@@ -29,6 +29,9 @@ namespace Private
 {
 
 Wallaby::Wallaby()
+: buffer_size_(REG_READABLE_COUNT),
+  read_buffer_(new unsigned char[buffer_size_]),
+  write_buffer_(new unsigned char[buffer_size_])
 {
 	static const std::string WALLABY_SPI_PATH = "/dev/spidev1.1";
 
@@ -46,6 +49,8 @@ Wallaby::Wallaby()
 Wallaby::~Wallaby()
 {
 	close(spi_fd_);
+	delete[] write_buffer_;
+	delete[] read_buffer_;
 }
 
 Wallaby * Wallaby::instance()
@@ -54,19 +59,9 @@ Wallaby * Wallaby::instance()
 	return &instance;
 }
 
-bool Wallaby::readRegister(unsigned short address, unsigned char & value) const
+bool Wallaby::transfer(unsigned char * wbuf, unsigned char * rbuf, unsigned int len)
 {
-    static const unsigned int BUFF_SIZE = REG_READABLE_COUNT; // TODO: cleanup
-
-	if (spi_fd_ <=0) return false; // TODO: feedback
-
-	if (address >= REG_ALL_COUNT) return false; // TODO: feedback
-
-    unsigned char wbuf[BUFF_SIZE];
-    unsigned char rbuf[BUFF_SIZE];
-
-	memset(wbuf, 0, sizeof rbuf);
-	memset(rbuf, 0, sizeof wbuf);
+	if (spi_fd_ <= 0) return false; // TODO: feedback
 
 	struct spi_ioc_transfer	xfer[1];
 	memset(xfer, 0, sizeof xfer);
@@ -76,23 +71,57 @@ bool Wallaby::readRegister(unsigned short address, unsigned char & value) const
 
 	wbuf[0] = 'J';        //start
 	wbuf[1] = 1;          // version 1
-	wbuf[2] = 0;          // 0 registers
-	//wbuf[3] = 3;          // address
-	//wbuf[4] = 0;          // value led off
-	wbuf[BUFF_SIZE-1] = 'S'; // stop
+	wbuf[len-1] = 'S'; // stop
 
+	std::cout << "xfer  start:" << std::to_string(wbuf[0]) << " ver:" << std::to_string(wbuf[1]) << " len:" << std::to_string(wbuf[2]) << " addy:" << std::to_string(wbuf[3]) << " val:" << std::to_string(wbuf[4]) << std::endl;
 
 	int status = ioctl(spi_fd_, SPI_IOC_MESSAGE(1), xfer);
+	usleep(2000); 	// TODO: remove this ...
+					//it just makes sure we don't outrun the co-processor until interrupts are in place for DMA
 	if (status < 0)
    	{
 		std::cerr << "Error (SPI_IOC_MESSAGE): " << strerror(errno) << std::endl;
 		return false;
 	}
 
-	value = rbuf[address];
+	return true;
+}
+
+bool Wallaby::readRegister(unsigned short address, unsigned char & value)
+{
+	if (address >= REG_ALL_COUNT) return false; // TODO: feedback
+
+	clear_buffers();
+
+	bool success = transfer(write_buffer_, read_buffer_, buffer_size_);
+
+	if (success == false) return false;
+
+	value = read_buffer_[address];
 
 	return true;
 }
 
+bool Wallaby::writeRegister(unsigned short address, unsigned char value)
+{
+	if (address >= REG_ALL_COUNT) return false; // TODO: feedback
+
+	clear_buffers();
+
+	// TODO definitions for buffer inds
+	write_buffer_[2] = 1; // write 1 register
+	write_buffer_[3] = address; // at address 'address'
+	write_buffer_[4] = value; // with value 'value'
+
+	bool success = transfer(write_buffer_, read_buffer_, buffer_size_);
+
+	return success;
+}
+
+void Wallaby::clear_buffers()
+{
+	memset(write_buffer_, 0, sizeof write_buffer_);
+	memset(read_buffer_, 0, sizeof read_buffer_);
+}
 
 } /* namespace Private */
