@@ -1,3 +1,10 @@
+/*
+ * led_test.c
+ *
+ *  Created on: Nov 2, 2015
+ *      Author: Joshua Southerland
+ */
+
 #include <stdio.h>
 #include <unistd.h>
 
