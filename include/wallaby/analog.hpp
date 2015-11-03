@@ -12,7 +12,7 @@ class Analog
 {
 public:
 	Analog(unsigned char port);
-	virtual void ~Analog();
+	virtual ~Analog();
 
 	virtual unsigned short value() const;
 
@@ -28,7 +28,7 @@ class Analog8 : public Analog
 {
 public:
 	Analog8(unsigned char port);
-	virtual void ~Analog8();
+	virtual ~Analog8();
 
 	unsigned short value() const;
 };
