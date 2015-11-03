@@ -20,18 +20,13 @@ bool Battery::isCharging()
 
 float Battery::powerLevel()
 {
-	unsigned char high_byte, low_byte;
-
-	// get current voltage reading
-	// TODO: read both values at the same time, once we support that
-	Private::Wallaby::instance()->readRegister(REG_RW_BATT_H, high_byte);
-	Private::Wallaby::instance()->readRegister(REG_RW_BATT_L, low_byte);
-
 	// piece the 12-bit ADC result back together
-	unsigned short raw_batt_adc = (static_cast<unsigned short>(high_byte) << 8) | static_cast<unsigned short>(low_byte);
+	unsigned short raw_batt_adc = Private::Wallaby::instance()->readRegister16b(REG_RW_BATT_H);
 
 	// calculate voltage based on linear curve-fitting
 	float batt_voltage = -0.02070635f + 0.009071161f * static_cast<float>(raw_batt_adc);
+
+	// FIXME   ADC->capacity  or  voltage->capacity
 
 	return batt_voltage;
 }

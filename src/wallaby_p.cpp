@@ -86,24 +86,23 @@ bool Wallaby::transfer()
 	return true;
 }
 
-bool Wallaby::readRegister(unsigned short address, unsigned char & value)
+unsigned char Wallaby::readRegister8b(unsigned char address)
 {
-	if (address >= REG_ALL_COUNT) return false; // TODO: feedback
+	if (address >= REG_READABLE_COUNT) return 0;// false; // TODO: feedback
 
 	clear_buffers();
 
-	bool success = transfer();
+	//bool success = transfer();
+	//TODO: if (success == false) return false;
+	transfer();
 
-	if (success == false) return false;
-
-	value = read_buffer_[address];
-
-	return true;
+	unsigned char value = read_buffer_[address];
+	return value;
 }
 
-bool Wallaby::writeRegister(unsigned short address, unsigned char value)
+void Wallaby::writeRegister8b(unsigned char address, unsigned char value)
 {
-	if (address >= REG_ALL_COUNT) return false; // TODO: feedback
+	if (address >= REG_ALL_COUNT) return;// false; // TODO: feedback
 
 	clear_buffers();
 
@@ -112,9 +111,82 @@ bool Wallaby::writeRegister(unsigned short address, unsigned char value)
 	write_buffer_[3] = address; // at address 'address'
 	write_buffer_[4] = value; // with value 'value'
 
-	bool success = transfer();
+	//TODO: bool success = transfer();
+	//return success;
+	transfer();
+}
 
-	return success;
+unsigned short Wallaby::readRegister16b(unsigned char address)
+{
+	if (address >= REG_READABLE_COUNT || address+1 >= REG_READABLE_COUNT) return 0;// false; // TODO: feedback
+
+	clear_buffers();
+
+	//TODO: bool success = transfer();
+	//return success;
+	transfer();
+
+	unsigned short value = (static_cast<unsigned short>(read_buffer_[address]) << 8) | read_buffer_[address+1];
+	return value;
+}
+
+void Wallaby::writeRegister16b(unsigned char address, unsigned short value)
+{
+	if (address >= REG_ALL_COUNT || address+1 >= REG_ALL_COUNT) return;// false; // TODO: feedback
+
+	clear_buffers();
+
+	// TODO definitions for buffer inds
+	write_buffer_[2] = 2; // write 2 registers
+	write_buffer_[3] = address; // at address 'address'
+	write_buffer_[4] = static_cast<unsigned char>((value & 0xFF00) >> 8);
+	write_buffer_[5] = address + 1;
+	write_buffer_[6] = static_cast<unsigned char>(value & 0x00FF);
+
+	//TODO: bool success = transfer();
+	//return success;
+	transfer();
+}
+
+unsigned int Wallaby::readRegister32b(unsigned char address)
+{
+	if (address >= REG_READABLE_COUNT || address+3 >= REG_READABLE_COUNT) return 0;// false; // TODO: feedback
+
+	clear_buffers();
+
+	//TODO: bool success = transfer();
+	//return success;
+	transfer();
+
+	unsigned short value =
+			  (static_cast<unsigned int>(read_buffer_[address]) << 24)
+			| (static_cast<unsigned int>(read_buffer_[address+1]) << 16)
+			| (static_cast<unsigned int>(read_buffer_[address+2]) << 8)
+			| (static_cast<unsigned int>(read_buffer_[address+3]));
+
+	return value;
+}
+
+void Wallaby::writeRegister32b(unsigned char address, unsigned int value)
+{
+	if (address >= REG_ALL_COUNT || address+3 >= REG_ALL_COUNT) return;// false; // TODO: feedback
+
+	clear_buffers();
+
+	// TODO definitions for buffer inds
+	write_buffer_[2] = 2; // write 2 registers
+	write_buffer_[3] = address; // at address 'address'
+	write_buffer_[4] = static_cast<unsigned char>((value & 0xFF000000) >> 24);
+	write_buffer_[5] = address + 1;
+	write_buffer_[6] = static_cast<unsigned char>((value & 0x00FF0000) >> 16);
+	write_buffer_[7] = address + 2;
+	write_buffer_[8] = static_cast<unsigned char>((value & 0x0000FF00) >> 8);
+	write_buffer_[9] = address + 3;
+	write_buffer_[10] = static_cast<unsigned char>((value & 0x000000FF));
+
+	//TODO: bool success = transfer();
+	//return success;
+	transfer();
 }
 
 void Wallaby::clear_buffers()
