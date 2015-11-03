@@ -23,7 +23,7 @@ public:
 
 private:
 	Wallaby();
-	bool transfer(unsigned char * wbuf, unsigned char * rbuf, unsigned int len);
+	bool transfer();
 	void clear_buffers();
 	int spi_fd_;
 	unsigned char * write_buffer_;

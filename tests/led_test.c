@@ -12,7 +12,7 @@
 
 int main(int argc, char ** argv)
 {
-	set_digital_output(16, 1);
+	set_digital_output(12, 1);
 	usleep(250000);
 
 	while(1)
