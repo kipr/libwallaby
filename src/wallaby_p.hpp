@@ -16,8 +16,15 @@ class Wallaby
 
 public:
 	static Wallaby * instance();
-	bool readRegister(unsigned short address, unsigned char & value);
-	bool writeRegister(unsigned short address, unsigned char value);
+
+	unsigned char readRegister8b(unsigned char address);
+	void writeRegister8b(unsigned char address, unsigned char value);
+
+	unsigned short readRegister16b(unsigned char address);
+	void writeRegister16b(unsigned char address, unsigned short value);
+
+	unsigned int readRegister32b(unsigned char address);
+	void writeRegister32b(unsigned char address, unsigned int value);
 
 	virtual ~Wallaby();
 
