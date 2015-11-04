@@ -26,7 +26,7 @@ int main(int argc, char ** argv)
 		}
 
         printf("%d %d %d %d %d %d\n", vals[0], vals[1], vals[2], vals[3], vals[4], vals[5]);
-        usleep(250000);
+        usleep(100000);
     }
 
     return 0;
