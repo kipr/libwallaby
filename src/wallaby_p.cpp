@@ -81,8 +81,8 @@ bool Wallaby::transfer()
 	xfer[0].len = buffer_size_;
 
 	int status = ioctl(spi_fd_, SPI_IOC_MESSAGE(1), xfer);
-	usleep(1500); // TODO: remove this ...
-					//it just makes sure we don't outrun the co-processor until interrupts are in place for DMA
+	usleep(50); //this  makes sure we don't outrun the co-processor until interrupts are in place for DMA
+
 	if (read_buffer_[0] != 'J')
 	{
 		std::cerr << " Error: DMA de-synchronized" << std::endl;
