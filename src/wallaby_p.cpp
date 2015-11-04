@@ -23,6 +23,7 @@
 
 #include <string>
 #include <iostream>
+#include <iomanip> // std::hex
 
 
 namespace Private
@@ -63,8 +64,13 @@ bool Wallaby::transfer()
 {
 	if (spi_fd_ <= 0) return false; // TODO: feedback
 
+	// transfer counter - used to detect missed packets on co-proc side
+	static unsigned char count = 0;
+	count += 1;
+
 	write_buffer_[0] = 'J';        //start
-	write_buffer_[1] = 1;          // version 1
+	write_buffer_[1] = 2;          // version 2
+	write_buffer_[2] = count;
 	write_buffer_[buffer_size_-1] = 'S'; // stop
 
 	struct spi_ioc_transfer	xfer[1];
@@ -75,8 +81,21 @@ bool Wallaby::transfer()
 	xfer[0].len = buffer_size_;
 
 	int status = ioctl(spi_fd_, SPI_IOC_MESSAGE(1), xfer);
-	usleep(100000); // TODO: remove this ...
-					//it just makes sure we don't outrun the co-processor until interrupts are in place for DMA
+	usleep(50); //this  makes sure we don't outrun the co-processor until interrupts are in place for DMA
+
+	if (read_buffer_[0] != 'J')
+	{
+		std::cerr << " Error: DMA de-synchronized" << std::endl;
+
+		for (unsigned int i = 0; i < buffer_size_; ++i)
+		{
+			std::cerr << std::hex << static_cast<unsigned int>(read_buffer_[i]) << " ";
+		}
+		std::cerr << std::endl;
+
+		return false;
+	}
+
 	if (status < 0)
    	{
 		std::cerr << "Error (SPI_IOC_MESSAGE): " << strerror(errno) << std::endl;
@@ -107,9 +126,9 @@ void Wallaby::writeRegister8b(unsigned char address, unsigned char value)
 	clear_buffers();
 
 	// TODO definitions for buffer inds
-	write_buffer_[2] = 1; // write 1 register
-	write_buffer_[3] = address; // at address 'address'
-	write_buffer_[4] = value; // with value 'value'
+	write_buffer_[3] = 1; // write 1 register
+	write_buffer_[4] = address; // at address 'address'
+	write_buffer_[5] = value; // with value 'value'
 
 	//TODO: bool success = transfer();
 	//return success;
@@ -137,11 +156,11 @@ void Wallaby::writeRegister16b(unsigned char address, unsigned short value)
 	clear_buffers();
 
 	// TODO definitions for buffer inds
-	write_buffer_[2] = 2; // write 2 registers
-	write_buffer_[3] = address; // at address 'address'
-	write_buffer_[4] = static_cast<unsigned char>((value & 0xFF00) >> 8);
-	write_buffer_[5] = address + 1;
-	write_buffer_[6] = static_cast<unsigned char>(value & 0x00FF);
+	write_buffer_[3] = 2; // write 2 registers
+	write_buffer_[4] = address; // at address 'address'
+	write_buffer_[5] = static_cast<unsigned char>((value & 0xFF00) >> 8);
+	write_buffer_[6] = address + 1;
+	write_buffer_[7] = static_cast<unsigned char>(value & 0x00FF);
 
 	//TODO: bool success = transfer();
 	//return success;
@@ -174,18 +193,18 @@ void Wallaby::writeRegister32b(unsigned char address, unsigned int value)
 	clear_buffers();
 
 	// TODO definitions for buffer inds
-	write_buffer_[2] = 2; // write 2 registers
-	write_buffer_[3] = address; // at address 'address'
-	write_buffer_[4] = static_cast<unsigned char>((value & 0xFF000000) >> 24);
-	write_buffer_[5] = address + 1;
-	write_buffer_[6] = static_cast<unsigned char>((value & 0x00FF0000) >> 16);
-	write_buffer_[7] = address + 2;
-	write_buffer_[8] = static_cast<unsigned char>((value & 0x0000FF00) >> 8);
-	write_buffer_[9] = address + 3;
-	write_buffer_[10] = static_cast<unsigned char>((value & 0x000000FF));
+	write_buffer_[3] = 2; // write 2 registers
+	write_buffer_[4] = address; // at address 'address'
+	write_buffer_[5] = static_cast<unsigned char>((value & 0xFF000000) >> 24);
+	write_buffer_[6] = address + 1;
+	write_buffer_[7] = static_cast<unsigned char>((value & 0x00FF0000) >> 16);
+	write_buffer_[8] = address + 2;
+	write_buffer_[9] = static_cast<unsigned char>((value & 0x0000FF00) >> 8);
+	write_buffer_[10] = address + 3;
+	write_buffer_[11] = static_cast<unsigned char>((value & 0x000000FF));
 
 	//TODO: bool success = transfer();
-	//return success;
+	//return succes2;
 	transfer();
 }
 
