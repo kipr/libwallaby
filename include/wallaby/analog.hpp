@@ -33,5 +33,14 @@ public:
 	unsigned short value() const;
 };
 
+class Analog10 : public Analog
+{
+public:
+	Analog10(unsigned char port);
+	virtual ~Analog10();
+
+	unsigned short value() const;
+};
+
 
 #endif /* INCLUDE_WALLABY_ANALOG_HPP_ */

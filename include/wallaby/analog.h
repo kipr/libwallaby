@@ -16,11 +16,13 @@ extern "C" {
 
 int analog(int port);
 
+int analog8(int port);
+
 int analog10(int port);
 
-int analog_et(int port);
+int analog12(int port);
 
-int analog8(int port);
+int analog_et(int port);
 
 void set_analog_pullup(int port, int pullup);
 

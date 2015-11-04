@@ -37,5 +37,17 @@ Analog8::Analog8(unsigned char port)
 
 unsigned short Analog8::value() const
 {
+	return Analog::value() >> 4;
+}
+
+
+Analog10::Analog10(unsigned char port)
+: Analog(port)
+{
+
+}
+
+unsigned short Analog10::value() const
+{
 	return Analog::value() >> 2;
 }
