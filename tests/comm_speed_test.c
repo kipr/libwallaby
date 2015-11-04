@@ -23,8 +23,27 @@ int main(int argc, char ** argv)
 
     while(1)
     {
-        float v = power_level();
-        if (v < 6.0 || v > 7.5) printf("%f\n",v);
+    	struct timeval start, stop;
+    	static const unsigned int num_samples = 100;
+
+    	gettimeofday(&start, NULL);
+
+    	unsigned int i;
+    	for (i = 0; i < num_samples; ++i)
+    	{
+    		float v = power_level();
+        	if (v < 6.0 || v > 7.5)
+			{
+        		printf("%f\n",v);
+			}
+    	}
+
+    	gettimeofday(&stop, NULL);
+
+    	long elapsed_time = elapsed_usec(start, stop);
+    	double avg_sample_time_usec = ((double)elapsed_time)/((double)num_samples);
+
+    	printf("%f uS per sample average (%f Hz)\n", avg_sample_time_usec, (1000000.0/avg_sample_time_usec));
     }
 
     return 0;
