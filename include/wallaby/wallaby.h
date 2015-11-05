@@ -12,5 +12,7 @@
 #include "analog.h"
 #include "battery.h"
 #include "digital.h"
+#include "gyro.h"
+#include "magneto.h"
 
 #endif /* INCLUDE_WALLABY_WALLABY_H_ */

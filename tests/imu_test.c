@@ -23,10 +23,14 @@ int main(int argc, char ** argv)
 		signed short gy = gyro_y();
 		signed short gz = gyro_z();
 
+		signed short mx = magneto_x();
+		signed short my = magneto_y();
+		signed short mz = magneto_z();
 
-		printf("ax:%d  ay:%d az:%d   gx:%d  gy:%d gz:%d\n",
+		printf("ax:%d ay:%d az:%d   gx:%d gy:%d gz:%d   mx:%d my:%d mz:%d\n",
 				ax,	ay, az,
-				gx, gy, gz);
+				gx, gy, gz,
+				mx, my, mz);
 
 		usleep(100000);
 	}
