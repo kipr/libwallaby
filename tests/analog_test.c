@@ -16,18 +16,33 @@
 int main(int argc, char ** argv)
 {
 	int vals[NUM_ADC_CHANS];
+	unsigned int count = 0;
 
 	while(1)
-    {
+	{
+		count += 1;
 		int channel;
-		for (channel = 0; channel < NUM_ADC_CHANS; ++channel)
+
+		if (count % 100 < 50)
 		{
-			vals[channel] = analog10(channel);
+			for (channel = 0; channel < NUM_ADC_CHANS; ++channel)
+			{
+				vals[channel] = analog12(channel);
+			}
+			printf("pu enabled: %d %d %d %d %d %d\n", vals[0], vals[1], vals[2], vals[3], vals[4], vals[5]);
+		}
+		else
+		{
+			for (channel = 0; channel < NUM_ADC_CHANS; ++channel)
+			{
+				vals[channel] = analog_et(channel);
+			}
+			printf("pu disabled: %d %d %d %d %d %d\n", vals[0], vals[1], vals[2], vals[3], vals[4], vals[5]);
 		}
 
-        printf("%d %d %d %d %d %d\n", vals[0], vals[1], vals[2], vals[3], vals[4], vals[5]);
-        usleep(100000);
-    }
 
-    return 0;
+		usleep(100000);
+	}
+
+	return 0;
 }
