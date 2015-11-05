@@ -10,7 +10,7 @@
 #include <time.h>
 #include <sys/time.h>
 
-#include "wallaby/battery.h"
+#include "wallaby/wallaby.h"
 
 long elapsed_usec(struct timeval t1, struct timeval t2)
 {
