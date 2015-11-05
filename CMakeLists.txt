@@ -25,14 +25,14 @@ if(COMPILER_SUPPORTS_CXX11)
 elseif(COMPILER_SUPPORTS_CXX0X)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
 else()
-        message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
+	message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
 endif()
 
 
 
 # Library: libwallaby
 add_library(wallaby STATIC
-    ${SOURCES})
+	${SOURCES})
 
 
 # Executables: test programs
@@ -47,3 +47,6 @@ target_link_libraries(comm_speed_test_c wallaby)
 
 add_executable(analog_test_c tests/analog_test.c)
 target_link_libraries(analog_test_c wallaby)
+
+add_executable(imu_test_c tests/imu_test.c)
+target_link_libraries(imu_test_c wallaby)

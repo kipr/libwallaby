@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <unistd.h>
 
-#include "wallaby/analog.h"
+#include "wallaby/wallaby.h"
 
 #define NUM_ADC_CHANS 6
 
