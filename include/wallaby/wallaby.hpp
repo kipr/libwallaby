@@ -12,5 +12,7 @@
 #include "analog.hpp"
 #include "battery.hpp"
 #include "digital.hpp"
+#include "gyro.hpp"
+#include "magneto.hpp"
 
 #endif /* INCLUDE_WALLABY_WALLABY_HPP_ */

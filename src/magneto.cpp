@@ -5,8 +5,8 @@
  *      Author: Joshua Southerland
  */
 
-#include "wallaby/gyro.hpp"
-#include "gyro_p.hpp"
+#include "wallaby/magneto.hpp"
+#include "magneto_p.hpp"
 
 signed short Magneto::x()
 {
