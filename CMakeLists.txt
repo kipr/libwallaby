@@ -44,3 +44,6 @@ target_link_libraries(led_test_c wallaby)
 
 add_executable(comm_speed_test_c tests/comm_speed_test.c)
 target_link_libraries(comm_speed_test_c wallaby)
+
+add_executable(analog_test_c tests/analog_test.c)
+target_link_libraries(analog_test_c wallaby)
