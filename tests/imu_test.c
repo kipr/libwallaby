@@ -13,14 +13,23 @@
 
 int main(int argc, char ** argv)
 {
-    while(1)
-    {
-        signed short ax = accel_x();
-        signed short ay = accel_y();
-        signed short az = accel_z();
-        printf("ax: %d    ay: %d    az: %d\n", ax, ay, az);
-        usleep(100000);
-    }
+	while(1)
+	{
+		signed short ax = accel_x();
+		signed short ay = accel_y();
+		signed short az = accel_z();
 
-    return 0;
+		signed short gx = gyro_x();
+		signed short gy = gyro_y();
+		signed short gz = gyro_z();
+
+
+		printf("ax:%d  ay:%d az:%d   gx:%d  gy:%d gz:%d\n",
+				ax,	ay, az,
+				gx, gy, gz);
+
+		usleep(100000);
+	}
+
+	return 0;
 }
