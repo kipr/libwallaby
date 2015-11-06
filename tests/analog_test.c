@@ -41,7 +41,7 @@ int main(int argc, char ** argv)
 		}
 
 
-		usleep(100000);
+		msleep(100);
 	}
 
 	return 0;

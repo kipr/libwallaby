@@ -6,7 +6,6 @@
  */
 
 #include <stdio.h>
-#include <unistd.h>
 
 #include "wallaby/wallaby.h"
 
@@ -32,7 +31,7 @@ int main(int argc, char ** argv)
 				gx, gy, gz,
 				mx, my, mz);
 
-		usleep(100000);
+		msleep(100);
 	}
 
 	return 0;
