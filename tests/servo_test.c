@@ -6,7 +6,6 @@
  */
 
 #include <stdio.h>
-#include <unistd.h>
 
 #include "wallaby/wallaby.h"
 
@@ -34,7 +33,7 @@ int main(int argc, char ** argv)
 
 		// TODO: demo individual enable/disable
 
-		sleep(2);
+		msleep(2000);
 	}
 
 	// disable servos

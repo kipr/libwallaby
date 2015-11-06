@@ -16,7 +16,7 @@ int main(int argc, char ** argv)
     {
         float v = power_level();
         printf("%f\n",v);
-        usleep(250000);
+        msleep(250);
     }
 
     return 0;
