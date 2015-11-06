@@ -15,5 +15,6 @@
 #include "gyro.h"
 #include "magneto.h"
 #include "servo.h"
+#include "util.h"
 
 #endif /* INCLUDE_WALLABY_WALLABY_H_ */
