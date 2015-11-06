@@ -68,10 +68,10 @@ bool Servo::setPosition(int port, unsigned short position)
 
 	// map a 10 bit (0-1023) position to  1500 +/- (0 to 90) degrees*10
 	// or    1500 +/- 900  or  [600, 2400]
-	unsigned short val =  1500.0 + 900.0 * ((double)position / 1023.0) - (1023.0 / 2.0);
+	unsigned short val =  1500.0 + 1800.0 * ((double)position / 1023.0) - (1800.0 / 2.0);
 
 	unsigned char address = REG_RW_SERVO_0_H + 2 * port;
-	Private::Wallaby::instance()->writeRegister16b(address, position);
+	Private::Wallaby::instance()->writeRegister16b(address, val);
 	return true;
 }
 
