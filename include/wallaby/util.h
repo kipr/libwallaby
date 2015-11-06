@@ -13,7 +13,11 @@
 extern "C" {
 #endif
 
+void msleep(long msecs);
 
+unsigned long systime();
+
+double seconds();
 
 #ifdef __cplusplus
 }
