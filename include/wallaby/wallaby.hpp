@@ -14,6 +14,7 @@
 #include "digital.hpp"
 #include "gyro.hpp"
 #include "magneto.hpp"
+#include "motors.hpp"
 #include "servo.hpp"
 #include "util.hpp"
 
