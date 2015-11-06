@@ -50,3 +50,6 @@ target_link_libraries(analog_test_c wallaby)
 
 add_executable(imu_test_c tests/imu_test.c)
 target_link_libraries(imu_test_c wallaby)
+
+add_executable(servo_test_c tests/servo_test.c)
+target_link_libraries(servo_test_c wallaby)

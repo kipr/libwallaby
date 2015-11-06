@@ -14,5 +14,6 @@
 #include "digital.hpp"
 #include "gyro.hpp"
 #include "magneto.hpp"
+#include "servo.hpp"
 
 #endif /* INCLUDE_WALLABY_WALLABY_HPP_ */
