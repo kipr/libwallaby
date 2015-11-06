@@ -15,7 +15,7 @@
 
 int main(int argc, char ** argv)
 {
-	unsigned short servo_cmds[6] = {0, 340, 682, 1024, 682, 340};
+	unsigned short servo_cmds[6] = {0, 340, 682, 1023, 682, 340};
 
 	// enable servos
 	int i;
@@ -27,7 +27,7 @@ int main(int argc, char ** argv)
 		for (chan = 0; chan < 4; ++chan)
 		{
 			unsigned short cmd_ind = (i + chan) % 6;
-			set_servo_position(0, servo_cmds[cmd_ind]);
+			set_servo_position(chan, servo_cmds[cmd_ind]);
 		}
 
 		// TODO: demo allstop
