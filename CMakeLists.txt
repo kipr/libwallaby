@@ -53,3 +53,6 @@ target_link_libraries(imu_test_c wallaby)
 
 add_executable(servo_test_c tests/servo_test.c)
 target_link_libraries(servo_test_c wallaby)
+
+add_executable(motor_pwm_test_c tests/motor_pwm_test.c)
+target_link_libraries(motor_pwm_test_c wallaby)
