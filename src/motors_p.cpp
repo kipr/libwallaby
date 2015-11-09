@@ -119,7 +119,8 @@ void Motor::setPwm(int port, unsigned short speed)
 	// TODO: error signal outside of range
 	setControlMode(port, Private::Motor::Inactive);
 	const unsigned short speedMax = 400;
-	const unsigned short adjustedSpeed = speed > speedMax ? speedMax : speed * 4; // TODO: check scaling (1/4 percent increments)
+	unsigned short adjustedSpeed = speed * 4;
+	if (adjustedSpeed > speedMax) adjustedSpeed = speedMax; // TODO: check scaling (1/4 percent increments)
 	Private::Wallaby::instance()->writeRegister16b(REG_RW_MOT_0_PWM_H + 2 * port, adjustedSpeed);
 }
 
@@ -136,6 +137,8 @@ void Motor::setPwmDirection(int port, Motor::Direction dir)
 	dirs &= ~(0x3 << offset);
 
 	dirs |= (dir << offset);
+
+	Private::Wallaby::instance()->writeRegister8b(REG_RW_MOT_DIRS, dirs);
 }
 
 unsigned short Motor::pwm(int port)
