@@ -32,7 +32,7 @@ void Motor::moveAtVelocity(short velocity)
 void Motor::moveToPosition(short speed, int goalPos)
 {
 	// FIXME: handle velocity scaling?
-	const int sign = Private::Motor::instance()->backEMF(m_port) > goalPos ? 1 : -1;
+	const int sign = Private::Motor::instance()->backEMF(m_port) > goalPos ? -1 : 1;
 	const short velocity = std::abs(speed) * sign;
 
 	Private::Motor::instance()->setControlMode(m_port, Private::Motor::SpeedPosition);
