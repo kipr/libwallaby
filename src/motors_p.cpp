@@ -34,8 +34,8 @@ void Motor::setPidGains(int port, short p, short i, short d, short pd, short id,
 void Motor::clearBemf(int port)
 {
 	if (port < 0 || port > 3) return;
-
-	//TODO: FIXME what is this function's purpose?
+	Private::Wallaby::instance()->writeRegister32b(REG_RW_MOT_0_B3 + 4 * port, 0);
+	return;
 }
 
 void Motor::setControlMode(int port, Motor::ControlMode mode)
