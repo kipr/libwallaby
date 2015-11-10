@@ -53,3 +53,15 @@ target_link_libraries(imu_test_c wallaby)
 
 add_executable(servo_test_c tests/servo_test.c)
 target_link_libraries(servo_test_c wallaby)
+
+add_executable(motor_pwm_test_c tests/motor_pwm_test.c)
+target_link_libraries(motor_pwm_test_c wallaby)
+
+add_executable(motor_mav_test_c tests/motor_mav_test.c)
+target_link_libraries(motor_mav_test_c wallaby)
+
+add_executable(motor_mtp_test_c tests/motor_mtp_test.c)
+target_link_libraries(motor_mtp_test_c wallaby)
+
+add_executable(motor_mrp_test_c tests/motor_mrp_test.c)
+target_link_libraries(motor_mrp_test_c wallaby)

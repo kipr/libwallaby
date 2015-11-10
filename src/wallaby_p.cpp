@@ -177,7 +177,7 @@ unsigned int Wallaby::readRegister32b(unsigned char address)
 	//return success;
 	transfer();
 
-	unsigned short value =
+	unsigned int value =
 			  (static_cast<unsigned int>(read_buffer_[address]) << 24)
 			| (static_cast<unsigned int>(read_buffer_[address+1]) << 16)
 			| (static_cast<unsigned int>(read_buffer_[address+2]) << 8)

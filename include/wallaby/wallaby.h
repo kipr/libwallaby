@@ -14,6 +14,7 @@
 #include "digital.h"
 #include "gyro.h"
 #include "magneto.h"
+#include "motors.h"
 #include "servo.h"
 #include "util.h"
 
