@@ -170,7 +170,8 @@ void Motor::stop(int port)
 int Motor::backEMF(int port)
 {
 	if (port < 0 || port > 3) return 0;
-	return 0; // TODO: can we read this?
+	int val = Private::Wallaby::instance()->readRegister32b(REG_RW_MOT_0_B3 + 4 * port);
+	return val;
 }
 
 Motor * Motor::instance()

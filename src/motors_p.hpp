@@ -62,7 +62,7 @@ public:
 
 	void stop(int port);
 
-	int backEMF(int port);
+	int backEMF(int port); // this is really the integrated back EMF signal
 
 	static Motor * instance();
 
