@@ -71,7 +71,7 @@ int y_button()
 	return button(&Y);
 }
 
-int z_buton()
+int z_button()
 {
 	return button(&Z);
 }
