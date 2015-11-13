@@ -23,5 +23,6 @@
 #include "servo.h"
 #include "thread.h"
 #include "util.h"
+#include "wait_for.h"
 
 #endif /* INCLUDE_WALLABY_WALLABY_H_ */
