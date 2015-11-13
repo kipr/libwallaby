@@ -15,6 +15,7 @@
 #include "camera.hpp"
 #include "digital.hpp"
 #include "gyro.hpp"
+#include "ir.hpp"
 #include "magneto.hpp"
 #include "motors.hpp"
 #include "servo.hpp"

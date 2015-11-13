@@ -16,6 +16,7 @@
 #include "camera.h"
 #include "digital.h"
 #include "gyro.h"
+#include "ir.h"
 #include "magneto.h"
 #include "motors.h"
 #include "servo.h"
