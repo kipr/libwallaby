@@ -96,3 +96,6 @@ target_link_libraries(motor_mrp_test_c wallaby)
 
 add_executable(audio_test_c tests/audio_test.c)
 target_link_libraries(audio_test_c wallaby)
+
+add_executable(ir_test_c tests/ir_test.c)
+target_link_libraries(ir_test_c wallaby)
