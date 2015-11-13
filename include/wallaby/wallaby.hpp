@@ -9,8 +9,10 @@
 #define INCLUDE_WALLABY_WALLABY_HPP_
 
 #include "accel.hpp"
+#include "ardrone.hpp"
 #include "analog.hpp"
 #include "battery.hpp"
+#include "camera.hpp"
 #include "digital.hpp"
 #include "gyro.hpp"
 #include "magneto.hpp"
