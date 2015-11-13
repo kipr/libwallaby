@@ -30,6 +30,34 @@ endif()
 
 
 
+if(DEFINED ENV{OPENCV_INCLUDE_DIR})
+  set(OPENCV_INCLUDE $ENV{OPENCV_INCLUDE_DIR})
+elseif(WIN32)
+  set(OPENCV_INCLUDE ${CMAKE_SOURCE_DIR}/../opencv/build/install/include)
+endif()
+
+if(DEFINED ENV{OPENCV_LIB_DIR})
+  set(OPENCV_LIB $ENV{OPENCV_LIB_DIR})
+elseif(WIN32)
+  set(OPENCV_LIB ${CMAKE_SOURCE_DIR}/../opencv/build/install/x86/vc11/lib)
+endif()
+
+if(DEFINED ENV{ZBAR_DIR})
+  set(ZBAR_DIR $ENV{ZBAR_DIR})
+elseif(WIN32)
+  set(ZBAR_DIR "C:/Program Files (x86)/ZBar")
+endif()
+
+
+include_directories(${CMAKE_INSTALL_PREFIX}/include)
+include_directories(${OPENCV_INCLUDE})
+include_directories(${ZBAR_DIR}/include)
+
+link_directories(${CMAKE_INSTALL_PREFIX}/lib)
+link_directories(${OPENCV_LIB})
+link_directories(${ZBAR_DIR}/lib)  
+
+
 # Library: libwallaby
 add_library(wallaby STATIC
 	${SOURCES})
