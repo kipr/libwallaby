@@ -1,0 +1,28 @@
+/*
+ * audio.h
+ *
+ *  Created on: Nov 13, 2015
+ *      Author: Joshua Southerland
+ */
+
+#ifndef INCLUDE_WALLABY_AUDIO_H_
+#define INCLUDE_WALLABY_AUDIO_H_
+
+#include "export.h"
+#include "vtable.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+VF EXPORT_SYM void beep(void);
+
+VFL
+
+#ifdef __cplusplus
+}
+#endif
+
+
+
+#endif /* INCLUDE_WALLABY_AUDIO_H_ */

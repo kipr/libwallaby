@@ -9,8 +9,9 @@
 #define INCLUDE_WALLABY_WALLABY_H_
 
 #include "accel.h"
-#include "ardrone.h"
 #include "analog.h"
+#include "ardrone.h"
+#include "audio.h"
 #include "battery.h"
 #include "camera.h"
 #include "digital.h"
