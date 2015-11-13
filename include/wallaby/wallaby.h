@@ -18,6 +18,7 @@
 #include "magneto.h"
 #include "motors.h"
 #include "servo.h"
+#include "thread.h"
 #include "util.h"
 
 #endif /* INCLUDE_WALLABY_WALLABY_H_ */

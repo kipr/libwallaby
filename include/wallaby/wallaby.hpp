@@ -18,6 +18,7 @@
 #include "magneto.hpp"
 #include "motors.hpp"
 #include "servo.hpp"
+#include "thread.hpp"
 #include "util.hpp"
 
 #endif /* INCLUDE_WALLABY_WALLABY_HPP_ */
