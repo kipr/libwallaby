@@ -9,6 +9,7 @@
 #include "button_p.hpp"
 #include "wallaby/compat.hpp"
 
+
 #include <cstring>
 
 IdButton Button::A(Button::Type::A, "A");
@@ -54,6 +55,15 @@ AbstractTextButton::~AbstractTextButton()
 
 }
 
+IdButton::IdButton(const Button::Type::Id & id, const char * defaultText)
+:m_id(id)
+{
+	size_t len = strlen(defaultText);
+	m_defaultText = new char[len + 1];
+	memcpy(m_defaultText, defaultText, len);
+	m_defaultText[len] = 0;
+}
+
 IdButton::~IdButton()
 {
 	if (m_defaultText) delete[] m_defaultText;
@@ -67,6 +77,11 @@ void IdButton::setText(const char * text)
 const char * IdButton::text() const
 {
 	return Private::Button::instance()->text(m_id);
+}
+
+bool IdButton::isTextDirty() const
+{
+	return Private::Button::instance()->isTextDirty(m_id);
 }
 
 void IdButton::setPressed(bool pressed)

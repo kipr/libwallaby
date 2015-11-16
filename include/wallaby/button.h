@@ -35,7 +35,7 @@ int x_button();
 
 int y_button();
 
-int z_buton();
+int z_button();
 
 int side_button();
 

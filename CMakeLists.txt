@@ -64,6 +64,7 @@ add_library(wallaby STATIC
 
 
 # Executables: test programs
+# TODO: use a list and foreach to make this more concise
 add_executable(battery_test_c tests/battery_test.c)
 target_link_libraries(battery_test_c wallaby)
 
@@ -99,3 +100,6 @@ target_link_libraries(audio_test_c wallaby)
 
 add_executable(ir_test_c tests/ir_test.c)
 target_link_libraries(ir_test_c wallaby)
+
+add_executable(button_test_c tests/button_test.c)
+target_link_libraries(button_test_c wallaby)

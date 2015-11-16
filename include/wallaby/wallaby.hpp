@@ -12,6 +12,7 @@
 #include "ardrone.hpp"
 #include "analog.hpp"
 #include "battery.hpp"
+#include "button.hpp"
 #include "camera.hpp"
 #include "digital.hpp"
 #include "gyro.hpp"
