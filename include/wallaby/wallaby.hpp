@@ -14,6 +14,7 @@
 #include "battery.hpp"
 #include "button.hpp"
 #include "camera.hpp"
+#include "create.hpp"
 #include "digital.hpp"
 #include "gyro.hpp"
 #include "ir.hpp"
