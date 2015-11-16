@@ -103,3 +103,6 @@ target_link_libraries(ir_test_c wallaby)
 
 add_executable(button_test_c tests/button_test.c)
 target_link_libraries(button_test_c wallaby)
+
+add_executable(create_test_c tests/create_test.c)
+target_link_libraries(create_test_c wallaby)

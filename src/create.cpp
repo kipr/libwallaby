@@ -993,7 +993,7 @@ Create::Create()
 	m_wheelDropLeft(0),
 	m_wheelDropRight(0),
 	m_wheelDropCaster(0),
-  m_defaultBaudRate(Baud57600)
+  m_defaultBaudRate(Baud115200)
 {
 #ifndef WIN32
 	pthread_mutex_init(&m_mutex, 0);
@@ -1035,7 +1035,7 @@ bool Create::open()
 
 	beginAtomicOperation();
 #ifndef WIN32
-	m_tty = ::open("/dev/ttyS2", O_RDWR | O_NOCTTY | O_NONBLOCK);
+	m_tty = ::open("/dev/ttyUSB0", O_RDWR | O_NOCTTY | O_NONBLOCK);
 #else
 	#pragma message	("Create library not yet implemented for Windows")
 #endif
