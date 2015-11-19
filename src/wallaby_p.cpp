@@ -34,7 +34,7 @@ Wallaby::Wallaby()
   read_buffer_(new unsigned char[REG_READABLE_COUNT]),
   write_buffer_(new unsigned char[REG_READABLE_COUNT])
 {
-	static const std::string WALLABY_SPI_PATH = "/dev/spidev1.1";
+	static const std::string WALLABY_SPI_PATH = "/dev/spidev2.0";
 
 	// TODO: move spi code outside constructor
 	// TODO: handle device path better
