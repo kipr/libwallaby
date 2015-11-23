@@ -106,3 +106,12 @@ target_link_libraries(button_test_c wallaby)
 
 add_executable(create_test_c tests/create_test.c)
 target_link_libraries(create_test_c wallaby)
+
+add_executable(dig_in_test_c tests/dig_in_test.c)
+target_link_libraries(dig_in_test_c wallaby)
+
+add_executable(dig_test_c tests/dig_test.c)
+target_link_libraries(dig_test_c wallaby)
+
+add_executable(dig_pu_test_c tests/dig_pu_test.c)
+target_link_libraries(dig_pu_test_c wallaby)
