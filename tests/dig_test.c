@@ -21,7 +21,7 @@ int main(int argc, char ** argv)
 	}
 
 	// next 5 will be inputs
-	for (i = 5; i < 5; ++i)
+	for (i = 5; i < 10; ++i)
 	{
 		set_digital_output(i, 0);
 	}
