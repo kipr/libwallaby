@@ -19,8 +19,8 @@ public:
 	enum ControlMode
 	{
 		Inactive = 0,
-		Position,
 		Speed,
+		Position,
 		SpeedPosition
 	};
 
