@@ -5,14 +5,6 @@
  *      Author: Joshua Southerland
  */
 
-#include <battlecreek/analog_states.hpp>
-#include <battlecreek/battery_state.hpp>
-#include <battlecreek/digital_states.hpp>
-#include <battlecreek/motor_states.hpp>
-#include <battlecreek/servo_states.hpp>
-
-#include <daylite/node.hpp>
-#include <daylite/spinner.hpp>
 
 #ifndef SRC_BATTLEHILL_P_HPP_
 #define SRC_BATTLEHILL_P_HPP_
@@ -26,8 +18,9 @@ class BattleHill
 public:
 	static BattleHill * instance();
 
-
 	virtual ~BattleHill();
+
+	float getBatteryCapacity();
 
 private:
 	BattleHill();
