@@ -1,0 +1,8 @@
+find_path(BATTLECREEK_INCLUDE_DIR battlecreek/motor_state.hpp)
+
+set(BATTLECREEK_INCLUDE_DIRS ${DAYLITE_INCLUDE_DIR})
+
+include(FindPackageHandleStandardArgs)
+
+find_package_handle_standard_args(Battlecreek DEFAULT_MSG BATTLECREEK_INCLUDE_DIR)
+mark_as_advanced(BATTLECREEK_INCLUDE_DIR)
