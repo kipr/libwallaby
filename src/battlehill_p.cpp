@@ -12,7 +12,9 @@
 #include <battlecreek/battery_state.hpp>
 #include <battlecreek/digital_states.hpp>
 #include <battlecreek/motor_states.hpp>
+#include <battlecreek/robot_states.hpp>
 #include <battlecreek/servo_states.hpp>
+
 
 #include <daylite/node.hpp>
 #include <daylite/spinner.hpp>
@@ -55,13 +57,13 @@ namespace
 	}
 
 	// TODO: move to namespace / class
-	void battery_state_cb(const bson_t *raw_msg, void *)
+	void robot_states_cb(const bson_t *raw_msg, void *)
 	{
-		const auto msg_option = safe_unbind<battery_state>(raw_msg);
+		const auto msg_option = safe_unbind<robot_states>(raw_msg);
 		if(msg_option.none()) return;
 
 		auto msg = msg_option.unwrap();
-		capacity = msg.capacity;
+		capacity = msg.battery_state.capacity;
 	}
 }
 
@@ -87,7 +89,7 @@ bool BattleHill::setup()
 		return false;
 	}
 
-	static auto battery_state_sub = n->subscribe("robot/battery_state", &battery_state_cb);
+	static auto robot_states_sub = n->subscribe("robot/robot_states", &robot_states_cb);
 
 	return true;
 }
