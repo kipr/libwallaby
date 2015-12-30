@@ -32,34 +32,33 @@ static float capacity = 0.f;
 
 namespace
 {
-	template<typename T>
-	inline bson_bind::option<T> safe_unbind(const bson_t *raw_msg)
+template<typename T>
+inline bson_bind::option<T> safe_unbind(const bson_t *raw_msg)
+{
+	using namespace bson_bind;
+	T ret;
+	try
 	{
-		using namespace bson_bind;
-		T ret;
-		try
-		{
-			ret = T::unbind(raw_msg);
-		}
-		catch(const invalid_argument &e)
-		{
-			cerr << e.what() << endl;
-			return none<T>();
-		}
-
-		return some(ret);
+		ret = T::unbind(raw_msg);
+	}
+	catch(const invalid_argument &e)
+	{
+		cerr << e.what() << endl;
+		return none<T>();
 	}
 
-	// TODO: move to namespace / class
-	void battery_state_cb(const bson_t *raw_msg, void *)
-	{
-	  const auto msg_option = safe_unbind<battery_state>(raw_msg);
-	  if(msg_option.none()) return;
+	return some(ret);
+}
 
-	  auto msg = msg_option.unwrap();
+// TODO: move to namespace / class
+void battery_state_cb(const bson_t *raw_msg, void *)
+{
+	const auto msg_option = safe_unbind<battery_state>(raw_msg);
+	if(msg_option.none()) return;
 
-	  std::cout << "got battery state with V=" << std::to_string(msg.capacity) << std::endl;
-	}
+	auto msg = msg_option.unwrap();
+	capacity = msg.capacity;
+}
 }
 
 namespace Private
@@ -71,19 +70,25 @@ float BattleHill::getBatteryCapacity()
 	return capacity;
 }
 
+bool BattleHill::setup()
+{
+	static auto n = node::create_node("libwallaby");
+
+	if (!n->start("127.0.0.1", 8374))
+	{
+		std::cerr << "Failed to contact daylite master" << std::endl;
+		return false;
+	}
+
+	static auto battery_state_sub = n->subscribe("robot/battery_state", &battery_state_cb);
+
+	return true;
+}
 
 BattleHill::BattleHill()
+: good(false)
 {
-	  auto n = node::create_node("battlehill");
 
-	  if(!n->start("127.0.0.1", 8374))
-	  {
-	    std::cerr << "Failed to contact daylite master" << std::endl;
-	    //TODO: handle failing (don't do it in constructor?) return 1;
-	  }
-
-
-	auto battery_state_sub = n->subscribe("robot/battery_state", &battery_state_cb);
 }
 
 BattleHill::~BattleHill()
@@ -94,6 +99,8 @@ BattleHill::~BattleHill()
 BattleHill * BattleHill::instance()
 {
 	static BattleHill instance;
+
+	if (!(instance.good)) instance.good = instance.setup();
 	return &instance;
 }
 
