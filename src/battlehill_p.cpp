@@ -21,6 +21,7 @@
 #include <bson_bind/option.hpp>
 
 #include <iostream>
+#include <mutex>
 
 using namespace battlecreek;
 using namespace daylite;
@@ -32,33 +33,36 @@ static float capacity = 0.f;
 
 namespace
 {
-template<typename T>
-inline bson_bind::option<T> safe_unbind(const bson_t *raw_msg)
-{
-	using namespace bson_bind;
-	T ret;
-	try
+
+	std::mutex battlehill_mutex;
+
+	template<typename T>
+	inline bson_bind::option<T> safe_unbind(const bson_t *raw_msg)
 	{
-		ret = T::unbind(raw_msg);
+		using namespace bson_bind;
+		T ret;
+		try
+		{
+			ret = T::unbind(raw_msg);
+		}
+		catch(const invalid_argument &e)
+		{
+			cerr << e.what() << endl;
+			return none<T>();
+		}
+
+		return some(ret);
 	}
-	catch(const invalid_argument &e)
+
+	// TODO: move to namespace / class
+	void battery_state_cb(const bson_t *raw_msg, void *)
 	{
-		cerr << e.what() << endl;
-		return none<T>();
+		const auto msg_option = safe_unbind<battery_state>(raw_msg);
+		if(msg_option.none()) return;
+
+		auto msg = msg_option.unwrap();
+		capacity = msg.capacity;
 	}
-
-	return some(ret);
-}
-
-// TODO: move to namespace / class
-void battery_state_cb(const bson_t *raw_msg, void *)
-{
-	const auto msg_option = safe_unbind<battery_state>(raw_msg);
-	if(msg_option.none()) return;
-
-	auto msg = msg_option.unwrap();
-	capacity = msg.capacity;
-}
 }
 
 namespace Private
@@ -72,6 +76,8 @@ float BattleHill::getBatteryCapacity()
 
 bool BattleHill::setup()
 {
+	std::lock_guard<std::mutex> lock(battlehill_mutex);
+
 	// TODO: mutex lock this for  thread safety
 	static auto n = node::create_node("libwallaby");
 
