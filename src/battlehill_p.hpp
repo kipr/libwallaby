@@ -24,7 +24,8 @@ public:
 
 private:
 	BattleHill();
-
+	bool setup(); // initializes the daylite node
+	bool daylite_good_; // is the daylite node alright
 };
 
 } /* namespace Private */

@@ -72,6 +72,7 @@ float BattleHill::getBatteryCapacity()
 
 bool BattleHill::setup()
 {
+	// TODO: mutex lock this for  thread safety
 	static auto n = node::create_node("libwallaby");
 
 	if (!n->start("127.0.0.1", 8374))
@@ -86,7 +87,7 @@ bool BattleHill::setup()
 }
 
 BattleHill::BattleHill()
-: good(false)
+: daylite_good_(false)
 {
 
 }
@@ -100,7 +101,7 @@ BattleHill * BattleHill::instance()
 {
 	static BattleHill instance;
 
-	if (!(instance.good)) instance.good = instance.setup();
+	if (!(instance.daylite_good_)) instance.daylite_good_ = instance.setup();
 	return &instance;
 }
 
