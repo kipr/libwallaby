@@ -38,8 +38,10 @@ namespace Private
 
 		private:
 			cv::Mat m_gray;
+			/* FIXME: needs zbar
 			zbar::Image m_image;
 			zbar::ImageScanner m_scanner;
+			*/
 		};
 	}
 }

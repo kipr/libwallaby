@@ -14,8 +14,25 @@ namespace Private
 
 class BattleHill
 {
-
 public:
+
+	enum MotorControlMode
+	{
+		Inactive = 0,
+		Speed,
+		Position,
+		SpeedPosition
+	};
+
+	enum MotorDirection
+	{
+		PassiveStop = 0,
+		Reverse,
+		Forward,
+		ActiveStop
+	};
+
+
 	static BattleHill * instance();
 
 	virtual ~BattleHill();
@@ -60,6 +77,23 @@ public:
 
 
 	// Motor
+	int backEMF(int port);
+	void clearBemf(int port);
+	void setControlMode(int port, MotorControlMode mode);
+	MotorControlMode controlMode(int port);
+	bool isPidActive(int port);
+	void setPidVelocity(int port, int ticks);
+	int pidVelocity(int port);
+	void setPidGoalPos(int port, int pos);
+	int pidGoalPos(int port);
+	void setPidGains(int port, short p, short i, short d, short pd, short id, short dd);
+	void pidGains(int port, short & p, short & i, short & d, short & pd, short & id, short & dd);
+	void setPwm(int port, unsigned short speed);
+	void setPwmDirection(int port, MotorDirection dir);
+	unsigned short pwm(int port);
+	MotorDirection pwmDirection(int port);
+	void stop(int port);
+
 
 	// Servo
 	void enableServo(int port);

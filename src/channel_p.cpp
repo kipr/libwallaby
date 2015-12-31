@@ -93,8 +93,8 @@ Camera::ObjectVector HsvChannelImpl::findObjects(const Config &config)
 
 BarcodeChannelImpl::BarcodeChannelImpl()
 {
-	m_image.set_format("Y800");
 	/*// TODO: needs zbar
+	m_image.set_format("Y800");
 	m_scanner.set_config(zbar::ZBAR_NONE, zbar::ZBAR_CFG_ENABLE, 0);
 	m_scanner.set_config(zbar::ZBAR_QRCODE, zbar::ZBAR_CFG_ENABLE, 1);
 	*/
@@ -102,6 +102,7 @@ BarcodeChannelImpl::BarcodeChannelImpl()
 
 void BarcodeChannelImpl::update(const cv::Mat &image)
 {
+	/* TODO: bring this back once we have zbar
 	if(image.empty()) {
 		m_gray = cv::Mat();
 		return;
@@ -113,6 +114,7 @@ void BarcodeChannelImpl::update(const cv::Mat &image)
 #endif
 	m_image.set_data(m_gray.data, m_gray.cols * m_gray.rows);
 	m_image.set_size(m_gray.cols, m_gray.rows);
+	*/
 }
 
 ::Camera::ObjectVector BarcodeChannelImpl::findObjects(const Config &config)
@@ -152,5 +154,5 @@ void BarcodeChannelImpl::update(const cv::Mat &image)
 
 	return ret;
 	*/
-	return ::Camera::ObjectVector; //TODO: add zbar
+	return ::Camera::ObjectVector(); //TODO: add zbar
 }
