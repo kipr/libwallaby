@@ -60,8 +60,17 @@ public:
 	// Motor
 
 	// Servo
+	void enableServo(int port);
+	void disableServo(int port);
 
+	void enableServos();
+	void disableServos();
 
+	void setServoEnabled(int port, bool enabled);
+	bool getServoEnabled(int port);
+
+	unsigned short getServoPosition(int port);
+	void setServoPosition(int port, unsigned short position);
 
 private:
 	BattleHill();

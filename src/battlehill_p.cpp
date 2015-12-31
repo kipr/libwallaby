@@ -29,6 +29,9 @@ using namespace battlecreek;
 using namespace daylite;
 using namespace std;
 
+static const unsigned int NUM_SERVOS = 4; // TODO: move
+
+
 namespace
 {
 	std::mutex battlehill_mutex;
@@ -206,6 +209,60 @@ bool BattleHill::calibrateMagneto()
 	std::cout << "Magnetometer calibration not yet supported" << std::endl;
 	return true;
 }
+
+void BattleHill::enableServo(int port)
+{
+	// FIXME implement
+}
+
+void BattleHill::disableServo(int port)
+{
+	// FIXME implement
+}
+
+void BattleHill::enableServos()
+{
+	// TODO: there is actually only one enable/disable setting for all servos
+	// ... here I have decided to re-use enable_servo in case that changes
+	for (unsigned int i = 0; i < NUM_SERVOS; ++i)
+	{
+		enableServo(i);
+	}
+
+}
+void BattleHill::disableServos()
+{
+	// TODO: there is actually only one enable/disable setting for all servos
+	// ... here I have decided to re-use enable_servo in case that changes
+	for (unsigned int i = 0; i < NUM_SERVOS; ++i)
+	{
+		disableServo(i);
+	}
+}
+
+void BattleHill::setServoEnabled(int port, bool enabled)
+{
+	// FIXME: implement
+}
+
+bool BattleHill::getServoEnabled(int port)
+{
+	if (port >= NUM_SERVOS) return false; // TODO
+	return Private::Robot::instance()->getRobotStates().servo_states.enabled[port];
+}
+
+unsigned short BattleHill::getServoPosition(int port)
+{
+	if (port >= NUM_SERVOS) return 0xFFFF;  // TODO
+	return Private::Robot::instance()->getRobotStates().servo_states.position[port];
+}
+
+void BattleHill::setServoPosition(int port, unsigned short position)
+{
+	// FIXME: implement
+}
+
+
 
 bool BattleHill::setup()
 {
