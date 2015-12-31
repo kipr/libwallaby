@@ -11,7 +11,7 @@
 
 #include "wallaby/camera.hpp"
 #include <opencv2/core/core.hpp>
-#include <zbar.h>
+//#include <zbar.h>
 #include <map>
 
 namespace Private

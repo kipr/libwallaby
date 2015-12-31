@@ -12,7 +12,7 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 
-#include <zbar.h>
+//#include <zbar.h>
 
 using namespace Private::Camera;
 
@@ -94,8 +94,10 @@ Camera::ObjectVector HsvChannelImpl::findObjects(const Config &config)
 BarcodeChannelImpl::BarcodeChannelImpl()
 {
 	m_image.set_format("Y800");
+	/*// TODO: needs zbar
 	m_scanner.set_config(zbar::ZBAR_NONE, zbar::ZBAR_CFG_ENABLE, 0);
 	m_scanner.set_config(zbar::ZBAR_QRCODE, zbar::ZBAR_CFG_ENABLE, 1);
+	*/
 }
 
 void BarcodeChannelImpl::update(const cv::Mat &image)
@@ -115,6 +117,7 @@ void BarcodeChannelImpl::update(const cv::Mat &image)
 
 ::Camera::ObjectVector BarcodeChannelImpl::findObjects(const Config &config)
 {
+	/*//needs zbar
 	if(m_gray.empty()) return ::Camera::ObjectVector();
 
 	m_scanner.scan(m_image);
@@ -148,4 +151,6 @@ void BarcodeChannelImpl::update(const cv::Mat &image)
 	}
 
 	return ret;
+	*/
+	return ::Camera::ObjectVector; //TODO: add zbar
 }
