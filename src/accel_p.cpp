@@ -43,6 +43,7 @@ Accel * Accel::instance()
 
 bool Accel::calibrate() const
 {
+	//FIXME: we don't support this yet
 	return true; // success
 }
 

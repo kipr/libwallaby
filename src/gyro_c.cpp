@@ -25,5 +25,6 @@ short gyro_z()
 
 int gyro_calibrate()
 {
+	// FIXME: we don't support this yet
 	return Private::Gyro::instance()->calibrate() ? 0 : -1;
 }
