@@ -29,15 +29,11 @@ using namespace battlecreek;
 using namespace daylite;
 using namespace std;
 
-
-// TODO: move to class
-static float capacity = 0.f;
+// TODO: relocate?
 static const unsigned int NUM_ADC = 6;
-static unsigned short adc_vals[NUM_ADC] = {0.f, 0.f, 0.f, 0.f, 0.f, 0.f};
 
 namespace
 {
-
 	std::mutex battlehill_mutex;
 
 	template<typename T>
@@ -65,13 +61,8 @@ namespace
 		if(msg_option.none()) return;
 
 		auto msg = msg_option.unwrap();
-		capacity = msg.battery_state.capacity;
 
-		for (unsigned int i = 0; i < NUM_ADC; ++i)
-		{
-			// FIXME: handle missing adc from message
-			adc_vals[i] = msg.analog_states.value[i];
-		}
+		Private::Robot::instance()->setRobotStates(msg);
 	}
 }
 
@@ -81,7 +72,13 @@ namespace Private
 float BattleHill::getBatteryCapacity()
 {
 	spinner::spin_once();
-	return capacity;
+	return Private::Robot::instance()->getRobotStates().battery_state.capacity;
+}
+
+unsigned short BattleHill::getBatteryRawReading()
+{
+	spinner::spin_once();
+	return Private::Robot::instance()->getRobotStates().battery_state.raw_adc;
 }
 
 unsigned short BattleHill::getAnalogValue(unsigned char port)
@@ -89,7 +86,7 @@ unsigned short BattleHill::getAnalogValue(unsigned char port)
 	spinner::spin_once();
 	// TODO: bounds checking
 	if (port >= NUM_ADC) return 0; // TODO: error feedback
-	return adc_vals[port];
+	return Private::Robot::instance()->getRobotStates().analog_states.value[port];
 }
 
 bool BattleHill::setup()

@@ -20,9 +20,28 @@ public:
 
 	virtual ~BattleHill();
 
-	float getBatteryCapacity();
+	// Ardrone
 
-	unsigned short BattleHill::getAnalogValue(unsigned char port);
+	// Analog
+	unsigned short getAnalogValue(unsigned char port);
+
+	// Battery
+	float getBatteryCapacity();
+	unsigned short getBatteryRawReading();
+
+	// Camera
+
+	// Create
+
+	// Digital
+
+	// IMU
+
+	// Motor
+
+	// Servo
+
+
 
 private:
 	BattleHill();
