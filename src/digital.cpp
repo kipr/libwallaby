@@ -6,7 +6,7 @@
  */
 
 #include "wallaby/digital.hpp"
-#include "digital_p.hpp"
+#include "battlehill_p.hpp"
 
 Digital::Digital(unsigned char port)
 : m_port(port)

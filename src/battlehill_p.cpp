@@ -90,6 +90,30 @@ unsigned short BattleHill::getBatteryRawReading()
 	return Private::Robot::instance()->getRobotStates().battery_state.raw_adc;
 }
 
+bool getDigitalValue(unsigned int port)
+{
+	exhaust_spinner();
+	// TODO: bounds checking
+	return Private::Robot::instance()->getRobotStates().digital_states.value[port];
+}
+
+bool getDigitalOutput(unsigned int port)
+{
+	exhaust_spinner();
+	// TODO: bounds checking
+	return Private::Robot::instance()->getRobotStates().digital_states.output[port];
+}
+
+void setDigitalValue(unsigned int port, bool high)
+{
+	// FIXME: implement
+}
+
+void setDigitalOutput(unsigned int port, bool output)
+{
+	// FIXME: implement
+}
+
 short BattleHill::getAccelX()
 {
 	exhaust_spinner();
@@ -118,7 +142,7 @@ bool BattleHill::calibrateAccel()
 {
 	// TODO: we don't support this yet
 	std::cout << "Accelerometer calibration not yet supported" << std::endl;
-	retur true;
+	return true;
 }
 
 short BattleHill::getGyroX()

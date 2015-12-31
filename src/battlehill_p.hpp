@@ -34,6 +34,10 @@ public:
 	// Create
 
 	// Digital
+	bool getDigitalValue(unsigned int port);
+	bool getDigitalOutput(unsigned int port);
+	void setDigitalValue(unsigned int port, bool high);
+	void setDigitalOutput(unsigned int port, bool output);
 
 	// IMU
 	short getAccelX();

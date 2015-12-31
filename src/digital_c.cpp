@@ -6,7 +6,7 @@
  */
 
 #include "wallaby/digital.h"
-#include "digital_p.hpp"
+#include "battlehill_p.hpp"
 
 int digital(int port)
 {
@@ -15,22 +15,23 @@ int digital(int port)
 
 void set_digital_value(int port, int value)
 {
-	Private::Digital::instance()->setValue(port, value);
+	Private::BattleHill::instance()->setDigitalValue(port, value == 0 ? false : true);
 }
 
 int get_digital_value(int port)
 {
-	return Private::Digital::instance()->value(port);
+	return (Private::BattleHill::instance()->getDigitalValue(port) ? 1 : 0);
 }
 
 void set_digital_output(int port, int out)
 {
-	Private::Digital::instance()->setDirection(port, out ? Private::Digital::Out : Private::Digital::In);
+
+	Private::BattleHill::instance()->setDigitalOutput(port, out == 0 ? false : true);
 }
 
 int get_digital_output(int port)
 {
-	return Private::Digital::instance()->direction(port) == Private::Digital::Out;
+	return (Private::BattleHill::instance()->getDigitalOutput(port) ? 1 : 0);
 }
 
 int get_digital_pullup(int port)
