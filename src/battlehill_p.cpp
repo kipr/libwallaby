@@ -6,7 +6,7 @@
  */
 
 #include "battlehill_p.hpp"
-
+#include "robot_p.hpp"
 
 #include <battlecreek/analog_states.hpp>
 #include <battlecreek/battery_state.hpp>
