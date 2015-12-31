@@ -69,6 +69,14 @@ namespace
 namespace Private
 {
 
+unsigned short BattleHill::getAnalogValue(unsigned char port)
+{
+	spinner::spin_once();
+	// TODO: bounds checking
+	if (port >= NUM_ADC) return 0; // TODO: error feedback
+	return Private::Robot::instance()->getRobotStates().analog_states.value[port];
+}
+
 float BattleHill::getBatteryCapacity()
 {
 	spinner::spin_once();
@@ -81,13 +89,7 @@ unsigned short BattleHill::getBatteryRawReading()
 	return Private::Robot::instance()->getRobotStates().battery_state.raw_adc;
 }
 
-unsigned short BattleHill::getAnalogValue(unsigned char port)
-{
-	spinner::spin_once();
-	// TODO: bounds checking
-	if (port >= NUM_ADC) return 0; // TODO: error feedback
-	return Private::Robot::instance()->getRobotStates().analog_states.value[port];
-}
+
 
 bool BattleHill::setup()
 {
