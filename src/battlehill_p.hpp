@@ -29,9 +29,11 @@ public:
 	float getBatteryCapacity();
 	unsigned short getBatteryRawReading();
 
-	// Camera
+	// Buttons - partly from battlehill, partly from harrogate
 
-	// Create
+	// Camera - not from battlehill
+
+	// Create - not from battlehill
 
 	// Digital
 	bool getDigitalValue(unsigned int port);
