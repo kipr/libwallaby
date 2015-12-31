@@ -11,7 +11,7 @@
 
 int main(int argc, char ** argv)
 {
-	int velocity = 100;
+	int velocity = 25;
 
 	printf("forward at velocity %d on all four motors, in an infinite loop...\n", velocity);
 
@@ -20,8 +20,6 @@ int main(int argc, char ** argv)
 		int i;
 
 		for (i = 0; i < 4; ++i) mav(i, velocity);
-
-		msleep(1);
 	}
 
 	return 0;
