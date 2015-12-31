@@ -61,6 +61,12 @@ namespace
 
 		Private::Robot::instance()->setRobotStates(msg);
 	}
+
+	void exhaust_spinner()
+	{
+		// TODO: spin_once as long as we have messages
+		spinner::spin_once();
+	}
 }
 
 namespace Private
@@ -68,23 +74,114 @@ namespace Private
 
 unsigned short BattleHill::getAnalogValue(unsigned char port)
 {
-	spinner::spin_once();
+	exhaust_spinner();
 	return Private::Robot::instance()->getRobotStates().analog_states.value[port];
 }
 
 float BattleHill::getBatteryCapacity()
 {
-	spinner::spin_once();
+	exhaust_spinner();
 	return Private::Robot::instance()->getRobotStates().battery_state.capacity;
 }
 
 unsigned short BattleHill::getBatteryRawReading()
 {
-	spinner::spin_once();
+	exhaust_spinner();
 	return Private::Robot::instance()->getRobotStates().battery_state.raw_adc;
 }
 
+short BattleHill::getAccelX()
+{
+	exhaust_spinner();
+	return Private::Robot::instance()->getRobotStates().imu_state.accel_state.x;
+}
 
+short BattleHill::getAccelY()
+{
+	exhaust_spinner();
+	return Private::Robot::instance()->getRobotStates().imu_state.accel_state.y;
+}
+
+short BattleHill::getAccelZ()
+{
+	exhaust_spinner();
+	return Private::Robot::instance()->getRobotStates().imu_state.accel_state.z;
+}
+
+bool BattleHill::getAccelCalibrated()
+{
+	exhaust_spinner();
+	return Private::Robot::instance()->getRobotStates().imu_state.accel_state.calibrated;
+}
+
+bool BattleHill::calibrateAccel()
+{
+	// TODO: we don't support this yet
+	std::cout << "Accelerometer calibration not yet supported" << std::endl;
+	retur true;
+}
+
+short BattleHill::getGyroX()
+{
+	exhaust_spinner();
+	return Private::Robot::instance()->getRobotStates().imu_state.gyro_state.x;
+}
+
+short BattleHill::getGyroY()
+{
+	exhaust_spinner();
+	return Private::Robot::instance()->getRobotStates().imu_state.gyro_state.y;
+}
+
+short BattleHill::getGyroZ()
+{
+	exhaust_spinner();
+	return Private::Robot::instance()->getRobotStates().imu_state.gyro_state.z;
+}
+
+bool BattleHill::getGyroCalibrated()
+{
+	exhaust_spinner();
+	return Private::Robot::instance()->getRobotStates().imu_state.gyro_state.calibrated;
+}
+
+bool BattleHill::calibrateGyro()
+{
+	// TODO: we don't support this yet
+	std::cout << "Gyrometer calibration not yet supported" << std::endl;
+	return true;
+}
+
+short BattleHill::getMagnetoX()
+{
+	exhaust_spinner();
+	return Private::Robot::instance()->getRobotStates().imu_state.magneto_state.x;
+}
+
+short BattleHill::getMagnetoY()
+{
+	exhaust_spinner();
+	return Private::Robot::instance()->getRobotStates().imu_state.magneto_state.y;
+}
+
+short BattleHill::getMagnetoZ()
+{
+	exhaust_spinner();
+	return Private::Robot::instance()->getRobotStates().imu_state.magneto_state.z;
+}
+
+bool BattleHill::getMagnetoCalibrated()
+{
+	exhaust_spinner();
+	return Private::Robot::instance()->getRobotStates().imu_state.calibrated;
+}
+
+bool BattleHill::calibrateMagneto()
+{
+	// TODO: we don't support this yet
+	std::cout << "Magnetometer calibration not yet supported" << std::endl;
+	return true;
+}
 
 bool BattleHill::setup()
 {

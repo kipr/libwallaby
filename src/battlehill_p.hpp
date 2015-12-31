@@ -36,6 +36,22 @@ public:
 	// Digital
 
 	// IMU
+	short getAccelX();
+	short getAccelY();
+	short getAccelZ();
+	bool getAccelCalibrated();
+	bool calibrateAccel();
+	short getGyroX();
+	short getGyroY();
+	short getGyroZ();
+	bool getGyroCalibrated();
+	bool calibrateGyro();
+	short getMagnetoX();
+	short getMagnetoY();
+	short getMagnetoZ();
+	bool getMagnetoCalibrated();
+	bool calibrateMagneto();
+
 
 	// Motor
 
