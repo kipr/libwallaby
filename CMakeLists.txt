@@ -15,7 +15,7 @@ include_directories(${BATTLECREEK_INCLUDE_DIR} ${DAYLITE_INCLUDE_DIRS})
 
 
 file(GLOB SOURCES ${SRC}/*.cpp)
-
+file(GLOB C_TESTS tests/*.c)
 
 # Cross-compile
 # set(CMAKE_CXX_COMPILER arm-linux-gnueabihf-g++)
@@ -74,56 +74,17 @@ target_link_libraries(wallaby ${DAYLITE_LIBRARIES})
 
 # Executables: test programs
 # TODO: use a list and foreach to make this more concise
-add_executable(battery_test_c tests/battery_test.c)
-target_link_libraries(battery_test_c wallaby)
+set(TESTS )
 
-add_executable(led_test_c tests/led_test.c)
-target_link_libraries(led_test_c wallaby)
+foreach(C_TEST ${C_TESTS})
+  get_filename_component(C_TEST_NAME ${C_TEST} NAME_WE)
+  set(TEST_BIN_NAME ${C_TEST_NAME}_c)
+  add_executable(${TEST_BIN_NAME} ${C_TEST})
+  target_link_libraries(${TEST_BIN_NAME} wallaby)
+  list(APPEND TESTS ${CMAKE_BINARY_DIR}/${TEST_BIN_NAME})
+endforeach()
 
-add_executable(comm_speed_test_c tests/comm_speed_test.c)
-target_link_libraries(comm_speed_test_c wallaby)
+install(FILES ${TESTS} DESTINATION bin/wallaby)
+install(TARGETS wallaby DESTINATION lib)
+install(DIRECTORY ${INCLUDE}/wallaby DESTINATION include)
 
-add_executable(analog_test_c tests/analog_test.c)
-target_link_libraries(analog_test_c wallaby)
-
-add_executable(imu_test_c tests/imu_test.c)
-target_link_libraries(imu_test_c wallaby)
-
-add_executable(servo_test_c tests/servo_test.c)
-target_link_libraries(servo_test_c wallaby)
-
-add_executable(motor_pwm_test_c tests/motor_pwm_test.c)
-target_link_libraries(motor_pwm_test_c wallaby)
-
-add_executable(motor_mav_test_c tests/motor_mav_test.c)
-target_link_libraries(motor_mav_test_c wallaby)
-
-add_executable(motor_mav_loop_test_c tests/motor_mav_loop_test.c)
-target_link_libraries(motor_mav_loop_test_c wallaby)
-
-add_executable(motor_mtp_test_c tests/motor_mtp_test.c)
-target_link_libraries(motor_mtp_test_c wallaby)
-
-add_executable(motor_mrp_test_c tests/motor_mrp_test.c)
-target_link_libraries(motor_mrp_test_c wallaby)
-
-add_executable(audio_test_c tests/audio_test.c)
-target_link_libraries(audio_test_c wallaby)
-
-add_executable(ir_test_c tests/ir_test.c)
-target_link_libraries(ir_test_c wallaby)
-
-add_executable(button_test_c tests/button_test.c)
-target_link_libraries(button_test_c wallaby)
-
-add_executable(create_test_c tests/create_test.c)
-target_link_libraries(create_test_c wallaby)
-
-add_executable(dig_in_test_c tests/dig_in_test.c)
-target_link_libraries(dig_in_test_c wallaby)
-
-add_executable(dig_test_c tests/dig_test.c)
-target_link_libraries(dig_test_c wallaby)
-
-add_executable(dig_pu_test_c tests/dig_pu_test.c)
-target_link_libraries(dig_pu_test_c wallaby)
