@@ -31,7 +31,7 @@ public:
 private:
 	Wallaby();
 	bool transfer();
-	void clear_buffers();
+	void clearBuffers();
 	int spi_fd_;
 	unsigned char * write_buffer_;
 	unsigned char * read_buffer_;

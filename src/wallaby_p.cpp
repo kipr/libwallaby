@@ -109,7 +109,7 @@ unsigned char Wallaby::readRegister8b(unsigned char address)
 {
 	if (address >= REG_READABLE_COUNT) return 0;// false; // TODO: feedback
 
-	clear_buffers();
+	clearBuffers();
 
 	//bool success = transfer();
 	//TODO: if (success == false) return false;
@@ -123,7 +123,7 @@ void Wallaby::writeRegister8b(unsigned char address, unsigned char value)
 {
 	if (address >= REG_ALL_COUNT) return;// false; // TODO: feedback
 
-	clear_buffers();
+	clearBuffers();
 
 	// TODO definitions for buffer inds
 	write_buffer_[3] = 1; // write 1 register
@@ -139,7 +139,7 @@ unsigned short Wallaby::readRegister16b(unsigned char address)
 {
 	if (address >= REG_READABLE_COUNT || address+1 >= REG_READABLE_COUNT) return 0;// false; // TODO: feedback
 
-	clear_buffers();
+	clearBuffers();
 
 	//TODO: bool success = transfer();
 	//return success;
@@ -153,7 +153,7 @@ void Wallaby::writeRegister16b(unsigned char address, unsigned short value)
 {
 	if (address >= REG_ALL_COUNT || address+1 >= REG_ALL_COUNT) return;// false; // TODO: feedback
 
-	clear_buffers();
+	clearBuffers();
 
 	// TODO definitions for buffer inds
 	write_buffer_[3] = 2; // write 2 registers
@@ -171,7 +171,7 @@ unsigned int Wallaby::readRegister32b(unsigned char address)
 {
 	if (address >= REG_READABLE_COUNT || address+3 >= REG_READABLE_COUNT) return 0;// false; // TODO: feedback
 
-	clear_buffers();
+	clearBuffers();
 
 	//TODO: bool success = transfer();
 	//return success;
@@ -190,7 +190,7 @@ void Wallaby::writeRegister32b(unsigned char address, unsigned int value)
 {
 	if (address >= REG_ALL_COUNT || address+3 >= REG_ALL_COUNT) return;// false; // TODO: feedback
 
-	clear_buffers();
+	clearBuffers();
 
 	// TODO definitions for buffer inds
 	write_buffer_[3] = 2; // write 2 registers
@@ -208,7 +208,7 @@ void Wallaby::writeRegister32b(unsigned char address, unsigned int value)
 	transfer();
 }
 
-void Wallaby::clear_buffers()
+void Wallaby::clearBuffers()
 {
 	memset(write_buffer_, 0, buffer_size_);
 	memset(read_buffer_, 0, buffer_size_);
