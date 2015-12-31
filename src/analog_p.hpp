@@ -16,8 +16,6 @@ class Analog
 public:
 	~Analog();
 
-	void setPullup(unsigned char port, bool pullup);
-	bool pullup(unsigned char port) const;
 	unsigned short value(unsigned char port) const;
 
 	static Analog * instance();

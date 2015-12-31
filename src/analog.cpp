@@ -26,7 +26,7 @@ unsigned char Analog::port() const
 
 bool Analog::pullup() const
 {
-	return Private::Analog::instance()->pullup(m_port);
+	return false;
 }
 
 Analog8::Analog8(unsigned char port)

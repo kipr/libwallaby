@@ -17,31 +17,6 @@ Analog::~Analog()
 
 }
 
-void Analog::setPullup(unsigned char port, bool pullup)
-{
-	// TODO: bounds checks
-	unsigned char pullups = Private::Wallaby::instance()->readRegister8b(REG_RW_ADC_PE);
-
-	if (pullup)
-	{
-		pullups |= (1 << port);
-	}
-	else
-	{
-		pullups &= ~(1 << port);
-	}
-
-	Private::Wallaby::instance()->writeRegister8b(REG_RW_ADC_PE, pullups);
-}
-
-bool Analog::pullup(unsigned char port) const
-{
-	// TODO: bounds checking
-	unsigned char pullups = Private::Wallaby::instance()->readRegister8b(REG_RW_ADC_PE);
-
-	return pullups & (1 << port);
-}
-
 unsigned short Analog::value(unsigned char port) const
 {
 	// TODO: bounds checking
