@@ -84,36 +84,6 @@ bool Digital::setDirection(unsigned char port, const Digital::Direction & direct
 	return true; // TODO: based on success;
 }
 
-
-bool Digital::pullup(unsigned char port) const
-{
-	// TODO: bounds checking (return false if out of range)
-
-	unsigned short pullups = Private::Wallaby::instance()->readRegister16b(REG_RW_DIG_PE_H);
-
-	bool ret = pullups & (1 << port);
-	return ret;
-}
-
-bool Digital::setPullup(unsigned char port, bool pullup)
-{
-	// TODO: bounds checking (return false if out of range)
-	unsigned short pullups = Private::Wallaby::instance()->readRegister16b(REG_RW_DIG_PE_H);
-
-	if (pullup)
-	{
-		pullups |= (1 << port);
-	}
-	else
-	{
-		pullups &= ~(1 << port);
-	}
-
-	Private::Wallaby::instance()->writeRegister16b(REG_RW_DIG_PE_H, pullups);
-
-	return true; // TODO: based on success;
-}
-
 Digital * Digital::instance()
 {
 	static Digital instance;

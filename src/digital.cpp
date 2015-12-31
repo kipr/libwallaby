@@ -36,10 +36,11 @@ bool Digital::isOutput() const
 
 void Digital::setPullup(bool pullup)
 {
-	Private::Digital::instance()->setPullup(m_port, pullup);
+	// not available on the Wallaby
 }
 
 bool Digital::pullup() const
 {
-	return Private::Digital::instance()->pullup(m_port);
+	// not available on the Wallaby
+	return false;
 }

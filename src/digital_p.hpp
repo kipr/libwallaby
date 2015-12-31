@@ -28,9 +28,6 @@ public:
 	const Digital::Direction direction(unsigned char port) const;
 	bool setDirection(unsigned char port, const Digital::Direction & direction);
 
-	bool pullup(unsigned char port) const;
-	bool setPullup(unsigned char port, bool pullup);
-
 	static Digital * instance();
 
 private:

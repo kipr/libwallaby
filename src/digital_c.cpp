@@ -35,10 +35,11 @@ int get_digital_output(int port)
 
 int get_digital_pullup(int port)
 {
-	return Private::Digital::instance()->pullup(port);
+	// Not available on the Wallaby
+	return 0;
 }
 
 void set_digital_pullup(int port, int pullup)
 {
-	Private::Digital::instance()->setPullup(port, pullup);
+	// Not available on the Wallaby
 }
