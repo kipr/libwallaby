@@ -6,7 +6,9 @@
  */
 
 #include "wallaby/analog.hpp"
-#include "analog_p.hpp"
+
+#include "battlehill_p.hpp"
+
 
 Analog::Analog(unsigned char port)
 : m_port(port)
@@ -16,7 +18,7 @@ Analog::Analog(unsigned char port)
 
 unsigned short Analog::value() const
 {
-	return Private::Analog::instance()->value(m_port);
+	return Private::BattleHill::instance()->getAnalogValue(m_port);
 }
 
 unsigned char Analog::port() const

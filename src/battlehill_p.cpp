@@ -32,6 +32,8 @@ using namespace std;
 
 // TODO: move to class
 static float capacity = 0.f;
+static const unsigned int NUM_ADC = 6;
+static unsigned short adc_vals[NUM_ADC] = {0.f, 0.f, 0.f, 0.f, 0.f, 0.f};
 
 namespace
 {
@@ -64,6 +66,12 @@ namespace
 
 		auto msg = msg_option.unwrap();
 		capacity = msg.battery_state.capacity;
+
+		for (unsigned int i = 0; i < NUM_ADC; ++i)
+		{
+			// FIXME: handle missing adc from message
+			adc_vals[i] = msg.analog_states.value[i];
+		}
 	}
 }
 
@@ -74,6 +82,14 @@ float BattleHill::getBatteryCapacity()
 {
 	spinner::spin_once();
 	return capacity;
+}
+
+unsigned short BattleHill::getAnalogValue(unsigned char port)
+{
+	spinner::spin_once();
+	// TODO: bounds checking
+	if (port >= NUM_ADC) return 0; // TODO: error feedback
+	return adc_vals[port];
 }
 
 bool BattleHill::setup()

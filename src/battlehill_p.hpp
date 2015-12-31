@@ -22,6 +22,8 @@ public:
 
 	float getBatteryCapacity();
 
+	unsigned short BattleHill::getAnalogValue(unsigned char port);
+
 private:
 	BattleHill();
 	bool setup(); // initializes the daylite node
