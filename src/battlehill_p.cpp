@@ -29,9 +29,6 @@ using namespace battlecreek;
 using namespace daylite;
 using namespace std;
 
-// TODO: relocate?
-static const unsigned int NUM_ADC = 6;
-
 namespace
 {
 	std::mutex battlehill_mutex;
@@ -72,8 +69,6 @@ namespace Private
 unsigned short BattleHill::getAnalogValue(unsigned char port)
 {
 	spinner::spin_once();
-	// TODO: bounds checking
-	if (port >= NUM_ADC) return 0; // TODO: error feedback
 	return Private::Robot::instance()->getRobotStates().analog_states.value[port];
 }
 
