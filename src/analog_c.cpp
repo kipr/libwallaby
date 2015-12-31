@@ -35,10 +35,11 @@ int analog_et(int port)
 
 void set_analog_pullup(int port, int pullup)
 {
-
+	// Not available on the Wallaby
 }
 
 int get_analog_pullup(int port)
 {
+	// Not available on the Wallaby
 	return 0;
 }

@@ -26,6 +26,7 @@ unsigned char Analog::port() const
 
 bool Analog::pullup() const
 {
+	// Not available on the Wallaby
 	return false;
 }
 
