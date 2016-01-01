@@ -37,7 +37,7 @@ namespace
 	std::mutex battlehill_mutex;
 
 	template<typename T>
-	inline bson_bind::option<T> safe_unbind(const bson_t *raw_msg)
+	inline bson_bind::option<T> safe_unbind(const bson & raw_msg)
 	{
 		using namespace bson_bind;
 		T ret;
@@ -55,7 +55,7 @@ namespace
 	}
 
 	// TODO: move to namespace / class
-	void robot_states_cb(const bson_t *raw_msg, void *)
+	void robot_states_cb(const bson & raw_msg, void *)
 	{
 		const auto msg_option = safe_unbind<robot_states>(raw_msg);
 		if(msg_option.none()) return;
@@ -78,6 +78,7 @@ namespace Private
 unsigned short BattleHill::getAnalogValue(unsigned char port)
 {
 	exhaust_spinner();
+	if (port >= Private::Robot::instance()->getRobotStates().analog_states.value.size()) return 0; // TODO: feedback
 	return Private::Robot::instance()->getRobotStates().analog_states.value[port];
 }
 
@@ -96,14 +97,14 @@ unsigned short BattleHill::getBatteryRawReading()
 bool BattleHill::getDigitalValue(unsigned int port)
 {
 	exhaust_spinner();
-	// TODO: bounds checking
+	if (port >= Private::Robot::instance()->getRobotStates().digital_states.value.size()) return false;// TODO: feedback
 	return Private::Robot::instance()->getRobotStates().digital_states.value[port];
 }
 
 bool BattleHill::getDigitalOutput(unsigned int port)
 {
 	exhaust_spinner();
-	// TODO: bounds checking
+	if (port >= Private::Robot::instance()->getRobotStates().digital_states.output.size()) return false;// TODO: feedback
 	return Private::Robot::instance()->getRobotStates().digital_states.output[port];
 }
 
