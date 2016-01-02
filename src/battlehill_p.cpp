@@ -38,42 +38,42 @@ static const unsigned int NUM_DIG = 16;
 
 namespace
 {
-	std::mutex battlehill_mutex;
+std::mutex battlehill_mutex;
 
-	template<typename T>
-	inline bson_bind::option<T> safe_unbind(const bson & raw_msg)
+template<typename T>
+inline bson_bind::option<T> safe_unbind(const bson & raw_msg)
+{
+	using namespace bson_bind;
+	T ret;
+	try
 	{
-		using namespace bson_bind;
-		T ret;
-		try
-		{
-			ret = T::unbind(raw_msg);
-		}
-		catch(const invalid_argument &e)
-		{
-			cerr << e.what() << endl;
-			return none<T>();
-		}
-
-		return some(ret);
+		ret = T::unbind(raw_msg);
+	}
+	catch(const invalid_argument &e)
+	{
+		cerr << e.what() << endl;
+		return none<T>();
 	}
 
-	// TODO: move to namespace / class
-	void robot_states_cb(const bson & raw_msg, void *)
-	{
-		const auto msg_option = safe_unbind<robot_states>(raw_msg);
-		if(msg_option.none()) return;
+	return some(ret);
+}
 
-		auto msg = msg_option.unwrap();
+// TODO: move to namespace / class
+void robot_states_cb(const bson & raw_msg, void *)
+{
+	const auto msg_option = safe_unbind<robot_states>(raw_msg);
+	if(msg_option.none()) return;
 
-		Private::Robot::instance()->setRobotStates(msg);
-	}
+	auto msg = msg_option.unwrap();
 
-	void exhaust_spinner()
-	{
-		// TODO: spin_once as long as we have messages
-		spinner::spin_once();
-	}
+	Private::Robot::instance()->setRobotStates(msg);
+}
+
+void exhaust_spinner()
+{
+	// TODO: spin_once as long as we have messages
+	spinner::spin_once();
+}
 }
 
 namespace Private
@@ -114,20 +114,22 @@ bool BattleHill::getDigitalOutput(unsigned int port)
 
 void BattleHill::setDigitalValue(unsigned int port, bool high)
 {
-	  battlecreek::set_digital_state msg;
-	  msg.port = port;
-	  msg.value = high;
+	battlecreek::set_digital_state msg;
+	msg.port = port;
+	msg.value = high;
 
-	  set_digital_state_pub_->publish(msg.bind());
+	set_digital_state_pub_->publish(msg.bind());
+	spinner::spin_once();
 }
 
 void BattleHill::setDigitalOutput(unsigned int port, bool output)
 {
-	  battlecreek::set_digital_state msg;
-	  msg.port = port;
-	  msg.output = output;
+	battlecreek::set_digital_state msg;
+	msg.port = port;
+	msg.output = output;
 
-	  set_digital_state_pub_->publish(msg.bind());
+	set_digital_state_pub_->publish(msg.bind());
+	spinner::spin_once();
 }
 
 short BattleHill::getAccelX()
@@ -253,7 +255,7 @@ void BattleHill::setControlMode(int port, BattleHill::MotorControlMode mode)
 	modes |=  (((int)mode) << offset);
 
 	Private::Wallaby::instance()->writeRegister8b(REG_RW_MOT_MODES, modes);
-	*/
+	 */
 }
 
 BattleHill::MotorControlMode BattleHill::controlMode(int port)
@@ -268,7 +270,7 @@ BattleHill::MotorControlMode BattleHill::controlMode(int port)
 	unsigned char mode = (modes & (0x3 << offset)) >> offset;
 
 	return (Private::Motor::ControlMode)mode;
-	*/
+	 */
 	return BattleHill::MotorControlMode::Inactive; // FIXME
 }
 
@@ -287,7 +289,7 @@ void BattleHill::setPidVelocity(int port, int ticks)
 	//  ... maybe add on the co-proc?
 	unsigned int goal_addy = REG_RW_MOT_0_SP_H + 2 * port; // TODO: 32 bit?
 	Private::Wallaby::instance()->writeRegister16b(goal_addy, static_cast<signed short>(ticks));
-	*/
+	 */
 }
 
 int BattleHill::pidVelocity(int port)
@@ -297,7 +299,7 @@ int BattleHill::pidVelocity(int port)
 	unsigned int goal_addy = REG_RW_MOT_0_SP_H + 2 * port;
 	int val = Private::Wallaby::instance()->readRegister16b(goal_addy);
 	return val;
-	*/
+	 */
 	return 0;//FIXME
 }
 
@@ -308,7 +310,7 @@ void BattleHill::setPidGoalPos(int port, int pos)
 	// TODO: logic to not set goals if they match the current value (in co-proc firmware maybe?)
 	unsigned int goal_addy = REG_W_MOT_0_GOAL_B3 + 4 * port;
 	Private::Wallaby::instance()->writeRegister32b(goal_addy, pos);
-	*/
+	 */
 }
 
 
@@ -329,7 +331,7 @@ void BattleHill::setPidGains(int port, short p, short i, short d, short pd, shor
 	Private::Wallaby::instance()->writeRegister16b(REG_W_PID_0_PD_H + addy_offset, pd);
 	Private::Wallaby::instance()->writeRegister16b(REG_W_PID_0_ID_H + addy_offset, id);
 	Private::Wallaby::instance()->writeRegister16b(REG_W_PID_0_DD_H + addy_offset, dd);
-	*/
+	 */
 }
 
 void BattleHill::pidGains(int port, short & p, short & i, short & d, short & pd, short & id, short & dd)
@@ -349,7 +351,7 @@ void BattleHill::setPwm(int port, unsigned short speed)
 	unsigned short adjustedSpeed = speed * 4;
 	if (adjustedSpeed > speedMax) adjustedSpeed = speedMax; // TODO: check scaling (1/4 percent increments)
 	Private::Wallaby::instance()->writeRegister16b(REG_RW_MOT_0_PWM_H + 2 * port, adjustedSpeed);
-	*/
+	 */
 }
 
 void BattleHill::setPwmDirection(int port, MotorDirection dir)
@@ -368,7 +370,7 @@ void BattleHill::setPwmDirection(int port, MotorDirection dir)
 	dirs |= (dir << offset);
 
 	Private::Wallaby::instance()->writeRegister8b(REG_RW_MOT_DIRS, dirs);
-	*/
+	 */
 }
 
 unsigned short BattleHill::pwm(int port)
@@ -377,7 +379,7 @@ unsigned short BattleHill::pwm(int port)
 	if (port < 0 || port > 3) return 0;
 	// TODO: error signal outside of range
 	return Private::Wallaby::instance()->readRegister16b(REG_RW_MOT_0_PWM_H + 2 * port);
-	*/
+	 */
 	return 0; // TODO
 }
 
@@ -392,7 +394,7 @@ BattleHill::MotorDirection BattleHill::pwmDirection(int port)
 	unsigned short offset = 2 * port;
 
 	return (MotorDirection)((dirs & (0x3 << offset)) >> offset);
-	*/
+	 */
 	return MotorDirection::PassiveStop; // FIXME
 }
 
@@ -402,7 +404,7 @@ void BattleHill::stop(int port)
 	if (port < 0 || port > 3) return;
 	setControlMode(port, Private::Motor::Inactive);
 	setPwmDirection(port, PassiveStop);
-	*/
+	 */
 }
 
 
