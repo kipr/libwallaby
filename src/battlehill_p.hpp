@@ -118,7 +118,7 @@ private:
 	BattleHill();
 	bool setup(); // initializes the daylite node
 	bool daylite_good_; // is the daylite node alright
-	std::shared_ptr<daylite::publisher> set_digital_states_pub_;
+	std::shared_ptr<daylite::publisher> set_digital_state_pub_;
 };
 
 } /* namespace Private */

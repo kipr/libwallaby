@@ -14,6 +14,8 @@
 #include <battlecreek/motor_states.hpp>
 #include <battlecreek/robot_states.hpp>
 #include <battlecreek/servo_states.hpp>
+#include <battlecreek/set_digital_state.hpp>
+
 
 
 #include <daylite/node.hpp>
@@ -112,26 +114,20 @@ bool BattleHill::getDigitalOutput(unsigned int port)
 
 void BattleHill::setDigitalValue(unsigned int port, bool high)
 {
-	  battlecreek::digital_states digital_states = Private::Robot::instance()->getRobotStates().digital_states;
-	  // TODO: clear output to avoid resetting it in battlehill
+	  battlecreek::set_digital_state msg;
+	  msg.port = port;
+	  msg.value = high;
 
-	  if (port >= digital_states.value.size()) digital_states.value.resize(port);
-
-	  digital_states.value[port] = high;
-
-	  set_digital_states_pub_->publish(digital_states.bind());
+	  set_digital_state_pub_->publish(msg.bind());
 }
 
 void BattleHill::setDigitalOutput(unsigned int port, bool output)
 {
-	  battlecreek::digital_states digital_states = Private::Robot::instance()->getRobotStates().digital_states;
-	  // TODO: clear value to avoid resetting it in battlehill
+	  battlecreek::set_digital_state msg;
+	  msg.port = port;
+	  msg.output = output;
 
-	  if (port >= digital_states.output.size()) digital_states.output.resize(port);
-
-	  digital_states.output[port] = output;
-
-	  set_digital_states_pub_->publish(digital_states.bind());
+	  set_digital_state_pub_->publish(msg.bind());
 }
 
 short BattleHill::getAccelX()
@@ -481,7 +477,7 @@ bool BattleHill::setup()
 
 	static auto robot_states_sub = n->subscribe("robot/robot_states", &robot_states_cb);
 
-	set_digital_states_pub_ = n->advertise("robot/set_digital_states");
+	set_digital_state_pub_ = n->advertise("robot/set_digital_state");
 
 	return true;
 }
