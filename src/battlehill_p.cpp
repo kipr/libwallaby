@@ -29,8 +29,10 @@ using namespace battlecreek;
 using namespace daylite;
 using namespace std;
 
-static const unsigned int NUM_SERVOS = 4; // TODO: move
-
+// TODO: move these and share
+static const unsigned int NUM_SERVOS = 4;
+static const unsigned int NUM_ADC = 6;
+static const unsigned int NUM_DIG = 16;
 
 namespace
 {
@@ -110,12 +112,26 @@ bool BattleHill::getDigitalOutput(unsigned int port)
 
 void BattleHill::setDigitalValue(unsigned int port, bool high)
 {
-	// FIXME: implement
+	  battlecreek::digital_states digital_states = Private::Robot::instance()->getRobotStates().digital_states;
+	  // TODO: clear output to avoid resetting it in battlehill
+
+	  if (port >= digital_states.value.size()) digital_states.value.resize(port);
+
+	  digital_states.value[port] = high;
+
+	  set_digital_states_pub_->publish(digital_states.bind());
 }
 
 void BattleHill::setDigitalOutput(unsigned int port, bool output)
 {
-	// FIXME: implement
+	  battlecreek::digital_states digital_states = Private::Robot::instance()->getRobotStates().digital_states;
+	  // TODO: clear value to avoid resetting it in battlehill
+
+	  if (port >= digital_states.output.size()) digital_states.output.resize(port);
+
+	  digital_states.output[port] = output;
+
+	  set_digital_states_pub_->publish(digital_states.bind());
 }
 
 short BattleHill::getAccelX()
@@ -464,6 +480,8 @@ bool BattleHill::setup()
 	}
 
 	static auto robot_states_sub = n->subscribe("robot/robot_states", &robot_states_cb);
+
+	set_digital_states_pub_ = n->advertise("robot/set_digital_states");
 
 	return true;
 }

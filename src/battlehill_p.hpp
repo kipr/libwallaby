@@ -9,6 +9,12 @@
 #ifndef SRC_BATTLEHILL_P_HPP_
 #define SRC_BATTLEHILL_P_HPP_
 
+
+#include <memory>
+
+#include "daylite/publisher.hpp"
+#include "daylite/subscriber.hpp"
+
 namespace Private
 {
 
@@ -112,6 +118,7 @@ private:
 	BattleHill();
 	bool setup(); // initializes the daylite node
 	bool daylite_good_; // is the daylite node alright
+	std::shared_ptr<daylite::publisher> set_digital_states_pub_;
 };
 
 } /* namespace Private */
