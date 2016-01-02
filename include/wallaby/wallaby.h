@@ -21,6 +21,7 @@
 #include "ir.h"
 #include "magneto.h"
 #include "motors.h"
+#include "robot.h"
 #include "servo.h"
 #include "thread.h"
 #include "util.h"

@@ -79,6 +79,18 @@ void exhaust_spinner()
 namespace Private
 {
 
+unsigned long int BattleHill::getRobotStatesSequenceNumber()
+{
+	exhaust_spinner();
+	return Private::Robot::instance()->getRobotStates().seq;
+}
+
+unsigned long int BattleHill::getRobotUpdateCount()
+{
+	exhaust_spinner();
+	return Private::Robot::instance()->getRobotStates().update_count;
+}
+
 unsigned short BattleHill::getAnalogValue(unsigned char port)
 {
 	exhaust_spinner();

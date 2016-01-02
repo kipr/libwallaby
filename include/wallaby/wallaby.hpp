@@ -20,6 +20,7 @@
 #include "ir.hpp"
 #include "magneto.hpp"
 #include "motors.hpp"
+#include "robot.hpp"
 #include "servo.hpp"
 #include "thread.hpp"
 #include "util.hpp"

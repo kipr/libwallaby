@@ -114,6 +114,10 @@ public:
 	unsigned short getServoPosition(int port);
 	void setServoPosition(int port, unsigned short position);
 
+	// Robot State Message Info
+	unsigned long int getRobotStatesSequenceNumber();
+	unsigned long int getRobotUpdateCount();
+
 private:
 	BattleHill();
 	bool setup(); // initializes the daylite node
