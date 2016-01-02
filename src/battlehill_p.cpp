@@ -15,6 +15,7 @@
 #include <battlecreek/robot_states.hpp>
 #include <battlecreek/servo_states.hpp>
 #include <battlecreek/set_digital_state.hpp>
+#include <battlecreek/set_servo_state.hpp>
 
 
 
@@ -422,12 +423,22 @@ void BattleHill::stop(int port)
 
 void BattleHill::enableServo(int port)
 {
-	// FIXME implement
+	battlecreek::set_servo_state msg;
+	msg.port = port;
+	msg.enabled = true;
+
+	set_servo_state_pub_->publish(msg.bind());
+	spinner::spin_once();
 }
 
 void BattleHill::disableServo(int port)
 {
-	// FIXME implement
+	battlecreek::set_servo_state msg;
+	msg.port = port;
+	msg.enabled = true;
+
+	set_servo_state_pub_->publish(msg.bind());
+	spinner::spin_once();
 }
 
 void BattleHill::enableServos()
@@ -452,7 +463,14 @@ void BattleHill::disableServos()
 
 void BattleHill::setServoEnabled(int port, bool enabled)
 {
-	// FIXME: implement
+	if (enabled)
+	{
+		enableServo(port);
+	}
+	else
+	{
+		disableServo(port);
+	}
 }
 
 bool BattleHill::getServoEnabled(int port)
@@ -471,7 +489,12 @@ unsigned short BattleHill::getServoPosition(int port)
 
 void BattleHill::setServoPosition(int port, unsigned short position)
 {
-	// FIXME: implement
+	battlecreek::set_servo_state msg;
+	msg.port = port;
+	msg.position = position;
+
+	set_servo_state_pub_->publish(msg.bind());
+	spinner::spin_once();
 }
 
 
@@ -492,6 +515,7 @@ bool BattleHill::setup()
 	static auto robot_states_sub = n->subscribe("robot/robot_states", &robot_states_cb);
 
 	set_digital_state_pub_ = n->advertise("robot/set_digital_state");
+	set_servo_state_pub_ = n->advertise("robot/set_servo_state");
 
 	return true;
 }
