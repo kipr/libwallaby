@@ -15,6 +15,8 @@
 #include <battlecreek/robot_states.hpp>
 #include <battlecreek/servo_states.hpp>
 #include <battlecreek/set_digital_state.hpp>
+#include <battlecreek/set_motor_state.hpp>
+#include <battlecreek/set_pid_state.hpp>
 #include <battlecreek/set_servo_state.hpp>
 
 
@@ -33,9 +35,10 @@ using namespace daylite;
 using namespace std;
 
 // TODO: move these and share
-static const unsigned int NUM_SERVOS = 4;
 static const unsigned int NUM_ADC = 6;
 static const unsigned int NUM_DIG = 16;
+static const unsigned int NUM_MOTORS = 4;
+static const unsigned int NUM_SERVOS = 4;
 
 namespace
 {
@@ -243,181 +246,151 @@ int BattleHill::backEMF(int port)
 {
 	exhaust_spinner();
 	if (port < 0 || port > 3) return 0;
-	int val = 0; // TODO: int val = Private::Wallaby::instance()->readRegister32b(REG_RW_MOT_0_B3 + 4 * port);
 	return Private::Robot::instance()->getRobotStates().motor_states.motor_state[port].position;
 }
 
 void BattleHill::clearBemf(int port)
 {
 	if (port < 0 || port > 3) return;
-	//FIXME: implement: Private::Wallaby::instance()->writeRegister32b(REG_RW_MOT_0_B3 + 4 * port, 0);
+
+	battlecreek::set_motor_state msg;
+	msg.port = port;
+	msg.reset_position = true;
+
+	set_motor_state_pub_->publish(msg.bind());
+	spinner::spin_once();
 }
 
 void BattleHill::setControlMode(int port, BattleHill::MotorControlMode mode)
 {
-	/** FIXME
-	if (port < 0 || port > 3) return;
-	unsigned char modes = Private::Wallaby::instance()->readRegister8b(REG_RW_MOT_MODES);
+	battlecreek::set_motor_state msg;
+	msg.port = port;
+	msg.mode  = (uint8_t)mode;
 
-	const unsigned short offset = 2*port;
-
-	// clear old drive mode
-	modes &= ~(0x3 << offset);
-
-	// set new drive mode
-	modes |=  (((int)mode) << offset);
-
-	Private::Wallaby::instance()->writeRegister8b(REG_RW_MOT_MODES, modes);
-	 */
+	set_motor_state_pub_->publish(msg.bind());
+	spinner::spin_once();
 }
 
 BattleHill::MotorControlMode BattleHill::controlMode(int port)
 {
-	/** FIXME
-	if (port < 0 || port > 3) return Motor::ControlMode::Inactive; // TODO: better fail code
-	unsigned char modes = Private::Wallaby::instance()->readRegister8b(REG_RW_MOT_MODES);
+	if (port < 0 || port > 3) return BattleHill::MotorControlMode::Inactive; // TODO
 
-	const unsigned short offset = 2*port;
-
-	//
-	unsigned char mode = (modes & (0x3 << offset)) >> offset;
-
-	return (Private::Motor::ControlMode)mode;
-	 */
-	return BattleHill::MotorControlMode::Inactive; // FIXME
+	return (BattleHill::MotorControlMode)(Private::Robot::instance()->getRobotStates().motor_states.motor_state[port].mode);
 }
 
 bool BattleHill::isPidActive(int port)
 {
-	//unsigned char motor_done = Private::Wallaby::instance()->readRegister8b(REG_RW_MOT_DONE);
-	//return !(motor_done & (1 < port));
-	return false; // FIXME
+	exhaust_spinner();
+	if (port < 0 || port > 3) return false; // TODO
+	return Private::Robot::instance()->getRobotStates().motor_states.motor_state[port].pid_active;
 }
 
 void BattleHill::setPidVelocity(int port, int ticks)
 {
-	/* FIXME
-	// TODO:check that byte order doesn't get messed up
-	// TODO: may need to put some logic in for not writing goals if they equal the current goal
-	//  ... maybe add on the co-proc?
-	unsigned int goal_addy = REG_RW_MOT_0_SP_H + 2 * port; // TODO: 32 bit?
-	Private::Wallaby::instance()->writeRegister16b(goal_addy, static_cast<signed short>(ticks));
-	 */
+	battlecreek::set_motor_state msg;
+	msg.port = port;
+	msg.velocity_goal = ticks;
+
+	set_motor_state_pub_->publish(msg.bind());
+	spinner::spin_once();
 }
 
 int BattleHill::pidVelocity(int port)
 {
-	/* FIXME
-	// TODO: 32 bit?
-	unsigned int goal_addy = REG_RW_MOT_0_SP_H + 2 * port;
-	int val = Private::Wallaby::instance()->readRegister16b(goal_addy);
-	return val;
-	 */
-	return 0;//FIXME
+	exhaust_spinner();
+	if (port < 0 || port > 3) return 0; // TODO
+	return Private::Robot::instance()->getRobotStates().motor_states.motor_state[port].goal_velocity;
 }
 
 void BattleHill::setPidGoalPos(int port, int pos)
 {
-	/* FIXME
-	// TODO: do we really need 64 bit positions?
-	// TODO: logic to not set goals if they match the current value (in co-proc firmware maybe?)
-	unsigned int goal_addy = REG_W_MOT_0_GOAL_B3 + 4 * port;
-	Private::Wallaby::instance()->writeRegister32b(goal_addy, pos);
-	 */
+	battlecreek::set_motor_state msg;
+	msg.port = port;
+	msg.position_goal = pos;
+
+	set_motor_state_pub_->publish(msg.bind());
+	spinner::spin_once();
 }
 
 
 int BattleHill::pidGoalPos(int port)
 {
-	// FIXME: last commanded goal pos since we can't read it
-	return 0;
+	exhaust_spinner();
+	if (port < 0 || port > 3) return 0; // TODO
+	return Private::Robot::instance()->getRobotStates().motor_states.motor_state[port].goal_position;
 }
 
 void BattleHill::setPidGains(int port, short p, short i, short d, short pd, short id, short dd)
 {
 	if (port < 0 || port > 3) return;
-	/* FIXME
-	unsigned int addy_offset = 12 * port;  // 6 registers at 2 bytes each... per port
-	Private::Wallaby::instance()->writeRegister16b(REG_W_PID_0_P_H + addy_offset, p);
-	Private::Wallaby::instance()->writeRegister16b(REG_W_PID_0_I_H + addy_offset, i);
-	Private::Wallaby::instance()->writeRegister16b(REG_W_PID_0_D_H + addy_offset, d);
-	Private::Wallaby::instance()->writeRegister16b(REG_W_PID_0_PD_H + addy_offset, pd);
-	Private::Wallaby::instance()->writeRegister16b(REG_W_PID_0_ID_H + addy_offset, id);
-	Private::Wallaby::instance()->writeRegister16b(REG_W_PID_0_DD_H + addy_offset, dd);
-	 */
+
+	battlecreek::set_pid_state msg;
+	msg.port = port;
+	msg.p = p;
+	msg.i = i;
+	msg.d = d;
+	msg.pd = pd;
+	msg.id = id;
+	msg.dd = dd;
+
+	set_pid_state_pub_->publish(msg.bind());
+	spinner::spin_once();
 }
 
 void BattleHill::pidGains(int port, short & p, short & i, short & d, short & pd, short & id, short & dd)
 {
+	exhaust_spinner();
 	if (port < 0 || port > 3) return;
 	//unsigned short offset = port * 2 * 3;
 	//TODO we can't read them from co-proc
+	p = Private::Robot::instance()->getRobotStates().pid_states.pid_state[port].p;
+	i = Private::Robot::instance()->getRobotStates().pid_states.pid_state[port].i;
+	d = Private::Robot::instance()->getRobotStates().pid_states.pid_state[port].d;
+	pd = Private::Robot::instance()->getRobotStates().pid_states.pid_state[port].pd;
+	id = Private::Robot::instance()->getRobotStates().pid_states.pid_state[port].id;
+	dd = Private::Robot::instance()->getRobotStates().pid_states.pid_state[port].dd;
 }
 
 void BattleHill::setPwm(int port, unsigned short speed)
 {
-	/* FIXME
-	if (port < 0 || port > 3) return;
-	// TODO: error signal outside of range
-	setControlMode(port, Private::Motor::Inactive);
-	const unsigned short speedMax = 400;
-	unsigned short adjustedSpeed = speed * 4;
-	if (adjustedSpeed > speedMax) adjustedSpeed = speedMax; // TODO: check scaling (1/4 percent increments)
-	Private::Wallaby::instance()->writeRegister16b(REG_RW_MOT_0_PWM_H + 2 * port, adjustedSpeed);
-	 */
+	battlecreek::set_motor_state msg;
+	msg.port = port;
+	msg.power = speed;
+
+	set_motor_state_pub_->publish(msg.bind());
+	spinner::spin_once();
 }
 
 void BattleHill::setPwmDirection(int port, MotorDirection dir)
 {
-	/* FIXME
-	if (port < 0 || port > 3) return;
+	battlecreek::set_motor_state msg;
+	msg.port = port;
+	msg.direction = (uint8_t)dir;
 
-	setControlMode(port, Private::Motor::Inactive);
-
-	unsigned char dirs = Private::Wallaby::instance()->readRegister8b(REG_RW_MOT_DIRS);
-
-	unsigned short offset = 2 * port;
-
-	dirs &= ~(0x3 << offset);
-
-	dirs |= (dir << offset);
-
-	Private::Wallaby::instance()->writeRegister8b(REG_RW_MOT_DIRS, dirs);
-	 */
+	set_motor_state_pub_->publish(msg.bind());
+	spinner::spin_once();
 }
 
 unsigned short BattleHill::pwm(int port)
 {
-	/* FIXME
-	if (port < 0 || port > 3) return 0;
-	// TODO: error signal outside of range
-	return Private::Wallaby::instance()->readRegister16b(REG_RW_MOT_0_PWM_H + 2 * port);
-	 */
-	return 0; // TODO
+	exhaust_spinner();
+	return (MotorDirection)(Private::Robot::instance()->getRobotStates().motor_states.motor_state[port].power);
 }
 
 BattleHill::MotorDirection BattleHill::pwmDirection(int port)
 {
-	/* FIXME
-	if (port < 0 || port > 3) return Private::Motor::Direction::PassiveStop;
-	// TODO: error signal outside of range
-
-	unsigned char dirs = Private::Wallaby::instance()->readRegister8b(REG_RW_MOT_DIRS);
-
-	unsigned short offset = 2 * port;
-
-	return (MotorDirection)((dirs & (0x3 << offset)) >> offset);
-	 */
-	return MotorDirection::PassiveStop; // FIXME
+	exhaust_spinner();
+	return (MotorDirection)(Private::Robot::instance()->getRobotStates().motor_states.motor_state[port].direction);
 }
 
 void BattleHill::stop(int port)
 {
-	/* FIXME
-	if (port < 0 || port > 3) return;
-	setControlMode(port, Private::Motor::Inactive);
-	setPwmDirection(port, PassiveStop);
-	 */
+	battlecreek::set_motor_state msg;
+	msg.port = port;
+	msg.stop = true;
+
+	set_motor_state_pub_->publish(msg.bind());
+	spinner::spin_once();
 }
 
 
@@ -515,6 +488,8 @@ bool BattleHill::setup()
 	static auto robot_states_sub = n->subscribe("robot/robot_states", &robot_states_cb);
 
 	set_digital_state_pub_ = n->advertise("robot/set_digital_state");
+	set_motor_state_pub_ = n->advertise("robot/set_motor_state");
+	set_motor_state_pub_ = n->advertise("robot/set_pid_state");
 	set_servo_state_pub_ = n->advertise("robot/set_servo_state");
 
 	return true;
