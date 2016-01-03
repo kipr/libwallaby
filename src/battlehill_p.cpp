@@ -245,7 +245,7 @@ bool BattleHill::calibrateMagneto()
 int BattleHill::backEMF(int port)
 {
 	exhaust_spinner();
-	if (port < 0 || port > 3) return 0;
+	if (port < 0 || port > 3 || port >= Private::Robot::instance()->getRobotStates().motor_states.motor_state.size()) return 0;
 	return Private::Robot::instance()->getRobotStates().motor_states.motor_state[port].position;
 }
 
@@ -273,7 +273,7 @@ void BattleHill::setControlMode(int port, BattleHill::MotorControlMode mode)
 
 BattleHill::MotorControlMode BattleHill::controlMode(int port)
 {
-	if (port < 0 || port > 3) return BattleHill::MotorControlMode::Inactive; // TODO
+	if (port < 0 || port > 3 || port >= Private::Robot::instance()->getRobotStates().motor_states.motor_state.size() ) return BattleHill::MotorControlMode::Inactive; // TODO
 
 	return (BattleHill::MotorControlMode)(Private::Robot::instance()->getRobotStates().motor_states.motor_state[port].mode);
 }
@@ -281,7 +281,7 @@ BattleHill::MotorControlMode BattleHill::controlMode(int port)
 bool BattleHill::isPidActive(int port)
 {
 	exhaust_spinner();
-	if (port < 0 || port > 3) return false; // TODO
+	if (port < 0 || port > 3 || port >= Private::Robot::instance()->getRobotStates().motor_states.motor_state.size()) return false; // TODO
 	return Private::Robot::instance()->getRobotStates().motor_states.motor_state[port].pid_active;
 }
 
@@ -298,7 +298,7 @@ void BattleHill::setPidVelocity(int port, int ticks)
 int BattleHill::pidVelocity(int port)
 {
 	exhaust_spinner();
-	if (port < 0 || port > 3) return 0; // TODO
+	if (port < 0 || port > 3 || port >= Private::Robot::instance()->getRobotStates().motor_states.motor_state.size()) return 0;
 	return Private::Robot::instance()->getRobotStates().motor_states.motor_state[port].goal_velocity;
 }
 
@@ -340,7 +340,7 @@ void BattleHill::setPidGains(int port, short p, short i, short d, short pd, shor
 void BattleHill::pidGains(int port, short & p, short & i, short & d, short & pd, short & id, short & dd)
 {
 	exhaust_spinner();
-	if (port < 0 || port > 3) return;
+	if (port < 0 || port > 3 || port >= Private::Robot::instance()->getRobotStates().pid_states.pid_state.size()) return;
 	//unsigned short offset = port * 2 * 3;
 	//TODO we can't read them from co-proc
 	p = Private::Robot::instance()->getRobotStates().pid_states.pid_state[port].p;
@@ -374,12 +374,14 @@ void BattleHill::setPwmDirection(int port, MotorDirection dir)
 unsigned short BattleHill::pwm(int port)
 {
 	exhaust_spinner();
+	if (port < 0 || port > 3 || port >= Private::Robot::instance()->getRobotStates().motor_states.motor_state.size()) return 0;
 	return (MotorDirection)(Private::Robot::instance()->getRobotStates().motor_states.motor_state[port].power);
 }
 
 BattleHill::MotorDirection BattleHill::pwmDirection(int port)
 {
 	exhaust_spinner();
+	if (port < 0 || port > 3 || port >= Private::Robot::instance()->getRobotStates().motor_states.motor_state.size()) return MotorDirection::PassiveStop;
 	return (MotorDirection)(Private::Robot::instance()->getRobotStates().motor_states.motor_state[port].direction);
 }
 
@@ -449,14 +451,14 @@ void BattleHill::setServoEnabled(int port, bool enabled)
 bool BattleHill::getServoEnabled(int port)
 {
 	exhaust_spinner();
-	if (port >= NUM_SERVOS) return false; // TODO
+	if (port >= NUM_SERVOS || port >= Private::Robot::instance()->getRobotStates().servo_states.enabled.size()) return false; // TODO
 	return Private::Robot::instance()->getRobotStates().servo_states.enabled[port];
 }
 
 unsigned short BattleHill::getServoPosition(int port)
 {
 	exhaust_spinner();
-	if (port >= NUM_SERVOS) return 0xFFFF;  // TODO
+	if (port >= NUM_SERVOS || port >= Private::Robot::instance()->getRobotStates().servo_states.position.size()) return 0xFFFF;  // TODO
 	return Private::Robot::instance()->getRobotStates().servo_states.position[port];
 }
 
