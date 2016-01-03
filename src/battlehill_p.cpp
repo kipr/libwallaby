@@ -489,7 +489,7 @@ bool BattleHill::setup()
 
 	set_digital_state_pub_ = n->advertise("robot/set_digital_state");
 	set_motor_state_pub_ = n->advertise("robot/set_motor_state");
-	set_motor_state_pub_ = n->advertise("robot/set_pid_state");
+	set_pid_state_pub_ = n->advertise("robot/set_pid_state");
 	set_servo_state_pub_ = n->advertise("robot/set_servo_state");
 
 	return true;
