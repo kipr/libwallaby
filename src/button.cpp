@@ -6,7 +6,7 @@
  */
 
 #include "wallaby/button.hpp"
-#include "button_p.hpp"
+#include "battlehill_p.hpp"
 #include "wallaby/compat.hpp"
 
 
@@ -71,27 +71,27 @@ IdButton::~IdButton()
 
 void IdButton::setText(const char * text)
 {
-	Private::Button::instance()->text(m_id);
+	//FIXME: Private::Button::instance()->text(m_id);
 }
 
 const char * IdButton::text() const
 {
-	return Private::Button::instance()->text(m_id);
+	return nullptr; //FIXME:  return Private::Button::instance()->text(m_id);
 }
 
 bool IdButton::isTextDirty() const
 {
-	return Private::Button::instance()->isTextDirty(m_id);
+	return true;//FIXME:  return Private::Button::instance()->isTextDirty(m_id);
 }
 
 void IdButton::setPressed(bool pressed)
 {
-	Private::Button::instance()->setPressed(m_id, pressed);
+	//FIXME: Private::Button::instance()->setPressed(m_id, pressed);
 }
 
 bool IdButton::value() const
 {
-	return Private::Button::instance()->isPressed(m_id);
+	return true;//FIXME: return Private::Button::instance()->isPressed(m_id);
 }
 
 void IdButton::resetText()
@@ -111,10 +111,10 @@ void ExtraButtons::hide()
 
 void ExtraButtons::setShown(bool shown)
 {
-	Private::Button::instance()->setExtraShown(shown);
+	//FIXME: Private::Button::instance()->setExtraShown(shown);
 }
 
 bool ExtraButtons::isShown()
 {
-	return Private::Button::instance()->isExtraShown();
+	return false;//FIXME:  return Private::Button::instance()->isExtraShown();
 }

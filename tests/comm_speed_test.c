@@ -19,31 +19,31 @@ long elapsed_usec(struct timeval t1, struct timeval t2)
 
 int main(int argc, char ** argv)
 {
-	set_digital_output(12, 1);
-
     while(1)
     {
     	struct timeval start, stop;
-    	static const unsigned int num_samples = 100;
+    	unsigned long int samples_start, samples_stop, num_samples;
+	unsigned long int pubs_start, pubs_stop, num_pubs;
 
     	gettimeofday(&start, NULL);
 
-    	unsigned int i;
-    	for (i = 0; i < num_samples; ++i)
-    	{
-    		float v = power_level();
-        	if (v < 6.0 || v > 7.5)
-			{
-        		printf("%f\n",v);
-			}
-    	}
+    	samples_start = get_robot_update_count();
+	pubs_start = get_robot_states_sequence_num();
+
+    	usleep(1000000);
+
+    	samples_stop = get_robot_update_count();
+	pubs_stop = get_robot_states_sequence_num();
 
     	gettimeofday(&stop, NULL);
+
+    	num_samples = samples_stop - samples_start;
+	num_pubs = pubs_stop - pubs_start;
 
     	long elapsed_time = elapsed_usec(start, stop);
     	double avg_sample_time_usec = ((double)elapsed_time)/((double)num_samples);
 
-    	printf("%f uS per sample average (%f Hz)\n", avg_sample_time_usec, (1000000.0/avg_sample_time_usec));
+    	printf("%d samples %d publishes:   %f uS per sample average (%f Hz)\n", num_samples, num_pubs, avg_sample_time_usec, (1000000.0/avg_sample_time_usec));
     }
 
     return 0;

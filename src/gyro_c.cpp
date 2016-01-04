@@ -6,24 +6,24 @@
  */
 
 #include "wallaby/gyro.h"
-#include "gyro_p.hpp"
+#include "battlehill_p.hpp"
 
 short gyro_x()
 {
-	return Private::Gyro::instance()->xGyro();
+	return Private::BattleHill::instance()->getGyroX();
 }
 
 short gyro_y()
 {
-	return Private::Gyro::instance()->yGyro();
+	return Private::BattleHill::instance()->getGyroY();
 }
 
 short gyro_z()
 {
-	return Private::Gyro::instance()->zGyro();
+	return Private::BattleHill::instance()->getGyroZ();
 }
 
 int gyro_calibrate()
 {
-	return Private::Gyro::instance()->calibrate() ? 0 : -1;
+	return Private::BattleHill::instance()->calibrateGyro() ? 0 : -1;
 }

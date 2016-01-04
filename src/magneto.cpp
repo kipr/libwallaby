@@ -6,39 +6,39 @@
  */
 
 #include "wallaby/magneto.hpp"
-#include "magneto_p.hpp"
+#include "battlehill_p.hpp"
 
 signed short Magneto::x()
 {
-	return Private::Magneto::instance()->xMagneto();
+	return Private::BattleHill::instance()->getMagnetoX();
 }
 
 signed short Magneto::y()
 {
-	return Private::Magneto::instance()->yMagneto();
+	return Private::BattleHill::instance()->getMagnetoY();
 }
 
 signed short Magneto::z()
 {
-	return Private::Magneto::instance()->zMagneto();
+	return Private::BattleHill::instance()->getMagnetoZ();
 }
 
 bool Magneto::calibrate()
 {
-	return Private::Magneto::instance()->calibrate();
+	return Private::BattleHill::instance()->calibrateMagneto();
 }
 
 short MagnetoX::value() const
 {
-	return Private::Magneto::instance()->xMagneto();
+	return Private::BattleHill::instance()->getMagnetoX();
 }
 
 short MagnetoY::value() const
 {
-	return Private::Magneto::instance()->yMagneto();
+	return Private::BattleHill::instance()->getMagnetoY();
 }
 
 short MagnetoZ::value() const
 {
-	return Private::Magneto::instance()->zMagneto();
+	return Private::BattleHill::instance()->getMagnetoZ();
 }

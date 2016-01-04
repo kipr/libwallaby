@@ -6,7 +6,7 @@
  */
 
 #include "wallaby/digital.hpp"
-#include "digital_p.hpp"
+#include "battlehill_p.hpp"
 
 Digital::Digital(unsigned char port)
 : m_port(port)
@@ -16,30 +16,31 @@ Digital::Digital(unsigned char port)
 
 void Digital::setValue(bool value)
 {
-	Private::Digital::instance()->setValue(m_port, value);
+	Private::BattleHill::instance()->setDigitalValue(m_port, value);
 }
 
 bool Digital::value() const
 {
-	return Private::Digital::instance()->value(m_port);
+	return Private::BattleHill::instance()->getDigitalValue(m_port);
 }
 
 void Digital::setOutput(bool output)
 {
-	Private::Digital::instance()->setDirection(m_port, output ? Private::Digital::Out : Private::Digital::In);
+	Private::BattleHill::instance()->setDigitalOutput(m_port, output);
 }
 
 bool Digital::isOutput() const
 {
-	return Private::Digital::instance()->direction(m_port) == Private::Digital::Out;
+	return Private::BattleHill::instance()->getDigitalOutput(m_port);
 }
 
 void Digital::setPullup(bool pullup)
 {
-	Private::Digital::instance()->setPullup(m_port, pullup);
+	// not available on the Wallaby
 }
 
 bool Digital::pullup() const
 {
-	return Private::Digital::instance()->pullup(m_port);
+	// not available on the Wallaby
+	return false;
 }

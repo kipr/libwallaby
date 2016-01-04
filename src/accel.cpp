@@ -6,40 +6,40 @@
  */
 
 #include "wallaby/accel.hpp"
-#include "accel_p.hpp"
+#include "battlehill_p.hpp"
 
 
 signed short Acceleration::x()
 {
-	return Private::Accel::instance()->xAccel();
+	return Private::BattleHill::instance()->getAccelX();
 }
 
 signed short Acceleration::y()
 {
-	return Private::Accel::instance()->yAccel();
+	return Private::BattleHill::instance()->getAccelY();
 }
 
 signed short Acceleration::z()
 {
-	return Private::Accel::instance()->zAccel();
+	return Private::BattleHill::instance()->getAccelZ();
 }
 
 bool Acceleration::calibrate()
 {
-	return Private::Accel::instance()->calibrate();
+	return Private::BattleHill::instance()->calibrateAccel();
 }
 
 short AccelX::value() const
 {
-	return Private::Accel::instance()->xAccel();
+	return Private::BattleHill::instance()->getAccelX();
 }
 
 short AccelY::value() const
 {
-	return Private::Accel::instance()->yAccel();
+	return Private::BattleHill::instance()->getAccelY();
 }
 
 short AccelZ::value() const
 {
-	return Private::Accel::instance()->zAccel();
+	return Private::BattleHill::instance()->getAccelZ();
 }
