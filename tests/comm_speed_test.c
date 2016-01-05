@@ -43,7 +43,7 @@ int main(int argc, char ** argv)
     	long elapsed_time = elapsed_usec(start, stop);
     	double avg_sample_time_usec = ((double)elapsed_time)/((double)num_samples);
 
-    	printf("%d samples %d publishes:   %f uS per sample average (%f Hz)\n", num_samples, num_pubs, avg_sample_time_usec, (1000000.0/avg_sample_time_usec));
+    	printf("%zu samples %zu publishes:   %f uS per sample average (%f Hz)\n", num_samples, num_pubs, avg_sample_time_usec, (1000000.0/avg_sample_time_usec));
     }
 
     return 0;
