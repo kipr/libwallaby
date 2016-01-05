@@ -481,6 +481,8 @@ bool BattleHill::setup()
 	// TODO: mutex lock this for  thread safety
 	static auto n = node::create_node("libwallaby");
 
+	// We have to set auto exit to true to give daylite permission to close the program
+	// if Ctrl-C is pressed
 	n->set_auto_exit(true);
 
 	if (!n->start("127.0.0.1", 8374))
