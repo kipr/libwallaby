@@ -14,6 +14,7 @@
 #include <battlecreek/motor_states.hpp>
 #include <battlecreek/robot_states.hpp>
 #include <battlecreek/servo_states.hpp>
+#include <battlecreek/set_battlehill_state.hpp>
 #include <battlecreek/set_digital_state.hpp>
 #include <battlecreek/set_motor_state.hpp>
 #include <battlecreek/set_pid_state.hpp>
@@ -94,6 +95,41 @@ unsigned long int BattleHill::getRobotUpdateCount()
 	exhaust_spinner();
 	return Private::Robot::instance()->getRobotStates().update_count;
 }
+
+bool BattleHill::setRobotUpdateDelay(unsigned int us_delay)
+{
+	battlecreek::set_battlehill_state msg;
+	msg.update_delay = us_delay;
+
+	set_battlehill_state_pub_->publish(msg.bind());
+	spinner::spin_once();
+
+	return true; // TODO: should we limit the range?  Battlehill can handle delays of 0us
+}
+
+unsigned int BattleHill::getRobotUpdateDelay()
+{
+	exhaust_spinner();
+	return Private::Robot::instance()->getBattlehillState().update_delay;
+}
+
+bool BattleHill::setLowVoltThreshold(float volts)
+{
+	battlecreek::set_battlehill_state msg;
+	msg.low_voltage_threshold = volts;
+
+	set_battlehill_state_pub_->publish(msg.bind());
+	spinner::spin_once();
+
+	return true; // TODO: should we limit the range?  -1.0V might be a useful setting
+}
+
+float BattleHill::getLowVoltThreshold()
+{
+	exhaust_spinner();
+	return Private::Robot::instance()->getBattlehillState().low_voltage_threshold;
+}
+
 
 unsigned short BattleHill::getAnalogValue(unsigned char port)
 {

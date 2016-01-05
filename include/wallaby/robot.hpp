@@ -13,6 +13,12 @@ class Robot
 public:
 	static unsigned long int getRobotStatesSequenceNumber();
 	static unsigned long int getRobotUpdateCount();
+
+	static bool setRobotUpdateDelay(unsigned int us_delay);
+	static unsigned int getRobotUpdateDelay();
+
+	static bool setLowVoltThreshold(float volts);
+	static float getLowVoltThreshold();
 };
 
 

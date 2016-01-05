@@ -118,6 +118,13 @@ public:
 	unsigned long int getRobotStatesSequenceNumber();
 	unsigned long int getRobotUpdateCount();
 
+	// Battlehill State info
+	bool setRobotUpdateDelay(unsigned int us_delay);
+	unsigned int getRobotUpdateDelay();
+
+	bool setLowVoltThreshold(float volts);
+	float getLowVoltThreshold();
+
 private:
 	BattleHill();
 	bool setup(); // initializes the daylite node
@@ -126,6 +133,7 @@ private:
 	std::shared_ptr<daylite::publisher> set_servo_state_pub_;
 	std::shared_ptr<daylite::publisher> set_motor_state_pub_;
 	std::shared_ptr<daylite::publisher> set_pid_state_pub_;
+	std::shared_ptr<daylite::publisher> set_battlehill_state_pub_;
 };
 
 } /* namespace Private */
