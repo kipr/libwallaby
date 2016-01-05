@@ -481,6 +481,8 @@ bool BattleHill::setup()
 	// TODO: mutex lock this for  thread safety
 	static auto n = node::create_node("libwallaby");
 
+	n->set_auto_exit(true);
+
 	if (!n->start("127.0.0.1", 8374))
 	{
 		std::cerr << "Failed to contact daylite master" << std::endl;
