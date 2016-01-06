@@ -1,3 +1,10 @@
+/*
+ * boyd_p.hpp
+ *
+ *  Created on: Jan 6, 2016
+ *      Author: Nafis Zaman
+ */
+
 #ifndef _CAMERA_P_HPP
 #define _CAMERA_P_HPP
 

@@ -1,3 +1,10 @@
+/*
+ * camera.cpp
+ *
+ *  Created on: Jan 6, 2016
+ *      Author: Nafis Zaman
+ */
+
 #include "wallaby/camera.hpp"
 #include "wallaby/color.hpp"
 #include "boyd_p.hpp"
