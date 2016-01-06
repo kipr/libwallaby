@@ -36,7 +36,7 @@ Private::Camera::Camera()
     return;
   }
   
-  m_settingsPub = m_node->advertise("camera/set_settings");
+  m_setSettingsPub = m_node->advertise("camera/set_settings");
 }
 
 bool Private::Camera::open(const int deviceNumber, const int width, const int height)
@@ -82,7 +82,7 @@ void Private::Camera::loadConfig(const std::string &name)
   
   boyd::settings s;
   s.config_name = name;
-  m_settingsPub->publish(bson(s.bind()));
+  m_setSettingsPub->publish(bson(s.bind()));
 }
 
 void Private::Camera::setWidth(const int width)
@@ -96,12 +96,12 @@ void Private::Camera::setWidth(const int width)
   
   boyd::settings s;
   s.width = width;
-  m_settingsPub->publish(bson(s.bind()));
+  m_setSettingsPub->publish(bson(s.bind()));
   daylite::spinner::spin_once();
   
   // TODO: Do we have to send multiple times?
   /*for(int i = 0; i < 5; ++i) {
-    m_settingsPub->publish(bson(s.bind()));
+    m_setSettingsPub->publish(bson(s.bind()));
     daylite::spinner::spin_once();
     std::this_thread::sleep_for(std::chrono::milliseconds(20));
   }*/
@@ -118,12 +118,12 @@ void Private::Camera::setHeight(const int height)
   
   boyd::settings s;
   s.height = height;
-  m_settingsPub->publish(bson(s.bind()));
+  m_setSettingsPub->publish(bson(s.bind()));
   daylite::spinner::spin_once();
   
   // TODO: Do we have to send multiple times?
   /*for(int i = 0; i < 10; ++i) {
-    m_settingsPub->publish(bson(s.bind()));
+    m_setSettingsPub->publish(bson(s.bind()));
     daylite::spinner::spin_once();
     std::this_thread::sleep_for(std::chrono::milliseconds(20));
   }*/
@@ -192,7 +192,7 @@ void Private::Camera::setConfigBasePath(const std::string &path)
   
   boyd::settings s;
   s.config_base_path = path;
-  m_settingsPub->publish(bson(s.bind()));
+  m_setSettingsPub->publish(bson(s.bind()));
 }
 
 bool Private::Camera::checkChannel(const int channel)

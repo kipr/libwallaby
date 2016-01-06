@@ -52,7 +52,7 @@ namespace Private
     
     std::shared_ptr<daylite::node> m_node;
     std::shared_ptr<daylite::subscriber> m_frameSub;
-    std::shared_ptr<daylite::publisher> m_settingsPub;
+    std::shared_ptr<daylite::publisher> m_setSettingsPub;
     
     daylite::bson m_latestFrameBson;
     boyd::frame_data m_userFrame;
