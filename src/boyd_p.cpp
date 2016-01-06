@@ -36,7 +36,7 @@ Private::Camera::Camera()
     return;
   }
   
-  m_setSettingsPub = m_node->advertise("camera/set_settings");
+  m_setSettingsPub = m_node->advertise(setSettingsTopic);
 }
 
 bool Private::Camera::open(const int deviceNumber, const int width, const int height)
@@ -51,7 +51,7 @@ bool Private::Camera::open(const int deviceNumber, const int width, const int he
   
   m_newFrameAvailable = false;
   // TODO: Callback directly?
-  m_frameSub = m_node->subscribe("camera/frame_data", [this](const daylite::bson &msg, void *arg)
+  m_frameSub = m_node->subscribe(frameTopic, [this](const daylite::bson &msg, void *arg)
     {
       this->receivedFrame(msg, arg);
     });
@@ -239,3 +239,6 @@ void Private::Camera::receivedFrame(const daylite::bson &msg, void *arg)
   m_latestFrameBson = msg;
   m_newFrameAvailable = true;
 }
+
+const std::string Private::Camera::frameTopic = "camera/frame_data";
+const std::string Private::Camera::setSettingsTopic = "camera/set_settings";

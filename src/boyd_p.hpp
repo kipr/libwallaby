@@ -63,6 +63,9 @@ namespace Private
     
     // Has m_latestFrameBson changed since last update call?
     bool m_newFrameAvailable;
+    
+    static const std::string frameTopic;
+    static const std::string setSettingsTopic;
   };
 }
 
