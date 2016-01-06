@@ -20,18 +20,18 @@ long elapsed_usec(struct timeval t1, struct timeval t2)
 
 int main(int argc, char ** argv)
 {
-	const float vlevel_one = 5.5f;
-	const float vlevel_two = 9.0f;
+	const float vlevel_one = 9.0f;
+	const float vlevel_two = 5.5f;
 
 	while(1)
 	{
 		printf("set_low_volt_threshold(%f)\n", vlevel_one);
 		set_low_volt_threshold(vlevel_one);
-		sleep(20);
+		sleep(15);
 
 		printf("set_low_volt_threshold(%f)\n", vlevel_two);
 		set_low_volt_threshold(vlevel_two);
-		sleep(20);
+		sleep(15);
 	}
 
 	return 0;
