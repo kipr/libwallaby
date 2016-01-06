@@ -33,9 +33,16 @@ private:
 class Camera
 {
 public:
+  enum Resolution
+  {
+    LOW_RES,
+    MED_RES,
+    HIGH_RES,
+  };
+  
   bool open();
-  bool open(const int width, const int height);
-  bool open(const int deviceNumber, const int width, const int height);
+  bool open(const Resolution res);
+  bool open(const int deviceNumber, const Resolution res);
   bool close();
   bool update();
   

@@ -35,17 +35,26 @@ const unsigned Object::confidence() const
 bool Camera::open()
 {
   // TODO: Keep default resolution somewhere
-  return this->open(480, 360);
+  return this->open(Resolution::LOW_RES);
 }
 
-bool Camera::open(const int width, const int height)
+bool Camera::open(const Resolution res)
 {
-  return this->open(0, width, height);
+  return this->open(0, res);
 }
 
-bool Camera::open(const int deviceNumber, const int width, const int height)
+bool Camera::open(const int deviceNumber, const Resolution res)
 {
-  return Private::Camera::instance()->open(deviceNumber, width, height);
+  switch(res) {
+    case LOW_RES:
+      return Private::Camera::instance()->open(deviceNumber, Private::Camera::Resolution::LOW_RES);
+    case MED_RES:
+      return Private::Camera::instance()->open(deviceNumber, Private::Camera::Resolution::MED_RES);
+    case HIGH_RES:
+      return Private::Camera::instance()->open(deviceNumber, Private::Camera::Resolution::HIGH_RES);
+    default:
+      return false;
+  }
 }
 
 bool Camera::close()

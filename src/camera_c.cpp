@@ -23,27 +23,23 @@ int camera_open_at_res(enum Resolution res)
 
 int camera_open_device(int number, enum Resolution res)
 {
-  int width = 0;
-  int height = 0;
+  Private::Camera::Resolution r;
   switch(res) {
     case LOW_RES:
-      width = 160;
-      height = 120;
+      r = Private::Camera::Resolution::LOW_RES;
       break;
     case MED_RES:
-      width = 320;
-      height = 240;
+      r = Private::Camera::Resolution::MED_RES;
       break;
     case HIGH_RES:
-      width = 640;
-      height = 480;
+      r = Private::Camera::Resolution::HIGH_RES;
       break;
     default:
       std::cout << "Invalid resolution" << std::endl;
       return 0;
   }
   
-  const bool result = Private::Camera::instance()->open(number, width, height);
+  const bool result = Private::Camera::instance()->open(number, r);
   return result ? 1 : 0;
 }
 

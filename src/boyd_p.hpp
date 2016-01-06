@@ -20,8 +20,15 @@ namespace Private
 {
   class Camera
   {
-  public:    
-    bool open(const int deviceNumber, const int width, const int height);
+  public:
+    enum Resolution
+    {
+      LOW_RES,
+      MED_RES,
+      HIGH_RES
+    };
+    
+    bool open(const int deviceNumber, const Resolution res);
     bool close();
     
     void loadConfig(const std::string &name);

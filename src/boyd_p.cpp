@@ -39,7 +39,7 @@ Private::Camera::Camera()
   m_setSettingsPub = m_node->advertise(setSettingsTopic);
 }
 
-bool Private::Camera::open(const int deviceNumber, const int width, const int height)
+bool Private::Camera::open(const int deviceNumber, const Resolution res)
 {
   // TODO: Opening other devices not yet supported
   
@@ -49,14 +49,27 @@ bool Private::Camera::open(const int deviceNumber, const int width, const int he
   if(!m_node)
     return false;
   
+  // Predefined resolutions
+  switch(res) {
+    case LOW_RES:
+      this->setResolution(160, 120);
+      break;
+    case MED_RES:
+      this->setResolution(320, 240);
+      break;
+    case HIGH_RES:
+      this->setResolution(640, 480);
+      break;
+    default:
+      return false;
+  }
+  
   m_newFrameAvailable = false;
   // TODO: Callback directly?
   m_frameSub = m_node->subscribe(frameTopic, [this](const daylite::bson &msg, void *arg)
     {
       this->receivedFrame(msg, arg);
     });
-  
-  this->setResolution(width, height);
   
   return true;
 }
