@@ -55,6 +55,8 @@ elseif(WIN32)
   set(ZBAR_DIR "C:/Program Files (x86)/ZBar")
 endif()
 
+find_package( OpenCV REQUIRED )
+
 
 include_directories(${CMAKE_INSTALL_PREFIX}/include)
 include_directories(${OPENCV_INCLUDE})
@@ -66,10 +68,10 @@ link_directories(${ZBAR_DIR}/lib)
 
 
 # Library: libwallaby
-add_library(wallaby STATIC
+add_library(wallaby SHARED
 	${SOURCES})
 	
-target_link_libraries(wallaby ${DAYLITE_LIBRARIES})
+target_link_libraries(wallaby ${DAYLITE_LIBRARIES} ${OpenCV_LIBS})
 
 
 # Executables: test programs
