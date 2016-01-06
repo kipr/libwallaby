@@ -83,10 +83,10 @@ foreach(C_TEST ${C_TESTS})
   set(TEST_BIN_NAME ${C_TEST_NAME}_c)
   add_executable(${TEST_BIN_NAME} ${C_TEST})
   target_link_libraries(${TEST_BIN_NAME} wallaby)
-  list(APPEND TESTS ${CMAKE_BINARY_DIR}/${TEST_BIN_NAME})
+  list(APPEND TESTS ${TEST_BIN_NAME})
 endforeach()
 
-install(FILES ${TESTS} DESTINATION bin/wallaby)
+install(TARGETS ${TESTS} DESTINATION bin/wallaby)
 install(TARGETS wallaby DESTINATION lib)
 install(DIRECTORY ${INCLUDE}/wallaby DESTINATION include)
 
