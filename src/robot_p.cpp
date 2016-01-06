@@ -38,4 +38,14 @@ void Robot::setRobotStates(const battlecreek::robot_states & robot_states)
 	robot_states_ = robot_states;
 }
 
+const battlecreek::battlehill_state & Robot::getBattlehillState() const
+{
+	return battlehill_state_;
+}
+
+void Robot::setBattlehillState(const battlecreek::battlehill_state & battlehill_state)
+{
+	battlehill_state_ = battlehill_state;
+}
+
 } /* namespace Private */

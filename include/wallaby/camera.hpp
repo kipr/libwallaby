@@ -2,6 +2,8 @@
 #define _CAMERA_HPP_
 
 #include <vector>
+#include <string>
+
 #include "wallaby/geom.hpp"
 #include "wallaby/color.hpp"
 

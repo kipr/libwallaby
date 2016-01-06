@@ -8,6 +8,7 @@
 
 
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "wallaby/wallaby.h"
 
@@ -18,6 +19,9 @@ int main(int argc, char ** argv)
 	{
 		printf("beep!");
 		beep();
+		msleep(1000);
+
+        system("aplay /usr/share/battlehill/turn_off_wallaby.wav");
 		msleep(1000);
 	}
 
