@@ -29,7 +29,7 @@ Private::Camera::Camera()
     return;
   }
   
-  m_settingsPub = m_node->advertise("camera/settings");
+  m_settingsPub = m_node->advertise("camera/set_settings");
 }
 
 bool Private::Camera::open(const int deviceNumber, const int width, const int height)
