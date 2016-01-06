@@ -44,6 +44,7 @@ public:
   
   void setWidth(const int width);
   void setHeight(const int height);
+  void setResolution(const int width, const int height);
   int width();
   int height();
   

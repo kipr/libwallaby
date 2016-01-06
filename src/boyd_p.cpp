@@ -56,8 +56,7 @@ bool Private::Camera::open(const int deviceNumber, const int width, const int he
       this->receivedFrame(msg, arg);
     });
   
-  this->setWidth(width);
-  this->setHeight(height);
+  this->setResolution(width, height);
   
   return true;
 }
@@ -85,44 +84,25 @@ void Private::Camera::loadConfig(const std::string &name)
   m_setSettingsPub->publish(bson(s.bind()));
 }
 
-void Private::Camera::setWidth(const int width)
+void Private::Camera::setResolution(const int width, const int height)
 {
-  if(width <= 0) {
-    std::cout << "Camera width must be greater than 0." << std::endl;
+  if(width <= 0 && height <= 0) {
+    std::cout << "Either camera width or height must be greater than 0." << std::endl;
     return;
   }
   
   using namespace daylite;
   
   boyd::settings s;
-  s.width = width;
+  if(width > 0)
+    s.width = width;
+  if(height > 0)
+    s.height = height;
   m_setSettingsPub->publish(bson(s.bind()));
   daylite::spinner::spin_once();
   
   // TODO: Do we have to send multiple times?
   /*for(int i = 0; i < 5; ++i) {
-    m_setSettingsPub->publish(bson(s.bind()));
-    daylite::spinner::spin_once();
-    std::this_thread::sleep_for(std::chrono::milliseconds(20));
-  }*/
-}
-
-void Private::Camera::setHeight(const int height)
-{
-  if(height <= 0) {
-    std::cout << "Camera height must be greater than 0." << std::endl;
-    return;
-  }
-  
-  using namespace daylite;
-  
-  boyd::settings s;
-  s.height = height;
-  m_setSettingsPub->publish(bson(s.bind()));
-  daylite::spinner::spin_once();
-  
-  // TODO: Do we have to send multiple times?
-  /*for(int i = 0; i < 10; ++i) {
     m_setSettingsPub->publish(bson(s.bind()));
     daylite::spinner::spin_once();
     std::this_thread::sleep_for(std::chrono::milliseconds(20));

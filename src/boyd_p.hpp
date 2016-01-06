@@ -26,8 +26,7 @@ namespace Private
     
     void loadConfig(const std::string &name);
     
-    void setWidth(const int width);
-    void setHeight(const int height);
+    void setResolution(const int width, const int height);
     
     int width();
     int height();

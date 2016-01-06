@@ -70,12 +70,17 @@ void Camera::setConfigBasePath(const std::string &path)
 
 void Camera::setWidth(const int width)
 {
-  Private::Camera::instance()->setWidth(width);
+  Private::Camera::instance()->setResolution(width, -1);
 }
 
 void Camera::setHeight(const int height)
 {
-  Private::Camera::instance()->setHeight(height);
+  Private::Camera::instance()->setResolution(-1, height);
+}
+
+void Camera::setResolution(const int width, const int height)
+{
+  Private::Camera::instance()->setResolution(width, height);
 }
 
 int Camera::width()

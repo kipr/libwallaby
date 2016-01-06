@@ -82,13 +82,19 @@ int camera_set_width(int width);
 
 /**
  * Sets the camera's y resolution.
- * \param width The height in pixels
+ * \param height The height in pixels
  * \ingroup camera
  */
 int camera_set_height(int height);
 
 // TODO: New function?
-//int camera_set_resolution(int width, int height);
+/**
+ * Sets the camera's x and y resolution.
+ * \param width The width in pixels
+ * \param height The height in pixels
+ * \ingroup camera
+ */
+int camera_set_resolution(int width, int height);
 
 /**
  * Gets the camera's x resolution.
