@@ -7,7 +7,7 @@
 
 #include "wallaby/geom.h"
 
-VI point2 create_point2(int x, int y)
+point2 create_point2(int x, int y)
 {
 	point2 ret;
 	ret.x = x;
@@ -15,7 +15,7 @@ VI point2 create_point2(int x, int y)
 	return ret;
 }
 
-VI point3 create_point3(int x, int y, int z)
+point3 create_point3(int x, int y, int z)
 {
 	point3 ret;
 	ret.x = x;
@@ -24,7 +24,7 @@ VI point3 create_point3(int x, int y, int z)
 	return ret;
 }
 
-VI rectangle create_rectangle(int ulx, int uly, int width, int height)
+rectangle create_rectangle(int ulx, int uly, int width, int height)
 {
 	rectangle ret;
 	ret.ulx = ulx;
