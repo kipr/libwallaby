@@ -8,8 +8,6 @@
 #include <stdio.h>
 
 #include "wallaby/wallaby.h"
-#include "wallaby/camera.h"
-#include "wallaby/geom.h"
 
 int main(int argc, char ** argv)
 {
