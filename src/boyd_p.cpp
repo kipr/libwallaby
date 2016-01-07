@@ -36,7 +36,16 @@ Private::Camera::Camera()
     return;
   }
   
+  // TODO: Remove this in the future
+  // Send dummy settings to workaround missing first messages
   m_setSettingsPub = m_node->advertise(setSettingsTopic);
+  boyd::settings s;
+  const bson &b = bson(s.bind());
+  for(int i = 0; i < 5; ++i) {
+    m_setSettingsPub->publish(b);
+    daylite::spinner::spin_once();
+    std::this_thread::sleep_for(std::chrono::milliseconds(20));
+  }
   
   // Reset current config and base path
   this->setConfigBasePath("");
@@ -117,14 +126,6 @@ void Private::Camera::setResolution(const int width, const int height)
   if(height > 0)
     s.height = height;
   m_setSettingsPub->publish(bson(s.bind()));
-  daylite::spinner::spin_once();
-  
-  // TODO: Do we have to send multiple times?
-  /*for(int i = 0; i < 5; ++i) {
-    m_setSettingsPub->publish(bson(s.bind()));
-    daylite::spinner::spin_once();
-    std::this_thread::sleep_for(std::chrono::milliseconds(20));
-  }*/
   
   // TODO: Make sure setting has changed before proceeding
 }
