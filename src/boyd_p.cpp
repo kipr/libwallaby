@@ -161,6 +161,7 @@ bool Private::Camera::update()
   
   // Update m_userFrame (contains raw pixels)
   m_userFrame = frame_data::unbind(m_latestFrameBson);
+  m_newFrameAvailable = false;
   
   // Update m_channelBlobs
   // TODO: Only do this when we actually need m_channelBlobs
@@ -179,7 +180,6 @@ bool Private::Camera::update()
   }
   
   m_userFrameValid = true;
-  m_newFrameAvailable = false;
   
   return true;
 }
