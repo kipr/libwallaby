@@ -145,12 +145,12 @@ pixel get_camera_pixel(point2 p)
 
 int get_channel_count(void)
 {
-  const std::vector<std::vector<Object>> *const allChannelObjs = Private::Camera::instance()->channelBlobs();
-  // Check if we have a frame
-  if(!allChannelObjs) {
+  if(!Private::Camera::instance()->hasValidFrame()) {
     WARN("no camera frame available");
     return -1;
   }
+  
+  const std::vector<std::vector<Object>> *const allChannelObjs = Private::Camera::instance()->channelBlobs();
   return allChannelObjs->size();
 }
 
