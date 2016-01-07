@@ -37,9 +37,11 @@ int main(int argc, char ** argv)
     const int y = get_object_centroid_y(0, 0);
     
     printf("Object count: %d\n", count);
-    printf("Largest object confidence: %d\n", conf);
-    printf("Largest object area: %d\n", area);
-    printf("Largest object center: (%d, %d)\n", x, y);
+    if(count > 0) {
+      printf("Largest object confidence: %d\n", conf);
+      printf("Largest object area: %d\n", area);
+      printf("Largest object center: (%d, %d)\n", x, y);
+    }
     printf("\n");
     
     msleep(1000L);
