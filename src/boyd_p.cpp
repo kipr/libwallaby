@@ -102,10 +102,8 @@ void Private::Camera::loadConfig(const std::string &name)
 
 void Private::Camera::setResolution(const int width, const int height)
 {
-  if(width <= 0 && height <= 0) {
-    std::cout << "Either camera width or height must be greater than 0." << std::endl;
+  if(width <= 0 && height <= 0)
     return;
-  }
   
   using namespace daylite;
   
@@ -195,26 +193,19 @@ void Private::Camera::setConfigBasePath(const std::string &path)
   // TODO: Make sure setting has changed before proceeding
 }
 
+bool Private::Camera::hasValidFrame() const
+{
+  return m_userFrameValid;
+}
+
 bool Private::Camera::checkChannel(const int channel)
 {
-  if(!m_userFrameValid)
-    return false;
-  
-  if(channel < 0 || channel >= m_channelBlobs.size())
-    return false;
-  
-  return true;
+  return (channel >= 0 && channel < m_channelBlobs.size());
 }
 
 bool Private::Camera::checkChannelObject(const int channel, const int object)
-{
-  if(!this->checkChannel(channel))
-    return false;
-  
-  if(object < 0 || object >= m_channelBlobs[channel].size())
-    return false;
-  
-  return true;
+{ 
+  return (checkChannel(channel) && object >= 0 && object < m_channelBlobs[channel].size());
 }
 
 const std::vector<uint8_t> *Private::Camera::rawPixels()

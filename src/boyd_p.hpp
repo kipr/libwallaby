@@ -42,6 +42,7 @@ namespace Private
     
     void setConfigBasePath(const std::string &path);
     
+    bool hasValidFrame() const;
     bool checkChannel(const int channel);
     bool checkChannelObject(const int channel, const int object);
     
