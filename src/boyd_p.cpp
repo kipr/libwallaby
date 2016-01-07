@@ -74,7 +74,7 @@ bool Private::Camera::open(const int deviceNumber, const Resolution res)
   return true;
 }
 
-bool Private::Camera::isOpen()
+bool Private::Camera::isOpen() const
 {
   // TODO: Is this the right way of checking if open?
   return m_frameSub ? true : false;
@@ -125,7 +125,7 @@ void Private::Camera::setResolution(const int width, const int height)
   // TODO: Make sure setting has changed before proceeding
 }
 
-int Private::Camera::width()
+int Private::Camera::width() const
 {
   if(!m_userFrameValid)
     return -1;
@@ -133,7 +133,7 @@ int Private::Camera::width()
   return m_userFrame.width;
 }
 
-int Private::Camera::height()
+int Private::Camera::height() const
 {
   if(!m_userFrameValid)
     return -1;
@@ -198,17 +198,17 @@ bool Private::Camera::hasValidFrame() const
   return m_userFrameValid;
 }
 
-bool Private::Camera::checkChannel(const int channel)
+bool Private::Camera::checkChannel(const int channel) const
 {
   return (channel >= 0 && channel < m_channelBlobs.size());
 }
 
-bool Private::Camera::checkChannelObject(const int channel, const int object)
+bool Private::Camera::checkChannelObject(const int channel, const int object) const
 { 
   return (checkChannel(channel) && object >= 0 && object < m_channelBlobs[channel].size());
 }
 
-const std::vector<uint8_t> *Private::Camera::rawPixels()
+const std::vector<uint8_t> *Private::Camera::rawPixels() const
 {
   if(!m_userFrameValid)
     return NULL;
@@ -216,7 +216,7 @@ const std::vector<uint8_t> *Private::Camera::rawPixels()
   return &m_userFrame.data;
 }
 
-const std::vector<std::vector<Object>> *Private::Camera::channelBlobs()
+const std::vector<std::vector<Object>> *Private::Camera::channelBlobs() const
 {
   if(!m_userFrameValid)
     return NULL;

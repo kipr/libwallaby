@@ -35,26 +35,26 @@ namespace Private
     
     void setResolution(const int width, const int height);
     
-    int width();
-    int height();
+    int width() const;
+    int height() const;
     
     bool update();
     
     void setConfigBasePath(const std::string &path);
     
     bool hasValidFrame() const;
-    bool checkChannel(const int channel);
-    bool checkChannelObject(const int channel, const int object);
+    bool checkChannel(const int channel) const;
+    bool checkChannelObject(const int channel, const int object) const;
     
-    const std::vector<uint8_t> *rawPixels();
-    const std::vector<std::vector<Object>> *channelBlobs();
+    const std::vector<uint8_t> *rawPixels() const;
+    const std::vector<std::vector<Object>> *channelBlobs() const;
     
     static Camera *instance();
   
   private:
     Camera();
     
-    bool isOpen();
+    bool isOpen() const;
     void receivedFrame(const daylite::bson &msg, void *arg);
     
     std::shared_ptr<daylite::node> m_node;
