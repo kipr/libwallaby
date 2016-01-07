@@ -50,26 +50,20 @@ int camera_load_config(const char *name)
   return 1;
 }
 
-int camera_set_width(int width)
+void camera_set_width(int width)
 {
   Private::Camera::instance()->setResolution(width, -1);
-  
-  return 1;
 }
 
-int camera_set_height(int height)
+void camera_set_height(int height)
 {
   Private::Camera::instance()->setResolution(-1, height);
-  
-  return 1;
 }
 
 // TODO: New function?
-int camera_set_resolution(int width, int height)
+void camera_set_resolution(int width, int height)
 {
   Private::Camera::instance()->setResolution(width, height);
-  
-  return 1;
 }
 
 int get_camera_width(void)
