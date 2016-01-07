@@ -76,6 +76,7 @@ bool Private::Camera::open(const int deviceNumber, const Resolution res)
 
 bool Private::Camera::isOpen()
 {
+  // TODO: Is this the right way of checking if open?
   return m_frameSub ? true : false;
 }
 
@@ -95,6 +96,8 @@ void Private::Camera::loadConfig(const std::string &name)
   boyd::settings s;
   s.config_name = name;
   m_setSettingsPub->publish(bson(s.bind()));
+  
+  // TODO: Make sure setting has changed before proceeding
 }
 
 void Private::Camera::setResolution(const int width, const int height)
@@ -120,6 +123,8 @@ void Private::Camera::setResolution(const int width, const int height)
     daylite::spinner::spin_once();
     std::this_thread::sleep_for(std::chrono::milliseconds(20));
   }*/
+  
+  // TODO: Make sure setting has changed before proceeding
 }
 
 int Private::Camera::width()
@@ -186,6 +191,8 @@ void Private::Camera::setConfigBasePath(const std::string &path)
   boyd::settings s;
   s.config_base_path = path;
   m_setSettingsPub->publish(bson(s.bind()));
+  
+  // TODO: Make sure setting has changed before proceeding
 }
 
 bool Private::Camera::checkChannel(const int channel)
