@@ -121,7 +121,7 @@ int get_channel_count(void)
   // Check if we have a frame
   if(!allChannelObjs) {
     std::cout << "No frame available." << std::endl;
-    return 0;
+    return -1;
   }
   return allChannelObjs->size();
 }
