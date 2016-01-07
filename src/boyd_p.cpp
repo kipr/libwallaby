@@ -37,6 +37,10 @@ Private::Camera::Camera()
   }
   
   m_setSettingsPub = m_node->advertise(setSettingsTopic);
+  
+  // Reset current config and base path
+  this->setConfigBasePath("");
+  this->loadConfig("");
 }
 
 bool Private::Camera::open(const int deviceNumber, const Resolution res)
