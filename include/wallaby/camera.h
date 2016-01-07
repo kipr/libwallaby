@@ -173,8 +173,10 @@ int get_code_num(int channel, int object);
 int get_object_data_length(int channel, int object);
 
 /**
- * \return The confidence, between 0.0 and 1.0, that given object on the given channel is significant.
- * If the channel or object doesn't exist, 0.0 is returned.
+ * \return The confidence, between 0 and 100, that given object on the given channel is significant.
+ * If the channel or object doesn't exist, -1 is returned.
+ * \note The confidence the percentage of the object's bounding box that the object occupies.
+ * In other words, it is calculated as (blob_area / bbox_area) * 100
  * \ingroup camera
  */
 int get_object_confidence(int channel, int object);
