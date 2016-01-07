@@ -8,6 +8,7 @@
 #include "wallaby/camera.h"
 #include "wallaby/camera.hpp"
 #include "boyd_p.hpp"
+#include "nyi.h"
 
 #include <iostream>
 
@@ -141,21 +142,21 @@ int get_object_count(int channel)
 // TODO: Implement?
 const char *get_object_data(int channel, int object)
 {
-  std::cout << "get_object_data is not implemented" << std::endl;
+  THIS_IS_NYI
   return 0;
 }
 
 // TODO: Implement?
 int get_code_num(int channel, int object)
 {
-  std::cout << "get_code_num is not implemented" << std::endl;
+  THIS_IS_NYI
   return -1;
 }
 
 // TODO: Implement?
 int get_object_data_length(int channel, int object)
 {
-  std::cout << "get_object_data_length is not implemented" << std::endl;
+  THIS_IS_NYI
   return -1;
 }
 
@@ -285,7 +286,7 @@ void set_camera_config_base_path(const char *const path)
 // TODO: Do we need this? It's more work and a potential leak for the user
 const unsigned char *get_camera_frame_row(unsigned row)
 {
-  std::cout << "get_camera_frame_row is not implemented" << std::endl;
+  THIS_IS_NYI
   return 0;
 }
 
@@ -302,6 +303,6 @@ const unsigned char *get_camera_frame()
 // TODO: Implement?
 unsigned get_camera_element_size()
 {
-  std::cout << "get_camera_element_size is not implemented" << std::endl;
+  THIS_IS_NYI
   return 0;
 }
