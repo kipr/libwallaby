@@ -8,6 +8,7 @@
 #include "wallaby/camera.hpp"
 #include "wallaby/color.hpp"
 #include "boyd_p.hpp"
+#include "warn.hpp"
 
 #include <iostream>
 
@@ -34,7 +35,6 @@ const unsigned Object::confidence() const
 
 bool Camera::open()
 {
-  // TODO: Keep default resolution somewhere
   return this->open(Resolution::LOW_RES);
 }
 
@@ -53,6 +53,7 @@ bool Camera::open(const int deviceNumber, const Resolution res)
     case HIGH_RES:
       return Private::Camera::instance()->open(deviceNumber, Private::Camera::Resolution::HIGH_RES);
     default:
+      WARN("invalid resolution");
       return false;
   }
 }
@@ -64,7 +65,11 @@ bool Camera::close()
 
 bool Camera::update()
 {
-  return Private::Camera::instance()->update();
+  const bool result = Private::Camera::instance()->update();
+  if(!result)
+    WARN("failed");
+  
+  return result;
 }
 
 void Camera::loadConfig(const std::string &name)
@@ -79,27 +84,50 @@ void Camera::setConfigBasePath(const std::string &path)
 
 void Camera::setWidth(const int width)
 {
+  if(width <= 0) {
+    WARN("width must be positive");
+    return;
+  }
+  
   Private::Camera::instance()->setResolution(width, -1);
 }
 
 void Camera::setHeight(const int height)
 {
+  if(height <= 0) {
+    WARN("height must be positive");
+    return;
+  }
+  
   Private::Camera::instance()->setResolution(-1, height);
 }
 
 void Camera::setResolution(const int width, const int height)
 {
+  if(width <= 0 && height <= 0) {
+    WARN("width or height must be positive");
+    return;
+  }
+  
   Private::Camera::instance()->setResolution(width, height);
 }
 
 int Camera::width()
 {
-  return Private::Camera::instance()->width();
+  const int width = Private::Camera::instance()->width();
+  if(width <= 0)
+    WARN("no camera frame available");
+  
+  return width;
 }
 
 int Camera::height()
 {
-  return Private::Camera::instance()->height();
+  const int height = Private::Camera::instance()->height();
+  if(height <= 0)
+    WARN("no camera frame available");
+  
+  return height;
 }
 
 Rgb Camera::getPixelRgb(Point2<int> point)
@@ -107,15 +135,19 @@ Rgb Camera::getPixelRgb(Point2<int> point)
   const std::vector<uint8_t> *const rawPixels = Private::Camera::instance()->rawPixels();
   // Check if we have a frame
   if(!rawPixels) {
-    std::cout << "No frame available." << std::endl;
+    WARN("no camera frame available");
     return Rgb();
   }
   
   const int w = this->width();
   const int h = this->height();
   // Check point bounds
-  if(point.x() < 0 || point.x() >= w || point.y() < 0 || point.y() >= h) {
-    std::cout << "Point is not within the image." << std::endl;
+  if(point.x() < 0 || point.x() >= w) {
+    WARN("x must be between 0 and %d", w-1);
+    return Rgb();
+  }
+  if(point.y() < 0 || point.y() >= h) {
+    WARN("y must be between 0 and %d", h-1);
     return Rgb();
   }
   
@@ -131,34 +163,57 @@ Rgb Camera::getPixelRgb(Point2<int> point)
 
 const std::vector<Object> *Camera::getObjects(int channel)
 {
-  if(!Private::Camera::instance()->checkChannel(channel))
+  if(!Private::Camera::instance()->hasValidFrame()) {
+    WARN("no camera frame available");
     return NULL;
+  }
+  
+  if(!Private::Camera::instance()->checkChannel(channel)) {
+    WARN("invalid channel");
+    return NULL;
+  }
   
   return &Private::Camera::instance()->channelBlobs()->at(channel);
 }
 
 const Object *Camera::getObject(int channel, int object)
 {
-  if(!Private::Camera::instance()->checkChannelObject(channel, object))
+  if(!Private::Camera::instance()->hasValidFrame()) {
+    WARN("no camera frame available");
     return NULL;
+  }
+  
+  if(!Private::Camera::instance()->checkChannelObject(channel, object)) {
+    WARN("invalid channel or object");
+    return NULL;
+  }
   
   return &Private::Camera::instance()->channelBlobs()->at(channel).at(object);
 }
 
 int Camera::getChannelCount()
 {
-  const std::vector<std::vector<Object>> *const allChannelObjs = Private::Camera::instance()->channelBlobs();
-  if(!allChannelObjs)
+  if(!Private::Camera::instance()->hasValidFrame()) {
+    WARN("no camera frame available");
     return -1;
+  }
   
+  const std::vector<std::vector<Object>> *const allChannelObjs = Private::Camera::instance()->channelBlobs();
   return allChannelObjs->size();
 }
 
 int Camera::getObjectCount(int channel)
 {
-  const std::vector<Object> *channelObjs = this->getObjects(channel);
-  if(!channelObjs)
+  if(!Private::Camera::instance()->hasValidFrame()) {
+    WARN("no camera frame available");
     return -1;
+  }
   
+  if(!Private::Camera::instance()->checkChannel(channel)) {
+    WARN("invalid channel");
+    return -1;
+  }
+  
+  const std::vector<Object> *channelObjs = this->getObjects(channel);  
   return channelObjs->size();
 }
