@@ -237,18 +237,17 @@ void camera_close();
 void set_camera_config_base_path(const char *const path);
 
 /**
- * Retrieves the current camera frame row as a BGR (BGR888) array. The returned
- * pointer is invalid after camera_update() is called again.
- * 
- * \return the current BGR888 camera frame row.
+ * Retrieves a row of the current camera frame as a BGR (BGR888) array.
+ * \attention The returned pointer is invalid after camera_update() is called again.
+ * \param row The number of the row to retrieve.
+ * \return a BGR888 row of the current camera frame.
  * \ingroup camera
  */
 const unsigned char *get_camera_frame_row(unsigned row);
 
 /**
- * Retrieves the current camera frame as a BGR (BGR888) array. The returned
- * pointer is invalid after camera_update() is called again.
- * 
+ * Retrieves the current camera frame as a BGR (BGR888) array.
+ * \attention The returned pointer is invalid after camera_update() is called again.
  * \return the current BGR888 camera frame.
  * \ingroup camera
  */
