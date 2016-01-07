@@ -8,7 +8,12 @@
 #ifndef _CAMERA_H_
 #define _CAMERA_H_
 
+
 #include "wallaby/geom.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 typedef struct pixel
 {
@@ -248,5 +253,10 @@ const unsigned char *get_camera_frame_row(unsigned row);
 const unsigned char *get_camera_frame();
 
 unsigned get_camera_element_size();
+
+#ifdef __cplusplus
+}
+#endif
+
 
 #endif
