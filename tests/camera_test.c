@@ -23,7 +23,8 @@ int main(int argc, char ** argv)
   printf("Camera height: %d\n", get_camera_height());
   printf("\n");
   
-  for(int i = 1; i <= 10; ++i) {
+  int i;
+  for(i = 1; i <= 10; ++i) {
     printf("SAMPLE %d\n", i);
     printf("Updating camera... ");
     ret = camera_update();
