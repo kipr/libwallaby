@@ -161,6 +161,29 @@ namespace CreatePackets
 		char rightVelocity[2];
 		char leftVelocity[2];
 	};
+  
+ /*!
+  * Create OI Packet 101
+  */
+ struct _101
+ {
+   unsigned char leftEncoderCounts[2];//43
+   unsigned char rightEncoderCounts[2];//44
+   
+   unsigned char lightBumpBits;//45
+   unsigned char lightBumpLeftSignal[2];//46
+   unsigned char lightBumpFrontLeftSignal[2];//47
+   unsigned char lightBumpCenterLeftSignal[2];//48
+   unsigned char lightBumpCenterRightSignal[2];//49
+   unsigned char lightBumpFrontRightSignal[2];//50
+   unsigned char lightBumpRightSignal[2];//51  
+
+   char leftMotorCurrent[2];//54
+   char rightMotorCurrent[2];//55
+   char mainBrushMotorCurrent[2];//56
+   char sideBrushMotorCurrent[2];//57
+   char stasis;//58
+ };
 }
 
 namespace CreateSensors
@@ -192,6 +215,20 @@ namespace CreateSensors
 	class WheelDropRight;
 	class WheelDropLeft;
 	class WheelDropCaster;
+  
+  class LightBumpLeft;
+  class LightBumpFrontLeft;
+  class LightBumpFrontRight;
+  class LightBumpRight;
+  class LightBumpCenterLeft;
+  class LightBumpCenterRight;
+  
+  class LightBumpLeftSignal;
+  class LightBumpFrontLeftSignal;
+  class LightBumpFrontRightSignal;
+  class LightBumpRightSignal;
+  class LightBumpCenterLeftSignal;
+  class LightBumpCenterRightSignal;
 }
 
 /*!
@@ -258,6 +295,7 @@ public:
 	 */
 	bool isConnected() const;
 
+  void setOffMode();
 	void setPassiveMode();
 	void setSafeMode();
 	void setFullMode();
@@ -385,6 +423,20 @@ public:
 	Sensor<bool> *wheelDropLeft() const;
 	Sensor<bool> *wheelDropRight() const;
 	Sensor<bool> *wheelDropCaster() const;
+  
+  Sensor<bool> *lightBumpLeft() const;
+  Sensor<bool> *lightBumpFrontLeft() const;
+  Sensor<bool> *lightBumpCenterLeft() const;
+  Sensor<bool> *lightBumpCenterRight() const;
+  Sensor<bool> *lightBumpFrontRight() const;
+  Sensor<bool> *lightBumpRight() const;
+  
+  Sensor<unsigned short> *lightBumpLeftSignal() const;
+  Sensor<unsigned short> *lightBumpFrontLeftSignal() const;
+  Sensor<unsigned short> *lightBumpCenterLeftSignal() const;
+  Sensor<unsigned short> *lightBumpCenterRightSignal() const;
+  Sensor<unsigned short> *lightBumpFrontRightSignal() const;
+  Sensor<unsigned short> *lightBumpRightSignal() const;
 
 	void setRefreshRate(const unsigned short& refreshRate);
 	const unsigned short& refreshRate() const;
@@ -402,6 +454,7 @@ public:
 	const CreatePackets::_3 *sensorPacket3();
 	const CreatePackets::_4 *sensorPacket4();
 	const CreatePackets::_5 *sensorPacket5();
+  const CreatePackets::_101 *sensorPacket101();
 
 	inline void beginAtomicOperation()
 	{
@@ -486,6 +539,7 @@ private:
 	void updateSensorPacket3();
 	void updateSensorPacket4();
 	void updateSensorPacket5();
+	void updateSensorPacket101();
 
 	CreateState m_state;
 
@@ -496,7 +550,8 @@ private:
 	CreatePackets::_3 m_3;
 	CreatePackets::_4 m_4;
 	CreatePackets::_5 m_5;
-	timeval timestamps[5];
+  CreatePackets::_101 m_101;
+	timeval timestamps[6];
 
 
 	// These are all marked mutable because they
@@ -520,6 +575,20 @@ private:
 	mutable CreateSensors::CliffRightSignal *m_cliffRightSignal;
 	mutable CreateSensors::CargoBayAnalogSignal *m_cargoBayAnalogSignal;
 	mutable CreateSensors::CargoBayDigitalInputs *m_cargoBayDigitalInputs;
+  
+  mutable CreateSensors::LightBumpLeft *m_lightBumpLeft;
+  mutable CreateSensors::LightBumpFrontLeft *m_lightBumpFrontLeft;
+  mutable CreateSensors::LightBumpCenterLeft *m_lightBumpCenterLeft;
+  mutable CreateSensors::LightBumpCenterRight *m_lightBumpCenterRight;
+  mutable CreateSensors::LightBumpFrontRight *m_lightBumpFrontRight;
+  mutable CreateSensors::LightBumpRight *m_lightBumpRight;
+  
+  mutable CreateSensors::LightBumpLeftSignal *m_lightBumpLeftSignal;
+  mutable CreateSensors::LightBumpFrontLeftSignal *m_lightBumpFrontLeftSignal;
+  mutable CreateSensors::LightBumpCenterLeftSignal *m_lightBumpCenterLeftSignal;
+  mutable CreateSensors::LightBumpCenterRightSignal *m_lightBumpCenterRightSignal;
+  mutable CreateSensors::LightBumpFrontRightSignal *m_lightBumpFrontRightSignal;
+  mutable CreateSensors::LightBumpRightSignal *m_lightBumpRightSignal;
 
 	mutable CreateSensors::IR *m_ir;
 

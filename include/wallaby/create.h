@@ -144,6 +144,36 @@ VF EXPORT_SYM int get_create_rcliff();
 /*!
  * \ingroup create
  */
+VF EXPORT_SYM int get_create_llightbump();
+
+/*!
+ * \ingroup create
+ */
+VF EXPORT_SYM int get_create_lflightbump();
+
+/*!
+ * \ingroup create
+ */
+VF EXPORT_SYM int get_create_lclightbump();
+
+/*!
+ * \ingroup create
+ */
+VF EXPORT_SYM int get_create_rclightbump();
+
+/*!
+ * \ingroup create
+ */
+VF EXPORT_SYM int get_create_rflightbump();
+
+/*!
+ * \ingroup create
+ */
+VF EXPORT_SYM int get_create_rlightbump();
+
+/*!
+ * \ingroup create
+ */
 VF EXPORT_SYM int get_create_vwall();
 
 /*!
