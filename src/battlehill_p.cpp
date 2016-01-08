@@ -446,7 +446,7 @@ void BattleHill::disableServo(int port)
 {
 	battlecreek::set_servo_state msg;
 	msg.port = port;
-	msg.enabled = true;
+	msg.enabled = false;
 
 	set_servo_state_pub_->publish(msg.bind());
 	spinner::spin_once();
