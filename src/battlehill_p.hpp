@@ -33,8 +33,8 @@ public:
 	enum MotorDirection
 	{
 		PassiveStop = 0,
-		Reverse,
 		Forward,
+		Reverse,
 		ActiveStop
 	};
 
