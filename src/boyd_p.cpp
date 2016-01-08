@@ -165,6 +165,7 @@ bool Private::Camera::update()
   // Update m_userFrame (contains raw pixels)
   m_userFrame = frame_data::unbind(m_latestFrameBson);
   m_newFrameAvailable = false;
+  std::cout << "Got frame " << m_userFrame.frameNum << std::endl;
   
   // Update m_channelBlobs
   // TODO: Only do this when we actually need m_channelBlobs
