@@ -10,7 +10,7 @@
 
 int digital(int port)
 {
-	return !get_digital_value(port); // TODO: why is it !(...) ???
+	return get_digital_value(port);
 }
 
 void set_digital_value(int port, int value)
