@@ -141,7 +141,7 @@ unsigned short BattleHill::getAnalogValue(unsigned char port)
 {
 	exhaust_spinner();
 	if (port >= Private::Robot::instance()->getRobotStates().analog_states.value.size()) return 0; // TODO: feedback
-	return Private::Robot::instance()->getRobotStates().analog_states.value[port];
+	return Private::Robot::instance()->getRobotStates().analog_states.value[port] * 4; // FIXME: should not be scaling here and in battlehill, only in the web browser
 }
 
 float BattleHill::getBatteryCapacity()
