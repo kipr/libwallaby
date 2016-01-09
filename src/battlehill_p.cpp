@@ -96,6 +96,12 @@ unsigned long int BattleHill::getRobotUpdateCount()
 	return Private::Robot::instance()->getRobotStates().update_count;
 }
 
+unsigned short BattleHill::getRobotFirmwareVersion()
+{
+	exhaust_spinner();
+	return Private::Robot::instance()->getRobotStates().firmware_version;
+}
+
 bool BattleHill::setRobotUpdateDelay(unsigned int us_delay)
 {
 	battlecreek::set_battlehill_state msg;
@@ -446,7 +452,7 @@ void BattleHill::disableServo(int port)
 {
 	battlecreek::set_servo_state msg;
 	msg.port = port;
-	msg.enabled = true;
+	msg.enabled = false;
 
 	set_servo_state_pub_->publish(msg.bind());
 	spinner::spin_once();

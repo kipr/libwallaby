@@ -413,6 +413,160 @@ namespace CreateSensors
 	private:
 		Create *m_create;
 	};
+  
+  class LightBumpLeft : public Sensor<bool>
+  {
+  public:
+    LightBumpLeft(Create *create) : m_create(create) {}
+    
+    virtual bool value() const
+    {
+      return m_create->sensorPacket101()->lightBumpBits & 1;
+    }
+  private:
+    Create *m_create;
+  };
+  
+  class LightBumpFrontLeft : public Sensor<bool>
+  {
+  public:
+    LightBumpFrontLeft(Create *create) : m_create(create) {}
+    
+    virtual bool value() const
+    {
+      return m_create->sensorPacket101()->lightBumpBits & 2;
+    }
+  private:
+    Create *m_create;
+  };
+  
+  class LightBumpCenterLeft : public Sensor<bool>
+  {
+  public:
+    LightBumpCenterLeft(Create *create) : m_create(create) {}
+    virtual bool value() const
+    {
+      return m_create->sensorPacket101()->lightBumpBits & 4;
+    }
+  private:
+    Create *m_create;
+  };
+  
+  class LightBumpCenterRight : public Sensor<bool>
+  {
+  public:
+    LightBumpCenterRight(Create *create) : m_create(create) {}
+    virtual bool value() const
+    {
+      return m_create->sensorPacket101()->lightBumpBits & 8;
+    }
+  private:
+    Create *m_create;
+  };
+  
+  class LightBumpFrontRight : public Sensor<bool>
+  {
+  public:
+    LightBumpFrontRight(Create *create) : m_create(create) {}
+    
+    virtual bool value() const
+    {
+      return m_create->sensorPacket101()->lightBumpBits & 16;
+    }
+  private:
+    Create *m_create;
+  };
+  
+  class LightBumpRight : public Sensor<bool>
+  {
+  public:
+    LightBumpRight(Create *create) : m_create(create) {}
+    
+    virtual bool value() const
+    {
+      return m_create->sensorPacket101()->lightBumpBits & 32;
+    }
+  private:
+    Create *m_create;
+  };
+  
+  class LightBumpLeftSignal : public Sensor<unsigned short>
+  {
+  public:
+    LightBumpLeftSignal(Create *create) : m_create(create) {}
+
+    virtual unsigned short value() const
+    {
+      return SHORT(m_create->sensorPacket101()->lightBumpLeftSignal);
+    }
+  private:
+    Create *m_create;
+  };
+
+  class LightBumpFrontLeftSignal : public Sensor<unsigned short>
+  {
+  public:
+    LightBumpFrontLeftSignal(Create *create) : m_create(create) {}
+
+    virtual unsigned short value() const
+    {
+      return SHORT(m_create->sensorPacket101()->lightBumpFrontLeftSignal);
+    }
+  private:
+    Create *m_create;
+  };
+
+  class LightBumpCenterLeftSignal : public Sensor<unsigned short>
+  {
+  public:
+    LightBumpCenterLeftSignal(Create *create) : m_create(create) {}
+
+    virtual unsigned short value() const
+    {
+      return SHORT(m_create->sensorPacket101()->lightBumpCenterLeftSignal);
+    }
+  private:
+    Create *m_create;
+  };
+
+  class LightBumpRightSignal : public Sensor<unsigned short>
+  {
+  public:
+    LightBumpRightSignal(Create *create) : m_create(create) {}
+
+    virtual unsigned short value() const
+    {
+      return SHORT(m_create->sensorPacket101()->lightBumpRightSignal);
+    }
+  private:
+    Create *m_create;
+  };
+
+  class LightBumpFrontRightSignal : public Sensor<unsigned short>
+  {
+  public:
+    LightBumpFrontRightSignal(Create *create) : m_create(create) {}
+
+    virtual unsigned short value() const
+    {
+      return SHORT(m_create->sensorPacket101()->lightBumpFrontRightSignal);
+    }
+  private:
+    Create *m_create;
+  };
+
+  class LightBumpCenterRightSignal : public Sensor<unsigned short>
+  {
+  public:
+    LightBumpCenterRightSignal(Create *create) : m_create(create) {}
+
+    virtual unsigned short value() const
+    {
+      return SHORT(m_create->sensorPacket101()->lightBumpCenterRightSignal);
+    }
+  private:
+    Create *m_create;
+  };
 }
 
 using namespace CreateSensors;
@@ -491,11 +645,23 @@ Create::~Create()
 	lazyDelete(m_cliffFrontRight);
 	lazyDelete(m_cliffRight);
 	lazyDelete(m_virtualWall);
+  lazyDelete(m_lightBumpLeft);
+  lazyDelete(m_lightBumpFrontLeft);
+  lazyDelete(m_lightBumpCenterLeft);
+  lazyDelete(m_lightBumpCenterRight);
+  lazyDelete(m_lightBumpFrontRight);
+  lazyDelete(m_lightBumpRight);
 	lazyDelete(m_wallSignal);
 	lazyDelete(m_cliffLeftSignal);
 	lazyDelete(m_cliffFrontLeftSignal);
 	lazyDelete(m_cliffFrontRightSignal);
 	lazyDelete(m_cliffRightSignal);
+  lazyDelete(m_lightBumpLeftSignal);
+  lazyDelete(m_lightBumpFrontLeftSignal);
+  lazyDelete(m_lightBumpCenterLeftSignal);
+  lazyDelete(m_lightBumpCenterRightSignal);
+  lazyDelete(m_lightBumpFrontRightSignal);
+  lazyDelete(m_lightBumpRightSignal);
 	lazyDelete(m_cargoBayAnalogSignal);
 	lazyDelete(m_ir);
 	lazyDelete(m_chargingState);
@@ -920,6 +1086,12 @@ const CreatePackets::_5 *Create::sensorPacket5()
 	return &m_5;
 }
 
+const CreatePackets::_101 *Create::sensorPacket101()
+{
+	updateSensorPacket101();
+	return &m_101;
+}
+
 AbstractButton *Create::playButton() const LAZY_RETURN(m_playButton);
 AbstractButton *Create::advanceButton() const LAZY_RETURN(m_advanceButton);
 Sensor<bool> *Create::wall() const LAZY_RETURN(m_wall);
@@ -935,6 +1107,18 @@ Sensor<unsigned short> *Create::cliffFrontRightSignal() const LAZY_RETURN(m_clif
 Sensor<unsigned short> *Create::cliffRightSignal() const LAZY_RETURN(m_cliffRightSignal);
 Sensor<unsigned short> *Create::cargoBayAnalogSignal() const LAZY_RETURN(m_cargoBayAnalogSignal);
 Sensor<unsigned char> *Create::cargoBayDigitalInputs() const LAZY_RETURN(m_cargoBayDigitalInputs);
+Sensor<bool> *Create::lightBumpLeft() const LAZY_RETURN(m_lightBumpLeft);
+Sensor<bool> *Create::lightBumpFrontLeft() const LAZY_RETURN(m_lightBumpFrontLeft);
+Sensor<bool> *Create::lightBumpCenterLeft() const LAZY_RETURN(m_lightBumpCenterLeft);
+Sensor<bool> *Create::lightBumpRight() const LAZY_RETURN(m_lightBumpRight);
+Sensor<bool> *Create::lightBumpFrontRight() const LAZY_RETURN(m_lightBumpFrontRight);
+Sensor<bool> *Create::lightBumpCenterRight() const LAZY_RETURN(m_lightBumpCenterRight);
+Sensor<unsigned short> *Create::lightBumpLeftSignal() const LAZY_RETURN(m_lightBumpLeftSignal);
+Sensor<unsigned short> *Create::lightBumpFrontLeftSignal() const LAZY_RETURN(m_lightBumpFrontLeftSignal);
+Sensor<unsigned short> *Create::lightBumpCenterLeftSignal() const LAZY_RETURN(m_lightBumpCenterLeftSignal);
+Sensor<unsigned short> *Create::lightBumpRightSignal() const LAZY_RETURN(m_lightBumpRightSignal);
+Sensor<unsigned short> *Create::lightBumpFrontRightSignal() const LAZY_RETURN(m_lightBumpFrontRightSignal);
+Sensor<unsigned short> *Create::lightBumpCenterRightSignal() const LAZY_RETURN(m_lightBumpCenterRightSignal);
 Sensor<unsigned char> *Create::ir() const LAZY_RETURN(m_ir);
 Sensor<unsigned char> *Create::chargingState() const LAZY_RETURN(m_chargingState);
 Sensor<char> *Create::batteryTemperature() const LAZY_RETURN(m_batteryTemperature);
@@ -979,6 +1163,18 @@ Create::Create()
 	m_cliffFrontLeftSignal(0),
 	m_cliffFrontRightSignal(0),
 	m_cliffRightSignal(0),
+  m_lightBumpLeft(0),
+  m_lightBumpFrontLeft(0),
+  m_lightBumpFrontRight(0),
+  m_lightBumpCenterLeft(0),
+  m_lightBumpCenterRight(0),
+  m_lightBumpRight(0),
+  m_lightBumpLeftSignal(0),
+  m_lightBumpFrontLeftSignal(0),
+  m_lightBumpFrontRightSignal(0),
+  m_lightBumpCenterLeftSignal(0),
+  m_lightBumpCenterRightSignal(0),
+  m_lightBumpRightSignal(0),
 	m_cargoBayAnalogSignal(0),
 	m_cargoBayDigitalInputs(0),
 	m_ir(0),
@@ -1134,4 +1330,14 @@ void Create::updateSensorPacket5()
 	endAtomicOperation();
 }
 
-
+void Create::updateSensorPacket101()
+{
+  if(!hasRequiredTimePassed(timestamps[5])) return;
+  flush();
+  beginAtomicOperation();
+  write(OI_SENSORS);
+  write(101);
+  blockingRead(m_101);
+  timestamps[5] = timeOfDay();
+  endAtomicOperation();
+}

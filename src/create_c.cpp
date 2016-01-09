@@ -123,6 +123,74 @@ int get_create_rcliff()
 	return Create::instance()->cliffRight()->value() ? 1 : 0;
 }
 
+int get_create_llightbump()
+{
+  return Create::instance()->lightBumpLeft()->value() ? 1 : 0;
+}
+
+
+int get_create_lflightbump()
+{
+  return Create::instance()->lightBumpFrontLeft()->value() ? 1 : 0;
+}
+
+
+int get_create_lclightbump()
+{
+  return Create::instance()->lightBumpCenterLeft()->value() ? 1 : 0;
+}
+
+int get_create_rlightbump()
+{
+  return Create::instance()->lightBumpRight()->value() ? 1 : 0;
+}
+
+
+int get_create_rflightbump()
+{
+  return Create::instance()->lightBumpFrontRight()->value() ? 1 : 0;
+}
+
+
+int get_create_rclightbump()
+{
+  return Create::instance()->lightBumpCenterRight()->value() ? 1 : 0;
+}
+
+int get_create_llightbump_amt()
+{
+  return Create::instance()->lightBumpLeftSignal()->value();
+}
+
+
+int get_create_lflightbump_amt()
+{
+  return Create::instance()->lightBumpFrontLeftSignal()->value();
+}
+
+
+int get_create_lclightbump_amt()
+{
+  return Create::instance()->lightBumpCenterLeftSignal()->value();
+}
+
+int get_create_rlightbump_amt()
+{
+  return Create::instance()->lightBumpRightSignal()->value();
+}
+
+
+int get_create_rflightbump_amt()
+{
+  return Create::instance()->lightBumpFrontRightSignal()->value();
+}
+
+
+int get_create_rclightbump_amt()
+{
+  return Create::instance()->lightBumpCenterRightSignal()->value();
+}
+
 int get_create_vwall()
 {
 	return Create::instance()->virtualWall()->value();

@@ -118,6 +118,9 @@ public:
 	unsigned long int getRobotStatesSequenceNumber();
 	unsigned long int getRobotUpdateCount();
 
+	unsigned short getRobotFirmwareVersion();
+
+
 	// Battlehill State info
 	bool setRobotUpdateDelay(unsigned int us_delay);
 	unsigned int getRobotUpdateDelay();
