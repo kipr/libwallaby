@@ -83,14 +83,14 @@ int camera_load_config(const char *name);
  * \param width The width in pixels
  * \ingroup camera
  */
-void camera_set_width(int width);
+void set_camera_width(int width);
 
 /**
  * Sets the camera's y resolution.
  * \param height The height in pixels
  * \ingroup camera
  */
-void camera_set_height(int height);
+void set_camera_height(int height);
 
 // TODO: New function?
 /**
@@ -99,7 +99,7 @@ void camera_set_height(int height);
  * \param height The height in pixels
  * \ingroup camera
  */
-void camera_set_resolution(int width, int height);
+void set_camera_resolution(int width, int height);
 
 /**
  * Gets the camera's x resolution.

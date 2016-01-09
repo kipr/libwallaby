@@ -52,7 +52,7 @@ int camera_load_config(const char *name)
   return 1;
 }
 
-void camera_set_width(int width)
+void set_camera_width(int width)
 {
   if(width <= 0) {
     WARN("width must be positive");
@@ -62,7 +62,7 @@ void camera_set_width(int width)
   Private::Camera::instance()->setResolution(width, -1);
 }
 
-void camera_set_height(int height)
+void set_camera_height(int height)
 {
   if(height <= 0) {
     WARN("height must be positive");
@@ -73,7 +73,7 @@ void camera_set_height(int height)
 }
 
 // TODO: New function?
-void camera_set_resolution(int width, int height)
+void set_camera_resolution(int width, int height)
 {
   if(width <= 0 && height <= 0) {
     WARN("width or height must be positive");
