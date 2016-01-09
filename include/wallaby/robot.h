@@ -18,6 +18,8 @@ extern "C" {
 unsigned long int get_robot_states_sequence_num();
 unsigned long int get_robot_update_count();
 
+unsigned short get_robot_firmware_version();
+
 int set_robot_update_delay(unsigned int us_delay);
 unsigned int get_robot_update_delay();
 
