@@ -157,36 +157,36 @@ int get_create_rclightbump()
   return Create::instance()->lightBumpCenterRight()->value() ? 1 : 0;
 }
 
-int vi_get_create_llightbump_amt()
+int get_create_llightbump_amt()
 {
   return Create::instance()->lightBumpLeftSignal()->value();
 }
 
 
-int vi_get_create_lflightbump_amt()
+int get_create_lflightbump_amt()
 {
   return Create::instance()->lightBumpFrontLeftSignal()->value();
 }
 
 
-int vi_get_create_lclightbump_amt()
+int get_create_lclightbump_amt()
 {
   return Create::instance()->lightBumpCenterLeftSignal()->value();
 }
 
-int vi_get_create_rlightbump_amt()
+int get_create_rlightbump_amt()
 {
   return Create::instance()->lightBumpRightSignal()->value();
 }
 
 
-int vi_get_create_rflightbump_amt()
+int get_create_rflightbump_amt()
 {
   return Create::instance()->lightBumpFrontRightSignal()->value();
 }
 
 
-int vi_get_create_rclightbump_amt()
+int get_create_rclightbump_amt()
 {
   return Create::instance()->lightBumpCenterRightSignal()->value();
 }
