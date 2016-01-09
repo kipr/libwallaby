@@ -96,6 +96,12 @@ unsigned long int BattleHill::getRobotUpdateCount()
 	return Private::Robot::instance()->getRobotStates().update_count;
 }
 
+unsigned short BattleHill::getRobotFirmwareVersion()
+{
+	exhaust_spinner();
+	return Private::Robot::instance()->getRobotStates().firmware_version;
+}
+
 bool BattleHill::setRobotUpdateDelay(unsigned int us_delay)
 {
 	battlecreek::set_battlehill_state msg;
