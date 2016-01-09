@@ -174,6 +174,36 @@ VF EXPORT_SYM int get_create_rlightbump();
 /*!
  * \ingroup create
  */
+VF EXPORT_SYM int get_create_llightbump_amt();
+
+/*!
+ * \ingroup create
+ */
+VF EXPORT_SYM int get_create_rlightbump_amt();
+
+/*!
+ * \ingroup create
+ */
+VF EXPORT_SYM int get_create_lflightbump_amt();
+
+/*!
+ * \ingroup create
+ */
+VF EXPORT_SYM int get_create_lclightbump_amt();
+
+/*!
+ * \ingroup create
+ */
+VF EXPORT_SYM int get_create_rclightbump_amt();
+
+/*!
+ * \ingroup create
+ */
+VF EXPORT_SYM int get_create_rflightbump_amt();
+
+/*!
+ * \ingroup create
+ */
 VF EXPORT_SYM int get_create_vwall();
 
 /*!
