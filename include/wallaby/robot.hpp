@@ -14,6 +14,8 @@ public:
 	static unsigned long int getRobotStatesSequenceNumber();
 	static unsigned long int getRobotUpdateCount();
 
+	static unsigned short getRobotFirmwareVersion();
+
 	static bool setRobotUpdateDelay(unsigned int us_delay);
 	static unsigned int getRobotUpdateDelay();
 

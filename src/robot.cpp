@@ -18,6 +18,11 @@ unsigned long int Robot::getRobotUpdateCount()
 	return Private::BattleHill::instance()->getRobotUpdateCount();
 }
 
+unsigned short Robot::getRobotFirmwareVersion()
+{
+	return Private::BattleHill::instance()->getRobotFirmwareVersion();
+}
+
 bool Robot::setRobotUpdateDelay(unsigned int us_delay)
 {
 	return Private::BattleHill::instance()->setRobotUpdateDelay(us_delay);
