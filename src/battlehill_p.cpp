@@ -550,7 +550,11 @@ bool BattleHill::setup()
 	static auto robot_states_sub = node_->subscribe("robot/robot_states", &robot_states_cb);
 
 	// wait for the subscriber to get a packet so we have real data to back library calls
-	while(!have_robot_data) usleep(1000);
+	while(!have_robot_data)
+	{
+		spinner::spin_once();
+		usleep(1000);
+	}
 
 	return true;
 }
