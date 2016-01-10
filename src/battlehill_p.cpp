@@ -42,6 +42,9 @@ static const unsigned int NUM_DIG = 16;
 static const unsigned int NUM_MOTORS = 4;
 static const unsigned int NUM_SERVOS = 4;
 
+
+static bool have_robot_data = false;  // TODO: move to class and bind callback
+
 namespace
 {
 std::mutex battlehill_mutex;
@@ -67,6 +70,7 @@ inline bson_bind::option<T> safe_unbind(const bson & raw_msg)
 // TODO: move to namespace / class
 void robot_states_cb(const bson & raw_msg, void *)
 {
+	have_robot_data = true; // TODO: make this a class var
 	const auto msg_option = safe_unbind<robot_states>(raw_msg);
 	if(msg_option.none()) return;
 
@@ -546,7 +550,7 @@ bool BattleHill::setup()
 	static auto robot_states_sub = node_->subscribe("robot/robot_states", &robot_states_cb);
 
 	// wait for the subscriber to get a packet so we have real data to back library calls
-	spinner::spin();
+	while(!have_robot_data) usleep(1000);
 
 	return true;
 }
