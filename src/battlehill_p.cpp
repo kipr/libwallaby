@@ -21,6 +21,8 @@
 #include <battlecreek/set_servo_state.hpp>
 
 
+#include <wallaby/servo.h>
+#include <wallaby/motors.h>
 
 #include <daylite/node.hpp>
 #include <daylite/spinner.hpp>
@@ -569,6 +571,9 @@ BattleHill::~BattleHill()
 {
 	if (daylite_good_)
 	{
+		// stop motors and servos for the user
+		ao();
+		disable_servos();
 		// daylite was set up. we need to make sure any messages waiting to be published are published
 		while(node_->out_queue_count() > 0) usleep(100000);
 	}
