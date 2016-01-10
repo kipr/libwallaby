@@ -30,6 +30,7 @@
 
 #include <iostream>
 #include <mutex>
+#include <unistd.h>
 
 using namespace battlecreek;
 using namespace daylite;
@@ -79,6 +80,7 @@ void exhaust_spinner()
 	// TODO: spin_once as long as we have messages
 	spinner::spin_once();
 }
+
 }
 
 namespace Private
@@ -525,9 +527,9 @@ bool BattleHill::setup()
 
 	// We have to set auto exit to true to give daylite permission to close the program
 	// if Ctrl-C is pressed
-	n->set_auto_exit(true);
+	node_->set_auto_exit(true);
 
-	if (!n->start("127.0.0.1", 8374))
+	if (!node_->start("127.0.0.1", 8374))
 	{
 		std::cerr << "Failed to contact daylite master" << std::endl;
 		return false;
@@ -557,7 +559,11 @@ BattleHill::BattleHill()
 
 BattleHill::~BattleHill()
 {
-
+	if (daylite_good_)
+	{
+		// daylite was set up. we need to make sure any messages waiting to be published are published
+		while(node_->out_queue_count() > 0) usleep(100000);
+	}
 }
 
 BattleHill * BattleHill::instance()
