@@ -14,7 +14,7 @@
 
 int main(int argc, char ** argv)
 {
-	unsigned short servo_cmds[6] = {0, 340, 682, 1023, 682, 340};
+	unsigned short servo_cmds[6] = {0, 680, 1364, 2046, 1364, 680};
 
 	// enable servos
 	int i;
