@@ -533,13 +533,18 @@ bool BattleHill::setup()
 		return false;
 	}
 
-	static auto robot_states_sub = n->subscribe("robot/robot_states", &robot_states_cb);
 
 	set_battlehill_state_pub_ = n->advertise("battlehill/set_battlehill_state");
 	set_digital_state_pub_ = n->advertise("robot/set_digital_state");
 	set_motor_state_pub_ = n->advertise("robot/set_motor_state");
 	set_pid_state_pub_ = n->advertise("robot/set_pid_state");
 	set_servo_state_pub_ = n->advertise("robot/set_servo_state");
+
+
+	static auto robot_states_sub = n->subscribe("robot/robot_states", &robot_states_cb);
+
+	// wait for the subscriber to get a packet so we have real data to back library calls
+	spinner::spin();
 
 	return true;
 }
