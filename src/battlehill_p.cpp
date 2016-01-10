@@ -523,7 +523,7 @@ bool BattleHill::setup()
 	std::lock_guard<std::mutex> lock(battlehill_mutex);
 
 	// TODO: mutex lock this for  thread safety
-	static auto n = node::create_node("libwallaby");
+	node_ = node::create_node("libwallaby");
 
 	// We have to set auto exit to true to give daylite permission to close the program
 	// if Ctrl-C is pressed
@@ -536,14 +536,14 @@ bool BattleHill::setup()
 	}
 
 
-	set_battlehill_state_pub_ = n->advertise("battlehill/set_battlehill_state");
-	set_digital_state_pub_ = n->advertise("robot/set_digital_state");
-	set_motor_state_pub_ = n->advertise("robot/set_motor_state");
-	set_pid_state_pub_ = n->advertise("robot/set_pid_state");
-	set_servo_state_pub_ = n->advertise("robot/set_servo_state");
+	set_battlehill_state_pub_ = node_->advertise("battlehill/set_battlehill_state");
+	set_digital_state_pub_ = node_->advertise("robot/set_digital_state");
+	set_motor_state_pub_ = node_->advertise("robot/set_motor_state");
+	set_pid_state_pub_ = node_->advertise("robot/set_pid_state");
+	set_servo_state_pub_ = node_->advertise("robot/set_servo_state");
 
 
-	static auto robot_states_sub = n->subscribe("robot/robot_states", &robot_states_cb);
+	static auto robot_states_sub = node_->subscribe("robot/robot_states", &robot_states_cb);
 
 	// wait for the subscriber to get a packet so we have real data to back library calls
 	spinner::spin();
