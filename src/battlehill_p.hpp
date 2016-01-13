@@ -12,6 +12,7 @@
 
 #include <memory>
 
+#include "daylite/node.hpp"
 #include "daylite/publisher.hpp"
 #include "daylite/subscriber.hpp"
 
@@ -137,6 +138,7 @@ private:
 	std::shared_ptr<daylite::publisher> set_motor_state_pub_;
 	std::shared_ptr<daylite::publisher> set_pid_state_pub_;
 	std::shared_ptr<daylite::publisher> set_battlehill_state_pub_;
+	std::shared_ptr<daylite::node> node_;
 };
 
 } /* namespace Private */
