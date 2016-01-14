@@ -33,6 +33,7 @@
 #include <iostream>
 #include <mutex>
 #include <unistd.h>
+#include <signal.h>
 
 using namespace battlecreek;
 using namespace daylite;
@@ -67,6 +68,19 @@ inline bson_bind::option<T> safe_unbind(const bson & raw_msg)
 	}
 
 	return some(ret);
+}
+
+//http://stackoverflow.com/questions/1641182/how-can-i-catch-a-ctrl-c-event-c
+#include <signal.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
+
+void BattleHillSigIntHandler(int s)
+{
+           std::cout << "Caught signal " << std::to_string(s) << std::endl;
+           delete Private::BattleHill::instance();
+           exit(1);
 }
 
 // TODO: move to namespace / class
@@ -565,12 +579,20 @@ BattleHill::BattleHill()
 : daylite_good_(false)
 {
 
+	// register sig int handler
+	struct sigaction sigIntHandler;
+	sigIntHandler.sa_handler = BattleHillSigIntHandler;
+	sigemptyset(&sigIntHandler.sa_mask);
+	sigIntHandler.sa_flags = 0;
+	sigaction(SIGINT, &sigIntHandler, NULL);
+
 }
 
 BattleHill::~BattleHill()
 {
 	if (daylite_good_)
 	{
+		std::cout << "Auto-stopping motors and servos" << std::endl;
 		// stop motors and servos for the user
 		ao();
 		disable_servos();
