@@ -33,7 +33,8 @@
 #include <iostream>
 #include <mutex>
 #include <unistd.h>
-#include <signal.h>
+#include <csignal>
+#include <cstdlib>
 
 using namespace battlecreek;
 using namespace daylite;
@@ -69,12 +70,6 @@ inline bson_bind::option<T> safe_unbind(const bson & raw_msg)
 
 	return some(ret);
 }
-
-//http://stackoverflow.com/questions/1641182/how-can-i-catch-a-ctrl-c-event-c
-#include <signal.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
 
 void BattleHillSigIntHandler(int s)
 {
