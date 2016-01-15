@@ -33,6 +33,8 @@
 #include <iostream>
 #include <mutex>
 #include <unistd.h>
+#include <csignal>
+#include <cstdlib>
 
 using namespace battlecreek;
 using namespace daylite;
@@ -67,6 +69,13 @@ inline bson_bind::option<T> safe_unbind(const bson & raw_msg)
 	}
 
 	return some(ret);
+}
+
+void BattleHillSigIntHandler(int s)
+{
+           std::cout << "Caught signal " << std::to_string(s) << std::endl;
+           delete Private::BattleHill::instance();
+           exit(1);
 }
 
 // TODO: move to namespace / class
@@ -565,12 +574,20 @@ BattleHill::BattleHill()
 : daylite_good_(false)
 {
 
+	// register sig int handler
+	struct sigaction sigIntHandler;
+	sigIntHandler.sa_handler = BattleHillSigIntHandler;
+	sigemptyset(&sigIntHandler.sa_mask);
+	sigIntHandler.sa_flags = 0;
+	sigaction(SIGINT, &sigIntHandler, NULL);
+
 }
 
 BattleHill::~BattleHill()
 {
 	if (daylite_good_)
 	{
+		std::cout << "Auto-stopping motors and servos" << std::endl;
 		// stop motors and servos for the user
 		ao();
 		disable_servos();
