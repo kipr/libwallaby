@@ -23,6 +23,7 @@
 
 #include <wallaby/servo.h>
 #include <wallaby/motors.h>
+#include <wallaby/create.h>
 
 #include <daylite/node.hpp>
 #include <daylite/spinner.hpp>
@@ -591,6 +592,10 @@ BattleHill::~BattleHill()
 		// stop motors and servos for the user
 		ao();
 		disable_servos();
+
+		std::cout << "Auto-stopping and disconnecting the Create" << std::endl;
+		create_stop();
+		create_disconnect();
 		// daylite was set up. we need to make sure any messages waiting to be published are published
 		while(node_->out_queue_count() > 0) usleep(100000);
 	}
