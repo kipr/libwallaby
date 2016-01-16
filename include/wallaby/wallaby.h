@@ -14,7 +14,6 @@
 #include "audio.h"
 #include "battery.h"
 #include "button.h"
-#include "camera.h"
 #include "create.h"
 #include "digital.h"
 #include "gyro.h"
