@@ -20,7 +20,8 @@ namespace Button
 			X,
 			Y,
 			Z,
-			Side
+			Left,
+			Right
 		};
 	}
 }

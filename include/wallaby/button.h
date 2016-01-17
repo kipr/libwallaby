@@ -41,6 +41,10 @@ int side_button();
 
 int black_button();
 
+int left_button();
+
+int right_button();
+
 int a_button_clicked();
 
 int b_button_clicked();
