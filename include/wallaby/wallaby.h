@@ -10,12 +10,12 @@
 
 #include "accel.h"
 #include "analog.h"
-#include "ardrone.h"
 #include "audio.h"
 #include "battery.h"
 #include "button.h"
 #include "create.h"
 #include "digital.h"
+#include "general.h"
 #include "gyro.h"
 #include "ir.h"
 #include "magneto.h"
