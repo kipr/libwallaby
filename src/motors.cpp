@@ -52,7 +52,7 @@ void Motor::setPidGains(short p, short i, short d, short pd, short id, short dd)
 
 void Motor::pidGains(short & p, short & i, short & d, short & pd, short & id, short & dd)
 {
-	Private::BattleHill::instance()->pidGains(m_port, p, i, d, pd, id, dd);
+	Private::BattleHill::instance()->pidGains(m_port, &p, &i, &d, &pd, &id, &dd);
 }
 
 void Motor::freeze()

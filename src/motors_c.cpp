@@ -79,7 +79,7 @@ void set_pid_gains(int motor, short p, short i, short d, short pd, short id, sho
 	Private::BattleHill::instance()->setPidGains(motor, p, i, d, pd, id, dd);
 }
 
-void get_pid_gains(int motor, short & p, short & i, short & d, short & pd, short & id, short & dd)
+void get_pid_gains(int motor, short * p, short * i, short * d, short * pd, short * id, short * dd)
 {
 	Private::BattleHill::instance()->pidGains(motor, p, i, d, pd, id, dd);
 }

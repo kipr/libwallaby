@@ -397,18 +397,18 @@ void BattleHill::setPidGains(int port, short p, short i, short d, short pd, shor
 	spinner::spin_once();
 }
 
-void BattleHill::pidGains(int port, short & p, short & i, short & d, short & pd, short & id, short & dd)
+void BattleHill::pidGains(int port, short * p, short * i, short * d, short * pd, short * id, short * dd)
 {
 	exhaust_spinner();
 	if (port < 0 || port > 3 || port >= Private::Robot::instance()->getRobotStates().pid_states.pid_state.size()) return;
 	//unsigned short offset = port * 2 * 3;
 	//TODO we can't read them from co-proc
-	p = Private::Robot::instance()->getRobotStates().pid_states.pid_state[port].p;
-	i = Private::Robot::instance()->getRobotStates().pid_states.pid_state[port].i;
-	d = Private::Robot::instance()->getRobotStates().pid_states.pid_state[port].d;
-	pd = Private::Robot::instance()->getRobotStates().pid_states.pid_state[port].pd;
-	id = Private::Robot::instance()->getRobotStates().pid_states.pid_state[port].id;
-	dd = Private::Robot::instance()->getRobotStates().pid_states.pid_state[port].dd;
+	*p = Private::Robot::instance()->getRobotStates().pid_states.pid_state[port].p;
+	*i = Private::Robot::instance()->getRobotStates().pid_states.pid_state[port].i;
+	*d = Private::Robot::instance()->getRobotStates().pid_states.pid_state[port].d;
+	*pd = Private::Robot::instance()->getRobotStates().pid_states.pid_state[port].pd;
+	*id = Private::Robot::instance()->getRobotStates().pid_states.pid_state[port].id;
+	*dd = Private::Robot::instance()->getRobotStates().pid_states.pid_state[port].dd;
 }
 
 void BattleHill::setPwm(int port, unsigned short speed)

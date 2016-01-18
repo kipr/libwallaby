@@ -94,7 +94,7 @@ public:
 	void setPidGoalPos(int port, int pos);
 	int pidGoalPos(int port);
 	void setPidGains(int port, short p, short i, short d, short pd, short id, short dd);
-	void pidGains(int port, short & p, short & i, short & d, short & pd, short & id, short & dd);
+	void pidGains(int port, short * p, short * i, short * d, short * pd, short * id, short * dd);
 	void setPwm(int port, unsigned short speed);
 	void setPwmDirection(int port, MotorDirection dir);
 	unsigned short pwm(int port);
