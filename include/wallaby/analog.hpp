@@ -8,7 +8,9 @@
 #ifndef INCLUDE_WALLABY_ANALOG_HPP_
 #define INCLUDE_WALLABY_ANALOG_HPP_
 
-class Analog
+#include "sensor.hpp"
+
+class Analog : public Sensor<unsigned short>
 {
 public:
 	Analog(unsigned char port);
@@ -16,7 +18,7 @@ public:
 
 	virtual unsigned short value() const;
 
-	void setPullup(bool pullup);
+	virtual void setPullup(bool pullup);
 	bool pullup() const;
 
 	unsigned char port() const;
@@ -39,7 +41,7 @@ public:
 	Analog10(unsigned char port);
 	virtual ~Analog10();
 
-	unsigned short value() const;
+	virtual unsigned short value() const;
 };
 
 

@@ -37,6 +37,11 @@ bool Analog::pullup() const
 	return false;
 }
 
+void Analog::setPullup(bool pullup)
+{
+
+}
+
 Analog8::Analog8(unsigned char port)
 : Analog(port)
 {

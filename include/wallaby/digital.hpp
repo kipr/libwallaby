@@ -8,8 +8,9 @@
 #ifndef INCLUDE_WALLABY_DIGITAL_HPP_
 #define INCLUDE_WALLABY_DIGITAL_HPP_
 
+#include "sensor.hpp"
 
-class Digital
+class Digital : public Sensor<bool>
 {
 public:
 	Digital(unsigned char port);
@@ -24,7 +25,7 @@ public:
 
 	bool pullup() const;
 
-	bool value() const;
+	virtual bool value() const;
 
 private:
 	unsigned char m_port;
