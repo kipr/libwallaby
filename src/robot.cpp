@@ -15,12 +15,12 @@ unsigned long int Robot::getRobotStatesSequenceNumber()
 
 unsigned long int Robot::getRobotUpdateCount()
 {
-	return 0;// TODO return Private::BattleHill::instance()->getRobotUpdateCount();
+	return Private::Wallaby::instance()->getUpdateCount();
 }
 
 unsigned short Robot::getRobotFirmwareVersion()
 {
-	return 0;// TODO return Private::BattleHill::instance()->getRobotFirmwareVersion();
+	return Private::Wallaby::instance()->getFirmwareVersion();
 }
 
 bool Robot::setRobotUpdateDelay(unsigned int us_delay)

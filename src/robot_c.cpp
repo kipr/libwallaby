@@ -8,6 +8,7 @@
 
 #include "wallaby/robot.h"
 #include "wallaby/robot.hpp"
+#include "wallaby_p.hpp"
 
 unsigned long int get_robot_states_sequence_num()
 {
@@ -16,12 +17,12 @@ unsigned long int get_robot_states_sequence_num()
 
 unsigned long int get_robot_update_count()
 {
-	return 0;// TODO return Robot::getRobotUpdateCount();
+	return Private::Wallaby::instance()->getUpdateCount();
 }
 
 unsigned short get_robot_firmware_version()
 {
-	return 0;// TODO return Robot::getRobotFirmwareVersion();
+	return Private::Wallaby::instance()->getUpdateCount();
 }
 
 int set_robot_update_delay(unsigned int us_delay)
