@@ -7,7 +7,7 @@
 
 #include "wallaby/battery.hpp"
 
-#include "wallaby_p.hpp"
+#include "battery_p.hpp"
 
 bool Battery::isCharging()
 {
@@ -17,5 +17,5 @@ bool Battery::isCharging()
 
 float Battery::powerLevel()
 {
-	return Private::BattleHill::instance()->getBatteryCapacity();
+	return Private::battery_power_level();
 }
