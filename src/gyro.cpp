@@ -6,39 +6,39 @@
  */
 
 #include "wallaby/gyro.hpp"
-#include "wallaby_p.hpp"
+#include "gyro_p.hpp"
 
 signed short Gyro::x()
 {
-	return Private::BattleHill::instance()->getGyroX();
+	return Private::gyro_x();
 }
 
 signed short Gyro::y()
 {
-	return Private::BattleHill::instance()->getGyroY();
+	return Private::gyro_y();
 }
 
 signed short Gyro::z()
 {
-	return Private::BattleHill::instance()->getGyroZ();
+	return Private::gyro_z();
 }
 
 bool Gyro::calibrate()
 {
-	return Private::BattleHill::instance()->calibrateGyro();
+	return Private::gyro_calibrate();
 }
 
 short GyroX::value() const
 {
-	return Private::BattleHill::instance()->getGyroX();
+	return Private::gyro_x();
 }
 
 short GyroY::value() const
 {
-	return Private::BattleHill::instance()->getGyroY();
+	return Private::gyro_y();
 }
 
 short GyroZ::value() const
 {
-	return Private::BattleHill::instance()->getGyroZ();
+	return Private::gyro_z();
 }
