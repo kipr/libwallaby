@@ -25,7 +25,7 @@ int get_digital_value(int port)
 
 void set_digital_output(int port, int out)
 {
-	set_digital_output(port, out == 0 ? false : true);
+	Private::set_digital_direction(port, out == 0 ? false : true);
 }
 
 int get_digital_output(int port)
