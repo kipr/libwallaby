@@ -11,7 +11,8 @@
 
 #include <iostream>
 
-using namespace Private;
+namespace Private
+{
 
 void set_servo_enabled(int port, bool enabled)
 {
@@ -79,3 +80,4 @@ unsigned short get_servo_position(int port, unsigned char * alt_read_buffer)
   return val;
 }
 
+}

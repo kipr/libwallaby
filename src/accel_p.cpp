@@ -9,7 +9,8 @@
 #include "wallaby_p.hpp"
 #include "wallaby_regs_p.hpp"
 
-using namespace Private;
+namespace Private
+{
 
 short accel_x(unsigned char * alt_read_buffer)
 {
@@ -36,4 +37,6 @@ bool accel_calibrated(unsigned char * alt_read_buffer)
 {
   // TODO
   return true;
+}
+
 }

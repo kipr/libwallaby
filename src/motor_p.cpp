@@ -11,8 +11,8 @@
 
 #include <iostream>
 
-using namespace Private;
-
+namespace Private
+{
 static const unsigned int NUM_MOTORS = 4; // TODO: get this from somewhere
 
 typedef struct pid_coeffs_t
@@ -274,4 +274,5 @@ bool get_motor_pid_active(unsigned int port, unsigned char * alt_read_buffer)
 {
   if (port >= NUM_MOTORS) return false;
   return !(Private::get_motor_done(port, alt_read_buffer));
+}
 }

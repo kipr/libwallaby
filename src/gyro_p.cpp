@@ -9,7 +9,8 @@
 #include "wallaby_p.hpp"
 #include "wallaby_regs_p.hpp"
 
-using namespace Private;
+namespace Private
+{
 
 short gyro_x(unsigned char * alt_read_buffer)
 {
@@ -38,3 +39,4 @@ bool gyro_calibrated(unsigned char * alt_read_buffer)
   return true;
 }
 
+}

@@ -12,7 +12,8 @@
 #include "wallaby_regs_p.hpp"
 #include "wallaby_p.hpp"
 
-using namespace Private;
+namespace Private
+{
 
 static const unsigned int LED_PIN_NUM = 12;
 
@@ -47,4 +48,4 @@ void blink_led()
   usleep(20000);
 }
 
-
+}

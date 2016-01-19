@@ -10,7 +10,7 @@
 #include "wallaby_p.hpp"
 #include "wallaby_regs_p.hpp"
 
-using namespace Private;
+namespace Private{
 
 bool digital_value(unsigned int port, unsigned char * alt_read_buffer)
 {
@@ -67,5 +67,5 @@ bool set_digital_direction(unsigned char port, bool output)
 
   return true; // TODO: based on success
 }
-
+}
 

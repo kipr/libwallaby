@@ -10,7 +10,8 @@
 #include "wallaby_regs_p.hpp"
 #include "wallaby_p.hpp"
 
-using namespace Private;
+namespace Private
+{
 
 unsigned short battery_raw_reading(unsigned char * alt_read_buffer)
 {
@@ -26,4 +27,6 @@ float battery_power_level(unsigned short raw_batt)
 
   // FIXME   convert ADC->capacity  or  voltage->capacity
   return batt_voltage;
+}
+
 }
