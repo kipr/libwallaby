@@ -6,7 +6,7 @@
  */
 
 #include "wallaby/accel.h"
-#include "battlehill_p.hpp"
+#include "wallaby_p.hpp"
 
 
 short accel_x()

@@ -6,7 +6,7 @@
  */
 
 #include "wallaby/digital.h"
-#include "battlehill_p.hpp"
+#include "wallaby_p.hpp"
 
 int digital(int port)
 {

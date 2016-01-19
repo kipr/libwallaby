@@ -7,7 +7,7 @@
 
 #include "wallaby/analog.hpp"
 
-#include "battlehill_p.hpp"
+#include "wallaby_p.hpp"
 
 
 Analog::Analog(unsigned char port)

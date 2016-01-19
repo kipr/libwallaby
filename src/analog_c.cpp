@@ -6,7 +6,7 @@
  */
 
 #include "wallaby/analog.h"
-#include "battlehill_p.hpp"
+#include "wallaby_p.hpp"
 
 
 int analog(int port)

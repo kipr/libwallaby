@@ -6,7 +6,7 @@
  */
 
 #include "wallaby/gyro.hpp"
-#include "battlehill_p.hpp"
+#include "wallaby_p.hpp"
 
 signed short Gyro::x()
 {

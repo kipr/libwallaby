@@ -6,7 +6,7 @@
  */
 
 #include "wallaby/magneto.h"
-#include "battlehill_p.hpp"
+#include "wallaby_p.hpp"
 
 short magneto_x()
 {

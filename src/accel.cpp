@@ -6,7 +6,7 @@
  */
 
 #include "wallaby/accel.hpp"
-#include "battlehill_p.hpp"
+#include "wallaby_p.hpp"
 
 
 signed short Acceleration::x()

@@ -6,7 +6,7 @@
  */
 
 #include "wallaby/servo.hpp"
-#include "battlehill_p.hpp"
+#include "wallaby_p.hpp"
 
 Servo::Servo(int port)
 : m_port(port)

@@ -6,7 +6,7 @@
  */
 
 #include "wallaby/servo.h"
-#include "battlehill_p.hpp"
+#include "wallaby_p.hpp"
 
 void enable_servo(int port)
 {

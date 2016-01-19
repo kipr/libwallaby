@@ -7,7 +7,7 @@
 
 #include "wallaby/motors.h"
 #include "wallaby/util.h"
-#include "battlehill_p.hpp"
+#include "wallaby_p.hpp"
 
 #include <iostream>
 #include <cstdlib>

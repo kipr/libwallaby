@@ -6,7 +6,7 @@
  */
 
 #include "wallaby/magneto.hpp"
-#include "battlehill_p.hpp"
+#include "wallaby_p.hpp"
 
 signed short Magneto::x()
 {

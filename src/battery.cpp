@@ -7,7 +7,7 @@
 
 #include "wallaby/battery.hpp"
 
-#include "battlehill_p.hpp"
+#include "wallaby_p.hpp"
 
 bool Battery::isCharging()
 {
