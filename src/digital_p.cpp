@@ -5,7 +5,7 @@
  *      Author: Joshua Southerland
  */
 
-#include "digital.hpp"
+#include "digital_p.hpp"
 
 #include "wallaby_p.hpp"
 #include "wallaby_regs_p.hpp"
