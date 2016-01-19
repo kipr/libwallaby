@@ -16,22 +16,22 @@ Digital::Digital(unsigned char port)
 
 void Digital::setValue(bool value)
 {
-	Private::BattleHill::instance()->setDigitalValue(m_port, value);
+	Private::set_digital_value(m_port, value);
 }
 
 bool Digital::value() const
 {
-	return Private::BattleHill::instance()->getDigitalValue(m_port);
+	return Private::digital_value(m_port, nullptr);
 }
 
 void Digital::setOutput(bool output)
 {
-	Private::BattleHill::instance()->setDigitalOutput(m_port, output);
+	Private::set_digital_direction(m_port, output);
 }
 
 bool Digital::isOutput() const
 {
-	return Private::BattleHill::instance()->getDigitalOutput(m_port);
+	return Private::digital_output(m_port, nullptr);
 }
 
 void Digital::setPullup(bool pullup)
