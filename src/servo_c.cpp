@@ -6,7 +6,7 @@
  */
 
 #include "wallaby/servo.h"
-#include "wallaby_p.hpp"
+#include "servo_p.hpp"
 
 void enable_servo(int port)
 {
@@ -30,20 +30,20 @@ void disable_servos()
 
 void set_servo_enabled(int port, int enabled)
 {
-	Private::BattleHill::instance()->setServoEnabled(port, enabled ? true : false);
+	Private::set_servo_enabled(port, enabled ? true : false);
 }
 
 int get_servo_enabled(int port)
 {
-	return Private::BattleHill::instance()->getServoEnabled(port) ? 1 : 0;
+	return (Private::get_servo_enabled(port, nullptr) ? 1 : 0);
 }
 
 int get_servo_position(int port)
 {
-	return Private::BattleHill::instance()->getServoPosition(port);
+	return Private::get_servo_position(port, nullptr);
 }
 
 void set_servo_position(int port, int position)
 {
-	Private::BattleHill::instance()->setServoPosition(port, position);
+	Private::set_servo_position(port, position);
 }

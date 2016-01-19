@@ -6,7 +6,7 @@
  */
 
 #include "wallaby/servo.hpp"
-#include "wallaby_p.hpp"
+#include "servo_p.hpp"
 
 Servo::Servo(int port)
 : m_port(port)
@@ -16,13 +16,13 @@ Servo::Servo(int port)
 
 void Servo::setPosition(Servo::ticks_t position)
 {
-	Private::BattleHill::instance()->setServoPosition(m_port, position);
+	Private::set_servo_position(m_port, position);
 }
 
 
 Servo::ticks_t Servo::position() const
 {
-	return Private::BattleHill::instance()->getServoPosition(m_port);
+	return Private::get_servo_position(m_port, nullptr);
 }
 
 void Servo::disable()
@@ -37,10 +37,10 @@ void Servo::enable()
 
 void Servo::setEnabled(bool enabled)
 {
-	Private::BattleHill::instance()->setServoEnabled(m_port, enabled);
+	Private::set_servo_enabled(m_port, enabled);
 }
 
 bool Servo::isEnabled() const
 {
-	return Private::BattleHill::instance()->getServoEnabled(m_port);
+	return Private::get_servo_enabled(m_port, nullptr);
 }
