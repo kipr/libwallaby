@@ -7,7 +7,7 @@
 
 #include "wallaby/analog.hpp"
 
-#include "wallaby_p.hpp"
+#include "analog_p.hpp"
 
 
 Analog::Analog(unsigned char port)
@@ -23,7 +23,7 @@ Analog::~Analog()
 
 unsigned short Analog::value() const
 {
-	return Private::BattleHill::instance()->getAnalogValue(m_port);
+	return Private::analog_value(m_port, nullptr);
 }
 
 unsigned char Analog::port() const
