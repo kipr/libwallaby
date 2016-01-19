@@ -107,7 +107,7 @@ bool set_motor_direction(unsigned int port, unsigned char dir)
 {
   if (port >= NUM_MOTORS) return false;
 
-  set_motor_mode(port, Motor::Inactive);
+  Private::set_motor_mode(port, Motor::Inactive);
 
   unsigned char dirs = Private::Wallaby::instance()->readRegister8b(REG_RW_MOT_DIRS);
 
@@ -136,8 +136,8 @@ unsigned char get_motor_direction(unsigned int port, unsigned char * alt_read_bu
 bool stop_motor(int port)
 {
   if (port >= NUM_MOTORS) return false;
-  set_motor_mode(port, Motor::Inactive);
-  set_motor_direction(port, Motor::PassiveStop);
+  Private::set_motor_mode(port, Motor::Inactive);
+  Private::set_motor_direction(port, Motor::PassiveStop);
   return true;
 }
 
@@ -154,7 +154,7 @@ bool set_motor_pwm(unsigned int port, unsigned char speed)
 
   if (port >= NUM_MOTORS) return false;
   // TODO: error signal outside of range
-  set_motor_mode(port, Motor::Inactive);
+  Private::set_motor_mode(port, Motor::Inactive);
   const unsigned short speedMax = 400;
   unsigned short adjustedSpeed = speed * 4;
   if (adjustedSpeed > speedMax) adjustedSpeed = speedMax; // TODO: check scaling (1/4 percent increments)
@@ -249,16 +249,16 @@ bool get_motor_stop(unsigned int port, unsigned char * alt_read_buffer)
 {
   if (port >= NUM_MOTORS) return false;
   // TODO: this needs testing
-  bool stopped = get_motor_mode(port, alt_read_buffer) == Motor::Inactive
-      && get_motor_direction(port, alt_read_buffer) == Motor::PassiveStop;
+  bool stopped = Private::get_motor_mode(port, alt_read_buffer) == Motor::Inactive
+      && Private::get_motor_direction(port, alt_read_buffer) == Motor::PassiveStop;
   return stopped;
 }
 
 bool set_motor_stop(unsigned int port, bool stop)
 {
   if (port >= NUM_MOTORS) return false;
-  set_motor_mode(port, Motor::Inactive);
-  set_motor_direction(port, Motor::PassiveStop);
+  Private::set_motor_mode(port, Motor::Inactive);
+  Private::set_motor_direction(port, Motor::PassiveStop);
   return true;
 }
 
@@ -273,5 +273,5 @@ bool get_motor_done(unsigned int port, unsigned char * alt_read_buffer)
 bool get_motor_pid_active(unsigned int port, unsigned char * alt_read_buffer)
 {
   if (port >= NUM_MOTORS) return false;
-  return !get_motor_done(port, alt_read_buffer);
+  return !(Private::get_motor_done(port, alt_read_buffer));
 }
