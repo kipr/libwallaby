@@ -7,7 +7,7 @@
 
 #include "wallaby/util.h"
 #include "wallaby/motors.hpp"
-#include "wallaby_p.hpp"
+#include "motor_p.hpp"
 
 #include <cstdlib>
 #include <math.h>
@@ -20,50 +20,50 @@ Motor::Motor(int port)
 
 void Motor::clearPositionCounter()
 {
-	Private::BattleHill::instance()->clearBemf(m_port);
+	Private::clear_motor_bemf(m_port);
 }
 
 void Motor::moveAtVelocity(short velocity)
 {
-	Private::BattleHill::instance()->setControlMode(m_port, Private::BattleHill::Speed);
-	Private::BattleHill::instance()->setPidVelocity(m_port, velocity);
+	Private::set_motor_mode(m_port, Private::Motor::Speed);
+	Private::set_motor_goal_velocity(m_port, velocity);
 }
 
 void Motor::moveToPosition(short speed, int goalPos)
 {
 	// FIXME: handle velocity scaling?
-	const int sign = Private::BattleHill::instance()->backEMF(m_port) > goalPos ? -1 : 1;
+	const int sign = Private::get_motor_bemf(m_port, nullptr) > goalPos ? -1 : 1;
 	const short velocity = std::abs(speed) * sign;
 
-	Private::BattleHill::instance()->setControlMode(m_port, Private::BattleHill::SpeedPosition);
-	Private::BattleHill::instance()->setPidGoalPos(m_port, goalPos);
-	Private::BattleHill::instance()->setPidVelocity(m_port, velocity);
+	Private::set_motor_mode(m_port, Private::Motor::SpeedPosition);
+	Private::set_motor_goal_position(m_port, goalPos);
+	Private::set_motor_goal_velocity(m_port, velocity);
 }
 
 void Motor::moveRelativePosition(short speed, int deltaPos)
 {
-	moveToPosition(speed, Private::BattleHill::instance()->backEMF(m_port) + deltaPos);
+	moveToPosition(speed, Private::get_motor_bemf(m_port, nullptr) + deltaPos);
 }
 
 void Motor::setPidGains(short p, short i, short d, short pd, short id, short dd)
 {
-	Private::BattleHill::instance()->setPidGains(m_port, p, i, d, pd, id, dd);
+	Private::set_motor_pid_gains(m_port, p, i, d, pd, id, dd);
 }
 
 void Motor::pidGains(short & p, short & i, short & d, short & pd, short & id, short & dd)
 {
-	Private::BattleHill::instance()->pidGains(m_port, &p, &i, &d, &pd, &id, &dd);
+	Private::get_motor_pid_gains(m_port, p, i, d, pd, id, dd);
 }
 
 void Motor::freeze()
 {
-	Private::BattleHill::instance()->setPwm(m_port, 100);
-	Private::BattleHill::instance()->setPwmDirection(m_port, Private::BattleHill::ActiveStop);
+	Private::set_motor_pwm(m_port, 100);
+	Private::set_motor_direction(m_port, Private::Motor::ActiveStop);
 }
 
 bool Motor::isMotorDone() const
 {
-	return !(Private::BattleHill::instance()->isPidActive(m_port));
+	return !(Private::get_motor_pid_active(m_port, nullptr));
 }
 
 void Motor::blockMotorDone() const
@@ -84,25 +84,26 @@ void Motor::backward()
 
 void Motor::motor(int percent)
 {
-	Private::BattleHill::instance()->setControlMode(m_port, Private::BattleHill::Inactive);
-	Private::BattleHill::instance()->setPwm(m_port, std::abs(percent));
+	Private::set_motor_mode(m_port, Private::Motor::Inactive);
+	Private::set_motor_pwm(m_port, std::abs(percent));
+
 	if (percent > 0)
 	{
-		Private::BattleHill::instance()->setPwmDirection(m_port, Private::BattleHill::Forward);
+		Private::set_motor_direction(m_port, Private::Motor::Forward);
 	}
 	else if (percent < 0)
 	{
-		Private::BattleHill::instance()->setPwmDirection(m_port, Private::BattleHill::Reverse);
+		Private::set_motor_direction(m_port, Private::Motor::Reverse);
 	}
 	else
 	{
-		Private::BattleHill::instance()->setPwmDirection(m_port, Private::BattleHill::PassiveStop);
+		Private::set_motor_direction(m_port, Private::Motor::PassiveStop);
 	}
 }
 
 void Motor::off()
 {
-	Private::BattleHill::instance()->stop(m_port);
+	Private::stop_motor(m_port);
 }
 
 int Motor::port() const
@@ -118,7 +119,7 @@ BackEMF::BackEMF(int port)
 
 int BackEMF::value() const
 {
-	return Private::BattleHill::instance()->backEMF(m_port);
+	return Private::get_motor_bemf(m_port, nullptr);
 }
 
 int BackEMF::port() const
