@@ -53,6 +53,7 @@ elseif(WIN32)
 endif()
 
 find_package( OpenCV REQUIRED )
+find_package (Threads)
 
 
 include_directories(${CMAKE_INSTALL_PREFIX}/include)
@@ -68,7 +69,11 @@ link_directories(${ZBAR_DIR}/lib)
 add_library(wallaby SHARED
 	${SOURCES})
 	
-target_link_libraries(wallaby ${OpenCV_LIBS})
+target_link_libraries(wallaby ${OpenCV_LIBS} ${CMAKE_THREAD_LIBS_INIT})
+
+if(UNIX AND NOT APPLE)
+    target_link_libraries(wallaby rt)
+endif()
 
 
 # Executables: test programs
