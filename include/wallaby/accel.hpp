@@ -8,6 +8,8 @@
 #ifndef INCLUDE_WALLABY_ACCEL_HPP_
 #define INCLUDE_WALLABY_ACCEL_HPP_
 
+#include "sensor.hpp"
+
 class Acceleration
 {
 public:
@@ -18,22 +20,22 @@ public:
 private:
 };
 
-class AccelX
+class AccelX : public Sensor<short>
 {
 public:
-	short value() const;
+	virtual short value() const;
 };
 
-class AccelY
+class AccelY : public Sensor<short>
 {
 public:
-	short value() const;
+	virtual short value() const;
 };
 
-class AccelZ
+class AccelZ : public Sensor<short>
 {
 public:
-	short value() const;
+	virtual short value() const;
 };
 
 #endif /* INCLUDE_WALLABY_ACCEL_HPP_ */

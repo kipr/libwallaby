@@ -3,15 +3,12 @@ cmake_minimum_required(VERSION 2.8)
 project(libwallaby)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
-find_package(Daylite REQUIRED)
-find_package(Battlecreek REQUIRED)
 
 
 set(INCLUDE ${libwallaby_SOURCE_DIR}/include)
 set(SRC ${libwallaby_SOURCE_DIR}/src)
 
 include_directories(${INCLUDE})
-include_directories(${BATTLECREEK_INCLUDE_DIR} ${DAYLITE_INCLUDE_DIRS})
 
 
 file(GLOB SOURCES ${SRC}/*.cpp)
@@ -56,6 +53,7 @@ elseif(WIN32)
 endif()
 
 find_package( OpenCV REQUIRED )
+find_package (Threads)
 
 
 include_directories(${CMAKE_INSTALL_PREFIX}/include)
@@ -71,7 +69,11 @@ link_directories(${ZBAR_DIR}/lib)
 add_library(wallaby SHARED
 	${SOURCES})
 	
-target_link_libraries(wallaby ${DAYLITE_LIBRARIES} ${OpenCV_LIBS})
+target_link_libraries(wallaby ${OpenCV_LIBS} ${CMAKE_THREAD_LIBS_INIT})
+
+if(UNIX AND NOT APPLE)
+    target_link_libraries(wallaby rt)
+endif()
 
 
 # Executables: test programs

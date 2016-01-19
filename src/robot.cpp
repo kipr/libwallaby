@@ -6,39 +6,39 @@
  */
 
 #include "wallaby/robot.hpp"
-#include "battlehill_p.hpp"
+#include "wallaby_p.hpp"
 
 unsigned long int Robot::getRobotStatesSequenceNumber()
 {
-	return Private::BattleHill::instance()->getRobotStatesSequenceNumber();
+	return 0;// TODO return Private::BattleHill::instance()->getRobotStatesSequenceNumber();
 }
 
 unsigned long int Robot::getRobotUpdateCount()
 {
-	return Private::BattleHill::instance()->getRobotUpdateCount();
+	return Private::Wallaby::instance()->getUpdateCount();
 }
 
 unsigned short Robot::getRobotFirmwareVersion()
 {
-	return Private::BattleHill::instance()->getRobotFirmwareVersion();
+	return Private::Wallaby::instance()->getFirmwareVersion();
 }
 
 bool Robot::setRobotUpdateDelay(unsigned int us_delay)
 {
-	return Private::BattleHill::instance()->setRobotUpdateDelay(us_delay);
+	return false;// TODO return Private::BattleHill::instance()->setRobotUpdateDelay(us_delay);
 }
 
 unsigned int Robot::getRobotUpdateDelay()
 {
-	return Private::BattleHill::instance()->getRobotUpdateDelay();
+	return 0;// TODO return Private::BattleHill::instance()->getRobotUpdateDelay();
 }
 
 bool Robot::setLowVoltThreshold(float volts)
 {
-	return Private::BattleHill::instance()->setLowVoltThreshold(volts);
+	return false;// TODO return Private::BattleHill::instance()->setLowVoltThreshold(volts);
 }
 
 float Robot::getLowVoltThreshold()
 {
-	return Private::BattleHill::instance()->getLowVoltThreshold();
+	return 0;// TODO return Private::BattleHill::instance()->getLowVoltThreshold();
 }

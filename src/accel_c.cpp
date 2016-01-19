@@ -6,25 +6,25 @@
  */
 
 #include "wallaby/accel.h"
-#include "battlehill_p.hpp"
+#include "accel_p.hpp"
 
 
 short accel_x()
 {
-	return Private::BattleHill::instance()->getAccelX();
+	return Private::accel_x();
 }
 
 short accel_y()
 {
-	return Private::BattleHill::instance()->getAccelY();
+	return Private::accel_y();
 }
 
 short accel_z()
 {
-	return Private::BattleHill::instance()->getAccelZ();
+	return Private::accel_z();
 }
 
 int accel_calibrate()
 {
-	return  Private::BattleHill::instance()->calibrateAccel() ? 0 : -1;
+	return Private::accel_calibrate();
 }

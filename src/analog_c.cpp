@@ -6,7 +6,7 @@
  */
 
 #include "wallaby/analog.h"
-#include "battlehill_p.hpp"
+#include "analog_p.hpp"
 
 
 int analog(int port)
@@ -26,7 +26,7 @@ int analog10(int port)
 
 int analog12(int port)
 {
-	return Private::BattleHill::instance()->getAnalogValue(static_cast<unsigned char>(port));
+	return Private::analog_value(port, nullptr);
 }
 
 int analog_et(int port)

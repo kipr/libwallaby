@@ -6,7 +6,7 @@
  */
 
 #include "wallaby/button.hpp"
-#include "battlehill_p.hpp"
+#include "wallaby_p.hpp"
 #include "wallaby/compat.hpp"
 
 

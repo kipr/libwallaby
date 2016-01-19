@@ -19,32 +19,35 @@ long elapsed_usec(struct timeval t1, struct timeval t2)
 
 int main(int argc, char ** argv)
 {
-    while(1)
-    {
-    	struct timeval start, stop;
-    	unsigned long int samples_start, samples_stop, num_samples;
-	unsigned long int pubs_start, pubs_stop, num_pubs;
 
-    	gettimeofday(&start, NULL);
+	while(1)
+	{
+		struct timeval start, stop;
+		unsigned long int samples_start, samples_stop, num_samples;
+		float dummy;
 
-    	samples_start = get_robot_update_count();
-	pubs_start = get_robot_states_sequence_num();
+		gettimeofday(&start, NULL);
 
-    	usleep(1000000);
+		samples_start = get_robot_update_count();
 
-    	samples_stop = get_robot_update_count();
-	pubs_stop = get_robot_states_sequence_num();
+		int i;
+		dummy = 0.0f;
+		for (i = 0; i < 1000; ++i)
+		{
+			dummy += power_level();
+		}
 
-    	gettimeofday(&stop, NULL);
+		samples_stop = get_robot_update_count();
 
-    	num_samples = samples_stop - samples_start;
-	num_pubs = pubs_stop - pubs_start;
+		gettimeofday(&stop, NULL);
 
-    	long elapsed_time = elapsed_usec(start, stop);
-    	double avg_sample_time_usec = ((double)elapsed_time)/((double)num_samples);
+		num_samples = samples_stop - samples_start;
 
-    	printf("%zu samples %zu publishes:   %f uS per sample average (%f Hz)\n", num_samples, num_pubs, avg_sample_time_usec, (1000000.0/avg_sample_time_usec));
-    }
+		long elapsed_time = elapsed_usec(start, stop);
+		double avg_sample_time_usec = ((double)elapsed_time)/((double)num_samples);
 
-    return 0;
+		printf("%zu samples %f uS per sample average (%f Hz)  dummy_var %f\n", num_samples, avg_sample_time_usec, (1000000.0/avg_sample_time_usec), dummy);
+	}
+
+	return 0;
 }

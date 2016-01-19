@@ -7,7 +7,7 @@
 
 #include "wallaby/analog.hpp"
 
-#include "battlehill_p.hpp"
+#include "analog_p.hpp"
 
 
 Analog::Analog(unsigned char port)
@@ -23,7 +23,7 @@ Analog::~Analog()
 
 unsigned short Analog::value() const
 {
-	return Private::BattleHill::instance()->getAnalogValue(m_port);
+	return Private::analog_value(m_port, nullptr);
 }
 
 unsigned char Analog::port() const
@@ -35,6 +35,11 @@ bool Analog::pullup() const
 {
 	// Not available on the Wallaby
 	return false;
+}
+
+void Analog::setPullup(bool pullup)
+{
+
 }
 
 Analog8::Analog8(unsigned char port)

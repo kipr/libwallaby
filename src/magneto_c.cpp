@@ -6,24 +6,24 @@
  */
 
 #include "wallaby/magneto.h"
-#include "battlehill_p.hpp"
+#include "magneto_p.hpp"
 
 short magneto_x()
 {
-	return Private::BattleHill::instance()->getMagnetoX();
+	return Private::magneto_x(nullptr);
 }
 
 short magneto_y()
 {
-	return Private::BattleHill::instance()->getMagnetoY();
+	return Private::magneto_y(nullptr);
 }
 
 short magneto_z()
 {
-	return Private::BattleHill::instance()->getMagnetoZ();
+	return Private::magneto_z(nullptr);
 }
 
 int magneto_calibrate()
 {
-	return Private::BattleHill::instance()->calibrateMagneto() ? 0 : -1;
+	return Private::magneto_calibrate();
 }
