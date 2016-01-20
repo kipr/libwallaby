@@ -20,6 +20,7 @@
 #include <cstring>
 
 #include <csignal>
+#include <thread>
 
 #include <sys/ioctl.h>
 #include <sys/types.h>
@@ -57,7 +58,8 @@ void atExit()
 void WallabySigHandler(int s)
 {
 	std::cout << "Caught signal " << s << std::endl;
-	atExit();
+	auto cleanupThread = std::thread(atExit);
+	cleanupThread.join();
 	exit(s);
 }
 
