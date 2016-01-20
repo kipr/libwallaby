@@ -38,24 +38,10 @@ namespace Private
 {
 
 
-void WallabyAtExit()
-{
-	std::cout << "Auto-stopping motors" << std::endl;
-	ao();
-
-	std::cout << "Auto-disabling servos" << std::endl;
-	disable_servos();
-
-	std::cout << "Auto-stopping and disconnecting the Create" << std::endl;
-	create_stop();
-	create_disconnect();
-}
-
-
 void WallabySigHandler(int s)
 {
 	std::cout << "Caught signal " << std::to_string(s) << std::endl;
-	WallabyAtExit();
+	delete ::Private::Wallaby::instance();
 	exit(s);
 }
 
@@ -89,7 +75,15 @@ Wallaby::Wallaby()
 
 Wallaby::~Wallaby()
 {
-	WallabyAtExit();
+	std::cout << "Auto-stopping motors" << std::endl;
+	ao();
+
+	std::cout << "Auto-disabling servos" << std::endl;
+	disable_servos();
+
+	std::cout << "Auto-stopping and disconnecting the Create" << std::endl;
+	create_stop();
+	create_disconnect();
 
 	close(spi_fd_);
 	delete[] write_buffer_;
@@ -113,9 +107,6 @@ bool Wallaby::transfer(unsigned char * alt_read_buffer)
 
 	const unsigned char * const read_buffer = (alt_read_buffer == nullptr) ? read_buffer_ : alt_read_buffer;
 
-
-	std::lock_guard<std::mutex> lock(transfer_mutex_);
-
 	// transfer counter - used to detect missed packets on co-proc side
 	static unsigned char count = 0;
 	count += 1;
@@ -133,7 +124,7 @@ bool Wallaby::transfer(unsigned char * alt_read_buffer)
 	xfer[0].len = buffer_size_;
 
 	int status = ioctl(spi_fd_, SPI_IOC_MESSAGE(1), xfer);
-	update_count_ += 1;
+	update_count_ += 1; // TODO: not multithread safe
 	usleep(50); //FIXME: this  makes sure we don't outrun the co-processor until interrupts are in place for DMA
 
 	if (read_buffer[0] != 'J')
