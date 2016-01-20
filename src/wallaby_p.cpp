@@ -38,10 +38,26 @@ namespace Private
 {
 
 
+void Wallaby::atExit()
+{
+	std::cout << "Auto-stopping motors" << std::endl;
+	ao();
+
+	std::cout << "Auto-disabling servos" << std::endl;
+	disable_servos();
+
+	std::cout << "Auto-stopping and disconnecting the Create" << std::endl;
+	create_stop();
+	create_disconnect();
+
+	close(spi_fd_);
+}
+
+
 void WallabySigHandler(int s)
 {
 	std::cout << "Caught signal " << std::to_string(s) << std::endl;
-	delete ::Private::Wallaby::instance();
+	::Private::Wallaby::instance()->atExit();
 	exit(s);
 }
 
@@ -75,17 +91,8 @@ Wallaby::Wallaby()
 
 Wallaby::~Wallaby()
 {
-	std::cout << "Auto-stopping motors" << std::endl;
-	ao();
+	this->atExit();
 
-	std::cout << "Auto-disabling servos" << std::endl;
-	disable_servos();
-
-	std::cout << "Auto-stopping and disconnecting the Create" << std::endl;
-	create_stop();
-	create_disconnect();
-
-	close(spi_fd_);
 	delete[] write_buffer_;
 	delete[] read_buffer_;
 }

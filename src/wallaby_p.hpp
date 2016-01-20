@@ -29,12 +29,13 @@ public:
 	void writeRegister32b(unsigned char address, unsigned int value);
 
 	// for efficient bulk / low-level access:
-  unsigned int getBufferSize();
+	unsigned int getBufferSize();
 	void readToAltBuffer(unsigned char * alt_read_buffer, unsigned int buffer_size);
 
 	unsigned long int getUpdateCount() const;
 
 	~Wallaby();
+	void atExit(); // TODO: ideally this wouldn't be public
 
 	static unsigned short getFirmwareVersion(unsigned char * alt_read_buffer = nullptr);
 
