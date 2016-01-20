@@ -37,7 +37,7 @@
 namespace Private
 {
 
-void WallabySigIntHandler(int s)
+void WallabySigHandler(int s)
 {
 	std::cout << "Caught signal " << std::to_string(s) << std::endl;
 	delete ::Private::Wallaby::instance();
@@ -55,10 +55,11 @@ Wallaby::Wallaby()
 
 	// register sig int handler
 	struct sigaction sigIntHandler;
-	sigIntHandler.sa_handler = WallabySigIntHandler;
+	sigIntHandler.sa_handler = WallabySigHandler;
 	sigemptyset(&sigIntHandler.sa_mask);
 	sigIntHandler.sa_flags = 0;
 	sigaction(SIGINT, &sigIntHandler, NULL);
+	sigaction(SIGTERM, &sigIntHandler, NULL);
 
 
 	// TODO: move spi code outside constructor
@@ -74,9 +75,11 @@ Wallaby::Wallaby()
 
 Wallaby::~Wallaby()
 {
-	std::cout << "Auto-stopping motors and servos" << std::endl;
+	std::cout << "Auto-stopping motors" << std::endl;
 	// stop motors and servos for the user
 	ao();
+
+	std::cout << "Auto-disabling servos" << std::endl;
 	disable_servos();
 
 	std::cout << "Auto-stopping and disconnecting the Create" << std::endl;
