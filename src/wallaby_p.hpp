@@ -38,12 +38,12 @@ public:
 
 	static unsigned short getFirmwareVersion(unsigned char * alt_read_buffer = nullptr);
 
+	int spi_fd_; // TODO: make private
 
 private:
 	Wallaby();
 	bool transfer(unsigned char * alt_read_buffer = nullptr);
 	void clearBuffers();
-	int spi_fd_;
 	unsigned char * write_buffer_;
 	unsigned char * read_buffer_;
 	const unsigned int buffer_size_; // same size for read/write buffers

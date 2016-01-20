@@ -49,8 +49,17 @@ void atExit()
 	std::cout << "Auto-stopping and disconnecting the Create" << std::endl;
 	create_stop();
 	create_disconnect();
+
+	close(Private::Wallaby::instance()->spi_fd_);
 }
 
+
+void WallabySigHandler(int s)
+{
+	std::cout << "Caught signal " << s << std::endl;
+	atExit();
+	exit(s);
+}
 
 Wallaby::Wallaby()
 : buffer_size_(REG_READABLE_COUNT),
@@ -60,7 +69,6 @@ Wallaby::Wallaby()
 {
 	static const std::string WALLABY_SPI_PATH = "/dev/spidev2.0";
 
-	atexit(atExit);
 
 	// TODO: move spi code outside constructor
 	// TODO: handle device path better
@@ -71,13 +79,21 @@ Wallaby::Wallaby()
 		// TODO: ifndef guard std::cout calls
 		std::cout << "Device not found: " << WALLABY_SPI_PATH << std::endl;
 	}
+
+	// register sig int handler
+	struct sigaction sigIntHandler;
+	sigIntHandler.sa_handler = WallabySigHandler;
+	sigemptyset(&sigIntHandler.sa_mask);
+	sigIntHandler.sa_flags = 0;
+	sigaction(SIGINT, &sigIntHandler, NULL);
+	sigaction(SIGTERM, &sigIntHandler, NULL);
 }
 
 Wallaby::~Wallaby()
 {
 	// happens automatically before destructor call: this->atExit();
+	atExit();
 
-	close(spi_fd_);
 	delete[] write_buffer_;
 	delete[] read_buffer_;
 }
