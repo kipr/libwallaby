@@ -38,7 +38,6 @@ public:
 
 	static unsigned short getFirmwareVersion(unsigned char * alt_read_buffer = nullptr);
 
-	int spi_fd_; // TODO: make private
 
 private:
 	Wallaby();
@@ -48,6 +47,7 @@ private:
 	unsigned char * read_buffer_;
 	const unsigned int buffer_size_; // same size for read/write buffers
 	unsigned long int update_count_;
+	int spi_fd_;
 	std::mutex transfer_mutex_;
 
 };

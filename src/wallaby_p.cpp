@@ -50,8 +50,6 @@ void atExit()
 	std::cout << "Auto-stopping and disconnecting the Create" << std::endl;
 	create_stop();
 	create_disconnect();
-
-	close(Private::Wallaby::instance()->spi_fd_);
 }
 
 
@@ -96,6 +94,7 @@ Wallaby::~Wallaby()
 	// happens automatically before destructor call: this->atExit();
 	atExit();
 
+	close(spi_fd_);
 	delete[] write_buffer_;
 	delete[] read_buffer_;
 }
@@ -142,6 +141,12 @@ bool Wallaby::transfer(unsigned char * alt_read_buffer)
 	}
 	usleep(50); //FIXME: this  makes sure we don't outrun the co-processor until interrupts are in place for DMA
 
+	if (status < 0)
+	{
+		std::cerr << "Error (SPI_IOC_MESSAGE): " << strerror(errno) << std::endl;
+		return false;
+	}
+
 	if (read_buffer[0] != 'J')
 	{
 		std::cerr << " Error: DMA de-synchronized" << std::endl;
@@ -152,12 +157,6 @@ bool Wallaby::transfer(unsigned char * alt_read_buffer)
 		}
 		std::cerr << std::endl;
 
-		return false;
-	}
-
-	if (status < 0)
-	{
-		std::cerr << "Error (SPI_IOC_MESSAGE): " << strerror(errno) << std::endl;
 		return false;
 	}
 
