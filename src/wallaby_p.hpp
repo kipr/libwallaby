@@ -35,7 +35,6 @@ public:
 	unsigned long int getUpdateCount() const;
 
 	~Wallaby();
-	void atExit(); // TODO: ideally this wouldn't be public
 
 	static unsigned short getFirmwareVersion(unsigned char * alt_read_buffer = nullptr);
 

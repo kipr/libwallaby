@@ -38,7 +38,7 @@ namespace Private
 {
 
 
-void Wallaby::atExit()
+void atExit()
 {
 	std::cout << "Auto-stopping motors" << std::endl;
 	ao();
@@ -49,17 +49,8 @@ void Wallaby::atExit()
 	std::cout << "Auto-stopping and disconnecting the Create" << std::endl;
 	create_stop();
 	create_disconnect();
-
-	close(spi_fd_);
 }
 
-
-void WallabySigHandler(int s)
-{
-	std::cout << "Caught signal " << std::to_string(s) << std::endl;
-	::Private::Wallaby::instance()->atExit();
-	exit(s);
-}
 
 Wallaby::Wallaby()
 : buffer_size_(REG_READABLE_COUNT),
@@ -69,14 +60,7 @@ Wallaby::Wallaby()
 {
 	static const std::string WALLABY_SPI_PATH = "/dev/spidev2.0";
 
-	// register sig int handler
-	struct sigaction sigIntHandler;
-	sigIntHandler.sa_handler = WallabySigHandler;
-	sigemptyset(&sigIntHandler.sa_mask);
-	sigIntHandler.sa_flags = 0;
-	sigaction(SIGINT, &sigIntHandler, NULL);
-	sigaction(SIGTERM, &sigIntHandler, NULL);
-
+	atexit(atExit);
 
 	// TODO: move spi code outside constructor
 	// TODO: handle device path better
@@ -91,8 +75,9 @@ Wallaby::Wallaby()
 
 Wallaby::~Wallaby()
 {
-	this->atExit();
+	// happens automatically before destructor call: this->atExit();
 
+	close(spi_fd_);
 	delete[] write_buffer_;
 	delete[] read_buffer_;
 }
@@ -114,24 +99,29 @@ bool Wallaby::transfer(unsigned char * alt_read_buffer)
 
 	const unsigned char * const read_buffer = (alt_read_buffer == nullptr) ? read_buffer_ : alt_read_buffer;
 
-	// transfer counter - used to detect missed packets on co-proc side
-	static unsigned char count = 0;
-	count += 1;
+	int status;
+	{
+		std::lock_guard<std::mutex> lock(transfer_mutex_);
 
-	write_buffer_[0] = 'J';        //start
-	write_buffer_[1] = WALLABY_SPI_VERSION;          // version 2
-	write_buffer_[2] = count;
-	write_buffer_[buffer_size_-1] = 'S'; // stop
+		// transfer counter - used to detect missed packets on co-proc side
+		static unsigned char count = 0;
+		count += 1;
 
-	struct spi_ioc_transfer	xfer[1];
-	memset(xfer, 0, sizeof xfer);
+		write_buffer_[0] = 'J';        //start
+		write_buffer_[1] = WALLABY_SPI_VERSION;          // version #
+		write_buffer_[2] = count;
+		write_buffer_[buffer_size_-1] = 'S'; // stop
 
-	xfer[0].tx_buf = (unsigned long) write_buffer_;
-	xfer[0].rx_buf = (unsigned long) read_buffer;
-	xfer[0].len = buffer_size_;
+		struct spi_ioc_transfer	xfer[1];
+		memset(xfer, 0, sizeof xfer);
 
-	int status = ioctl(spi_fd_, SPI_IOC_MESSAGE(1), xfer);
-	update_count_ += 1; // TODO: not multithread safe
+		xfer[0].tx_buf = (unsigned long) write_buffer_;
+		xfer[0].rx_buf = (unsigned long) read_buffer;
+		xfer[0].len = buffer_size_;
+
+		status = ioctl(spi_fd_, SPI_IOC_MESSAGE(1), xfer);
+		update_count_ += 1;
+	}
 	usleep(50); //FIXME: this  makes sure we don't outrun the co-processor until interrupts are in place for DMA
 
 	if (read_buffer[0] != 'J')
