@@ -41,13 +41,13 @@ namespace Private
 
 void atExit()
 {
-	std::cout << "Auto-stopping motors" << std::endl;
+	//std::cout << "Auto-stopping motors" << std::endl;
 	ao();
 
-	std::cout << "Auto-disabling servos" << std::endl;
+	//std::cout << "Auto-disabling servos" << std::endl;
 	disable_servos();
 
-	std::cout << "Auto-stopping and disconnecting the Create" << std::endl;
+	//std::cout << "Auto-stopping and disconnecting the Create" << std::endl;
 	create_stop();
 	create_disconnect();
 }
@@ -55,7 +55,7 @@ void atExit()
 
 void WallabySigHandler(int s)
 {
-	std::cout << "Caught signal " << s << std::endl;
+	//std::cout << "Caught signal " << s << std::endl;
 	auto cleanupThread = std::thread(atExit);
 	cleanupThread.join();
 	exit(s);
