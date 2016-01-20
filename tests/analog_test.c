@@ -23,23 +23,11 @@ int main(int argc, char ** argv)
 		count += 1;
 		int channel;
 
-		if (count % 100 < 50)
+		for (channel = 0; channel < NUM_ADC_CHANS; ++channel)
 		{
-			for (channel = 0; channel < NUM_ADC_CHANS; ++channel)
-			{
-				vals[channel] = analog12(channel);
-			}
-			printf("pu enabled: %d %d %d %d %d %d\n", vals[0], vals[1], vals[2], vals[3], vals[4], vals[5]);
+			vals[channel] = analog(channel);
 		}
-		else
-		{
-			for (channel = 0; channel < NUM_ADC_CHANS; ++channel)
-			{
-				vals[channel] = analog_et(channel);
-			}
-			printf("pu disabled: %d %d %d %d %d %d\n", vals[0], vals[1], vals[2], vals[3], vals[4], vals[5]);
-		}
-
+		printf("analog values: %d %d %d %d %d %d\n", vals[0], vals[1], vals[2], vals[3], vals[4], vals[5]);
 
 		msleep(100);
 	}
