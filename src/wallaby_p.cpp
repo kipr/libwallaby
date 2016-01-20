@@ -8,6 +8,11 @@
 #include "wallaby_p.hpp"
 #include "wallaby_regs_p.hpp"
 
+
+#include "wallaby/create.h"
+#include "wallaby/motors.h"
+#include "wallaby/servo.h"
+
 #include <unistd.h>
 #include <cstdlib>
 #include <fcntl.h>
@@ -69,6 +74,15 @@ Wallaby::Wallaby()
 
 Wallaby::~Wallaby()
 {
+	std::cout << "Auto-stopping motors and servos" << std::endl;
+	// stop motors and servos for the user
+	ao();
+	disable_servos();
+
+	std::cout << "Auto-stopping and disconnecting the Create" << std::endl;
+	create_stop();
+	create_disconnect();
+
 	close(spi_fd_);
 	delete[] write_buffer_;
 	delete[] read_buffer_;
