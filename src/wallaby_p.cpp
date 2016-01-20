@@ -18,8 +18,9 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-#include <linux/types.h>
+#ifndef NOT_A_WALLABY
 #include <linux/spi/spidev.h>
+#endif
 
 #include <string>
 #include <iostream>
@@ -63,6 +64,11 @@ Wallaby * Wallaby::instance()
 
 bool Wallaby::transfer(unsigned char * alt_read_buffer)
 {
+  // Doesn't make sense for non-wallabys
+#ifdef NOT_A_WALLABY
+  std::cerr << "Warning: this is not a wallaby; transfer failed" << std::endl;
+  return false;
+#else
   if (spi_fd_ <= 0) return false; // TODO: feedback
 
   const unsigned char * const read_buffer = (alt_read_buffer == nullptr) ? read_buffer_ : alt_read_buffer;
@@ -110,6 +116,7 @@ bool Wallaby::transfer(unsigned char * alt_read_buffer)
   }
 
   return true;
+#endif
 }
 
 unsigned char Wallaby::readRegister8b(unsigned char address, const unsigned char * alt_read_buffer)

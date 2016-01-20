@@ -2,6 +2,11 @@ cmake_minimum_required(VERSION 2.8)
 
 project(libwallaby)
 
+option(no_wallaby "Not a wallaby controller" OFF)
+if(no_wallaby)
+  add_definitions(-DNOT_A_WALLABY)
+endif()
+
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
 
