@@ -15,6 +15,8 @@
 #include "create.hpp"
 #include "digital.hpp"
 #include "general.h"
+#include "graphics.h"
+#include "graphics_key_code.h"
 #include "gyro.hpp"
 #include "ir.hpp"
 #include "magneto.hpp"
