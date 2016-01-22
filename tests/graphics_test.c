@@ -12,11 +12,17 @@ int main(int argc, char ** argv)
 {
 	graphics_open(100,100);
 
-	graphics_line(0,0,49,49, 255, 0, 0);
-
-	graphics_update();
-
-	msleep(5000);
+	int x, j;
+	for (j = 0; j < 10; ++j)
+	{
+		for (x = 0; x < 100; ++x)
+		{
+			graphics_clear();
+			graphics_circle_fill(x, 50, 5, 255, 0, 0);
+			graphics_update();
+			msleep(10);
+		}
+	}
 
 	graphics_close();
 
