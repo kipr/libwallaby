@@ -136,19 +136,6 @@ extern "C" {
 
 #ifdef __cplusplus
 }
-
-#include <functional>
-namespace std
-{
-template<>
-struct hash<KeyCode>
-{
-  size_t operator()(const KeyCode &code) const
-  {
-    return code;
-  }
-};
-}
 #endif
 
 
