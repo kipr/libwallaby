@@ -84,14 +84,21 @@ include_directories(${ZBAR_DIR}/include)
 
 link_directories(${CMAKE_INSTALL_PREFIX}/lib)
 link_directories(${OPENCV_LIB})
-link_directories(${ZBAR_DIR}/lib)  
+link_directories(${ZBAR_DIR}/lib)
 
 
 # Library: libwallaby
 add_library(wallaby SHARED
-	${SOURCES} ${PIXELTOASTER_SOURCES})
-	
+	${SOURCES} ${PIXELTOASTER_SOURCES} ${OBJC_SOURCES})
+  
 target_link_libraries(wallaby ${OpenCV_LIBS} ${CMAKE_THREAD_LIBS_INIT})
+
+if(APPLE)
+  find_library(OPENGL_LIBRARY OpenGL)
+  find_library(COCOA_LIBRARY Cocoa)
+  find_library(CORESERVICE_LIBRARY CoreServices)
+  target_link_libraries(wallaby ${OPENGL_LIBRARY} ${COCOA_LIBRARY} ${CORESERVICE_LIBRARY})
+endif()
 
 if(UNIX AND NOT APPLE)
     target_link_libraries(wallaby rt X11)
