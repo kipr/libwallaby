@@ -8,6 +8,7 @@
 #ifndef INCLUDE_WALLABY_GYRO_HPP_
 #define INCLUDE_WALLABY_GYRO_HPP_
 
+#include "sensor.hpp"
 
 class Gyro
 {
@@ -19,22 +20,22 @@ public:
 private:
 };
 
-class GyroX
+class GyroX : public Sensor<short>
 {
 public:
-	short value() const;
+	virtual short value() const;
 };
 
-class GyroY
+class GyroY : public Sensor<short>
 {
 public:
-	short value() const;
+	virtual short value() const;
 };
 
-class GyroZ
+class GyroZ : public Sensor<short>
 {
 public:
-	short value() const;
+	virtual short value() const;
 };
 
 

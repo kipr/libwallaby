@@ -8,6 +8,7 @@
 #ifndef INCLUDE_WALLABY_MAGNETO_HPP_
 #define INCLUDE_WALLABY_MAGNETO_HPP_
 
+#include "sensor.hpp"
 
 class Magneto
 {
@@ -19,22 +20,22 @@ public:
 private:
 };
 
-class MagnetoX
+class MagnetoX : public Sensor<short>
 {
 public:
-	short value() const;
+	virtual short value() const;
 };
 
-class MagnetoY
+class MagnetoY : public Sensor<short>
 {
 public:
-	short value() const;
+	virtual short value() const;
 };
 
-class MagnetoZ
+class MagnetoZ : public Sensor<short>
 {
 public:
-	short value() const;
+	virtual short value() const;
 };
 
 
