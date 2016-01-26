@@ -36,7 +36,7 @@ short AccelX::value() const
 
 short AccelY::value() const
 {
-	return Private::accel_z();
+	return Private::accel_y();
 }
 
 short AccelZ::value() const
