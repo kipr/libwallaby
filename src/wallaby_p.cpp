@@ -39,7 +39,7 @@ namespace Private
 {
 
 
-void atExit()
+void Wallaby::atExit()
 {
 	//std::cout << "Auto-stopping motors" << std::endl;
 	ao();
@@ -56,7 +56,7 @@ void atExit()
 void WallabySigHandler(int s)
 {
 	//std::cout << "Caught signal " << s << std::endl;
-	auto cleanupThread = std::thread(atExit);
+	auto cleanupThread = std::thread(Wallaby::atExit);
 	cleanupThread.join();
 	exit(s);
 }

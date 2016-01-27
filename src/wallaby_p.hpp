@@ -38,6 +38,7 @@ public:
 
 	static unsigned short getFirmwareVersion(unsigned char * alt_read_buffer = nullptr);
 
+	static void atExit();
 
 private:
 	Wallaby();
