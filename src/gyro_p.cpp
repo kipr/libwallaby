@@ -19,12 +19,12 @@ short gyro_x(unsigned char * alt_read_buffer)
 
 short gyro_y(unsigned char * alt_read_buffer)
 {
-	return static_cast<signed short>(Private::Wallaby::instance()->readRegister16b(REG_RW_GYRO_Y_H, alt_read_buffer))/16;
+    return static_cast<signed short>(Private::Wallaby::instance()->readRegister16b(REG_RW_GYRO_Y_H, alt_read_buffer))/16;
 }
 
 short gyro_z(unsigned char * alt_read_buffer)
 {
-	return static_cast<signed short>(Private::Wallaby::instance()->readRegister16b(REG_RW_GYRO_Z_H, alt_read_buffer))/16;
+    return static_cast<signed short>(Private::Wallaby::instance()->readRegister16b(REG_RW_GYRO_Z_H, alt_read_buffer))/16;
 }
 
 bool gyro_calibrate()
