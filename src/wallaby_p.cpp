@@ -267,7 +267,7 @@ void Wallaby::writeRegister32b(unsigned char address, unsigned int value)
 	clearBuffers();
 
 	// TODO definitions for buffer inds
-	write_buffer_[3] = 4; // write 2 registers
+	write_buffer_[3] = 4; // write 4 registers
 	write_buffer_[4] = address; // at address 'address'
 	write_buffer_[5] = static_cast<unsigned char>((value & 0xFF000000) >> 24);
 	write_buffer_[6] = address + 1;
