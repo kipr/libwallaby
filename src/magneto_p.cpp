@@ -15,17 +15,17 @@ namespace Private
 
 short magneto_x(unsigned char * alt_read_buffer)
 {
-    return static_cast<signed short>(Private::Wallaby::instance()->readRegister16b(REG_RW_MAG_X_H, alt_read_buffer));
+    return static_cast<signed short>(Private::Wallaby::instance()->readRegister16b(REG_RW_MAG_X_H, alt_read_buffer))/16;
 }
 
 short magneto_y(unsigned char * alt_read_buffer)
 {
-    return static_cast<signed short>(Private::Wallaby::instance()->readRegister16b(REG_RW_MAG_Y_H, alt_read_buffer));
+    return static_cast<signed short>(Private::Wallaby::instance()->readRegister16b(REG_RW_MAG_Y_H, alt_read_buffer))/16;
 }
 
 short magneto_z(unsigned char * alt_read_buffer)
 {
-    return static_cast<signed short>(Private::Wallaby::instance()->readRegister16b(REG_RW_MAG_Z_H, alt_read_buffer));
+    return static_cast<signed short>(Private::Wallaby::instance()->readRegister16b(REG_RW_MAG_Z_H, alt_read_buffer))/16;
 }
 
 bool magneto_calibrate()
