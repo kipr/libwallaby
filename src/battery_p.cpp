@@ -25,7 +25,7 @@ float battery_power_level(unsigned short raw_batt)
 
   // convert to capacity
   // TODO: better calibration
-  float perc = (batt_voltage - 5.5f) / 1.5f;
+  float perc = (batt_voltage - 5.5f) / 2.0f;
   if (perc > 1.0f) perc = 1.0f;
   if (perc < 0.0f) perc = 0.0f;
 

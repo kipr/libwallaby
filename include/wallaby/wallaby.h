@@ -12,6 +12,7 @@
 #include "analog.h"
 #include "audio.h"
 #include "battery.h"
+#include "botball.h"
 #include "button.h"
 #include "create.h"
 #include "digital.h"

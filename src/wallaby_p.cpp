@@ -39,7 +39,7 @@ namespace Private
 {
 
 
-void atExit()
+void Wallaby::atExit()
 {
 	//std::cout << "Auto-stopping motors" << std::endl;
 	ao();
@@ -56,7 +56,7 @@ void atExit()
 void WallabySigHandler(int s)
 {
 	//std::cout << "Caught signal " << s << std::endl;
-	auto cleanupThread = std::thread(atExit);
+	auto cleanupThread = std::thread(Wallaby::atExit);
 	cleanupThread.join();
 	exit(s);
 }
@@ -267,7 +267,7 @@ void Wallaby::writeRegister32b(unsigned char address, unsigned int value)
 	clearBuffers();
 
 	// TODO definitions for buffer inds
-	write_buffer_[3] = 2; // write 2 registers
+	write_buffer_[3] = 4; // write 4 registers
 	write_buffer_[4] = address; // at address 'address'
 	write_buffer_[5] = static_cast<unsigned char>((value & 0xFF000000) >> 24);
 	write_buffer_[6] = address + 1;

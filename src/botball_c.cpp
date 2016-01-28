@@ -12,6 +12,8 @@
 #include "wallaby/create.hpp"
 #include "wallaby/compat.hpp"
 
+#include "wallaby_p.hpp"
+
 #include <cstdlib>
 #include <iostream>
 
@@ -38,7 +40,8 @@ public:
 		const double end = seconds();
 		std::cout << std::endl << "Shutdown after " << (end - start) << " seconds" << std::endl;
 		// Note: Might want to move this to botui in the future.
-		Create::instance()->stop();
+		//Create::instance()->stop();
+		Private::Wallaby::atExit();
 		_exit(0);
 	}
 	

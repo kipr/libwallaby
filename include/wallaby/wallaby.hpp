@@ -11,6 +11,7 @@
 #include "accel.hpp"
 #include "analog.hpp"
 #include "battery.hpp"
+#include "botball.h"
 #include "button.hpp"
 #include "create.hpp"
 #include "digital.hpp"
