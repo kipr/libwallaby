@@ -79,7 +79,7 @@ void wait_for_light(int light_port)
 
 	while (!OK) {
 		printf ("CALIBRATE: sensor port #%d\r\n", light_port);
-		printf("   press ON when light is on\r\n");
+		printf("   press the 'R' button when light is on\r\n");
 		while(digital(button_port)==0){
 			msleep(100);
 			onval=analog(light_port); // sensor value when light is on
@@ -87,15 +87,17 @@ void wait_for_light(int light_port)
 		}
 		printf("   light on value is = %d       \r\n", onval);
 		msleep(200);
-		while (digital(button_port)); // debounce B button
-		printf("   press OFF when light is off\r\n");
+		while (digital(button_port)); // debounce R button
+		printf("   press the 'R' button when light is off\r\n");
 		while (digital(button_port)==0) {
+			msleep(100);
 			offval=analog(light_port);
 			printf("   light off value is = %d         \r\n", offval);
-			msleep(100);
 		}
-		offval=analog(light_port); // sensor value when light is off
+		//offval=analog(light_port); // sensor value when light is off
 		printf("   light off value is = %d         \r\n", offval);
+		msleep(200);
+		while (digital(button_port)); // debounce R button
 		msleep(200);
 		if ((offval-onval)>=THRESHOLD) { // bright = small values
 			OK=1;
