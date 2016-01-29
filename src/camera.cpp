@@ -527,6 +527,10 @@ void Camera::Device::updateConfig()
 
 bool Camera::Device::initCapDevice(const unsigned width, const unsigned height)
 {
+#ifdef NOT_A_WALLABY
+  WARN("camera only supported on wallaby");
+  return false;
+#else
   if(!this->isOpen()) return false;
   
   // TODO: When this function fails, is calling close() enough? Other cleanup?
@@ -639,10 +643,15 @@ bool Camera::Device::initCapDevice(const unsigned width, const unsigned height)
   }
   
   return true;
+#endif
 }
 
 int Camera::Device::readFrame()
 {
+#ifdef NOT_A_WALLABY
+  WARN("camera only supported on wallaby");
+  return -1;
+#else
   struct v4l2_buffer buf;
   memset(&buf, 0, sizeof(buf));
   buf.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
@@ -672,14 +681,20 @@ int Camera::Device::readFrame()
   
   // Success!
   return 1;
+#endif
 }
 
 int Camera::Device::xioctl(int fh, int request, void *arg)
 {
+#ifdef NOT_A_WALLABY
+  WARN("camera only supported on wallaby");
+  return -1;
+#else
   int r;
   do {
     r = ioctl(fh, request, arg);
   } while (-1 == r && EINTR == errno);
   
   return r;
+#endif
 }
