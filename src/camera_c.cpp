@@ -41,10 +41,10 @@ int camera_open_device(int number, enum Resolution res)
   const bool ret = DeviceSingleton::instance()->open(number);
   if(!ret) return 0;
   
-  const int width = 160;
-  const int height = 120;
-  DeviceSingleton::instance()->setWidth(width);
-  DeviceSingleton::instance()->setHeight(height);
+  //const int width = 160;
+  //const int height = 120;
+  //DeviceSingleton::instance()->setWidth(width);
+  //DeviceSingleton::instance()->setHeight(height);
   
   return 1;
 }
