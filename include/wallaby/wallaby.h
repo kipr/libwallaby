@@ -14,6 +14,7 @@
 #include "battery.h"
 #include "botball.h"
 #include "button.h"
+#include "camera.h"
 #include "create.h"
 #include "digital.h"
 #include "general.h"

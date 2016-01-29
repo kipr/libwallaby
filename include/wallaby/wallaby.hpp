@@ -13,6 +13,7 @@
 #include "battery.hpp"
 #include "botball.h"
 #include "button.hpp"
+#include "camera.hpp"
 #include "create.hpp"
 #include "digital.hpp"
 #include "general.h"
