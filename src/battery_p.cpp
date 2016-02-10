@@ -21,14 +21,14 @@ unsigned short battery_raw_reading(unsigned char * alt_read_buffer)
 float battery_power_level(unsigned short raw_batt)
 {
   // calculate voltage based on linear curve-fitting
-  float batt_voltage = -0.02070635f + 0.009071161f * static_cast<float>(raw_batt);
+  double batt_voltage = 0.00886446886 * static_cast<double>(raw_batt);
 
   // convert to capacity
   // TODO: better calibration
-  float empty_voltage = 5.5f;
-  float full_voltage = 7.15f;
-  float voltage_range = full_voltage - empty_voltage;
-  float perc = (batt_voltage - empty_voltage) / voltage_range;
+  double empty_voltage = 5.5f;
+  double full_voltage = 6.6f;
+  double voltage_range = full_voltage - empty_voltage;
+  float perc = static_cast<float>((batt_voltage - empty_voltage) / voltage_range);
   if (perc > 1.0f) perc = 1.0f;
   if (perc < 0.0f) perc = 0.0f;
 
