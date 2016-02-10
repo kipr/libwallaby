@@ -42,8 +42,6 @@
 // there are added segments to provide for . : , ; and other non alphameric characters
 // arrows (l,r,u,d) are specified by numbers 11 ,12, 13, 14
 
-#include "compat.hpp"
-
 #ifdef __cplusplus
 extern "C" {
 #endif
