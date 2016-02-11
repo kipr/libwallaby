@@ -21,7 +21,7 @@ unsigned short battery_raw_reading(unsigned char * alt_read_buffer)
 float battery_power_level(unsigned short raw_batt)
 {
   // calculate voltage based on linear curve-fitting
-  double batt_voltage =  -0.02070635f + 0.009071161f * static_cast<double>(raw_batt);
+  double batt_voltage =  0.009175 * static_cast<double>(raw_batt);
 
   // convert to capacity
   // TODO: better calibration
