@@ -13,6 +13,7 @@ class Battery
 public:
 	static bool isCharging();
 	static float powerLevel();
+	static unsigned short rawPowerADC();
 };
 
 #endif /* INCLUDE_WALLABY_BATTERY_HPP_ */
