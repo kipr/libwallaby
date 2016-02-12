@@ -36,6 +36,25 @@
                        /
                 	  / (19)
 */
+
+#define NUMSEG 30
+// SEGL specifies the length of a vertical segment in pixels
+#define SEGL 5
+// SEGSP is the spacing of characters
+#define SEGSP 7
+// The width in pixels of the window
+extern int __bold;
+#define BOLD __bold=1;
+#define NOBOLD __bold=0;
+
+#ifndef GXWINDOW
+  #define GXWINDOW 700
+#endif
+// The height of the window
+#ifndef GYWINDOW
+  #define GYWINDOW 500
+#endif
+
 // **************** Function Prototypes ******************
 // Based on 16 segment characters: draws a segment for each s value that gets a 1 and a rectangle if the value is 2;
 // the upper left corner starts at x,y; the color is defined by the vales of rgb; multiplier size resizes the character;
