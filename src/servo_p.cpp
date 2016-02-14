@@ -42,9 +42,9 @@ bool get_servo_enabled(int port, unsigned char * alt_read_buffer)
   unsigned short allStop = Private::Wallaby::instance()->readRegister8b(REG_RW_MOT_SRV_ALLSTOP, alt_read_buffer);
 
   const unsigned short bit = 1 << (port + 4);
-  const bool currentlyEnabled = allStop & bit;
+  const bool currentlyDisabled = allStop & bit;
 
-  return currentlyEnabled;
+  return !currentlyDisabled;
 }
 
 
