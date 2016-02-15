@@ -8,16 +8,25 @@
 #ifndef SRC_BATTERY_P_HPP_
 #define SRC_BATTERY_P_HPP_
 
-
 namespace Private
 {
+
+namespace Battery
+{
+  enum BatteryType
+  {
+    LiFe = 0,
+    LiPo,
+    NiMH
+  };
+}
 
 unsigned short battery_raw_reading(unsigned char * alt_read_buffer = nullptr);
 
 // TODO: move to battery source/header
-// TODO: confusing, this should be % remaining, but currently returns a voltage approximation
 // TODO: doesn't allow for use of an alt_read_buffer
-float battery_power_level(unsigned short raw_batt = battery_raw_reading());
+// battery types, 0=LiFePO4, 1=LiPo, 2=NiMH
+float battery_power_level(Battery::BatteryType batt_type = Battery::LiFe, unsigned short raw_batt = battery_raw_reading());
 
 }
 

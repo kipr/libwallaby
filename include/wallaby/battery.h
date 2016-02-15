@@ -27,6 +27,12 @@ int battery_charging();
  */
 float power_level();
 
+float power_level_nimh();
+
+float power_level_lipo();
+
+float power_level_life();
+
 
 
 #ifdef __cplusplus
