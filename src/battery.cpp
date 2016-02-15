@@ -19,3 +19,8 @@ float Battery::powerLevel()
 {
 	return Private::battery_power_level();
 }
+
+unsigned short Battery::rawPowerADC()
+{
+	return Private::battery_raw_reading();
+}
