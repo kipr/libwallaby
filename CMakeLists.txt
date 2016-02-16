@@ -91,7 +91,7 @@ link_directories(${ZBAR_DIR}/lib)
 add_library(wallaby SHARED
 	${SOURCES} ${PIXELTOASTER_SOURCES} ${OBJC_SOURCES})
   
-target_link_libraries(wallaby ${OpenCV_LIBS} ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(wallaby ${OpenCV_LIBS} ${CMAKE_THREAD_LIBS_INIT} zbar)
 
 if(APPLE)
   find_library(OPENGL_LIBRARY OpenGL)
