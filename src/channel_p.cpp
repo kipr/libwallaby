@@ -71,8 +71,9 @@ Camera::ObjectVector HsvChannelImpl::findObjects(const Config &config)
     const cv::Rect rect = cv::boundingRect(c[i]);
     if(rect.width < 3 && rect.height < 3) continue;
     
+    const double confidence = m[i].m00 / rect.area();
     ret.push_back(::Camera::Object(Point2<unsigned>(m[i].m10 / m[i].m00, m[i].m01 / m[i].m00),
-      Rect<unsigned>(rect.x, rect.y, rect.width, rect.height), 1.0));
+      Rect<unsigned>(rect.x, rect.y, rect.width, rect.height), confidence));
   }
   
   return ret;
