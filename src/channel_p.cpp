@@ -78,7 +78,6 @@ Camera::ObjectVector HsvChannelImpl::findObjects(const Config &config)
   return ret;
 }
 
-// TODO: Support barcode channels
 BarcodeChannelImpl::BarcodeChannelImpl()
 {
   m_image.set_format("Y800");

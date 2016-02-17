@@ -119,8 +119,7 @@ ObjectVector ChannelImpl::objects(const Config &config)
   return findObjects(config);
 }
 
-// TODO: Add barcode channel impl to map
-std::map<std::string, ChannelImpl *> ChannelImplManager::m_channelImpls = {{"hsv", new Private::Camera::HsvChannelImpl()}};
+std::map<std::string, ChannelImpl *> ChannelImplManager::m_channelImpls = {{"hsv", new Private::Camera::HsvChannelImpl()}, {"qr", new Private::Camera::BarcodeChannelImpl}};
 
 void ChannelImplManager::setImage(const cv::Mat &image)
 {
