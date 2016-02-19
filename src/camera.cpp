@@ -13,6 +13,7 @@
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
+#include <jpeglib.h>
 
 #ifndef NOT_A_WALLABY
 #include <fcntl.h>
@@ -671,9 +672,11 @@ int Camera::Device::readFrame()
   
   // Process frame
   // TODO: width and height shouldn't be hardcoded
-  // TODO: can we speed this up?
+  /*// OPENCV WAY
   cv::Mat jpgBuf(cv::Size(160, 120), CV_8UC3, buffers[buf.index].start);
-  m_image = cv::imdecode(jpgBuf, CV_LOAD_IMAGE_COLOR);
+  m_image = cv::imdecode(jpgBuf, CV_LOAD_IMAGE_COLOR);*/
+  // LIBJPEG WAY
+  m_image = this->decodeJpeg(buffers[buf.index].start, buf.bytesused);
   
   if(xioctl(m_fd, VIDIOC_QBUF, &buf) == -1)
     return -1;
@@ -681,6 +684,55 @@ int Camera::Device::readFrame()
   // Success!
   return 1;
 #endif
+}
+
+METHODDEF(void) emit_message_suppressed(j_common_ptr cinfo, int msg_level)
+{
+}
+
+cv::Mat Camera::Device::decodeJpeg(void *p, int size)
+{
+  if(size <= 0)
+    return cv::Mat();
+  
+  // Init JPEG decompression objects
+  struct jpeg_decompress_struct cInfo;
+  struct jpeg_error_mgr jerr;
+  cInfo.err = jpeg_std_error(&jerr);
+  jerr.emit_message = emit_message_suppressed;
+  jpeg_create_decompress(&cInfo);
+  
+  // Compressed data source
+  jpeg_mem_src(&cInfo, (unsigned char *)p, size); // parameters?
+  
+  // Read JPEG header
+  jpeg_read_header(&cInfo, true);
+  const int width = cInfo.image_width;
+  const int height = cInfo.image_height;
+  const int numComp = cInfo.num_components;
+  
+  jpeg_start_decompress(&cInfo);
+  const int outWidth = cInfo.output_width;
+  const int outHeight = cInfo.output_height;
+  const int outComp = cInfo.output_components;
+  
+  unsigned long bmp_size = outWidth * outHeight * outComp;
+  unsigned char *bmp_buffer = (unsigned char *) malloc(bmp_size);
+  int row_stride = width * outComp;
+  
+  while(cInfo.output_scanline < cInfo.output_height) {
+    unsigned char *buffer_array[1];
+    buffer_array[0] = bmp_buffer + (cInfo.output_scanline) * row_stride;
+    jpeg_read_scanlines(&cInfo, buffer_array, 1);
+  }
+  
+  jpeg_finish_decompress(&cInfo);
+  jpeg_destroy_decompress (&cInfo);
+    
+  cv::Mat image(cv::Size(outWidth, outHeight), CV_8UC3, bmp_buffer);
+  cv::cvtColor(image, image, CV_BGR2RGB);
+  
+  return image;
 }
 
 int Camera::Device::xioctl(int fh, int request, void *arg)
