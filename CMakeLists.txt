@@ -33,9 +33,9 @@ include(CheckCXXCompilerFlag)
 CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
 CHECK_CXX_COMPILER_FLAG("-std=c++0x" COMPILER_SUPPORTS_CXX0X)
 if(COMPILER_SUPPORTS_CXX11)
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+	add_definitions(--std=c++11)
 elseif(COMPILER_SUPPORTS_CXX0X)
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+	add_definitions(--std=c++0x)
 else()
 	message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
 endif()
@@ -75,11 +75,13 @@ elseif(WIN32)
 endif()
 
 find_package( OpenCV REQUIRED )
+find_package(JPEG REQUIRED)
 find_package (Threads)
 
 
 include_directories(${CMAKE_INSTALL_PREFIX}/include)
 include_directories(${OPENCV_INCLUDE})
+include_directories(${JPEG_INCLUDE_DIR})
 include_directories(${ZBAR_DIR}/include)
 
 link_directories(${CMAKE_INSTALL_PREFIX}/lib)
@@ -91,7 +93,7 @@ link_directories(${ZBAR_DIR}/lib)
 add_library(wallaby SHARED
 	${SOURCES} ${PIXELTOASTER_SOURCES} ${OBJC_SOURCES})
   
-target_link_libraries(wallaby ${OpenCV_LIBS} ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(wallaby ${OpenCV_LIBS} ${JPEG_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} zbar)
 
 if(APPLE)
   find_library(OPENGL_LIBRARY OpenGL)

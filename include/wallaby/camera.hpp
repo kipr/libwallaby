@@ -164,6 +164,7 @@ namespace Camera
     void updateConfig();
     bool initCapDevice(const unsigned width, const unsigned height);
     int readFrame();
+    cv::Mat decodeJpeg(void *p, int size);
     int xioctl(int fh, int request, void *arg);
     
     struct buffer {

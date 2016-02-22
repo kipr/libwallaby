@@ -11,6 +11,8 @@
 #include "wallaby/camera.hpp"
 #include <opencv2/core/core.hpp>
 
+#include <zbar.h>
+
 namespace Private
 {
   namespace Camera
@@ -26,8 +28,7 @@ namespace Private
       cv::Mat m_image;
     };
     
-    // TODO: Support barcode channels
-    /*class BarcodeChannelImpl : public ::Camera::ChannelImpl
+    class BarcodeChannelImpl : public ::Camera::ChannelImpl
     {
     public:
       BarcodeChannelImpl();
@@ -38,7 +39,7 @@ namespace Private
       cv::Mat m_gray;
       zbar::Image m_image;
       zbar::ImageScanner m_scanner;
-    };*/
+    };
   }
 }
 

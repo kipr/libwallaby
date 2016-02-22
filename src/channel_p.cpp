@@ -10,6 +10,8 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 
+#include <zbar.h>
+
 using namespace Private::Camera;
 
 HsvChannelImpl::HsvChannelImpl()
@@ -69,15 +71,15 @@ Camera::ObjectVector HsvChannelImpl::findObjects(const Config &config)
     const cv::Rect rect = cv::boundingRect(c[i]);
     if(rect.width < 3 && rect.height < 3) continue;
     
+    const double confidence = m[i].m00 / rect.area();
     ret.push_back(::Camera::Object(Point2<unsigned>(m[i].m10 / m[i].m00, m[i].m01 / m[i].m00),
-      Rect<unsigned>(rect.x, rect.y, rect.width, rect.height), 1.0));
+      Rect<unsigned>(rect.x, rect.y, rect.width, rect.height), confidence));
   }
   
   return ret;
 }
 
-// TODO: Support barcode channels
-/*BarcodeChannelImpl::BarcodeChannelImpl()
+BarcodeChannelImpl::BarcodeChannelImpl()
 {
   m_image.set_format("Y800");
   m_scanner.set_config(zbar::ZBAR_NONE, zbar::ZBAR_CFG_ENABLE, 0);
@@ -134,4 +136,4 @@ void BarcodeChannelImpl::update(const cv::Mat &image)
   }
   
   return ret;
-}*/
+}

@@ -15,9 +15,9 @@ bool Battery::isCharging()
 }
 
 
-float Battery::powerLevel()
+float Battery::powerLevel(unsigned int battery_type)
 {
-	return Private::battery_power_level();
+	return Private::battery_power_level(static_cast<Private::Battery::BatteryType>(battery_type));
 }
 
 unsigned short Battery::rawPowerADC()
