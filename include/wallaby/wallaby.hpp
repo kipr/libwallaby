@@ -17,6 +17,7 @@
 #include "console.hpp"
 #include "create.hpp"
 #include "digital.hpp"
+#include "display.h"
 #include "general.h"
 #include "graphics.h"
 #include "graphics_characters.h"

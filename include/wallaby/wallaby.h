@@ -18,6 +18,7 @@
 #include "console.h"
 #include "create.h"
 #include "digital.h"
+#include "display.h"
 #include "general.h"
 #include "graphics.h"
 #include "graphics_characters.h"
