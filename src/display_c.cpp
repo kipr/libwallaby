@@ -12,16 +12,34 @@
 //    maxw failing to prevent scroll bar display; simply needed a reduction by 1
 // stdarg.h provides macros for accessing a function's argument list ... see K&R
 
-#include "wallaby/display.h"
-#include "wallaby/button.h"
-#include "wallaby/console.h"
-
+// void console_clear(); (to be defined in kipr/botball.h)
+#define __VBUTTONS 0 // set to 0 if A,B,C virtual buttons are not going to be implemented
+// Copyright(c) KIPR, 2013
+// Full screen management functions for the display window as implemented on the KIPR LINK controller
+//   display_printf(int column, int row, <printf arguments>)
+//
+// Link Console screen display window size is 10 rows and limited to 42 columns, indexed from 0
+// Wallaby console is 13 rows and limited to 57 columns
+//
+// Initial version: 1/8/2013 - cnw
+// Revision: 2/2/2013 - cnw
+//    1. switched variadic usage to vsprintf
+//    2. fixed to work for both normal and extra button cases
+// Revision:  2/4/2013 - cnw
+//    maxw failing to prevent scroll bar display; simply needed a reduction by 1
+// Revision: 2/7/2016 - cnw
+//    reconfigured for Wallaby controller - virtual buttons not in at time, which may require a further adjustment
+// stdarg.h provides macros for accessing a function's argument list ... see K&R
 #include <stdarg.h>
 #include <string.h>
 #include <stdio.h>
 
-#define _MAPy 10  // 10 rows with 3 buttons visible, loses last 2 rows if 6 buttons visible
-#define _MAPx 43  // 42 columns is max fit for screen (array has 43 to accommodate \0)
+#include "wallaby/display.h"
+#include "wallaby/button.h"
+#include "wallaby/console.h"
+
+#define _MAPy 13  // 10 rows with 3 buttons visible, loses last 2 rows if 6 buttons visible
+#define _MAPx 58  // 42 columns is max fit for screen (array has 43 to accommodate \0)
 char _display_map[_MAPy][_MAPx];
 int _initialize_ = 1;   // flag to signal need to clear display on first use
 
@@ -29,21 +47,21 @@ VI void display_clear() {  // clears console and sets display map to all spaces
 	int i,j;
 	console_clear();
 	for (i=0;i<_MAPy;i++) for(j=0;j<_MAPx;j++) _display_map[i][j]=' ';  //  initialize to spaces
-	for (i=0;i<_MAPy;i++) _display_map[i][_MAPx-1]='\0';                // make each row a string
+	for (i=0;i<_MAPy;i++) _display_map[i][_MAPx-1]='\0'; // make each row (except last) a string
 }
 
 // Usage: same as printf except the first two parameters specify
 //    the (column, row) of the display where print is to begin.
 // Excess print to a line is truncated.
-void display_printf(int col, int row, const char *t, ...) { // variadic function
+void display_printf(int col, int row, const char *t, ...) { //  variadic function
 	va_list argp;       // variadic argument list pointer for vsprintf
 	int i, maxw;        // maxw marks available room on row
-	int rb6=0;          // row adjustment (2 for 6 button case)
+	int rb6=__VBUTTONS; // row adjustment (default is 2, if there are no buttons, change to 0)
 	char *dp, ws[256];  // pointer into display map, working string for vsprintf
 
 	va_start (argp,t);  // t is last named argument in display_printf's function header;
 	// Note: system macro va_start points argp to first variadic arg for vsprintf
-	if (get_extra_buttons_visible()) rb6=2;
+	if (get_extra_buttons_visible()) rb6=4;
 	if (col >= _MAPx) {row = row+1; col = 0;} // bad col so wrap to next line
 	if (row >= _MAPy) row = _MAPy - 1;        // bad row so (over) print on last line
 	console_clear();               // ready the display
