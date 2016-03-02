@@ -10,6 +10,7 @@
 #include "wallaby_regs_p.hpp"
 
 #include <iostream>
+#include <cmath>
 
 namespace Private
 {
@@ -55,7 +56,7 @@ bool set_servo_position(int port, unsigned short position)
 
   // map a 10 bit (0-2047) position to  1500 +/- (0 to 90) degrees*10
   // or    1500 +/- 900  or  [600, 2400]
-  unsigned short val =  1500.0 + 1800.0 * ((double)position / 2047.0) - (1800.0 / 2.0);
+  unsigned short val =  1500 + std::round(1800.0 * ((double)position / 2047.0)) - (1800 / 2);
 
   unsigned char address = REG_RW_SERVO_0_H + 2 * port;
   Private::Wallaby::instance()->writeRegister16b(address, val);
@@ -75,7 +76,7 @@ unsigned short get_servo_position(int port, unsigned char * alt_read_buffer)
 
   if (dval < 0.0) dval = 0.0;
   if (dval > 2047.0) dval = 2047.01;
-  unsigned short val = static_cast<unsigned short>(dval);
+  unsigned short val = static_cast<unsigned short>(dval + 0.5);
 
   return val;
 }
