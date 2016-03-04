@@ -635,6 +635,7 @@ CreateScript& CreateScript::operator=(const CreateScript& rhs)
 
 Create::~Create()
 {
+	std::cout << "~Create()" << std::endl;
 	disconnect();
 
 	lazyDelete(m_playButton);

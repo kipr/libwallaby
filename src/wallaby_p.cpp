@@ -38,27 +38,34 @@
 namespace Private
 {
 
-
-void Wallaby::atExit()
+//TODO: clean up name and make params optional
+void Wallaby::atExit(bool should_abort)
 {
-	//std::cout << "Auto-stopping motors" << std::endl;
+	std::cout << "Auto-stopping motors" << std::endl;
 	ao();
 
-	//std::cout << "Auto-disabling servos" << std::endl;
+	std::cout << "Auto-disabling servos" << std::endl;
 	disable_servos();
 
-	//std::cout << "Auto-stopping and disconnecting the Create" << std::endl;
+	std::cout << "Auto-stopping and disconnecting the Create" << std::endl;
 	create_stop();
 	create_disconnect();
+
+	std::cout << "After the automatic create cleanup" << std::endl;
+
+	if (should_abort)
+	{
+		std::cout << "atExit() is calling abort()" << std::endl;
+		abort();
+	}
 }
 
 
 void WallabySigHandler(int s)
 {
 	//std::cout << "Caught signal " << s << std::endl;
-	auto cleanupThread = std::thread(Wallaby::atExit);
-	cleanupThread.join();
-	exit(s);
+	auto cleanupThread = std::thread(Wallaby::atExit, true);
+	cleanupThread.detach();
 }
 
 Wallaby::Wallaby()
@@ -91,8 +98,10 @@ Wallaby::Wallaby()
 
 Wallaby::~Wallaby()
 {
+	std::cout << "~Wallaby()" << std::endl;
+
 	// happens automatically before destructor call: this->atExit();
-	atExit();
+	atExit(false);
 
 	close(spi_fd_);
 	delete[] write_buffer_;
