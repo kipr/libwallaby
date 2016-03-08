@@ -78,7 +78,6 @@ find_package( OpenCV REQUIRED )
 find_package(JPEG REQUIRED)
 find_package (Threads)
 
-
 include_directories(${CMAKE_INSTALL_PREFIX}/include)
 include_directories(${OPENCV_INCLUDE})
 include_directories(${JPEG_INCLUDE_DIR})
@@ -118,6 +117,33 @@ foreach(C_TEST ${C_TESTS})
   target_link_libraries(${TEST_BIN_NAME} wallaby)
   list(APPEND TESTS ${TEST_BIN_NAME})
 endforeach()
+
+
+########################################
+#   Doxygen documentation (optional)   #
+########################################
+
+option(BUILD_DOCUMENTATION "Use Doxygen to create the HTML based API documentation" ON)
+if(BUILD_DOCUMENTATION)
+  FIND_PACKAGE(Doxygen)
+  if(NOT DOXYGEN_FOUND)
+    message(FATAL_ERROR "Doxygen is needed to build the documentation. Please install it correctly")
+  endif()
+  file(MAKE_DIRECTORY doc)
+  set(DOXYGEN_DIR ${PROJECT_SOURCE_DIR}/doxygen)
+  add_custom_target (Docs++ ALL 
+    COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_DIR}/Doxyfile++ SOURCES ${DOXYGEN_DIR}/Doxyfile++
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
+  add_custom_target (Docs ALL 
+    COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_DIR}/Doxyfile SOURCES ${DOXYGEN_DIR}/Doxyfile
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
+  add_custom_target(DocMetadata ALL
+    COMMAND ${CMAKE_COMMAND} -E copy ${DOXYGEN_DIR}/metadata.ini ${PROJECT_SOURCE_DIR}/doc)
+endif()
+
+
+
+
 
 install(TARGETS ${TESTS} DESTINATION bin/wallaby)
 install(TARGETS wallaby DESTINATION lib)
