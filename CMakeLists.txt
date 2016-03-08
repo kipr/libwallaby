@@ -19,6 +19,8 @@ set(SRC ${libwallaby_SOURCE_DIR}/src)
 set(PIXELTOASTER ${SRC}/pixeltoaster)
 set(BINDINGS ${CMAKE_SOURCE_DIR}/swig)
 
+set(LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/lib)
+
 include_directories(${INCLUDE})
 
 
