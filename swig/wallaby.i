@@ -16,7 +16,7 @@
   
   //#define CameraDevice Device
   
-  using namespace depth;
+  //using namespace depth;
 %}
 
 #define EXPORT_SYM
@@ -82,6 +82,6 @@
 %include "digital.h"
 
 //%include "camera.i"
-%include "create.i"
-%include "motor.i"
+//%include "create.i"
+//%include "motor.i"
 
