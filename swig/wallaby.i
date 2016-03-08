@@ -14,7 +14,7 @@
   #define _open open
   #endif
   
-  #define CameraDevice Device
+  //#define CameraDevice Device
   
   using namespace depth;
 %}
@@ -28,7 +28,7 @@
 %include "vtable.h"
 
 %include "button_prelude.i"
-%include "camera_prelude.i"
+//%include "camera_prelude.i"
 
 %include "sensor.hpp"
 %template(IntSensor) Sensor<int>;
@@ -47,7 +47,7 @@
 %include "battery.hpp"
 %include "analog.hpp"
 %include "accel.hpp"
-%include "camera.hpp"
+//%include "camera.hpp"
 %include "button.hpp"
 %include "ardrone.hpp"
 %include "config.hpp"
@@ -71,7 +71,7 @@
 %include "analog.h"
 %include "general.h"
 %include "accel.h"
-%include "camera.h"
+//%include "camera.h"
 %include "button.h"
 %include "botball.h"
 %include "ardrone.h"
@@ -81,7 +81,7 @@
 %include "thread.h"
 %include "digital.h"
 
-%include "camera.i"
+//%include "camera.i"
 %include "create.i"
 %include "motor.i"
 
