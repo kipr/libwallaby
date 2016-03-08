@@ -2,13 +2,13 @@
 %{
   //#include "kovan.hpp"
   //#include "kovan.h"
-  #include "wallaby.hpp"
-  #include "wallaby.h"
-  #include "segment.hpp"
-  #include "colinear_segmenter.hpp"
-  #include "xtion_depth_driver.hpp"
+  #include "wallaby/wallaby.hpp"
+  #include "wallaby/wallaby.h"
+  //#include "segment.hpp"
+  //#include "colinear_segmenter.hpp"
+  //#include "xtion_depth_driver.hpp"
   
-  #include "motor.hpp"
+  #include "wallaby/motors.hpp"
   
   #ifdef SWIGPYTHON
   #define _open open
@@ -39,7 +39,7 @@
 %include "geom.hpp"
 //%include "port.hpp"
 //%include "segment.hpp"
-%template(IntSegmenter) Segmenter<int>;
+//%template(IntSegmenter) Segmenter<int>;
 %include "servo.hpp"
 %include "util.hpp"
 %include "create.hpp"
