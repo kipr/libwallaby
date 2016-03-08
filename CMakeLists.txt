@@ -17,6 +17,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 set(INCLUDE ${libwallaby_SOURCE_DIR}/include)
 set(SRC ${libwallaby_SOURCE_DIR}/src)
 set(PIXELTOASTER ${SRC}/pixeltoaster)
+set(BINDINGS ${CMAKE_SOURCE_DIR}/swig)
 
 include_directories(${INCLUDE})
 
