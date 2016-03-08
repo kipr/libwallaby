@@ -88,6 +88,31 @@ link_directories(${CMAKE_INSTALL_PREFIX}/lib)
 link_directories(${OPENCV_LIB})
 link_directories(${ZBAR_DIR}/lib)
 
+option(build_python "Build python bindings" ON)
+
+file(GLOB SWIG_SOURCES ${BINDINGS}/*.i)
+
+if(build_python)
+  add_library(wallaby_python SHARED ${PYTHON_BINDING_SOURCES})
+  set_target_properties(wallaby_python PROPERTIES PREFIX _ OUTPUT_NAME 
+wallaby SUFFIX .so)
+  target_link_libraries(wallaby_python wallaby ${PYTHON_BINDING_LIBRARIES})
+endif()
+
+if(build_python)
+  find_package(SWIG REQUIRED)
+  find_package(PythonLibs REQUIRED)
+  message("${PYTHON_LIBRARY}")
+  set(PYTHON_BINDING_SOURCES ${CMAKE_BINARY_DIR}/wallaby_wrap_py.cxx)
+  set(PYTHON_BINDING_LIBRARIES ${PYTHON_LIBRARY})
+  include_directories(${PYTHON_INCLUDE_DIR})
+  add_custom_command(COMMAND ${SWIG_EXECUTABLE} -Wall -python -c++ 
+-I${INCLUDE} -outdir ${LIBRARY_OUTPUT_PATH} -o 
+${CMAKE_BINARY_DIR}/wallaby_wrap_py.cxx ${BINDINGS}/wallaby.i
+    DEPENDS ${SWIG_SOURCES}
+    OUTPUT ${CMAKE_BINARY_DIR}/wallaby_wrap_py.cxx 
+${LIBRARY_OUTPUT_PATH}/wallaby.py)
+endif()
 
 # Library: libwallaby
 add_library(wallaby SHARED

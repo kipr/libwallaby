@@ -1,7 +1,9 @@
-%module kovan
+%module wallaby
 %{
-  #include "kovan.hpp"
-  #include "kovan.h"
+  //#include "kovan.hpp"
+  //#include "kovan.h"
+  #include "wallaby.hpp"
+  #include "wallaby.h"
   #include "segment.hpp"
   #include "colinear_segmenter.hpp"
   #include "xtion_depth_driver.hpp"
