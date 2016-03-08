@@ -59,17 +59,17 @@ endif()
 
 
 
-#if(DEFINED ENV{OPENCV_INCLUDE_DIR})
-#  set(OPENCV_INCLUDE $ENV{OPENCV_INCLUDE_DIR})
-#elseif(WIN32)
-#  set(OPENCV_INCLUDE ${CMAKE_SOURCE_DIR}/../opencv/build/install/include)
-#endif()
+if(DEFINED ENV{OPENCV_INCLUDE_DIR})
+  set(OPENCV_INCLUDE $ENV{OPENCV_INCLUDE_DIR})
+elseif(WIN32)
+  set(OPENCV_INCLUDE ${CMAKE_SOURCE_DIR}/../opencv/build/install/include)
+endif()
 
-#if(DEFINED ENV{OPENCV_LIB_DIR})
-#  set(OPENCV_LIB $ENV{OPENCV_LIB_DIR})
-#elseif(WIN32)
-#  set(OPENCV_LIB ${CMAKE_SOURCE_DIR}/../opencv/build/install/x86/vc11/lib)
-#endif()
+if(DEFINED ENV{OPENCV_LIB_DIR})
+  set(OPENCV_LIB $ENV{OPENCV_LIB_DIR})
+elseif(WIN32)
+  set(OPENCV_LIB ${CMAKE_SOURCE_DIR}/../opencv/build/install/x86/vc11/lib)
+endif()
 
 if(DEFINED ENV{ZBAR_DIR})
   set(ZBAR_DIR $ENV{ZBAR_DIR})
@@ -77,18 +77,18 @@ elseif(WIN32)
   set(ZBAR_DIR "C:/Program Files (x86)/ZBar")
 endif()
 
-#find_package( OpenCV REQUIRED )
-#find_package(JPEG REQUIRED)
-#find_package (Threads)
+#find_package(OpenCV REQUIRED )
+find_package(JPEG REQUIRED)
+find_package (Threads)
 
 
 include_directories(${CMAKE_INSTALL_PREFIX}/include)
-#include_directories(${OPENCV_INCLUDE})
+include_directories(${OPENCV_INCLUDE})
 include_directories(${JPEG_INCLUDE_DIR})
 include_directories(${ZBAR_DIR}/include)
 
 link_directories(${CMAKE_INSTALL_PREFIX}/lib)
-#link_directories(${OPENCV_LIB})
+link_directories(${OPENCV_LIB})
 link_directories(${ZBAR_DIR}/lib)
 
 option(build_python "Build python bindings" ON)
@@ -122,7 +122,7 @@ endif()
 add_library(wallaby SHARED
 	${SOURCES} ${PIXELTOASTER_SOURCES} ${OBJC_SOURCES})
   
-target_link_libraries(wallaby ${JPEG_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} zbar)
+target_link_libraries(wallaby ${OpenCV_LIBS} ${JPEG_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} zbar opencv_core opencv_highgui opencv_imgproc)
 
 if(APPLE)
   find_library(OPENGL_LIBRARY OpenGL)
@@ -152,3 +152,4 @@ install(TARGETS ${TESTS} DESTINATION bin/wallaby)
 install(TARGETS wallaby DESTINATION lib)
 install(DIRECTORY ${INCLUDE}/wallaby DESTINATION include)
 
+set(CMAKE_INSTALL_PREFIX /usr)
