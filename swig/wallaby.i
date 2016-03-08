@@ -42,7 +42,7 @@
 //%template(IntSegmenter) Segmenter<int>;
 %include "servo.hpp"
 %include "util.hpp"
-%include "create.hpp"
+//%include "create.hpp"
 %include "color.hpp"
 %include "battery.hpp"
 %include "analog.hpp"
@@ -65,7 +65,7 @@
 %include "graphics.h"
 %include "servo.h"
 %include "util.h"
-%include "create.h"
+//%include "create.h"
 //%include "depth.h"
 %include "battery.h"
 %include "analog.h"
