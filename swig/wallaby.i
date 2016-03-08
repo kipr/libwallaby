@@ -65,7 +65,7 @@
 %include "graphics.h"
 %include "servo.h"
 %include "util.h"
-//%include "create.h"
+%include "create.h"
 //%include "depth.h"
 %include "battery.h"
 %include "analog.h"
