@@ -107,12 +107,14 @@ if(build_python)
   add_custom_command(COMMAND ${SWIG_EXECUTABLE} -Wall -python -c++ -I${INCLUDE}/wallaby -outdir ${LIBRARY_OUTPUT_PATH} -o ${CMAKE_BINARY_DIR}/wallaby_wrap_py.cxx ${BINDINGS}/wallaby.i
     DEPENDS ${SWIG_SOURCES}
     OUTPUT ${CMAKE_BINARY_DIR}/wallaby_wrap_py.cxx ${LIBRARY_OUTPUT_PATH}/wallaby.py)
+  install(FILES ${LIBRARY_OUTPUT_PATH}/wallaby.py DESTINATION lib)
 endif()
 
 if(build_python)
   add_library(wallaby_python SHARED ${PYTHON_BINDING_SOURCES})
   set_target_properties(wallaby_python PROPERTIES PREFIX _ OUTPUT_NAME wallaby SUFFIX .so)
   target_link_libraries(wallaby_python wallaby ${PYTHON_BINDING_LIBRARIES} )
+  install(TARGETS wallaby_python DESTINATION lib)
 endif()
 
 
