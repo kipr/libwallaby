@@ -13,21 +13,27 @@ extern "C" {
 #endif
 
 /*!
- * Gets the sensed x acceleration
+ * \brief Gets the sensed x acceleration
+ * \description +/- 2G range,  1024 per G
+ * \description This should be approximately 0 when at rest and flat on a table
  * \return The latest signed x acceleration value
  */
 signed short accel_x();
 
 
 /*!
- * Gets the sensed x acceleration
+ * \brief Gets the sensed y acceleration
+ * \description +/- 2G range,  1024 per G
+ * \description This should be approximately 0 when at rest and flat on a table
  * \return The latest signed y acceleration value
  */
 signed short accel_y();
 
 
 /*!
- * Gets the sensed x acceleration
+ * \brief Gets the sensed z acceleration
+ * \description +/- 2G range,  1024 per G
+ * \description This should be approximately -1024 when at rest and flat on a table
  * \return The latest signed z acceleration value
  */
 signed short accel_z();
