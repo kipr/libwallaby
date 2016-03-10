@@ -70,10 +70,11 @@ int camera_open_at_res(enum Resolution res);
 int camera_open_device(int number, enum Resolution res);
 
 /**
- * Loads the config file specified by name.
+ * Loads the config file specified by name. The system will look for the config in the base path.
  * \param name The configuration to load. Configuration file names are case sensitive.
  * \note Do NOT include the config file extension ".conf" in the name parameter.
  * \return 1 on success, 0 on failure.
+ * \see set_camera_config_base_path
  * \ingroup camera
  */
 int camera_load_config(const char *name);
