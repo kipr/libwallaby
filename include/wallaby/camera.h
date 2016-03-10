@@ -45,6 +45,7 @@ int camera_open();
  *   - LOW_RES (160x120)
  *   - MED_RES (320x240)
  *   - HIGH_RES (640x480)
+ * \warning Only LOW_RES is currently supported. The function will fail for other resolutions.
  * \return 1 on success, 0 on failure
  * \see camera_open
  * \see camera_open_device
@@ -60,6 +61,7 @@ int camera_open_at_res(enum Resolution res);
  *   - LOW_RES (160x120)
  *   - MED_RES (320x240)
  *   - HIGH_RES (640x480)
+ * \warning Only LOW_RES is currently supported. The function will fail for other resolutions.
  * \return 1 on success, 0 on failure
  * \see camera_open
  * \see camera_close
@@ -70,7 +72,7 @@ int camera_open_device(int number, enum Resolution res);
 /**
  * Loads the config file specified by name.
  * \param name The configuration to load. Configuration file names are case sensitive.
- * \note You must include the config file extension ".conf" in the name parameter.
+ * \note Do NOT include the config file extension ".conf" in the name parameter.
  * \return 1 on success, 0 on failure.
  * \ingroup camera
  */
@@ -79,6 +81,7 @@ int camera_load_config(const char *name);
 
 /**
  * Sets the camera's x resolution.
+ * \warning Setting the camera width is not currently supported.
  * \param width The width in pixels
  * \ingroup camera
  */
@@ -86,6 +89,7 @@ void set_camera_width(int width);
 
 /**
  * Sets the camera's y resolution.
+ * \warning Setting the camera height is not currently supported.
  * \param width The height in pixels
  * \ingroup camera
  */
@@ -115,6 +119,7 @@ int get_camera_height(void);
 int camera_update(void);
 
 /**
+ * Gets the color of a pixel.
  * \param p The point at which the pixel lies.
  * \return The rgb value of the pixel located at point p.
  * \note A (r, g, b) value of (-1, -1, -1) will be returned for points that are out of range.
@@ -210,6 +215,7 @@ int get_object_center_y(int channel, int object);
 /**
  * Cleanup the current camera instance.
  * \see camera_open
+ * \see camera_open_at_res
  * \see camera_open_device
  * \ingroup camera
  */
