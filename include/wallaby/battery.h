@@ -17,20 +17,35 @@ extern "C" {
 /*!
  * Whether or not the battery is charging
  * \return 0: not charging  1: charging
+ * \deprecated not applicable for the Wallaby controller
  */
 int battery_charging();
 
 
 /*!
  * The device's power level
- * \return The device's current voltage
+ * \return The device's current battery capacity 0: 0%   1: 100%
+ * \note defaults to LiFePO4 chemistry
  */
 float power_level();
 
+/*!
+ * The device's power level (NiMH chemistry)
+ * \return The device's current battery capacity 0: 0%   1: 100%
+ */
 float power_level_nimh();
 
+/*!
+ * The device's power level (LiPo chemistry)
+ * \return The device's current battery capacity 0: 0%   1: 100%
+ */
 float power_level_lipo();
 
+/*!
+ * The device's power level (LiFePO4 chemistry)
+ * \return The device's current battery capacity 0: 0%   1: 100%
+ * \see power_level()
+ */
 float power_level_life();
 
 

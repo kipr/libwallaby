@@ -9,6 +9,7 @@
 #include "wallaby/create_codes.h"
 #include "wallaby/util.hpp"
 #include "wallaby/compat.hpp"
+#include "wallaby/battery.hpp"
 
 #ifndef WIN32
 #include <fcntl.h>
@@ -635,6 +636,7 @@ CreateScript& CreateScript::operator=(const CreateScript& rhs)
 
 Create::~Create()
 {
+	std::cout << "~Create()" << std::endl;
 	disconnect();
 
 	lazyDelete(m_playButton);
@@ -1195,6 +1197,11 @@ Create::Create()
 	pthread_mutex_init(&m_mutex, 0);
 #endif
 	memset(&m_state, 0, sizeof(CreateState));
+
+	// TODO: this is a hack to make sure the Wallaby signal handler is registered
+	// otherwise a program using only the Create won't stop the Create when
+	// a SIGTERM or SIGINT are used to stop the program
+	Battery::powerLevel();
 }
 
 Create::Create(const Create&) {}

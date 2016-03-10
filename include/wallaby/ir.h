@@ -16,7 +16,15 @@
 extern "C" {
 #endif
 
+/*!
+ * \deprecated non present on the Wallaby
+ */
 EXPORT_SYM void ir_read();
+
+/*!
+ * Gets the sensed y rotation
+ * \deprecated non present on the Wallaby
+ */
 EXPORT_SYM void ir_write();
 
 #ifdef __cplusplus

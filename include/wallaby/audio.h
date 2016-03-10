@@ -15,6 +15,11 @@
 extern "C" {
 #endif
 
+
+/*!
+ * Trigger an audible beep
+ * \note does not seem to work on the Wallaby
+ */
 VF EXPORT_SYM void beep(void);
 
 VFL

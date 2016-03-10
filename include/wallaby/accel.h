@@ -12,12 +12,38 @@
 extern "C" {
 #endif
 
+/*!
+ * \brief Gets the sensed x acceleration
+ * \description +/- 2G range,  1024 per G
+ * \description This should be approximately 0 when at rest and flat on a table
+ * \return The latest signed x acceleration value
+ */
 signed short accel_x();
 
+
+/*!
+ * \brief Gets the sensed y acceleration
+ * \description +/- 2G range,  1024 per G
+ * \description This should be approximately 0 when at rest and flat on a table
+ * \return The latest signed y acceleration value
+ */
 signed short accel_y();
 
+
+/*!
+ * \brief Gets the sensed z acceleration
+ * \description +/- 2G range,  1024 per G
+ * \description This should be approximately -1024 when at rest and flat on a table
+ * \return The latest signed z acceleration value
+ */
 signed short accel_z();
 
+
+/*!
+ * Initiates a calibration of the accelerometer
+ * \note Not Yet Implemented
+ * \return 1: success 0: failure
+ */
 int accel_calibrate();
 
 #ifdef __cplusplus

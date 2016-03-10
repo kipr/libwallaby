@@ -43,7 +43,7 @@ public:
 		std::cout << std::endl << "Shutdown after " << (end - start) << " seconds" << std::endl;
 		// Note: Might want to move this to botui in the future.
 		//Create::instance()->stop();
-		Private::Wallaby::atExit();
+		Private::Wallaby::atExit(true);
 		_exit(0);
 	}
 	

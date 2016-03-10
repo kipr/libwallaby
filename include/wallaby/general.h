@@ -43,6 +43,7 @@ extern "C" {
  * \note Any command involving hardware modification, such as motors or servos,
  * requires publish() to be called before changes will be written to the system.
  * \ingroup general
+ * \deprecated This has no effect when using the Wallaby
  */
 VF EXPORT_SYM void set_auto_publish(int on);
 
@@ -51,6 +52,7 @@ VF EXPORT_SYM void set_auto_publish(int on);
  * \details All hardware output commands are stored locally before being written to the system.
  * This allows for batch execution of commands with automatic publishing turned off.
  * \ingroup general
+ * \deprecated This has no effect when using the Wallaby
  */
 VF EXPORT_SYM void publish();
 
