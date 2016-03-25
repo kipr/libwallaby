@@ -57,7 +57,7 @@ bool Private::Button::isPressed(const ::Button::Type::Id &id) const
 void Private::Button::setExtraShown(const bool& shown)
 {
 	unsigned char states = Private::Wallaby::instance()->readRegister8b(REG_RW_BUTTONS);
-	states |= 0b1000000;
+	states |= 0b10000000;
 	Private::Wallaby::instance()->writeRegister8b(REG_RW_BUTTONS, states);
 }
 
