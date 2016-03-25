@@ -13,7 +13,7 @@ namespace Private
 
 
 
-#define WALLABY_SPI_VERSION 3
+#define WALLABY_SPI_VERSION 4
 
 // READ Only Registers ---------------------------------------------------------
 #define REG_R_START        0
@@ -134,87 +134,91 @@ namespace Private
 #define REG_RW_BATT_H      86
 #define REG_RW_BATT_L      87
 
-#define REG_READABLE_COUNT 88
+// msb is "extra show", then a non used bit
+// then 6 virtual button bits
+// E x 5 4 3 2 1 0
+#define REG_RW_BUTTONS 88
+
+#define REG_READABLE_COUNT 89
 
 
 
 // WRITE ONLY Registers---------------------------------------------------------
-#define REG_W_PID_0_P_H    88
-#define REG_W_PID_0_P_L    89
-#define REG_W_PID_0_PD_H   90
-#define REG_W_PID_0_PD_L   91
-#define REG_W_PID_0_I_H    92
-#define REG_W_PID_0_I_L    93
-#define REG_W_PID_0_ID_H   94
-#define REG_W_PID_0_ID_L   95
-#define REG_W_PID_0_D_H    96
-#define REG_W_PID_0_D_L    97
-#define REG_W_PID_0_DD_H   98
-#define REG_W_PID_0_DD_L   99
-#define REG_W_PID_1_P_H    100
-#define REG_W_PID_1_P_L    101
-#define REG_W_PID_1_PD_H   102
-#define REG_W_PID_1_PD_L   103
-#define REG_W_PID_1_I_H    104
-#define REG_W_PID_1_I_L    105
-#define REG_W_PID_1_ID_H   106
-#define REG_W_PID_1_ID_L   107
-#define REG_W_PID_1_D_H    108
-#define REG_W_PID_1_D_L    109
-#define REG_W_PID_1_DD_H   110
-#define REG_W_PID_1_DD_L   111
-#define REG_W_PID_2_P_H    112
-#define REG_W_PID_2_P_L    113
-#define REG_W_PID_2_PD_H   114
-#define REG_W_PID_2_PD_L   115
-#define REG_W_PID_2_I_H    116
-#define REG_W_PID_2_I_L    117
-#define REG_W_PID_2_ID_H   118
-#define REG_W_PID_2_ID_L   119
-#define REG_W_PID_2_D_H    120
-#define REG_W_PID_2_D_L    121
-#define REG_W_PID_2_DD_H   122
-#define REG_W_PID_2_DD_L   123
+#define REG_W_PID_0_P_H    89
+#define REG_W_PID_0_P_L    90
+#define REG_W_PID_0_PD_H   91
+#define REG_W_PID_0_PD_L   92
+#define REG_W_PID_0_I_H    93
+#define REG_W_PID_0_I_L    94
+#define REG_W_PID_0_ID_H   95
+#define REG_W_PID_0_ID_L   96
+#define REG_W_PID_0_D_H    97
+#define REG_W_PID_0_D_L    98
+#define REG_W_PID_0_DD_H   99
+#define REG_W_PID_0_DD_L   100
+#define REG_W_PID_1_P_H    101
+#define REG_W_PID_1_P_L    102
+#define REG_W_PID_1_PD_H   103
+#define REG_W_PID_1_PD_L   104
+#define REG_W_PID_1_I_H    105
+#define REG_W_PID_1_I_L    106
+#define REG_W_PID_1_ID_H   107
+#define REG_W_PID_1_ID_L   108
+#define REG_W_PID_1_D_H    119
+#define REG_W_PID_1_D_L    110
+#define REG_W_PID_1_DD_H   111
+#define REG_W_PID_1_DD_L   112
+#define REG_W_PID_2_P_H    113
+#define REG_W_PID_2_P_L    114
+#define REG_W_PID_2_PD_H   115
+#define REG_W_PID_2_PD_L   116
+#define REG_W_PID_2_I_H    117
+#define REG_W_PID_2_I_L    118
+#define REG_W_PID_2_ID_H   119
+#define REG_W_PID_2_ID_L   120
+#define REG_W_PID_2_D_H    121
+#define REG_W_PID_2_D_L    122
+#define REG_W_PID_2_DD_H   123
+#define REG_W_PID_2_DD_L   124
 
-#define REG_W_PID_3_P_H    124
-#define REG_W_PID_3_P_L    125
-#define REG_W_PID_3_PD_H   126
-#define REG_W_PID_3_PD_L   127
-#define REG_W_PID_3_I_H    128
-#define REG_W_PID_3_I_L    129
-#define REG_W_PID_3_ID_H   130
-#define REG_W_PID_3_ID_L   131
-#define REG_W_PID_3_D_H    132
-#define REG_W_PID_3_D_L    133
-#define REG_W_PID_3_DD_H   134
-#define REG_W_PID_3_DD_L   135
-
+#define REG_W_PID_3_P_H    125
+#define REG_W_PID_3_P_L    126
+#define REG_W_PID_3_PD_H   127
+#define REG_W_PID_3_PD_L   128
+#define REG_W_PID_3_I_H    129
+#define REG_W_PID_3_I_L    130
+#define REG_W_PID_3_ID_H   131
+#define REG_W_PID_3_ID_L   132
+#define REG_W_PID_3_D_H    133
+#define REG_W_PID_3_D_L    134
+#define REG_W_PID_3_DD_H   135
+#define REG_W_PID_3_DD_L   136
 
 // Motor 0 position goal
-#define REG_W_MOT_0_GOAL_B3    136
-#define REG_W_MOT_0_GOAL_B2    137
-#define REG_W_MOT_0_GOAL_B1    138
-#define REG_W_MOT_0_GOAL_B0    139
+#define REG_W_MOT_0_GOAL_B3    137
+#define REG_W_MOT_0_GOAL_B2    138
+#define REG_W_MOT_0_GOAL_B1    139
+#define REG_W_MOT_0_GOAL_B0    140
 
 // Motor 1 position goal
-#define REG_W_MOT_1_GOAL_B3    140
-#define REG_w_MOT_1_GOAL_B2    141
-#define REG_w_MOT_1_GOAL_B1    142
-#define REG_W_MOT_1_GOAL_B0    143
+#define REG_W_MOT_1_GOAL_B3    141
+#define REG_w_MOT_1_GOAL_B2    142
+#define REG_w_MOT_1_GOAL_B1    143
+#define REG_W_MOT_1_GOAL_B0    144
 
 // Motor 2 position goal
-#define REG_W_MOT_2_GOAL_B3    144
-#define REG_W_MOT_2_GOAL_B2    145
-#define REG_W_MOT_2_GOAL_B1    146
-#define REG_W_MOT_2_GOAL_B0    147
+#define REG_W_MOT_2_GOAL_B3    145
+#define REG_W_MOT_2_GOAL_B2    146
+#define REG_W_MOT_2_GOAL_B1    147
+#define REG_W_MOT_2_GOAL_B0    148
 
 // Motor 3 position goal
-#define REG_W_MOT_3_GOAL_B3    148
-#define REG_W_MOT_3_GOAL_B2    149
-#define REG_W_MOT_3_GOAL_B1    150
-#define REG_W_MOT_3_GOAL_B0    151
+#define REG_W_MOT_3_GOAL_B3    149
+#define REG_W_MOT_3_GOAL_B2    150
+#define REG_W_MOT_3_GOAL_B1    151
+#define REG_W_MOT_3_GOAL_B0    152
 
-#define REG_ALL_COUNT      152
+#define REG_ALL_COUNT      153
 
 
 }

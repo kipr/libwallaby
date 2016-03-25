@@ -5,6 +5,7 @@
  *      Author: Joshua Southerland
  */
 
+#include "button_p.hpp"
 #include "wallaby/button.hpp"
 #include "wallaby_p.hpp"
 #include "wallaby/compat.hpp"
@@ -20,13 +21,13 @@ IdButton Button::X(Button::Type::X, "X");
 IdButton Button::Y(Button::Type::Y, "Y");
 IdButton Button::Z(Button::Type::Z, "Z");
 
+IdButton Button::Left(Button::Type::Left, "");
+IdButton Button::Right(Button::Type::Right, "");
 
-IdButton Button::Side(Button::Type::Side, "");
-
-IdButton * const Button::all[7] = {
+IdButton * const Button::all[8] = {
 		&Button::A, &Button::B, &Button::C,
 		&Button::X, &Button::Y, &Button::Z,
-		&Button::Side
+		&Button::Left, &Button::Right
 };
 
 AbstractButton::~AbstractButton()
@@ -71,27 +72,27 @@ IdButton::~IdButton()
 
 void IdButton::setText(const char * text)
 {
-	//FIXME: Private::Button::instance()->text(m_id);
+	// deprecated
 }
 
 const char * IdButton::text() const
 {
-	return nullptr; //FIXME:  return Private::Button::instance()->text(m_id);
+	return nullptr; // ceprecated
 }
 
 bool IdButton::isTextDirty() const
 {
-	return true;//FIXME:  return Private::Button::instance()->isTextDirty(m_id);
+	return true; // deprecated
 }
 
 void IdButton::setPressed(bool pressed)
 {
-	//FIXME: Private::Button::instance()->setPressed(m_id, pressed);
+	Private::Button::instance()->setPressed(m_id, pressed);
 }
 
 bool IdButton::value() const
 {
-	return true;//FIXME: return Private::Button::instance()->isPressed(m_id);
+	return Private::Button::instance()->isPressed(m_id);
 }
 
 void IdButton::resetText()
@@ -111,10 +112,10 @@ void ExtraButtons::hide()
 
 void ExtraButtons::setShown(bool shown)
 {
-	//FIXME: Private::Button::instance()->setExtraShown(shown);
+	Private::Button::instance()->setExtraShown(shown);
 }
 
 bool ExtraButtons::isShown()
 {
-	return false;//FIXME:  return Private::Button::instance()->isExtraShown();
+	return Private::Button::instance()->isExtraShown();
 }
