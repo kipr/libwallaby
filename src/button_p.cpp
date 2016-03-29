@@ -15,7 +15,66 @@
 #include <cstdio>
 #include <iostream>
 
+#include <unistd.h>
+#include <fcntl.h>
+
 using namespace Private;
+
+static const unsigned int L_BUTTON_GPIO = 54;
+static const unsigned int GPIO_DIR_IN = 0;
+
+void gpio_export(int gpio)
+{
+        char buff[256];
+        int fd = open("/sys/class/gpio/export", O_WRONLY);
+        sprintf(buff, "%d", gpio);
+        write(fd, buff, strlen(buff));
+        close(fd);
+}
+
+void gpio_direction(int gpio, int direction)
+{
+        char buff[256];
+        sprintf(buff, "/sys/class/gpio/gpio%d/direction", gpio);
+        int fd = open(buff, O_WRONLY);
+
+        if (direction)
+        {
+                write(fd, "out", 3);
+        }
+        else
+        {
+                write(fd, "in", 2);
+        }
+
+        close(fd);
+}
+
+void gpio_set(int gpio, int value)
+{
+        if (value !=0) value = 1;
+
+        char buff[256];
+        sprintf(buff, "/sys/class/gpio/gpio%d/value", gpio);
+        int fd = open(buff, O_WRONLY);
+        sprintf(buff, "%d", value);
+        write(fd, buff, 1);
+        close(fd);
+}
+
+int gpio_get(int gpio)
+{
+        char buff[256];
+        sprintf(buff, "/sys/class/gpio/gpio%d/value", gpio);
+        int fd = open(buff, O_RDONLY);
+        read(fd, buff, 1);
+        close(fd);
+
+        if (buff[0] == '0')
+                return 0;
+
+        return 1;
+}
 
 
 void Private::Button::setPressed(const ::Button::Type::Id &id, bool pressed)
@@ -37,7 +96,7 @@ bool Private::Button::isPressed(const ::Button::Type::Id &id) const
 	// Physical buttons:
 	if (id == ::Button::Type::Left)
 	{
-		// TODO read from gpio
+		return (gpio_get(L_BUTTON_GPIO) == 0 ? true : false); // active low
 	}
 
 	if (id == ::Button::Type::Right)
@@ -91,6 +150,8 @@ unsigned char Private::Button::buttonOffset(const ::Button::Type::Id &id) const
 
 Private::Button::Button()
 {
+	gpio_export(L_BUTTON_GPIO);
+	gpio_direction(L_BUTTON_GPIO, GPIO_DIR_IN);
 }
 
 
