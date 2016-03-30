@@ -14,6 +14,8 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <jpeglib.h>
+#include <csetjmp>
+#include <iostream>
 
 #ifndef NOT_A_WALLABY
 #include <fcntl.h>
@@ -686,6 +688,20 @@ int Camera::Device::readFrame()
 #endif
 }
 
+struct jpegErrorManager {
+  struct jpeg_error_mgr jpegErrMgr;
+  jmp_buf jmpBuffer;
+};
+
+char jpegLastErrorMsg[JMSG_LENGTH_MAX];
+
+void jpegErrorJmp(j_common_ptr cInfo)
+{
+  jpegErrorManager *const errMgr = (jpegErrorManager *) cInfo->err;
+  (*(cInfo->err->format_message)) (cInfo, jpegLastErrorMsg);
+  longjmp(errMgr->jmpBuffer, 1);
+}
+
 METHODDEF(void) emit_message_suppressed(j_common_ptr cinfo, int msg_level)
 {
 }
@@ -697,9 +713,19 @@ cv::Mat Camera::Device::decodeJpeg(void *p, int size)
   
   // Init JPEG decompression objects
   struct jpeg_decompress_struct cInfo;
-  struct jpeg_error_mgr jerr;
-  cInfo.err = jpeg_std_error(&jerr);
-  jerr.emit_message = emit_message_suppressed;
+  struct jpegErrorManager errMgr;
+  cInfo.err = jpeg_std_error(&errMgr.jpegErrMgr);
+  // TODO: uncomment this line again
+  //errMgr.jpegErrMgr.emit_message = emit_message_suppressed;
+  errMgr.jpegErrMgr.error_exit = jpegErrorJmp;
+  
+  // setjmp return context
+  if(setjmp(errMgr.jmpBuffer)) {
+    std::cerr << jpegLastErrorMsg << std::endl;
+    jpeg_destroy_decompress(&cInfo);
+    return cv::Mat();
+  }
+  
   jpeg_create_decompress(&cInfo);
   
   // Compressed data source
