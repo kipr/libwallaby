@@ -77,7 +77,7 @@ void IdButton::setText(const char * text)
 
 const char * IdButton::text() const
 {
-	return nullptr; // ceprecated
+	return m_defaultText; // deprecated
 }
 
 bool IdButton::isTextDirty() const
