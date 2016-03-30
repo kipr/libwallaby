@@ -76,7 +76,6 @@ Wallaby::Wallaby()
 {
 	static const std::string WALLABY_SPI_PATH = "/dev/spidev2.0";
 
-
 	// TODO: move spi code outside constructor
 	// TODO: handle device path better
 
@@ -126,28 +125,26 @@ bool Wallaby::transfer(unsigned char * alt_read_buffer)
 	const unsigned char * const read_buffer = (alt_read_buffer == nullptr) ? read_buffer_ : alt_read_buffer;
 
 	int status;
-	{
-		std::lock_guard<std::mutex> lock(transfer_mutex_);
 
-		// transfer counter - used to detect missed packets on co-proc side
-		static unsigned char count = 0;
-		count += 1;
+	// transfer counter - used to detect missed packets on co-proc side
+	static unsigned char count = 0;
+	count += 1;
 
-		write_buffer_[0] = 'J';        //start
-		write_buffer_[1] = WALLABY_SPI_VERSION;          // version #
-		write_buffer_[2] = count;
-		write_buffer_[buffer_size_-1] = 'S'; // stop
+	write_buffer_[0] = 'J';        //start
+	write_buffer_[1] = WALLABY_SPI_VERSION;          // version #
+	write_buffer_[2] = count;
+	write_buffer_[buffer_size_-1] = 'S'; // stop
 
-		struct spi_ioc_transfer	xfer[1];
-		memset(xfer, 0, sizeof xfer);
+	struct spi_ioc_transfer	xfer[1];
+	memset(xfer, 0, sizeof xfer);
 
-		xfer[0].tx_buf = (unsigned long) write_buffer_;
-		xfer[0].rx_buf = (unsigned long) read_buffer;
-		xfer[0].len = buffer_size_;
+	xfer[0].tx_buf = (unsigned long) write_buffer_;
+	xfer[0].rx_buf = (unsigned long) read_buffer;
+	xfer[0].len = buffer_size_;
 
-		status = ioctl(spi_fd_, SPI_IOC_MESSAGE(1), xfer);
-		update_count_ += 1;
-	}
+	status = ioctl(spi_fd_, SPI_IOC_MESSAGE(1), xfer);
+	update_count_ += 1;
+
 	usleep(50); //FIXME: this  makes sure we don't outrun the co-processor until interrupts are in place for DMA
 
 	if (status < 0)
@@ -177,6 +174,8 @@ unsigned char Wallaby::readRegister8b(unsigned char address, const unsigned char
 {
 	if (address >= REG_READABLE_COUNT) return 0;// false; // TODO: feedback
 
+	std::lock_guard<std::mutex> lock(transfer_mutex_);
+
 	const unsigned char * const buffer = (alt_read_buffer == nullptr) ? read_buffer_ : alt_read_buffer;
 
 	if (alt_read_buffer == nullptr)
@@ -196,6 +195,8 @@ void Wallaby::writeRegister8b(unsigned char address, unsigned char value)
 {
 	if (address >= REG_ALL_COUNT) return;// false; // TODO: feedback
 
+	std::lock_guard<std::mutex> lock(transfer_mutex_);
+
 	clearBuffers();
 
 	// TODO definitions for buffer inds
@@ -211,6 +212,8 @@ void Wallaby::writeRegister8b(unsigned char address, unsigned char value)
 unsigned short Wallaby::readRegister16b(unsigned char address, const unsigned char * alt_read_buffer)
 {
 	if (address >= REG_READABLE_COUNT || address+1 >= REG_READABLE_COUNT) return 0;// false; // TODO: feedback
+
+	std::lock_guard<std::mutex> lock(transfer_mutex_);
 
 	const unsigned char * const buffer = (alt_read_buffer == nullptr) ? read_buffer_ : alt_read_buffer;
 
@@ -231,6 +234,8 @@ void Wallaby::writeRegister16b(unsigned char address, unsigned short value)
 {
 	if (address >= REG_ALL_COUNT || address+1 >= REG_ALL_COUNT) return;// false; // TODO: feedback
 
+	std::lock_guard<std::mutex> lock(transfer_mutex_);
+
 	clearBuffers();
 
 	// TODO definitions for buffer inds
@@ -248,6 +253,8 @@ void Wallaby::writeRegister16b(unsigned char address, unsigned short value)
 unsigned int Wallaby::readRegister32b(unsigned char address, const unsigned char * alt_read_buffer)
 {
 	if (address >= REG_READABLE_COUNT || address+3 >= REG_READABLE_COUNT) return 0;// false; // TODO: feedback
+
+	std::lock_guard<std::mutex> lock(transfer_mutex_);
 
 	const unsigned char * const buffer = (alt_read_buffer == nullptr) ? read_buffer_ : alt_read_buffer;
 
@@ -272,6 +279,8 @@ unsigned int Wallaby::readRegister32b(unsigned char address, const unsigned char
 void Wallaby::writeRegister32b(unsigned char address, unsigned int value)
 {
 	if (address >= REG_ALL_COUNT || address+3 >= REG_ALL_COUNT) return;// false; // TODO: feedback
+
+	std::lock_guard<std::mutex> lock(transfer_mutex_);
 
 	clearBuffers();
 
