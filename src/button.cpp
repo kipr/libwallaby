@@ -82,7 +82,7 @@ const char * IdButton::text() const
 
 bool IdButton::isTextDirty() const
 {
-	return true; // deprecated
+	return false; // deprecated
 }
 
 void IdButton::setPressed(bool pressed)
