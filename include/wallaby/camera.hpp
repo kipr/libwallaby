@@ -178,6 +178,7 @@ namespace Camera
     Config m_config;
     ChannelPtrVector m_channels;
     cv::Mat m_image;
+    unsigned char *m_bmpBuffer;
     
     mutable unsigned char *m_bgr;
     mutable unsigned m_bgrSize;

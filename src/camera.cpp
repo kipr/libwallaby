@@ -252,7 +252,8 @@ void Camera::ConfigPath::setDefaultConfigPath(const std::string &name)
 const char *Camera::Device::device_name = "/dev/video0";
 
 Camera::Device::Device()
-  : m_bgr(0),
+  : m_bmpBuffer(0),
+  m_bgr(0),
   m_bgrSize(0),
   m_fd(-1)
 {
@@ -269,6 +270,8 @@ Camera::Device::~Device()
   ChannelPtrVector::const_iterator it = m_channels.begin();
   for(; it != m_channels.end(); ++it) delete *it;
   delete m_bgr;
+  free(m_bmpBuffer);
+  m_bmpBuffer = 0;
 }
 
 bool Camera::Device::open(const int number, const unsigned width, const unsigned height)
@@ -408,11 +411,15 @@ bool Camera::Device::update()
     if(r == -1) {
       if(errno == EINTR) continue;
       m_image = cv::Mat();
+      free(m_bmpBuffer);
+      m_bmpBuffer = 0;
       return false;
     }
     if(r == 0) {
       // Timed out
       m_image = cv::Mat();
+      free(m_bmpBuffer);
+      m_bmpBuffer = 0;
       return false;
     }
     
@@ -420,6 +427,8 @@ bool Camera::Device::update()
     if(readRes == -1) {
       // Something went wrong
       m_image = cv::Mat();
+      free(m_bmpBuffer);
+      m_bmpBuffer = 0;
       return false;
     }
     else if(readRes == 1) {
@@ -743,21 +752,20 @@ cv::Mat Camera::Device::decodeJpeg(void *p, int size)
   const int outComp = cInfo.output_components;
   
   unsigned long bmp_size = outWidth * outHeight * outComp;
-  unsigned char *bmp_buffer = (unsigned char *) malloc(bmp_size);
   int row_stride = width * outComp;
+  free(m_bmpBuffer);
+  m_bmpBuffer = (unsigned char *) malloc(bmp_size);
   
   while(cInfo.output_scanline < cInfo.output_height) {
     unsigned char *buffer_array[1];
-    buffer_array[0] = bmp_buffer + (cInfo.output_scanline) * row_stride;
+    buffer_array[0] = m_bmpBuffer + (cInfo.output_scanline) * row_stride;
     jpeg_read_scanlines(&cInfo, buffer_array, 1);
   }
   
-  free(bmp_buffer);
-
   jpeg_finish_decompress(&cInfo);
   jpeg_destroy_decompress (&cInfo);
     
-  cv::Mat image(cv::Size(outWidth, outHeight), CV_8UC3, bmp_buffer);
+  cv::Mat image(cv::Size(outWidth, outHeight), CV_8UC3, m_bmpBuffer);
   cv::cvtColor(image, image, CV_BGR2RGB);
   
   return image;
