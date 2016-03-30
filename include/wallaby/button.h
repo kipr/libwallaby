@@ -135,6 +135,22 @@ int side_button();
 int black_button();
 
 /*!
+ * Gets the left button's state (pressed or not pressed.)
+ * \return 1 for pressed, 0 for not pressed
+ * \see a_button_clicked
+ * \ingroup button
+ */
+int left_button();
+
+/*!
+ * Gets the right button's state (pressed or not pressed.)
+ * \return 1 for pressed, 0 for not pressed
+ * \see a_button_clicked
+ * \ingroup button
+ */
+int right_button();
+
+/*!
  * Gets the A button's state (pressed or not pressed.)
  * \blocksuntil the button is no longer pressed.
  * \return 1 for pressed, 0 for not pressed

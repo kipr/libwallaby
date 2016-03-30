@@ -78,12 +78,22 @@ int z_button()
 
 int side_button()
 {
-	return button(&Side);
+	return right_button();
+}
+
+int left_button()
+{
+	return button(&Left);
+}
+
+int right_button()
+{
+	return button(&Right);
 }
 
 int black_button()
 {
-	return side_button();
+	return right_button();
 }
 
 int button_clicked(AbstractButton * button)
@@ -123,12 +133,12 @@ int z_button_clicked()
 
 int side_button_clicked()
 {
-	return button_clicked(&Side);
+	return right_button();
 }
 
 int any_button()
 {
-	for (unsigned char i = 0; i < 7; ++i) if (all[i]->isPressed()) return 1;
+	for (unsigned char i = 0; i < 8; ++i) if (all[i]->isPressed()) return 1;
 	return 0;
 }
 

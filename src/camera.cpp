@@ -752,6 +752,8 @@ cv::Mat Camera::Device::decodeJpeg(void *p, int size)
     jpeg_read_scanlines(&cInfo, buffer_array, 1);
   }
   
+  free(bmp_buffer);
+
   jpeg_finish_decompress(&cInfo);
   jpeg_destroy_decompress (&cInfo);
     
