@@ -550,8 +550,9 @@ private:
 	CreatePackets::_3 m_3;
 	CreatePackets::_4 m_4;
 	CreatePackets::_5 m_5;
-  CreatePackets::_101 m_101;
+	CreatePackets::_101 m_101;
 	timeval timestamps[6];
+	bool have_packet[6];
 
 
 	// These are all marked mutable because they

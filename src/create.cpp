@@ -1202,6 +1202,11 @@ Create::Create()
 	// otherwise a program using only the Create won't stop the Create when
 	// a SIGTERM or SIGINT are used to stop the program
 	Battery::powerLevel();
+
+	for (unsigned int i = 0; i < 6; ++i)
+	{
+		have_packet[i] = false;
+	}
 }
 
 Create::Create(const Create&) {}
@@ -1277,25 +1282,27 @@ void printArray(const T& array) {
 
 void Create::updateSensorPacket1()
 {
-	if(!hasRequiredTimePassed(timestamps[0])) return;
+	if(have_packet[0] && !hasRequiredTimePassed(timestamps[0])) return;
 	flush();
 	beginAtomicOperation();
 	write(OI_SENSORS);
 	write(1);
 	blockingRead(m_1);
 	timestamps[0] = timeOfDay();
+	have_packet[0] = true;
 	endAtomicOperation();
 }
 
 void Create::updateSensorPacket2(bool forceUpdate)
 {
-	if(!forceUpdate && !hasRequiredTimePassed(timestamps[1])) return;
+	if(have_packet[1] && !forceUpdate && !hasRequiredTimePassed(timestamps[1])) return;
 	flush();
 	beginAtomicOperation();
 	write(OI_SENSORS);
 	write(2);
 	blockingRead(m_2);
 	timestamps[1] = timeOfDay();
+	have_packet[1] = true;
 	m_state.distance += SHORT(m_2.distance);
 	m_state.angle += SHORT(m_2.angle);
 	endAtomicOperation();
@@ -1303,48 +1310,52 @@ void Create::updateSensorPacket2(bool forceUpdate)
 
 void Create::updateSensorPacket3()
 {
-	if(!hasRequiredTimePassed(timestamps[2])) return;
+	if(have_packet[2] && !hasRequiredTimePassed(timestamps[2])) return;
 	flush();
 	beginAtomicOperation();
 	write(OI_SENSORS);
 	write(3);
 	blockingRead(m_3);
 	timestamps[2] = timeOfDay();
+	have_packet[2] = true;
 	endAtomicOperation();
 }
 
 void Create::updateSensorPacket4()
 {
-	if(!hasRequiredTimePassed(timestamps[3])) return;
+	if(have_packet[3] && !hasRequiredTimePassed(timestamps[3])) return;
 	flush();
 	beginAtomicOperation();
 	write(OI_SENSORS);
 	write(4);
 	blockingRead(m_4);
 	timestamps[3] = timeOfDay();
+	have_packet[3] = true;
 	endAtomicOperation();
 }
 
 void Create::updateSensorPacket5()
 {
-	if(!hasRequiredTimePassed(timestamps[4])) return;
+	if(have_packet[4] && !hasRequiredTimePassed(timestamps[4])) return;
 	flush();
 	beginAtomicOperation();
 	write(OI_SENSORS);
 	write(5);
 	blockingRead(m_5);
 	timestamps[4] = timeOfDay();
+	have_packet[4] = true;
 	endAtomicOperation();
 }
 
 void Create::updateSensorPacket101()
 {
-  if(!hasRequiredTimePassed(timestamps[5])) return;
+  if(have_packet[5] && !hasRequiredTimePassed(timestamps[5])) return;
   flush();
   beginAtomicOperation();
   write(OI_SENSORS);
   write(101);
   blockingRead(m_101);
   timestamps[5] = timeOfDay();
+  have_packet[5] = true;
   endAtomicOperation();
 }
