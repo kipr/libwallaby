@@ -9,6 +9,12 @@
 #define INCLUDE_WALLABY_SERVO_H_
 
 
+/*!
+ * \file servo.h
+ * \copyright KISS Institute for Practical Robotics
+ * \defgroup servo Servos
+ */
+
 #ifdef __cplusplus
 extern "C" {
 #endif

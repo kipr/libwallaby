@@ -10,6 +10,13 @@
 
 #include "geom.h"
 
+/*!
+ * \file camera.h
+ * \copyright KISS Institute for Practical Robotics
+ * \defgroup camera Camera
+ */
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
