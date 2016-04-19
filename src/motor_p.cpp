@@ -69,6 +69,8 @@ bool set_motor_mode(unsigned int port, unsigned char mode)
   if (port >= NUM_MOTORS) return false;
   unsigned char modes = Private::Wallaby::instance()->readRegister8b(REG_RW_MOT_MODES);
 
+  std::lock_guard<std::mutex> lock(shutdown_mutex);
+
   const unsigned short offset = 2*fix_port(port);
 
   // clear old drive mode
@@ -108,6 +110,8 @@ bool set_motor_direction(unsigned int port, unsigned char dir)
   if (port >= NUM_MOTORS) return false;
 
   Private::set_motor_mode(port, Motor::Inactive);
+
+  std::lock_guard<std::mutex> lock(shutdown_mutex);
 
   unsigned char dirs = Private::Wallaby::instance()->readRegister8b(REG_RW_MOT_DIRS);
 
@@ -153,6 +157,7 @@ bool set_motor_pwm(unsigned int port, unsigned char speed)
 {
 
   if (port >= NUM_MOTORS) return false;
+  std::lock_guard<std::mutex> lock(shutdown_mutex);
   // TODO: error signal outside of range
   Private::set_motor_mode(port, Motor::Inactive);
   const unsigned short speedMax = 400;
@@ -179,6 +184,7 @@ bool set_motor_goal_velocity(unsigned int port, int goal_velocity)
   // TODO: may need to put some logic in for not writing goals if they equal the current goal
   //  ... maybe add on the co-proc?
   unsigned int goal_addy = REG_RW_MOT_0_SP_H + 2 * fix_port(port); // TODO: 32 bit?
+  std::lock_guard<std::mutex> lock(shutdown_mutex);
   Private::Wallaby::instance()->writeRegister16b(goal_addy, static_cast<signed short>(goal_velocity));
 
   goal_vel_array[port] = goal_velocity;

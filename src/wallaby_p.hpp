@@ -13,6 +13,8 @@
 namespace Private
 {
 
+extern std::mutex shutdown_mutex;
+
 class Wallaby
 {
 
