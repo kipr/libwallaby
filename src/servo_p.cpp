@@ -32,6 +32,7 @@ void set_servo_enabled(int port, bool enabled)
     allStop &= ~bit;
   }
 
+  std::lock_guard<std::mutex> lock(shutdown_mutex);
   Private::Wallaby::instance()->writeRegister8b(REG_RW_MOT_SRV_ALLSTOP, allStop);
 }
 
@@ -59,6 +60,7 @@ bool set_servo_position(int port, unsigned short position)
   unsigned short val =  1500 + std::round(1800.0 * ((double)position / 2047.0)) - (1800 / 2);
 
   unsigned char address = REG_RW_SERVO_0_H + 2 * port;
+  std::lock_guard<std::mutex> lock(shutdown_mutex);
   Private::Wallaby::instance()->writeRegister16b(address, val);
   return true;
 }
