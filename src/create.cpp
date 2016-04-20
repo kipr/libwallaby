@@ -10,6 +10,7 @@
 #include "wallaby/util.hpp"
 #include "wallaby/compat.hpp"
 #include "wallaby/battery.hpp"
+#include "wallaby_p.hpp"
 
 #ifndef WIN32
 #include <fcntl.h>
@@ -774,6 +775,7 @@ void Create::setSafeMode()
 void Create::setFullMode()
 {
 	if(!isConnected()) return;
+	std::lock_guard<std::mutex> lock(Private::shutdown_mutex);
 	beginAtomicOperation();
 	write(OI_FULL);
 	endAtomicOperation();
@@ -922,6 +924,7 @@ void Create::setLeds(const bool& advance, const bool& play, const unsigned char&
 void Create::drive(const short& velocity, const short& radius)
 {
 	if(!isConnected()) return;
+	std::lock_guard<std::mutex> lock(Private::shutdown_mutex);
 	beginAtomicOperation();
 
 	write(OI_DRIVE);
@@ -941,6 +944,7 @@ void Create::drive(const short& velocity, const short& radius)
 void Create::driveDirect(const short& left, const short& right)
 {
 	if(!isConnected()) return;
+	std::lock_guard<std::mutex> lock(Private::shutdown_mutex);
 	beginAtomicOperation();
 
 	write(OI_DRIVE_DIRECT);
