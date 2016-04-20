@@ -32,7 +32,7 @@ void set_servo_enabled(int port, bool enabled)
     allStop &= ~bit;
   }
 
-  std::lock_guard<std::mutex> lock(shutdown_mutex);
+  if(enabled) std::lock_guard<std::mutex> lock(shutdown_mutex);
   Private::Wallaby::instance()->writeRegister8b(REG_RW_MOT_SRV_ALLSTOP, allStop);
 }
 
