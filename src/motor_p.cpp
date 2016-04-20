@@ -67,6 +67,9 @@ unsigned char get_motor_mode(unsigned int port, unsigned char * alt_read_buffer)
 bool set_motor_mode(unsigned int port, unsigned char mode)
 {
   if (port >= NUM_MOTORS) return false;
+
+  if (mode != 0) std::lock_guard<std::mutex> lock(shutdown_mutex);
+
   unsigned char modes = Private::Wallaby::instance()->readRegister8b(REG_RW_MOT_MODES);
 
   const unsigned short offset = 2*fix_port(port);
@@ -108,6 +111,8 @@ bool set_motor_direction(unsigned int port, unsigned char dir)
   if (port >= NUM_MOTORS) return false;
 
   Private::set_motor_mode(port, Motor::Inactive);
+
+  if (dir != Motor::Inactive) std::lock_guard<std::mutex> lock(shutdown_mutex);
 
   unsigned char dirs = Private::Wallaby::instance()->readRegister8b(REG_RW_MOT_DIRS);
 
