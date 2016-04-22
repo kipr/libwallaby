@@ -970,7 +970,23 @@ void Create::driveStraight(const short& speed)
 void Create::stop()
 {
 	flush();
-	driveStraight(0);
+	if(!isConnected()) return;
+
+	beginAtomicOperation();
+
+	write(OI_DRIVE_DIRECT);
+	write(HIGH_BYTE(0));
+	write(LOW_BYTE(0));
+	write(HIGH_BYTE(0));
+	write(LOW_BYTE(0));
+
+	m_state.radius = 0xFFFF;
+	m_state.leftVelocity = 0;
+	m_state.rightVelocity = 0;
+
+	updateState();
+
+	endAtomicOperation();
 }
 
 void Create::turn(const short& angle, const unsigned short& speed)
