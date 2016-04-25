@@ -8,6 +8,12 @@
 #ifndef INCLUDE_WALLABY_ACCEL_H_
 #define INCLUDE_WALLABY_ACCEL_H_
 
+/*!
+ * \file analog.h
+ * \copyright KISS Institute for Practical Robotics
+ * \defgroup accel Accelerometer
+ */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -17,6 +23,7 @@ extern "C" {
  * \description +/- 2G range,  1024 per G
  * \description This should be approximately 0 when at rest and flat on a table
  * \return The latest signed x acceleration value
+ * \ingroup accel
  */
 signed short accel_x();
 
@@ -26,6 +33,7 @@ signed short accel_x();
  * \description +/- 2G range,  1024 per G
  * \description This should be approximately 0 when at rest and flat on a table
  * \return The latest signed y acceleration value
+ * \ingroup accel
  */
 signed short accel_y();
 
@@ -35,6 +43,7 @@ signed short accel_y();
  * \description +/- 2G range,  1024 per G
  * \description This should be approximately -1024 when at rest and flat on a table
  * \return The latest signed z acceleration value
+ * \ingroup accel
  */
 signed short accel_z();
 
@@ -43,6 +52,7 @@ signed short accel_z();
  * Initiates a calibration of the accelerometer
  * \note Not Yet Implemented
  * \return 1: success 0: failure
+ * \ingroup accel
  */
 int accel_calibrate();
 

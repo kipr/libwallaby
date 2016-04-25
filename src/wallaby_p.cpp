@@ -38,9 +38,13 @@
 namespace Private
 {
 
+std::mutex shutdown_mutex;
+
 //TODO: clean up name and make params optional
 void Wallaby::atExit(bool should_abort)
 {
+
+	std::lock_guard<std::mutex> lock(shutdown_mutex);
 	std::cout << "Auto-stopping motors" << std::endl;
 	ao();
 

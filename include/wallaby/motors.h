@@ -8,6 +8,13 @@
 #ifndef INCLUDE_WALLABY_MOTORS_H_
 #define INCLUDE_WALLABY_MOTORS_H_
 
+/*!
+ * \file motors.h
+ * \copyright KISS Institute for Practical Robotics
+ * \defgroup motor Motors
+ */
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif

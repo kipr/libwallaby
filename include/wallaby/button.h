@@ -9,6 +9,13 @@
 #define INCLUDE_WALLABY_BUTTON_H_
 
 
+/*!
+ * \file button.h
+ * \copyright KISS Institute for Practical Robotics
+ * \defgroup button Buttons
+ */
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
