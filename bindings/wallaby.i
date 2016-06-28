@@ -71,7 +71,7 @@
 %include "analog.h"
 %include "general.h"
 %include "accel.h"
-//%include "camera.h"
+%include "camera.h"
 %include "button.h"
 %include "botball.h"
 //%include "ardrone.h"
