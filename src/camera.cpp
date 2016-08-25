@@ -270,6 +270,7 @@ Camera::Device::~Device()
   ChannelPtrVector::const_iterator it = m_channels.begin();
   for(; it != m_channels.end(); ++it) delete *it;
   delete m_bgr;
+  delete m_cap;
   free(m_bmpBuffer);
   m_bmpBuffer = 0;
 }
@@ -282,7 +283,7 @@ bool Camera::Device::open(const int number, const unsigned width, const unsigned
 #else
   // Device already open?
   if(this->isOpen()) return false;
-  
+  /*
   struct stat st;
   
   if(stat(device_name, &st) == -1) {
@@ -300,8 +301,22 @@ bool Camera::Device::open(const int number, const unsigned width, const unsigned
     fprintf(stderr, "Cannot open '%s': %d, %s\n", device_name, errno, strerror(errno));
     return false;
   }
-  
+ 
   return this->initCapDevice(width, height);
+  */
+
+  m_cap = new cv::VideoCapture(0);
+  if(!m_cap->isOpened())
+  {
+    fprintf(stderr, "Failed to open %s\n", device_name);
+    return false;
+  }
+
+  m_cap->set(CV_CAP_PROP_FRAME_WIDTH, 160); // FIXME
+  m_cap->set(CV_CAP_PROP_FRAME_HEIGHT, 120); // FIXME
+
+  return true;
+
 #endif
 }
 
@@ -367,6 +382,7 @@ bool Camera::Device::close()
 #else
   if(!this->isOpen()) return false;
   
+  /*
   // Stop capturing
   enum v4l2_buf_type type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
   type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
@@ -386,6 +402,9 @@ bool Camera::Device::close()
   }
   
   m_fd = -1;
+  */
+
+  // TODO: close m_cap
   
   return true;
 #endif
@@ -397,6 +416,7 @@ bool Camera::Device::update()
   WARN("camera only supported on wallaby");
   return false;
 #else  
+/*
   for(;;) {
     fd_set fds;    
     FD_ZERO(&fds);
@@ -435,8 +455,10 @@ bool Camera::Device::update()
       // Success
       break;
     }
+
   }
-  
+*/
+
   // No need to update channels if there are none.
   if(m_channels.empty()) return true;
   
@@ -663,6 +685,7 @@ int Camera::Device::readFrame()
   WARN("camera only supported on wallaby");
   return -1;
 #else
+/*
   struct v4l2_buffer buf;
   memset(&buf, 0, sizeof(buf));
   buf.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
@@ -683,15 +706,20 @@ int Camera::Device::readFrame()
   
   // Process frame
   // TODO: width and height shouldn't be hardcoded
-  /*// OPENCV WAY
-  cv::Mat jpgBuf(cv::Size(160, 120), CV_8UC3, buffers[buf.index].start);
-  m_image = cv::imdecode(jpgBuf, CV_LOAD_IMAGE_COLOR);*/
+  // OPENCV WAY
+  //cv::Mat jpgBuf(cv::Size(160, 120), CV_8UC3, buffers[buf.index].start);
+  //m_image = cv::imdecode(jpgBuf, CV_LOAD_IMAGE_COLOR);
   // LIBJPEG WAY
   m_image = this->decodeJpeg(buffers[buf.index].start, buf.bytesused);
   
   if(xioctl(m_fd, VIDIOC_QBUF, &buf) == -1)
     return -1;
-  
+*/  
+
+  // no decoding 
+  if (!(m_cap->read(m_image)))
+    return -1;
+
   // Success!
   return 1;
 #endif

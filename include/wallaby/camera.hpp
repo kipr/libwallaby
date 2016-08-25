@@ -185,7 +185,7 @@ namespace Camera
     
     int m_fd;
     static const char *device_name;
-    
+    cv::VideoCapture *m_cap;
     
   };
   
