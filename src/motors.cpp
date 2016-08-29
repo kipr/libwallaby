@@ -82,7 +82,13 @@ void Motor::backward()
 	motor(-100);
 }
 
+
 void Motor::motor(int percent)
+{
+	moveAtVelocity(percent * 15); // 100% = 1500 ticks/sec
+}
+
+void Motor::motorPower(int percent)
 {
 	Private::set_motor_mode(m_port, Private::Motor::Inactive);
 	Private::set_motor_pwm(m_port, std::abs(percent));
@@ -100,6 +106,8 @@ void Motor::motor(int percent)
 		Private::set_motor_direction(m_port, Private::Motor::PassiveStop);
 	}
 }
+
+
 
 void Motor::off()
 {

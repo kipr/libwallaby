@@ -209,14 +209,25 @@ void bk(int motor);
 
 
 /*!
- * \brief Moves a motor at a percent power.
+ * \brief Moves a motor at a percent velocity.
  *
  * \param[in] motor The motor port.
- * \param[in] percent The power of the motor, between -100 and 100.
+ * \param[in] percent The percent of the motors velocity, between -100 and 100.
  *
  * \ingroup motor
  */
 void motor(int motor, int percent);
+
+/*!
+ * \brief Moves a motor at a percent power.
+ *
+ * \param[in] motor the motor port.
+ * \param[in] percent The power of the motor, between -100 and 100.
+ *
+ * \ingroup motor
+ */
+void motor_power(int motor, int percent);
+
 
 /*!
  * \brief Turns the specified motor off.
