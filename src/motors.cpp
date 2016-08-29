@@ -85,8 +85,7 @@ void Motor::backward()
 
 void Motor::motor(int percent)
 {
-	short velocity_ticks = 15 * percent; // 100% = ~1500 ticks/sec 
-	moveAtVelocity(percent * 15);
+	moveAtVelocity(percent * 15); // 100% = 1500 ticks/sec
 }
 
 void Motor::motorPower(int percent)
