@@ -223,17 +223,22 @@ std::string Camera::ConfigPath::path(const std::string &name)
 
 std::string Camera::ConfigPath::defaultPath()
 {
+  printf("returning s_path(%s) + default\n", s_path.c_str());
   return s_path + "default";
 }
 
 std::string Camera::ConfigPath::defaultConfigPath()
 {
+  printf("defaultConfigPath\n");
   std::ifstream file;
   file.open(defaultPath().c_str());
+  printf("file open check...\n");
   if(!file.is_open()) return std::string();
+  printf("file is open\n");
   std::string ret;
   std::getline(file, ret);
   file.close();
+  printf("return\n");
   return ret;
 }
 
@@ -253,9 +258,12 @@ const char *Camera::Device::device_name = "/dev/video0";
 
 Camera::Device::Device()
   : m_bmpBuffer(0),
+  m_connected(false),
   m_bgr(0),
   m_bgrSize(0),
-  m_fd(-1)
+  m_fd(-1),
+  m_cap(0),
+  m_image()
 {
   Config *config = Config::load(Camera::ConfigPath::defaultConfigPath());
   if(!config) return;
@@ -273,7 +281,9 @@ Camera::Device::~Device()
   delete m_cap;
   free(m_bmpBuffer);
   m_bmpBuffer = 0;
+  m_connected = false;
 }
+
 
 bool Camera::Device::open(const int number, const unsigned width, const unsigned height)
 {
@@ -315,6 +325,8 @@ bool Camera::Device::open(const int number, const unsigned width, const unsigned
   m_cap->set(CV_CAP_PROP_FRAME_WIDTH, 160); // FIXME
   m_cap->set(CV_CAP_PROP_FRAME_HEIGHT, 120); // FIXME
 
+
+  m_connected = true;
   return true;
 
 #endif
@@ -326,7 +338,7 @@ bool Camera::Device::isOpen() const
   WARN("camera only supported on wallaby");
   return false;
 #else
-  return (m_fd != -1);
+  return m_connected || (m_fd != -1);
 #endif
 }
 
@@ -458,7 +470,8 @@ bool Camera::Device::update()
 
   }
 */
-
+  const int readRes = this->readFrame();
+  if (readRes == -1) return false; // TODO more image clearing
   // No need to update channels if there are none.
   if(m_channels.empty()) return true;
   
@@ -716,11 +729,35 @@ int Camera::Device::readFrame()
     return -1;
 */  
 
-  // no decoding 
-  if (!(m_cap->read(m_image)))
+
+  if (!m_connected)
+  {
+    printf("not connected\n");
+    open(0,0,0); // TODO real numbers, we don't use these yet
     return -1;
+  }
+
+  if (m_cap == 0)
+  {
+    printf("m_cap ptr = 0\n");
+    return -1;
+  }
+  // no decoding 
+  if (!(m_cap->isOpened()))
+  {
+	  printf("cap isn't opened\n");
+  }
+
+
+  printf("get image 3 \n");	  
+  if ( !(m_cap->read(m_image)))
+  {
+    printf("error reading image\n");
+    return -1;
+  }
 
   // Success!
+  printf("success\n");
   return 1;
 #endif
 }
