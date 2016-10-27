@@ -8,6 +8,8 @@
 #ifndef SRC_WALLABY_P_HPP_
 #define SRC_WALLABY_P_HPP_
 
+#define USE_SOCKETS
+
 #include <mutex>
 
 namespace Private
@@ -53,6 +55,10 @@ private:
 	int spi_fd_;
 	std::mutex transfer_mutex_;
 
+
+#ifdef USE_SOCKETS
+	TCPClient * tcp_client_;
+#endif
 };
 
 } /* namespace Private */

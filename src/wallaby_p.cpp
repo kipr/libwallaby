@@ -35,6 +35,14 @@
 #include <iomanip> // std::hex
 
 
+#ifdef USE_SOCKETS
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <netdb.h>
+#include <netinet/tcp.h> // TCP_NODELAY
+#include "tcp_client.hpp"
+#endif
+
 namespace Private
 {
 
@@ -78,6 +86,10 @@ Wallaby::Wallaby()
   write_buffer_(new unsigned char[REG_READABLE_COUNT]),
   update_count_(0)
 {
+
+#ifdef USE_SOCKETS
+
+#else
 	static const std::string WALLABY_SPI_PATH = "/dev/spidev2.0";
 
 	// TODO: move spi code outside constructor
@@ -90,6 +102,7 @@ Wallaby::Wallaby()
 		std::cout << "Device not found: " << WALLABY_SPI_PATH << std::endl;
 	}
 
+#endif
 	// register sig int handler
 	struct sigaction sigIntHandler;
 	sigIntHandler.sa_handler = WallabySigHandler;
