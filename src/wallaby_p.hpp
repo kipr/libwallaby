@@ -8,14 +8,14 @@
 #ifndef SRC_WALLABY_P_HPP_
 #define SRC_WALLABY_P_HPP_
 
-#define USE_SOCKETS
-
 #include <mutex>
 
 namespace Private
 {
 
 extern std::mutex shutdown_mutex;
+
+class TCPClient;
 
 class Wallaby
 {
@@ -42,6 +42,9 @@ public:
 
 	static unsigned short getFirmwareVersion(unsigned char * alt_read_buffer = nullptr);
 
+	bool usingTCP() const;
+	void useTCP(bool setting);
+
 	static void atExit(bool should_abort);
 
 private:
@@ -54,11 +57,8 @@ private:
 	unsigned long int update_count_;
 	int spi_fd_;
 	std::mutex transfer_mutex_;
-
-
-#ifdef USE_SOCKETS
 	TCPClient * tcp_client_;
-#endif
+	bool using_tcp_;
 };
 
 } /* namespace Private */

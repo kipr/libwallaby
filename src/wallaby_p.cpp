@@ -5,6 +5,7 @@
  *      Author: Joshua Southerland
  */
 
+
 #include "wallaby_p.hpp"
 #include "wallaby_regs_p.hpp"
 
@@ -30,23 +31,19 @@
 #include <linux/spi/spidev.h>
 #endif
 
+#include "tcp_client.hpp"
+
 #include <string>
 #include <iostream>
 #include <iomanip> // std::hex
 
 
-#ifdef USE_SOCKETS
-#include <sys/socket.h>
-#include <arpa/inet.h>
-#include <netdb.h>
-#include <netinet/tcp.h> // TCP_NODELAY
-#include "tcp_client.hpp"
-#endif
-
 namespace Private
 {
 
 std::mutex shutdown_mutex;
+
+
 
 //TODO: clean up name and make params optional
 void Wallaby::atExit(bool should_abort)
@@ -84,12 +81,9 @@ Wallaby::Wallaby()
 : buffer_size_(REG_READABLE_COUNT),
   read_buffer_(new unsigned char[REG_READABLE_COUNT]),
   write_buffer_(new unsigned char[REG_READABLE_COUNT]),
-  update_count_(0)
+  update_count_(0), tcp_client_(nullptr), using_tcp_(false)
 {
 
-#ifdef USE_SOCKETS
-
-#else
 	static const std::string WALLABY_SPI_PATH = "/dev/spidev2.0";
 
 	// TODO: move spi code outside constructor
@@ -102,7 +96,6 @@ Wallaby::Wallaby()
 		std::cout << "Device not found: " << WALLABY_SPI_PATH << std::endl;
 	}
 
-#endif
 	// register sig int handler
 	struct sigaction sigIntHandler;
 	sigIntHandler.sa_handler = WallabySigHandler;
@@ -119,7 +112,10 @@ Wallaby::~Wallaby()
 	// happens automatically before destructor call: this->atExit();
 	atExit(false);
 
+	delete tcp_client_;
+
 	close(spi_fd_);
+
 	delete[] write_buffer_;
 	delete[] read_buffer_;
 }
@@ -136,8 +132,15 @@ bool Wallaby::transfer(unsigned char * alt_read_buffer)
 #ifdef NOT_A_WALLABY
 	std::cerr << "Warning: this is not a wallaby; transfer failed" << std::endl;
 	return false;
-#else
-	if (spi_fd_ <= 0) return false; // TODO: feedback
+#endif
+
+	if (!using_tcp_)
+	{	
+
+		if (spi_fd_ <= 0) return false; // TODO: feedback
+	}
+
+	// TODO: make sure we have a valid (TCP?) connection to the simulator
 
 	const unsigned char * const read_buffer = (alt_read_buffer == nullptr) ? read_buffer_ : alt_read_buffer;
 
@@ -159,17 +162,33 @@ bool Wallaby::transfer(unsigned char * alt_read_buffer)
 	xfer[0].rx_buf = (unsigned long) read_buffer;
 	xfer[0].len = buffer_size_;
 
-	status = ioctl(spi_fd_, SPI_IOC_MESSAGE(1), xfer);
-	update_count_ += 1;
 
-	usleep(50); //FIXME: this  makes sure we don't outrun the co-processor until interrupts are in place for DMA
-
-	if (status < 0)
+	if (using_tcp_)
 	{
-		std::cerr << "Error (SPI_IOC_MESSAGE): " << strerror(errno) << std::endl;
-		return false;
+		// send xfer[0].tx_buf, then read rx_buf, both have size buffer_size_
+		//std::cout << "Send " << buffer_size_ << " to Sim..." << std::endl;
+		ssize_t num_sent = tcp_client_->send(write_buffer_, buffer_size_);
+		//std::cout <<  "Sent " << num_sent << " Now reading from Sim.." << std::endl;
+		ssize_t num_read = tcp_client_->receive(read_buffer_, buffer_size_);
+		//std::cout << "Read " << num_read << std::endl;
+	}
+	else
+	{
+		status = ioctl(spi_fd_, SPI_IOC_MESSAGE(1), xfer);
+
+		usleep(50); //FIXME: this  makes sure we don't outrun the co-processor until interrupts are in place for DMA
+
+		if (status < 0)
+		{
+			std::cerr << "Error (SPI_IOC_MESSAGE): " << strerror(errno) << std::endl;
+			return false;
+		}
 	}
 
+	update_count_ += 1;
+
+
+/* FIXME putback
 	if (read_buffer[0] != 'J')
 	{
 		std::cerr << " Error: DMA de-synchronized" << std::endl;
@@ -182,9 +201,8 @@ bool Wallaby::transfer(unsigned char * alt_read_buffer)
 
 		return false;
 	}
-
+*/
 	return true;
-#endif
 }
 
 unsigned char Wallaby::readRegister8b(unsigned char address, const unsigned char * alt_read_buffer)
@@ -350,6 +368,34 @@ unsigned long int Wallaby::getUpdateCount() const
 unsigned short Wallaby::getFirmwareVersion(unsigned char * alt_read_buffer)
 {
 	return Private::Wallaby::instance()->readRegister16b(REG_R_VERSION_H, alt_read_buffer);
+}
+
+
+void Wallaby::useTCP(bool setting)
+{
+	using_tcp_ = setting;
+
+	// TODO: move / cleanup how this is done
+	if (using_tcp_)
+	{
+		if (tcp_client_ == nullptr)
+		{
+			tcp_client_ = new TCPClient("192.168.123.122", 11000); // FIXME dont hardcode
+			std::cout << "Connecting to simulator..." << std::endl;
+			bool success = tcp_client_->connect();
+			if (success) std::cout << "Connected!" << std::endl;
+		}
+	}
+	else
+	{
+		delete tcp_client_;
+		tcp_client_ = nullptr;
+	}
+}
+
+bool Wallaby::usingTCP() const
+{
+	return using_tcp_;
 }
 
 

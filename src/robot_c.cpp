@@ -44,3 +44,15 @@ float get_low_volt_threshold()
 {
 	return 0;// TODO return Robot::getLowVoltThreshold();
 }
+
+
+int get_robot_sim_setting()
+{
+	return Robot::getRobotSimSetting() ? 1 : 0;
+}
+
+
+void set_robot_sim_setting(int simulate)
+{
+	Robot::setRobotSimSetting(simulate);
+}

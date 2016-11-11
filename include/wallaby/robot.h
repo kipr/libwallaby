@@ -26,6 +26,9 @@ unsigned int get_robot_update_delay();
 int set_low_volt_threshold(float volts);
 float get_low_volt_threshold();
 
+int get_robot_sim_setting();
+void set_robot_sim_setting(int simulate);
+
 #ifdef __cplusplus
 }
 #endif

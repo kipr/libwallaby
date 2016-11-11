@@ -42,3 +42,13 @@ float Robot::getLowVoltThreshold()
 {
 	return 0;// TODO return Private::BattleHill::instance()->getLowVoltThreshold();
 }
+
+bool Robot::getRobotSimSetting()
+{
+	return Private::Wallaby::instance()->usingTCP();
+}
+
+void Robot::setRobotSimSetting(bool simulate)
+{
+	Private::Wallaby::instance()->useTCP(simulate);
+}

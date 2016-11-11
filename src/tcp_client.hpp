@@ -1,5 +1,8 @@
 #include <string>
 
+namespace Private
+{
+
 class TCPClient
 {
 public:
@@ -10,8 +13,8 @@ public:
 	bool connect();
 	bool disconnect();
 
-	bool send(const void * data, int size);
-	bool receive(void * buff, int buff_size);
+	ssize_t send(const void * data, int size);
+	ssize_t receive(void * buff, int buff_size);
 
 private:
 	int sock_;
@@ -19,3 +22,5 @@ private:
 	int port_;
 
 };
+
+}

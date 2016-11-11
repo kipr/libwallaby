@@ -21,6 +21,9 @@ public:
 
 	static bool setLowVoltThreshold(float volts);
 	static float getLowVoltThreshold();
+
+	static bool getRobotSimSetting();
+	static void setRobotSimSetting(bool simulate);
 };
 
 
