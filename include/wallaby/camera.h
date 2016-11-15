@@ -36,6 +36,12 @@ enum Resolution
 	NATIVE_RES
 };
 
+enum Model
+{
+	WHITE, // 2016
+	BLACK  // 2017
+};
+
 /**
  * Opens the default system camera for use at LOW_RES (160x120).
  * \return 1 on success, 0 on failure
