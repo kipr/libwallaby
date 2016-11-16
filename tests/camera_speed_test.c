@@ -11,7 +11,7 @@ int main()
     int ret;
   
     printf("Camera open\n");
-    camera_open_device_model_at_res(0, BLACK_2017, MED_RES);
+    camera_open_device_model_at_res(0, WHITE_2016, LOW_RES);
     
     printf("load config\n");
     ret = camera_load_config("1");
