@@ -316,7 +316,7 @@ bool Camera::Device::open(const int number, Resolution resolution, Model model)
 		return false;
 	  }
 
-	  return this->initCapDevice(resolutionToWidth(m_resolution), resolutionToHeight(resolution));
+	  return this->initCapDevice(resolutionToWidth(m_resolution), resolutionToHeight(m_resolution));
   }
   else if (m_model == BLACK_2017)
   {
