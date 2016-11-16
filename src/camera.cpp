@@ -224,22 +224,17 @@ std::string Camera::ConfigPath::path(const std::string &name)
 
 std::string Camera::ConfigPath::defaultPath()
 {
-  printf("returning s_path(%s) + default\n", s_path.c_str());
   return s_path + "default";
 }
 
 std::string Camera::ConfigPath::defaultConfigPath()
 {
-  printf("defaultConfigPath\n");
   std::ifstream file;
   file.open(defaultPath().c_str());
-  printf("file open check...\n");
   if(!file.is_open()) return std::string();
-  printf("file is open\n");
   std::string ret;
   std::getline(file, ret);
   file.close();
-  printf("return\n");
   return ret;
 }
 
