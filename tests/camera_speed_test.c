@@ -1,4 +1,4 @@
-//#include <wallaby/botball.h>
+//#include <kipr/botball.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -11,7 +11,7 @@ int main()
     int ret;
   
     printf("Camera open\n");
-    camera_open_device_model_at_res(0, WHITE_2016, LOW_RES);
+    camera_open_device_model_at_res(0, BLACK_2017, MED_RES);
     
     printf("load config\n");
     ret = camera_load_config("1");
@@ -29,9 +29,9 @@ int main()
     for (i = 0; i < num_imgs; ++i)
     {
        camera_update();
-       int x = get_object_count(0) > 0 ? get_object_center_x(0,0) : 0;
-       int y = get_object_count(0) > 0 ? get_object_center_y(0,0) : 0;
-       // printf("%f objs: %d  (%d,%d)\n", seconds(), get_object_count(0), x, y); 
+       int x = get_object_count(0) > 0 ? get_object_center_x(0,0) : -1;
+       int y = get_object_count(0) > 0 ? get_object_center_y(0,0) : -1;
+       printf("%f objs: %d  (%d,%d)\n", seconds(), get_object_count(0), x, y);
        // printf("%f\n", seconds());
     }
     double stop = seconds();
