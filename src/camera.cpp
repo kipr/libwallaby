@@ -301,40 +301,43 @@ bool Camera::Device::open(const int number, Resolution resolution, Model model)
   m_model = model;
   m_resolution = resolution;
 
-  /*
-  struct stat st;
-  
-  if(stat(device_name, &st) == -1) {
-    fprintf(stderr, "Cannot identify '%s': %d, %s\n", device_name, errno, strerror(errno));
-    return false;
-  }
-  
-  if(!S_ISCHR(st.st_mode)) {
-    fprintf(stderr, "%s is no device\n", device_name);
-    return false;
-  }
-  
-  m_fd = ::open(device_name, O_RDWR | O_NONBLOCK, 0);
-  if(m_fd == -1) {
-    fprintf(stderr, "Cannot open '%s': %d, %s\n", device_name, errno, strerror(errno));
-    return false;
-  }
- 
-  return this->initCapDevice(width, height);
-  */
-
-  m_cap = new cv::VideoCapture(0);
-  if(!m_cap->isOpened())
+  if (m_model == WHITE_2016)
   {
-    fprintf(stderr, "Failed to open %s\n", device_name);
-    return false;
+	  struct stat st;
+
+	  if(stat(device_name, &st) == -1) {
+		fprintf(stderr, "Cannot identify '%s': %d, %s\n", device_name, errno, strerror(errno));
+		return false;
+	  }
+
+	  if(!S_ISCHR(st.st_mode)) {
+		fprintf(stderr, "%s is no device\n", device_name);
+		return false;
+	  }
+
+	  m_fd = ::open(device_name, O_RDWR | O_NONBLOCK, 0);
+	  if(m_fd == -1) {
+		fprintf(stderr, "Cannot open '%s': %d, %s\n", device_name, errno, strerror(errno));
+		return false;
+	  }
+
+	  return this->initCapDevice(resolutionToWidth(m_resolution), resolutionToHeight(resolution));
   }
+  else if (m_model == BLACK_2017)
+  {
+	  m_cap = new cv::VideoCapture(0);
+	  if(!m_cap->isOpened())
+	  {
+		fprintf(stderr, "Failed to open %s\n", device_name);
+		return false;
+	  }
 
-  m_cap->set(CV_CAP_PROP_FRAME_WIDTH, resolutionToWidth(m_resolution));
-  m_cap->set(CV_CAP_PROP_FRAME_HEIGHT, resolutionToHeight(m_resolution));
+	  m_cap->set(CV_CAP_PROP_FRAME_WIDTH, resolutionToWidth(m_resolution));
+	  m_cap->set(CV_CAP_PROP_FRAME_HEIGHT, resolutionToHeight(m_resolution));
 
 
-  m_connected = true;
+	  m_connected = true;
+  }
   return true;
 
 #endif
