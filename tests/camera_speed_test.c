@@ -1,11 +1,17 @@
-#include <kipr/botball.h>
+//#include <wallaby/botball.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <wallaby/wallaby.h>
+#include <string.h>
+#include <time.h>
 
 int main()
 {
     int ret;
   
     printf("Camera open\n");
-	camera_open_at_res(LOW_RES);
+    camera_open_device_model_at_res(0, WHITE_2016, LOW_RES);
     
     printf("load config\n");
     ret = camera_load_config("1");
@@ -26,7 +32,7 @@ int main()
        int x = get_object_count(0) > 0 ? get_object_center_x(0,0) : 0;
        int y = get_object_count(0) > 0 ? get_object_center_y(0,0) : 0;
        // printf("%f objs: %d  (%d,%d)\n", seconds(), get_object_count(0), x, y); 
-     // printf("%f\n", seconds());
+       // printf("%f\n", seconds());
     }
     double stop = seconds();
   
