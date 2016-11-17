@@ -274,7 +274,7 @@ bool get_motor_done(unsigned int port, unsigned char * alt_read_buffer)
 {
   if (port >= NUM_MOTORS) return false;
   unsigned char motors_done = Private::Wallaby::instance()->readRegister8b(REG_RW_MOT_DONE, alt_read_buffer);
-  std::cout << "motors done = " << (unsigned int)motors_done << " vs " << (1 < fix_port(port))  << "fixed port is " << std::endl;
+  //std::cout << "motors done = " << (unsigned int)motors_done << " vs " << (1 < fix_port(port))  << "fixed port is " << std::endl;
 
   return (motors_done & (1 << fix_port(port)));
 }
