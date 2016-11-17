@@ -16,6 +16,8 @@
 #include <vector>
 #include <map>
 
+#include "wallaby/camera.h"
+
 #include <opencv2/core/core.hpp>
 
 // These keys are used in the config files loaded by
@@ -140,7 +142,7 @@ namespace Camera
     Device();
     ~Device();
     
-    bool open(const int number = 0, const unsigned width = 160, const unsigned height = 120);
+    bool open(const int number = 0, Resolution resolution = LOW_RES, Model model = WHITE_2016);
     bool isOpen() const;
     bool close();
     bool update();
@@ -151,6 +153,10 @@ namespace Camera
     unsigned width() const;
     unsigned height() const;
     
+    static unsigned int resolutionToHeight(Resolution res);
+    static unsigned int resolutionToWidth(Resolution res);
+
+
     const ChannelPtrVector &channels() const;
     
     const cv::Mat &rawImage() const;
@@ -185,8 +191,11 @@ namespace Camera
     
     int m_fd;
     static const char *device_name;
-    
-    
+    cv::VideoCapture *m_cap;
+    bool m_connected;
+
+    Resolution m_resolution;
+    Model m_model;
   };
   
   /**

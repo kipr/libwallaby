@@ -36,6 +36,12 @@ enum Resolution
 	NATIVE_RES
 };
 
+enum Model
+{
+	WHITE_2016,
+	BLACK_2017
+};
+
 /**
  * Opens the default system camera for use at LOW_RES (160x120).
  * \return 1 on success, 0 on failure
@@ -75,6 +81,24 @@ int camera_open_at_res(enum Resolution res);
  * \ingroup camera
  */
 int camera_open_device(int number, enum Resolution res);
+
+/**
+ * Opens a camera for use.
+ * \param number The camera's id. 0 is the first camera, 1 is the second camera, etc.
+ * \param res The resolution the camera should operate at. This can be:
+ *   - LOW_RES (160x120)
+ *   - MED_RES (320x240)
+ *   - HIGH_RES (640x480)
+ * \param model The camera model
+ *   - WHITE_2016  The white 2016 Botball camera
+ *   - BLACK_2017  The black 2017 Botball camera
+ * \warning MED_RES is supported only for the BLACK_2017 camera and HIGH_RES is not supported
+ * \return 1 on success, 0 on failure
+ * \see camera_open
+ * \see camera_close
+ * \ingroup camera
+ */
+int camera_open_device_model_at_res(int number, enum Model model, enum Resolution res);
 
 /**
  * Loads the config file specified by name. The system will look for the config in the base path.

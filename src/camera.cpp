@@ -6,6 +6,7 @@
  */
 
 #include "wallaby/camera.hpp"
+#include "wallaby/camera.h"
 #include "channel_p.hpp"
 #include "warn.hpp"
 
@@ -253,9 +254,14 @@ const char *Camera::Device::device_name = "/dev/video0";
 
 Camera::Device::Device()
   : m_bmpBuffer(0),
+  m_connected(false),
   m_bgr(0),
   m_bgrSize(0),
-  m_fd(-1)
+  m_fd(-1),
+  m_cap(0),
+  m_image(),
+  m_resolution(LOW_RES),
+  m_model(WHITE_2016)
 {
   Config *config = Config::load(Camera::ConfigPath::defaultConfigPath());
   if(!config) return;
@@ -270,38 +276,65 @@ Camera::Device::~Device()
   ChannelPtrVector::const_iterator it = m_channels.begin();
   for(; it != m_channels.end(); ++it) delete *it;
   delete m_bgr;
+  delete m_cap;
   free(m_bmpBuffer);
   m_bmpBuffer = 0;
+  m_connected = false;
 }
 
-bool Camera::Device::open(const int number, const unsigned width, const unsigned height)
+
+bool Camera::Device::open(const int number, Resolution resolution, Model model)
 {
 #ifdef NOT_A_WALLABY
   WARN("camera only supported on wallaby");
   return false;
 #else
+
   // Device already open?
   if(this->isOpen()) return false;
-  
-  struct stat st;
-  
-  if(stat(device_name, &st) == -1) {
-    fprintf(stderr, "Cannot identify '%s': %d, %s\n", device_name, errno, strerror(errno));
-    return false;
+
+  m_model = model;
+  m_resolution = resolution;
+
+  if (m_model == WHITE_2016)
+  {
+	  struct stat st;
+
+	  if(stat(device_name, &st) == -1) {
+		fprintf(stderr, "Cannot identify '%s': %d, %s\n", device_name, errno, strerror(errno));
+		return false;
+	  }
+
+	  if(!S_ISCHR(st.st_mode)) {
+		fprintf(stderr, "%s is no device\n", device_name);
+		return false;
+	  }
+
+	  m_fd = ::open(device_name, O_RDWR | O_NONBLOCK, 0);
+	  if(m_fd == -1) {
+		fprintf(stderr, "Cannot open '%s': %d, %s\n", device_name, errno, strerror(errno));
+		return false;
+	  }
+
+	  return this->initCapDevice(resolutionToWidth(m_resolution), resolutionToHeight(m_resolution));
   }
-  
-  if(!S_ISCHR(st.st_mode)) {
-    fprintf(stderr, "%s is no device\n", device_name);
-    return false;
+  else if (m_model == BLACK_2017)
+  {
+	  m_cap = new cv::VideoCapture(0);
+	  if(!m_cap->isOpened())
+	  {
+		fprintf(stderr, "Failed to open %s\n", device_name);
+		return false;
+	  }
+
+	  m_cap->set(CV_CAP_PROP_FRAME_WIDTH, resolutionToWidth(m_resolution));
+	  m_cap->set(CV_CAP_PROP_FRAME_HEIGHT, resolutionToHeight(m_resolution));
+
+
+	  m_connected = true;
   }
-  
-  m_fd = ::open(device_name, O_RDWR | O_NONBLOCK, 0);
-  if(m_fd == -1) {
-    fprintf(stderr, "Cannot open '%s': %d, %s\n", device_name, errno, strerror(errno));
-    return false;
-  }
-  
-  return this->initCapDevice(width, height);
+  return true;
+
 #endif
 }
 
@@ -311,9 +344,40 @@ bool Camera::Device::isOpen() const
   WARN("camera only supported on wallaby");
   return false;
 #else
-  return (m_fd != -1);
+  return m_connected || (m_fd != -1);
 #endif
 }
+
+unsigned int Camera::Device::resolutionToHeight(Resolution res)
+{
+	switch (res)
+	{
+	case LOW_RES:
+		return 120;
+	case MED_RES:
+		return 240;
+	case HIGH_RES:
+		return 480;
+	}
+
+	return 0;
+}
+
+unsigned int Camera::Device::resolutionToWidth(Resolution res)
+{
+	switch (res)
+	{
+	case LOW_RES:
+		return 160;
+	case MED_RES:
+		return 320;
+	case HIGH_RES:
+		return 640;
+	}
+
+	return 0;
+}
+
 
 void Camera::Device::setWidth(const unsigned width)
 {
@@ -341,9 +405,7 @@ unsigned Camera::Device::width() const
   WARN("camera only supported on wallaby");
   return 0;
 #else
-  // TODO: Get actual camera width
-  if(m_image.empty()) return 0;
-  return m_image.cols;
+  return resolutionToWidth(m_resolution);
 #endif
 }
 
@@ -353,9 +415,7 @@ unsigned Camera::Device::height() const
   WARN("camera only supported on wallaby");
   return 0;
 #else
-  // TODO: Get actual camera height
-  if(m_image.empty()) return 0;
-  return m_image.rows;
+  return resolutionToHeight(m_resolution);
 #endif
 }
 
@@ -366,27 +426,33 @@ bool Camera::Device::close()
   return false;
 #else
   if(!this->isOpen()) return false;
-  
-  // Stop capturing
-  enum v4l2_buf_type type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
-  type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
-  if(xioctl(m_fd, VIDIOC_STREAMOFF, &type) == -1) {
-    // TODO: ignore this failure?
+  if (m_model == WHITE_2016)
+  {
+	  // Stop capturing
+	  enum v4l2_buf_type type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
+	  type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
+	  if(xioctl(m_fd, VIDIOC_STREAMOFF, &type) == -1) {
+		// TODO: ignore this failure?
+	  }
+
+	  // Unmap buffers
+	  for(unsigned int i = 0; i < nBuffers; ++i)
+		if(munmap(buffers[i].start, buffers[i].length) == -1) {
+		  // TODO: ignore this failure?
+		}
+
+	  // Close device
+	  if(::close(m_fd) == -1) {
+		// TODO: ignore this failure?
+	  }
+
+	  m_fd = -1;
   }
-  
-  // Unmap buffers
-  for(unsigned int i = 0; i < nBuffers; ++i)
-    if(munmap(buffers[i].start, buffers[i].length) == -1) {
-      // TODO: ignore this failure?
-    }
-  
-  // Close device
-  if(::close(m_fd) == -1) {
-    // TODO: ignore this failure?
+  else if (m_model == BLACK_2017)
+  {
+	  m_cap->release();
+	  m_connected = false;
   }
-  
-  m_fd = -1;
-  
   return true;
 #endif
 }
@@ -397,46 +463,62 @@ bool Camera::Device::update()
   WARN("camera only supported on wallaby");
   return false;
 #else  
-  for(;;) {
-    fd_set fds;    
-    FD_ZERO(&fds);
-    FD_SET(m_fd, &fds);
-    
-    // Timeout
-    struct timeval tv;
-    tv.tv_sec = 2;
-    tv.tv_usec = 0;
-    
-    const int r = select(m_fd + 1, &fds, NULL, NULL, &tv);
-    if(r == -1) {
-      if(errno == EINTR) continue;
-      m_image = cv::Mat();
-      free(m_bmpBuffer);
-      m_bmpBuffer = 0;
-      return false;
-    }
-    if(r == 0) {
-      // Timed out
-      m_image = cv::Mat();
-      free(m_bmpBuffer);
-      m_bmpBuffer = 0;
-      return false;
-    }
-    
-    const int readRes = this->readFrame();
-    if(readRes == -1) {
-      // Something went wrong
-      m_image = cv::Mat();
-      free(m_bmpBuffer);
-      m_bmpBuffer = 0;
-      return false;
-    }
-    else if(readRes == 1) {
-      // Success
-      break;
-    }
+  if (m_model == WHITE_2016)
+  {
+	  for(;;) {
+		fd_set fds;
+		FD_ZERO(&fds);
+		FD_SET(m_fd, &fds);
+
+		// Timeout
+		struct timeval tv;
+		tv.tv_sec = 2;
+		tv.tv_usec = 0;
+
+		const int r = select(m_fd + 1, &fds, NULL, NULL, &tv);
+		if(r == -1) {
+		  if(errno == EINTR) continue;
+		  m_image = cv::Mat();
+		  free(m_bmpBuffer);
+		  m_bmpBuffer = 0;
+		  return false;
+		}
+		if(r == 0) {
+		  // Timed out
+		  m_image = cv::Mat();
+		  free(m_bmpBuffer);
+		  m_bmpBuffer = 0;
+		  return false;
+		}
+
+		const int readRes = this->readFrame();
+		if(readRes == -1) {
+		  // Something went wrong
+		  m_image = cv::Mat();
+		  const int readRes = this->readFrame();
+		  if (readRes == -1) return false; // TODO more image clearing
+		  // No need to update channels if there are none.
+		  if(m_channels.empty()) return true;
+
+		  // Dirty all channel impls
+		  ChannelImplManager::setImage(m_image);
+
+		  free(m_bmpBuffer);
+		  m_bmpBuffer = 0;
+		  return false;
+		}
+		else if(readRes == 1) {
+		  // Success
+		  break;
+		}
+	  }
   }
-  
+  else if (m_model == BLACK_2017)
+  {
+	  const int readRes = this->readFrame();
+	  if (readRes == -1) return false;
+  }
+
   // No need to update channels if there are none.
   if(m_channels.empty()) return true;
   
@@ -447,6 +529,7 @@ bool Camera::Device::update()
   ChannelPtrVector::const_iterator it = m_channels.begin();
   for(; it != m_channels.end(); ++it) (*it)->invalidate();
   return true;
+
 #endif
 }
 
@@ -663,35 +746,69 @@ int Camera::Device::readFrame()
   WARN("camera only supported on wallaby");
   return -1;
 #else
-  struct v4l2_buffer buf;
-  memset(&buf, 0, sizeof(buf));
-  buf.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
-  buf.memory = V4L2_MEMORY_MMAP;
-  if(xioctl(m_fd, VIDIOC_DQBUF, &buf) == -1) {
-    switch(errno) {
-      case EAGAIN:
-        // Try again later
-        return 0;
-      case EIO:
-      default:
-        // Something is wrong
-        return -1;
-    }
+  if (m_model == WHITE_2016)
+  {
+	  struct v4l2_buffer buf;
+	  memset(&buf, 0, sizeof(buf));
+	  buf.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
+	  buf.memory = V4L2_MEMORY_MMAP;
+	  if(xioctl(m_fd, VIDIOC_DQBUF, &buf) == -1) {
+		switch(errno) {
+		  case EAGAIN:
+			// Try again later
+			return 0;
+		  case EIO:
+		  default:
+			// Something is wrong
+			return -1;
+		}
+	  }
+
+	  assert(buf.index < nBuffers);
+
+	  // Process frame
+	  // TODO: width and height shouldn't be hardcoded
+	  // OPENCV WAY
+	  //cv::Mat jpgBuf(cv::Size(160, 120), CV_8UC3, buffers[buf.index].start);
+	  //m_image = cv::imdecode(jpgBuf, CV_LOAD_IMAGE_COLOR);
+	  // LIBJPEG WAY
+	  m_image = this->decodeJpeg(buffers[buf.index].start, buf.bytesused);
+
+	  if(xioctl(m_fd, VIDIOC_QBUF, &buf) == -1)
+		return -1;
+
+	  return 1;
   }
-  
-  assert(buf.index < nBuffers);
-  
-  // Process frame
-  // TODO: width and height shouldn't be hardcoded
-  /*// OPENCV WAY
-  cv::Mat jpgBuf(cv::Size(160, 120), CV_8UC3, buffers[buf.index].start);
-  m_image = cv::imdecode(jpgBuf, CV_LOAD_IMAGE_COLOR);*/
-  // LIBJPEG WAY
-  m_image = this->decodeJpeg(buffers[buf.index].start, buf.bytesused);
-  
-  if(xioctl(m_fd, VIDIOC_QBUF, &buf) == -1)
-    return -1;
-  
+  else if (m_model == BLACK_2017)
+  {
+	  if (!m_connected)
+	  {
+		printf("not connected\n");
+		open(0, LOW_RES, WHITE_2016); // TODO real numbers, we don't use these yet
+		return -1;
+	  }
+
+	  if (m_cap == 0)
+	  {
+		printf("m_cap ptr = 0\n");
+		return -1;
+	  }
+	  // no decoding
+	  if (!(m_cap->isOpened()))
+	  {
+		  printf("cap isn't opened\n");
+	  }
+
+
+	  if ( !(m_cap->read(m_image)))
+	  {
+		printf("error reading image\n");
+		return -1;
+	  }
+
+	  return 1;
+  }
+
   // Success!
   return 1;
 #endif

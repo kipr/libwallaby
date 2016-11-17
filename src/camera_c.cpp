@@ -33,19 +33,15 @@ int camera_open_at_res(enum Resolution res)
 
 int camera_open_device(int number, enum Resolution res)
 {
-  if(res != LOW_RES) {
-    WARN("only LOW_RES is currently supported");
-    return 0;
-  }
-  
-  const bool ret = DeviceSingleton::instance()->open(number);
+  int ret = camera_open_device_model_at_res(number, WHITE_2016, res);
+  return ret;
+}
+
+int camera_open_device_model_at_res(int number, enum Model model, enum Resolution res)
+{
+  bool ret = DeviceSingleton::instance()->open(number, res, model);
   if(!ret) return 0;
-  
-  //const int width = 160;
-  //const int height = 120;
-  //DeviceSingleton::instance()->setWidth(width);
-  //DeviceSingleton::instance()->setHeight(height);
-  
+
   return 1;
 }
 
