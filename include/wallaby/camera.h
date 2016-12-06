@@ -53,6 +53,17 @@ enum Model
 int camera_open();
 
 /**
+ * Opens the default system camera for use at LOW_RES (160x120).
+ * This will improve frame rates for the black Logitech camera
+ * \return 1 on success, 0 on failure
+ * \see camera_open_at_res
+ * \see camera_open_device
+ * \see camera_close
+ * \ingroup camera
+ */
+int camera_open_black();
+
+/**
  * Opens the default system camera for use at a given resolution.
  * \param res The resolution the camera should operate at. This can be:
  *   - LOW_RES (160x120)
