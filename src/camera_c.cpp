@@ -21,6 +21,11 @@ int camera_open()
   return camera_open_at_res(LOW_RES);
 }
 
+int camera_open_black()
+{
+	return camera_open_device_model_at_res(0, BLACK_2017, LOW_RES);
+}
+
 int camera_open_at_res(enum Resolution res)
 {
   if(res != LOW_RES) {
