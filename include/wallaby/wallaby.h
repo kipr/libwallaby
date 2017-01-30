@@ -15,6 +15,7 @@
 #include "botball.h"
 #include "button.h"
 #include "camera.h"
+#include "compass.h"
 #include "console.h"
 #include "create.h"
 #include "digital.h"
