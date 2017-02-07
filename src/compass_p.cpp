@@ -102,7 +102,7 @@ void Compass::calibrate()
 	  mean_y = sum_y / NSAMPLES;
 	  mean_z = sum_z / NSAMPLES;
 
-	  printf("Means: %f %f %f\n\r", mean_x, mean_y, mean_z);
+	  //printf("Means: %f %f %f\n\r", mean_x, mean_y, mean_z);
 
 	  // Zero-center data
 	  //printf("Zero centering...\n\r");
