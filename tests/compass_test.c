@@ -33,7 +33,7 @@ int main(int argc, char ** argv)
 
 	// Test:  void set_compass_params(float meanX, float meanY, float meanZ,
 	//			    float W1, float W2, float div_E1, float div_E2)
-	set_compass_params(0,0,0,0,0,0,0); // TODO: sensible defaults
+	set_compass_params(-70.386002, -6.933000, 114.002998, -0.068338, 0.115273, 1.002332, 1.011292);
 
 
 	printf("Done.\n");
