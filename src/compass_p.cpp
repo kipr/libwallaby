@@ -95,7 +95,7 @@ void Compass::calibrate()
 	    sum_x += x[i];
 	    sum_y += y[i];
 	    sum_z += z[i];
-	    printf("%f %f %f\n\r", x[i], y[i], z[i]);
+	    //printf("%f %f %f\n\r", x[i], y[i], z[i]);
 	  };
 
 	  mean_x = sum_x / NSAMPLES;
@@ -105,7 +105,7 @@ void Compass::calibrate()
 	  printf("Means: %f %f %f\n\r", mean_x, mean_y, mean_z);
 
 	  // Zero-center data
-	  printf("Zero centering...\n\r");
+	  //printf("Zero centering...\n\r");
 
 	  for(i=0; i < NSAMPLES; ++i){
 	    x[i] -= mean_x;
@@ -114,7 +114,7 @@ void Compass::calibrate()
 	  };
 
 	  // Compute higher-order covariance terms
-	  printf("2nd-order terms...\n\r");
+	  //printf("2nd-order terms...\n\r");
 
 	  sum_x2 = sum_y2 = sum_xy = sum_xz = sum_yz = 0.0;
 
@@ -126,7 +126,7 @@ void Compass::calibrate()
 	    sum_yz += y[i] * z[i];
 	  };
 
-	  printf("Inverting covariance matrix...\n\r");
+	  //printf("Inverting covariance matrix...\n\r");
 	  det = sum_x2 * sum_y2 - sum_xy * sum_xy;
 
 	  // Inverse is [iA, iB; iC iD]
@@ -139,7 +139,7 @@ void Compass::calibrate()
 	  w1 =  iA * sum_xz + iB * sum_yz;
 	  w2 =  iC * sum_xz + iD * sum_yz;
 
-	  printf("Slopes: %f %f\n\r", w1, w2);
+	  //printf("Slopes: %f %f\n\r", w1, w2);
 
 	  // Orthogonal vectors [1; 0; w1] and [0; 1; w2]
 	  div_e1 = sqrt(1 + w1*w1);
