@@ -147,7 +147,7 @@ void Compass::calibrate()
 	                + w1*w1*w1*w1 + w2*w2);
 
 	  // Give the user the line of code that will calibrate the compass directly
-	  printf("Complete: imu_set_compass_params(%f, %f, %f, %f, %f, %f, %f)\n\r",
+	  printf("Complete: set_compass_params(%f, %f, %f, %f, %f, %f, %f)\n\r",
 	         mean_x, mean_y, mean_z, w1, w2, div_e1, div_e2);
 }
 
