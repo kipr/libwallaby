@@ -26,8 +26,19 @@ Aruco::Aruco(int dictionaryId) {
   if (access(this->newCalibrationFile.c_str(), F_OK) != -1)
     calib_file = this->newCalibrationFile;
   this->readCameraCalibration(calib_file);
+  this->m_camDevice = new Camera::Device();
 }
 
+/*
+ * Aruco
+ *
+ * Class for detecting Aruco markers and getting Pose Estimation
+ *
+ */
+ cv::Mat Arcuo::getFrame()
+ {
+   
+ }
 /*
  * Set Camera Calibration
  *

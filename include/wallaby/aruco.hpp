@@ -20,6 +20,8 @@
 
 #include "wallaby/camera.hpp"
 
+#include "wallaby/camera.hpp"
+
 class Aruco {
 public:
   Aruco(int dicionaryId);
@@ -46,6 +48,7 @@ private:
   std::string newCalibrationFile = "";   // TODO neet to get the proper path
   cv::Ptr<cv::aruco::Dictionary> dictionary;
   cv::Ptr<cv::aruco::DetectorParameters> detectorParams;
+  Camera::Device *m_camDevice;
 
   cv::Mat getFrame();
   bool saveCalibration();
