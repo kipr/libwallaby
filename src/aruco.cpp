@@ -32,12 +32,25 @@ Aruco::Aruco(int dictionaryId) {
 /*
  * Aruco
  *
+ * Class Destructor
+ *
+ */
+Aruco::~Aruco()
+{
+  this->m_camDevice->close();
+}
+
+/*
+ * Aruco
+ *
  * Class for detecting Aruco markers and getting Pose Estimation
  *
  */
- cv::Mat Arcuo::getFrame()
+ cv::Mat Aruco::getFrame()
  {
-   
+   cv::Mat mt;
+   if(!this->m_camDevice->update()) return mt;
+   return m_camDevice->rawImage();
  }
 /*
  * Set Camera Calibration
@@ -113,12 +126,8 @@ bool Aruco::vectorContains(std::vector<int> vec, int val) {
 std::vector<double> Aruco::getPose(int arucoId) {
   std::vector<double> rottransvec;
   rottransvec.assign(6, 0.0);
-  // TODO setup using Libwallaby Camera
-  // if(!this->isCameraOpen()) return rottransvec;
-
-  // TODO setup using Libwallaby Camera
-  // cv::Mat img = this->getFrame();
-  cv::Mat img;
+  if(!this->m_camDevice->isOpen()) return rottransvec;
+  cv::Mat img = this->getFrame();
   std::vector<int> ids;
   std::vector<std::vector<cv::Point2f>> corners, rejected;
   std::vector<cv::Vec3d> rvecs, tvecs;
@@ -154,11 +163,8 @@ std::vector<double> Aruco::getPose(int arucoId) {
 std::vector<int> Aruco::arucoMarkersInView() {
   std::vector<int> ids;
   std::vector<std::vector<cv::Point2f>> corners, rejected;
-  // TODO Setup using Libwallaby Camera
-  // if(!this->isCameraOpen()) return ids;
-  // TODO Setup using Libwallaby Camera
-  // Mat img = this->getFrame();
-  cv::Mat img;
+  if(!this->m_camDevice->isOpen()) return ids;
+  cv::Mat img = this->getFrame();
   cv::aruco::detectMarkers(img, this->dictionary, corners, ids, detectorParams,
                            rejected);
   return ids;
@@ -173,11 +179,8 @@ std::vector<int> Aruco::arucoMarkersInView() {
 bool Aruco::arucoMarkerInView(int arucoId) {
   std::vector<int> ids;
   std::vector<std::vector<cv::Point2f>> corners, rejected;
-  // TODO Setup using Libwallaby Camera
-  // if(!this->isCameraOpen()) return false;
-  // TODO Setup using Libwallaby Camera
-  // Mat img = this->getFrame();
-  cv::Mat img;
+  if(!this->m_camDevice->isOpen()) return false;
+  cv::Mat img = this->getFrame();
   cv::aruco::detectMarkers(img, this->dictionary, corners, ids, detectorParams,
                            rejected);
   if (find(ids.begin(), ids.end(), arucoId) != ids.end())
@@ -233,10 +236,7 @@ void Aruco::getImagesFromCamera() {
   std::vector<cv::Mat> savedImages;
   std::vector<std::vector<cv::Point2f>> markerCorners, rejectedCorners;
 
-  // TODO setup using Libwallaby Camera
-  // if (!this->inputVideo.isOpened()) {
-  //   return;
-  // }
+  if(!this->m_camDevice->isOpen()) return;
   usleep(5 * 1000000);
   while (true) {
     // TODO Setup using LibWallaby Camera

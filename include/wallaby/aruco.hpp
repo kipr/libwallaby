@@ -25,6 +25,7 @@
 class Aruco {
 public:
   Aruco(int dicionaryId);
+  ~Aruco();
   std::vector<double> getPose(int arucoId);
   std::vector<int> arucoMarkersInView();
   bool arucoMarkerInView(int arucoId);
