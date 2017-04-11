@@ -12,7 +12,7 @@
  * Class for detecting Aruco markers and getting Pose Estimation
  *
  */
-Aruco::Aruco(int dictionaryId) {
+aruco::Aruco::Aruco(int dictionaryId) {
   std::string calib_file = this->calibrationFile;
   this->dictionaryId = dictionaryId;
   // if dictioniary ID < 0 use custom dictionary file
@@ -30,12 +30,24 @@ Aruco::Aruco(int dictionaryId) {
 }
 
 /*
+ * get Instance
+ *
+ * Get an instance of the Aruco class
+ *
+ */
+ aruco::Aruco* aruco::Aruco::getInstance()
+{
+  if(!aruco::instance) aruco::instance = new Aruco(aruco::defaultDictionaryID);
+  return aruco::instance;
+}
+
+/*
  * Aruco
  *
  * Class Destructor
  *
  */
-Aruco::~Aruco()
+aruco::Aruco::~Aruco()
 {
   this->m_camDevice->close();
 }
@@ -46,7 +58,7 @@ Aruco::~Aruco()
  * Class for detecting Aruco markers and getting Pose Estimation
  *
  */
- cv::Mat Aruco::getFrame()
+ cv::Mat aruco::Aruco::getFrame()
  {
    cv::Mat mt;
    if(!this->m_camDevice->update()) return mt;
@@ -58,7 +70,7 @@ Aruco::~Aruco()
  * Updates the Camera Distortion Matrixes from the file
  *
  */
-bool Aruco::setCameraCalibration(std::string filename) {
+bool aruco::Aruco::setCameraCalibration(std::string filename) {
   if (access(filename.c_str(), F_OK) == -1)
     return false;
   return this->readCameraCalibration(filename);
@@ -70,7 +82,7 @@ bool Aruco::setCameraCalibration(std::string filename) {
  * Reads in the Camera Callibration for use with Pose Estimation
  *
  */
-bool Aruco::readCameraCalibration(std::string filename) {
+bool aruco::Aruco::readCameraCalibration(std::string filename) {
   cv::FileStorage fs(filename, cv::FileStorage::READ);
   if (!fs.isOpened())
     return false;
@@ -86,7 +98,7 @@ bool Aruco::readCameraCalibration(std::string filename) {
  * Sets the Dictionary to a custom dictionary
  *
  */
-bool Aruco::getCustomDictionary() {
+bool aruco::Aruco::getCustomDictionary() {
   int markerSize, maxCorrectionBits;
   cv::Mat bytesList;
   cv::FileStorage fs(this->customDictionaryFile, cv::FileStorage::READ);
@@ -107,7 +119,7 @@ bool Aruco::getCustomDictionary() {
  * a value
  *
  */
-bool Aruco::vectorContains(std::vector<int> vec, int val) {
+bool aruco::Aruco::vectorContains(std::vector<int> vec, int val) {
   if (find(vec.begin(), vec.end(), val) != vec.end())
     return true;
   return false;
@@ -123,7 +135,7 @@ bool Aruco::vectorContains(std::vector<int> vec, int val) {
  * returns as TX TY TZ RX RY RZ
  *
  */
-std::vector<double> Aruco::getPose(int arucoId) {
+std::vector<double> aruco::Aruco::getPose(int arucoId) {
   std::vector<double> rottransvec;
   rottransvec.assign(6, 0.0);
   if(!this->m_camDevice->isOpen()) return rottransvec;
@@ -160,7 +172,7 @@ std::vector<double> Aruco::getPose(int arucoId) {
  * Get an array (vector) of all Aruco Markers in the current view
  *
  */
-std::vector<int> Aruco::arucoMarkersInView() {
+std::vector<int> aruco::Aruco::arucoMarkersInView() {
   std::vector<int> ids;
   std::vector<std::vector<cv::Point2f>> corners, rejected;
   if(!this->m_camDevice->isOpen()) return ids;
@@ -176,7 +188,7 @@ std::vector<int> Aruco::arucoMarkersInView() {
  * Check if a particular Aruco Marker is in the current view
  *
  */
-bool Aruco::arucoMarkerInView(int arucoId) {
+bool aruco::Aruco::arucoMarkerInView(int arucoId) {
   std::vector<int> ids;
   std::vector<std::vector<cv::Point2f>> corners, rejected;
   if(!this->m_camDevice->isOpen()) return false;
@@ -194,7 +206,7 @@ bool Aruco::arucoMarkerInView(int arucoId) {
  * Determines the chess board Position
  *
  */
-void Aruco::calculateChessBoardPosition(std::vector<cv::Point3f> &corners) {
+void aruco::Aruco::calculateChessBoardPosition(std::vector<cv::Point3f> &corners) {
   for (size_t i = 0; i < (size_t)this->chessBoardDimensions.height; i++) {
     for (size_t j = 0; j < (size_t)this->chessBoardDimensions.width; j++) {
       // X = j * square size, Y = i * square size, Z = 0.0
@@ -210,7 +222,7 @@ void Aruco::calculateChessBoardPosition(std::vector<cv::Point3f> &corners) {
  * Determines all the chess board corner positions
  *
  */
-void Aruco::calculateChessBoardCornersFromImages(
+void aruco::Aruco::calculateChessBoardCornersFromImages(
     std::vector<std::vector<cv::Point2f>> &foundCorners) {
   for (std::vector<cv::Mat>::iterator iter = this->images.begin();
        iter != this->images.end(); iter++) {
@@ -230,7 +242,7 @@ void Aruco::calculateChessBoardCornersFromImages(
  *
  */
 
-void Aruco::getImagesFromCamera() {
+void aruco::Aruco::getImagesFromCamera() {
   cv::Mat frame, drawToFrame, oefficients,
       cameraMatrix = cv::Mat::eye(3, 3, CV_64F);
   std::vector<cv::Mat> savedImages;
@@ -268,7 +280,7 @@ void Aruco::getImagesFromCamera() {
  * Grab images from a camera and store for calibration
  *
  */
-bool Aruco::calibrate() {
+bool aruco::Aruco::calibrate() {
   this->getImagesFromCamera();
   std::vector<std::vector<cv::Point2f>> imageSpacePoints;
   this->calculateChessBoardCornersFromImages(imageSpacePoints);
@@ -288,7 +300,7 @@ bool Aruco::calibrate() {
     return false;
 }
 
-bool Aruco::saveCalibration() {
+bool aruco::Aruco::saveCalibration() {
   cv::FileStorage fs(this->newCalibrationFile, cv::FileStorage::WRITE);
   if (!fs.isOpened())
     return false;

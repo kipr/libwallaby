@@ -9,6 +9,7 @@
 #define INCLUDE_WALLABY_WALLABY_H_
 
 #include "accel.h"
+#include "aruco.h"
 #include "analog.h"
 #include "audio.h"
 #include "battery.h"

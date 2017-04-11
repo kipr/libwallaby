@@ -9,19 +9,19 @@
 int main()
 {
     int ret;
-  
+
     printf("Camera open\n");
     camera_open_device_model_at_res(0, WHITE_2016, LOW_RES);
-    
+
     printf("load config\n");
     ret = camera_load_config("1");
     if (ret == 1) printf("...success\n");
-  
+
     camera_update();
     printf("Cam width x height:  %d x %d\n", get_camera_width(), get_camera_height());
-  
+
     printf("Num channels = %d\n", get_channel_count());
-  
+
 
     int i;
     double start = seconds();
@@ -35,9 +35,9 @@ int main()
        // printf("%f\n", seconds());
     }
     double stop = seconds();
-  
-    printf("%f fps\n", ((double)num_imgs/(stop-start)));  
-  
+
+    printf("%f fps\n", ((double)num_imgs/(stop-start)));
+
     printf("Camera close\n");
     camera_close();
     return 0;

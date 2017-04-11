@@ -20,45 +20,50 @@
 
 #include "wallaby/camera.hpp"
 
-#include "wallaby/camera.hpp"
+namespace aruco {
+  class Aruco;
+  static Aruco* instance;
+  const static int defaultDictionaryID = 0; // TODO default dictionary
 
-class Aruco {
-public:
-  Aruco(int dicionaryId);
-  ~Aruco();
-  std::vector<double> getPose(int arucoId);
-  std::vector<int> arucoMarkersInView();
-  bool arucoMarkerInView(int arucoId);
-  bool setCameraCalibration(std::string filename);
-  bool calibrate();
+  class Aruco {
+  public:
+    static Aruco* getInstance();
+    Aruco(int dicionaryId);
+    ~Aruco();
+    std::vector<double> getPose(int arucoId);
+    std::vector<int> arucoMarkersInView();
+    bool arucoMarkerInView(int arucoId);
+    bool setCameraCalibration(std::string filename);
+    bool calibrate();
 
-private:
-  float chessBoardSquareSize = 0.0235f; // Meters // TODO pass in this value?
-  float arucoSquareSize = 0.025f;       // Meters // TODO pass in this value?
-  int numImagesForCalibration = 15;     // TODO appropriate value?
-  cv::Size chessBoardDimensions = cv::Size(6, 9);
-  std::vector<cv::Mat> images;
-  std::vector<std::vector<cv::Point2f>> foundChessboardCorners;
-  cv::Mat cameraMatrix, distortionCoefficients;
-  int dictionaryId;
-  int chessBoardFlags = cv::CALIB_CB_ADAPTIVE_THRESH |
-                        cv::CALIB_CB_NORMALIZE_IMAGE | cv::CALIB_CB_FAST_CHECK;
-  std::string calibrationFile =
-      "calibration.txt";                 // TODO need to get the proper path
-  std::string customDictionaryFile = ""; // TODO need to get the proper path
-  std::string newCalibrationFile = "";   // TODO neet to get the proper path
-  cv::Ptr<cv::aruco::Dictionary> dictionary;
-  cv::Ptr<cv::aruco::DetectorParameters> detectorParams;
-  Camera::Device *m_camDevice;
+  private:
+    float chessBoardSquareSize = 0.0235f; // Meters // TODO pass in this value?
+    float arucoSquareSize = 0.025f;       // Meters // TODO pass in this value?
+    int numImagesForCalibration = 15;     // TODO appropriate value?
+    cv::Size chessBoardDimensions = cv::Size(6, 9);
+    std::vector<cv::Mat> images;
+    std::vector<std::vector<cv::Point2f>> foundChessboardCorners;
+    cv::Mat cameraMatrix, distortionCoefficients;
+    int dictionaryId;
+    int chessBoardFlags = cv::CALIB_CB_ADAPTIVE_THRESH |
+    cv::CALIB_CB_NORMALIZE_IMAGE | cv::CALIB_CB_FAST_CHECK;
+    std::string calibrationFile =
+    "calibration.txt";                 // TODO need to get the proper path
+    std::string customDictionaryFile = ""; // TODO need to get the proper path
+    std::string newCalibrationFile = "";   // TODO neet to get the proper path
+    cv::Ptr<cv::aruco::Dictionary> dictionary;
+    cv::Ptr<cv::aruco::DetectorParameters> detectorParams;
+    Camera::Device *m_camDevice;
 
-  cv::Mat getFrame();
-  bool saveCalibration();
-  void getImagesFromCamera();
-  bool getCustomDictionary();
-  bool readCameraCalibration(std::string filename);
-  void calculateChessBoardPosition(std::vector<cv::Point3f> &vec);
-  bool vectorContains(std::vector<int> vec, int val);
-  void calculateChessBoardCornersFromImages(
+    cv::Mat getFrame();
+    bool saveCalibration();
+    void getImagesFromCamera();
+    bool getCustomDictionary();
+    bool readCameraCalibration(std::string filename);
+    void calculateChessBoardPosition(std::vector<cv::Point3f> &vec);
+    bool vectorContains(std::vector<int> vec, int val);
+    void calculateChessBoardCornersFromImages(
       std::vector<std::vector<cv::Point2f>> &foundCorners);
-};
+    };
+}
 #endif
