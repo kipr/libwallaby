@@ -32,6 +32,8 @@ aruco::Aruco::Aruco(int dictionaryId) {
     this->readCameraCalibration(this->currentCalibrationFile);
   }
   this->m_camDevice = new Camera::Device();
+  std::cout << "Aruco constructor" << std::endl;
+  // TODO: ??? this->m_camDevice->open(0, LOW_RES, BLACK_2017);
 }
 
 /*
@@ -208,9 +210,16 @@ std::vector<double> aruco::Aruco::getPose(int arucoId) {
 std::vector<int> aruco::Aruco::arucoMarkersInView() {
   std::vector<int> ids;
   std::vector<std::vector<cv::Point2f>> corners, rejected;
+<<<<<<< 889d39bd6b8fb9c04b97aae05691e307a159b21f
   if (!this->m_camDevice->isOpen())
     if (!this->openCamera())
       return ids;
+=======
+  if(!this->m_camDevice->isOpen()){
+      std::cout << "camera is not open" << std::endl;
+      return ids;
+  }
+>>>>>>> Adding debug info and todos
   cv::Mat img = this->getFrame();
   cv::aruco::detectMarkers(img, this->dictionary, corners, ids, detectorParams,
                            rejected);
