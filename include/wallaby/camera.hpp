@@ -29,7 +29,7 @@
 
 #define CAMERA_CHANNEL_TYPE_HSV_KEY ("hsv")
 #define CAMERA_CHANNEL_TYPE_QR_KEY ("qr")
-#define CAMERA_CHANNEL_TYPE_ARUCO_KE Y ("aruco")
+#define CAMERA_CHANNEL_TYPE_ARUCO_KEY ("aruco")
 
 namespace cv {
 class VideoCapture;
