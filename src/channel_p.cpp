@@ -11,6 +11,9 @@
 #include <opencv2/imgproc/imgproc.hpp>
 
 #include <zbar.h>
+#include <iostream> 
+#include "wallaby/aruco.hpp"
+
 
 using namespace Private::Camera;
 
@@ -157,7 +160,8 @@ void ArucoChannelImpl::update(const cv::Mat &image)
 Camera::ObjectVector ArucoChannelImpl::findObjects(const Config &config)
 {
   if(m_image.empty()) return ::Camera::ObjectVector();
-  
+  std::cout << "We see " << aruco::Aruco::getInstance()->arucoMarkersInView().size() << " markers" << std::endl;
+
   // TODO: find aruco markers and fill ret in  
   return ::Camera::ObjectVector();
 }
