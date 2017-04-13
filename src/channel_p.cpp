@@ -154,7 +154,7 @@ void ArucoChannelImpl::update(const cv::Mat &image)
   
   // TODO: actual aruco image format needs
 
-   m_image = image
+   m_image = image;
 }
 
 Camera::ObjectVector ArucoChannelImpl::findObjects(const Config &config)
