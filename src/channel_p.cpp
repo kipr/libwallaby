@@ -137,3 +137,27 @@ void BarcodeChannelImpl::update(const cv::Mat &image)
   
   return ret;
 }
+
+ArucoChannelImpl::ArucoChannelImpl()
+{
+}
+
+void ArucoChannelImpl::update(const cv::Mat &image)
+{
+  if(image.empty()) {
+    m_image = cv::Mat();
+    return;
+  }
+  
+  // TODO: actual aruco image format needs
+
+  cv::cvtColor(image, m_image, cv::COLOR_BGR2HSV);
+}
+
+Camera::ObjectVector ArucoChannelImpl::findObjects(const Config &config)
+{
+  if(m_image.empty()) return ::Camera::ObjectVector();
+  
+  // TODO: find aruco markers and fill ret in  
+  return ::Camera::ObjectVector();
+}

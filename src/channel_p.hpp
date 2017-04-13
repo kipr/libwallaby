@@ -40,6 +40,17 @@ namespace Private
       zbar::Image m_image;
       zbar::ImageScanner m_scanner;
     };
+
+    class ArucoChannelImpl : public ::Camera::ChannelImpl
+    {
+    public:
+      ArucoChannelImpl();
+      virtual void update(const cv::Mat &image);
+      virtual ::Camera::ObjectVector findObjects(const Config &config);
+
+    private:
+      cv::Mat m_image;
+    };
   }
 }
 
