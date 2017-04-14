@@ -300,7 +300,13 @@ bool aruco::Aruco::calibrate() {
     return false;
 }
 
-bool aruco::Aruco::saveCalibration() {
+/*
+ * Save Calibration
+ *
+ * Save the custom calibration file
+ *
+ */
+bool Aruco::saveCalibration() {
   cv::FileStorage fs(this->newCalibrationFile, cv::FileStorage::WRITE);
   if (!fs.isOpened())
     return false;
@@ -316,4 +322,30 @@ bool aruco::Aruco::saveCalibration() {
   fs.release();
   this->setCameraCalibration(this->newCalibrationFile);
   return true;
+}
+
+/*
+ * Set Chess Board Size
+ *
+ * Sets the size for the chess board squares
+ *
+ */
+void Aruco::setChessBoardSize(float sizeInMeters) {
+  if (sizeInMeters > 0.0 && sizeInMeters < 1.0)
+    this->chessBoardSquareSize = sizeInMeters;
+  else
+    this->chessBoardSquareSize = 0.0235f; // Default size if printed on 8.5x11
+}
+
+/*
+ * Set Aruco Marker Size
+ *
+ * Sets the size for aruco markers
+ *
+ */
+void Aruco::setArucoMarkerSize(float sizeInMeters) {
+  if (sizeInMeters > 0.0 && sizeInMeters < 1.0)
+    this->arucoSquareSize = sizeInMeters;
+  else
+    this->arucoSquareSize = 0.025f; // Default size if printed on 8.5x11
 }

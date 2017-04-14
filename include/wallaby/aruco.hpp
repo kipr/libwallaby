@@ -64,6 +64,7 @@ namespace aruco {
     bool vectorContains(std::vector<int> vec, int val);
     void calculateChessBoardCornersFromImages(
       std::vector<std::vector<cv::Point2f>> &foundCorners);
-    };
-}
+  void setChessBoardSize(float sizeInMeters);
+  void setArucoMarkerSize(float sizeInMeters);
+};
 #endif
