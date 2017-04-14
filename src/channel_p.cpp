@@ -162,7 +162,7 @@ Camera::ObjectVector ArucoChannelImpl::findObjects(const Config &config)
   if(m_image.empty()) return ::Camera::ObjectVector();
   
   // TODO: use m_image, don't get a new image
-  std::cout << "We see " << aruco::Aruco::getInstance()->arucoMarkersInView().size() << " markers" << std::endl;
+  std::cout << "We see " << aruco::Aruco::getInstance()->arucoMarkersInView(&m_image).size() << " markers" << std::endl;
 
   // TODO: find aruco markers and fill ret in  
   return ::Camera::ObjectVector();

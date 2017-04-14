@@ -162,7 +162,7 @@ bool aruco::Aruco::vectorContains(std::vector<int> vec, int val) {
  * returns as TX TY TZ RX RY RZ
  *
  */
-std::vector<double> aruco::Aruco::getPose(int arucoId) {
+std::vector<double> aruco::Aruco::getPose(int arucoId, cv::Mat * frame) {
   std::vector<double> rottransvec;
   rottransvec.assign(6, 0.0);
   // Camera Calibration Failed...No files?
@@ -171,13 +171,22 @@ std::vector<double> aruco::Aruco::getPose(int arucoId) {
        cv::countNonZero(distortionCoefficients) < 1))
     return rottransvec;
 
-  if (!this->m_camDevice->isOpen())
-    if (!this->openCamera())
-      return rottransvec;
-  cv::Mat img = this->getFrame();
+  cv::Mat img;
+  if (frame == nullptr){
+    if (!this->m_camDevice->isOpen())
+      if (!this->openCamera())
+        return rottransvec;
+    img = this->getFrame();
+  }else
+  {
+    img = *frame;
+  }
+
+
   std::vector<int> ids;
   std::vector<std::vector<cv::Point2f>> corners, rejected;
   std::vector<cv::Vec3d> rvecs, tvecs;
+
 
   // detect markers and estimate pose
   cv::aruco::detectMarkers(img, this->dictionary, corners, ids, detectorParams,
@@ -207,15 +216,23 @@ std::vector<double> aruco::Aruco::getPose(int arucoId) {
  * Get an array (vector) of all Aruco Markers in the current view
  *
  */
-std::vector<int> aruco::Aruco::arucoMarkersInView() {
+std::vector<int> aruco::Aruco::arucoMarkersInView(cv::Mat * frame) {
   std::vector<int> ids;
   std::vector<std::vector<cv::Point2f>> corners, rejected;
-  if (!this->m_camDevice->isOpen())
-    if (!this->openCamera())
-      return ids;
-  cv::Mat img = this->getFrame();
+  cv::Mat img;
+  if (frame == nullptr){
+    if (!this->m_camDevice->isOpen())
+      if (!this->openCamera())
+        return ids;
+    img = this->getFrame();
+  }else
+  {
+    img = *frame;
+  }
+
   cv::aruco::detectMarkers(img, this->dictionary, corners, ids, detectorParams,
                            rejected);
+
   return ids;
 }
 
@@ -225,13 +242,19 @@ std::vector<int> aruco::Aruco::arucoMarkersInView() {
  * Check if a particular Aruco Marker is in the current view
  *
  */
-bool aruco::Aruco::arucoMarkerInView(int arucoId) {
+bool aruco::Aruco::arucoMarkerInView(int arucoId, cv::Mat * frame) {
   std::vector<int> ids;
   std::vector<std::vector<cv::Point2f>> corners, rejected;
-  if (!this->m_camDevice->isOpen())
-    if (!this->openCamera())
-      return false;
-  cv::Mat img = this->getFrame();
+  cv::Mat img;
+  if (frame == nullptr){
+    if (!this->m_camDevice->isOpen())
+      if (!this->openCamera())
+        return false;
+    img = this->getFrame();
+  }else
+  {
+    img = *frame;
+  }
   cv::aruco::detectMarkers(img, this->dictionary, corners, ids, detectorParams,
                            rejected);
   if (find(ids.begin(), ids.end(), arucoId) != ids.end())
