@@ -34,6 +34,7 @@ public:
   bool arucoMarkerInView(int arucoId, cv::Mat * frame = nullptr);
   bool setDictionary(int dictionaryId);
   std::vector<int> arucoMarkersInView(cv::Mat * frame = nullptr);
+  std::vector<std::vector<cv::Point2f>> arucoMarkerCorners(cv::Mat * frame = nullptr);
   std::vector<double> getPose(int arucoId, cv::Mat * frame = nullptr);
   void setChessBoardSize(float sizeInMeters);
   void setArucoMarkerSize(float sizeInMeters);

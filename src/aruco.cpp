@@ -235,6 +235,32 @@ std::vector<int> aruco::Aruco::arucoMarkersInView(cv::Mat * frame) {
 }
 
 /*
+ * Marker corners in view
+ *
+ */
+std::vector<std::vector<cv::Point2f>> aruco::Aruco::arucoMarkerCorners(cv::Mat * frame)
+{
+  std::vector<int> ids;
+  std::vector<std::vector<cv::Point2f>> corners, rejected;
+
+  cv::Mat img;
+  if (frame == nullptr) {
+    if (!this->m_camDevice->isOpen())
+      if (!this->openCamera())
+        return corners;
+    img = this->getFrame();
+  } else {
+    img = *frame;
+  }
+
+    cv::aruco::detectMarkers(img, this->dictionary, corners, ids, detectorParams,
+                           rejected);
+
+  return corners;
+}
+
+
+/*
  * Marker In View
  *
  * Check if a particular Aruco Marker is in the current view
