@@ -163,6 +163,12 @@ bool aruco::Aruco::vectorContains(std::vector<int> vec, int val) {
 std::vector<double> aruco::Aruco::getPose(int arucoId) {
   std::vector<double> rottransvec;
   rottransvec.assign(6, 0.0);
+  // Camera Calibration Failed...No files?
+  if ((cameraMatrix.empty() || cv::countNonZero(cameraMatrix) < 1) ||
+      (distortionCoefficients.empty() ||
+       cv::countNonZero(distortionCoefficients) < 1))
+    return rottransvec;
+
   if (!this->m_camDevice->isOpen())
     if (!this->openCamera())
       return rottransvec;
