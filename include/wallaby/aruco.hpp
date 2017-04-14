@@ -30,7 +30,6 @@ class Aruco {
 public:
   Aruco(int dicionaryId);
   ~Aruco();
-  bool calibrate();
   static Aruco *getInstance();
   bool arucoMarkerInView(int arucoId);
   bool setDictionary(int dictionaryId);
@@ -38,6 +37,7 @@ public:
   std::vector<double> getPose(int arucoId);
   void setChessBoardSize(float sizeInMeters);
   void setArucoMarkerSize(float sizeInMeters);
+  bool calibrate(std::vector<cv::Mat> images);
   bool setCameraCalibration(std::string filename);
 
 private:
@@ -53,8 +53,9 @@ private:
                         cv::CALIB_CB_NORMALIZE_IMAGE | cv::CALIB_CB_FAST_CHECK;
 
   std::string currentCalibrationFile = "";
-  std::string customDictionaryFile = ""; // TODO need to get the proper path
-  std::string calibrationFilePath = "";  // TODO neet to get the proper path
+  std::string customDictionaryFile =
+      "kipr_dictionary.yml";            // TODO need to get the proper path
+  std::string calibrationFilePath = ""; // TODO neet to get the proper path
   cv::Ptr<cv::aruco::Dictionary> dictionary;
   cv::Ptr<cv::aruco::DetectorParameters> detectorParams;
   Camera::Device *m_camDevice;

@@ -314,8 +314,8 @@ void aruco::Aruco::getImagesFromCamera() {
  * Grab images from a camera and store for calibration
  *
  */
-bool aruco::Aruco::calibrate() {
-  this->getImagesFromCamera();
+bool aruco::Aruco::calibrate(std::vector<cv::Mat> images) {
+  this->images = images; // pass in images instead of get them here
   std::vector<std::vector<cv::Point2f>> imageSpacePoints;
   this->calculateChessBoardCornersFromImages(imageSpacePoints);
   std::vector<std::vector<cv::Point3f>> worldCornerPoints(1);
