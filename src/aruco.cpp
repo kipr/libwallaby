@@ -13,19 +13,24 @@
  *
  */
 aruco::Aruco::Aruco(int dictionaryId) {
-  std::string calib_file = this->calibrationFile;
   this->dictionaryId = dictionaryId;
   // if dictioniary ID < 0 use custom dictionary file
-  if (dictionaryId < 0)
+  this->dictionaryId = dictionaryId;
+  if (dictionaryId < 0) {
     this->getCustomDictionary();
-  else
+  } else {
     this->dictionary = cv::aruco::getPredefinedDictionary(
         cv::aruco::PREDEFINED_DICTIONARY_NAME(this->dictionaryId));
+  }
   this->detectorParams = cv::aruco::DetectorParameters::create();
   this->detectorParams->doCornerRefinement = true;
-  if (access(this->newCalibrationFile.c_str(), F_OK) != -1)
-    calib_file = this->newCalibrationFile;
-  this->readCameraCalibration(calib_file);
+  // sets WHITE_2016 custom configuration as default
+  std::string fname = this->calibrationFilePath + this->WHITE_CAMERA_FILE;
+  if (access(fname.c_str(), F_OK) != -1) {
+    this->currentCalibrationFile = this->WHITE_CAMERA_FILE;
+    // Now get distortion calibration data
+    this->readCameraCalibration(this->currentCalibrationFile);
+  }
   this->m_camDevice = new Camera::Device();
 }
 
@@ -35,9 +40,9 @@ aruco::Aruco::Aruco(int dictionaryId) {
  * Get an instance of the Aruco class
  *
  */
- aruco::Aruco* aruco::Aruco::getInstance()
-{
-  if(!aruco::instance) aruco::instance = new Aruco(aruco::defaultDictionaryID);
+aruco::Aruco *aruco::Aruco::getInstance() {
+  if (!aruco::instance)
+    aruco::instance = new Aruco(aruco::defaultDictionaryID);
   return aruco::instance;
 }
 
@@ -47,9 +52,9 @@ aruco::Aruco::Aruco(int dictionaryId) {
  * Class Destructor
  *
  */
-aruco::Aruco::~Aruco()
-{
-  this->m_camDevice->close();
+aruco::Aruco::~Aruco() {
+  if (this->m_camDevice->isOpen())
+    this->m_camDevice->close();
 }
 
 /*
@@ -58,12 +63,12 @@ aruco::Aruco::~Aruco()
  * Class for detecting Aruco markers and getting Pose Estimation
  *
  */
- cv::Mat aruco::Aruco::getFrame()
- {
-   cv::Mat mt;
-   if(!this->m_camDevice->update()) return mt;
-   return m_camDevice->rawImage();
- }
+cv::Mat aruco::Aruco::getFrame() {
+  cv::Mat mt;
+  if (!this->m_camDevice->update())
+    return mt;
+  return m_camDevice->rawImage();
+}
 /*
  * Set Camera Calibration
  *
@@ -71,8 +76,10 @@ aruco::Aruco::~Aruco()
  *
  */
 bool aruco::Aruco::setCameraCalibration(std::string filename) {
-  if (access(filename.c_str(), F_OK) == -1)
+  std::string fname = this->calibrationFilePath + filename;
+  if (access(fname.c_str(), F_OK) == -1)
     return false;
+  this->currentCalibrationFile = filename;
   return this->readCameraCalibration(filename);
 }
 
@@ -83,7 +90,8 @@ bool aruco::Aruco::setCameraCalibration(std::string filename) {
  *
  */
 bool aruco::Aruco::readCameraCalibration(std::string filename) {
-  cv::FileStorage fs(filename, cv::FileStorage::READ);
+  cv::FileStorage fs(this->calibrationFilePath + filename,
+                     cv::FileStorage::READ);
   if (!fs.isOpened())
     return false;
   fs["camera_matrix"] >> this->cameraMatrix;
@@ -92,6 +100,23 @@ bool aruco::Aruco::readCameraCalibration(std::string filename) {
   return true;
 }
 
+/*
+ * Get Custom Dictionary
+ *
+ * Sets the Dictionary to a custom dictionary
+ *
+ */
+bool aruco::Aruco::setDictionary(int dictionaryId) {
+  if (dictionaryId < 0) {
+    this->dictionaryId = dictionaryId;
+    return getCustomDictionary();
+  } else {
+    this->dictionaryId = dictionaryId;
+    this->dictionary = cv::aruco::getPredefinedDictionary(
+        cv::aruco::PREDEFINED_DICTIONARY_NAME(dictionaryId));
+    return true;
+  }
+}
 /*
  * Get Custom Dictionary
  *
@@ -138,7 +163,9 @@ bool aruco::Aruco::vectorContains(std::vector<int> vec, int val) {
 std::vector<double> aruco::Aruco::getPose(int arucoId) {
   std::vector<double> rottransvec;
   rottransvec.assign(6, 0.0);
-  if(!this->m_camDevice->isOpen()) return rottransvec;
+  if (!this->m_camDevice->isOpen())
+    if (!this->openCamera())
+      return rottransvec;
   cv::Mat img = this->getFrame();
   std::vector<int> ids;
   std::vector<std::vector<cv::Point2f>> corners, rejected;
@@ -175,7 +202,9 @@ std::vector<double> aruco::Aruco::getPose(int arucoId) {
 std::vector<int> aruco::Aruco::arucoMarkersInView() {
   std::vector<int> ids;
   std::vector<std::vector<cv::Point2f>> corners, rejected;
-  if(!this->m_camDevice->isOpen()) return ids;
+  if (!this->m_camDevice->isOpen())
+    if (!this->openCamera())
+      return ids;
   cv::Mat img = this->getFrame();
   cv::aruco::detectMarkers(img, this->dictionary, corners, ids, detectorParams,
                            rejected);
@@ -191,7 +220,9 @@ std::vector<int> aruco::Aruco::arucoMarkersInView() {
 bool aruco::Aruco::arucoMarkerInView(int arucoId) {
   std::vector<int> ids;
   std::vector<std::vector<cv::Point2f>> corners, rejected;
-  if(!this->m_camDevice->isOpen()) return false;
+  if (!this->m_camDevice->isOpen())
+    if (!this->openCamera())
+      return false;
   cv::Mat img = this->getFrame();
   cv::aruco::detectMarkers(img, this->dictionary, corners, ids, detectorParams,
                            rejected);
@@ -206,7 +237,8 @@ bool aruco::Aruco::arucoMarkerInView(int arucoId) {
  * Determines the chess board Position
  *
  */
-void aruco::Aruco::calculateChessBoardPosition(std::vector<cv::Point3f> &corners) {
+void aruco::Aruco::calculateChessBoardPosition(
+    std::vector<cv::Point3f> &corners) {
   for (size_t i = 0; i < (size_t)this->chessBoardDimensions.height; i++) {
     for (size_t j = 0; j < (size_t)this->chessBoardDimensions.width; j++) {
       // X = j * square size, Y = i * square size, Z = 0.0
@@ -248,7 +280,9 @@ void aruco::Aruco::getImagesFromCamera() {
   std::vector<cv::Mat> savedImages;
   std::vector<std::vector<cv::Point2f>> markerCorners, rejectedCorners;
 
-  if(!this->m_camDevice->isOpen()) return;
+  if (!this->m_camDevice->isOpen())
+    if (!this->openCamera())
+      return;
   usleep(5 * 1000000);
   while (true) {
     // TODO Setup using LibWallaby Camera
@@ -306,8 +340,14 @@ bool aruco::Aruco::calibrate() {
  * Save the custom calibration file
  *
  */
-bool Aruco::saveCalibration() {
-  cv::FileStorage fs(this->newCalibrationFile, cv::FileStorage::WRITE);
+bool aruco::Aruco::saveCalibration() {
+  std::string fname = "";
+  if (this->m_camDevice->getModel() == WHITE_2016) {
+    fname = this->calibrationFilePath + this->WHITE_CAMERA_FILE;
+  } else {
+    fname = this->calibrationFilePath + this->BLACK_CAMERA_FILE;
+  }
+  cv::FileStorage fs(fname, cv::FileStorage::WRITE);
   if (!fs.isOpened())
     return false;
   time_t tm;
@@ -320,7 +360,7 @@ bool Aruco::saveCalibration() {
   fs << "camera_matrix" << this->cameraMatrix;
   fs << "distortion_coefficients" << this->distortionCoefficients;
   fs.release();
-  this->setCameraCalibration(this->newCalibrationFile);
+  this->setCameraCalibration(this->calibrationFilePath);
   return true;
 }
 
@@ -330,11 +370,12 @@ bool Aruco::saveCalibration() {
  * Sets the size for the chess board squares
  *
  */
-void Aruco::setChessBoardSize(float sizeInMeters) {
-  if (sizeInMeters > 0.0 && sizeInMeters < 1.0)
+void aruco::Aruco::setChessBoardSize(float sizeInMeters) {
+  if (sizeInMeters > 0.0 && sizeInMeters < 1.0) {
     this->chessBoardSquareSize = sizeInMeters;
-  else
+  } else {
     this->chessBoardSquareSize = 0.0235f; // Default size if printed on 8.5x11
+  }
 }
 
 /*
@@ -343,9 +384,21 @@ void Aruco::setChessBoardSize(float sizeInMeters) {
  * Sets the size for aruco markers
  *
  */
-void Aruco::setArucoMarkerSize(float sizeInMeters) {
-  if (sizeInMeters > 0.0 && sizeInMeters < 1.0)
+void aruco::Aruco::setArucoMarkerSize(float sizeInMeters) {
+  if (sizeInMeters > 0.0 && sizeInMeters < 1.0) {
     this->arucoSquareSize = sizeInMeters;
-  else
+  } else {
     this->arucoSquareSize = 0.025f; // Default size if printed on 8.5x11
+  }
+}
+
+/*
+ * Open Camera
+ *
+ * Opens the Camera
+ *
+ */
+bool aruco::Aruco::openCamera() {
+  // TODO allow multiple cameras
+  return this->m_camDevice->open() && this->m_camDevice->isOpen();
 }
