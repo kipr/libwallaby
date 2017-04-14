@@ -172,13 +172,12 @@ std::vector<double> aruco::Aruco::getPose(int arucoId, cv::Mat * frame) {
     return rottransvec;
 
   cv::Mat img;
-  if (frame == nullptr){
+  if (frame == nullptr) {
     if (!this->m_camDevice->isOpen())
       if (!this->openCamera())
         return rottransvec;
     img = this->getFrame();
-  }else
-  {
+  } else {
     img = *frame;
   }
 
@@ -220,13 +219,12 @@ std::vector<int> aruco::Aruco::arucoMarkersInView(cv::Mat * frame) {
   std::vector<int> ids;
   std::vector<std::vector<cv::Point2f>> corners, rejected;
   cv::Mat img;
-  if (frame == nullptr){
+  if (frame == nullptr) {
     if (!this->m_camDevice->isOpen())
       if (!this->openCamera())
         return ids;
     img = this->getFrame();
-  }else
-  {
+  } else {
     img = *frame;
   }
 
@@ -246,13 +244,12 @@ bool aruco::Aruco::arucoMarkerInView(int arucoId, cv::Mat * frame) {
   std::vector<int> ids;
   std::vector<std::vector<cv::Point2f>> corners, rejected;
   cv::Mat img;
-  if (frame == nullptr){
+  if (frame == nullptr) {
     if (!this->m_camDevice->isOpen())
       if (!this->openCamera())
         return false;
     img = this->getFrame();
-  }else
-  {
+  } else {
     img = *frame;
   }
   cv::aruco::detectMarkers(img, this->dictionary, corners, ids, detectorParams,
