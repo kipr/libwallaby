@@ -11,6 +11,12 @@ if(no_wallaby)
   add_definitions(-DNOT_A_WALLABY)
 endif()
 
+
+if(USE_ARUCO)
+	add_definitions(-DARUCO)
+endif()
+
+
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
 
@@ -94,6 +100,7 @@ link_directories(${OPENCV_LIB})
 link_directories(${ZBAR_DIR}/lib)
 
 option(build_python "Build python bindings" ON)
+option(USE_ARUCO "Use Aruco Markers" OFF)
 
 file(GLOB SWIG_SOURCES ${BINDINGS}/*.i)
 

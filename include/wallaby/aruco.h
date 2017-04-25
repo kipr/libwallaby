@@ -5,6 +5,8 @@
  *      Author: Ryan Owens
  */
 
+#ifdef ARUCO
+
 #ifndef INCLUDE_WALLABY_ARUCO_H_
 #define INCLUDE_WALLABY_ARUCO_H_
 
@@ -79,5 +81,6 @@ int *get_markers_in_view();
 
 #ifdef __cplusplus
 }
+#endif
 #endif
 #endif
