@@ -18,13 +18,6 @@
 #include <string>
 #include <unistd.h>
 
-#include "wallaby/camera.h"
-#ifdef WALLABY
-#include <wallaby/camera.hpp>
-#else
-#include <kovan/camera.hpp>
-#endif
-
 namespace aruco {
 class Aruco;
 static Aruco *instance;
@@ -35,11 +28,12 @@ public:
   Aruco(int dicionaryId);
   ~Aruco();
   static Aruco *getInstance();
-  bool arucoMarkerInView(int arucoId, cv::Mat * frame = nullptr);
+  bool arucoMarkerInView(int arucoId, cv::Mat *frame = nullptr);
   bool setDictionary(int dictionaryId);
-  std::vector<int> arucoMarkersInView(cv::Mat * frame = nullptr);
-  std::vector<std::vector<cv::Point2f>> arucoMarkerCorners(cv::Mat * frame = nullptr);
-  std::vector<double> getPose(int arucoId, cv::Mat * frame = nullptr);
+  std::vector<int> arucoMarkersInView(cv::Mat *frame = nullptr);
+  std::vector<std::vector<cv::Point2f>>
+  arucoMarkerCorners(cv::Mat *frame = nullptr);
+  std::vector<double> getPose(int arucoId, cv::Mat *frame = nullptr);
   void setChessBoardSize(float sizeInMeters);
   void setArucoMarkerSize(float sizeInMeters);
   bool calibrate(std::vector<cv::Mat> images);
@@ -63,7 +57,7 @@ private:
   std::string calibrationFilePath = ""; // TODO neet to get the proper path
   cv::Ptr<cv::aruco::Dictionary> dictionary;
   cv::Ptr<cv::aruco::DetectorParameters> detectorParams;
-  Camera::Device *m_camDevice;
+  // Camera::Device *m_camDevice; // no longer needed
 
   const std::string WHITE_CAMERA_FILE = "white_2016.yml";
   const std::string BLACK_CAMERA_FILE = "black_2017.yml";

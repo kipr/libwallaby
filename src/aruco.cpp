@@ -6,6 +6,7 @@
  */
 
 #include "wallaby/aruco.hpp"
+#include "camera_c_p.hpp"
 /*
  * Aruco
  *
@@ -31,7 +32,7 @@ aruco::Aruco::Aruco(int dictionaryId) {
     // Now get distortion calibration data
     this->readCameraCalibration(this->currentCalibrationFile);
   }
-  this->m_camDevice = new Camera::Device();
+  // this->m_camDevice = new Camera::Device();
   std::cout << "Aruco constructor" << std::endl;
   // TODO: ??? this->m_camDevice->open(0, LOW_RES, BLACK_2017);
 }
@@ -55,8 +56,8 @@ aruco::Aruco *aruco::Aruco::getInstance() {
  *
  */
 aruco::Aruco::~Aruco() {
-  if (this->m_camDevice->isOpen())
-    this->m_camDevice->close();
+  // need to close?
+  // bool ret = Private::DeviceSingleton::instance()->open();
 }
 
 /*
@@ -67,9 +68,12 @@ aruco::Aruco::~Aruco() {
  */
 cv::Mat aruco::Aruco::getFrame() {
   cv::Mat mt;
-  if (!this->m_camDevice->update())
+  // if (!this->m_camDevice->update())
+  //   return mt;
+  // return m_camDevice->rawImage();
+  if (!Private::DeviceSingleton::instance()->update())
     return mt;
-  return m_camDevice->rawImage();
+  return Private::DeviceSingleton::instance()->rawImage();
 }
 /*
  * Set Camera Calibration
@@ -162,7 +166,7 @@ bool aruco::Aruco::vectorContains(std::vector<int> vec, int val) {
  * returns as TX TY TZ RX RY RZ
  *
  */
-std::vector<double> aruco::Aruco::getPose(int arucoId, cv::Mat * frame) {
+std::vector<double> aruco::Aruco::getPose(int arucoId, cv::Mat *frame) {
   std::vector<double> rottransvec;
   rottransvec.assign(6, 0.0);
   // Camera Calibration Failed...No files?
@@ -173,7 +177,7 @@ std::vector<double> aruco::Aruco::getPose(int arucoId, cv::Mat * frame) {
 
   cv::Mat img;
   if (frame == nullptr) {
-    if (!this->m_camDevice->isOpen())
+    if (!Private::DeviceSingleton::instance()->isOpen())
       if (!this->openCamera())
         return rottransvec;
     img = this->getFrame();
@@ -181,11 +185,9 @@ std::vector<double> aruco::Aruco::getPose(int arucoId, cv::Mat * frame) {
     img = *frame;
   }
 
-
   std::vector<int> ids;
   std::vector<std::vector<cv::Point2f>> corners, rejected;
   std::vector<cv::Vec3d> rvecs, tvecs;
-
 
   // detect markers and estimate pose
   cv::aruco::detectMarkers(img, this->dictionary, corners, ids, detectorParams,
@@ -215,12 +217,13 @@ std::vector<double> aruco::Aruco::getPose(int arucoId, cv::Mat * frame) {
  * Get an array (vector) of all Aruco Markers in the current view
  *
  */
-std::vector<int> aruco::Aruco::arucoMarkersInView(cv::Mat * frame) {
+std::vector<int> aruco::Aruco::arucoMarkersInView(cv::Mat *frame) {
   std::vector<int> ids;
   std::vector<std::vector<cv::Point2f>> corners, rejected;
   cv::Mat img;
   if (frame == nullptr) {
-    if (!this->m_camDevice->isOpen())
+    // if (!this->m_camDevice->isOpen())
+    if (!Private::DeviceSingleton::instance()->isOpen())
       if (!this->openCamera())
         return ids;
     img = this->getFrame();
@@ -238,14 +241,15 @@ std::vector<int> aruco::Aruco::arucoMarkersInView(cv::Mat * frame) {
  * Marker corners in view
  *
  */
-std::vector<std::vector<cv::Point2f>> aruco::Aruco::arucoMarkerCorners(cv::Mat * frame)
-{
+std::vector<std::vector<cv::Point2f>>
+aruco::Aruco::arucoMarkerCorners(cv::Mat *frame) {
   std::vector<int> ids;
   std::vector<std::vector<cv::Point2f>> corners, rejected;
 
   cv::Mat img;
   if (frame == nullptr) {
-    if (!this->m_camDevice->isOpen())
+    // if (!this->m_camDevice->isOpen())
+    if (!Private::DeviceSingleton::instance()->isOpen())
       if (!this->openCamera())
         return corners;
     img = this->getFrame();
@@ -253,12 +257,11 @@ std::vector<std::vector<cv::Point2f>> aruco::Aruco::arucoMarkerCorners(cv::Mat *
     img = *frame;
   }
 
-    cv::aruco::detectMarkers(img, this->dictionary, corners, ids, detectorParams,
+  cv::aruco::detectMarkers(img, this->dictionary, corners, ids, detectorParams,
                            rejected);
 
   return corners;
 }
-
 
 /*
  * Marker In View
@@ -266,12 +269,13 @@ std::vector<std::vector<cv::Point2f>> aruco::Aruco::arucoMarkerCorners(cv::Mat *
  * Check if a particular Aruco Marker is in the current view
  *
  */
-bool aruco::Aruco::arucoMarkerInView(int arucoId, cv::Mat * frame) {
+bool aruco::Aruco::arucoMarkerInView(int arucoId, cv::Mat *frame) {
   std::vector<int> ids;
   std::vector<std::vector<cv::Point2f>> corners, rejected;
   cv::Mat img;
   if (frame == nullptr) {
-    if (!this->m_camDevice->isOpen())
+    // if (!this->m_camDevice->isOpen())
+    if (!Private::DeviceSingleton::instance()->isOpen())
       if (!this->openCamera())
         return false;
     img = this->getFrame();
@@ -334,7 +338,8 @@ void aruco::Aruco::getImagesFromCamera() {
   std::vector<cv::Mat> savedImages;
   std::vector<std::vector<cv::Point2f>> markerCorners, rejectedCorners;
 
-  if (!this->m_camDevice->isOpen())
+  // if (!this->m_camDevice->isOpen())
+  if (!Private::DeviceSingleton::instance()->isOpen())
     if (!this->openCamera())
       return;
   usleep(5 * 1000000);
@@ -396,7 +401,8 @@ bool aruco::Aruco::calibrate(std::vector<cv::Mat> images) {
  */
 bool aruco::Aruco::saveCalibration() {
   std::string fname = "";
-  if (this->m_camDevice->getModel() == WHITE_2016) {
+  // if (this->m_camDevice->getModel() == WHITE_2016) {
+  if (Private::DeviceSingleton::instance()->getModel() == WHITE_2016) {
     fname = this->calibrationFilePath + this->WHITE_CAMERA_FILE;
   } else {
     fname = this->calibrationFilePath + this->BLACK_CAMERA_FILE;
@@ -454,5 +460,8 @@ void aruco::Aruco::setArucoMarkerSize(float sizeInMeters) {
  */
 bool aruco::Aruco::openCamera() {
   // TODO allow multiple cameras
-  return this->m_camDevice->open() && this->m_camDevice->isOpen();
+  if (Private::DeviceSingleton::instance()->isOpen())
+    return true;
+  // return this->m_camDevice->open() && this->m_camDevice->isOpen();
+  return Private::DeviceSingleton::instance()->open();
 }
