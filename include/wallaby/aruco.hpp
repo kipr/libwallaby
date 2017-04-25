@@ -19,7 +19,11 @@
 #include <unistd.h>
 
 #include "wallaby/camera.h"
-#include "wallaby/camera.hpp"
+#ifdef WALLABY
+#include <wallaby/camera.hpp>
+#else
+#include <kovan/camera.hpp>
+#endif
 
 namespace aruco {
 class Aruco;
