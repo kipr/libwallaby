@@ -35,10 +35,11 @@ public:
   Aruco(int dicionaryId);
   ~Aruco();
   static Aruco *getInstance();
-  bool arucoMarkerInView(int arucoId);
+  bool arucoMarkerInView(int arucoId, cv::Mat * frame = nullptr);
   bool setDictionary(int dictionaryId);
-  std::vector<int> arucoMarkersInView();
-  std::vector<double> getPose(int arucoId);
+  std::vector<int> arucoMarkersInView(cv::Mat * frame = nullptr);
+  std::vector<std::vector<cv::Point2f>> arucoMarkerCorners(cv::Mat * frame = nullptr);
+  std::vector<double> getPose(int arucoId, cv::Mat * frame = nullptr);
   void setChessBoardSize(float sizeInMeters);
   void setArucoMarkerSize(float sizeInMeters);
   bool calibrate(std::vector<cv::Mat> images);
