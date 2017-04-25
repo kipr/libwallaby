@@ -7,6 +7,8 @@
 
 #include "wallaby/aruco.hpp"
 #include "camera_c_p.hpp"
+
+#ifdef ARUCO
 /*
  * Aruco
  *
@@ -360,7 +362,7 @@ void aruco::Aruco::getImagesFromCamera() {
       frame.copyTo(temp);
       this->images.push_back(temp);
       // TODO Display to User to positon for next Frame...
-      usleep(5 * 1000000);
+      usleep(5 * 1000);
     } else {
       // TODO Display to User to reposition camera...
     }
@@ -465,3 +467,5 @@ bool aruco::Aruco::openCamera() {
   // return this->m_camDevice->open() && this->m_camDevice->isOpen();
   return Private::DeviceSingleton::instance()->open();
 }
+
+#endif

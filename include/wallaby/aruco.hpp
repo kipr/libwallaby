@@ -7,6 +7,8 @@
 #ifndef INCLUDE_WALLABY_ARUCO_HPP_
 #define INCLUDE_WALLABY_ARUCO_HPP_
 
+#ifdef ARUCO
+
 #include <algorithm>
 #include <fstream>
 #include <iostream>
@@ -74,4 +76,5 @@ private:
       std::vector<std::vector<cv::Point2f>> &foundCorners);
 };
 }
+#endif
 #endif

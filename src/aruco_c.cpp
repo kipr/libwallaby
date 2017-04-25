@@ -5,6 +5,7 @@
  *      Author: Ryan Owens
  */
 
+#ifdef ARUCO
 #include "wallaby/aruco.h"
 #include "wallaby/aruco.hpp"
 
@@ -48,10 +49,4 @@ signed short can_see_marker(int marker) {
   return dev->arucoMarkerInView(marker);
 }
 
-// signed short camera_calibrate()
-// {
-//   // TODO Needs to be completely different but without knowing the
-//   // desired interface...
-//   Aruco* dev = Aruco::getInstance();
-//   return dev->calibrate();
-// }
+#endif
