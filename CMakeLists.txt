@@ -11,6 +11,12 @@ if(no_wallaby)
   add_definitions(-DNOT_A_WALLABY)
 endif()
 
+
+if(USE_ARUCO)
+	add_definitions(-DARUCO)
+endif()
+
+
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
 
@@ -80,7 +86,7 @@ elseif(WIN32)
   set(ZBAR_DIR "C:/Program Files (x86)/ZBar")
 endif()
 
-#find_package(OpenCV REQUIRED )
+find_package(OpenCV REQUIRED )
 find_package(JPEG REQUIRED)
 find_package (Threads)
 
@@ -94,6 +100,7 @@ link_directories(${OPENCV_LIB})
 link_directories(${ZBAR_DIR}/lib)
 
 option(build_python "Build python bindings" ON)
+option(USE_ARUCO "Use Aruco Markers" OFF)
 
 file(GLOB SWIG_SOURCES ${BINDINGS}/*.i)
 
@@ -121,8 +128,12 @@ endif()
 # Library: libwallaby
 add_library(wallaby SHARED
 	${SOURCES} ${PIXELTOASTER_SOURCES} ${OBJC_SOURCES})
-  
+
 target_link_libraries(wallaby ${OpenCV_LIBS} ${JPEG_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} zbar opencv_core opencv_highgui opencv_imgproc)
+
+if(USE_ARUCO)
+    target_link_libraries(wallaby opencv_aruco)
+endif()
 
 if(APPLE)
   find_library(OPENGL_LIBRARY OpenGL)
@@ -161,10 +172,10 @@ if(BUILD_DOCUMENTATION)
   endif()
   file(MAKE_DIRECTORY doc)
   set(DOXYGEN_DIR ${PROJECT_SOURCE_DIR}/doxygen)
-  add_custom_target (Docs++ ALL 
+  add_custom_target (Docs++ ALL
     COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_DIR}/Doxyfile++ SOURCES ${DOXYGEN_DIR}/Doxyfile++
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
-  add_custom_target (Docs ALL 
+  add_custom_target (Docs ALL
     COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_DIR}/Doxyfile SOURCES ${DOXYGEN_DIR}/Doxyfile
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
   add_custom_target(DocMetadata ALL
