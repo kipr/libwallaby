@@ -129,7 +129,11 @@ endif()
 add_library(wallaby SHARED
 	${SOURCES} ${PIXELTOASTER_SOURCES} ${OBJC_SOURCES})
 
-target_link_libraries(wallaby ${OpenCV_LIBS} ${JPEG_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} zbar opencv_core opencv_highgui opencv_imgproc opencv_aruco)
+target_link_libraries(wallaby ${OpenCV_LIBS} ${JPEG_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} zbar opencv_core opencv_highgui opencv_imgproc)
+
+if(USE_ARUCO)
+    target_link_libraries(wallaby opencv_aruco)
+endif()
 
 if(APPLE)
   find_library(OPENGL_LIBRARY OpenGL)
