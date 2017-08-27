@@ -9,8 +9,9 @@ Ubuntu Build Instructions
 #Installing dependencies: 
 sudo apt-get install libzbar-dev libopencv-dev libjpeg-dev python-dev doxygen swig
 
-# Create a build directory (inside libwallaby/)
+# Create a build directory (inside libwallaby/) and change directory to it
 mkdir build
+cd build
 
 # Initialize CMake
 cmake ..
