@@ -106,7 +106,7 @@ file(GLOB SWIG_SOURCES ${BINDINGS}/*.i)
 
 if(build_python)
   find_package(SWIG REQUIRED)
-  find_package(PythonLibs REQUIRED)
+  find_package(PythonLibs 2.7 REQUIRED)
   message("${PYTHON_LIBRARY}")
   set(PYTHON_BINDING_SOURCES ${CMAKE_BINARY_DIR}/wallaby_wrap_py.cxx)
   set(PYTHON_BINDING_LIBRARIES ${PYTHON_LIBRARY})
