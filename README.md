@@ -7,7 +7,7 @@ It was designed based on (and to be mostly compatible with) https://github.com/k
 Ubuntu Build Instructions
 ```` bash
 #Installing dependencies: 
-sudo apt-get install libzbar-dev libopencv-dev libjpeg-dev python-dev doxygen swig
+sudo apt-get install libzbar-dev libopencv-dev libjpeg-dev python-dev doxygen swig cmake
 
 # Create a build directory (inside libwallaby/) and change directory to it
 mkdir build
