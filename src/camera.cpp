@@ -513,8 +513,9 @@ bool Camera::Device::update()
 
 		// Timeout
 		struct timeval tv;
-		tv.tv_sec = 0;
-		tv.tv_usec = 300000;  // 300 ms delay - mainly because the white camera
+		tv.tv_sec = 2;  // 2 sec delay to allow camera startup - Q; should we get rid of this code
+		                // and use the BLACK_2017 to support WHITE_2016 as well?
+		tv.tv_usec = 0;  // 300 ms delay - mainly because the white camera
                               // is running at 15 FPS which is 66ms/frame
                               // 300 ms gives us a cushion to handle the
                               // corner cases
