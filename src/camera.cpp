@@ -72,7 +72,21 @@ public:
 	    cap = cvCreateCameraCapture_V4L_K(device);
 	    return isOpened();
 	}
+
+	~VideoCapture_K()
+	{
+	}
 };
+
+// select timeout values for the WHITE_2016 Camera
+// BLACk_2017 camera values are set in cap_v4l.cpp
+//
+
+#define SELECTTIMEOUTINITSEC   10     // timeout value for initializatio
+#define SELECTTIMEOUTINITUSEC   0
+
+#define SELECTTIMEOUTSEC       1
+#define SELECTTIMEOUTUSEC      0
 
 // Object //
 
@@ -87,7 +101,7 @@ Camera::Object::Object(const Point2<unsigned> &centroid,
   m_dataLength(dataLength)
 {
   if(!data) return;
-  
+
   m_data = new char[m_dataLength];
   memcpy(m_data, data, m_dataLength);
 }
@@ -303,9 +317,10 @@ Camera::Device::Device()
   m_cap(0),
   m_image(),
   m_resolution(LOW_RES),
-  m_model(WHITE_2016)
+  m_model(/*WHITE_2016*/ BLACK_2017)
 {
   Config *config = Config::load(Camera::ConfigPath::defaultConfigPath());
+
   if(!config) return;
   setConfig(*config);
   delete config;
@@ -331,7 +346,7 @@ bool Camera::Device::open(const int number, Resolution resolution, Model model)
   WARN("camera only supported on wallaby");
   return false;
 #else
-
+   model = BLACK_2017;    // for now - force black
   // Device already open?
   if(this->isOpen()) return false;
 
@@ -358,6 +373,9 @@ bool Camera::Device::open(const int number, Resolution resolution, Model model)
 		return false;
 	  }
 
+	  SelectTimeoutSec  =  SELECTTIMEOUTINITSEC;
+          SelectTimeoutuSec =  SELECTTIMEOUTINITUSEC;
+
 	  return this->initCapDevice(resolutionToWidth(m_resolution), resolutionToHeight(m_resolution));
   }
   else if (m_model == BLACK_2017)
@@ -371,7 +389,18 @@ bool Camera::Device::open(const int number, Resolution resolution, Model model)
 
 	  m_cap->set(CV_CAP_PROP_FRAME_WIDTH, resolutionToWidth(m_resolution));
 	  m_cap->set(CV_CAP_PROP_FRAME_HEIGHT, resolutionToHeight(m_resolution));
-	  m_cap->set(CV_CAP_PROP_BUFFERSIZE, 10);
+	  m_cap->set(CV_CAP_PROP_FOURCC, V4L2_PIX_FMT_MJPEG);
+
+	  if(m_resolution == LOW_RES)
+	  {
+	  	m_cap->set(CV_CAP_PROP_BUFFERSIZE,10) ;
+		m_cap->set(CV_CAP_PROP_FPS, 15);
+	  }
+	  else
+	  {
+		  m_cap->set(CV_CAP_PROP_BUFFERSIZE, 4);  // minimize processing
+		  m_cap->set(CV_CAP_PROP_FPS, 15);        // slow down the input
+	  }
 	  m_connected = true;
   }
   return true;
@@ -491,7 +520,9 @@ bool Camera::Device::close()
   }
   else if (m_model == BLACK_2017)
   {
-	  m_cap->release();
+	  delete m_cap;       // test to fix
+	  //m_cap->release(); // test turn off
+//	  delete capture;
 	  m_connected = false;
   }
   return true;
@@ -513,9 +544,9 @@ bool Camera::Device::update()
 
 		// Timeout
 		struct timeval tv;
-		tv.tv_sec = 2;  // 2 sec delay to allow camera startup - Q; should we get rid of this code
+		tv.tv_sec = SelectTimeoutSec;  // 2 sec delay to allow camera startup - Q; should we get rid of this code
 		                // and use the BLACK_2017 to support WHITE_2016 as well?
-		tv.tv_usec = 0;  // 300 ms delay - mainly because the white camera
+		tv.tv_usec = SelectTimeoutuSec;  // 300 ms delay - mainly because the white camera
                               // is running at 15 FPS which is 66ms/frame
                               // 300 ms gives us a cushion to handle the
                               // corner cases
@@ -539,6 +570,8 @@ bool Camera::Device::update()
 		  m_image = cv::Mat();
 		  free(m_bmpBuffer);
 		  m_bmpBuffer = 0;
+	          SelectTimeoutSec  =  SELECTTIMEOUTINITSEC;    // longer timeout for recovery
+                  SelectTimeoutuSec =  SELECTTIMEOUTINITUSEC;	  
 		  return false;
 		}
 
@@ -583,6 +616,10 @@ bool Camera::Device::update()
   // Invalidate all channels
   ChannelPtrVector::const_iterator it = m_channels.begin();
   for(; it != m_channels.end(); ++it) (*it)->invalidate();
+
+  SelectTimeoutSec  =  SELECTTIMEOUTSEC;    // shorter timeout for normal ope
+  SelectTimeoutuSec =  SELECTTIMEOUTUSEC;   
+
   return true;
 
 #endif
@@ -842,7 +879,7 @@ int Camera::Device::readFrame()
 	  if (!m_connected)
 	  {
 		printf("not connected\n");
-		open(0, LOW_RES, WHITE_2016); // TODO real numbers, we don't use these yet
+		open(0, LOW_RES, BLACK_2017); // TODO real numbers, we don't use these yet
 		return -1;
 	  }
 

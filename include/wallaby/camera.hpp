@@ -142,7 +142,7 @@ namespace Camera
     Device();
     ~Device();
     
-    bool open(const int number = 0, Resolution resolution = LOW_RES, Model model = WHITE_2016);
+    bool open(const int number = 0, Resolution resolution = LOW_RES, Model model = BLACK_2017);
     bool isOpen() const;
     bool close();
     bool update();
@@ -196,6 +196,8 @@ namespace Camera
 
     Resolution m_resolution;
     Model m_model;
+    unsigned int SelectTimeoutSec;
+    unsigned int SelectTimeoutuSec;
   };
   
   /**

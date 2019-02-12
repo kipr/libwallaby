@@ -236,6 +236,7 @@ make & enjoy!
 // added to have this compile with opencv v2
 
 #define V4L_ABORT_BADJPEG
+#define HAVE_JPEG
 
 #define HAVE_CAMV4L2
 #define CV_FINAL final
@@ -377,12 +378,14 @@ struct CvCaptureCAM_V4L_K CV_FINAL : public CvCapture
     void releaseFrame();
     unsigned long DqbufTimeoutSec;
     unsigned long DqbufTimeoutuSec;
+    int SelectDqbufError;
 };
 
 /***********************   Implementations  ***************************************/
 
 CvCaptureCAM_V4L_K::CvCaptureCAM_V4L_K() : deviceHandle(-1), bufferIndex(-1), DqbufTimeoutSec(10), DqbufTimeoutuSec(0) 
 {
+    SelectDqbufError = 0;     // select error count
     memset(&timestamp, 0, sizeof(timestamp));
 }
 
@@ -834,7 +837,7 @@ bool CvCaptureCAM_V4L_K::open(const char* _deviceName)
 // making this value 150ms provides a margin of safety
     
 #define STIMEOUT_DETECT_SEC  0
-#define STIMEOUT_DETECT_USEC 150000
+#define STIMEOUT_DETECT_USEC 300000
     
 // the timeout needs to be longer when the camera is
 // initializing - this usually takes around 400ms
@@ -845,8 +848,8 @@ bool CvCaptureCAM_V4L_K::open(const char* _deviceName)
 // resetting the driver requires a longer timemout
 // reset takes between 310-350ms
     
-#define STIMEOUT_RESET_SEC    2
-#define STIMEOUT_RESRT_USEC   0
+#define STIMEOUT_RESET_SEC    10
+#define STIMEOUT_RESET_USEC   0
 
 static bool bufReturned;  // need to share this with tryIoctl to get the proper EAGAIN handling
 
@@ -905,7 +908,7 @@ bool CvCaptureCAM_V4L_K::read_frame_v4l2()
             perror("VIDIOC_DQBUF - First Loop");
             return false;
         }
-        
+        SelectDqbufError = 0;    // reset the select error count
         //printf("tbuf.index: %d errno: %d\n", tbuf.index, errno);
         if(EagainHappened)  // last buff - then get out
         {
@@ -968,7 +971,7 @@ processBuf:
     
     DqbufTimeoutSec = STIMEOUT_DETECT_SEC;           // after we get a good read from the camer
     DqbufTimeoutuSec = STIMEOUT_DETECT_USEC;    // chande these to speed up select timeout detection;
-    
+     
     return true;
 }
 
@@ -1002,29 +1005,65 @@ bool CvCaptureCAM_V4L_K::tryIoctl(unsigned long ioctlCode, void *parameter) //co
             tv.tv_sec = 2;
             tv.tv_usec = 0;
         }
+
+	int tv_tv_sec = tv.tv_sec;   //debug
+	int tv_tv_usec = tv.tv_usec;
         
         int result = select(deviceHandle + 1, &fds, NULL, NULL, &tv);
         if (0 == result) {
             fprintf(stderr, "select timeout - ioctlCode: %lu\n", ioctlCode);
             if(VIDIOC_DQBUF)
             {
-                printf("resetting camera driver\n");
-                
+		    if(SelectDqbufError > 1)
+		    {
+			    printf("Select Timeout - camera not responsive to restart\n");
+			    SelectDqbufError = 0;  //reset for next time
+		    }
+                printf("resetting camera driver (%u, %u)xx \n", tv_tv_sec, tv_tv_usec);
+                unsigned long StartTime = systime();
+
+		SelectDqbufError++;     // here to prevent a loop
+
+	        //if((tv_tv_sec == STIMEOUT_RESET_SEC) && 
+	        //   (tv_tv_usec == STIMEOUT_RESET_USEC))
+		//{
+			printf("attempting to recover camera\n");
+			// we get here because the camera has not responded
+			// to the previous reset request
+			//
+			// so we use a bigger hammer
+			//
+			streaming(false);
+			releaseBuffers();
+
+			close(deviceHandle);
+			deviceHandle = ::open(deviceName.c_str(), O_RDWR|O_NONBLOCK, 0);
+			if(deviceHandle == -1)
+			{
+				printf("***ERROR*** Camera could not be reset\n");
+				return false;
+			}
+			initCapture();
+	        //}
+		//else
+		//{
                 // set the timeout values to account for delay in
                 // the driver when it is being reset
                 
-                DqbufTimeoutSec = STIMEOUT_RESET_SEC;    // set the recovery timeout
-                DqbufTimeoutuSec  = STIMEOUT_RESET_SEC;
-                unsigned long StartTime = systime();
-                v4l2_reset();
+                	DqbufTimeoutSec = STIMEOUT_RESET_SEC;    // set the recovery timeout
+                	DqbufTimeoutuSec  = STIMEOUT_RESET_USEC;
+                //	v4l2_reset();
+		//}
                 printf("camera driver reset - time: %d\n", systime() - StartTime);
             }
             
             return false;
         }
+
         if (-1 == result && EINTR != errno)
             perror("select");
     }
+    SelectDqbufError = 0; // got past theere
     return true;
 }
 
@@ -1529,6 +1568,7 @@ static int sonix_decompress(int width, int height, unsigned char *inp, unsigned 
 void CvCaptureCAM_V4L_K::convertToRgb(const Buffer &currentBuffer)
 {
     cv::Size imageSize(form.fmt.pix.width, form.fmt.pix.height);
+
     // Not found conversion
     switch (palette)
     {
