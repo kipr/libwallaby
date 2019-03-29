@@ -389,7 +389,7 @@ VF EXPORT_SYM void create_drive_direct(int l_speed, int r_speed);
 /*!
  * \ingroup create
  */
-VF EXPORT_SYM void create_spin_block(int speed, int angle);
+VF EXPORT_SYM void create_spin_block(int angle, int speed);
 
 /*!
  * \ingroup create
