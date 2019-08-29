@@ -93,16 +93,17 @@ void Private::Button::setPressed(const ::Button::Type::Id &id, bool pressed)
 
 bool Private::Button::isPressed(const ::Button::Type::Id &id) const
 {
-	// Physical buttons:
-	if (id == ::Button::Type::Left)
-	{
-		return (gpio_get(L_BUTTON_GPIO) == 0 ? true : false); // active low
-	}
+        //Physical buttons:
+        if (id == ::Button::Type::Left)
+        {
+                return (gpio_get(L_BUTTON_GPIO) == 0 ? true : false); // active low
+        }
 
-	if (id == ::Button::Type::Right)
-	{
-		return Private::digital_value(13, nullptr);
-	}
+        if (id == ::Button::Type::Right)
+        {
+                bool val =  Private::digital_value(13, nullptr); //Because it is active high
+                return !val;
+        }
 
 	// Virtual buttons:
 	const unsigned char offset = buttonOffset(id);
@@ -150,8 +151,8 @@ unsigned char Private::Button::buttonOffset(const ::Button::Type::Id &id) const
 
 Private::Button::Button()
 {
-	gpio_export(L_BUTTON_GPIO);
-	gpio_direction(L_BUTTON_GPIO, GPIO_DIR_IN);
+        gpio_export(L_BUTTON_GPIO);
+        gpio_direction(L_BUTTON_GPIO, GPIO_DIR_IN);
 }
 
 

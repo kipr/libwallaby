@@ -92,9 +92,9 @@ namespace Button
 	extern EXPORT_SYM IdButton Z;
 
 	extern EXPORT_SYM IdButton Left;
-	extern EXPORT_SYM IdButton Right;
+        extern EXPORT_SYM IdButton Right;
 
-	extern EXPORT_SYM IdButton * const all[8];
+        extern EXPORT_SYM IdButton * const all[8];
 };
 
 #endif /* INCLUDE_WALLABY_BUTTON_HPP_ */

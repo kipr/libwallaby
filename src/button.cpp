@@ -27,7 +27,7 @@ IdButton Button::Right(Button::Type::Right, "");
 IdButton * const Button::all[8] = {
 		&Button::A, &Button::B, &Button::C,
 		&Button::X, &Button::Y, &Button::Z,
-		&Button::Left, &Button::Right
+                &Button::Left, &Button::Right
 };
 
 AbstractButton::~AbstractButton()

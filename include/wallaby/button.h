@@ -151,7 +151,7 @@ int left_button();
 
 /*!
  * Gets the right button's state (pressed or not pressed.)
- * \return 1 for pressed, 0 for not pressed
+ * \return 1 for pressed, 0 for not pressed (But returning flipped)
  * \see a_button_clicked
  * \ingroup button
  */

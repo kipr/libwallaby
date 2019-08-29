@@ -21,7 +21,8 @@ namespace Button
 			Y,
 			Z,
 			Left,
-			Right
+                        Right,
+                        Physical
 		};
 	}
 }

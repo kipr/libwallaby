@@ -5,7 +5,16 @@ project(libwallaby)
 #set(ENV{OPENCV_INCLUDE_DIR} /home/root/Documents/KISS/bin/wallaby7/libwallaby/opencv/include)
 #set(OpenCV_DIR /home/root/Documents/KISS/bin/wallaby7/libwallaby/opencv/cmake)
 
+
+# Use these options based on platform:
+# platform										no_wallaby	no_zoobee_wallaby
+# desktop (Ubuntu, etc.)					ON					ON or OFF (don't care)
+# wallaby-wallaby controller			OFF					ON
+# zoobee-wallaby controller				OFF					OFF	
+
 option(no_wallaby "Not a wallaby controller" OFF)
+
+option(no_zoobee_wallaby "Not a zoobee wallaby controller" OFF)
 
 if(no_wallaby)
   add_definitions(-DNOT_A_WALLABY)
@@ -14,6 +23,11 @@ endif()
 
 if(USE_ARUCO)
 	add_definitions(-DARUCO)
+endif()
+
+
+if(no_zoobee_wallaby)
+  add_definitions(-DNOT_A_ZOOBEE_WALLABY)
 endif()
 
 
@@ -191,3 +205,11 @@ install(TARGETS wallaby DESTINATION lib)
 install(DIRECTORY ${INCLUDE}/wallaby DESTINATION include)
 
 set(CMAKE_INSTALL_PREFIX /usr)
+
+# Install the manpage (appropriate for .deb package)
+# manpage should have -r-wr--r-- or 644 permission (owner r-w, group r--, others r--)
+install(
+	FILES libwallaby.1
+	PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ 
+	DESTINATION ${DESTDIR}${CMAKE_INSTALL_PREFIX}/share/man/man1 
+)
