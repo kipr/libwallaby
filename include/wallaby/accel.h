@@ -19,8 +19,9 @@ extern "C" {
 #endif
 
 /*!
- * \brief Gets the sensed x acceleration
- * \description +/- 2G range,  1024 per G
+ * \brief Gets the sensed x acceleration ("Left and Right")
+ * \description Wombat and later: +/- 2G range, 512 per G
+ * \description Wallaby and Previous: +/- 2G range,  1024 per G
  * \description This should be approximately 0 when at rest and flat on a table
  * \return The latest signed x acceleration value
  * \ingroup accel
@@ -29,8 +30,9 @@ signed short accel_x();
 
 
 /*!
- * \brief Gets the sensed y acceleration
- * \description +/- 2G range,  1024 per G
+ * \brief Gets the sensed y acceleration ("Foward" and "Backward")
+ * \description Wombat and later: +/- 2G range, 512 per G
+ * \description Wallaby and Previous: +/- 2G range,  1024 per G
  * \description This should be approximately 0 when at rest and flat on a table
  * \return The latest signed y acceleration value
  * \ingroup accel
@@ -39,9 +41,10 @@ signed short accel_y();
 
 
 /*!
- * \brief Gets the sensed z acceleration
- * \description +/- 2G range,  1024 per G
- * \description This should be approximately -1024 when at rest and flat on a table
+ * \brief Gets the sensed z acceleration ("Top" and "Bottom")
+ * \description Wombat and later: +/- 2G range, 512 per G
+ * \description Wallaby and Previous: +/- 2G range,  1024 per G
+ * \description This should be approximately -1024 when at rest and flat on a table 
  * \return The latest signed z acceleration value
  * \ingroup accel
  */
