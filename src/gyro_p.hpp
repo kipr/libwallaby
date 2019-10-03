@@ -19,7 +19,6 @@ short gyro_z(unsigned char * alt_read_buffer = nullptr);
 
 bool gyro_calibrate();
 
-bool gyro_calibrated(unsigned char * alt_read_buffer = nullptr);
 
 }
 
