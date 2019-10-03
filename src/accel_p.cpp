@@ -39,30 +39,30 @@ bool accel_calibrate()
     //Find the average noise
     int i = 0;
     double avg = 0;
-    while(i<samples){
+    while(i<50){
      	avg += accel_z();
         msleep(10);
         i++;
     }
-    Biasz = avg/samples+512; //Z axis should be detecting gravity
+    Biasz = avg/50.0+512; //Z axis should be detecting gravity
 	
     i = 0;
     avg = 0;
-    while(i<samples){
+    while(i<50){
      	avg += accel_y();
         msleep(10);
         i++;
     }
-    Biasy = avg/samples;
+    Biasy = avg/50.0;
 	
 	i = 0;
     avg = 0;
-    while(i<samples){
+    while(i<50){
      	avg += accel_x();
         msleep(10);
         i++;
     }
-    Biasx = avg/samples;
+    Biasx = avg/50.0;
 
     return 0;
 }
