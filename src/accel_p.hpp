@@ -19,7 +19,7 @@ short accel_z(unsigned char * alt_read_buffer = nullptr);
 
 bool accel_calibrate();
 
-bool accel_calibrated(unsigned char * alt_read_buffer = nullptr);
+
 
 }
 
