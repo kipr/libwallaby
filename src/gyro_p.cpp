@@ -8,6 +8,9 @@
 #include "gyro_p.hpp"
 #include "wallaby_p.hpp"
 #include "wallaby_regs_p.hpp"
+#include "kipr/util.h"
+#include "kipr/motors.h"
+
 double biasx = 0, biasy = 0, biasz = 0;
 namespace Private
 {
