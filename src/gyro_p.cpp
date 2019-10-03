@@ -45,10 +45,5 @@ bool gyro_calibrate()
     return 0;
 }
 
-bool gyro_calibrated(unsigned char * alt_read_buffer)
-{
-  // TODO
-  return true;
-}
 
 }
