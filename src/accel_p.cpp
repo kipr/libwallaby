@@ -10,28 +10,28 @@
 #include "wallaby_regs_p.hpp"
 #include "kipr/util.h"
 #include "kipr/motors.h"
-double biasx = 0, biasy = 0, biasz = 0;
+double Biasx = 0, Biasy = 0, Biasz = 0;
 
 namespace Private
 {
 
 short accel_x(unsigned char * alt_read_buffer)
 {
-    return static_cast<signed short>(Private::Wallaby::instance()->readRegister16b(REG_RW_ACCEL_X_H, alt_read_buffer))/16-biasx;
+    return static_cast<signed short>(Private::Wallaby::instance()->readRegister16b(REG_RW_ACCEL_X_H, alt_read_buffer))/16-Biasx;
 }
 
 short accel_y(unsigned char * alt_read_buffer)
 {
-	return static_cast<signed short>(Private::Wallaby::instance()->readRegister16b(REG_RW_ACCEL_Y_H, alt_read_buffer))/16-biasy;
+	return static_cast<signed short>(Private::Wallaby::instance()->readRegister16b(REG_RW_ACCEL_Y_H, alt_read_buffer))/16-Biasy;
 }
 
 short accel_z(unsigned char * alt_read_buffer)
 {
-	return static_cast<signed short>(Private::Wallaby::instance()->readRegister16b(REG_RW_ACCEL_Z_H, alt_read_buffer))/16-biasz;
+	return static_cast<signed short>(Private::Wallaby::instance()->readRegister16b(REG_RW_ACCEL_Z_H, alt_read_buffer))/16-Biasz;
 }
 
 //Simple low-pass filter for accelerometer
-bool accel_calibrate(int samples = 50)
+bool accel_calibrate()
 {
   ao();
     msleep(300);
@@ -44,7 +44,7 @@ bool accel_calibrate(int samples = 50)
         msleep(10);
         i++;
     }
-    biasz = avg/samples+512; //Z axis should be detecting gravity
+    Biasz = avg/samples+512; //Z axis should be detecting gravity
 	
     i = 0;
     avg = 0;
@@ -53,7 +53,7 @@ bool accel_calibrate(int samples = 50)
         msleep(10);
         i++;
     }
-    biasy = avg/samples;
+    Biasy = avg/samples;
 	
 	i = 0;
     avg = 0;
@@ -62,7 +62,7 @@ bool accel_calibrate(int samples = 50)
         msleep(10);
         i++;
     }
-    biasx = avg/samples;
+    Biasx = avg/samples;
 
     return 0;
 }
