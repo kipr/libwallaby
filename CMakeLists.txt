@@ -103,6 +103,8 @@ endif()
 find_package(OpenCV REQUIRED )
 find_package(JPEG REQUIRED)
 find_package (Threads)
+find_package( PythonInterp 2.7 REQUIRED )
+find_package( PythonLibs 2.7 REQUIRED )
 
 include_directories(${CMAKE_INSTALL_PREFIX}/include)
 include_directories(${OPENCV_INCLUDE})

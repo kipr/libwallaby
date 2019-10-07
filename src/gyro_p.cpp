@@ -31,9 +31,10 @@ short gyro_z(unsigned char * alt_read_buffer)
 }
 
 //Simple low-pass filter for gyroscope
-bool gyro_calibrate(int samples = 50)
+bool gyro_calibrate()
 {
-  ao();
+    int samples = 50;
+    ao();
     msleep(300);
     
     //Find the average noise
@@ -65,6 +66,12 @@ bool gyro_calibrate(int samples = 50)
     biasx = avg/samples;
 
     return 0;
+}
+
+bool gyro_calibrated(unsigned char * alt_read_buffer)
+{
+  // TODO
+  return true;
 }
 
 
