@@ -1,14 +1,14 @@
-%module wallaby
+%module kipr
 %{
   //#include "kovan.hpp"
   //#include "kovan.h"
-  #include "wallaby/wallaby.hpp"
-  #include "wallaby/wallaby.h"
+  #include "kipr/wallaby.hpp"
+  #include "kipr/wallaby.h"
   //#include "segment.hpp"
   //#include "colinear_segmenter.hpp"
   //#include "xtion_depth_driver.hpp"
   
-  #include "wallaby/motors.hpp"
+  #include "kipr/motors.hpp"
   
   #ifdef SWIGPYTHON
   #define _open open

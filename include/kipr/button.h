@@ -141,6 +141,16 @@ int side_button();
  */
 int black_button();
 
+
+/*!
+ * Gets the ousg button's state (pressed or not pressed.)
+ * \return 1 for pressed, 0 for not pressed
+ * \see a_button_clicked
+ * \the only physical button on the Wombat
+ */
+int push_button();
+
+
 /*!
  * Gets the left button's state (pressed or not pressed.)
  * \return 1 for pressed, 0 for not pressed
