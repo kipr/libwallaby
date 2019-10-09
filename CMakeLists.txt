@@ -10,7 +10,7 @@ project(libwallaby)
 # platform										no_wallaby	no_zoobee_wallaby
 # desktop (Ubuntu, etc.)					ON					ON or OFF (don't care)
 # wallaby-wallaby controller			OFF					ON
-# zoobee-wallaby controller				OFF					OFF	
+# zoobee-wallaby controller			OFF					OFF	
 
 option(no_wallaby "Not a wallaby controller" OFF)
 
@@ -127,7 +127,7 @@ if(build_python)
   set(PYTHON_BINDING_SOURCES ${CMAKE_BINARY_DIR}/wallaby_wrap_py.cxx)
   set(PYTHON_BINDING_LIBRARIES ${PYTHON_LIBRARY})
   include_directories(${PYTHON_INCLUDE_DIR})
-  add_custom_command(COMMAND ${SWIG_EXECUTABLE} -Wall -python -c++ -I${INCLUDE}/wallaby -outdir ${LIBRARY_OUTPUT_PATH} -o ${CMAKE_BINARY_DIR}/wallaby_wrap_py.cxx ${BINDINGS}/wallaby.i
+  add_custom_command(COMMAND ${SWIG_EXECUTABLE} -Wall -python -c++ -I${INCLUDE}/kipr -outdir ${LIBRARY_OUTPUT_PATH} -o ${CMAKE_BINARY_DIR}/wallaby_wrap_py.cxx ${BINDINGS}/wallaby.i
     DEPENDS ${SWIG_SOURCES}
     OUTPUT ${CMAKE_BINARY_DIR}/wallaby_wrap_py.cxx ${LIBRARY_OUTPUT_PATH}/kipr.py)
   install(FILES ${LIBRARY_OUTPUT_PATH}/kipr.py DESTINATION lib)
@@ -148,7 +148,7 @@ add_library(wallaby SHARED
 target_link_libraries(wallaby ${OpenCV_LIBS} ${JPEG_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} zbar opencv_core opencv_highgui opencv_imgproc)
 
 if(USE_ARUCO)
-    target_link_libraries(wallaby opencv_aruco)
+    target_link_libraries(kipr opencv_aruco)
 endif()
 
 if(APPLE)
@@ -159,7 +159,7 @@ if(APPLE)
 endif()
 
 if(UNIX AND NOT APPLE)
-    target_link_libraries(kipr rt X11)
+    target_link_libraries(wallaby rt X11)
 endif()
 
 
@@ -171,7 +171,7 @@ foreach(C_TEST ${C_TESTS})
   get_filename_component(C_TEST_NAME ${C_TEST} NAME_WE)
   set(TEST_BIN_NAME ${C_TEST_NAME}_c)
   add_executable(${TEST_BIN_NAME} ${C_TEST})
-  target_link_libraries(${TEST_BIN_NAME} kipr)
+  target_link_libraries(${TEST_BIN_NAME} wallaby)
   list(APPEND TESTS ${TEST_BIN_NAME})
 endforeach()
 
@@ -204,8 +204,8 @@ endif()
 
 #install(TARGETS ${TESTS} DESTINATION bin/wallaby)
 install(TARGETS ${TESTS} DESTINATION bin/kipr)
-#install(TARGETS wallaby DESTINATION lib)
-install(TARGETS kipr DESTINATION lib)
+install(TARGETS wallaby DESTINATION lib)
+#install(TARGETS kipr DESTINATION lib)
 install(DIRECTORY ${INCLUDE}/wallaby DESTINATION include)
 install(DIRECTORY ${INCLUDE}/kipr DESTINATION include)
 
