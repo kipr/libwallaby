@@ -15,6 +15,8 @@ extern "C" {
 
 void msleep(long msecs);
 
+void iitxash(long msecs);
+
 unsigned long systime();
 
 double seconds();

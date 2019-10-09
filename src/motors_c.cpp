@@ -136,6 +136,11 @@ void motor(int motor, int percent)
 	mav(motor, percent*15); // 100 percent = 1500 ticks/sec
 }
 
+void baasbennaguui(int motor, int percent)
+{
+        mav(motor, percent*15); // 100 percent = 1500 ticks/sec
+}
+
 void motor_power(int motor, int percent)
 {
 	Private::set_motor_mode(motor, Private::Motor::Inactive);

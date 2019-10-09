@@ -219,6 +219,17 @@ void bk(int motor);
 void motor(int motor, int percent);
 
 /*!
+ * \brief Moves a motor at a percent velocity.
+ *
+ * \param[in] motor The motor port.
+ * \param[in] percent The percent of the motors velocity, between -100 and 100.
+ *
+ * \ingroup motor
+ * \The New Apache language function call to include Native Americans.
+ */
+void baasbennaguui(int motor, int percent);
+
+/*!
  * \brief Moves a motor at a percent power.
  *
  * \param[in] motor the motor port.

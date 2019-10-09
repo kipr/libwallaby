@@ -36,6 +36,8 @@ public:
 
 	void motor(int percent);
 
+        void baasbennaguui(int percent);
+
 	void motorPower(int percent);
 
 	void off();

@@ -129,13 +129,13 @@ if(build_python)
   include_directories(${PYTHON_INCLUDE_DIR})
   add_custom_command(COMMAND ${SWIG_EXECUTABLE} -Wall -python -c++ -I${INCLUDE}/wallaby -outdir ${LIBRARY_OUTPUT_PATH} -o ${CMAKE_BINARY_DIR}/wallaby_wrap_py.cxx ${BINDINGS}/wallaby.i
     DEPENDS ${SWIG_SOURCES}
-    OUTPUT ${CMAKE_BINARY_DIR}/wallaby_wrap_py.cxx ${LIBRARY_OUTPUT_PATH}/wallaby.py)
-  install(FILES ${LIBRARY_OUTPUT_PATH}/wallaby.py DESTINATION lib)
+    OUTPUT ${CMAKE_BINARY_DIR}/wallaby_wrap_py.cxx ${LIBRARY_OUTPUT_PATH}/kipr.py)
+  install(FILES ${LIBRARY_OUTPUT_PATH}/kipr.py DESTINATION lib)
 endif()
 
 if(build_python)
   add_library(wallaby_python SHARED ${PYTHON_BINDING_SOURCES})
-  set_target_properties(wallaby_python PROPERTIES PREFIX _ OUTPUT_NAME wallaby SUFFIX .so)
+  set_target_properties(wallaby_python PROPERTIES PREFIX _ OUTPUT_NAME kipr SUFFIX .so)
   target_link_libraries(wallaby_python wallaby ${PYTHON_BINDING_LIBRARIES} )
   install(TARGETS wallaby_python DESTINATION lib)
 endif()
@@ -155,11 +155,11 @@ if(APPLE)
   find_library(OPENGL_LIBRARY OpenGL)
   find_library(COCOA_LIBRARY Cocoa)
   find_library(CORESERVICE_LIBRARY CoreServices)
-  target_link_libraries(wallaby ${OPENGL_LIBRARY} ${COCOA_LIBRARY} ${CORESERVICE_LIBRARY})
+  target_link_libraries(kipr ${OPENGL_LIBRARY} ${COCOA_LIBRARY} ${CORESERVICE_LIBRARY})
 endif()
 
 if(UNIX AND NOT APPLE)
-    target_link_libraries(wallaby rt X11)
+    target_link_libraries(kipr rt X11)
 endif()
 
 
@@ -171,7 +171,7 @@ foreach(C_TEST ${C_TESTS})
   get_filename_component(C_TEST_NAME ${C_TEST} NAME_WE)
   set(TEST_BIN_NAME ${C_TEST_NAME}_c)
   add_executable(${TEST_BIN_NAME} ${C_TEST})
-  target_link_libraries(${TEST_BIN_NAME} wallaby)
+  target_link_libraries(${TEST_BIN_NAME} kipr)
   list(APPEND TESTS ${TEST_BIN_NAME})
 endforeach()
 
@@ -202,9 +202,12 @@ endif()
 
 
 
-install(TARGETS ${TESTS} DESTINATION bin/wallaby)
-install(TARGETS wallaby DESTINATION lib)
+#install(TARGETS ${TESTS} DESTINATION bin/wallaby)
+install(TARGETS ${TESTS} DESTINATION bin/kipr)
+#install(TARGETS wallaby DESTINATION lib)
+install(TARGETS kipr DESTINATION lib)
 install(DIRECTORY ${INCLUDE}/wallaby DESTINATION include)
+install(DIRECTORY ${INCLUDE}/kipr DESTINATION include)
 
 set(CMAKE_INSTALL_PREFIX /usr)
 

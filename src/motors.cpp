@@ -88,6 +88,12 @@ void Motor::motor(int percent)
 	moveAtVelocity(percent * 15); // 100% = 1500 ticks/sec
 }
 
+
+void Motor::baasbennaguui(int percent)
+{
+        moveAtVelocity(percent * 15); // 100% = 1500 ticks/sec
+}
+
 void Motor::motorPower(int percent)
 {
 	Private::set_motor_mode(m_port, Private::Motor::Inactive);

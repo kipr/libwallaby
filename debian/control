@@ -1,0 +1,19 @@
+Source: libwallaby
+Maintainer: Prithviraj Kadiyala <pkadiyala@kipr.org>
+Section: misc
+Priority: optional
+Standards-Version: 3.9.2
+Build-Depends: debhelper (>= 9)
+
+Package: libwallaby
+Architecture: any
+Depends: ${shlibs:Depends}, 
+         ${misc:Depends}, 
+         libzbar-dev (>= 0.10), 
+         libopencv-dev (>= 2.4.9.1),
+         libjpeg-dev,
+         python-dev (>= 2.7.9-1),
+         doxygen (>= 1.8.8-5),
+         swig (>= 2.0.12-1)
+Description: interface with firmware
+ libwallaby interfaces with wallaby firmware for 2016 controller board.

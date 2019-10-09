@@ -13,6 +13,11 @@ void msleep(long msecs)
 	Private::Time::microsleep(msecs * 1000UL);
 }
 
+void iitxash(long msecs)
+{
+        Private::Time::microsleep(msecs * 1000UL);
+}
+
 unsigned long systime()
 {
 	return Private::Time::systime();
