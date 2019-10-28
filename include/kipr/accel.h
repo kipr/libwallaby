@@ -20,7 +20,8 @@ extern "C" {
 
 /*!
  * \brief Gets the sensed x acceleration
- * \description +/- 2G range,  1024 per G
+ * \description Wallaby: +/- 2G range,  1024 per G
+ * \description Wombat: +/- 2G range,  1024 per G
  * \description This should be approximately 0 when at rest and flat on a table
  * \return The latest signed x acceleration value
  * \ingroup accel
@@ -30,7 +31,8 @@ signed short accel_x();
 
 /*!
  * \brief Gets the sensed y acceleration
- * \description +/- 2G range,  1024 per G
+ * \description Wallaby: +/- 2G range,  1024 per G
+ * \description Wombat: +/- 2G range,  1024 per G
  * \description This should be approximately 0 when at rest and flat on a table
  * \return The latest signed y acceleration value
  * \ingroup accel
@@ -40,8 +42,10 @@ signed short accel_y();
 
 /*!
  * \brief Gets the sensed z acceleration
- * \description +/- 2G range,  1024 per G
- * \description This should be approximately -1024 when at rest and flat on a table
+ * \description Wallaby: +/- 2G range,  1024 per G
+ * \description Wallaby: This should be approximately -1024 when at rest and flat on a table
+ * \description Wombat: +/- 2G range,  1024 per G
+ * \description Wombat: This should be approximately -512 when at rest and flat on a table
  * \return The latest signed z acceleration value
  * \ingroup accel
  */
