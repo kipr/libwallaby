@@ -1,4 +1,4 @@
-%module kipr
+%module wallaby
 %{
   //#include "kovan.hpp"
   //#include "kovan.h"

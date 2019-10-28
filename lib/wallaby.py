@@ -141,6 +141,7 @@ class Motor(_object):
     def forward(self): return _wallaby.Motor_forward(self)
     def backward(self): return _wallaby.Motor_backward(self)
     def motor(self, *args): return _wallaby.Motor_motor(self, *args)
+    def baasbennaguui(self, *args): return _wallaby.Motor_baasbennaguui(self, *args)
     def motorPower(self, *args): return _wallaby.Motor_motorPower(self, *args)
     def off(self): return _wallaby.Motor_off(self)
     def port(self): return _wallaby.Motor_port(self)
@@ -1005,6 +1006,10 @@ def motor(*args):
   return _wallaby.motor(*args)
 motor = _wallaby.motor
 
+def baasbennaguui(*args):
+  return _wallaby.baasbennaguui(*args)
+baasbennaguui = _wallaby.baasbennaguui
+
 def motor_power(*args):
   return _wallaby.motor_power(*args)
 motor_power = _wallaby.motor_power
@@ -1140,6 +1145,10 @@ set_servo_position = _wallaby.set_servo_position
 def msleep(*args):
   return _wallaby.msleep(*args)
 msleep = _wallaby.msleep
+
+def iitxash(*args):
+  return _wallaby.iitxash(*args)
+iitxash = _wallaby.iitxash
 
 def systime():
   return _wallaby.systime()
@@ -1868,6 +1877,10 @@ side_button = _wallaby.side_button
 def black_button():
   return _wallaby.black_button()
 black_button = _wallaby.black_button
+
+def push_button():
+  return _wallaby.push_button()
+push_button = _wallaby.push_button
 
 def left_button():
   return _wallaby.left_button()
