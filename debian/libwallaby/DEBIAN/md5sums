@@ -54,7 +54,7 @@ f3ca920ad37b1ceb07018b2c670924b5  usr/bin/wallaby/motor_mav_test_c
 e40c24a6fa3d39aad57e6cc7e4fb8c9e  usr/bin/wallaby/motor_pwm_test_c
 13c3568ebb5b324d127384065d2aaf91  usr/bin/wallaby/servo_test_c
 dca893650887c59bcace78b4d6bb084c  usr/bin/wallaby/version_test_c
-33857c87cd209a09e960917f2032f959  usr/include/kipr/accel.h
+ea4abf06ae4bc774eecc4730f5b76972  usr/include/kipr/accel.h
 f64f29d52f0aaa6752675dffae71cbf8  usr/include/kipr/accel.hpp
 d5630c754236b9df11fa7b31ee90ab6d  usr/include/kipr/analog.h
 2a52ba2ca5b39433bc9dba1e1192ec08  usr/include/kipr/analog.hpp
@@ -78,7 +78,7 @@ b968b30aa58dc3f35ab68c138c47eebc  usr/include/kipr/button.hpp
 48020a9a327d21632cd985ec8ab64dfb  usr/include/kipr/console.h
 78a132b52216fc1f2acb5026dfbe9e9d  usr/include/kipr/console.hpp
 a3563dc083fe8466c1ae011b291ee41a  usr/include/kipr/countdown_timer.h
-40946ef4a0a12be41f74c52d93a2edd4  usr/include/kipr/create.h
+6a88610cfe1a336fba1673dc66d965f5  usr/include/kipr/create.h
 ccf181b4b7734e0a8ce75cd3e60bb489  usr/include/kipr/create.hpp
 35c78523c8cafde7f9734d80aecf7029  usr/include/kipr/create_codes.h
 1c12d800871079f2a19e9e86e997f83e  usr/include/kipr/debug.h
@@ -92,7 +92,7 @@ e88d9b0de37ad0e4e31371b6ce26f04c  usr/include/kipr/digital.h
 d4fff270332b27112c45ac814a2cd06b  usr/include/kipr/graphics.h
 588fc4c74fb42052caa1432a5d54a949  usr/include/kipr/graphics_characters.h
 44cca650a91215fcabf7076ae67f0933  usr/include/kipr/graphics_key_code.h
-0905ab606034b6396b8be95dd4a435b4  usr/include/kipr/gyro.h
+beca92ebd020727bf3740aae61c1cf69  usr/include/kipr/gyro.h
 32908b0de9232ef8567cbd01383cac77  usr/include/kipr/gyro.hpp
 ed9c7b3e241fe47567cc057418ee4b77  usr/include/kipr/ir.h
 309bf1ea9e1d3f87d69d11175fa5cc4d  usr/include/kipr/ir.hpp
@@ -116,6 +116,8 @@ adef8155880089c11e720744427594c1  usr/include/kipr/util.hpp
 5bfe8fdd93ac37c705a6748b7c3e90e2  usr/include/kipr/wait_for.h
 0c26e6b2aca626effc796e9439252dbe  usr/include/kipr/wallaby.h
 629f24460c43623fb6a2da9ad64cf58e  usr/include/kipr/wallaby.hpp
+a40d9e575972e43133626bf9574b03ee  usr/include/kipr/wombat.h
+89182a7f472d94c7117f788d5cc67352  usr/include/kipr/wombat.hpp
 33857c87cd209a09e960917f2032f959  usr/include/wallaby/accel.h
 f64f29d52f0aaa6752675dffae71cbf8  usr/include/wallaby/accel.hpp
 d5630c754236b9df11fa7b31ee90ab6d  usr/include/wallaby/analog.h
@@ -178,7 +180,9 @@ adef8155880089c11e720744427594c1  usr/include/wallaby/util.hpp
 5bfe8fdd93ac37c705a6748b7c3e90e2  usr/include/wallaby/wait_for.h
 0c26e6b2aca626effc796e9439252dbe  usr/include/wallaby/wallaby.h
 629f24460c43623fb6a2da9ad64cf58e  usr/include/wallaby/wallaby.hpp
-3c5d28769f56222a19ed362b19b7da62  usr/lib/_wallaby.so
+a40d9e575972e43133626bf9574b03ee  usr/include/wallaby/wombat.h
+89182a7f472d94c7117f788d5cc67352  usr/include/wallaby/wombat.hpp
+6e49f65b3bb093117ada1aecb59225bd  usr/lib/_wallaby.so
 30890b4b69a5a1aa180342bc8a4b88e1  usr/lib/libkipr.so
 ccde7b246faa6e2c73d867972b6c3027  usr/lib/libwallaby.so
 7fb41ce7e9ccd597d8491075418c4168  usr/lib/wallaby.py
