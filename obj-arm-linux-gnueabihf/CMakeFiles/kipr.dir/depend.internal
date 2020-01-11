@@ -5,34 +5,34 @@ CMakeFiles/kipr.dir/src/accel.cpp.o
  ../include/wallaby/accel.hpp
  ../include/wallaby/export.h
  ../include/wallaby/sensor.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/accel.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/accel_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/accel.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/accel_p.hpp
 CMakeFiles/kipr.dir/src/accel_c.cpp.o
  ../include/wallaby/accel.h
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/accel_c.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/accel_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/accel_c.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/accel_p.hpp
 CMakeFiles/kipr.dir/src/accel_p.cpp.o
  ../include/kipr/motors.h
  ../include/kipr/util.h
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/accel_p.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/accel_p.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_p.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_regs_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/accel_p.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/accel_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_regs_p.hpp
 CMakeFiles/kipr.dir/src/analog.cpp.o
  ../include/wallaby/analog.hpp
  ../include/wallaby/export.h
  ../include/wallaby/sensor.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/analog.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/analog_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/analog.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/analog_p.hpp
 CMakeFiles/kipr.dir/src/analog_c.cpp.o
  ../include/wallaby/analog.h
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/analog_c.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/analog_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/analog_c.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/analog_p.hpp
 CMakeFiles/kipr.dir/src/analog_p.cpp.o
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/analog_p.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/analog_p.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_p.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_regs_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/analog_p.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/analog_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_regs_p.hpp
 CMakeFiles/kipr.dir/src/aruco.cpp.o
  ../include/wallaby/aruco.hpp
  ../include/wallaby/camera.h
@@ -43,34 +43,34 @@ CMakeFiles/kipr.dir/src/aruco.cpp.o
  ../include/wallaby/geom.h
  ../include/wallaby/geom.hpp
  ../include/wallaby/vtable.h
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/aruco.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/camera_c_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/aruco.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/camera_c_p.hpp
 CMakeFiles/kipr.dir/src/aruco_c.cpp.o
  ../include/wallaby/aruco.h
  ../include/wallaby/aruco.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/aruco_c.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/aruco_c.cpp
 CMakeFiles/kipr.dir/src/audio.cpp.o
  ../include/wallaby/audio.h
  ../include/wallaby/export.h
  ../include/wallaby/vtable.h
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/audio.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/audio.cpp
 CMakeFiles/kipr.dir/src/battery.cpp.o
  ../include/wallaby/battery.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/battery.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/battery_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/battery.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/battery_p.hpp
 CMakeFiles/kipr.dir/src/battery_c.cpp.o
  ../include/wallaby/battery.h
  ../include/wallaby/battery.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/battery_c.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/battery_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/battery_c.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/battery_p.hpp
 CMakeFiles/kipr.dir/src/battery_p.cpp.o
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/battery_p.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/battery_p.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_p.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_regs_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/battery_p.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/battery_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_regs_p.hpp
 CMakeFiles/kipr.dir/src/bits_p.cpp.o
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/bits_p.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/bits_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/bits_p.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/bits_p.hpp
 CMakeFiles/kipr.dir/src/botball_c.cpp.o
  ../include/kipr/analog.h
  ../include/kipr/audio.h
@@ -92,31 +92,31 @@ CMakeFiles/kipr.dir/src/botball_c.cpp.o
  ../include/kipr/thread.hpp
  ../include/kipr/util.h
  ../include/kipr/vtable.h
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/botball_c.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/botball_c.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_p.hpp
 CMakeFiles/kipr.dir/src/button.cpp.o
  ../include/wallaby/button.hpp
  ../include/wallaby/button_ids.hpp
  ../include/wallaby/compat.hpp
  ../include/wallaby/export.h
  ../include/wallaby/sensor.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/button.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/button_p.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/button.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/button_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_p.hpp
 CMakeFiles/kipr.dir/src/button_c.cpp.o
  ../include/wallaby/button.h
  ../include/wallaby/button.hpp
  ../include/wallaby/button_ids.hpp
  ../include/wallaby/export.h
  ../include/wallaby/sensor.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/button_c.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/button_c.cpp
 CMakeFiles/kipr.dir/src/button_p.cpp.o
  ../include/wallaby/button_ids.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/button_p.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/button_p.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/digital_p.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_p.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_regs_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/button_p.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/button_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/digital_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_regs_p.hpp
 CMakeFiles/kipr.dir/src/camera.cpp.o
  ../include/wallaby/camera.h
  ../include/wallaby/camera.hpp
@@ -127,9 +127,9 @@ CMakeFiles/kipr.dir/src/camera.cpp.o
  ../include/wallaby/geom.h
  ../include/wallaby/geom.hpp
  ../include/wallaby/vtable.h
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/camera.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/channel_p.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/warn.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/camera.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/channel_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/warn.hpp
 CMakeFiles/kipr.dir/src/camera_c.cpp.o
  ../include/wallaby/camera.h
  ../include/wallaby/camera.hpp
@@ -140,10 +140,10 @@ CMakeFiles/kipr.dir/src/camera_c.cpp.o
  ../include/wallaby/geom.h
  ../include/wallaby/geom.hpp
  ../include/wallaby/vtable.h
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/camera_c.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/camera_c_p.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/nyi.h
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/warn.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/camera_c.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/camera_c_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/nyi.h
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/warn.hpp
 CMakeFiles/kipr.dir/src/camera_c_p.cpp.o
  ../include/wallaby/camera.h
  ../include/wallaby/camera.hpp
@@ -153,8 +153,8 @@ CMakeFiles/kipr.dir/src/camera_c_p.cpp.o
  ../include/wallaby/geom.h
  ../include/wallaby/geom.hpp
  ../include/wallaby/vtable.h
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/camera_c_p.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/camera_c_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/camera_c_p.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/camera_c_p.hpp
 CMakeFiles/kipr.dir/src/channel_p.cpp.o
  ../include/wallaby/aruco.hpp
  ../include/wallaby/camera.h
@@ -166,39 +166,39 @@ CMakeFiles/kipr.dir/src/channel_p.cpp.o
  ../include/wallaby/geom.h
  ../include/wallaby/geom.hpp
  ../include/wallaby/vtable.h
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/channel_p.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/channel_p.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/warn.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/channel_p.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/channel_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/warn.hpp
 CMakeFiles/kipr.dir/src/compass.cpp.o
  ../include/wallaby/compass.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/compass.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/compass_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/compass.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/compass_p.hpp
 CMakeFiles/kipr.dir/src/compass_c.cpp.o
  ../include/wallaby/compass.h
  ../include/wallaby/compass.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/compass_c.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/compass_c.cpp
 CMakeFiles/kipr.dir/src/compass_p.cpp.o
  ../include/wallaby/magneto.h
  ../include/wallaby/util.h
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/compass_p.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/compass_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/compass_p.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/compass_p.hpp
 CMakeFiles/kipr.dir/src/compat.cpp.o
  ../include/wallaby/compat.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/compat.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/compat.cpp
 CMakeFiles/kipr.dir/src/config.cpp.o
  ../include/wallaby/config.hpp
  ../include/wallaby/export.h
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/config.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/config.cpp
 CMakeFiles/kipr.dir/src/console.cpp.o
  ../include/wallaby/console.hpp
  ../include/wallaby/export.h
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/console.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/console.cpp
 CMakeFiles/kipr.dir/src/console_c.cpp.o
  ../include/wallaby/console.h
  ../include/wallaby/console.hpp
  ../include/wallaby/export.h
  ../include/wallaby/vtable.h
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/console_c.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/console_c.cpp
 CMakeFiles/kipr.dir/src/create.cpp.o
  ../include/wallaby/battery.hpp
  ../include/wallaby/button.hpp
@@ -210,8 +210,8 @@ CMakeFiles/kipr.dir/src/create.cpp.o
  ../include/wallaby/sensor.hpp
  ../include/wallaby/util.h
  ../include/wallaby/util.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/create.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/create.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_p.hpp
 CMakeFiles/kipr.dir/src/create_c.cpp.o
  ../include/wallaby/button.hpp
  ../include/wallaby/button_ids.hpp
@@ -221,23 +221,23 @@ CMakeFiles/kipr.dir/src/create_c.cpp.o
  ../include/wallaby/export.h
  ../include/wallaby/sensor.hpp
  ../include/wallaby/vtable.h
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/create_c.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/nyi.h
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/create_c.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/nyi.h
 CMakeFiles/kipr.dir/src/digital.cpp.o
  ../include/wallaby/digital.hpp
  ../include/wallaby/export.h
  ../include/wallaby/sensor.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/digital.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/digital_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/digital.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/digital_p.hpp
 CMakeFiles/kipr.dir/src/digital_c.cpp.o
  ../include/wallaby/digital.h
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/digital_c.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/digital_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/digital_c.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/digital_p.hpp
 CMakeFiles/kipr.dir/src/digital_p.cpp.o
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/digital_p.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/digital_p.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_p.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_regs_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/digital_p.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/digital_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_regs_p.hpp
 CMakeFiles/kipr.dir/src/display_c.cpp.o
  ../include/wallaby/button.h
  ../include/wallaby/console.h
@@ -245,155 +245,155 @@ CMakeFiles/kipr.dir/src/display_c.cpp.o
  ../include/wallaby/export.h
  ../include/wallaby/util.h
  ../include/wallaby/vtable.h
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/display_c.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/display_c.cpp
 CMakeFiles/kipr.dir/src/general_c.cpp.o
  ../include/wallaby/export.h
  ../include/wallaby/general.h
  ../include/wallaby/vtable.h
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/general_c.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/general_c.cpp
 CMakeFiles/kipr.dir/src/geom_c.cpp.o
  ../include/wallaby/export.h
  ../include/wallaby/geom.h
  ../include/wallaby/vtable.h
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/geom_c.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/geom_c.cpp
 CMakeFiles/kipr.dir/src/graphics.cpp.o
  ../include/wallaby/export.h
  ../include/wallaby/graphics.h
  ../include/wallaby/graphics_key_code.h
  ../include/wallaby/vtable.h
  ../src/pixeltoaster/PixelToaster.h
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/graphics.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/graphics.cpp
 CMakeFiles/kipr.dir/src/graphics_characters.cpp.o
  ../include/wallaby/export.h
  ../include/wallaby/graphics.h
  ../include/wallaby/graphics_characters.h
  ../include/wallaby/graphics_key_code.h
  ../include/wallaby/vtable.h
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/graphics_characters.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/graphics_characters.cpp
 CMakeFiles/kipr.dir/src/gyro.cpp.o
  ../include/wallaby/export.h
  ../include/wallaby/gyro.hpp
  ../include/wallaby/sensor.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/gyro.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/gyro_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/gyro.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/gyro_p.hpp
 CMakeFiles/kipr.dir/src/gyro_c.cpp.o
  ../include/wallaby/gyro.h
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/gyro_c.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/gyro_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/gyro_c.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/gyro_p.hpp
 CMakeFiles/kipr.dir/src/gyro_p.cpp.o
  ../include/kipr/motors.h
  ../include/kipr/util.h
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/gyro_p.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/gyro_p.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_p.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_regs_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/gyro_p.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/gyro_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_regs_p.hpp
 CMakeFiles/kipr.dir/src/ir.cpp.o
  ../include/wallaby/export.h
  ../include/wallaby/ir.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/ir.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/ir.cpp
 CMakeFiles/kipr.dir/src/ir_c.cpp.o
  ../include/wallaby/export.h
  ../include/wallaby/ir.h
  ../include/wallaby/ir.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/ir_c.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/ir_c.cpp
 CMakeFiles/kipr.dir/src/led_p.cpp.o
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/led_p.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/led_p.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_p.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_regs_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/led_p.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/led_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_regs_p.hpp
 CMakeFiles/kipr.dir/src/magneto.cpp.o
  ../include/wallaby/export.h
  ../include/wallaby/magneto.hpp
  ../include/wallaby/sensor.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/magneto.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/magneto_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/magneto.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/magneto_p.hpp
 CMakeFiles/kipr.dir/src/magneto_c.cpp.o
  ../include/wallaby/magneto.h
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/magneto_c.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/magneto_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/magneto_c.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/magneto_p.hpp
 CMakeFiles/kipr.dir/src/magneto_p.cpp.o
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/magneto_p.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/magneto_p.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_p.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_regs_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/magneto_p.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/magneto_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_regs_p.hpp
 CMakeFiles/kipr.dir/src/motor_p.cpp.o
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/motor_p.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/motor_p.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_p.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_regs_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/motor_p.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/motor_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_regs_p.hpp
 CMakeFiles/kipr.dir/src/motors.cpp.o
  ../include/wallaby/motors.hpp
  ../include/wallaby/util.h
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/motor_p.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/motors.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/motor_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/motors.cpp
 CMakeFiles/kipr.dir/src/motors_c.cpp.o
  ../include/wallaby/motors.h
  ../include/wallaby/util.h
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/motor_p.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/motors_c.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/motor_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/motors_c.cpp
 CMakeFiles/kipr.dir/src/network_interface_p.cpp.o
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/network_interface_p.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/network_interface_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/network_interface_p.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/network_interface_p.hpp
 CMakeFiles/kipr.dir/src/nyi.cpp.o
  ../include/wallaby/compat.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/nyi.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/nyi.h
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/nyi.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/nyi.h
 CMakeFiles/kipr.dir/src/pixeltoaster/PixelToaster.cpp.o
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/pixeltoaster/PixelToaster.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/pixeltoaster/PixelToaster.h
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/pixeltoaster/PixelToasterApple.h
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/pixeltoaster/PixelToasterCommon.h
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/pixeltoaster/PixelToasterConversion.h
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/pixeltoaster/PixelToasterUnix.h
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/pixeltoaster/PixelToasterWindows.h
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/pixeltoaster/PixelToaster.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/pixeltoaster/PixelToaster.h
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/pixeltoaster/PixelToasterApple.h
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/pixeltoaster/PixelToasterCommon.h
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/pixeltoaster/PixelToasterConversion.h
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/pixeltoaster/PixelToasterUnix.h
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/pixeltoaster/PixelToasterWindows.h
 CMakeFiles/kipr.dir/src/robot.cpp.o
  ../include/wallaby/robot.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/robot.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/robot.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_p.hpp
 CMakeFiles/kipr.dir/src/robot_c.cpp.o
  ../include/wallaby/robot.h
  ../include/wallaby/robot.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/robot_c.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/robot_c.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_p.hpp
 CMakeFiles/kipr.dir/src/sensor_logic.cpp.o
  ../include/wallaby/export.h
  ../include/wallaby/sensor.hpp
  ../include/wallaby/sensor_logic.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/sensor_logic.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/sensor_logic.cpp
 CMakeFiles/kipr.dir/src/servo.cpp.o
  ../include/wallaby/servo.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/servo.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/servo_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/servo.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/servo_p.hpp
 CMakeFiles/kipr.dir/src/servo_c.cpp.o
  ../include/wallaby/servo.h
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/servo_c.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/servo_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/servo_c.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/servo_p.hpp
 CMakeFiles/kipr.dir/src/servo_p.cpp.o
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/servo_p.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/servo_p.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_p.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_regs_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/servo_p.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/servo_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_regs_p.hpp
 CMakeFiles/kipr.dir/src/socket.cpp.o
  ../include/wallaby/socket.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/socket.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/socket.cpp
 CMakeFiles/kipr.dir/src/thread.cpp.o
  ../include/wallaby/export.h
  ../include/wallaby/thread.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/thread.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/thread.cpp
 CMakeFiles/kipr.dir/src/thread_c.cpp.o
  ../include/wallaby/export.h
  ../include/wallaby/thread.h
  ../include/wallaby/thread.hpp
  ../include/wallaby/vtable.h
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/thread_c.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/thread_c.cpp
 CMakeFiles/kipr.dir/src/time_p.cpp.o
  ../include/wallaby/compat.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/time_p.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/time_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/time_p.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/time_p.hpp
 CMakeFiles/kipr.dir/src/util.cpp.o
  ../include/wallaby/util.h
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/time_p.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/util.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/time_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/util.cpp
 CMakeFiles/kipr.dir/src/wait_for.cpp.o
  ../include/wallaby/button.h
  ../include/wallaby/digital.h
@@ -401,13 +401,13 @@ CMakeFiles/kipr.dir/src/wait_for.cpp.o
  ../include/wallaby/util.h
  ../include/wallaby/vtable.h
  ../include/wallaby/wait_for.h
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wait_for.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wait_for.cpp
 CMakeFiles/kipr.dir/src/wallaby_p.cpp.o
  ../include/wallaby/create.h
  ../include/wallaby/export.h
  ../include/wallaby/motors.h
  ../include/wallaby/servo.h
  ../include/wallaby/vtable.h
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_p.cpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_p.hpp
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_regs_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_p.cpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_p.hpp
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_regs_p.hpp

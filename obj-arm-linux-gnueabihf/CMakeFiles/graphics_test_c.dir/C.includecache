@@ -26,7 +26,7 @@ graphics_key_code.h
 export.h
 ../include/kipr/export.h
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/tests/graphics_test.c
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/tests/graphics_test.c
 kipr/graphics.h
 -
 kipr/util.h
@@ -34,5 +34,5 @@ kipr/util.h
 stdio.h
 -
 kipr/colors.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/tests/kipr/colors.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/tests/kipr/colors.h
 

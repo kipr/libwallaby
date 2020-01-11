@@ -166,9 +166,9 @@ util.h
 wait_for.h
 ../include/wallaby/wait_for.h
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/tests/motor_mtp_test.c
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/tests/motor_mtp_test.c
 stdio.h
 -
 wallaby/wallaby.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/tests/wallaby/wallaby.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/tests/wallaby/wallaby.h
 

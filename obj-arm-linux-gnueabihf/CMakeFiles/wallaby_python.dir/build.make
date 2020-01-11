@@ -38,10 +38,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/pi/got2/libwallaby-v25.2/libwallaby-25.3
+CMAKE_SOURCE_DIR = /home/pi/got2/libwallaby-v25.4/libwallaby-25.5
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf
+CMAKE_BINARY_DIR = /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf
 
 # Include any dependencies generated for this target.
 include CMakeFiles/wallaby_python.dir/depend.make
@@ -56,25 +56,25 @@ wallaby_wrap_py.cxx: ../bindings/motor.i
 wallaby_wrap_py.cxx: ../bindings/wallaby.i
 wallaby_wrap_py.cxx: ../bindings/button_prelude.i
 wallaby_wrap_py.cxx: ../bindings/create.i
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating wallaby_wrap_py.cxx, ../lib/wallaby.py"
-	/usr/bin/swig2.0 -Wall -python -c++ -I/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/include/kipr -outdir /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/lib -o /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/wallaby_wrap_py.cxx /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/bindings/wallaby.i
+	/usr/bin/swig2.0 -Wall -python -c++ -I/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/include/kipr -outdir /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/lib -o /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/wallaby_wrap_py.cxx /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/bindings/wallaby.i
 
 ../lib/wallaby.py: wallaby_wrap_py.cxx
 
 CMakeFiles/wallaby_python.dir/wallaby_wrap_py.cxx.o: CMakeFiles/wallaby_python.dir/flags.make
 CMakeFiles/wallaby_python.dir/wallaby_wrap_py.cxx.o: wallaby_wrap_py.cxx
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby_python.dir/wallaby_wrap_py.cxx.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby_python.dir/wallaby_wrap_py.cxx.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/wallaby_wrap_py.cxx
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby_python.dir/wallaby_wrap_py.cxx.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/wallaby_wrap_py.cxx
 
 CMakeFiles/wallaby_python.dir/wallaby_wrap_py.cxx.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby_python.dir/wallaby_wrap_py.cxx.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/wallaby_wrap_py.cxx > CMakeFiles/wallaby_python.dir/wallaby_wrap_py.cxx.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/wallaby_wrap_py.cxx > CMakeFiles/wallaby_python.dir/wallaby_wrap_py.cxx.i
 
 CMakeFiles/wallaby_python.dir/wallaby_wrap_py.cxx.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby_python.dir/wallaby_wrap_py.cxx.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/wallaby_wrap_py.cxx -o CMakeFiles/wallaby_python.dir/wallaby_wrap_py.cxx.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/wallaby_wrap_py.cxx -o CMakeFiles/wallaby_python.dir/wallaby_wrap_py.cxx.s
 
 CMakeFiles/wallaby_python.dir/wallaby_wrap_py.cxx.o.requires:
 .PHONY : CMakeFiles/wallaby_python.dir/wallaby_wrap_py.cxx.o.requires
@@ -132,6 +132,6 @@ CMakeFiles/wallaby_python.dir/clean:
 
 CMakeFiles/wallaby_python.dir/depend: wallaby_wrap_py.cxx
 CMakeFiles/wallaby_python.dir/depend: ../lib/wallaby.py
-	cd /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/pi/got2/libwallaby-v25.2/libwallaby-25.3 /home/pi/got2/libwallaby-v25.2/libwallaby-25.3 /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles/wallaby_python.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/pi/got2/libwallaby-v25.4/libwallaby-25.5 /home/pi/got2/libwallaby-v25.4/libwallaby-25.5 /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles/wallaby_python.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/wallaby_python.dir/depend
 

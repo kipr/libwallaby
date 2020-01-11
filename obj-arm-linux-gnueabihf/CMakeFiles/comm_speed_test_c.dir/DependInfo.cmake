@@ -4,13 +4,13 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/tests/comm_speed_test.c" "/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles/comm_speed_test_c.dir/tests/comm_speed_test.c.o"
+  "/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/tests/comm_speed_test.c" "/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles/comm_speed_test_c.dir/tests/comm_speed_test.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles/kipr.dir/DependInfo.cmake"
+  "/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles/kipr.dir/DependInfo.cmake"
   )
 
 # The include file search paths:

@@ -38,10 +38,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/pi/got2/libwallaby-v25.2/libwallaby-25.3
+CMAKE_SOURCE_DIR = /home/pi/got2/libwallaby-v25.4/libwallaby-25.5
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf
+CMAKE_BINARY_DIR = /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf
 
 # Include any dependencies generated for this target.
 include CMakeFiles/wallaby.dir/depend.make
@@ -54,17 +54,17 @@ include CMakeFiles/wallaby.dir/flags.make
 
 CMakeFiles/wallaby.dir/src/digital_c.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/digital_c.cpp.o: ../src/digital_c.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/digital_c.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/digital_c.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/digital_c.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/digital_c.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/digital_c.cpp
 
 CMakeFiles/wallaby.dir/src/digital_c.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/digital_c.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/digital_c.cpp > CMakeFiles/wallaby.dir/src/digital_c.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/digital_c.cpp > CMakeFiles/wallaby.dir/src/digital_c.cpp.i
 
 CMakeFiles/wallaby.dir/src/digital_c.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/digital_c.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/digital_c.cpp -o CMakeFiles/wallaby.dir/src/digital_c.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/digital_c.cpp -o CMakeFiles/wallaby.dir/src/digital_c.cpp.s
 
 CMakeFiles/wallaby.dir/src/digital_c.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/digital_c.cpp.o.requires
@@ -77,17 +77,17 @@ CMakeFiles/wallaby.dir/src/digital_c.cpp.o.provides.build: CMakeFiles/wallaby.di
 
 CMakeFiles/wallaby.dir/src/compat.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/compat.cpp.o: ../src/compat.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/compat.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/compat.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/compat.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/compat.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/compat.cpp
 
 CMakeFiles/wallaby.dir/src/compat.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/compat.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/compat.cpp > CMakeFiles/wallaby.dir/src/compat.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/compat.cpp > CMakeFiles/wallaby.dir/src/compat.cpp.i
 
 CMakeFiles/wallaby.dir/src/compat.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/compat.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/compat.cpp -o CMakeFiles/wallaby.dir/src/compat.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/compat.cpp -o CMakeFiles/wallaby.dir/src/compat.cpp.s
 
 CMakeFiles/wallaby.dir/src/compat.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/compat.cpp.o.requires
@@ -100,17 +100,17 @@ CMakeFiles/wallaby.dir/src/compat.cpp.o.provides.build: CMakeFiles/wallaby.dir/s
 
 CMakeFiles/wallaby.dir/src/magneto_p.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/magneto_p.cpp.o: ../src/magneto_p.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/magneto_p.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/magneto_p.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/magneto_p.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/magneto_p.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/magneto_p.cpp
 
 CMakeFiles/wallaby.dir/src/magneto_p.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/magneto_p.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/magneto_p.cpp > CMakeFiles/wallaby.dir/src/magneto_p.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/magneto_p.cpp > CMakeFiles/wallaby.dir/src/magneto_p.cpp.i
 
 CMakeFiles/wallaby.dir/src/magneto_p.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/magneto_p.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/magneto_p.cpp -o CMakeFiles/wallaby.dir/src/magneto_p.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/magneto_p.cpp -o CMakeFiles/wallaby.dir/src/magneto_p.cpp.s
 
 CMakeFiles/wallaby.dir/src/magneto_p.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/magneto_p.cpp.o.requires
@@ -123,17 +123,17 @@ CMakeFiles/wallaby.dir/src/magneto_p.cpp.o.provides.build: CMakeFiles/wallaby.di
 
 CMakeFiles/wallaby.dir/src/network_interface_p.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/network_interface_p.cpp.o: ../src/network_interface_p.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/network_interface_p.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/network_interface_p.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/network_interface_p.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/network_interface_p.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/network_interface_p.cpp
 
 CMakeFiles/wallaby.dir/src/network_interface_p.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/network_interface_p.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/network_interface_p.cpp > CMakeFiles/wallaby.dir/src/network_interface_p.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/network_interface_p.cpp > CMakeFiles/wallaby.dir/src/network_interface_p.cpp.i
 
 CMakeFiles/wallaby.dir/src/network_interface_p.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/network_interface_p.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/network_interface_p.cpp -o CMakeFiles/wallaby.dir/src/network_interface_p.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/network_interface_p.cpp -o CMakeFiles/wallaby.dir/src/network_interface_p.cpp.s
 
 CMakeFiles/wallaby.dir/src/network_interface_p.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/network_interface_p.cpp.o.requires
@@ -146,17 +146,17 @@ CMakeFiles/wallaby.dir/src/network_interface_p.cpp.o.provides.build: CMakeFiles/
 
 CMakeFiles/wallaby.dir/src/bits_p.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/bits_p.cpp.o: ../src/bits_p.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/bits_p.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/bits_p.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/bits_p.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/bits_p.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/bits_p.cpp
 
 CMakeFiles/wallaby.dir/src/bits_p.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/bits_p.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/bits_p.cpp > CMakeFiles/wallaby.dir/src/bits_p.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/bits_p.cpp > CMakeFiles/wallaby.dir/src/bits_p.cpp.i
 
 CMakeFiles/wallaby.dir/src/bits_p.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/bits_p.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/bits_p.cpp -o CMakeFiles/wallaby.dir/src/bits_p.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/bits_p.cpp -o CMakeFiles/wallaby.dir/src/bits_p.cpp.s
 
 CMakeFiles/wallaby.dir/src/bits_p.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/bits_p.cpp.o.requires
@@ -169,17 +169,17 @@ CMakeFiles/wallaby.dir/src/bits_p.cpp.o.provides.build: CMakeFiles/wallaby.dir/s
 
 CMakeFiles/wallaby.dir/src/analog_c.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/analog_c.cpp.o: ../src/analog_c.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_6)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/analog_c.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/analog_c.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/analog_c.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/analog_c.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/analog_c.cpp
 
 CMakeFiles/wallaby.dir/src/analog_c.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/analog_c.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/analog_c.cpp > CMakeFiles/wallaby.dir/src/analog_c.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/analog_c.cpp > CMakeFiles/wallaby.dir/src/analog_c.cpp.i
 
 CMakeFiles/wallaby.dir/src/analog_c.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/analog_c.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/analog_c.cpp -o CMakeFiles/wallaby.dir/src/analog_c.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/analog_c.cpp -o CMakeFiles/wallaby.dir/src/analog_c.cpp.s
 
 CMakeFiles/wallaby.dir/src/analog_c.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/analog_c.cpp.o.requires
@@ -192,17 +192,17 @@ CMakeFiles/wallaby.dir/src/analog_c.cpp.o.provides.build: CMakeFiles/wallaby.dir
 
 CMakeFiles/wallaby.dir/src/botball_c.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/botball_c.cpp.o: ../src/botball_c.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_7)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/botball_c.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/botball_c.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/botball_c.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/botball_c.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/botball_c.cpp
 
 CMakeFiles/wallaby.dir/src/botball_c.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/botball_c.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/botball_c.cpp > CMakeFiles/wallaby.dir/src/botball_c.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/botball_c.cpp > CMakeFiles/wallaby.dir/src/botball_c.cpp.i
 
 CMakeFiles/wallaby.dir/src/botball_c.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/botball_c.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/botball_c.cpp -o CMakeFiles/wallaby.dir/src/botball_c.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/botball_c.cpp -o CMakeFiles/wallaby.dir/src/botball_c.cpp.s
 
 CMakeFiles/wallaby.dir/src/botball_c.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/botball_c.cpp.o.requires
@@ -215,17 +215,17 @@ CMakeFiles/wallaby.dir/src/botball_c.cpp.o.provides.build: CMakeFiles/wallaby.di
 
 CMakeFiles/wallaby.dir/src/console.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/console.cpp.o: ../src/console.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_8)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_8)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/console.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/console.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/console.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/console.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/console.cpp
 
 CMakeFiles/wallaby.dir/src/console.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/console.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/console.cpp > CMakeFiles/wallaby.dir/src/console.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/console.cpp > CMakeFiles/wallaby.dir/src/console.cpp.i
 
 CMakeFiles/wallaby.dir/src/console.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/console.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/console.cpp -o CMakeFiles/wallaby.dir/src/console.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/console.cpp -o CMakeFiles/wallaby.dir/src/console.cpp.s
 
 CMakeFiles/wallaby.dir/src/console.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/console.cpp.o.requires
@@ -238,17 +238,17 @@ CMakeFiles/wallaby.dir/src/console.cpp.o.provides.build: CMakeFiles/wallaby.dir/
 
 CMakeFiles/wallaby.dir/src/accel_p.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/accel_p.cpp.o: ../src/accel_p.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_9)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_9)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/accel_p.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/accel_p.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/accel_p.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/accel_p.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/accel_p.cpp
 
 CMakeFiles/wallaby.dir/src/accel_p.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/accel_p.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/accel_p.cpp > CMakeFiles/wallaby.dir/src/accel_p.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/accel_p.cpp > CMakeFiles/wallaby.dir/src/accel_p.cpp.i
 
 CMakeFiles/wallaby.dir/src/accel_p.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/accel_p.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/accel_p.cpp -o CMakeFiles/wallaby.dir/src/accel_p.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/accel_p.cpp -o CMakeFiles/wallaby.dir/src/accel_p.cpp.s
 
 CMakeFiles/wallaby.dir/src/accel_p.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/accel_p.cpp.o.requires
@@ -261,17 +261,17 @@ CMakeFiles/wallaby.dir/src/accel_p.cpp.o.provides.build: CMakeFiles/wallaby.dir/
 
 CMakeFiles/wallaby.dir/src/digital_p.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/digital_p.cpp.o: ../src/digital_p.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_10)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_10)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/digital_p.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/digital_p.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/digital_p.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/digital_p.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/digital_p.cpp
 
 CMakeFiles/wallaby.dir/src/digital_p.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/digital_p.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/digital_p.cpp > CMakeFiles/wallaby.dir/src/digital_p.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/digital_p.cpp > CMakeFiles/wallaby.dir/src/digital_p.cpp.i
 
 CMakeFiles/wallaby.dir/src/digital_p.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/digital_p.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/digital_p.cpp -o CMakeFiles/wallaby.dir/src/digital_p.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/digital_p.cpp -o CMakeFiles/wallaby.dir/src/digital_p.cpp.s
 
 CMakeFiles/wallaby.dir/src/digital_p.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/digital_p.cpp.o.requires
@@ -284,17 +284,17 @@ CMakeFiles/wallaby.dir/src/digital_p.cpp.o.provides.build: CMakeFiles/wallaby.di
 
 CMakeFiles/wallaby.dir/src/motors_c.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/motors_c.cpp.o: ../src/motors_c.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_11)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_11)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/motors_c.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/motors_c.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/motors_c.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/motors_c.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/motors_c.cpp
 
 CMakeFiles/wallaby.dir/src/motors_c.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/motors_c.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/motors_c.cpp > CMakeFiles/wallaby.dir/src/motors_c.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/motors_c.cpp > CMakeFiles/wallaby.dir/src/motors_c.cpp.i
 
 CMakeFiles/wallaby.dir/src/motors_c.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/motors_c.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/motors_c.cpp -o CMakeFiles/wallaby.dir/src/motors_c.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/motors_c.cpp -o CMakeFiles/wallaby.dir/src/motors_c.cpp.s
 
 CMakeFiles/wallaby.dir/src/motors_c.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/motors_c.cpp.o.requires
@@ -307,17 +307,17 @@ CMakeFiles/wallaby.dir/src/motors_c.cpp.o.provides.build: CMakeFiles/wallaby.dir
 
 CMakeFiles/wallaby.dir/src/create_c.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/create_c.cpp.o: ../src/create_c.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_12)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_12)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/create_c.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/create_c.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/create_c.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/create_c.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/create_c.cpp
 
 CMakeFiles/wallaby.dir/src/create_c.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/create_c.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/create_c.cpp > CMakeFiles/wallaby.dir/src/create_c.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/create_c.cpp > CMakeFiles/wallaby.dir/src/create_c.cpp.i
 
 CMakeFiles/wallaby.dir/src/create_c.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/create_c.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/create_c.cpp -o CMakeFiles/wallaby.dir/src/create_c.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/create_c.cpp -o CMakeFiles/wallaby.dir/src/create_c.cpp.s
 
 CMakeFiles/wallaby.dir/src/create_c.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/create_c.cpp.o.requires
@@ -330,17 +330,17 @@ CMakeFiles/wallaby.dir/src/create_c.cpp.o.provides.build: CMakeFiles/wallaby.dir
 
 CMakeFiles/wallaby.dir/src/led_p.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/led_p.cpp.o: ../src/led_p.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_13)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_13)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/led_p.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/led_p.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/led_p.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/led_p.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/led_p.cpp
 
 CMakeFiles/wallaby.dir/src/led_p.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/led_p.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/led_p.cpp > CMakeFiles/wallaby.dir/src/led_p.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/led_p.cpp > CMakeFiles/wallaby.dir/src/led_p.cpp.i
 
 CMakeFiles/wallaby.dir/src/led_p.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/led_p.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/led_p.cpp -o CMakeFiles/wallaby.dir/src/led_p.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/led_p.cpp -o CMakeFiles/wallaby.dir/src/led_p.cpp.s
 
 CMakeFiles/wallaby.dir/src/led_p.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/led_p.cpp.o.requires
@@ -353,17 +353,17 @@ CMakeFiles/wallaby.dir/src/led_p.cpp.o.provides.build: CMakeFiles/wallaby.dir/sr
 
 CMakeFiles/wallaby.dir/src/nyi.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/nyi.cpp.o: ../src/nyi.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_14)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_14)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/nyi.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/nyi.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/nyi.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/nyi.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/nyi.cpp
 
 CMakeFiles/wallaby.dir/src/nyi.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/nyi.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/nyi.cpp > CMakeFiles/wallaby.dir/src/nyi.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/nyi.cpp > CMakeFiles/wallaby.dir/src/nyi.cpp.i
 
 CMakeFiles/wallaby.dir/src/nyi.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/nyi.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/nyi.cpp -o CMakeFiles/wallaby.dir/src/nyi.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/nyi.cpp -o CMakeFiles/wallaby.dir/src/nyi.cpp.s
 
 CMakeFiles/wallaby.dir/src/nyi.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/nyi.cpp.o.requires
@@ -376,17 +376,17 @@ CMakeFiles/wallaby.dir/src/nyi.cpp.o.provides.build: CMakeFiles/wallaby.dir/src/
 
 CMakeFiles/wallaby.dir/src/general_c.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/general_c.cpp.o: ../src/general_c.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_15)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_15)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/general_c.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/general_c.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/general_c.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/general_c.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/general_c.cpp
 
 CMakeFiles/wallaby.dir/src/general_c.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/general_c.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/general_c.cpp > CMakeFiles/wallaby.dir/src/general_c.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/general_c.cpp > CMakeFiles/wallaby.dir/src/general_c.cpp.i
 
 CMakeFiles/wallaby.dir/src/general_c.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/general_c.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/general_c.cpp -o CMakeFiles/wallaby.dir/src/general_c.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/general_c.cpp -o CMakeFiles/wallaby.dir/src/general_c.cpp.s
 
 CMakeFiles/wallaby.dir/src/general_c.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/general_c.cpp.o.requires
@@ -399,17 +399,17 @@ CMakeFiles/wallaby.dir/src/general_c.cpp.o.provides.build: CMakeFiles/wallaby.di
 
 CMakeFiles/wallaby.dir/src/channel_p.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/channel_p.cpp.o: ../src/channel_p.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_16)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_16)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/channel_p.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/channel_p.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/channel_p.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/channel_p.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/channel_p.cpp
 
 CMakeFiles/wallaby.dir/src/channel_p.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/channel_p.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/channel_p.cpp > CMakeFiles/wallaby.dir/src/channel_p.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/channel_p.cpp > CMakeFiles/wallaby.dir/src/channel_p.cpp.i
 
 CMakeFiles/wallaby.dir/src/channel_p.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/channel_p.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/channel_p.cpp -o CMakeFiles/wallaby.dir/src/channel_p.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/channel_p.cpp -o CMakeFiles/wallaby.dir/src/channel_p.cpp.s
 
 CMakeFiles/wallaby.dir/src/channel_p.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/channel_p.cpp.o.requires
@@ -422,17 +422,17 @@ CMakeFiles/wallaby.dir/src/channel_p.cpp.o.provides.build: CMakeFiles/wallaby.di
 
 CMakeFiles/wallaby.dir/src/magneto_c.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/magneto_c.cpp.o: ../src/magneto_c.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_17)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_17)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/magneto_c.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/magneto_c.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/magneto_c.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/magneto_c.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/magneto_c.cpp
 
 CMakeFiles/wallaby.dir/src/magneto_c.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/magneto_c.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/magneto_c.cpp > CMakeFiles/wallaby.dir/src/magneto_c.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/magneto_c.cpp > CMakeFiles/wallaby.dir/src/magneto_c.cpp.i
 
 CMakeFiles/wallaby.dir/src/magneto_c.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/magneto_c.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/magneto_c.cpp -o CMakeFiles/wallaby.dir/src/magneto_c.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/magneto_c.cpp -o CMakeFiles/wallaby.dir/src/magneto_c.cpp.s
 
 CMakeFiles/wallaby.dir/src/magneto_c.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/magneto_c.cpp.o.requires
@@ -445,17 +445,17 @@ CMakeFiles/wallaby.dir/src/magneto_c.cpp.o.provides.build: CMakeFiles/wallaby.di
 
 CMakeFiles/wallaby.dir/src/wait_for.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/wait_for.cpp.o: ../src/wait_for.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_18)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_18)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/wait_for.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/wait_for.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wait_for.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/wait_for.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wait_for.cpp
 
 CMakeFiles/wallaby.dir/src/wait_for.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/wait_for.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wait_for.cpp > CMakeFiles/wallaby.dir/src/wait_for.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wait_for.cpp > CMakeFiles/wallaby.dir/src/wait_for.cpp.i
 
 CMakeFiles/wallaby.dir/src/wait_for.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/wait_for.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wait_for.cpp -o CMakeFiles/wallaby.dir/src/wait_for.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wait_for.cpp -o CMakeFiles/wallaby.dir/src/wait_for.cpp.s
 
 CMakeFiles/wallaby.dir/src/wait_for.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/wait_for.cpp.o.requires
@@ -468,17 +468,17 @@ CMakeFiles/wallaby.dir/src/wait_for.cpp.o.provides.build: CMakeFiles/wallaby.dir
 
 CMakeFiles/wallaby.dir/src/thread_c.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/thread_c.cpp.o: ../src/thread_c.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_19)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_19)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/thread_c.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/thread_c.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/thread_c.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/thread_c.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/thread_c.cpp
 
 CMakeFiles/wallaby.dir/src/thread_c.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/thread_c.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/thread_c.cpp > CMakeFiles/wallaby.dir/src/thread_c.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/thread_c.cpp > CMakeFiles/wallaby.dir/src/thread_c.cpp.i
 
 CMakeFiles/wallaby.dir/src/thread_c.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/thread_c.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/thread_c.cpp -o CMakeFiles/wallaby.dir/src/thread_c.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/thread_c.cpp -o CMakeFiles/wallaby.dir/src/thread_c.cpp.s
 
 CMakeFiles/wallaby.dir/src/thread_c.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/thread_c.cpp.o.requires
@@ -491,17 +491,17 @@ CMakeFiles/wallaby.dir/src/thread_c.cpp.o.provides.build: CMakeFiles/wallaby.dir
 
 CMakeFiles/wallaby.dir/src/motors.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/motors.cpp.o: ../src/motors.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_20)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_20)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/motors.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/motors.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/motors.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/motors.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/motors.cpp
 
 CMakeFiles/wallaby.dir/src/motors.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/motors.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/motors.cpp > CMakeFiles/wallaby.dir/src/motors.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/motors.cpp > CMakeFiles/wallaby.dir/src/motors.cpp.i
 
 CMakeFiles/wallaby.dir/src/motors.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/motors.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/motors.cpp -o CMakeFiles/wallaby.dir/src/motors.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/motors.cpp -o CMakeFiles/wallaby.dir/src/motors.cpp.s
 
 CMakeFiles/wallaby.dir/src/motors.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/motors.cpp.o.requires
@@ -514,17 +514,17 @@ CMakeFiles/wallaby.dir/src/motors.cpp.o.provides.build: CMakeFiles/wallaby.dir/s
 
 CMakeFiles/wallaby.dir/src/motor_p.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/motor_p.cpp.o: ../src/motor_p.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_21)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_21)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/motor_p.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/motor_p.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/motor_p.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/motor_p.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/motor_p.cpp
 
 CMakeFiles/wallaby.dir/src/motor_p.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/motor_p.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/motor_p.cpp > CMakeFiles/wallaby.dir/src/motor_p.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/motor_p.cpp > CMakeFiles/wallaby.dir/src/motor_p.cpp.i
 
 CMakeFiles/wallaby.dir/src/motor_p.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/motor_p.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/motor_p.cpp -o CMakeFiles/wallaby.dir/src/motor_p.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/motor_p.cpp -o CMakeFiles/wallaby.dir/src/motor_p.cpp.s
 
 CMakeFiles/wallaby.dir/src/motor_p.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/motor_p.cpp.o.requires
@@ -537,17 +537,17 @@ CMakeFiles/wallaby.dir/src/motor_p.cpp.o.provides.build: CMakeFiles/wallaby.dir/
 
 CMakeFiles/wallaby.dir/src/digital.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/digital.cpp.o: ../src/digital.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_22)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_22)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/digital.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/digital.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/digital.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/digital.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/digital.cpp
 
 CMakeFiles/wallaby.dir/src/digital.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/digital.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/digital.cpp > CMakeFiles/wallaby.dir/src/digital.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/digital.cpp > CMakeFiles/wallaby.dir/src/digital.cpp.i
 
 CMakeFiles/wallaby.dir/src/digital.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/digital.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/digital.cpp -o CMakeFiles/wallaby.dir/src/digital.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/digital.cpp -o CMakeFiles/wallaby.dir/src/digital.cpp.s
 
 CMakeFiles/wallaby.dir/src/digital.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/digital.cpp.o.requires
@@ -560,17 +560,17 @@ CMakeFiles/wallaby.dir/src/digital.cpp.o.provides.build: CMakeFiles/wallaby.dir/
 
 CMakeFiles/wallaby.dir/src/geom_c.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/geom_c.cpp.o: ../src/geom_c.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_23)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_23)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/geom_c.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/geom_c.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/geom_c.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/geom_c.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/geom_c.cpp
 
 CMakeFiles/wallaby.dir/src/geom_c.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/geom_c.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/geom_c.cpp > CMakeFiles/wallaby.dir/src/geom_c.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/geom_c.cpp > CMakeFiles/wallaby.dir/src/geom_c.cpp.i
 
 CMakeFiles/wallaby.dir/src/geom_c.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/geom_c.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/geom_c.cpp -o CMakeFiles/wallaby.dir/src/geom_c.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/geom_c.cpp -o CMakeFiles/wallaby.dir/src/geom_c.cpp.s
 
 CMakeFiles/wallaby.dir/src/geom_c.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/geom_c.cpp.o.requires
@@ -583,17 +583,17 @@ CMakeFiles/wallaby.dir/src/geom_c.cpp.o.provides.build: CMakeFiles/wallaby.dir/s
 
 CMakeFiles/wallaby.dir/src/button.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/button.cpp.o: ../src/button.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_24)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_24)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/button.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/button.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/button.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/button.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/button.cpp
 
 CMakeFiles/wallaby.dir/src/button.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/button.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/button.cpp > CMakeFiles/wallaby.dir/src/button.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/button.cpp > CMakeFiles/wallaby.dir/src/button.cpp.i
 
 CMakeFiles/wallaby.dir/src/button.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/button.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/button.cpp -o CMakeFiles/wallaby.dir/src/button.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/button.cpp -o CMakeFiles/wallaby.dir/src/button.cpp.s
 
 CMakeFiles/wallaby.dir/src/button.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/button.cpp.o.requires
@@ -606,17 +606,17 @@ CMakeFiles/wallaby.dir/src/button.cpp.o.provides.build: CMakeFiles/wallaby.dir/s
 
 CMakeFiles/wallaby.dir/src/compass.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/compass.cpp.o: ../src/compass.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_25)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_25)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/compass.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/compass.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/compass.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/compass.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/compass.cpp
 
 CMakeFiles/wallaby.dir/src/compass.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/compass.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/compass.cpp > CMakeFiles/wallaby.dir/src/compass.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/compass.cpp > CMakeFiles/wallaby.dir/src/compass.cpp.i
 
 CMakeFiles/wallaby.dir/src/compass.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/compass.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/compass.cpp -o CMakeFiles/wallaby.dir/src/compass.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/compass.cpp -o CMakeFiles/wallaby.dir/src/compass.cpp.s
 
 CMakeFiles/wallaby.dir/src/compass.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/compass.cpp.o.requires
@@ -629,17 +629,17 @@ CMakeFiles/wallaby.dir/src/compass.cpp.o.provides.build: CMakeFiles/wallaby.dir/
 
 CMakeFiles/wallaby.dir/src/graphics_characters.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/graphics_characters.cpp.o: ../src/graphics_characters.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_26)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_26)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/graphics_characters.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/graphics_characters.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/graphics_characters.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/graphics_characters.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/graphics_characters.cpp
 
 CMakeFiles/wallaby.dir/src/graphics_characters.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/graphics_characters.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/graphics_characters.cpp > CMakeFiles/wallaby.dir/src/graphics_characters.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/graphics_characters.cpp > CMakeFiles/wallaby.dir/src/graphics_characters.cpp.i
 
 CMakeFiles/wallaby.dir/src/graphics_characters.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/graphics_characters.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/graphics_characters.cpp -o CMakeFiles/wallaby.dir/src/graphics_characters.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/graphics_characters.cpp -o CMakeFiles/wallaby.dir/src/graphics_characters.cpp.s
 
 CMakeFiles/wallaby.dir/src/graphics_characters.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/graphics_characters.cpp.o.requires
@@ -652,17 +652,17 @@ CMakeFiles/wallaby.dir/src/graphics_characters.cpp.o.provides.build: CMakeFiles/
 
 CMakeFiles/wallaby.dir/src/analog_p.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/analog_p.cpp.o: ../src/analog_p.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_27)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_27)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/analog_p.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/analog_p.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/analog_p.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/analog_p.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/analog_p.cpp
 
 CMakeFiles/wallaby.dir/src/analog_p.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/analog_p.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/analog_p.cpp > CMakeFiles/wallaby.dir/src/analog_p.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/analog_p.cpp > CMakeFiles/wallaby.dir/src/analog_p.cpp.i
 
 CMakeFiles/wallaby.dir/src/analog_p.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/analog_p.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/analog_p.cpp -o CMakeFiles/wallaby.dir/src/analog_p.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/analog_p.cpp -o CMakeFiles/wallaby.dir/src/analog_p.cpp.s
 
 CMakeFiles/wallaby.dir/src/analog_p.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/analog_p.cpp.o.requires
@@ -675,17 +675,17 @@ CMakeFiles/wallaby.dir/src/analog_p.cpp.o.provides.build: CMakeFiles/wallaby.dir
 
 CMakeFiles/wallaby.dir/src/socket.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/socket.cpp.o: ../src/socket.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_28)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_28)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/socket.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/socket.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/socket.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/socket.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/socket.cpp
 
 CMakeFiles/wallaby.dir/src/socket.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/socket.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/socket.cpp > CMakeFiles/wallaby.dir/src/socket.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/socket.cpp > CMakeFiles/wallaby.dir/src/socket.cpp.i
 
 CMakeFiles/wallaby.dir/src/socket.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/socket.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/socket.cpp -o CMakeFiles/wallaby.dir/src/socket.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/socket.cpp -o CMakeFiles/wallaby.dir/src/socket.cpp.s
 
 CMakeFiles/wallaby.dir/src/socket.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/socket.cpp.o.requires
@@ -698,17 +698,17 @@ CMakeFiles/wallaby.dir/src/socket.cpp.o.provides.build: CMakeFiles/wallaby.dir/s
 
 CMakeFiles/wallaby.dir/src/battery.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/battery.cpp.o: ../src/battery.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_29)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_29)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/battery.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/battery.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/battery.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/battery.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/battery.cpp
 
 CMakeFiles/wallaby.dir/src/battery.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/battery.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/battery.cpp > CMakeFiles/wallaby.dir/src/battery.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/battery.cpp > CMakeFiles/wallaby.dir/src/battery.cpp.i
 
 CMakeFiles/wallaby.dir/src/battery.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/battery.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/battery.cpp -o CMakeFiles/wallaby.dir/src/battery.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/battery.cpp -o CMakeFiles/wallaby.dir/src/battery.cpp.s
 
 CMakeFiles/wallaby.dir/src/battery.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/battery.cpp.o.requires
@@ -721,17 +721,17 @@ CMakeFiles/wallaby.dir/src/battery.cpp.o.provides.build: CMakeFiles/wallaby.dir/
 
 CMakeFiles/wallaby.dir/src/servo.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/servo.cpp.o: ../src/servo.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_30)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_30)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/servo.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/servo.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/servo.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/servo.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/servo.cpp
 
 CMakeFiles/wallaby.dir/src/servo.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/servo.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/servo.cpp > CMakeFiles/wallaby.dir/src/servo.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/servo.cpp > CMakeFiles/wallaby.dir/src/servo.cpp.i
 
 CMakeFiles/wallaby.dir/src/servo.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/servo.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/servo.cpp -o CMakeFiles/wallaby.dir/src/servo.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/servo.cpp -o CMakeFiles/wallaby.dir/src/servo.cpp.s
 
 CMakeFiles/wallaby.dir/src/servo.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/servo.cpp.o.requires
@@ -744,17 +744,17 @@ CMakeFiles/wallaby.dir/src/servo.cpp.o.provides.build: CMakeFiles/wallaby.dir/sr
 
 CMakeFiles/wallaby.dir/src/analog.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/analog.cpp.o: ../src/analog.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_31)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_31)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/analog.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/analog.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/analog.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/analog.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/analog.cpp
 
 CMakeFiles/wallaby.dir/src/analog.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/analog.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/analog.cpp > CMakeFiles/wallaby.dir/src/analog.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/analog.cpp > CMakeFiles/wallaby.dir/src/analog.cpp.i
 
 CMakeFiles/wallaby.dir/src/analog.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/analog.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/analog.cpp -o CMakeFiles/wallaby.dir/src/analog.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/analog.cpp -o CMakeFiles/wallaby.dir/src/analog.cpp.s
 
 CMakeFiles/wallaby.dir/src/analog.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/analog.cpp.o.requires
@@ -767,17 +767,17 @@ CMakeFiles/wallaby.dir/src/analog.cpp.o.provides.build: CMakeFiles/wallaby.dir/s
 
 CMakeFiles/wallaby.dir/src/gyro_c.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/gyro_c.cpp.o: ../src/gyro_c.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_32)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_32)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/gyro_c.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/gyro_c.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/gyro_c.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/gyro_c.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/gyro_c.cpp
 
 CMakeFiles/wallaby.dir/src/gyro_c.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/gyro_c.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/gyro_c.cpp > CMakeFiles/wallaby.dir/src/gyro_c.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/gyro_c.cpp > CMakeFiles/wallaby.dir/src/gyro_c.cpp.i
 
 CMakeFiles/wallaby.dir/src/gyro_c.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/gyro_c.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/gyro_c.cpp -o CMakeFiles/wallaby.dir/src/gyro_c.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/gyro_c.cpp -o CMakeFiles/wallaby.dir/src/gyro_c.cpp.s
 
 CMakeFiles/wallaby.dir/src/gyro_c.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/gyro_c.cpp.o.requires
@@ -790,17 +790,17 @@ CMakeFiles/wallaby.dir/src/gyro_c.cpp.o.provides.build: CMakeFiles/wallaby.dir/s
 
 CMakeFiles/wallaby.dir/src/config.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/config.cpp.o: ../src/config.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_33)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_33)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/config.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/config.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/config.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/config.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/config.cpp
 
 CMakeFiles/wallaby.dir/src/config.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/config.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/config.cpp > CMakeFiles/wallaby.dir/src/config.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/config.cpp > CMakeFiles/wallaby.dir/src/config.cpp.i
 
 CMakeFiles/wallaby.dir/src/config.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/config.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/config.cpp -o CMakeFiles/wallaby.dir/src/config.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/config.cpp -o CMakeFiles/wallaby.dir/src/config.cpp.s
 
 CMakeFiles/wallaby.dir/src/config.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/config.cpp.o.requires
@@ -813,17 +813,17 @@ CMakeFiles/wallaby.dir/src/config.cpp.o.provides.build: CMakeFiles/wallaby.dir/s
 
 CMakeFiles/wallaby.dir/src/button_p.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/button_p.cpp.o: ../src/button_p.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_34)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_34)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/button_p.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/button_p.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/button_p.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/button_p.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/button_p.cpp
 
 CMakeFiles/wallaby.dir/src/button_p.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/button_p.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/button_p.cpp > CMakeFiles/wallaby.dir/src/button_p.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/button_p.cpp > CMakeFiles/wallaby.dir/src/button_p.cpp.i
 
 CMakeFiles/wallaby.dir/src/button_p.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/button_p.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/button_p.cpp -o CMakeFiles/wallaby.dir/src/button_p.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/button_p.cpp -o CMakeFiles/wallaby.dir/src/button_p.cpp.s
 
 CMakeFiles/wallaby.dir/src/button_p.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/button_p.cpp.o.requires
@@ -836,17 +836,17 @@ CMakeFiles/wallaby.dir/src/button_p.cpp.o.provides.build: CMakeFiles/wallaby.dir
 
 CMakeFiles/wallaby.dir/src/time_p.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/time_p.cpp.o: ../src/time_p.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_35)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_35)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/time_p.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/time_p.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/time_p.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/time_p.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/time_p.cpp
 
 CMakeFiles/wallaby.dir/src/time_p.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/time_p.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/time_p.cpp > CMakeFiles/wallaby.dir/src/time_p.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/time_p.cpp > CMakeFiles/wallaby.dir/src/time_p.cpp.i
 
 CMakeFiles/wallaby.dir/src/time_p.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/time_p.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/time_p.cpp -o CMakeFiles/wallaby.dir/src/time_p.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/time_p.cpp -o CMakeFiles/wallaby.dir/src/time_p.cpp.s
 
 CMakeFiles/wallaby.dir/src/time_p.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/time_p.cpp.o.requires
@@ -859,17 +859,17 @@ CMakeFiles/wallaby.dir/src/time_p.cpp.o.provides.build: CMakeFiles/wallaby.dir/s
 
 CMakeFiles/wallaby.dir/src/battery_c.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/battery_c.cpp.o: ../src/battery_c.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_36)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_36)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/battery_c.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/battery_c.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/battery_c.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/battery_c.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/battery_c.cpp
 
 CMakeFiles/wallaby.dir/src/battery_c.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/battery_c.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/battery_c.cpp > CMakeFiles/wallaby.dir/src/battery_c.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/battery_c.cpp > CMakeFiles/wallaby.dir/src/battery_c.cpp.i
 
 CMakeFiles/wallaby.dir/src/battery_c.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/battery_c.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/battery_c.cpp -o CMakeFiles/wallaby.dir/src/battery_c.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/battery_c.cpp -o CMakeFiles/wallaby.dir/src/battery_c.cpp.s
 
 CMakeFiles/wallaby.dir/src/battery_c.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/battery_c.cpp.o.requires
@@ -882,17 +882,17 @@ CMakeFiles/wallaby.dir/src/battery_c.cpp.o.provides.build: CMakeFiles/wallaby.di
 
 CMakeFiles/wallaby.dir/src/compass_c.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/compass_c.cpp.o: ../src/compass_c.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_37)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_37)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/compass_c.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/compass_c.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/compass_c.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/compass_c.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/compass_c.cpp
 
 CMakeFiles/wallaby.dir/src/compass_c.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/compass_c.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/compass_c.cpp > CMakeFiles/wallaby.dir/src/compass_c.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/compass_c.cpp > CMakeFiles/wallaby.dir/src/compass_c.cpp.i
 
 CMakeFiles/wallaby.dir/src/compass_c.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/compass_c.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/compass_c.cpp -o CMakeFiles/wallaby.dir/src/compass_c.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/compass_c.cpp -o CMakeFiles/wallaby.dir/src/compass_c.cpp.s
 
 CMakeFiles/wallaby.dir/src/compass_c.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/compass_c.cpp.o.requires
@@ -905,17 +905,17 @@ CMakeFiles/wallaby.dir/src/compass_c.cpp.o.provides.build: CMakeFiles/wallaby.di
 
 CMakeFiles/wallaby.dir/src/gyro_p.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/gyro_p.cpp.o: ../src/gyro_p.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_38)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_38)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/gyro_p.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/gyro_p.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/gyro_p.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/gyro_p.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/gyro_p.cpp
 
 CMakeFiles/wallaby.dir/src/gyro_p.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/gyro_p.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/gyro_p.cpp > CMakeFiles/wallaby.dir/src/gyro_p.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/gyro_p.cpp > CMakeFiles/wallaby.dir/src/gyro_p.cpp.i
 
 CMakeFiles/wallaby.dir/src/gyro_p.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/gyro_p.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/gyro_p.cpp -o CMakeFiles/wallaby.dir/src/gyro_p.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/gyro_p.cpp -o CMakeFiles/wallaby.dir/src/gyro_p.cpp.s
 
 CMakeFiles/wallaby.dir/src/gyro_p.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/gyro_p.cpp.o.requires
@@ -928,17 +928,17 @@ CMakeFiles/wallaby.dir/src/gyro_p.cpp.o.provides.build: CMakeFiles/wallaby.dir/s
 
 CMakeFiles/wallaby.dir/src/robot.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/robot.cpp.o: ../src/robot.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_39)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_39)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/robot.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/robot.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/robot.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/robot.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/robot.cpp
 
 CMakeFiles/wallaby.dir/src/robot.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/robot.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/robot.cpp > CMakeFiles/wallaby.dir/src/robot.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/robot.cpp > CMakeFiles/wallaby.dir/src/robot.cpp.i
 
 CMakeFiles/wallaby.dir/src/robot.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/robot.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/robot.cpp -o CMakeFiles/wallaby.dir/src/robot.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/robot.cpp -o CMakeFiles/wallaby.dir/src/robot.cpp.s
 
 CMakeFiles/wallaby.dir/src/robot.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/robot.cpp.o.requires
@@ -951,17 +951,17 @@ CMakeFiles/wallaby.dir/src/robot.cpp.o.provides.build: CMakeFiles/wallaby.dir/sr
 
 CMakeFiles/wallaby.dir/src/sensor_logic.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/sensor_logic.cpp.o: ../src/sensor_logic.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_40)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_40)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/sensor_logic.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/sensor_logic.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/sensor_logic.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/sensor_logic.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/sensor_logic.cpp
 
 CMakeFiles/wallaby.dir/src/sensor_logic.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/sensor_logic.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/sensor_logic.cpp > CMakeFiles/wallaby.dir/src/sensor_logic.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/sensor_logic.cpp > CMakeFiles/wallaby.dir/src/sensor_logic.cpp.i
 
 CMakeFiles/wallaby.dir/src/sensor_logic.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/sensor_logic.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/sensor_logic.cpp -o CMakeFiles/wallaby.dir/src/sensor_logic.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/sensor_logic.cpp -o CMakeFiles/wallaby.dir/src/sensor_logic.cpp.s
 
 CMakeFiles/wallaby.dir/src/sensor_logic.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/sensor_logic.cpp.o.requires
@@ -974,17 +974,17 @@ CMakeFiles/wallaby.dir/src/sensor_logic.cpp.o.provides.build: CMakeFiles/wallaby
 
 CMakeFiles/wallaby.dir/src/aruco.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/aruco.cpp.o: ../src/aruco.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_41)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_41)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/aruco.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/aruco.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/aruco.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/aruco.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/aruco.cpp
 
 CMakeFiles/wallaby.dir/src/aruco.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/aruco.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/aruco.cpp > CMakeFiles/wallaby.dir/src/aruco.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/aruco.cpp > CMakeFiles/wallaby.dir/src/aruco.cpp.i
 
 CMakeFiles/wallaby.dir/src/aruco.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/aruco.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/aruco.cpp -o CMakeFiles/wallaby.dir/src/aruco.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/aruco.cpp -o CMakeFiles/wallaby.dir/src/aruco.cpp.s
 
 CMakeFiles/wallaby.dir/src/aruco.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/aruco.cpp.o.requires
@@ -997,17 +997,17 @@ CMakeFiles/wallaby.dir/src/aruco.cpp.o.provides.build: CMakeFiles/wallaby.dir/sr
 
 CMakeFiles/wallaby.dir/src/util.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/util.cpp.o: ../src/util.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_42)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_42)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/util.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/util.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/util.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/util.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/util.cpp
 
 CMakeFiles/wallaby.dir/src/util.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/util.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/util.cpp > CMakeFiles/wallaby.dir/src/util.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/util.cpp > CMakeFiles/wallaby.dir/src/util.cpp.i
 
 CMakeFiles/wallaby.dir/src/util.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/util.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/util.cpp -o CMakeFiles/wallaby.dir/src/util.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/util.cpp -o CMakeFiles/wallaby.dir/src/util.cpp.s
 
 CMakeFiles/wallaby.dir/src/util.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/util.cpp.o.requires
@@ -1020,17 +1020,17 @@ CMakeFiles/wallaby.dir/src/util.cpp.o.provides.build: CMakeFiles/wallaby.dir/src
 
 CMakeFiles/wallaby.dir/src/ir.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/ir.cpp.o: ../src/ir.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_43)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_43)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/ir.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/ir.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/ir.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/ir.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/ir.cpp
 
 CMakeFiles/wallaby.dir/src/ir.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/ir.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/ir.cpp > CMakeFiles/wallaby.dir/src/ir.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/ir.cpp > CMakeFiles/wallaby.dir/src/ir.cpp.i
 
 CMakeFiles/wallaby.dir/src/ir.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/ir.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/ir.cpp -o CMakeFiles/wallaby.dir/src/ir.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/ir.cpp -o CMakeFiles/wallaby.dir/src/ir.cpp.s
 
 CMakeFiles/wallaby.dir/src/ir.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/ir.cpp.o.requires
@@ -1043,17 +1043,17 @@ CMakeFiles/wallaby.dir/src/ir.cpp.o.provides.build: CMakeFiles/wallaby.dir/src/i
 
 CMakeFiles/wallaby.dir/src/create.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/create.cpp.o: ../src/create.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_44)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_44)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/create.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/create.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/create.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/create.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/create.cpp
 
 CMakeFiles/wallaby.dir/src/create.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/create.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/create.cpp > CMakeFiles/wallaby.dir/src/create.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/create.cpp > CMakeFiles/wallaby.dir/src/create.cpp.i
 
 CMakeFiles/wallaby.dir/src/create.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/create.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/create.cpp -o CMakeFiles/wallaby.dir/src/create.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/create.cpp -o CMakeFiles/wallaby.dir/src/create.cpp.s
 
 CMakeFiles/wallaby.dir/src/create.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/create.cpp.o.requires
@@ -1066,17 +1066,17 @@ CMakeFiles/wallaby.dir/src/create.cpp.o.provides.build: CMakeFiles/wallaby.dir/s
 
 CMakeFiles/wallaby.dir/src/console_c.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/console_c.cpp.o: ../src/console_c.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_45)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_45)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/console_c.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/console_c.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/console_c.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/console_c.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/console_c.cpp
 
 CMakeFiles/wallaby.dir/src/console_c.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/console_c.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/console_c.cpp > CMakeFiles/wallaby.dir/src/console_c.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/console_c.cpp > CMakeFiles/wallaby.dir/src/console_c.cpp.i
 
 CMakeFiles/wallaby.dir/src/console_c.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/console_c.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/console_c.cpp -o CMakeFiles/wallaby.dir/src/console_c.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/console_c.cpp -o CMakeFiles/wallaby.dir/src/console_c.cpp.s
 
 CMakeFiles/wallaby.dir/src/console_c.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/console_c.cpp.o.requires
@@ -1089,17 +1089,17 @@ CMakeFiles/wallaby.dir/src/console_c.cpp.o.provides.build: CMakeFiles/wallaby.di
 
 CMakeFiles/wallaby.dir/src/thread.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/thread.cpp.o: ../src/thread.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_46)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_46)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/thread.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/thread.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/thread.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/thread.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/thread.cpp
 
 CMakeFiles/wallaby.dir/src/thread.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/thread.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/thread.cpp > CMakeFiles/wallaby.dir/src/thread.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/thread.cpp > CMakeFiles/wallaby.dir/src/thread.cpp.i
 
 CMakeFiles/wallaby.dir/src/thread.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/thread.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/thread.cpp -o CMakeFiles/wallaby.dir/src/thread.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/thread.cpp -o CMakeFiles/wallaby.dir/src/thread.cpp.s
 
 CMakeFiles/wallaby.dir/src/thread.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/thread.cpp.o.requires
@@ -1112,17 +1112,17 @@ CMakeFiles/wallaby.dir/src/thread.cpp.o.provides.build: CMakeFiles/wallaby.dir/s
 
 CMakeFiles/wallaby.dir/src/compass_p.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/compass_p.cpp.o: ../src/compass_p.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_47)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_47)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/compass_p.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/compass_p.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/compass_p.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/compass_p.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/compass_p.cpp
 
 CMakeFiles/wallaby.dir/src/compass_p.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/compass_p.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/compass_p.cpp > CMakeFiles/wallaby.dir/src/compass_p.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/compass_p.cpp > CMakeFiles/wallaby.dir/src/compass_p.cpp.i
 
 CMakeFiles/wallaby.dir/src/compass_p.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/compass_p.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/compass_p.cpp -o CMakeFiles/wallaby.dir/src/compass_p.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/compass_p.cpp -o CMakeFiles/wallaby.dir/src/compass_p.cpp.s
 
 CMakeFiles/wallaby.dir/src/compass_p.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/compass_p.cpp.o.requires
@@ -1135,17 +1135,17 @@ CMakeFiles/wallaby.dir/src/compass_p.cpp.o.provides.build: CMakeFiles/wallaby.di
 
 CMakeFiles/wallaby.dir/src/aruco_c.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/aruco_c.cpp.o: ../src/aruco_c.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_48)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_48)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/aruco_c.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/aruco_c.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/aruco_c.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/aruco_c.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/aruco_c.cpp
 
 CMakeFiles/wallaby.dir/src/aruco_c.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/aruco_c.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/aruco_c.cpp > CMakeFiles/wallaby.dir/src/aruco_c.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/aruco_c.cpp > CMakeFiles/wallaby.dir/src/aruco_c.cpp.i
 
 CMakeFiles/wallaby.dir/src/aruco_c.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/aruco_c.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/aruco_c.cpp -o CMakeFiles/wallaby.dir/src/aruco_c.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/aruco_c.cpp -o CMakeFiles/wallaby.dir/src/aruco_c.cpp.s
 
 CMakeFiles/wallaby.dir/src/aruco_c.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/aruco_c.cpp.o.requires
@@ -1158,17 +1158,17 @@ CMakeFiles/wallaby.dir/src/aruco_c.cpp.o.provides.build: CMakeFiles/wallaby.dir/
 
 CMakeFiles/wallaby.dir/src/camera_c_p.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/camera_c_p.cpp.o: ../src/camera_c_p.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_49)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_49)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/camera_c_p.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/camera_c_p.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/camera_c_p.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/camera_c_p.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/camera_c_p.cpp
 
 CMakeFiles/wallaby.dir/src/camera_c_p.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/camera_c_p.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/camera_c_p.cpp > CMakeFiles/wallaby.dir/src/camera_c_p.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/camera_c_p.cpp > CMakeFiles/wallaby.dir/src/camera_c_p.cpp.i
 
 CMakeFiles/wallaby.dir/src/camera_c_p.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/camera_c_p.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/camera_c_p.cpp -o CMakeFiles/wallaby.dir/src/camera_c_p.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/camera_c_p.cpp -o CMakeFiles/wallaby.dir/src/camera_c_p.cpp.s
 
 CMakeFiles/wallaby.dir/src/camera_c_p.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/camera_c_p.cpp.o.requires
@@ -1181,17 +1181,17 @@ CMakeFiles/wallaby.dir/src/camera_c_p.cpp.o.provides.build: CMakeFiles/wallaby.d
 
 CMakeFiles/wallaby.dir/src/ir_c.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/ir_c.cpp.o: ../src/ir_c.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_50)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_50)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/ir_c.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/ir_c.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/ir_c.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/ir_c.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/ir_c.cpp
 
 CMakeFiles/wallaby.dir/src/ir_c.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/ir_c.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/ir_c.cpp > CMakeFiles/wallaby.dir/src/ir_c.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/ir_c.cpp > CMakeFiles/wallaby.dir/src/ir_c.cpp.i
 
 CMakeFiles/wallaby.dir/src/ir_c.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/ir_c.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/ir_c.cpp -o CMakeFiles/wallaby.dir/src/ir_c.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/ir_c.cpp -o CMakeFiles/wallaby.dir/src/ir_c.cpp.s
 
 CMakeFiles/wallaby.dir/src/ir_c.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/ir_c.cpp.o.requires
@@ -1204,17 +1204,17 @@ CMakeFiles/wallaby.dir/src/ir_c.cpp.o.provides.build: CMakeFiles/wallaby.dir/src
 
 CMakeFiles/wallaby.dir/src/battery_p.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/battery_p.cpp.o: ../src/battery_p.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_51)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_51)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/battery_p.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/battery_p.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/battery_p.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/battery_p.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/battery_p.cpp
 
 CMakeFiles/wallaby.dir/src/battery_p.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/battery_p.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/battery_p.cpp > CMakeFiles/wallaby.dir/src/battery_p.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/battery_p.cpp > CMakeFiles/wallaby.dir/src/battery_p.cpp.i
 
 CMakeFiles/wallaby.dir/src/battery_p.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/battery_p.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/battery_p.cpp -o CMakeFiles/wallaby.dir/src/battery_p.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/battery_p.cpp -o CMakeFiles/wallaby.dir/src/battery_p.cpp.s
 
 CMakeFiles/wallaby.dir/src/battery_p.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/battery_p.cpp.o.requires
@@ -1227,17 +1227,17 @@ CMakeFiles/wallaby.dir/src/battery_p.cpp.o.provides.build: CMakeFiles/wallaby.di
 
 CMakeFiles/wallaby.dir/src/display_c.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/display_c.cpp.o: ../src/display_c.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_52)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_52)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/display_c.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/display_c.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/display_c.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/display_c.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/display_c.cpp
 
 CMakeFiles/wallaby.dir/src/display_c.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/display_c.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/display_c.cpp > CMakeFiles/wallaby.dir/src/display_c.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/display_c.cpp > CMakeFiles/wallaby.dir/src/display_c.cpp.i
 
 CMakeFiles/wallaby.dir/src/display_c.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/display_c.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/display_c.cpp -o CMakeFiles/wallaby.dir/src/display_c.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/display_c.cpp -o CMakeFiles/wallaby.dir/src/display_c.cpp.s
 
 CMakeFiles/wallaby.dir/src/display_c.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/display_c.cpp.o.requires
@@ -1250,17 +1250,17 @@ CMakeFiles/wallaby.dir/src/display_c.cpp.o.provides.build: CMakeFiles/wallaby.di
 
 CMakeFiles/wallaby.dir/src/graphics.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/graphics.cpp.o: ../src/graphics.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_53)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_53)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/graphics.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/graphics.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/graphics.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/graphics.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/graphics.cpp
 
 CMakeFiles/wallaby.dir/src/graphics.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/graphics.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/graphics.cpp > CMakeFiles/wallaby.dir/src/graphics.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/graphics.cpp > CMakeFiles/wallaby.dir/src/graphics.cpp.i
 
 CMakeFiles/wallaby.dir/src/graphics.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/graphics.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/graphics.cpp -o CMakeFiles/wallaby.dir/src/graphics.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/graphics.cpp -o CMakeFiles/wallaby.dir/src/graphics.cpp.s
 
 CMakeFiles/wallaby.dir/src/graphics.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/graphics.cpp.o.requires
@@ -1273,17 +1273,17 @@ CMakeFiles/wallaby.dir/src/graphics.cpp.o.provides.build: CMakeFiles/wallaby.dir
 
 CMakeFiles/wallaby.dir/src/audio.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/audio.cpp.o: ../src/audio.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_54)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_54)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/audio.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/audio.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/audio.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/audio.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/audio.cpp
 
 CMakeFiles/wallaby.dir/src/audio.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/audio.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/audio.cpp > CMakeFiles/wallaby.dir/src/audio.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/audio.cpp > CMakeFiles/wallaby.dir/src/audio.cpp.i
 
 CMakeFiles/wallaby.dir/src/audio.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/audio.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/audio.cpp -o CMakeFiles/wallaby.dir/src/audio.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/audio.cpp -o CMakeFiles/wallaby.dir/src/audio.cpp.s
 
 CMakeFiles/wallaby.dir/src/audio.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/audio.cpp.o.requires
@@ -1296,17 +1296,17 @@ CMakeFiles/wallaby.dir/src/audio.cpp.o.provides.build: CMakeFiles/wallaby.dir/sr
 
 CMakeFiles/wallaby.dir/src/magneto.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/magneto.cpp.o: ../src/magneto.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_55)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_55)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/magneto.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/magneto.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/magneto.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/magneto.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/magneto.cpp
 
 CMakeFiles/wallaby.dir/src/magneto.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/magneto.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/magneto.cpp > CMakeFiles/wallaby.dir/src/magneto.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/magneto.cpp > CMakeFiles/wallaby.dir/src/magneto.cpp.i
 
 CMakeFiles/wallaby.dir/src/magneto.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/magneto.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/magneto.cpp -o CMakeFiles/wallaby.dir/src/magneto.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/magneto.cpp -o CMakeFiles/wallaby.dir/src/magneto.cpp.s
 
 CMakeFiles/wallaby.dir/src/magneto.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/magneto.cpp.o.requires
@@ -1319,17 +1319,17 @@ CMakeFiles/wallaby.dir/src/magneto.cpp.o.provides.build: CMakeFiles/wallaby.dir/
 
 CMakeFiles/wallaby.dir/src/accel.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/accel.cpp.o: ../src/accel.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_56)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_56)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/accel.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/accel.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/accel.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/accel.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/accel.cpp
 
 CMakeFiles/wallaby.dir/src/accel.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/accel.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/accel.cpp > CMakeFiles/wallaby.dir/src/accel.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/accel.cpp > CMakeFiles/wallaby.dir/src/accel.cpp.i
 
 CMakeFiles/wallaby.dir/src/accel.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/accel.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/accel.cpp -o CMakeFiles/wallaby.dir/src/accel.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/accel.cpp -o CMakeFiles/wallaby.dir/src/accel.cpp.s
 
 CMakeFiles/wallaby.dir/src/accel.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/accel.cpp.o.requires
@@ -1342,17 +1342,17 @@ CMakeFiles/wallaby.dir/src/accel.cpp.o.provides.build: CMakeFiles/wallaby.dir/sr
 
 CMakeFiles/wallaby.dir/src/wallaby_p.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/wallaby_p.cpp.o: ../src/wallaby_p.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_57)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_57)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/wallaby_p.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/wallaby_p.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_p.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/wallaby_p.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_p.cpp
 
 CMakeFiles/wallaby.dir/src/wallaby_p.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/wallaby_p.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_p.cpp > CMakeFiles/wallaby.dir/src/wallaby_p.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_p.cpp > CMakeFiles/wallaby.dir/src/wallaby_p.cpp.i
 
 CMakeFiles/wallaby.dir/src/wallaby_p.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/wallaby_p.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_p.cpp -o CMakeFiles/wallaby.dir/src/wallaby_p.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_p.cpp -o CMakeFiles/wallaby.dir/src/wallaby_p.cpp.s
 
 CMakeFiles/wallaby.dir/src/wallaby_p.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/wallaby_p.cpp.o.requires
@@ -1365,17 +1365,17 @@ CMakeFiles/wallaby.dir/src/wallaby_p.cpp.o.provides.build: CMakeFiles/wallaby.di
 
 CMakeFiles/wallaby.dir/src/servo_c.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/servo_c.cpp.o: ../src/servo_c.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_58)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_58)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/servo_c.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/servo_c.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/servo_c.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/servo_c.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/servo_c.cpp
 
 CMakeFiles/wallaby.dir/src/servo_c.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/servo_c.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/servo_c.cpp > CMakeFiles/wallaby.dir/src/servo_c.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/servo_c.cpp > CMakeFiles/wallaby.dir/src/servo_c.cpp.i
 
 CMakeFiles/wallaby.dir/src/servo_c.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/servo_c.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/servo_c.cpp -o CMakeFiles/wallaby.dir/src/servo_c.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/servo_c.cpp -o CMakeFiles/wallaby.dir/src/servo_c.cpp.s
 
 CMakeFiles/wallaby.dir/src/servo_c.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/servo_c.cpp.o.requires
@@ -1388,17 +1388,17 @@ CMakeFiles/wallaby.dir/src/servo_c.cpp.o.provides.build: CMakeFiles/wallaby.dir/
 
 CMakeFiles/wallaby.dir/src/camera.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/camera.cpp.o: ../src/camera.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_59)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_59)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/camera.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/camera.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/camera.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/camera.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/camera.cpp
 
 CMakeFiles/wallaby.dir/src/camera.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/camera.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/camera.cpp > CMakeFiles/wallaby.dir/src/camera.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/camera.cpp > CMakeFiles/wallaby.dir/src/camera.cpp.i
 
 CMakeFiles/wallaby.dir/src/camera.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/camera.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/camera.cpp -o CMakeFiles/wallaby.dir/src/camera.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/camera.cpp -o CMakeFiles/wallaby.dir/src/camera.cpp.s
 
 CMakeFiles/wallaby.dir/src/camera.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/camera.cpp.o.requires
@@ -1411,17 +1411,17 @@ CMakeFiles/wallaby.dir/src/camera.cpp.o.provides.build: CMakeFiles/wallaby.dir/s
 
 CMakeFiles/wallaby.dir/src/gyro.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/gyro.cpp.o: ../src/gyro.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_60)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_60)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/gyro.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/gyro.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/gyro.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/gyro.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/gyro.cpp
 
 CMakeFiles/wallaby.dir/src/gyro.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/gyro.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/gyro.cpp > CMakeFiles/wallaby.dir/src/gyro.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/gyro.cpp > CMakeFiles/wallaby.dir/src/gyro.cpp.i
 
 CMakeFiles/wallaby.dir/src/gyro.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/gyro.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/gyro.cpp -o CMakeFiles/wallaby.dir/src/gyro.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/gyro.cpp -o CMakeFiles/wallaby.dir/src/gyro.cpp.s
 
 CMakeFiles/wallaby.dir/src/gyro.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/gyro.cpp.o.requires
@@ -1434,17 +1434,17 @@ CMakeFiles/wallaby.dir/src/gyro.cpp.o.provides.build: CMakeFiles/wallaby.dir/src
 
 CMakeFiles/wallaby.dir/src/camera_c.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/camera_c.cpp.o: ../src/camera_c.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_61)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_61)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/camera_c.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/camera_c.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/camera_c.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/camera_c.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/camera_c.cpp
 
 CMakeFiles/wallaby.dir/src/camera_c.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/camera_c.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/camera_c.cpp > CMakeFiles/wallaby.dir/src/camera_c.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/camera_c.cpp > CMakeFiles/wallaby.dir/src/camera_c.cpp.i
 
 CMakeFiles/wallaby.dir/src/camera_c.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/camera_c.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/camera_c.cpp -o CMakeFiles/wallaby.dir/src/camera_c.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/camera_c.cpp -o CMakeFiles/wallaby.dir/src/camera_c.cpp.s
 
 CMakeFiles/wallaby.dir/src/camera_c.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/camera_c.cpp.o.requires
@@ -1457,17 +1457,17 @@ CMakeFiles/wallaby.dir/src/camera_c.cpp.o.provides.build: CMakeFiles/wallaby.dir
 
 CMakeFiles/wallaby.dir/src/robot_c.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/robot_c.cpp.o: ../src/robot_c.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_62)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_62)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/robot_c.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/robot_c.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/robot_c.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/robot_c.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/robot_c.cpp
 
 CMakeFiles/wallaby.dir/src/robot_c.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/robot_c.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/robot_c.cpp > CMakeFiles/wallaby.dir/src/robot_c.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/robot_c.cpp > CMakeFiles/wallaby.dir/src/robot_c.cpp.i
 
 CMakeFiles/wallaby.dir/src/robot_c.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/robot_c.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/robot_c.cpp -o CMakeFiles/wallaby.dir/src/robot_c.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/robot_c.cpp -o CMakeFiles/wallaby.dir/src/robot_c.cpp.s
 
 CMakeFiles/wallaby.dir/src/robot_c.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/robot_c.cpp.o.requires
@@ -1480,17 +1480,17 @@ CMakeFiles/wallaby.dir/src/robot_c.cpp.o.provides.build: CMakeFiles/wallaby.dir/
 
 CMakeFiles/wallaby.dir/src/button_c.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/button_c.cpp.o: ../src/button_c.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_63)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_63)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/button_c.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/button_c.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/button_c.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/button_c.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/button_c.cpp
 
 CMakeFiles/wallaby.dir/src/button_c.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/button_c.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/button_c.cpp > CMakeFiles/wallaby.dir/src/button_c.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/button_c.cpp > CMakeFiles/wallaby.dir/src/button_c.cpp.i
 
 CMakeFiles/wallaby.dir/src/button_c.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/button_c.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/button_c.cpp -o CMakeFiles/wallaby.dir/src/button_c.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/button_c.cpp -o CMakeFiles/wallaby.dir/src/button_c.cpp.s
 
 CMakeFiles/wallaby.dir/src/button_c.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/button_c.cpp.o.requires
@@ -1503,17 +1503,17 @@ CMakeFiles/wallaby.dir/src/button_c.cpp.o.provides.build: CMakeFiles/wallaby.dir
 
 CMakeFiles/wallaby.dir/src/accel_c.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/accel_c.cpp.o: ../src/accel_c.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_64)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_64)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/accel_c.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/accel_c.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/accel_c.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/accel_c.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/accel_c.cpp
 
 CMakeFiles/wallaby.dir/src/accel_c.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/accel_c.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/accel_c.cpp > CMakeFiles/wallaby.dir/src/accel_c.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/accel_c.cpp > CMakeFiles/wallaby.dir/src/accel_c.cpp.i
 
 CMakeFiles/wallaby.dir/src/accel_c.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/accel_c.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/accel_c.cpp -o CMakeFiles/wallaby.dir/src/accel_c.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/accel_c.cpp -o CMakeFiles/wallaby.dir/src/accel_c.cpp.s
 
 CMakeFiles/wallaby.dir/src/accel_c.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/accel_c.cpp.o.requires
@@ -1526,17 +1526,17 @@ CMakeFiles/wallaby.dir/src/accel_c.cpp.o.provides.build: CMakeFiles/wallaby.dir/
 
 CMakeFiles/wallaby.dir/src/servo_p.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/servo_p.cpp.o: ../src/servo_p.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_65)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_65)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/servo_p.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/servo_p.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/servo_p.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/servo_p.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/servo_p.cpp
 
 CMakeFiles/wallaby.dir/src/servo_p.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/servo_p.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/servo_p.cpp > CMakeFiles/wallaby.dir/src/servo_p.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/servo_p.cpp > CMakeFiles/wallaby.dir/src/servo_p.cpp.i
 
 CMakeFiles/wallaby.dir/src/servo_p.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/servo_p.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/servo_p.cpp -o CMakeFiles/wallaby.dir/src/servo_p.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/servo_p.cpp -o CMakeFiles/wallaby.dir/src/servo_p.cpp.s
 
 CMakeFiles/wallaby.dir/src/servo_p.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/servo_p.cpp.o.requires
@@ -1549,17 +1549,17 @@ CMakeFiles/wallaby.dir/src/servo_p.cpp.o.provides.build: CMakeFiles/wallaby.dir/
 
 CMakeFiles/wallaby.dir/src/pixeltoaster/PixelToaster.cpp.o: CMakeFiles/wallaby.dir/flags.make
 CMakeFiles/wallaby.dir/src/pixeltoaster/PixelToaster.cpp.o: ../src/pixeltoaster/PixelToaster.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_66)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_66)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/wallaby.dir/src/pixeltoaster/PixelToaster.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/pixeltoaster/PixelToaster.cpp.o -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/pixeltoaster/PixelToaster.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/wallaby.dir/src/pixeltoaster/PixelToaster.cpp.o -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/pixeltoaster/PixelToaster.cpp
 
 CMakeFiles/wallaby.dir/src/pixeltoaster/PixelToaster.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/wallaby.dir/src/pixeltoaster/PixelToaster.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/pixeltoaster/PixelToaster.cpp > CMakeFiles/wallaby.dir/src/pixeltoaster/PixelToaster.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/pixeltoaster/PixelToaster.cpp > CMakeFiles/wallaby.dir/src/pixeltoaster/PixelToaster.cpp.i
 
 CMakeFiles/wallaby.dir/src/pixeltoaster/PixelToaster.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/wallaby.dir/src/pixeltoaster/PixelToaster.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/pixeltoaster/PixelToaster.cpp -o CMakeFiles/wallaby.dir/src/pixeltoaster/PixelToaster.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/pixeltoaster/PixelToaster.cpp -o CMakeFiles/wallaby.dir/src/pixeltoaster/PixelToaster.cpp.s
 
 CMakeFiles/wallaby.dir/src/pixeltoaster/PixelToaster.cpp.o.requires:
 .PHONY : CMakeFiles/wallaby.dir/src/pixeltoaster/PixelToaster.cpp.o.requires
@@ -1823,6 +1823,6 @@ CMakeFiles/wallaby.dir/clean:
 .PHONY : CMakeFiles/wallaby.dir/clean
 
 CMakeFiles/wallaby.dir/depend:
-	cd /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/pi/got2/libwallaby-v25.2/libwallaby-25.3 /home/pi/got2/libwallaby-v25.2/libwallaby-25.3 /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles/wallaby.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/pi/got2/libwallaby-v25.4/libwallaby-25.5 /home/pi/got2/libwallaby-v25.4/libwallaby-25.5 /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles/wallaby.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/wallaby.dir/depend
 

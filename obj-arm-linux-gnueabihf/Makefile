@@ -46,10 +46,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/pi/got2/libwallaby-v25.2/libwallaby-25.3
+CMAKE_SOURCE_DIR = /home/pi/got2/libwallaby-v25.4/libwallaby-25.5
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf
+CMAKE_BINARY_DIR = /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -117,9 +117,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -587,6 +587,19 @@ wallaby_python: cmake_check_build_system
 wallaby_python/fast:
 	$(MAKE) -f CMakeFiles/wallaby_python.dir/build.make CMakeFiles/wallaby_python.dir/build
 .PHONY : wallaby_python/fast
+
+#=============================================================================
+# Target rules for targets named wombat_python
+
+# Build rule for target.
+wombat_python: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 wombat_python
+.PHONY : wombat_python
+
+# fast build rule for target.
+wombat_python/fast:
+	$(MAKE) -f CMakeFiles/wombat_python.dir/build.make CMakeFiles/wombat_python.dir/build
+.PHONY : wombat_python/fast
 
 src/accel.o: src/accel.cpp.o
 .PHONY : src/accel.o
@@ -3048,6 +3061,7 @@ wallaby_wrap_py.o: wallaby_wrap_py.cxx.o
 # target to build an object file
 wallaby_wrap_py.cxx.o:
 	$(MAKE) -f CMakeFiles/wallaby_python.dir/build.make CMakeFiles/wallaby_python.dir/wallaby_wrap_py.cxx.o
+	$(MAKE) -f CMakeFiles/wombat_python.dir/build.make CMakeFiles/wombat_python.dir/wallaby_wrap_py.cxx.o
 .PHONY : wallaby_wrap_py.cxx.o
 
 wallaby_wrap_py.i: wallaby_wrap_py.cxx.i
@@ -3056,6 +3070,7 @@ wallaby_wrap_py.i: wallaby_wrap_py.cxx.i
 # target to preprocess a source file
 wallaby_wrap_py.cxx.i:
 	$(MAKE) -f CMakeFiles/wallaby_python.dir/build.make CMakeFiles/wallaby_python.dir/wallaby_wrap_py.cxx.i
+	$(MAKE) -f CMakeFiles/wombat_python.dir/build.make CMakeFiles/wombat_python.dir/wallaby_wrap_py.cxx.i
 .PHONY : wallaby_wrap_py.cxx.i
 
 wallaby_wrap_py.s: wallaby_wrap_py.cxx.s
@@ -3064,6 +3079,7 @@ wallaby_wrap_py.s: wallaby_wrap_py.cxx.s
 # target to generate assembly for a file
 wallaby_wrap_py.cxx.s:
 	$(MAKE) -f CMakeFiles/wallaby_python.dir/build.make CMakeFiles/wallaby_python.dir/wallaby_wrap_py.cxx.s
+	$(MAKE) -f CMakeFiles/wombat_python.dir/build.make CMakeFiles/wombat_python.dir/wallaby_wrap_py.cxx.s
 .PHONY : wallaby_wrap_py.cxx.s
 
 # Help Target
@@ -3112,6 +3128,7 @@ help:
 	@echo "... version_test_c"
 	@echo "... wallaby"
 	@echo "... wallaby_python"
+	@echo "... wombat_python"
 	@echo "... src/accel.o"
 	@echo "... src/accel.i"
 	@echo "... src/accel.s"

@@ -65,11 +65,23 @@ VI void shut_down_in(double s)
 	s_instance->start();
 }
 
-
-//Waits for the light to shine on the light sensor.
-//Ignores camera flashes
-//Zachary Sasser - zsasser@kipr.org
-
+// Rework of Link version of wait_for_light to work on the current Wallaby implementation
+// *** calls functions in bg.c for drawing Botguy
+#define FLASHPAUSE 100  // msecs to pause to let a flash subside
+/* Assumption is that if light is detected by consecutive readings FLASHPAUSE apart,
+   it's the start light, not a flash
+   NOTE: when tested with camera, the flash persisted < 0.1 sec
+*/
+#define THRESHOLD 60  // minimum discrimination between light and dark
+#define RED 255,0,0
+#define GREEN 0,255,0
+#define WHITE 255,255,255
+#define BLACK 0,0,0
+#define CROWS 200 // Cylon window dimensions
+#define CCOLS 500
+#define INSET 100 // how much to inset Cylon eye
+#define DJUMP 2   // how far to jump to next red circle - affects speed of red circle
+void colorbar(int i, int range);
 void wait_for_light(int port)
 {
     int badDifference = 100; //The standard for what is too close for the light values
@@ -81,6 +93,7 @@ void wait_for_light(int port)
         while(!any_button()){
 
             printf("Turn on light and press button... \n");
+	    printf("Looking for light on PORT....#%d\n", port);
             printf("Light ON Value: %d  <---- \n", analog(port));
             printf("     |=| \n");
             printf("     / \\ \n");
@@ -102,6 +115,7 @@ void wait_for_light(int port)
 
         while(!any_button()){
             printf("Turn off light and press button... \n \n");
+	    printf("Looking for light on PORT....#%d\n", port);
             printf("Light ON Value: %d \n", initial);
             printf("Light OFF Value: %d  <---- \n", analog(port));
             printf("     |=| \n");
@@ -131,6 +145,7 @@ void wait_for_light(int port)
             while(analog(0)>threshold){
                  while(analog(0)>threshold){
                     printf("Waiting for starting light...\n \n");
+		    printf("Looking for light on PORT....#%d\n", port);
                     printf("Light ON Value: %d \n", initial);
                     printf("Light OFF Value: %d \n", final);
                     printf("---------------------- \n");
@@ -141,6 +156,7 @@ void wait_for_light(int port)
 
                 }
                 printf("Waiting for starting light...\n \n");
+		printf("Looking for light on PORT....#%d\n", port);
                 printf("Light ON Value: %d \n", initial);
                 printf("Light OFF Value: %d \n", final);
                 printf("---------------------- \n");
@@ -168,3 +184,13 @@ void wait_for_light(int port)
             while(!any_button()){} //Wait until they press the button.
         }
     }}
+void colorbar(int i, int range) {
+    int d, limit;
+    limit = range/DJUMP; // how far to traverse before reversing
+    d=i%(int)(2*limit);  // scale i to total number of jumps (half forward and half back)
+         if (d<limit) graphics_circle_fill(INSET+DJUMP*d,CROWS/2,20,RED); // move to right
+         else graphics_circle_fill(INSET+DJUMP*limit-DJUMP*(d-limit),CROWS/2,20,RED); // move to left
+         graphics_update();
+    if (d<limit) graphics_circle_fill(INSET+DJUMP*d,CROWS/2,20,GREEN); // remove circle from next iteration
+         else graphics_circle_fill(INSET+DJUMP*limit-DJUMP*(d-limit),CROWS/2,20,GREEN);
+}

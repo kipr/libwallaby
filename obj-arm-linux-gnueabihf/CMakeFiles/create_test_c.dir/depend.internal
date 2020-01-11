@@ -32,4 +32,4 @@ CMakeFiles/create_test_c.dir/tests/create_test.c.o
  ../include/wallaby/vtable.h
  ../include/wallaby/wait_for.h
  ../include/wallaby/wallaby.h
- /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/tests/create_test.c
+ /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/tests/create_test.c

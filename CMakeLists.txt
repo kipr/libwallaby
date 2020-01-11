@@ -131,6 +131,10 @@ if(build_python)
     DEPENDS ${SWIG_SOURCES}
     OUTPUT ${CMAKE_BINARY_DIR}/wallaby_wrap_py.cxx ${LIBRARY_OUTPUT_PATH}/wallaby.py)
     install(FILES ${LIBRARY_OUTPUT_PATH}/wallaby.py DESTINATION lib)
+    add_custom_command(COMMAND ${SWIG_EXECUTABLE} -Wall -python -c++ -I${INCLUDE}/kipr -outdir ${LIBRARY_OUTPUT_PATH} -o ${CMAKE_BINARY_DIR}/wallaby_wrap_py.cxx ${BINDINGS}/wallaby.i
+    DEPENDS ${SWIG_SOURCES}
+    OUTPUT ${CMAKE_BINARY_DIR}/wallaby_wrap_py.cxx ${LIBRARY_OUTPUT_PATH}/kipr.py)
+    install(FILES ${LIBRARY_OUTPUT_PATH}/kipr.py DESTINATION lib)
   
 endif()
 
@@ -139,7 +143,13 @@ if(build_python)
   set_target_properties(wallaby_python PROPERTIES PREFIX _ OUTPUT_NAME wallaby SUFFIX .so)
   target_link_libraries(wallaby_python wallaby ${PYTHON_BINDING_LIBRARIES} )
   install(TARGETS wallaby_python DESTINATION lib)
+
+  add_library(wombat_python SHARED ${PYTHON_BINDING_SOURCES})
+  set_target_properties(wombat_python PROPERTIES PREFIX _ OUTPUT_NAME kipr SUFFIX .so)
+  target_link_libraries(wombat_python kipr ${PYTHON_BINDING_LIBRARIES} )
+  install(TARGETS wombat_python DESTINATION lib)
 endif()
+
 
 
 ##Changed wallaby to KIPR under three instances below: 148, 151,165

@@ -38,10 +38,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/pi/got2/libwallaby-v25.2/libwallaby-25.3
+CMAKE_SOURCE_DIR = /home/pi/got2/libwallaby-v25.4/libwallaby-25.5
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf
+CMAKE_BINARY_DIR = /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf
 
 # Include any dependencies generated for this target.
 include CMakeFiles/battery_test_c.dir/depend.make
@@ -54,17 +54,17 @@ include CMakeFiles/battery_test_c.dir/flags.make
 
 CMakeFiles/battery_test_c.dir/tests/battery_test.c.o: CMakeFiles/battery_test_c.dir/flags.make
 CMakeFiles/battery_test_c.dir/tests/battery_test.c.o: ../tests/battery_test.c
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object CMakeFiles/battery_test_c.dir/tests/battery_test.c.o"
-	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/battery_test_c.dir/tests/battery_test.c.o   -c /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/tests/battery_test.c
+	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/battery_test_c.dir/tests/battery_test.c.o   -c /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/tests/battery_test.c
 
 CMakeFiles/battery_test_c.dir/tests/battery_test.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/battery_test_c.dir/tests/battery_test.c.i"
-	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -E /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/tests/battery_test.c > CMakeFiles/battery_test_c.dir/tests/battery_test.c.i
+	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -E /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/tests/battery_test.c > CMakeFiles/battery_test_c.dir/tests/battery_test.c.i
 
 CMakeFiles/battery_test_c.dir/tests/battery_test.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/battery_test_c.dir/tests/battery_test.c.s"
-	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -S /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/tests/battery_test.c -o CMakeFiles/battery_test_c.dir/tests/battery_test.c.s
+	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -S /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/tests/battery_test.c -o CMakeFiles/battery_test_c.dir/tests/battery_test.c.s
 
 CMakeFiles/battery_test_c.dir/tests/battery_test.c.o.requires:
 .PHONY : CMakeFiles/battery_test_c.dir/tests/battery_test.c.o.requires
@@ -120,6 +120,6 @@ CMakeFiles/battery_test_c.dir/clean:
 .PHONY : CMakeFiles/battery_test_c.dir/clean
 
 CMakeFiles/battery_test_c.dir/depend:
-	cd /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/pi/got2/libwallaby-v25.2/libwallaby-25.3 /home/pi/got2/libwallaby-v25.2/libwallaby-25.3 /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles/battery_test_c.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/pi/got2/libwallaby-v25.4/libwallaby-25.5 /home/pi/got2/libwallaby-v25.4/libwallaby-25.5 /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles/battery_test_c.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/battery_test_c.dir/depend
 

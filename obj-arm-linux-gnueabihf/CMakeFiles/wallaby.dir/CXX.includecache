@@ -390,115 +390,115 @@ vtable.h
 vector
 -
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/accel.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/accel.cpp
 wallaby/accel.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/accel.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/accel.hpp
 accel_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/accel_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/accel_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/accel_c.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/accel_c.cpp
 wallaby/accel.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/accel.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/accel.h
 accel_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/accel_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/accel_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/accel_p.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/accel_p.cpp
 accel_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/accel_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/accel_p.hpp
 wallaby_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_p.hpp
 wallaby_regs_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_regs_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_regs_p.hpp
 kipr/util.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/kipr/util.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/kipr/util.h
 kipr/motors.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/kipr/motors.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/kipr/motors.h
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/accel_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/accel_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/analog.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/analog.cpp
 wallaby/analog.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/analog.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/analog.hpp
 analog_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/analog_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/analog_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/analog_c.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/analog_c.cpp
 wallaby/analog.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/analog.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/analog.h
 analog_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/analog_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/analog_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/analog_p.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/analog_p.cpp
 analog_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/analog_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/analog_p.hpp
 wallaby_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_p.hpp
 wallaby_regs_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_regs_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_regs_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/analog_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/analog_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/aruco.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/aruco.cpp
 wallaby/aruco.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/aruco.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/aruco.hpp
 camera_c_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/camera_c_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/camera_c_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/aruco_c.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/aruco_c.cpp
 wallaby/aruco.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/aruco.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/aruco.h
 wallaby/aruco.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/aruco.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/aruco.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/audio.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/audio.cpp
 wallaby/audio.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/audio.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/audio.h
 cstdio
 -
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/battery.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/battery.cpp
 wallaby/battery.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/battery.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/battery.hpp
 battery_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/battery_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/battery_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/battery_c.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/battery_c.cpp
 wallaby/battery.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/battery.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/battery.h
 wallaby/battery.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/battery.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/battery.hpp
 battery_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/battery_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/battery_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/battery_p.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/battery_p.cpp
 battery_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/battery_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/battery_p.hpp
 wallaby_regs_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_regs_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_regs_p.hpp
 wallaby_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/battery_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/battery_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/bits_p.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/bits_p.cpp
 bits_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/bits_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/bits_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/bits_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/bits_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/botball_c.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/botball_c.cpp
 kipr/botball.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/kipr/botball.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/kipr/botball.h
 kipr/display.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/kipr/display.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/kipr/display.h
 kipr/thread.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/kipr/thread.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/kipr/thread.hpp
 kipr/general.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/kipr/general.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/kipr/general.h
 kipr/create.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/kipr/create.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/kipr/create.hpp
 kipr/compat.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/kipr/compat.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/kipr/compat.hpp
 stdio.h
 -
 string.h
@@ -520,7 +520,7 @@ kipr/button.h
 kipr/audio.h
 -
 wallaby_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_p.hpp
 cstdlib
 -
 iostream
@@ -528,33 +528,33 @@ iostream
 unistd.h
 -
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/button.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/button.cpp
 button_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/button_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/button_p.hpp
 wallaby/button.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/button.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/button.hpp
 wallaby_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_p.hpp
 wallaby/compat.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/compat.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/compat.hpp
 cstring
 -
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/button_c.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/button_c.cpp
 wallaby/button.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/button.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/button.h
 wallaby/button.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/button.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/button.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/button_p.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/button_p.cpp
 button_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/button_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/button_p.hpp
 wallaby_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_p.hpp
 digital_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/digital_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/digital_p.hpp
 wallaby_regs_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_regs_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_regs_p.hpp
 cstring
 -
 cstdio
@@ -566,19 +566,19 @@ unistd.h
 fcntl.h
 -
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/button_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/button_p.hpp
 wallaby/button_ids.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/button_ids.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/button_ids.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/camera.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/camera.cpp
 wallaby/camera.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/camera.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/camera.hpp
 channel_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/channel_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/channel_p.hpp
 wallaby/camera.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/camera.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/camera.h
 warn.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/warn.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/warn.hpp
 csetjmp
 -
 fstream
@@ -612,35 +612,35 @@ sys/types.h
 unistd.h
 -
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/camera_c.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/camera_c.cpp
 wallaby/camera.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/camera.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/camera.h
 wallaby/camera.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/camera.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/camera.hpp
 warn.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/warn.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/warn.hpp
 nyi.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/nyi.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/nyi.h
 camera_c_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/camera_c_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/camera_c_p.hpp
 iostream
 -
 cstdlib
 -
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/camera_c_p.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/camera_c_p.cpp
 camera_c_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/camera_c_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/camera_c_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/camera_c_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/camera_c_p.hpp
 wallaby/camera.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/camera.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/camera.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/channel_p.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/channel_p.cpp
 channel_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/channel_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/channel_p.hpp
 warn.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/warn.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/warn.hpp
 opencv2/core/core.hpp
 -
 opencv2/highgui/highgui.hpp
@@ -648,7 +648,7 @@ opencv2/highgui/highgui.hpp
 opencv2/imgproc/imgproc.hpp
 -
 wallaby/aruco.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/aruco.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/aruco.hpp
 iostream
 -
 vector
@@ -656,29 +656,29 @@ vector
 zbar.h
 -
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/channel_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/channel_p.hpp
 wallaby/camera.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/camera.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/camera.hpp
 opencv2/core/core.hpp
 -
 zbar.h
 -
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/compass.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/compass.cpp
 wallaby/compass.hpp
 -
 compass_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/compass_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/compass_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/compass_c.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/compass_c.cpp
 wallaby/compass.h
 -
 wallaby/compass.hpp
 -
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/compass_p.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/compass_p.cpp
 compass_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/compass_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/compass_p.hpp
 wallaby/magneto.h
 -
 wallaby/util.h
@@ -688,19 +688,19 @@ cstdio
 cmath
 -
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/compass_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/compass_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/compat.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/compat.cpp
 wallaby/compat.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/compat.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/compat.hpp
 unistd.h
 -
 sched.h
 -
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/config.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/config.cpp
 wallaby/config.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/config.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/config.hpp
 sstream
 -
 fstream
@@ -708,31 +708,31 @@ fstream
 iostream
 -
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/console.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/console.cpp
 wallaby/console.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/console.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/console.hpp
 cstdio
 -
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/console_c.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/console_c.cpp
 wallaby/console.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/console.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/console.h
 wallaby/console.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/console.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/console.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/create.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/create.cpp
 wallaby/create.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/create.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/create.hpp
 wallaby/create_codes.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/create_codes.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/create_codes.h
 wallaby/util.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/util.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/util.hpp
 wallaby/compat.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/compat.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/compat.hpp
 wallaby/battery.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/battery.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/battery.hpp
 wallaby_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_p.hpp
 fcntl.h
 -
 pthread.h
@@ -752,39 +752,39 @@ cstring
 cerrno
 -
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/create_c.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/create_c.cpp
 wallaby/create.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/create.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/create.h
 wallaby/create.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/create.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/create.hpp
 nyi.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/nyi.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/nyi.h
 climits
 -
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/digital.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/digital.cpp
 wallaby/digital.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/digital.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/digital.hpp
 digital_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/digital_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/digital_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/digital_c.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/digital_c.cpp
 wallaby/digital.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/digital.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/digital.h
 digital_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/digital_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/digital_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/digital_p.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/digital_p.cpp
 digital_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/digital_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/digital_p.hpp
 wallaby_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_p.hpp
 wallaby_regs_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_regs_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_regs_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/digital_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/digital_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/display_c.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/display_c.cpp
 stdarg.h
 -
 string.h
@@ -792,31 +792,31 @@ string.h
 stdio.h
 -
 wallaby/display.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/display.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/display.h
 wallaby/button.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/button.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/button.h
 wallaby/console.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/console.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/console.h
 wallaby/util.h
 -
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/general_c.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/general_c.cpp
 wallaby/general.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/general.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/general.h
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/geom_c.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/geom_c.cpp
 wallaby/geom.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/geom.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/geom.h
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/graphics.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/graphics.cpp
 wallaby/graphics.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/graphics.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/graphics.h
 vector
 -
 algorithm
 -
 PixelToaster.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/PixelToaster.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/PixelToaster.h
 iostream
 -
 string.h
@@ -824,119 +824,119 @@ string.h
 math.h
 -
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/graphics_characters.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/graphics_characters.cpp
 string.h
 -
 math.h
 -
 wallaby/graphics_characters.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/graphics_characters.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/graphics_characters.h
 wallaby/graphics.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/graphics.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/graphics.h
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/gyro.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/gyro.cpp
 wallaby/gyro.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/gyro.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/gyro.hpp
 gyro_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/gyro_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/gyro_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/gyro_c.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/gyro_c.cpp
 wallaby/gyro.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/gyro.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/gyro.h
 gyro_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/gyro_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/gyro_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/gyro_p.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/gyro_p.cpp
 gyro_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/gyro_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/gyro_p.hpp
 wallaby_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_p.hpp
 wallaby_regs_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_regs_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_regs_p.hpp
 kipr/util.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/kipr/util.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/kipr/util.h
 kipr/motors.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/kipr/motors.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/kipr/motors.h
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/gyro_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/gyro_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/ir.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/ir.cpp
 wallaby/ir.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/ir.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/ir.hpp
 iostream
 -
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/ir_c.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/ir_c.cpp
 wallaby/ir.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/ir.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/ir.h
 wallaby/ir.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/ir.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/ir.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/led_p.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/led_p.cpp
 led_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/led_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/led_p.hpp
 unistd.h
 -
 wallaby_regs_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_regs_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_regs_p.hpp
 wallaby_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/led_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/led_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/magneto.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/magneto.cpp
 wallaby/magneto.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/magneto.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/magneto.hpp
 magneto_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/magneto_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/magneto_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/magneto_c.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/magneto_c.cpp
 wallaby/magneto.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/magneto.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/magneto.h
 magneto_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/magneto_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/magneto_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/magneto_p.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/magneto_p.cpp
 magneto_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/magneto_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/magneto_p.hpp
 wallaby_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_p.hpp
 wallaby_regs_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_regs_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_regs_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/magneto_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/magneto_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/motor_p.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/motor_p.cpp
 motor_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/motor_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/motor_p.hpp
 wallaby_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_p.hpp
 wallaby_regs_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_regs_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_regs_p.hpp
 iostream
 -
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/motor_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/motor_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/motors.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/motors.cpp
 wallaby/util.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/util.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/util.h
 wallaby/motors.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/motors.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/motors.hpp
 motor_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/motor_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/motor_p.hpp
 cstdlib
 -
 math.h
 -
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/motors_c.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/motors_c.cpp
 wallaby/motors.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/motors.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/motors.h
 wallaby/util.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/util.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/util.h
 motor_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/motor_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/motor_p.hpp
 iostream
 -
 cstdlib
@@ -944,9 +944,9 @@ cstdlib
 math.h
 -
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/network_interface_p.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/network_interface_p.cpp
 network_interface_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/network_interface_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/network_interface_p.hpp
 sys/socket.h
 -
 sys/ioctl.h
@@ -964,55 +964,55 @@ cstring
 cstdio
 -
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/network_interface_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/network_interface_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/nyi.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/nyi.cpp
 nyi.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/nyi.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/nyi.h
 iostream
 -
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/nyi.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/nyi.h
 wallaby/compat.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/compat.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/compat.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/pixeltoaster/PixelToaster.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/pixeltoaster/PixelToaster.cpp
 cassert
 -
 PixelToaster.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/pixeltoaster/PixelToaster.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/pixeltoaster/PixelToaster.h
 PixelToasterCommon.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/pixeltoaster/PixelToasterCommon.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/pixeltoaster/PixelToasterCommon.h
 PixelToasterConversion.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/pixeltoaster/PixelToasterConversion.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/pixeltoaster/PixelToasterConversion.h
 PixelToasterUnix.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/pixeltoaster/PixelToasterUnix.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/pixeltoaster/PixelToasterUnix.h
 PixelToasterApple.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/pixeltoaster/PixelToasterApple.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/pixeltoaster/PixelToasterApple.h
 PixelToasterWindows.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/pixeltoaster/PixelToasterWindows.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/pixeltoaster/PixelToasterWindows.h
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/pixeltoaster/PixelToaster.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/pixeltoaster/PixelToaster.h
 vector
 -
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/pixeltoaster/PixelToasterApple.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/pixeltoaster/PixelToasterApple.h
 CoreServices/CoreServices.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/pixeltoaster/CoreServices/CoreServices.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/pixeltoaster/CoreServices/CoreServices.h
 PixelToasterUnix.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/pixeltoaster/PixelToasterUnix.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/pixeltoaster/PixelToasterUnix.h
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/pixeltoaster/PixelToasterCommon.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/pixeltoaster/PixelToasterCommon.h
 ctime
 -
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/pixeltoaster/PixelToasterConversion.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/pixeltoaster/PixelToasterConversion.h
 PixelToaster.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/pixeltoaster/PixelToaster.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/pixeltoaster/PixelToaster.h
 memory.h
 -
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/pixeltoaster/PixelToasterUnix.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/pixeltoaster/PixelToasterUnix.h
 X11/Xlib.h
 -
 X11/Xutil.h
@@ -1032,7 +1032,7 @@ stdint.h
 stdio.h
 -
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/pixeltoaster/PixelToasterWindows.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/pixeltoaster/PixelToasterWindows.h
 windows.h
 -
 windowsx.h
@@ -1040,53 +1040,53 @@ windowsx.h
 d3d9.h
 -
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/robot.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/robot.cpp
 wallaby/robot.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/robot.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/robot.hpp
 wallaby_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/robot_c.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/robot_c.cpp
 wallaby/robot.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/robot.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/robot.h
 wallaby/robot.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/robot.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/robot.hpp
 wallaby_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/sensor_logic.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/sensor_logic.cpp
 wallaby/sensor_logic.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/sensor_logic.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/sensor_logic.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/servo.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/servo.cpp
 wallaby/servo.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/servo.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/servo.hpp
 servo_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/servo_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/servo_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/servo_c.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/servo_c.cpp
 wallaby/servo.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/servo.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/servo.h
 servo_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/servo_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/servo_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/servo_p.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/servo_p.cpp
 servo_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/servo_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/servo_p.hpp
 wallaby_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_p.hpp
 wallaby_regs_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_regs_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_regs_p.hpp
 iostream
 -
 cmath
 -
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/servo_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/servo_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/socket.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/socket.cpp
 wallaby/socket.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/socket.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/socket.hpp
 arpa/inet.h
 -
 netinet/in.h
@@ -1104,21 +1104,21 @@ cstdio
 cstring
 -
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/thread.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/thread.cpp
 wallaby/thread.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/thread.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/thread.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/thread_c.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/thread_c.cpp
 wallaby/thread.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/thread.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/thread.h
 wallaby/thread.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/thread.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/thread.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/time_p.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/time_p.cpp
 time_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/time_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/time_p.hpp
 wallaby/compat.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/compat.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/compat.hpp
 unistd.h
 -
 sys/time.h
@@ -1136,35 +1136,35 @@ algorithm
 stdio.h
 -
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/time_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/time_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/util.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/util.cpp
 wallaby/util.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/util.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/util.h
 time_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/time_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/time_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wait_for.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wait_for.cpp
 wallaby/wait_for.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/wait_for.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/wait_for.h
 wallaby/button.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/button.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/button.h
 wallaby/util.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/util.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/util.h
 wallaby/digital.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/digital.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/digital.h
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_p.cpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_p.cpp
 wallaby_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_p.hpp
 wallaby_regs_p.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_regs_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_regs_p.hpp
 wallaby/create.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/create.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/create.h
 wallaby/motors.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/motors.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/motors.h
 wallaby/servo.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/servo.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/servo.h
 unistd.h
 -
 cstdlib
@@ -1194,15 +1194,15 @@ iostream
 iomanip
 -
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_p.hpp
 mutex
 -
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby_regs_p.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby_regs_p.hpp
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/warn.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/warn.hpp
 cstdio
 -
 wallaby/compat.hpp
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/src/wallaby/compat.hpp
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/src/wallaby/compat.hpp
 

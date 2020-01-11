@@ -119,4 +119,5 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/version_test_c.dir/DependInfo.cmake"
   "CMakeFiles/wallaby.dir/DependInfo.cmake"
   "CMakeFiles/wallaby_python.dir/DependInfo.cmake"
+  "CMakeFiles/wombat_python.dir/DependInfo.cmake"
   )

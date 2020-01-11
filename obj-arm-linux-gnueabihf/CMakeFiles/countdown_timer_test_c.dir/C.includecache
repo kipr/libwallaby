@@ -42,7 +42,7 @@ graphics_key_code.h
 export.h
 ../include/kipr/export.h
 
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/tests/countdown_timer_test.c
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/tests/countdown_timer_test.c
 stdio.h
 -
 kipr/graphics.h
@@ -52,5 +52,5 @@ kipr/util.h
 kipr/button.h
 -
 kipr/countdown_timer.h
-/home/pi/got2/libwallaby-v25.2/libwallaby-25.3/tests/kipr/countdown_timer.h
+/home/pi/got2/libwallaby-v25.4/libwallaby-25.5/tests/kipr/countdown_timer.h
 

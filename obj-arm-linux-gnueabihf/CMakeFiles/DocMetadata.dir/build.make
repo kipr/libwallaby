@@ -38,10 +38,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/pi/got2/libwallaby-v25.2/libwallaby-25.3
+CMAKE_SOURCE_DIR = /home/pi/got2/libwallaby-v25.4/libwallaby-25.5
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf
+CMAKE_BINARY_DIR = /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf
 
 # Utility rule file for DocMetadata.
 
@@ -49,7 +49,7 @@ CMAKE_BINARY_DIR = /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-
 include CMakeFiles/DocMetadata.dir/progress.make
 
 CMakeFiles/DocMetadata:
-	/usr/bin/cmake -E copy /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/doxygen/metadata.ini /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/doc
+	/usr/bin/cmake -E copy /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/doxygen/metadata.ini /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/doc
 
 DocMetadata: CMakeFiles/DocMetadata
 DocMetadata: CMakeFiles/DocMetadata.dir/build.make
@@ -64,6 +64,6 @@ CMakeFiles/DocMetadata.dir/clean:
 .PHONY : CMakeFiles/DocMetadata.dir/clean
 
 CMakeFiles/DocMetadata.dir/depend:
-	cd /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/pi/got2/libwallaby-v25.2/libwallaby-25.3 /home/pi/got2/libwallaby-v25.2/libwallaby-25.3 /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf /home/pi/got2/libwallaby-v25.2/libwallaby-25.3/obj-arm-linux-gnueabihf/CMakeFiles/DocMetadata.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/pi/got2/libwallaby-v25.4/libwallaby-25.5 /home/pi/got2/libwallaby-v25.4/libwallaby-25.5 /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf /home/pi/got2/libwallaby-v25.4/libwallaby-25.5/obj-arm-linux-gnueabihf/CMakeFiles/DocMetadata.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/DocMetadata.dir/depend
 
