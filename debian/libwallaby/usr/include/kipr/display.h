@@ -34,6 +34,9 @@
 extern "C" {
 #endif
 
+//void display_printf(int col, int row, char *t, ...);
+//void display_clear();
+
 VF EXPORT_SYM void display_clear();  // clears console and sets display map to all spaces
 
 EXPORT_SYM void display_printf(int col, int row, const char *t, ...); // runs printf formatting to specified screen location

@@ -33,14 +33,14 @@
 // Revision: 8/6/2019 - cnw
 //    reconfigured for Wombat KRC controller - reduced line count and column count
 //    to conform to Wombat KRC UI display
+
+#include <stdio.h>
 #include <stdarg.h>
 #include <string.h>
-#include <stdio.h>
-
-#include "wallaby/display.h"
-#include "wallaby/button.h"
-#include "wallaby/console.h"
-#include <wallaby/util.h>
+#include <kipr/util.h>
+#include <kipr/console.h>
+#include <kipr/button.h>
+#include <kipr/display.h>
 
 #define _MAPy 11  // 9 rows when 3 buttons visible, loses 2 rows for each line of virtual buttons
 #define _MAPx 43  // 41 columns is max fit for screen (array has 42 to accommodate \0)

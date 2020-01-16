@@ -128,17 +128,20 @@ $(document).ready(function(){initNavTree('display_8h_source.html','');});
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<a class="code" href="vtable_8h.html#a8956b9119e3f283cb31cf6e029da3277">VF</a> <a class="code" href="export_8h.html#ad78259114e2822d9b93f376572655819">EXPORT_SYM</a> <span class="keywordtype">void</span> <a class="code" href="display_8h.html#a6c8381cd97a94a67a35d86b0c5308b3a">display_clear</a>();  <span class="comment">// clears console and sets display map to all spaces</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<a class="code" href="export_8h.html#ad78259114e2822d9b93f376572655819">EXPORT_SYM</a> <span class="keywordtype">void</span> <a class="code" href="display_8h.html#abbf993d2dc1de781d106a1ca2c8c484d">display_printf</a>(<span class="keywordtype">int</span> col, <span class="keywordtype">int</span> row, <span class="keyword">const</span> <span class="keywordtype">char</span> *t, ...); <span class="comment">// runs printf formatting to specified screen location</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<a class="code" href="vtable_8h.html#a1c14113ea2bf7eb0812f9f957211f587">VFL</a></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;}</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">//void display_printf(int col, int row, char *t, ...);</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">//void display_clear();</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<a class="code" href="vtable_8h.html#a8956b9119e3f283cb31cf6e029da3277">VF</a> <a class="code" href="export_8h.html#ad78259114e2822d9b93f376572655819">EXPORT_SYM</a> <span class="keywordtype">void</span> <a class="code" href="display_8h.html#a6c8381cd97a94a67a35d86b0c5308b3a">display_clear</a>();  <span class="comment">// clears console and sets display map to all spaces</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<a class="code" href="export_8h.html#ad78259114e2822d9b93f376572655819">EXPORT_SYM</a> <span class="keywordtype">void</span> <a class="code" href="display_8h.html#abbf993d2dc1de781d106a1ca2c8c484d">display_printf</a>(<span class="keywordtype">int</span> col, <span class="keywordtype">int</span> row, <span class="keyword">const</span> <span class="keywordtype">char</span> *t, ...); <span class="comment">// runs printf formatting to specified screen location</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<a class="code" href="vtable_8h.html#a1c14113ea2bf7eb0812f9f957211f587">VFL</a></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;}</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="export_8h_html"><div class="ttname"><a href="export_8h.html">export.h</a></div></div>
 <div class="ttc" id="vtable_8h_html_a8956b9119e3f283cb31cf6e029da3277"><div class="ttname"><a href="vtable_8h.html#a8956b9119e3f283cb31cf6e029da3277">VF</a></div><div class="ttdeci">#define VF</div><div class="ttdef"><b>Definition:</b> vtable.h:19</div></div>
 <div class="ttc" id="vtable_8h_html_a1c14113ea2bf7eb0812f9f957211f587"><div class="ttname"><a href="vtable_8h.html#a1c14113ea2bf7eb0812f9f957211f587">VFL</a></div><div class="ttdeci">#define VFL</div><div class="ttdef"><b>Definition:</b> vtable.h:20</div></div>
@@ -152,7 +155,7 @@ $(document).ready(function(){initNavTree('display_8h_source.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_7a9bb5fcfb57a809ac25df340b11204e.html">wallaby</a></li><li class="navelem"><a class="el" href="display_8h.html">display.h</a></li>
-    <li class="footer">Generated on Sat Jan 11 2020 20:04:40 for libwallaby by
+    <li class="footer">Generated on Thu Jan 16 2020 20:50:45 for libwallaby by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>
