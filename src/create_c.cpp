@@ -398,9 +398,9 @@ void create_drive_direct(int l_speed, int r_speed)
 	Create::instance()->driveDirect(l_speed, r_speed);
 }
 
-void create_spin_block(int angle, int speed)
+void create_spin_block(int speed, int angle)
 {
-	Create::instance()->turn(angle, speed);
+	Create::instance()->turn(speed, angle);
 }
 
 int _create_get_raw_encoders(long *lenc, long *renc)
