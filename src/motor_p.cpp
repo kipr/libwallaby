@@ -102,7 +102,7 @@ int get_motor_bemf(unsigned int port, unsigned char * alt_read_buffer)
 int get_motor_bemf_vel(unsigned int port, unsigned char * alt_read_buffer)
 {
   if (port >= NUM_MOTORS) return 0;
-  int val = Private::Wallaby::instance()->readRegister16b(REG_RW_MOT_0_SP_H + 2 * fix_port(port), alt_read_buffer);
+  int val = Private::Wallaby::instance()->readRegister32b(REG_RW_MOT_0_SP_H + 4 * fix_port(port), alt_read_buffer);
   return val;
 }
 
