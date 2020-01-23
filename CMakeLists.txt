@@ -120,23 +120,33 @@ option(USE_ARUCO "Use Aruco Markers" OFF)
 
 file(GLOB SWIG_SOURCES ${BINDINGS}/*.i)
 
+#if(build_python)
+#  find_package(SWIG REQUIRED)
+#  find_package(PythonLibs 2.7 REQUIRED)
+ # message("${PYTHON_LIBRARY}")
+ # set(PYTHON_BINDING_SOURCES ${CMAKE_BINARY_DIR}/wallaby_wrap_py.cxx)
+ # set(PYTHON_BINDING_LIBRARIES ${PYTHON_LIBRARY})
+ # include_directories(${PYTHON_INCLUDE_DIR})
+ # add_custom_command(COMMAND ${SWIG_EXECUTABLE} -Wall -python -c++ -I${INCLUDE}/kipr -outdir ${LIBRARY_OUTPUT_PATH} -o ${CMAKE_BINARY_DIR}/wallaby_wrap_py.cxx ${BINDINGS}/wallaby.i
+  #  DEPENDS ${SWIG_SOURCES}
+  #  OUTPUT ${CMAKE_BINARY_DIR}/wallaby_wrap_py.cxx ${LIBRARY_OUTPUT_PATH}/wallaby.py)
+   # install(FILES ${LIBRARY_OUTPUT_PATH}/wallaby.py DESTINATION lib)
+#endif()
+
 if(build_python)
   find_package(SWIG REQUIRED)
   find_package(PythonLibs 2.7 REQUIRED)
   message("${PYTHON_LIBRARY}")
-  set(PYTHON_BINDING_SOURCES ${CMAKE_BINARY_DIR}/wallaby_wrap_py.cxx)
+  set(PYTHON_BINDING_SOURCES ${CMAKE_BINARY_DIR}/kipr_wrap_py.cxx)
   set(PYTHON_BINDING_LIBRARIES ${PYTHON_LIBRARY})
   include_directories(${PYTHON_INCLUDE_DIR})
-  add_custom_command(COMMAND ${SWIG_EXECUTABLE} -Wall -python -c++ -I${INCLUDE}/kipr -outdir ${LIBRARY_OUTPUT_PATH} -o ${CMAKE_BINARY_DIR}/wallaby_wrap_py.cxx ${BINDINGS}/wallaby.i
+  add_custom_command(COMMAND ${SWIG_EXECUTABLE} -Wall -python -c++ -I${INCLUDE}/kipr -outdir ${LIBRARY_OUTPUT_PATH} -o ${CMAKE_BINARY_DIR}/kipr_wrap_py.cxx ${BINDINGS}/kipr.i
     DEPENDS ${SWIG_SOURCES}
-    OUTPUT ${CMAKE_BINARY_DIR}/wallaby_wrap_py.cxx ${LIBRARY_OUTPUT_PATH}/wallaby.py)
-    install(FILES ${LIBRARY_OUTPUT_PATH}/wallaby.py DESTINATION lib)
-    add_custom_command(COMMAND ${SWIG_EXECUTABLE} -Wall -python -c++ -I${INCLUDE}/kipr -outdir ${LIBRARY_OUTPUT_PATH} -o ${CMAKE_BINARY_DIR}/wallaby_wrap_py.cxx ${BINDINGS}/wallaby.i
-    DEPENDS ${SWIG_SOURCES}
-    OUTPUT ${CMAKE_BINARY_DIR}/wallaby_wrap_py.cxx ${LIBRARY_OUTPUT_PATH}/kipr.py)
+    OUTPUT ${CMAKE_BINARY_DIR}/kipr_wrap_py.cxx ${LIBRARY_OUTPUT_PATH}/kipr.py)
     install(FILES ${LIBRARY_OUTPUT_PATH}/kipr.py DESTINATION lib)
   
 endif()
+
 
 if(build_python)
   add_library(wallaby_python SHARED ${PYTHON_BINDING_SOURCES})
