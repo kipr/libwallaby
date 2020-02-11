@@ -135,7 +135,7 @@ void wait_for_light(int light_port)
             g_printString((char *)"READING-ON=",50,50,BLACK,1.5);
 			while (1) { // loop until light verified on
 				colorbar(i++, range); // draw moving red circle
-				//msleep(20);
+				msleep(20);  // do not hog processor
 				reading=analog(light_port);
                 graphics_rectangle_fill(170,50,250,70,WHITE);
                 g_printInt(reading-onval,1,170,50,BLACK,1.5);
