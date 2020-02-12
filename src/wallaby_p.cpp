@@ -27,7 +27,14 @@
 #include <sys/stat.h>
 
 #ifndef NOT_A_WALLABY
-#include <linux/spi/spidev.h>
+	#include <linux/spi/spidev.h>
+	#ifndef NOT_A_ZOOBEE_WALLABY
+		#define SPI_FILE_SYSTEM "/dev/spidev0.0"
+	#else
+		#define SPI_FILE_SYSTEM "/dev/spidev2.0"
+	#endif
+#else
+	#define SPI_FILE_SYSTEM "/dev/spidev0.0"
 #endif
 
 #include <string>
@@ -78,7 +85,7 @@ Wallaby::Wallaby()
   write_buffer_(new unsigned char[REG_READABLE_COUNT]),
   update_count_(0)
 {
-	static const std::string WALLABY_SPI_PATH = "/dev/spidev2.0";
+	static const std::string WALLABY_SPI_PATH = SPI_FILE_SYSTEM;
 
 	// TODO: move spi code outside constructor
 	// TODO: handle device path better
@@ -145,6 +152,7 @@ bool Wallaby::transfer(unsigned char * alt_read_buffer)
 	xfer[0].tx_buf = (unsigned long) write_buffer_;
 	xfer[0].rx_buf = (unsigned long) read_buffer;
 	xfer[0].len = buffer_size_;
+	xfer[0].speed_hz = 16000000; // Josh: under /got on RPi...needed for Wallaby1?
 
 	status = ioctl(spi_fd_, SPI_IOC_MESSAGE(1), xfer);
 	update_count_ += 1;

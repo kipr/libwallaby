@@ -81,6 +81,11 @@ int side_button()
 	return right_button();
 }
 
+int push_button()
+{
+	return button(&Right);
+}
+
 int left_button()
 {
 	return button(&Left);

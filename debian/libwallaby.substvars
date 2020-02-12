@@ -1,0 +1,3 @@
+shlibs:Depends=libc6 (>= 2.17), libgcc1 (>= 1:4.4.0), libjpeg62-turbo (>= 1.3.1), libopencv-calib3d2.4, libopencv-contrib2.4, libopencv-core2.4, libopencv-features2d2.4, libopencv-flann2.4, libopencv-gpu2.4, libopencv-highgui2.4, libopencv-imgproc2.4, libopencv-legacy2.4, libopencv-ml2.4, libopencv-objdetect2.4, libopencv-ocl2.4, libopencv-photo2.4, libopencv-stitching2.4, libopencv-superres2.4, libopencv-ts2.4, libopencv-video2.4, libopencv-videostab2.4, libpython2.7 (>= 2.7), libstdc++6 (>= 4.9), libx11-6, libzbar0 (>= 0.10)
+misc:Depends=
+misc:Pre-Depends=

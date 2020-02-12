@@ -1,0 +1,39 @@
+." ********************************************************************
+." This is an example manpage for a package called helloworld. It was
+." created manually using gedit.
+." To preview the manually created manpage, from the same directory, do:
+." $ groff -man -Tascii ./helloworld.1 | less
+." Writing and formatting a manpage:
+." http://www.linuxhowtos.org/System/creatingman.htm
+." ********************************************************************
+." title header 
+." [name of program] [section number] [center footer] [left footer] [center header]
+.TH libwallaby 1 "24 Aug 2018" "version 25.1"
+." name of the program, followed by a short description of what it does or what 
+." the name stands for if it is in an acronym. This will be read by apropos, 
+." man -k, makewhatis and whatis
+.SH NAME
+libwallaby - interface with firmware
+." synopsis is the syntax used to run the program from the command line. An 
+." example would be like: foo [-d] [-e] [ -f filename]
+.SH SYNOPSIS
+.B none
+." this is the full or long description
+.SH DESCRIPTION
+.B libwallaby
+libwallaby is a library for interfacing with the wallaby firmware for the 2016 
+controller board.
+." new paragraph
+.PP
+It was designed based on (and to be mostly compatible with) 
+https://github.com/kipr/libkovan 
+.SH BUGS
+.PP
+- bug 1
+.PP
+- bug 2
+.PP
+- bug 3
+." author information - name and email
+.SH AUTHOR
+Joshua Southerland

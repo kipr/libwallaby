@@ -5,7 +5,16 @@ project(libwallaby)
 #set(ENV{OPENCV_INCLUDE_DIR} /home/root/Documents/KISS/bin/wallaby7/libwallaby/opencv/include)
 #set(OpenCV_DIR /home/root/Documents/KISS/bin/wallaby7/libwallaby/opencv/cmake)
 
+
+# Use these options based on platform:
+# platform										no_wallaby	no_zoobee_wallaby
+# desktop (Ubuntu, etc.)					ON					ON or OFF (don't care)
+# wallaby-wallaby controller			OFF					ON
+# zoobee-wallaby controller			OFF					OFF	
+
 option(no_wallaby "Not a wallaby controller" OFF)
+
+option(no_zoobee_wallaby "Not a zoobee wallaby controller" OFF)
 
 if(no_wallaby)
   add_definitions(-DNOT_A_WALLABY)
@@ -14,6 +23,11 @@ endif()
 
 if(USE_ARUCO)
 	add_definitions(-DARUCO)
+endif()
+
+
+if(no_zoobee_wallaby)
+  add_definitions(-DNOT_A_ZOOBEE_WALLABY)
 endif()
 
 
@@ -89,6 +103,8 @@ endif()
 find_package(OpenCV REQUIRED )
 find_package(JPEG REQUIRED)
 find_package (Threads)
+find_package( PythonInterp 2.7 REQUIRED )
+find_package( PythonLibs 2.7 REQUIRED )
 
 include_directories(${CMAKE_INSTALL_PREFIX}/include)
 include_directories(${OPENCV_INCLUDE})
@@ -104,35 +120,60 @@ option(USE_ARUCO "Use Aruco Markers" OFF)
 
 file(GLOB SWIG_SOURCES ${BINDINGS}/*.i)
 
+#if(build_python)
+#  find_package(SWIG REQUIRED)
+#  find_package(PythonLibs 2.7 REQUIRED)
+ # message("${PYTHON_LIBRARY}")
+ # set(PYTHON_BINDING_SOURCES ${CMAKE_BINARY_DIR}/wallaby_wrap_py.cxx)
+ # set(PYTHON_BINDING_LIBRARIES ${PYTHON_LIBRARY})
+ # include_directories(${PYTHON_INCLUDE_DIR})
+ # add_custom_command(COMMAND ${SWIG_EXECUTABLE} -Wall -python -c++ -I${INCLUDE}/kipr -outdir ${LIBRARY_OUTPUT_PATH} -o ${CMAKE_BINARY_DIR}/wallaby_wrap_py.cxx ${BINDINGS}/wallaby.i
+  #  DEPENDS ${SWIG_SOURCES}
+  #  OUTPUT ${CMAKE_BINARY_DIR}/wallaby_wrap_py.cxx ${LIBRARY_OUTPUT_PATH}/wallaby.py)
+   # install(FILES ${LIBRARY_OUTPUT_PATH}/wallaby.py DESTINATION lib)
+#endif()
+
 if(build_python)
   find_package(SWIG REQUIRED)
-  find_package(PythonLibs REQUIRED)
+  find_package(PythonLibs 2.7 REQUIRED)
   message("${PYTHON_LIBRARY}")
-  set(PYTHON_BINDING_SOURCES ${CMAKE_BINARY_DIR}/wallaby_wrap_py.cxx)
+  set(PYTHON_BINDING_SOURCES ${CMAKE_BINARY_DIR}/kipr_wrap_py.cxx)
   set(PYTHON_BINDING_LIBRARIES ${PYTHON_LIBRARY})
   include_directories(${PYTHON_INCLUDE_DIR})
-  add_custom_command(COMMAND ${SWIG_EXECUTABLE} -Wall -python -c++ -I${INCLUDE}/wallaby -outdir ${LIBRARY_OUTPUT_PATH} -o ${CMAKE_BINARY_DIR}/wallaby_wrap_py.cxx ${BINDINGS}/wallaby.i
+  add_custom_command(COMMAND ${SWIG_EXECUTABLE} -Wall -python -c++ -I${INCLUDE}/kipr -outdir ${LIBRARY_OUTPUT_PATH} -o ${CMAKE_BINARY_DIR}/kipr_wrap_py.cxx ${BINDINGS}/kipr.i
     DEPENDS ${SWIG_SOURCES}
-    OUTPUT ${CMAKE_BINARY_DIR}/wallaby_wrap_py.cxx ${LIBRARY_OUTPUT_PATH}/wallaby.py)
-  install(FILES ${LIBRARY_OUTPUT_PATH}/wallaby.py DESTINATION lib)
+    OUTPUT ${CMAKE_BINARY_DIR}/kipr_wrap_py.cxx ${LIBRARY_OUTPUT_PATH}/kipr.py)
+    install(FILES ${LIBRARY_OUTPUT_PATH}/kipr.py DESTINATION lib)
+  
 endif()
+
 
 if(build_python)
   add_library(wallaby_python SHARED ${PYTHON_BINDING_SOURCES})
   set_target_properties(wallaby_python PROPERTIES PREFIX _ OUTPUT_NAME wallaby SUFFIX .so)
   target_link_libraries(wallaby_python wallaby ${PYTHON_BINDING_LIBRARIES} )
   install(TARGETS wallaby_python DESTINATION lib)
+
+  add_library(wombat_python SHARED ${PYTHON_BINDING_SOURCES})
+  set_target_properties(wombat_python PROPERTIES PREFIX _ OUTPUT_NAME kipr SUFFIX .so)
+  target_link_libraries(wombat_python kipr ${PYTHON_BINDING_LIBRARIES} )
+  install(TARGETS wombat_python DESTINATION lib)
 endif()
 
 
+
+##Changed wallaby to KIPR under three instances below: 148, 151,165
 # Library: libwallaby
-add_library(wallaby SHARED
-	${SOURCES} ${PIXELTOASTER_SOURCES} ${OBJC_SOURCES})
+add_library(wallaby SHARED ${SOURCES} ${PIXELTOASTER_SOURCES} ${OBJC_SOURCES})
+add_library(kipr SHARED ${SOURCES} ${PIXELTOASTER_SOURCES} ${OBJC_SOURCES})
 
 target_link_libraries(wallaby ${OpenCV_LIBS} ${JPEG_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} zbar opencv_core opencv_highgui opencv_imgproc)
+target_link_libraries(kipr ${OpenCV_LIBS} ${JPEG_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} zbar opencv_core opencv_highgui opencv_imgproc)
+
 
 if(USE_ARUCO)
     target_link_libraries(wallaby opencv_aruco)
+    target_link_libraries(kipr opencv_aruco)
 endif()
 
 if(APPLE)
@@ -155,7 +196,7 @@ foreach(C_TEST ${C_TESTS})
   get_filename_component(C_TEST_NAME ${C_TEST} NAME_WE)
   set(TEST_BIN_NAME ${C_TEST_NAME}_c)
   add_executable(${TEST_BIN_NAME} ${C_TEST})
-  target_link_libraries(${TEST_BIN_NAME} wallaby)
+  target_link_libraries(${TEST_BIN_NAME} kipr)
   list(APPEND TESTS ${TEST_BIN_NAME})
 endforeach()
 
@@ -187,7 +228,18 @@ endif()
 
 
 install(TARGETS ${TESTS} DESTINATION bin/wallaby)
+install(TARGETS ${TESTS} DESTINATION bin/kipr)
+install(TARGETS kipr DESTINATION lib)
 install(TARGETS wallaby DESTINATION lib)
 install(DIRECTORY ${INCLUDE}/wallaby DESTINATION include)
+install(DIRECTORY ${INCLUDE}/kipr DESTINATION include)
 
 set(CMAKE_INSTALL_PREFIX /usr)
+
+# Install the manpage (appropriate for .deb package)
+# manpage should have -r-wr--r-- or 644 permission (owner r-w, group r--, others r--)
+install(
+	FILES libwallaby.1
+	PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ 
+	DESTINATION ${DESTDIR}${CMAKE_INSTALL_PREFIX}/share/man/man1 
+)

@@ -21,6 +21,7 @@ bool gyro_calibrate();
 
 bool gyro_calibrated(unsigned char * alt_read_buffer = nullptr);
 
+
 }
 
 #endif /* SRC_GYRO_P_HPP_ */

@@ -1,18 +1,21 @@
-#include "wallaby/botball.h"
+#include "kipr/wombat.h"
 
-#include "wallaby/button.h"
-#include "wallaby/util.h"
-#include "wallaby/display.h"
-#include "wallaby/analog.h"
-#include "wallaby/digital.h"
-#include "wallaby/audio.h"
-#include "wallaby/graphics.h"
-#include "wallaby/graphics_characters.h"
-#include "wallaby/thread.hpp"
-#include "wallaby/general.h"
-#include "wallaby/create.hpp"
-#include "wallaby/compat.hpp"
-#include "wallaby/console.h"
+#include "kipr/display.h"
+#include "kipr/thread.hpp"
+#include "kipr/general.h"
+#include "kipr/create.hpp"
+#include "kipr/compat.hpp"
+
+#include <stdio.h>
+#include <string.h>
+#include <kipr/util.h>
+#include <kipr/graphics.h>
+#include <kipr/graphics_characters.h>
+#include <kipr/console.h>
+#include <kipr/digital.h>
+#include <kipr/analog.h>
+#include <kipr/button.h>
+#include <kipr/audio.h>
 
 #include "wallaby_p.hpp"
 
@@ -62,8 +65,8 @@ VI void shut_down_in(double s)
 	s_instance->start();
 }
 
-// Rework of Link version of wait_for_light to work on the current Wallaby implementation
-// *** calls functions in bg.c for drawing Botguy
+// Rework of Wallaby version of wait_for_light to work with the Wombat KRC
+//   cnw: 8/15/2019
 #define FLASHPAUSE 100  // msecs to pause to let a flash subside
 /* Assumption is that if light is detected by consecutive readings FLASHPAUSE apart,
    it's the start light, not a flash
@@ -74,111 +77,90 @@ VI void shut_down_in(double s)
 #define GREEN 0,255,0
 #define WHITE 255,255,255
 #define BLACK 0,0,0
-#define INSET 150 // how much to inset Cylon eye
-#define DJUMP 6   // how far to jump to next red circle
-
+#define CROWS 200 // Cylon window dimensions
+#define CCOLS 500
+#define INSET 100 // how much to inset Cylon eye
+#define DJUMP 2   // how far to jump to next red circle - affects speed of red circle
 void colorbar(int i, int range);
-
 void wait_for_light(int light_port)
 {
-	int xBut, OK=0, onval, offval, reading, i=0, range;
-	//xBut=get_extra_buttons_visible(); // in case user has extra buttons visible
-	//set_extra_buttons_visible(0);     //    turn them off
-	//set_a_button_text("-");
-	//set_c_button_text("-");
-    display_clear();
-	while (!OK) {
-		//set_b_button_text("Light is ON");
-		//display_clear();
-		display_printf(0,0,"CALIBRATE: sensor port #%d", light_port);
-		//display_printf(0,1,"   press ON when light is on");
-        display_printf(0,1,"   press R button when light is on");
-		//while(b_button()==0){
-        while (digital(13)==0) {
-			msleep(100);
-			onval=analog(light_port); // sensor value when light is on
-			display_printf(0,3,"   light on value is  = %4d        ", onval);
-		}
-		//set_b_button_text("Light is OFF");
-		display_printf(0,3,"   light on value is  = %4d        ", onval);
-		msleep(200);
-		beep();
-		//while (b_button()); // debounce B button
-        while (digital(13));  // debounce
-		//display_printf(0,1,"   press OFF when light is off");
-
-        display_printf(0,1,"   now press R button when light is off");
-        display_printf(0,2,"  (OFF must exceed ON by at least %d)\n", THRESHOLD);
-		//while (b_button()==0) {
-        while (digital(13)==0) {
-			offval=analog(light_port);
-			display_printf(0,4,"   light off value is = %4d         ", offval);
-            display_printf(0,5,"                        ----        ");
-            display_printf(0,6,"             OFF - ON = %4d         ",offval-onval);
-			msleep(100);
-		}
-		offval=analog(light_port); // sensor value when light is off
-		display_printf(0,4,"   light off value is = %4d         ", offval);
-        display_printf(0,6,"               OFF-ON = %4d         ", offval-onval);
-		msleep(200);
-		if ((offval-onval)>=THRESHOLD) { // bright = small values
-			OK=1;
-			display_printf(0,8,"Good Calibration!");
-            msleep(1000);
-			graphics_open(480,260);
-			graphics_fill(WHITE);  // black full screen
-            range=480-2*INSET; // inset amount for green bar that follows
-            graphics_rectangle_fill(INSET,120,480-INSET,140,GREEN);
-            graphics_circle_fill(INSET,130,10,GREEN);
-            graphics_circle_fill(480-INSET,130,10,GREEN);
-			graphics_update();
-            g_printString((char *)"READING-ON=",50,50,BLACK,1.5);
-			while (1) { // loop until light verified on
-				colorbar(i++, range); // draw moving red circle
-				//msleep(20);
-				reading=analog(light_port);
-                graphics_rectangle_fill(170,50,250,70,WHITE);
-                g_printInt(reading-onval,1,170,50,BLACK,1.5);
-				//display_printf(0,8,"Current reading: %d ", reading);
-				if ((reading-onval) < THRESHOLD) { // reading is low enough for light on
-					msleep(FLASHPAUSE); // pause
-					reading=analog(light_port);	// get second reading to rule out flash
-				   if ((reading-onval) < THRESHOLD) break; // if still low enough, light is on
-				}
-			}
-			graphics_close();
-            console_clear();
-            printf("OFF value: %d, ON value: %d, DIFFERENCE: %d\n", offval, onval, offval-onval);
-            printf("READING: %d, READING-ON = %d is < THRESHOLD of %d\n",reading, reading-onval, THRESHOLD);
-            printf("  (good enough to recognize lights are on)\n");
-			//display_printf(0,8,"Reading:%4d *** LIGHTS ARE ON ***", reading);
-		}
-		else {
-			display_printf(0,8,"BAD CALIBRATION");
-			if (offval<256) {
-				display_printf(0,9,"   Add Shielding!!");
-				msleep(5000);
-			}
-			else {
-				display_printf(0,9,"   Aim sensor!!");
-				msleep(5000);
-			}
+        int OK=0, onval, offval, reading, i=0, range;
+        while (!OK) {
+                display_printf(0,0,"CALIBRATE: sensor port #%d", light_port);
+                display_printf(0,1,"  press 'B' button when light is on");
+                while(b_button()==0) {
+                        msleep(100);
+                        onval=analog(light_port); // sensor value when light is on
+                        display_printf(0,3,"  light on value is  = %4d        ", onval);
+                }
+                display_printf(0,3,"  light on value is  = %4d        ", onval);
+                msleep(200);
+                while (b_button()); // debounce B button
+        	display_printf(0,1,"  press 'B' button when light is off");
+        	display_printf(0,2," (OFF must exceed ON by at least %d)\n", THRESHOLD);
+                while (b_button()==0) {
+            		offval=analog(light_port);
+                        display_printf(0,4,"  light off value is = %4d         ", offval);
+            		display_printf(0,5,"                       ----        ");
+            		display_printf(0,6,"              OFF-ON = %4d         ",offval-onval);
+                        msleep(100);
+                }
+                offval=analog(light_port); // sensor value when light is off
+                display_printf(0,4,"  light off value is = %4d         ", offval);
+        	display_printf(0,6,"              OFF-ON = %4d         ", offval-onval);
+                msleep(200);
+                if ((offval-onval)>=THRESHOLD) { // bright = small values
+                        OK=1;
+                        display_printf(0,8,"Good Calibration!");
+            		msleep(1000);
+                        graphics_open(CCOLS,CROWS);
+                        graphics_fill(WHITE);  // paint screen
+			range=CCOLS-2*INSET; // inset amount for green bar that follows
+			graphics_rectangle_fill(INSET,CROWS/2-20,CCOLS-INSET,CROWS/2+20,GREEN);
+			graphics_circle_fill(INSET,CROWS/2,20,GREEN);
+			graphics_circle_fill(CCOLS-INSET,CROWS/2,20,GREEN);
+                        graphics_update();
+    			g_printString("READING - ON = ",INSET,30,BLACK,2);
+                        while (1) { // loop until light verified on
+                                colorbar(i++, range); // draw moving red circle
+                                //msleep(20); // alternate for setting red circle speed to DJUMP
+                                reading=analog(light_port);
+                		graphics_rectangle_fill(INSET+210,30,INSET+270,60,WHITE); // erase text
+                		g_printInt(reading-onval,1,INSET+210,30,BLACK,2);
+                                if ((reading-onval) < THRESHOLD) { // reading is low enough for light on
+                                        msleep(FLASHPAUSE); // pause
+                                        reading=analog(light_port);	// get second reading to rule out flash
+                                   if ((reading-onval) < THRESHOLD) break; // if still low enough, light is on
+                                }
+                        }
+                        graphics_close();
+			console_clear();
+			printf("Diagnostics:\n");
+			printf("OFF: %d, ON: %d, OFF-ON: %d\n", offval, onval, offval-onval);
+			printf("READ: %d, READ-ON=%d < THRESHOLD=%d\n",reading, reading-onval, THRESHOLD);
+			printf(" (good enough to recognize lights on)\n");
+                }
+                else {
+                        display_printf(0,8,"BAD CALIBRATION");
+                        if (offval<256) {
+                                display_printf(15,8," - Add Shielding!!");
+                                msleep(5000);
+                        }
+                        else {
+                                display_printf(15,8," - Aim sensor!!");
+                                msleep(5000);
+                        }
             display_clear();
-		}
-	}
-	//set_a_button_text("A"); set_b_button_text("B"); set_c_button_text("C");
-	//set_extra_buttons_visible(xBut); // in case user had extra buttons visible
+                }
+        }
 }
-
-
-void colorbar(int i, int range)
-{
+void colorbar(int i, int range) {
     int d, limit;
     limit = range/DJUMP; // how far to traverse before reversing
     d=i%(int)(2*limit);  // scale i to total number of jumps (half forward and half back)
-	 if (d<limit) graphics_circle_fill(INSET+DJUMP*d,130,10,RED); // move to right
-	 else graphics_circle_fill(INSET+DJUMP*limit-DJUMP*(d-limit),130,10,RED); // move to left
-	 graphics_update();
-    if (d<limit) graphics_circle_fill(INSET+DJUMP*d,130,10,GREEN); // remove circle from next iteration
-	 else graphics_circle_fill(INSET+DJUMP*limit-DJUMP*(d-limit),130,10,GREEN);
+         if (d<limit) graphics_circle_fill(INSET+DJUMP*d,CROWS/2,20,RED); // move to right
+         else graphics_circle_fill(INSET+DJUMP*limit-DJUMP*(d-limit),CROWS/2,20,RED); // move to left
+         graphics_update();
+    if (d<limit) graphics_circle_fill(INSET+DJUMP*d,CROWS/2,20,GREEN); // remove circle from next iteration
+         else graphics_circle_fill(INSET+DJUMP*limit-DJUMP*(d-limit),CROWS/2,20,GREEN);
 }
