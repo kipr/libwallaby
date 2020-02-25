@@ -38,7 +38,7 @@ int camera_open_at_res(enum Resolution res)
 
 int camera_open_device(int number, enum Resolution res)
 {
-  int ret = camera_open_device_model_at_res(number, WHITE_2016, res);
+  int ret = camera_open_device_model_at_res(number, BLACK_2017 /*WHITE_2016*/, res);
   return ret;
 }
 
