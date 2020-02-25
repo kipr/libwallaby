@@ -5,7 +5,6 @@
  *      Author: Nafis Zaman
  */
 
-
 #include "wallaby/camera.hpp"
 #include "channel_p.hpp"
 #include "wallaby/camera.h"
@@ -33,74 +32,16 @@
 
 using namespace Camera;
 
-#include <linux/usbdevice_fs.h>
-
-// setup the overide of the opencv cap_v4l, which is opencv support for
-// firewire and usb cameras.
-//
-// The usb camera issues (select time) are in opencv.
-// The opencv cap_v4l.cpp file was taken from the opencv source and
-// modified to deal with the select time problem and to reduce the
-// camera lag.
-//
-// the c++ object definition below does the override
-//
-// NOTE: (1) both the white and black camera configurations deal properly
-// with the select timeout issue.
-// (2) Only the black camera has the camera lag reduced.
-
-extern CvCapture* cvCreateCameraCapture_V4L_K( int index );
-
-class VideoCapture_K: public  cv::VideoCapture
-{
-public:
-	VideoCapture_K(const std::string& filename)
-	{
-		VideoCapture::open(filename);
-	}
-
-	VideoCapture_K(int device)
-	{
-		    open(device);
-	}
-
-	bool open(int device)
-	{
-	    if (isOpened()) 
-		    release();
-        
-	    cap = cvCreateCameraCapture_V4L_K(device);
-	    return isOpened();
-	}
-
-	~VideoCapture_K()
-	{
-	}
-};
-
-// select timeout values for the WHITE_2016 Camera
-// BLACk_2017 camera values are set in cap_v4l.cpp
-//
-
-#define SELECTTIMEOUTINITSEC   10     // timeout value for initializatio
-#define SELECTTIMEOUTINITUSEC   0
-
-#define SELECTTIMEOUTSEC       1
-#define SELECTTIMEOUTUSEC      0
-
 // Object //
 
 Camera::Object::Object(const Point2<unsigned> &centroid,
-  const Rect<unsigned> &boundingBox,
-  const double confidence, const char *data,
-  const size_t &dataLength)
-  : m_centroid(centroid),
-  m_boundingBox(boundingBox),
-  m_confidence(confidence),
-  m_data(0),
-  m_dataLength(dataLength)
-{
-  if(!data) return;
+                       const Rect<unsigned> &boundingBox,
+                       const double confidence, const char *data,
+                       const size_t &dataLength)
+    : m_centroid(centroid), m_boundingBox(boundingBox),
+      m_confidence(confidence), m_data(0), m_dataLength(dataLength) {
+  if (!data)
+    return;
 
   m_data = new char[m_dataLength];
   memcpy(m_data, data, m_dataLength);
@@ -267,19 +208,11 @@ void Camera::ConfigPath::setDefaultConfigPath(const std::string &name) {
 const char *Camera::Device::device_name = "/dev/video0";
 
 Camera::Device::Device()
-  : m_bmpBuffer(0),
-  m_connected(false),
-  m_bgr(0),
-  m_bgrSize(0),
-  m_fd(-1),
-  m_cap(0),
-  m_image(),
-  m_resolution(LOW_RES),
-  m_model(/*WHITE_2016*/ BLACK_2017)
-{
+    : m_bmpBuffer(0), m_connected(false), m_bgr(0), m_bgrSize(0), m_fd(-1),
+      m_cap(0), m_image(), m_resolution(LOW_RES), m_model(WHITE_2016) {
   Config *config = Config::load(Camera::ConfigPath::defaultConfigPath());
-
-  if(!config) return;
+  if (!config)
+    return;
   setConfig(*config);
   delete config;
 
@@ -305,7 +238,7 @@ bool Camera::Device::open(const int number, Resolution resolution,
   WARN("camera only supported on wallaby");
   return false;
 #else
-   model = BLACK_2017;    // for now - force black
+
   // Device already open?
   if (this->isOpen())
     return false;
@@ -327,35 +260,26 @@ bool Camera::Device::open(const int number, Resolution resolution,
       return false;
     }
 
-	  SelectTimeoutSec  =  SELECTTIMEOUTINITSEC;
-          SelectTimeoutuSec =  SELECTTIMEOUTINITUSEC;
+    m_fd = ::open(device_name, O_RDWR | O_NONBLOCK, 0);
+    if (m_fd == -1) {
+      fprintf(stderr, "Cannot open '%s': %d, %s\n", device_name, errno,
+              strerror(errno));
+      return false;
+    }
 
-	  return this->initCapDevice(resolutionToWidth(m_resolution), resolutionToHeight(m_resolution));
-  }
-  else if (m_model == BLACK_2017)
-  {
-	  m_cap = new VideoCapture_K(0);
-	  if(!m_cap->isOpened())
-	  {
-		fprintf(stderr, "Failed to open %s\n", device_name);
-		return false;
-	  }
+    return this->initCapDevice(resolutionToWidth(m_resolution),
+                               resolutionToHeight(m_resolution));
+  } else if (m_model == BLACK_2017) {
+    m_cap = new cv::VideoCapture(0);
+    if (!m_cap->isOpened()) {
+      fprintf(stderr, "Failed to open %s\n", device_name);
+      return false;
+    }
 
-	  m_cap->set(CV_CAP_PROP_FRAME_WIDTH, resolutionToWidth(m_resolution));
-	  m_cap->set(CV_CAP_PROP_FRAME_HEIGHT, resolutionToHeight(m_resolution));
-	  m_cap->set(CV_CAP_PROP_FOURCC, V4L2_PIX_FMT_MJPEG);
+    m_cap->set(CV_CAP_PROP_FRAME_WIDTH, resolutionToWidth(m_resolution));
+    m_cap->set(CV_CAP_PROP_FRAME_HEIGHT, resolutionToHeight(m_resolution));
 
-	  if(m_resolution == LOW_RES)
-	  {
-	  	m_cap->set(CV_CAP_PROP_BUFFERSIZE,10) ;
-		m_cap->set(CV_CAP_PROP_FPS, 15);
-	  }
-	  else
-	  {
-		  m_cap->set(CV_CAP_PROP_BUFFERSIZE, 4);  // minimize processing
-		  m_cap->set(CV_CAP_PROP_FPS, 15);        // slow down the input
-	  }
-	  m_connected = true;
+    m_connected = true;
   }
   return true;
 
@@ -438,35 +362,31 @@ bool Camera::Device::close() {
   WARN("camera only supported on wallaby");
   return false;
 #else
-  if(!this->isOpen()) return false;
-  if (m_model == WHITE_2016)
-  {
-	  // Stop capturing
-	  enum v4l2_buf_type type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
-	  type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
-	  if(xioctl(m_fd, VIDIOC_STREAMOFF, &type) == -1) {
-		// TODO: ignore this failure?
-	  }
+  if (!this->isOpen())
+    return false;
+  if (m_model == WHITE_2016) {
+    // Stop capturing
+    enum v4l2_buf_type type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
+    type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
+    if (xioctl(m_fd, VIDIOC_STREAMOFF, &type) == -1) {
+      // TODO: ignore this failure?
+    }
 
-	  // Unmap buffers
- 	  for(unsigned int i = 0; i < nBuffers; ++i)
-		if(munmap(buffers[i].start, buffers[i].length) == -1) {
-		  // TODO: ignore this failure?
-		}
+    // Unmap buffers
+    for (unsigned int i = 0; i < nBuffers; ++i)
+      if (munmap(buffers[i].start, buffers[i].length) == -1) {
+        // TODO: ignore this failure?
+      }
 
-	  // Close device
-	  if(::close(m_fd) == -1) {
-		// TODO: ignore this failure?
-	  }
+    // Close device
+    if (::close(m_fd) == -1) {
+      // TODO: ignore this failure?
+    }
 
-	  m_fd = -1;
-  }
-  else if (m_model == BLACK_2017)
-  {
-	  delete m_cap;       // test to fix
-	  //m_cap->release(); // test turn off
-//	  delete capture;
-	  m_connected = false;
+    m_fd = -1;
+  } else if (m_model == BLACK_2017) {
+    m_cap->release();
+    m_connected = false;
   }
   return true;
 #endif
@@ -476,77 +396,61 @@ bool Camera::Device::update() {
 #ifdef NOT_A_WALLABY
   WARN("camera only supported on wallaby");
   return false;
-#else  
-  if (m_model == WHITE_2016)
-  {
-	  for(;;) {
-		fd_set fds;
-		FD_ZERO(&fds);
-		FD_SET(m_fd, &fds);
+#else
+  if (m_model == WHITE_2016) {
+    for (;;) {
+      fd_set fds;
+      FD_ZERO(&fds);
+      FD_SET(m_fd, &fds);
 
-		// Timeout
-		struct timeval tv;
-		tv.tv_sec = SelectTimeoutSec;  // 2 sec delay to allow camera startup - Q; should we get rid of this code
-		                // and use the BLACK_2017 to support WHITE_2016 as well?
-		tv.tv_usec = SelectTimeoutuSec;  // 300 ms delay - mainly because the white camera
-                              // is running at 15 FPS which is 66ms/frame
-                              // 300 ms gives us a cushion to handle the
-                              // corner cases
+      // Timeout
+      struct timeval tv;
+      tv.tv_sec = 2;
+      tv.tv_usec = 0;
 
-		const int r = select(m_fd + 1, &fds, NULL, NULL, &tv);
-		if(r == -1) {
-			printf("select error errno: %d\n", r);
-		  if(errno == EINTR) continue;
-		  m_image = cv::Mat();
-		  free(m_bmpBuffer);
-		  m_bmpBuffer = 0;
-		  return false;
-		}
-		if(r == 0) {
-		  // Timed out - the driver is hung up
-          // this sequence resets the driver
-          
-		  printf("select timeout - resetting camera driver\n");
-		  close();
-		  open(0, m_resolution, m_model);
-		  m_image = cv::Mat();
-		  free(m_bmpBuffer);
-		  m_bmpBuffer = 0;
-	          SelectTimeoutSec  =  SELECTTIMEOUTINITSEC;    // longer timeout for recovery
-                  SelectTimeoutuSec =  SELECTTIMEOUTINITUSEC;	  
-		  return false;
-		}
+      const int r = select(m_fd + 1, &fds, NULL, NULL, &tv);
+      if (r == -1) {
+        if (errno == EINTR)
+          continue;
+        m_image = cv::Mat();
+        free(m_bmpBuffer);
+        m_bmpBuffer = 0;
+        return false;
+      }
+      if (r == 0) {
+        // Timed out
+        m_image = cv::Mat();
+        free(m_bmpBuffer);
+        m_bmpBuffer = 0;
+        return false;
+      }
 
-		const int readRes = this->readFrame();
-		if(readRes == -1) {
-		  // Something went wrong
-		  m_image = cv::Mat();
-		  const int readRes = this->readFrame();
-		  if (readRes == -1) return false; // TODO more image clearing
-		  // No need to update channels if there are none.
-		  if(m_channels.empty()) return true;
+      const int readRes = this->readFrame();
+      if (readRes == -1) {
+        // Something went wrong
+        m_image = cv::Mat();
+        const int readRes = this->readFrame();
+        if (readRes == -1)
+          return false; // TODO more image clearing
+        // No need to update channels if there are none.
+        if (m_channels.empty())
+          return true;
 
-		  // Dirty all channel impls
-		  ChannelImplManager::setImage(m_image);
+        // Dirty all channel impls
+        ChannelImplManager::setImage(m_image);
 
-		  free(m_bmpBuffer);
-		  m_bmpBuffer = 0;
-		  return false;
-		}
-		else if(readRes == 1) {
-		  // Success
-		  break;
-		}
-	  }
-  }
-  else if (m_model == BLACK_2017)
-  {
-	  const int readRes = this->readFrame();
-	  if (readRes == -1)
-	  {
-		  m_image = cv::Mat();   // return a null image
-		  return false;
-	  }
+        free(m_bmpBuffer);
+        m_bmpBuffer = 0;
+        return false;
+      } else if (readRes == 1) {
+        // Success
+        break;
+      }
+    }
+  } else if (m_model == BLACK_2017) {
+    const int readRes = this->readFrame();
+    if (readRes == -1)
+      return false;
   }
 
   // No need to update channels if there are none.
@@ -558,11 +462,8 @@ bool Camera::Device::update() {
 
   // Invalidate all channels
   ChannelPtrVector::const_iterator it = m_channels.begin();
-  for(; it != m_channels.end(); ++it) (*it)->invalidate();
-
-  SelectTimeoutSec  =  SELECTTIMEOUTSEC;    // shorter timeout for normal ope
-  SelectTimeoutuSec =  SELECTTIMEOUTUSEC;   
-
+  for (; it != m_channels.end(); ++it)
+    (*it)->invalidate();
   return true;
 
 #endif
@@ -776,69 +677,59 @@ int Camera::Device::readFrame() {
   WARN("camera only supported on wallaby");
   return -1;
 #else
-  if (m_model == WHITE_2016)
-  {
-	  struct v4l2_buffer buf;
-	  memset(&buf, 0, sizeof(buf));
-	  buf.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
-	  buf.memory = V4L2_MEMORY_MMAP;
-	  if(xioctl(m_fd, VIDIOC_DQBUF, &buf) == -1) {
-		  printf("DQBUF Error: $d\n", errno);
-		switch(errno) {
-		  case EAGAIN:
-			// Try again later
-			return 0;
-		  case EIO:
-		  default:
-			// Something is wrong
-			return -1;
-		}
-	  }
-
-	  assert(buf.index < nBuffers);
-
-	  // Process frame
-	  // TODO: width and height shouldn't be hardcoded
-	  // OPENCV WAY
-	  //cv::Mat jpgBuf(cv::Size(160, 120), CV_8UC3, buffers[buf.index].start);
-	  //m_image = cv::imdecode(jpgBuf, CV_LOAD_IMAGE_COLOR);
-	  // LIBJPEG WAY
-	  m_image = this->decodeJpeg(buffers[buf.index].start, buf.bytesused);
-
-	  if(xioctl(m_fd, VIDIOC_QBUF, &buf) == -1)
-	  {
-		printf("DBUF Error: %d\n", errno);
-		return -1;
+  if (m_model == WHITE_2016) {
+    struct v4l2_buffer buf;
+    memset(&buf, 0, sizeof(buf));
+    buf.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
+    buf.memory = V4L2_MEMORY_MMAP;
+    if (xioctl(m_fd, VIDIOC_DQBUF, &buf) == -1) {
+      switch (errno) {
+      case EAGAIN:
+        // Try again later
+        return 0;
+      case EIO:
+      default:
+        // Something is wrong
+        return -1;
       }
-	  return 1;
-  }
-  else if (m_model == BLACK_2017)
-  {
-	  if (!m_connected)
-	  {
-		printf("not connected\n");
-		open(0, LOW_RES, BLACK_2017); // TODO real numbers, we don't use these yet
-		return -1;
-	  }
+    }
 
-	  if (m_cap == 0)
-	  {
-		printf("m_cap ptr = 0\n");
-		return -1;
-	  }
-	  // no decoding
-	  if (!(m_cap->isOpened()))
-	  {
-		  printf("cap isn't opened\n");
-	  }
+    assert(buf.index < nBuffers);
 
-	  if ( !(m_cap->read(m_image)))
-	  {
-		printf("error reading image\n");
-		return -1;
-	  }
+    // Process frame
+    // TODO: width and height shouldn't be hardcoded
+    // OPENCV WAY
+    // cv::Mat jpgBuf(cv::Size(160, 120), CV_8UC3, buffers[buf.index].start);
+    // m_image = cv::imdecode(jpgBuf, CV_LOAD_IMAGE_COLOR);
+    // LIBJPEG WAY
+    m_image = this->decodeJpeg(buffers[buf.index].start, buf.bytesused);
 
-	  return 1;
+    if (xioctl(m_fd, VIDIOC_QBUF, &buf) == -1)
+      return -1;
+
+    return 1;
+  } else if (m_model == BLACK_2017) {
+    if (!m_connected) {
+      printf("not connected\n");
+      open(0, LOW_RES, WHITE_2016); // TODO real numbers, we don't use these yet
+      return -1;
+    }
+
+    if (m_cap == 0) {
+      printf("m_cap ptr = 0\n");
+      return -1;
+    }
+    // no decoding
+    if (!(m_cap->isOpened())) {
+      printf("cap isn't opened\n");
+    }
+
+    if (!(m_cap->read(m_image))) {
+      printf("error reading image\n");
+      return -1;
+    }
+
+    return 1;
   }
 
   // Success!
@@ -929,4 +820,3 @@ int Camera::Device::xioctl(int fh, int request, void *arg) {
   return r;
 #endif
 }
-
