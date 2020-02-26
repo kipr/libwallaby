@@ -6,6 +6,7 @@
  */
 
 
+#include "precomp.hpp"
 #include "wallaby/camera.hpp"
 #include "channel_p.hpp"
 #include "wallaby/camera.h"
@@ -341,19 +342,19 @@ bool Camera::Device::open(const int number, Resolution resolution,
 		return false;
 	  }
 
-	  m_cap->set(CV_CAP_PROP_FRAME_WIDTH, resolutionToWidth(m_resolution));
-	  m_cap->set(CV_CAP_PROP_FRAME_HEIGHT, resolutionToHeight(m_resolution));
-	  m_cap->set(CV_CAP_PROP_FOURCC, V4L2_PIX_FMT_MJPEG);
+	  m_cap->set(cv::CAP_PROP_FRAME_WIDTH, resolutionToWidth(m_resolution));
+	  m_cap->set(cv::CAP_PROP_FRAME_HEIGHT, resolutionToHeight(m_resolution));
+	  m_cap->set(cv::CAP_PROP_FOURCC, V4L2_PIX_FMT_MJPEG);
 
 	  if(m_resolution == LOW_RES)
 	  {
-	  	m_cap->set(CV_CAP_PROP_BUFFERSIZE,10) ;
-		m_cap->set(CV_CAP_PROP_FPS, 15);
+	  	m_cap->set(cv::CAP_PROP_BUFFERSIZE,10) ;
+		m_cap->set(cv::CAP_PROP_FPS, 15);
 	  }
 	  else
 	  {
-		  m_cap->set(CV_CAP_PROP_BUFFERSIZE, 4);  // minimize processing
-		  m_cap->set(CV_CAP_PROP_FPS, 15);        // slow down the input
+		  m_cap->set(cv::CAP_PROP_BUFFERSIZE, 4);  // minimize processing
+		  m_cap->set(cv::CAP_PROP_FPS, 15);        // slow down the input
 	  }
 	  m_connected = true;
   }
