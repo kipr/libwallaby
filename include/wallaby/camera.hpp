@@ -165,6 +165,8 @@ namespace Camera
     const Config &config() const;
     
     const unsigned char *bgr() const;
+
+    Model getModel();
     
   private:
     void updateConfig();
@@ -199,98 +201,6 @@ namespace Camera
     unsigned int SelectTimeoutSec;
     unsigned int SelectTimeoutuSec;
   };
-  
-  /**
-   * Do not call this method unless you know what you are doing!
-   */
-  void setConfig(const Config &config);
-
-private:
-  Device *m_device;
-  Config m_config;
-  mutable ObjectVector m_objects;
-  ChannelImpl *m_impl;
-  mutable bool m_valid;
-};
-
-typedef std::vector<Channel *> ChannelPtrVector;
-
-class ConfigPath {
-public:
-  static std::string extension();
-
-  static void setBasePath(const std::string &path);
-  static std::string path(const std::string &name = std::string());
-  static std::string defaultPath();
-  static std::string defaultConfigPath();
-  static void setDefaultConfigPath(const std::string &name);
-
-private:
-  static std::string s_path;
-};
-
-class Device {
-public:
-  Device();
-  ~Device();
-
-  bool open(const int number = 0, Resolution resolution = LOW_RES,
-            Model model = WHITE_2016);
-  bool isOpen() const;
-  bool close();
-  bool update();
-
-  void setWidth(const unsigned width);
-  void setHeight(const unsigned height);
-
-  unsigned width() const;
-  unsigned height() const;
-
-  static unsigned int resolutionToHeight(Resolution res);
-  static unsigned int resolutionToWidth(Resolution res);
-
-  const ChannelPtrVector &channels() const;
-
-  const cv::Mat &rawImage() const;
-
-  void setConfig(const Config &config);
-  const Config &config() const;
-
-  const unsigned char *bgr() const;
-
-  Model getModel();
-
-private:
-  void updateConfig();
-  bool initCapDevice(const unsigned width, const unsigned height);
-  int readFrame();
-  cv::Mat decodeJpeg(void *p, int size);
-  int xioctl(int fh, int request, void *arg);
-
-  struct buffer {
-    void *start;
-    size_t length;
-  };
-  struct buffer *buffers;
-  unsigned int nBuffers;
-
-  // cv::VideoCapture *m_capture;
-  Config m_config;
-  ChannelPtrVector m_channels;
-  cv::Mat m_image;
-  unsigned char *m_bmpBuffer;
-
-  mutable unsigned char *m_bgr;
-  mutable unsigned m_bgrSize;
-
-  int m_fd;
-  static const char *device_name;
-  cv::VideoCapture *m_cap;
-  bool m_connected;
-
-  Resolution m_resolution;
-  Model m_model;
-};
 
 /**
  * Retrieve the device singleton that backs the libkovan C camera API
