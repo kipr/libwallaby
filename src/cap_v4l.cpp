@@ -271,7 +271,7 @@ make & enjoy!
 /* Defaults - If your board can do better, set it here.  Set for the most common type inputs. */
 #define DEFAULT_V4L_WIDTH  640
 #define DEFAULT_V4L_HEIGHT 480
-#define DEFAULT_V4L_FPS 30
+#define DEFAULT_V4L_FPS 15 
 
 #define MAX_CAMERAS 8
 
@@ -848,7 +848,7 @@ bool CvCaptureCAM_V4L_K::open(const char* _deviceName)
 // resetting the driver requires a longer timemout
 // reset takes between 310-350ms
     
-#define STIMEOUT_RESET_SEC    10
+#define STIMEOUT_RESET_SEC    3
 #define STIMEOUT_RESET_USEC   0
 
 static bool bufReturned;  // need to share this with tryIoctl to get the proper EAGAIN handling
