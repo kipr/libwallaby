@@ -51,18 +51,19 @@ using namespace Camera;
 // (2) Only the black camera has the camera lag reduced.
 
 extern CvCapture* cvCreateCameraCapture_V4L_K( int index );
+extern CvCapture* cvCreateCameraCapture_V4L_K( const char * deviceName);
 
 class VideoCapture_K: public  cv::VideoCapture
 {
 public:
 	VideoCapture_K(const std::string& filename)
 	{
-		VideoCapture::open(filename);
+		open(filename);
 	}
 
 	VideoCapture_K(int device)
 	{
-		    open(device);
+		open(device);
 	}
 
 	bool open(int device)
@@ -74,8 +75,18 @@ public:
 	    return isOpened();
 	}
 
+	bool open(const std::string& filename)
+        {
+            if (isOpened())
+                    release();
+
+            cap = cvCreateCameraCapture_V4L_K(filename.c_str());
+            return isOpened();
+        }
+
 	~VideoCapture_K()
 	{
+		this->~VideoCapture();
 	}
 };
 
@@ -306,7 +317,6 @@ bool Camera::Device::open(const int number, Resolution resolution,
   WARN("camera only supported on wallaby");
   return false;
 #else
-   model = BLACK_2017;    // for now - force black
   // Device already open?
   if (this->isOpen())
     return false;
@@ -465,8 +475,7 @@ bool Camera::Device::close() {
   else if (m_model == BLACK_2017)
   {
 	  delete m_cap;       // test to fix
-	  //m_cap->release(); // test turn off
-//	  delete capture;
+	  m_cap = 0;          // prevemt double release
 	  m_connected = false;
   }
   return true;
@@ -543,7 +552,7 @@ bool Camera::Device::update() {
   else if (m_model == BLACK_2017)
   {
 	  const int readRes = this->readFrame();
-	  if (readRes == -1)
+	  if (readRes < 0)
 	  {
 		  m_image = cv::Mat();   // return a null image
 		  return false;
