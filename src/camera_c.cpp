@@ -28,11 +28,6 @@ int camera_open_black()
 
 int camera_open_at_res(enum Resolution res)
 {
-  if(res != LOW_RES) {
-    WARN("only LOW_RES is currently supported");
-    return 0;
-  }
-  
   return camera_open_device(0, res);
 }
 
