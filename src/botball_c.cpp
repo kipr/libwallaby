@@ -65,118 +65,106 @@ VI void shut_down_in(double s)
 	s_instance->start();
 }
 
-// Rework of Wallaby version of wait_for_light to work with the Wombat KRC
-//   cnw: 8/15/2019
-#define FLASHPAUSE 100  // msecs to pause to let a flash subside
-/* Assumption is that if light is detected by consecutive readings FLASHPAUSE apart,
-   it's the start light, not a flash
-   NOTE: when tested with camera, the flash persisted < 0.1 sec
-*/
-#define THRESHOLD 60  // minimum discrimination between light and dark
-#define RED 255,0,0
-#define GREEN 0,255,0
-#define WHITE 255,255,255
-#define BLACK 0,0,0
-#define CROWS 200 // Cylon window dimensions
-#define CCOLS 500
-#define INSET 100 // how much to inset Cylon eye
-#define DJUMP 2   // how far to jump to next red circle - affects speed of red circle
-void colorbar(int i, int range);
-void wait_for_light(int light_port)
-{
-	int xBut, OK=0, onval, offval, reading, i=0, range;
-	//xBut=get_extra_buttons_visible(); // in case user has extra buttons visible
-	//set_extra_buttons_visible(0);     //    turn them off
-	//set_a_button_text("-");
-	//set_c_button_text("-");
-    display_clear();
-	while (!OK) {
-		//set_b_button_text("Light is ON");
-		//display_clear();
-		display_printf(0,0,"CALIBRATE: sensor port #%d", light_port);
-		//display_printf(0,1,"   press ON when light is on");
-        display_printf(0,1,"   press R button when light is on");
-		//while(b_button()==0){
-        while (digital(13)==0) {
-			msleep(100);
-			onval=analog(light_port); // sensor value when light is on
-			display_printf(0,3,"   light on value is  = %4d        ", onval);
-		}
-		//set_b_button_text("Light is OFF");
-		display_printf(0,3,"   light on value is  = %4d        ", onval);
-		msleep(200);
-		beep();
-		//while (b_button()); // debounce B button
-        while (digital(13));  // debounce
-		//display_printf(0,1,"   press OFF when light is off");
 
-        display_printf(0,1,"   now press R button when light is off");
-        display_printf(0,2,"  (OFF must exceed ON by at least %d)\n", THRESHOLD);
-		//while (b_button()==0) {
-        while (digital(13)==0) {
-			offval=analog(light_port);
-			display_printf(0,4,"   light off value is = %4d         ", offval);
-            display_printf(0,5,"                        ----        ");
-            display_printf(0,6,"             OFF - ON = %4d         ",offval-onval);
-			msleep(100);
-		}
-		offval=analog(light_port); // sensor value when light is off
-		display_printf(0,4,"   light off value is = %4d         ", offval);
-        display_printf(0,6,"               OFF-ON = %4d         ", offval-onval);
-		msleep(200);
-		if ((offval-onval)>=THRESHOLD) { // bright = small values
-			OK=1;
-			display_printf(0,8,"Good Calibration!");
-            msleep(1000);
-			graphics_open(480,260);
-			graphics_fill(WHITE);  // black full screen
-            range=480-2*INSET; // inset amount for green bar that follows
-            graphics_rectangle_fill(INSET,120,480-INSET,140,GREEN);
-            graphics_circle_fill(INSET,130,10,GREEN);
-            graphics_circle_fill(480-INSET,130,10,GREEN);
-			graphics_update();
-            g_printString((char *)"READING-ON=",50,50,BLACK,1.5);
-			while (1) { // loop until light verified on
-				colorbar(i++, range); // draw moving red circle
-				msleep(20);  // do not hog processor
-				reading=analog(light_port);
-                graphics_rectangle_fill(170,50,250,70,WHITE);
-                g_printInt(reading-onval,1,170,50,BLACK,1.5);
-				//display_printf(0,8,"Current reading: %d ", reading);
-				if ((reading-onval) < THRESHOLD) { // reading is low enough for light on
-					msleep(FLASHPAUSE); // pause
-					reading=analog(light_port);	// get second reading to rule out flash
-				   if ((reading-onval) < THRESHOLD) break; // if still low enough, light is on
-				}
-			}
-			graphics_close();
-            console_clear();
-            printf("OFF value: %d, ON value: %d, DIFFERENCE: %d\n", offval, onval, offval-onval);
-            printf("READING: %d, READING-ON = %d is < THRESHOLD of %d\n",reading, reading-onval, THRESHOLD);
-            printf("  (good enough to recognize lights are on)\n");
-			//display_printf(0,8,"Reading:%4d *** LIGHTS ARE ON ***", reading);
-		}
-		else {
-			display_printf(0,8,"BAD CALIBRATION");
-			if (offval<256) {
-				display_printf(0,9,"   Add Shielding!!");
-				msleep(5000);
-			}
-			else {
-				display_printf(0,9,"   Aim sensor!!");
-				msleep(5000);
-			}
-            display_clear();
-                }
+//Waits for the light to shine on the light sensor.
+//Ignores camera flashes
+//Zachary Sasser - zsasser@kipr.org
+
+void wait_for_light(int port)
+{
+    int badDifference = 100; //The standard for what is too close for the light values
+
+    while(1>0){
+
+        while(any_button()){} //Debounce
+
+        while(!any_button()){
+
+            printf("Turn on light and press button... \n");
+            printf("Light ON Value: %d  <---- \n", analog(port));
+            printf("     |=| \n");
+            printf("     / \\ \n");
+            printf("--- (   ) ---  \n");
+            printf("   , `-'.   \n");
+            printf("  /   |  \\   \n");
+            printf(" '    |   `   \n");
+
+            if(any_button()){ break; } //Makes the button more responsive
+
+            msleep(200);
+            console_clear(); //For refreshing the values
+
         }
-}
-void colorbar(int i, int range) {
-    int d, limit;
-    limit = range/DJUMP; // how far to traverse before reversing
-    d=i%(int)(2*limit);  // scale i to total number of jumps (half forward and half back)
-         if (d<limit) graphics_circle_fill(INSET+DJUMP*d,CROWS/2,20,RED); // move to right
-         else graphics_circle_fill(INSET+DJUMP*limit-DJUMP*(d-limit),CROWS/2,20,RED); // move to left
-         graphics_update();
-    if (d<limit) graphics_circle_fill(INSET+DJUMP*d,CROWS/2,20,GREEN); // remove circle from next iteration
-         else graphics_circle_fill(INSET+DJUMP*limit-DJUMP*(d-limit),CROWS/2,20,GREEN);
-}
+
+        int initial = analog(port); //Set Light ON Value
+
+        while(any_button()){} //Debounce
+
+        while(!any_button()){
+            printf("Turn off light and press button... \n \n");
+            printf("Light ON Value: %d \n", initial);
+            printf("Light OFF Value: %d  <---- \n", analog(port));
+            printf("     |=| \n");
+            printf("     / \\ \n");
+            printf("    (   ) \n");
+            printf("     `-' \n");
+
+            if(any_button()){ break; } //Makes the button more responsive
+
+            msleep(200);
+            console_clear(); //For refreshing the values
+
+        }
+
+        int final = analog(port); //Set the light off value
+
+        while(any_button()){} //Debounce
+		
+        if((final-initial)>badDifference){ //Check to make sure the values are good.
+		
+	     //If the light is 10% of the way to the ON value, it is a light.
+            int threshold = (final-initial)*0.1+initial;
+		
+	     /*
+		This part keeps camera flashes from starting the robot. The 2 second wait is how long my cell phone flash takes. -Zach
+	     */
+            while(analog(0)>threshold){
+                 while(analog(0)>threshold){
+                    printf("Waiting for starting light...\n \n");
+                    printf("Light ON Value: %d \n", initial);
+                    printf("Light OFF Value: %d \n", final);
+                    printf("---------------------- \n");
+                    printf("Threshold Value: %d \n \n", threshold);
+                    printf("Current Value: %d  <----  \n", analog(port));
+                    msleep(200);
+                    console_clear();
+
+                }
+                printf("Waiting for starting light...\n \n");
+                printf("Light ON Value: %d \n", initial);
+                printf("Light OFF Value: %d \n", final);
+                printf("---------------------- \n");
+                printf("Threshold Value: %d \n \n", threshold);
+                printf("Current Value: %d  <----  \n", analog(port));
+                msleep(2000);
+                console_clear();
+            }
+            return;
+        }
+
+	//If the values were too close together
+        else{
+
+
+            console_clear();
+            printf("BAD CALIBRATION!!!");         
+            if(final<1000){
+             	printf(" -> Shield Light Sensor. \n");  
+            }
+            else{
+                printf(" -> Values are too close.\n");
+            }
+            printf(" \n \n Press any button to restart calibration.");
+            while(!any_button()){} //Wait until they press the button.
+        }
+    }}
