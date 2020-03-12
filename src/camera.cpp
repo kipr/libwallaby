@@ -857,9 +857,8 @@ int Camera::Device::readFrame() {
   {
 	  if (!m_connected)
 	  {
-		printf("camera not connected\n");
-		//if(m_model != TELLO)
-		//	open(0, LOW_RES, BLACK_2017); // TODO real numbers, we don't use these yet
+		printf("not connected\n");
+		open(0, HIGH_RES/*LOW_RES*/, BLACK_2017); // TODO real numbers, we don't use these yet
 		return -1;
 	  }
 
