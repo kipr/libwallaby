@@ -13,11 +13,22 @@ project(libwallaby)
 # zoobee-wallaby controller			OFF					OFF	
 
 option(no_wallaby "Not a wallaby controller" OFF)
+option(with_vision_support "Controls camera support" ON)
+option(with_graphics_support "Controls graphics support" ON)
+option(with_tests "Controls test support" ON)
 
 option(no_zoobee_wallaby "Not a zoobee wallaby controller" OFF)
 
 if(no_wallaby)
   add_definitions(-DNOT_A_WALLABY)
+endif()
+
+if(with_vision_support)
+  add_definitions(-DWITH_VISION_SUPPORT)
+endif()
+
+if(with_graphics_support)
+  add_definitions(-DWITH_VISION_SUPPORT)
 endif()
 
 
@@ -46,7 +57,10 @@ include_directories(${INCLUDE})
 
 file(GLOB SOURCES ${SRC}/*.cpp)
 file(GLOB C_TESTS tests/*.c)
-file(GLOB PIXELTOASTER_SOURCES ${PIXELTOASTER}/*.cpp)
+
+if (WITH_GRAPHICS_SUPPORT)
+  file(GLOB PIXELTOASTER_SOURCES ${PIXELTOASTER}/*.cpp)
+endif ()
 
 # Cross-compile
 # set(CMAKE_CXX_COMPILER arm-linux-gnueabihf-g++)
@@ -74,7 +88,7 @@ include_directories(${SRC}/pixeltoaster)
 #   PixelToaster settings   #
 #############################
 
-if(APPLE)
+if(APPLE AND WITH_GRAPHICS_SUPPORT)
 	file(GLOB OBJC_SOURCES ${PIXELTOASTER}/*.mm)
 elseif(WIN32)
 	add_definitions(-fno-check-new)
@@ -100,20 +114,29 @@ elseif(WIN32)
   set(ZBAR_DIR "C:/Program Files (x86)/ZBar")
 endif()
 
+if (WITH_VISION_SUPPORT)
 find_package(OpenCV REQUIRED )
 find_package(JPEG REQUIRED)
+endif()
 find_package (Threads)
+
+if (BUILD_PYTHON)
 find_package( PythonInterp 2.7 REQUIRED )
 find_package( PythonLibs 2.7 REQUIRED )
 
+endif()
+
 include_directories(${CMAKE_INSTALL_PREFIX}/include)
+if(WITH_VISION_SUPPORT)
 include_directories(${OPENCV_INCLUDE})
 include_directories(${JPEG_INCLUDE_DIR})
 include_directories(${ZBAR_DIR}/include)
-
-link_directories(${CMAKE_INSTALL_PREFIX}/lib)
 link_directories(${OPENCV_LIB})
 link_directories(${ZBAR_DIR}/lib)
+endif()
+
+link_directories(${CMAKE_INSTALL_PREFIX}/lib)
+
 
 option(build_python "Build python bindings" ON)
 option(USE_ARUCO "Use Aruco Markers" OFF)
@@ -167,8 +190,10 @@ endif()
 add_library(wallaby SHARED ${SOURCES} ${PIXELTOASTER_SOURCES} ${OBJC_SOURCES})
 add_library(kipr SHARED ${SOURCES} ${PIXELTOASTER_SOURCES} ${OBJC_SOURCES})
 
+if(WITH_VISION_SUPPORT)
 target_link_libraries(wallaby ${OpenCV_LIBS} ${JPEG_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} zbar opencv_core opencv_highgui opencv_imgproc)
 target_link_libraries(kipr ${OpenCV_LIBS} ${JPEG_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} zbar opencv_core opencv_highgui opencv_imgproc)
+endif()
 
 
 if(USE_ARUCO)
@@ -176,7 +201,7 @@ if(USE_ARUCO)
     target_link_libraries(kipr opencv_aruco)
 endif()
 
-if(APPLE)
+if(APPLE AND WITH_GRAPHICS_SUPPORT)
   find_library(OPENGL_LIBRARY OpenGL)
   find_library(COCOA_LIBRARY Cocoa)
   find_library(CORESERVICE_LIBRARY CoreServices)
@@ -187,7 +212,7 @@ if(UNIX AND NOT APPLE)
     target_link_libraries(wallaby rt X11)
 endif()
 
-
+if(WITH_TESTS)
 # Executables: test programs
 # TODO: use a list and foreach to make this more concise
 set(TESTS )
@@ -199,6 +224,8 @@ foreach(C_TEST ${C_TESTS})
   target_link_libraries(${TEST_BIN_NAME} kipr)
   list(APPEND TESTS ${TEST_BIN_NAME})
 endforeach()
+
+endif()
 
 
 ########################################

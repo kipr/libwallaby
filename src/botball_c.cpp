@@ -82,6 +82,8 @@ VI void shut_down_in(double s)
 #define INSET 100 // how much to inset Cylon eye
 #define DJUMP 2   // how far to jump to next red circle - affects speed of red circle
 void colorbar(int i, int range);
+
+#ifdef WITH_GRAPHICS_SUPPORT
 void wait_for_light(int light_port)
 {
         int OK=0, onval, offval, reading, i=0, range;
@@ -164,3 +166,4 @@ void colorbar(int i, int range) {
     if (d<limit) graphics_circle_fill(INSET+DJUMP*d,CROWS/2,20,GREEN); // remove circle from next iteration
          else graphics_circle_fill(INSET+DJUMP*limit-DJUMP*(d-limit),CROWS/2,20,GREEN);
 }
+#endif

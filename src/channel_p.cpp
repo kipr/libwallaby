@@ -5,6 +5,8 @@
  *      Author: Nafis Zaman
  */
 
+#ifdef WITH_VISION_SUPPORT
+
 #include "channel_p.hpp"
 #include "warn.hpp"
 #include <opencv2/core/core.hpp>
@@ -206,3 +208,5 @@ Camera::ObjectVector ArucoChannelImpl::findObjects(const Config &config) {
 
   return ret;
 }
+
+#endif

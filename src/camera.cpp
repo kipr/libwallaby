@@ -1,3 +1,5 @@
+#ifdef WITH_VISION_SUPPORT
+
 /*
  * camera.cpp
  *
@@ -30,11 +32,12 @@
 #include <sys/time.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <linux/usbdevice_fs.h>
 #endif
 
 using namespace Camera;
 
-#include <linux/usbdevice_fs.h>
+
 
 // setup the overide of the opencv cap_v4l, which is opencv support for
 // firewire and usb cameras.
@@ -940,3 +943,5 @@ int Camera::Device::xioctl(int fh, int request, void *arg) {
 #endif
 }
 
+
+#endif

@@ -5,6 +5,8 @@
  *      Author: Nafis Zaman
  */
 
+#ifdef WITH_VISION_SUPPORT
+
 #include "camera_c_p.hpp"
 
 Camera::Device *Private::DeviceSingleton::s_device = 0;
@@ -14,3 +16,6 @@ Camera::Device *Private::DeviceSingleton::instance()
 	if(!s_device) s_device = new Camera::Device();
 	return s_device;
 }
+
+
+#endif

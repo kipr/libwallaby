@@ -231,6 +231,8 @@ make & enjoy!
 //
 //M*/
 
+#ifdef WITH_VISION_SUPPORT
+
 #include "precomp.hpp"
 
 // added to have this compile with opencv v2
@@ -2166,5 +2168,7 @@ CvCapture* cvCreateCameraCapture_V4L_K( const char * deviceName )
     delete capture;
     return NULL;
 }
+
+#endif
 
 #endif

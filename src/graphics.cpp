@@ -1,3 +1,5 @@
+#ifdef WITH_GRAPHICS_SUPPORT
+
 #include "wallaby/graphics.h"
 
 #include <vector>
@@ -368,3 +370,6 @@ VI int get_mouse_right_button()
 {
 	return g_listener.isRightButtonDown();
 }
+
+
+#endif

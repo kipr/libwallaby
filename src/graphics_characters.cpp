@@ -69,6 +69,8 @@ int g_printInt(int n, int minNumDigits, int x, int y, int r, int g, int b, float
 void g_printFloat(float n, int numDigits, int x, int y, int r, int g, int b, float size);
 */
 
+#ifdef WITH_GRAPHICS_SUPPORT
+
 // bold faces print; usage: BOLD g_print<fn>;
 int __bold=0;
 #ifndef _graphics_characters_
@@ -469,3 +471,5 @@ void g_segmentDisplay(int s[], int x, int y, int r, int g, int b, float size)
 	}
 }
 
+
+#endif

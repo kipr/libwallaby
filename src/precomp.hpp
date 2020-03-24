@@ -1,3 +1,5 @@
+#ifdef WITH_VISION_SUPPORT
+
 //
 // Taken and modified from opencv v4.0 to support cap_v4l.cpp
 //
@@ -303,3 +305,6 @@ namespace cv
 }
 
 #endif /* __VIDEOIO_H_ */
+
+
+#endif
