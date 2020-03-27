@@ -1,5 +1,5 @@
-libwallaby (25.5-1) UNRELEASED; urgency=low
+libwallaby (25.8-1) UNRELEASED; urgency=low
 
   * Initial release. (Closes: #XXXXXX)
 
- -- Prithviraj Kadiyala <pkadiyala@kipr.org>  Mon, 9 Oct 2019 09:19:07 -0500
+ -- Prithviraj Kadiyala <pkadiyala@kipr.org>  Mon, 23 Mar 2020 05:21:07 -0500

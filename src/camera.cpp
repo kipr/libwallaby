@@ -286,7 +286,7 @@ Camera::Device::Device()
   m_fd(-1),
   m_cap(0),
   m_image(),
-  m_resolution(LOW_RES),
+  m_resolution(HIGH_RES),
   m_model(/*WHITE_2016*/ BLACK_2017)
 {
   Config *config = Config::load(Camera::ConfigPath::defaultConfigPath());
