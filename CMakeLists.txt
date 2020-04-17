@@ -4,6 +4,7 @@ project(libwallaby)
 
 #set(ENV{OPENCV_INCLUDE_DIR} /home/root/Documents/KISS/bin/wallaby7/libwallaby/opencv/include)
 #set(OpenCV_DIR /home/root/Documents/KISS/bin/wallaby7/libwallaby/opencv/cmake)
+#set(ENV{EMSCRIPTEN_INCLUDE_DIR} /home/kipr2/Desktop/KIPR/emsdk/upstream/emscripten/system/include)
 
 
 # Use these options based on platform:
@@ -130,6 +131,7 @@ include_directories(${CMAKE_INSTALL_PREFIX}/include)
 if(WITH_VISION_SUPPORT)
 include_directories(${OPENCV_INCLUDE})
 include_directories(${JPEG_INCLUDE_DIR})
+include_directories(${EMSCRIPTEN_INCLUDE_DIR})
 include_directories(${ZBAR_DIR}/include)
 link_directories(${OPENCV_LIB})
 link_directories(${ZBAR_DIR}/lib)

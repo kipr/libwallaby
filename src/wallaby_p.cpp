@@ -9,9 +9,9 @@
 #include "wallaby_regs_p.hpp"
 
 
-#include "wallaby/create.h"
-#include "wallaby/motors.h"
-#include "wallaby/servo.h"
+#include "kipr/create.h"
+#include "kipr/motors.h"
+#include "kipr/servo.h"
 
 #include <unistd.h>
 #include <cstdlib>
@@ -40,6 +40,7 @@
 #include <string>
 #include <iostream>
 #include <iomanip> // std::hex
+#include <emscripten.h>
 
 
 namespace Private
@@ -128,6 +129,7 @@ bool Wallaby::transfer(unsigned char * alt_read_buffer)
 {
 	// Doesn't make sense for non-wallabys
 #ifdef NOT_A_WALLABY
+	//RegisterState function goes here
 	std::cerr << "Warning: this is not a wallaby; transfer failed" << std::endl;
 	return false;
 #else
@@ -184,6 +186,8 @@ bool Wallaby::transfer(unsigned char * alt_read_buffer)
 
 unsigned char Wallaby::readRegister8b(unsigned char address, const unsigned char * alt_read_buffer)
 {
+	//Testing the emscripten	
+	
 	if (address >= REG_READABLE_COUNT) return 0;// false; // TODO: feedback
 
 	std::lock_guard<std::mutex> lock(transfer_mutex_);
@@ -200,6 +204,7 @@ unsigned char Wallaby::readRegister8b(unsigned char address, const unsigned char
 	}
 
 	unsigned char value = buffer[address];
+	
 	return value;
 }
 
@@ -218,11 +223,13 @@ void Wallaby::writeRegister8b(unsigned char address, unsigned char value)
 
 	//TODO: bool success = transfer();
 	//return success;
+	emscripten_run_script("console.log('End of WriteRegister8b::')");
 	transfer();
 }
 
 unsigned short Wallaby::readRegister16b(unsigned char address, const unsigned char * alt_read_buffer)
 {
+	//emscripten_run_script("console.log('ReadRegister16b::start')");
 	if (address >= REG_READABLE_COUNT || address+1 >= REG_READABLE_COUNT) return 0;// false; // TODO: feedback
 
 	std::lock_guard<std::mutex> lock(transfer_mutex_);
@@ -239,11 +246,37 @@ unsigned short Wallaby::readRegister16b(unsigned char address, const unsigned ch
 	}
 
 	unsigned short value = (static_cast<unsigned short>(buffer[address]) << 8) | buffer[address+1];
+	
 	return value;
 }
 
 void Wallaby::writeRegister16b(unsigned char address, unsigned short value)
 {
+	emscripten_run_script("console.log('WriteRegister16b::')");
+	//std::cout << "This is the value : " << value << std::endl;
+	/*int cppX = 0;
+	EM_ASM(
+		var x = 1;
+		setX(x);
+	);
+	EM_ASM(
+		var x = getX();
+		console.log(x);
+	);
+	*/
+    EM_ASM_({
+        var x = $0;
+		console.log("This is value");
+        console.log(x);
+    }, value);
+
+	EM_ASM_({
+        var goal_addy = $0;
+		console.log("This is address");
+        console.log(goal_addy);
+    }, address);
+
+
 	if (address >= REG_ALL_COUNT || address+1 >= REG_ALL_COUNT) return;// false; // TODO: feedback
 
 	std::lock_guard<std::mutex> lock(transfer_mutex_);
@@ -256,9 +289,12 @@ void Wallaby::writeRegister16b(unsigned char address, unsigned short value)
 	write_buffer_[5] = static_cast<unsigned char>((value & 0xFF00) >> 8);
 	write_buffer_[6] = address + 1;
 	write_buffer_[7] = static_cast<unsigned char>(value & 0x00FF);
+	
+	//std::cout << "This is the address" << write_buffer_ << std::endl;
 
 	//TODO: bool success = transfer();
 	//return success;
+	emscripten_run_script("console.log('End of WriteRegister16b::')");
 	transfer();
 }
 

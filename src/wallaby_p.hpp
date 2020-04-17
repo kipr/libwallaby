@@ -9,6 +9,8 @@
 #define SRC_WALLABY_P_HPP_
 
 #include <mutex>
+#include <emscripten.h>
+
 
 namespace Private
 {
@@ -29,7 +31,12 @@ public:
 
 	unsigned int readRegister32b(unsigned char address, const unsigned char * alt_read_buffer = nullptr);
 	void writeRegister32b(unsigned char address, unsigned int value);
-
+	
+	//EM_JS(void, two_alerts, (), {
+	  //alert('hai');
+	  //alert('bai');
+	//});
+	
 	// for efficient bulk / low-level access:
 	unsigned int getBufferSize();
 	void readToAltBuffer(unsigned char * alt_read_buffer, unsigned int buffer_size);
