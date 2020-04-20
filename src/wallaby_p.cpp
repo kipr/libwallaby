@@ -250,6 +250,10 @@ unsigned short Wallaby::readRegister16b(unsigned char address, const unsigned ch
 	return value;
 }
 
+EM_JS(void, test, (), {
+	console.log(Module.context.f('Hello'));
+});
+
 void Wallaby::writeRegister16b(unsigned char address, unsigned short value)
 {
 	emscripten_run_script("console.log('WriteRegister16b::')");
@@ -264,6 +268,8 @@ void Wallaby::writeRegister16b(unsigned char address, unsigned short value)
 		console.log(x);
 	);
 	*/
+	test();
+
     EM_ASM_({
         var x = $0;
 		console.log("This is value");
