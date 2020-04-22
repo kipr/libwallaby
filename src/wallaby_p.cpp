@@ -184,6 +184,18 @@ bool Wallaby::transfer(unsigned char * alt_read_buffer)
 #endif
 }
 
+//Emscripten Function calls
+EM_JS(void, updateRegister, (unsigned char address, unsigned char value), {
+	Module.context.registers[address] = value;
+	Module.context.onRegistersChange(address, value);
+	
+});
+//To-Do, Take two addresses and then onRegisterChange later
+EM_JS(unsigned char, readRegister, (unsigned char address), {
+	return Module.context.registers[address];
+});
+
+
 unsigned char Wallaby::readRegister8b(unsigned char address, const unsigned char * alt_read_buffer)
 {
 	//Testing the emscripten	
@@ -192,18 +204,7 @@ unsigned char Wallaby::readRegister8b(unsigned char address, const unsigned char
 
 	std::lock_guard<std::mutex> lock(transfer_mutex_);
 
-	const unsigned char * const buffer = (alt_read_buffer == nullptr) ? read_buffer_ : alt_read_buffer;
-
-	if (alt_read_buffer == nullptr)
-	{
-		clearBuffers();
-
-		//bool success = transfer();
-		//TODO: if (success == false) return false;
-		transfer();
-	}
-
-	unsigned char value = buffer[address];
+	unsigned char value = readRegister(address);
 	
 	return value;
 }
@@ -214,17 +215,8 @@ void Wallaby::writeRegister8b(unsigned char address, unsigned char value)
 
 	std::lock_guard<std::mutex> lock(transfer_mutex_);
 
-	clearBuffers();
-
-	// TODO definitions for buffer inds
-	write_buffer_[3] = 1; // write 1 register
-	write_buffer_[4] = address; // at address 'address'
-	write_buffer_[5] = value; // with value 'value'
-
-	//TODO: bool success = transfer();
-	//return success;
-	emscripten_run_script("console.log('End of WriteRegister8b::')");
-	transfer();
+	updateRegister(address, value);
+	
 }
 
 unsigned short Wallaby::readRegister16b(unsigned char address, const unsigned char * alt_read_buffer)
@@ -234,74 +226,24 @@ unsigned short Wallaby::readRegister16b(unsigned char address, const unsigned ch
 
 	std::lock_guard<std::mutex> lock(transfer_mutex_);
 
-	const unsigned char * const buffer = (alt_read_buffer == nullptr) ? read_buffer_ : alt_read_buffer;
-
-	if (alt_read_buffer == nullptr)
-	{
-		clearBuffers();
-
-		//TODO: bool success = transfer();
-		//return success;
-		transfer();
-	}
-
-	unsigned short value = (static_cast<unsigned short>(buffer[address]) << 8) | buffer[address+1];
+	unsigned short value = (static_cast<unsigned short>(readRegister(address)) << 8) | readRegister(address+1);
 	
 	return value;
 }
 
-EM_JS(void, test, (), {
-	console.log(Module.context.f('Hello'));
-});
-
 void Wallaby::writeRegister16b(unsigned char address, unsigned short value)
 {
-	emscripten_run_script("console.log('WriteRegister16b::')");
-	//std::cout << "This is the value : " << value << std::endl;
-	/*int cppX = 0;
-	EM_ASM(
-		var x = 1;
-		setX(x);
-	);
-	EM_ASM(
-		var x = getX();
-		console.log(x);
-	);
-	*/
-	test();
-
-    EM_ASM_({
-        var x = $0;
-		console.log("This is value");
-        console.log(x);
-    }, value);
-
-	EM_ASM_({
-        var goal_addy = $0;
-		console.log("This is address");
-        console.log(goal_addy);
-    }, address);
-
-
 	if (address >= REG_ALL_COUNT || address+1 >= REG_ALL_COUNT) return;// false; // TODO: feedback
 
 	std::lock_guard<std::mutex> lock(transfer_mutex_);
 
-	clearBuffers();
+	//clearBuffers();
 
 	// TODO definitions for buffer inds
-	write_buffer_[3] = 2; // write 2 registers
-	write_buffer_[4] = address; // at address 'address'
-	write_buffer_[5] = static_cast<unsigned char>((value & 0xFF00) >> 8);
-	write_buffer_[6] = address + 1;
-	write_buffer_[7] = static_cast<unsigned char>(value & 0x00FF);
+	updateRegister(address, static_cast<unsigned char>((value & 0xFF00) >> 8));
+	updateRegister(address + 1, static_cast<unsigned char>(value & 0x00FF));
 	
-	//std::cout << "This is the address" << write_buffer_ << std::endl;
-
-	//TODO: bool success = transfer();
-	//return success;
-	emscripten_run_script("console.log('End of WriteRegister16b::')");
-	transfer();
+	//transfer();
 }
 
 unsigned int Wallaby::readRegister32b(unsigned char address, const unsigned char * alt_read_buffer)
@@ -310,22 +252,11 @@ unsigned int Wallaby::readRegister32b(unsigned char address, const unsigned char
 
 	std::lock_guard<std::mutex> lock(transfer_mutex_);
 
-	const unsigned char * const buffer = (alt_read_buffer == nullptr) ? read_buffer_ : alt_read_buffer;
-
-	if (alt_read_buffer == nullptr)
-	{
-		clearBuffers();
-
-		//TODO: bool success = transfer();
-		//return success;
-		transfer();
-	}
-
 	unsigned int value =
-			(static_cast<unsigned int>(buffer[address]) << 24)
-			| (static_cast<unsigned int>(buffer[address+1]) << 16)
-			| (static_cast<unsigned int>(buffer[address+2]) << 8)
-			| (static_cast<unsigned int>(buffer[address+3]));
+			(static_cast<unsigned int>(readRegister(address)) << 24)
+			| (static_cast<unsigned int>(readRegister(address+1)) << 16)
+			| (static_cast<unsigned int>(readRegister(address+2)) << 8)
+			| (static_cast<unsigned int>(readRegister(address+3)));
 
 	return value;
 }
@@ -336,22 +267,11 @@ void Wallaby::writeRegister32b(unsigned char address, unsigned int value)
 
 	std::lock_guard<std::mutex> lock(transfer_mutex_);
 
-	clearBuffers();
-
-	// TODO definitions for buffer inds
-	write_buffer_[3] = 4; // write 4 registers
-	write_buffer_[4] = address; // at address 'address'
-	write_buffer_[5] = static_cast<unsigned char>((value & 0xFF000000) >> 24);
-	write_buffer_[6] = address + 1;
-	write_buffer_[7] = static_cast<unsigned char>((value & 0x00FF0000) >> 16);
-	write_buffer_[8] = address + 2;
-	write_buffer_[9] = static_cast<unsigned char>((value & 0x0000FF00) >> 8);
-	write_buffer_[10] = address + 3;
-	write_buffer_[11] = static_cast<unsigned char>((value & 0x000000FF));
-
-	//TODO: bool success = transfer();
-	//return succes2;
-	transfer();
+	updateRegister(address  , static_cast<unsigned char>((value & 0xFF000000) >> 24));
+	updateRegister(address+1, static_cast<unsigned char>((value & 0x00FF0000) >> 16));
+	updateRegister(address+2, static_cast<unsigned char>((value & 0x0000FF00) >> 8));
+	updateRegister(address+3, static_cast<unsigned char>((value & 0x000000FF)));
+	
 }
 
 void Wallaby::clearBuffers()
