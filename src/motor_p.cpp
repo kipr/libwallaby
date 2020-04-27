@@ -43,18 +43,19 @@ int per_tick_large_to_small(int val)
 }
 
 // TODO: this is a hack but the hardware timers are making it hard to easily swap motors 2,3 today
-unsigned int fix_port(unsigned int port)
+//Only for use on actual robot not in simulator
+/*unsigned int fix_port(unsigned int port)
 {
   if (port == 2) return 3;
   if (port == 3) return 2;
   return port;
-}
+}*/
 
 unsigned char get_motor_mode(unsigned int port, unsigned char * alt_read_buffer)
 {
   if (port < 0 || port > 3) return Motor::Inactive; // TODO: better fail code
 
-  const unsigned short offset = 2*fix_port(port);
+  const unsigned short offset = 2*port;
 
   unsigned char modes = Private::Wallaby::instance()->readRegister8b(REG_RW_MOT_MODES, alt_read_buffer);
   unsigned char mode = (modes & (0x3 << offset)) >> offset;
@@ -73,7 +74,7 @@ bool set_motor_mode(unsigned int port, unsigned char mode)
 
   unsigned char modes = Private::Wallaby::instance()->readRegister8b(REG_RW_MOT_MODES);
 
-  const unsigned short offset = 2*fix_port(port);
+  const unsigned short offset = 2*port;
 
   // clear old drive mode
   modes &= ~(0x3 << offset);
@@ -89,21 +90,21 @@ bool set_motor_mode(unsigned int port, unsigned char mode)
 bool clear_motor_bemf(unsigned int port)
 {
   if (port >= NUM_MOTORS) return false;
-  Private::Wallaby::instance()->writeRegister32b(REG_RW_MOT_0_B3 + 4 * fix_port(port), 0);
+  Private::Wallaby::instance()->writeRegister32b(REG_RW_MOT_0_B3 + 4 * port, 0);
   return true;
 }
 
 int get_motor_bemf(unsigned int port, unsigned char * alt_read_buffer)
 {
   if (port >= NUM_MOTORS) return 0;
-  int val = Private::Wallaby::instance()->readRegister32b(REG_RW_MOT_0_B3 + 4 * fix_port(port), alt_read_buffer);
+  int val = Private::Wallaby::instance()->readRegister32b(REG_RW_MOT_0_B3 + 4 * port, alt_read_buffer);
   return per_tick_large_to_small(val); // TODO: cleaner place for scaling
 }
 
 int get_motor_bemf_vel(unsigned int port, unsigned char * alt_read_buffer)
 {
   if (port >= NUM_MOTORS) return 0;
-  int val = Private::Wallaby::instance()->readRegister32b(REG_RW_MOT_0_SP_H + 4 * fix_port(port), alt_read_buffer);
+  int val = Private::Wallaby::instance()->readRegister32b(REG_RW_MOT_0_SP_H + 4 * port, alt_read_buffer);
   return val;
 }
 
@@ -117,7 +118,7 @@ bool set_motor_direction(unsigned int port, unsigned char dir)
 
   unsigned char dirs = Private::Wallaby::instance()->readRegister8b(REG_RW_MOT_DIRS);
 
-  unsigned short offset = 2 * fix_port(port);
+  unsigned short offset = 2 * port;
 
   dirs &= ~(0x3 << offset);
 
@@ -134,7 +135,7 @@ unsigned char get_motor_direction(unsigned int port, unsigned char * alt_read_bu
 
   unsigned char dirs = Private::Wallaby::instance()->readRegister8b(REG_RW_MOT_DIRS, alt_read_buffer);
 
-  unsigned short offset = 2 * fix_port(port);
+  unsigned short offset = 2 * port;
 
   return (Motor::MotorDirection)((dirs & (0x3 << offset)) >> offset);
 }
@@ -152,7 +153,7 @@ unsigned int get_motor_pwm(unsigned int port, unsigned char * alt_read_buffer)
 {
   if (port >= NUM_MOTORS) return 0;
   // TODO: error signal outside of range
-  return Private::Wallaby::instance()->readRegister16b(REG_RW_MOT_0_PWM_H + 2 * fix_port(port), alt_read_buffer);
+  return Private::Wallaby::instance()->readRegister16b(REG_RW_MOT_0_PWM_H + 2 * port, alt_read_buffer);
 }
 
 bool set_motor_pwm(unsigned int port, unsigned char speed)
@@ -165,7 +166,7 @@ bool set_motor_pwm(unsigned int port, unsigned char speed)
   const unsigned short speedMax = 400;
   unsigned short adjustedSpeed = speed * 4;
   if (adjustedSpeed > speedMax) adjustedSpeed = speedMax; // TODO: check scaling (1/4 percent increments)
-  Private::Wallaby::instance()->writeRegister16b(REG_RW_MOT_0_PWM_H + 2 * fix_port(port), adjustedSpeed);
+  Private::Wallaby::instance()->writeRegister16b(REG_RW_MOT_0_PWM_H + 2 * port, adjustedSpeed);
 
   return true;
 }
@@ -185,7 +186,7 @@ bool set_motor_goal_velocity(unsigned int port, int goal_velocity)
   // TODO:check that byte order doesn't get messed up
   // TODO: may need to put some logic in for not writing goals if they equal the current goal
   //  ... maybe add on the co-proc?
-  unsigned int goal_addy = REG_RW_MOT_0_SP_H + 2 * fix_port(port); // TODO: 32 bit?
+  unsigned int goal_addy = REG_RW_MOT_0_SP_H + 2 * port; // TODO: 32 bit?
   std::lock_guard<std::mutex> lock(shutdown_mutex);  
   
   Private::Wallaby::instance()->writeRegister16b(goal_addy, static_cast<signed short>(goal_velocity));
@@ -208,7 +209,7 @@ bool set_motor_goal_position(unsigned int port, int goal_position)
 
   // TODO
   // TODO: logic to not set goals if they match the current value (in co-proc firmware maybe?)
-  unsigned int goal_addy = REG_W_MOT_0_GOAL_B3 + 4 * fix_port(port);
+  unsigned int goal_addy = REG_W_MOT_0_GOAL_B3 + 4 * port;
   Private::Wallaby::instance()->writeRegister32b(goal_addy, per_tick_small_to_large(goal_position));
 
   goal_pos_array[port] = goal_position;
@@ -222,7 +223,7 @@ bool set_motor_pid_gains(int port, short p, short i, short d, short pd, short id
 {
   if (port >= NUM_MOTORS) return false;
 
-  unsigned int addy_offset = 12 * fix_port(port);  // 6 registers at 2 bytes each... per port
+  unsigned int addy_offset = 12 * port;  // 6 registers at 2 bytes each... per port
   Private::Wallaby::instance()->writeRegister16b(REG_W_PID_0_P_H + addy_offset, p);
   Private::Wallaby::instance()->writeRegister16b(REG_W_PID_0_I_H + addy_offset, i);
   Private::Wallaby::instance()->writeRegister16b(REG_W_PID_0_D_H + addy_offset, d);
@@ -276,9 +277,9 @@ bool get_motor_done(unsigned int port, unsigned char * alt_read_buffer)
 {
   if (port >= NUM_MOTORS) return false;
   unsigned char motors_done = Private::Wallaby::instance()->readRegister8b(REG_RW_MOT_DONE, alt_read_buffer);
-  //std::cout << "motors done = " << (unsigned int)motors_done << " vs " << (1 < fix_port(port))  << "fixed port is " << std::endl;
+  //std::cout << "motors done = " << (unsigned int)motors_done << " vs " << (1 < port)  << "fixed port is " << std::endl;
 
-  return (motors_done & (1 << fix_port(port)));
+  return (motors_done & (1 << port));
 }
 
 bool get_motor_pid_active(unsigned int port, unsigned char * alt_read_buffer)
