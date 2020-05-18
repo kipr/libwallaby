@@ -8,6 +8,7 @@
 #include "wallaby/motors.h"
 #include "wallaby/util.h"
 #include "motor_p.hpp"
+#include <emscripten.h>
 
 #include <iostream>
 #include <cstdlib>
@@ -25,6 +26,7 @@ int gmpc(int motor)
 
 void clear_motor_position_counter(int motor)
 {
+	//Write EMJS function to pass zeros to the registers.
 	Private::clear_motor_bemf(motor);
 }
 
@@ -134,6 +136,7 @@ void bk(int motor)
 void motor(int motor, int percent)
 {
 	mav(motor, percent*15); // 100 percent = 1500 ticks/sec
+	motor_power(motor, percent);
 }
 
 void baasbennaguui(int motor, int percent)
@@ -167,7 +170,9 @@ void off(int motor)
 
 void alloff()
 {
-	for (unsigned int i = 0; i < 4; ++i) off(i);
+	for (unsigned int i = 0; i < 4; ++i){
+		motor(i, 0);
+	}
 }
 
 void ao()
