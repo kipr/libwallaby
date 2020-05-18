@@ -185,12 +185,13 @@ bool Wallaby::transfer(unsigned char * alt_read_buffer)
 }
 
 //Emscripten Function calls
+//To-Do, Take two addresses and then onRegisterChange later
 EM_JS(void, updateRegister, (unsigned char address, unsigned char value), {
 	Module.context.registers[address] = value;
 	Module.context.onRegistersChange(address, value);
 	
 });
-//To-Do, Take two addresses and then onRegisterChange later
+
 EM_JS(unsigned char, readRegister, (unsigned char address), {
 	return Module.context.registers[address];
 });

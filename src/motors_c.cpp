@@ -24,10 +24,20 @@ int gmpc(int motor)
 	return get_motor_position_counter(motor);
 }
 
+//Write EMJS function to pass zeros to the registers.
+EM_JS(void, set_motor_position_clear, (int motor), {
+	Module.context.onMotorPositionClear(motor);
+});
+
+EM_JS(int, get_motor_position, (int motor), {
+	return Module.context.getMotorPosition(motor);
+});
+
+
 void clear_motor_position_counter(int motor)
 {
-	//Write EMJS function to pass zeros to the registers.
-	Private::clear_motor_bemf(motor);
+	set_motor_position_clear(motor);
+	/*Private::clear_motor_bemf(motor);*/
 }
 
 void cmpc(int motor)
@@ -50,7 +60,7 @@ int mav(int motor, int velocity)
 int move_to_position(int motor, int speed, int goal_pos)
 {
 	// FIXME: handle velocity scaling?
-	const int sign = Private::get_motor_bemf(motor, nullptr) > goal_pos ? -1 : 1;
+	const int sign = get_motor_position(motor) > goal_pos ? -1 : 1;
 	const short velocity = std::abs(speed) * sign;
 
 	// TODO: combine into one call
