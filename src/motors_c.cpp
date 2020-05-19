@@ -2,7 +2,8 @@
  * motors_c.cpp
  *
  *  Created on: Nov 6, 2015
- *      Author: Joshua Southerland
+ *      Author: Joshua Southerland, Braden McDorman
+ * 		//Edit all the authors everywhere
  */
 
 #include "wallaby/motors.h"
@@ -24,11 +25,13 @@ int gmpc(int motor)
 	return get_motor_position_counter(motor);
 }
 
+//Write the registers from WorkerInstance->Worker->Registers
 //Write EMJS function to pass zeros to the registers.
 EM_JS(void, set_motor_position_clear, (int motor), {
 	Module.context.onMotorPositionClear(motor);
 });
 
+//Not using this when registers state are saved.
 EM_JS(int, get_motor_position, (int motor), {
 	return Module.context.getMotorPosition(motor);
 });
