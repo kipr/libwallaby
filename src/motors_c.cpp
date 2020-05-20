@@ -25,17 +25,10 @@ int gmpc(int motor)
 	return get_motor_position_counter(motor);
 }
 
-//Write the registers from WorkerInstance->Worker->Registers
-//Write EMJS function to pass zeros to the registers.
-EM_JS(void, set_motor_position_clear, (int motor), {
-	Module.context.onMotorPositionClear(motor);
-});
-
 
 void clear_motor_position_counter(int motor)
 {
-	set_motor_position_clear(motor);
-	/*Private::clear_motor_bemf(motor);*/
+	Private::clear_motor_bemf(motor);
 }
 
 void cmpc(int motor)
