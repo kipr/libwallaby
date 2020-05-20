@@ -31,11 +31,6 @@ EM_JS(void, set_motor_position_clear, (int motor), {
 	Module.context.onMotorPositionClear(motor);
 });
 
-//Not using this when registers state are saved.
-EM_JS(int, get_motor_position, (int motor), {
-	return Module.context.getMotorPosition(motor);
-});
-
 
 void clear_motor_position_counter(int motor)
 {
@@ -63,7 +58,7 @@ int mav(int motor, int velocity)
 int move_to_position(int motor, int speed, int goal_pos)
 {
 	// FIXME: handle velocity scaling?
-	const int sign = get_motor_position(motor) > goal_pos ? -1 : 1;
+	const int sign = get_motor_position_counter(motor) > goal_pos ? -1 : 1;
 	const short velocity = std::abs(speed) * sign;
 
 	// TODO: combine into one call
