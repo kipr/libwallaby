@@ -223,6 +223,7 @@ void Wallaby::writeRegister8b(unsigned char address, unsigned char value)
 unsigned short Wallaby::readRegister16b(unsigned char address, const unsigned char * alt_read_buffer)
 {
 	//emscripten_run_script("console.log('ReadRegister16b::start')");
+	emscripten_sleep(0);
 	if (address >= REG_READABLE_COUNT || address+1 >= REG_READABLE_COUNT) return 0;// false; // TODO: feedback
 
 	std::lock_guard<std::mutex> lock(transfer_mutex_);
