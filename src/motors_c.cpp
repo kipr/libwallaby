@@ -143,13 +143,28 @@ void bk(int motor)
 
 void motor(int motor, int percent)
 {
+	if(percent > 100){
+		percent = 100;
+	}
+	else if(percent < -100)
+	{
+		percent = -100;
+	}
 	mav(motor, percent*15); // 100 percent = 1500 ticks/sec
 	motor_power(motor, percent);
 }
 
 void baasbennaguui(int motor, int percent)
 {
-        mav(motor, percent*15); // 100 percent = 1500 ticks/sec
+
+	if(percent > 100){
+		percent = 100;
+	}
+	else if(percent < -100)
+	{
+		percent = -100;
+	}
+    mav(motor, percent*15); // 100 percent = 1500 ticks/sec
 }
 
 void motor_power(int motor, int percent)
