@@ -193,6 +193,7 @@ EM_JS(void, updateRegister, (unsigned char address, unsigned char value), {
 });
 
 EM_JS(unsigned char, readRegister, (unsigned char address), {
+	console.log('Reading ' + address + ' ' + Module.context.registers[address]);
 	return Module.context.registers[address];
 });
 
@@ -201,7 +202,7 @@ unsigned char Wallaby::readRegister8b(unsigned char address, const unsigned char
 {
 	//Testing the emscripten	
 	
-	emscripten_sleep(0);
+	//emscripten_sleep(0);
 	
 	if (address >= REG_READABLE_COUNT) return 0;// false; // TODO: feedback
 
@@ -225,7 +226,7 @@ void Wallaby::writeRegister8b(unsigned char address, unsigned char value)
 unsigned short Wallaby::readRegister16b(unsigned char address, const unsigned char * alt_read_buffer)
 {
 	//emscripten_run_script("console.log('ReadRegister16b::start')");
-	emscripten_sleep(0);
+	//emscripten_sleep(0);
 
 	if (address >= REG_READABLE_COUNT || address+1 >= REG_READABLE_COUNT) return 0;// false; // TODO: feedback
 
@@ -253,7 +254,7 @@ void Wallaby::writeRegister16b(unsigned char address, unsigned short value)
 
 unsigned int Wallaby::readRegister32b(unsigned char address, const unsigned char * alt_read_buffer)
 {
-	emscripten_sleep(0);
+	//emscripten_sleep(0);
 	
 	if (address >= REG_READABLE_COUNT /* || address+3 >= REG_READABLE_COUNT*/) return 0;// false; // TODO: feedback
 
