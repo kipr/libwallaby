@@ -27,7 +27,6 @@
 
 %include "vtable.h"
 
-%include "button_prelude.i"
 //%include "camera_prelude.i"
 
 %include "sensor.hpp"

@@ -32,3 +32,6 @@ build
 obj-arm-linux-gnueabihf
 deploy
 lib
+
+#Copy over when compiling
+debian/libwallaby/user/include/
