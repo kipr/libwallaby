@@ -8,7 +8,7 @@
 #ifndef _CAMERA_C_P_HPP_
 #define _CAMERA_C_P_HPP_
 
-#include "wallaby/camera.hpp"
+#include "kipr/camera.hpp"
 
 namespace Private
 {

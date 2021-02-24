@@ -13,10 +13,10 @@
 class Gyro
 {
 public:
-	static short x();
-	static short y();
-	static short z();
-	static bool calibrate();
+	short gyro_x();
+	short gyro_y();
+	short gyro_z();
+	bool calibrate();
 private:
 };
 

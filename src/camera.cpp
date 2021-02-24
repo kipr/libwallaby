@@ -7,9 +7,9 @@
 
 
 #include "precomp.hpp"
-#include "wallaby/camera.hpp"
+#include "kipr/camera.hpp"
 #include "channel_p.hpp"
-#include "wallaby/camera.h"
+#include "kipr/camera.h"
 #include "warn.hpp"
 
 #include <csetjmp>
@@ -939,4 +939,5 @@ int Camera::Device::xioctl(int fh, int request, void *arg) {
   return r;
 #endif
 }
+
 

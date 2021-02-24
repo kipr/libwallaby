@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 
-#include "wallaby/wallaby.h"
+#include "kipr/wombat.h"
 
 
 int main(int argc, char ** argv)

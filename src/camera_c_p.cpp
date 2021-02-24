@@ -14,3 +14,4 @@ Camera::Device *Private::DeviceSingleton::instance()
 	if(!s_device) s_device = new Camera::Device();
 	return s_device;
 }
+

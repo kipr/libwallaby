@@ -298,3 +298,4 @@ unsigned get_camera_element_size();
 
 
 #endif
+

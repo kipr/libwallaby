@@ -5,8 +5,8 @@
  *      Author: Nafis Zaman
  */
 
-#include "wallaby/camera.h"
-#include "wallaby/camera.hpp"
+#include "kipr/camera.h"
+#include "kipr/camera.hpp"
 #include "warn.hpp"
 #include "nyi.h"
 #include "camera_c_p.hpp"
@@ -307,3 +307,4 @@ unsigned get_camera_element_size()
 {
   return DeviceSingleton::instance()->rawImage().elemSize();
 }
+
