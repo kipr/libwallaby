@@ -8,7 +8,7 @@
 #ifndef INCLUDE_WOMBAT_WOMBAT_HPP_
 #define INCLUDE_WOMBAT_WOMBAT_HPP_
 
-#include "accel.hpp"
+#include "accel.h"
 #include "analog.hpp"
 #include "battery.hpp"
 #include "botball.h"

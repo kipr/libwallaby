@@ -1,12 +1,7 @@
-/*
- * accel.h
- *
- *  Created on: Nov 5, 2015
- *      Author: Joshua Southerland
- */
+#ifndef ACCEL_H_
+#define ACCEL_H
 
-#ifndef INCLUDE_WALLABY_ACCEL_H_
-#define INCLUDE_WALLABY_ACCEL_H_
+#include "sensor.hpp"
 
 /*!
  * \file analog.h
@@ -18,6 +13,9 @@
 extern "C" {
 #endif
 
+namespace Private
+{
+
 /*!
  * \brief Gets the sensed x acceleration
  * \description Wallaby: +/- 2G range,  1024 per G
@@ -26,8 +24,7 @@ extern "C" {
  * \return The latest signed x acceleration value
  * \ingroup accel
  */
-signed short accel_x();
-
+short accel_x(unsigned char * alt_read_buffer = nullptr);
 
 /*!
  * \brief Gets the sensed y acceleration
@@ -37,8 +34,7 @@ signed short accel_x();
  * \return The latest signed y acceleration value
  * \ingroup accel
  */
-signed short accel_y();
-
+short accel_y(unsigned char * alt_read_buffer = nullptr);
 
 /*!
  * \brief Gets the sensed z acceleration
@@ -49,8 +45,7 @@ signed short accel_y();
  * \return The latest signed z acceleration value
  * \ingroup accel
  */
-signed short accel_z();
-
+short accel_z(unsigned char * alt_read_buffer = nullptr);
 
 /*!
  * Initiates a calibration of the accelerometer
@@ -58,11 +53,14 @@ signed short accel_z();
  * \return 1: success 0: failure
  * \ingroup accel
  */
-int accel_calibrate();
+bool accel_calibrate();
+
+
+
+}
 
 #ifdef __cplusplus
 }
 #endif
 
-
-#endif /* INCLUDE_WALLABY_ACCEL_H_ */
+#endif /* SRC_ACCEL_H_ */
