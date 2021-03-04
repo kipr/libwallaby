@@ -1,45 +1,63 @@
-/*
- * accel.cpp
- *
- *  Created on: Nov 5, 2015
- *      Author: Joshua Southerland
- */
+#include "kipr/accel.h"
+#include "wallaby_p.hpp"
+#include "wallaby_regs_p.hpp"
+#include "kipr/util.h"
+#include "kipr/motors.h"
+double Biasx = 0, Biasy = 0, Biasz = 0;
 
-#include "wallaby/accel.hpp"
-#include "accel_p.hpp"
-
-
-signed short Acceleration::x()
+namespace Private
 {
-	return Private::accel_x();
+
+short accel_x(unsigned char * alt_read_buffer)
+{
+    return static_cast<signed short>(Private::Wallaby::instance()->readRegister16b(REG_RW_ACCEL_X_H, alt_read_buffer))/16-Biasx;
 }
 
-signed short Acceleration::y()
+short accel_y(unsigned char * alt_read_buffer)
 {
-	return Private::accel_y();
+	return static_cast<signed short>(Private::Wallaby::instance()->readRegister16b(REG_RW_ACCEL_Y_H, alt_read_buffer))/16-Biasy;
 }
 
-signed short Acceleration::z()
+short accel_z(unsigned char * alt_read_buffer)
 {
-	return Private::accel_z();
+	return static_cast<signed short>(Private::Wallaby::instance()->readRegister16b(REG_RW_ACCEL_Z_H, alt_read_buffer))/16-Biasz;
 }
 
-bool Acceleration::calibrate()
+//Simple low-pass filter for accelerometer
+bool accel_calibrate()
 {
-	return Private::accel_calibrate();
+  ao();
+    msleep(300);
+    
+    //Find the average noise
+    int i = 0;
+    double avg = 0;
+    while(i<50){
+     	avg += accel_z();
+        msleep(10);
+        i++;
+    }
+    Biasz = avg/50.0+512; //Z axis should be detecting gravity
+	
+    i = 0;
+    avg = 0;
+    while(i<50){
+     	avg += accel_y();
+        msleep(10);
+        i++;
+    }
+    Biasy = avg/50.0;
+	
+	i = 0;
+    avg = 0;
+    while(i<50){
+     	avg += accel_x();
+        msleep(10);
+        i++;
+    }
+    Biasx = avg/50.0;
+
+    return 0;
 }
 
-short AccelX::value() const
-{
-	return Private::accel_x();
-}
-
-short AccelY::value() const
-{
-	return Private::accel_y();
-}
-
-short AccelZ::value() const
-{
-	return Private::accel_z();
 }
