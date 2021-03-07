@@ -1,3 +1,5 @@
+[![CI](https://github.com/justinmerrell/libwallaby/actions/workflows/main.yml/badge.svg)](https://github.com/justinmerrell/libwallaby/actions/workflows/main.yml)
+
 # libwallaby
 Library for interfacing with the "wallaby" firmware on the 2016 controller board
 
