@@ -1,3 +1,5 @@
+[![CMake Build](https://github.com/justinmerrell/libwallaby/actions/workflows/cmake_build.yml/badge.svg)](https://github.com/justinmerrell/libwallaby/actions/workflows/cmake_build.yml)
+
 # libwallaby
 Library for interfacing with the "wallaby" firmware on the 2016 controller board
 
