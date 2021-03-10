@@ -7,17 +7,24 @@ env:
 
 jobs:
   build:
-    # The CMake configure and build commands are platform agnostic and should work equally
-    # well on Windows or Mac.  You can convert this to a matrix build if you need
-    # cross-platform coverage.
-    # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
-    - uses: Dovyski/setup-opencv-action@v1
+
+    - name: Cache OpenCV
+      id: opencv-cache
+      uses: actions/cache@v2
       with:
-        opencv-version: '4.0.0'
+        path: ./opencv-install
+        key: ${{ runner.os }}-opencv-cache
+
+  - name: Install OpenCV
+    uses: rayandrews/with-opencv-action@v1
+    with:
+      dir: ./opencv-install
+      cached: ${{ steps.opencv-cache.outputs.cache-hit }}
+      opencv-version: '4.0.0'
 
     - name: Create Build Environment
       # Some projects don't allow in-source building, so create a separate build directory
