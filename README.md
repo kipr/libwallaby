@@ -25,4 +25,5 @@ make
 sudo make install
 ````
 
-Author: Joshua Southerland
+Want to Contribute? Start Here!:
+https://github.com/kipr/KIPR-Development-Toolkit
