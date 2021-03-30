@@ -179,8 +179,8 @@ add_library(kipr SHARED ${SOURCES} ${PIXELTOASTER_SOURCES} ${OBJC_SOURCES})
 
 if(with_vision_support)
 link_directories(/opt/vc/lib)
-target_link_libraries(wallaby ${OpenCV_LIBS} ${JPEG_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} zbar opencv_core opencv_highgui opencv_imgproc avcodec avutil m /opt/vc/lib/libmmal.so /opt/vc/lib/libbcm_host.so swscale)
-target_link_libraries(kipr ${OpenCV_LIBS} ${JPEG_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} zbar opencv_core opencv_highgui opencv_imgproc avcodec avutil  m /opt/vc/lib/libmmal.so /opt/vc/lib/libbcm_host.so swscale)
+  target_link_libraries(wallaby ${OpenCV_LIBS} ${JPEG_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} zbar opencv_core opencv_highgui opencv_imgproc avcodec avutil m /opt/vc/lib/libmmal.so /opt/vc/lib/libbcm_host.so swscale)
+  target_link_libraries(kipr ${OpenCV_LIBS} ${JPEG_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} zbar opencv_core opencv_highgui opencv_imgproc avcodec avutil  m /opt/vc/lib/libmmal.so /opt/vc/lib/libbcm_host.so swscale)
 endif()
 
 
