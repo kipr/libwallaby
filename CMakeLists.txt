@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.1)
 
 project(libwallaby)
 
@@ -54,17 +54,9 @@ file(GLOB PIXELTOASTER_SOURCES ${PIXELTOASTER}/*.cpp)
 
 
 # C++11
-# http://www.guyrutenberg.com/2014/01/05/enabling-c11-c0x-in-cmake/
-include(CheckCXXCompilerFlag)
-CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
-CHECK_CXX_COMPILER_FLAG("-std=c++0x" COMPILER_SUPPORTS_CXX0X)
-if(COMPILER_SUPPORTS_CXX11)
-	add_definitions(--std=c++11)
-elseif(COMPILER_SUPPORTS_CXX0X)
-	add_definitions(--std=c++0x)
-else()
-	message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
-endif()
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 
 # REMOVE ME
