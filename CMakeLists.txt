@@ -101,8 +101,11 @@ if(with_vision_support)
   find_package(JPEG REQUIRED)
 endif()
 find_package (Threads)
-find_package( PythonInterp 2.7 REQUIRED )
-find_package( PythonLibs 2.7 REQUIRED )
+
+if(build_python)
+  find_package( PythonInterp 2.7 REQUIRED )
+  find_package( PythonLibs 2.7 REQUIRED )
+endif()
 
 include_directories(${CMAKE_INSTALL_PREFIX}/include)
 if(with_vision_support)
