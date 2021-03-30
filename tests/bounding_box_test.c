@@ -7,6 +7,7 @@
 // Revision: 9/3/2019 - cnw
 //    1. modified and modularized for Wombat KRC
 
+#include <stdio.h>
 #include <kipr/graphics.h>
 #include <kipr/graphics_characters.h>
 #include <kipr/camera.h>
@@ -25,6 +26,7 @@ void install_bboxes(int rgb[][3], rectangle bbcx[][5], int nx[]); // adds up to 
                                                 // to graphics window, color r,g,b
 int main()
   {
+#ifdef WITH_VISION_SUPPORT
     int n[3], b, c, cc, tf, row, col, rgb[3][3]={{255,0,0},{0,255,0},{0,0,255}}; // channel color for boxes
     rectangle bbcx [3][5]; // array of rectangles to hold up to 5 bounding boxes for up to 3 channels
     camera_open();         // open camera 
@@ -59,8 +61,14 @@ int main()
     // clean things up and exit
     camera_close();
     graphics_close();
+#else
+    printf("This platform does not support camera");
+#endif
+
     return 0;
 }
+
+#ifdef WITH_VISION_SUPPORT
 
 // display the camera CAMCOLSxCAMROWS pixel image in a graphics window
 void set_cam_image()
@@ -106,3 +114,5 @@ void install_bboxes(int rgb[][3], rectangle bbcx[][5], int nx[])
    }
    return;
 }
+
+#endif

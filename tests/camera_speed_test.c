@@ -8,6 +8,7 @@
 
 int main()
 {
+#ifdef WITH_VISION_SUPPORT
     int ret;
 
     printf("Camera open\n");
@@ -40,5 +41,9 @@ int main()
 
     printf("Camera close\n");
     camera_close();
+#else
+    printf("This platform does not support camera");
+#endif
+
     return 0;
 }
