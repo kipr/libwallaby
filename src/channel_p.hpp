@@ -5,6 +5,8 @@
  *      Author: Nafis Zaman
  */
 
+#ifdef WITH_VISION_SUPPORT
+
 #ifndef _CHANNEL_P_HPP_
 #define _CHANNEL_P_HPP_
 
@@ -53,5 +55,7 @@ namespace Private
     };
   }
 }
+
+#endif
 
 #endif

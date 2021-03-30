@@ -13,6 +13,7 @@ project(libwallaby)
 # zoobee-wallaby controller			OFF					OFF	
 
 option(no_wallaby "Not a wallaby controller" OFF)
+option(with_vision_support "Controls camera support" ON)
 
 option(no_zoobee_wallaby "Not a zoobee wallaby controller" OFF)
 
@@ -20,6 +21,9 @@ if(no_wallaby)
   add_definitions(-DNOT_A_WALLABY)
 endif()
 
+if(with_vision_support)
+  add_definitions(-DWITH_VISION_SUPPORT)
+endif()
 
 if(USE_ARUCO)
 	add_definitions(-DARUCO)
@@ -92,20 +96,25 @@ elseif(WIN32)
   set(ZBAR_DIR "C:/Program Files (x86)/ZBar")
 endif()
 
-find_package(OpenCV REQUIRED )
-find_package(JPEG REQUIRED)
+if(with_vision_support)
+  find_package(OpenCV REQUIRED )
+  find_package(JPEG REQUIRED)
+endif()
 find_package (Threads)
 find_package( PythonInterp 2.7 REQUIRED )
 find_package( PythonLibs 2.7 REQUIRED )
 
 include_directories(${CMAKE_INSTALL_PREFIX}/include)
-include_directories(${OPENCV_INCLUDE})
-include_directories(${JPEG_INCLUDE_DIR})
-include_directories(${ZBAR_DIR}/include)
+if(with_vision_support)
+  include_directories(${OPENCV_INCLUDE})
+  include_directories(${JPEG_INCLUDE_DIR})
+  include_directories(${ZBAR_DIR}/include)
+
+  link_directories(${OPENCV_LIB})
+  link_directories(${ZBAR_DIR}/lib)
+endif()
 
 link_directories(${CMAKE_INSTALL_PREFIX}/lib)
-link_directories(${OPENCV_LIB})
-link_directories(${ZBAR_DIR}/lib)
 
 option(build_python "Build python bindings" ON)
 option(USE_ARUCO "Use Aruco Markers" OFF)
@@ -159,8 +168,10 @@ endif()
 add_library(wallaby SHARED ${SOURCES} ${PIXELTOASTER_SOURCES} ${OBJC_SOURCES})
 add_library(kipr SHARED ${SOURCES} ${PIXELTOASTER_SOURCES} ${OBJC_SOURCES})
 
-target_link_libraries(wallaby ${OpenCV_LIBS} ${JPEG_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} zbar opencv_core opencv_highgui opencv_imgproc)
-target_link_libraries(kipr ${OpenCV_LIBS} ${JPEG_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} zbar opencv_core opencv_highgui opencv_imgproc)
+if(with_vision_support)
+  target_link_libraries(wallaby ${OpenCV_LIBS} ${JPEG_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} zbar opencv_core opencv_highgui opencv_imgproc)
+  target_link_libraries(kipr ${OpenCV_LIBS} ${JPEG_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} zbar opencv_core opencv_highgui opencv_imgproc)
+endif()
 
 
 if(USE_ARUCO)
