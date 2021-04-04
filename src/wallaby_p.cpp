@@ -213,6 +213,7 @@ unsigned char Wallaby::readRegister8b(unsigned char address, const unsigned char
 	if (alt_read_buffer == nullptr)
 	{
 		#ifdef TARGET_EMSCRIPTEN
+		emscripten_sleep(0);
 		read_buffer_[address] = readRegister(address);
 		#else
 		clearBuffers();
@@ -260,6 +261,7 @@ unsigned short Wallaby::readRegister16b(unsigned char address, const unsigned ch
 	if (alt_read_buffer == nullptr)
 	{
 		#ifdef TARGET_EMSCRIPTEN
+		emscripten_sleep(0);
 		read_buffer_[address] = readRegister(address);
 		read_buffer_[address+1] = readRegister(address+1);
 		#else
@@ -314,6 +316,7 @@ unsigned int Wallaby::readRegister32b(unsigned char address, const unsigned char
 	if (alt_read_buffer == nullptr)
 	{
 		#ifdef TARGET_EMSCRIPTEN
+		emscripten_sleep(0);
 		read_buffer_[address] = readRegister(address);
 		read_buffer_[address+1] = readRegister(address+1);
 		read_buffer_[address+2] = readRegister(address+2);
