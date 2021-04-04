@@ -13,12 +13,17 @@ project(libwallaby)
 # zoobee-wallaby controller			OFF					OFF	
 
 option(no_wallaby "Not a wallaby controller" OFF)
+option(emscripten "Build for use with emscripten (for simulator)" OFF)
 option(with_vision_support "Controls camera support" ON)
 
 option(no_zoobee_wallaby "Not a zoobee wallaby controller" OFF)
 
 if(no_wallaby)
   add_definitions(-DNOT_A_WALLABY)
+endif()
+
+if(emscripten)
+  add_definitions(-DTARGET_EMSCRIPTEN)
 endif()
 
 if(with_vision_support)
