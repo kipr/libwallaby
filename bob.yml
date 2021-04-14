@@ -1,0 +1,62 @@
+name: BobTheBuilder
+
+#BobTheBuilder
+#Author: Zachary Sasser (KISS Institute for Practical Robotics)
+#
+#This program builds the debian files upon push to master.
+
+on:
+  push:
+    # Sequence of patterns matched against refs/heads
+    branches:    
+      #- master I'm putting this project on hold for now. The amount of time being used to get it to work is not worth the result.
+      - Zacharyprime-WorkflowTesting #Push events on my testing branch
+
+jobs:
+  build:
+
+    runs-on: [self-hosted, linux]
+    
+    steps:
+    #- uses: actions/checkout@v2 (BROKEN?)
+           
+    #I know that the actions/checkout@v2 function is SUPPOSED to do this... Doesn't work on the Wombat.
+    - name: Get libwallaby from github
+      run: 
+        sudo rm -r /home/pi/got2 || 
+        mkdir /home/pi/got2 &&
+        cd /home/pi/got2 &&
+        git clone https://github.com/kipr/libwallaby 
+        
+    #Setup the enviroment for the package to be created.
+    - name: Setup Enviroment
+      run: 
+        cd /home/pi/got2 &&
+        tar -zcvf libwallaby.tar.gz libwallaby &&
+        cp libwallaby.tar.gz libwallaby 
+        
+    #Builds everything into a .deb file using dpkg-buildpackage
+    - name: Create .deb file
+      run:
+        cd /home/pi/got2/libwallaby &&
+        dpkg-buildpackage -b -rfakeroot -us -uc -j4
+    
+    #Change the default output of the builder to a standard libwallaby.deb
+    - name: Fix filename
+      run: 
+        cd /home/pi/got2 &&
+        mv *.deb libwallaby.deb
+    
+    #Upload everything to github (note that the push is the last operation to prevent uploading bad things)
+    - name: Produce Github Repo
+      run:
+        cd /home/pi/got2 &&
+        git clone https://github.com/kipr/KIPR-Update &&
+        cp libwallaby.deb KIPR-Update/pkgs/libwallaby.deb &&
+        cd KIPR-Update &&
+        git init &&
+        git add . &&
+        git commit -m "[Bob the Builder] Automated Commit, Updating .deb for libwallaby" &&
+        git checkout -b bobthebuilder &&
+        git remote set-url origin "git+ssh://github.com/kipr/KIPR-Update" &&
+        git push origin bobthebuilder
