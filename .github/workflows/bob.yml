@@ -10,7 +10,7 @@ on:
     # Sequence of patterns matched against refs/heads
     branches:    
       #- master I'm putting this project on hold for now. The amount of time being used to get it to work is not worth the result.
-      - Zacharyprime-WorkflowTesting #Push events on my testing branch
+      - master #Push events on my testing branch
 
 jobs:
   build:
