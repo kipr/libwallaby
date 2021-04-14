@@ -5,6 +5,7 @@
  *      Author: Nafis Zaman
  */
 
+#ifdef WITH_VISION_SUPPORT
 
 #include "precomp.hpp"
 #include "wallaby/camera.hpp"
@@ -940,3 +941,4 @@ int Camera::Device::xioctl(int fh, int request, void *arg) {
 #endif
 }
 
+#endif

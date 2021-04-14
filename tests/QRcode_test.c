@@ -11,6 +11,7 @@
 #define SM 1
 int main() // assumes channel 2 is for QR codes
 {
+#ifdef WITH_VISION_SUPPORT
     const char *cp;
     const unsigned char *img;
     int i, j, n, cc, row, col;
@@ -47,5 +48,9 @@ int main() // assumes channel 2 is for QR codes
     }
     camera_close();
     printf("done\n");
+#else
+    printf("This platform does not support camera");
+#endif
+
     return 0;
 }

@@ -41,6 +41,10 @@
 #include <iostream>
 #include <iomanip> // std::hex
 
+#ifdef TARGET_EMSCRIPTEN
+	#include <emscripten.h>
+#endif
+
 
 namespace Private
 {
@@ -182,6 +186,22 @@ bool Wallaby::transfer(unsigned char * alt_read_buffer)
 #endif
 }
 
+#ifdef TARGET_EMSCRIPTEN
+
+// emscripten function to write register values to JS registers variable
+EM_JS(void, updateRegister, (unsigned char address, unsigned char value), {
+	Module.context.registers[address] = value;
+	Module.context.onRegistersChange(address, value);
+
+});
+
+// emscripten function to read register values from JS registers variable
+EM_JS(unsigned char, readRegister, (unsigned char address), {
+	return Module.context.registers[address];
+});
+
+#endif
+
 unsigned char Wallaby::readRegister8b(unsigned char address, const unsigned char * alt_read_buffer)
 {
 	if (address >= REG_READABLE_COUNT) return 0;// false; // TODO: feedback
@@ -192,11 +212,16 @@ unsigned char Wallaby::readRegister8b(unsigned char address, const unsigned char
 
 	if (alt_read_buffer == nullptr)
 	{
+		#ifdef TARGET_EMSCRIPTEN
+		emscripten_sleep(0);
+		read_buffer_[address] = readRegister(address);
+		#else
 		clearBuffers();
 
 		//bool success = transfer();
 		//TODO: if (success == false) return false;
 		transfer();
+		#endif
 	}
 
 	unsigned char value = buffer[address];
@@ -209,6 +234,9 @@ void Wallaby::writeRegister8b(unsigned char address, unsigned char value)
 
 	std::lock_guard<std::mutex> lock(transfer_mutex_);
 
+	#ifdef TARGET_EMSCRIPTEN
+	updateRegister(address, value);
+	#else
 	clearBuffers();
 
 	// TODO definitions for buffer inds
@@ -219,6 +247,7 @@ void Wallaby::writeRegister8b(unsigned char address, unsigned char value)
 	//TODO: bool success = transfer();
 	//return success;
 	transfer();
+	#endif
 }
 
 unsigned short Wallaby::readRegister16b(unsigned char address, const unsigned char * alt_read_buffer)
@@ -231,11 +260,17 @@ unsigned short Wallaby::readRegister16b(unsigned char address, const unsigned ch
 
 	if (alt_read_buffer == nullptr)
 	{
+		#ifdef TARGET_EMSCRIPTEN
+		emscripten_sleep(0);
+		read_buffer_[address] = readRegister(address);
+		read_buffer_[address+1] = readRegister(address+1);
+		#else
 		clearBuffers();
 
 		//TODO: bool success = transfer();
 		//return success;
 		transfer();
+		#endif
 	}
 
 	unsigned short value = (static_cast<unsigned short>(buffer[address]) << 8) | buffer[address+1];
@@ -246,20 +281,28 @@ void Wallaby::writeRegister16b(unsigned char address, unsigned short value)
 {
 	if (address >= REG_ALL_COUNT || address+1 >= REG_ALL_COUNT) return;// false; // TODO: feedback
 
+	unsigned char value1 = static_cast<unsigned char>((value & 0xFF00) >> 8);
+	unsigned char value2 = static_cast<unsigned char>(value & 0x00FF);
+
 	std::lock_guard<std::mutex> lock(transfer_mutex_);
 
+	#ifdef TARGET_EMSCRIPTEN
+	updateRegister(address, value1);
+	updateRegister(address + 1, value2);
+	#else
 	clearBuffers();
 
 	// TODO definitions for buffer inds
 	write_buffer_[3] = 2; // write 2 registers
 	write_buffer_[4] = address; // at address 'address'
-	write_buffer_[5] = static_cast<unsigned char>((value & 0xFF00) >> 8);
+	write_buffer_[5] = value1;
 	write_buffer_[6] = address + 1;
-	write_buffer_[7] = static_cast<unsigned char>(value & 0x00FF);
+	write_buffer_[7] = value2;
 
 	//TODO: bool success = transfer();
 	//return success;
 	transfer();
+	#endif
 }
 
 unsigned int Wallaby::readRegister32b(unsigned char address, const unsigned char * alt_read_buffer)
@@ -272,11 +315,19 @@ unsigned int Wallaby::readRegister32b(unsigned char address, const unsigned char
 
 	if (alt_read_buffer == nullptr)
 	{
+		#ifdef TARGET_EMSCRIPTEN
+		emscripten_sleep(0);
+		read_buffer_[address] = readRegister(address);
+		read_buffer_[address+1] = readRegister(address+1);
+		read_buffer_[address+2] = readRegister(address+2);
+		read_buffer_[address+3] = readRegister(address+3);
+		#else
 		clearBuffers();
 
 		//TODO: bool success = transfer();
 		//return success;
 		transfer();
+		#endif		
 	}
 
 	unsigned int value =
@@ -292,24 +343,36 @@ void Wallaby::writeRegister32b(unsigned char address, unsigned int value)
 {
 	if (address >= REG_ALL_COUNT || address+3 >= REG_ALL_COUNT) return;// false; // TODO: feedback
 
+	unsigned char value1 = static_cast<unsigned char>((value & 0xFF000000) >> 24);
+	unsigned char value2 = static_cast<unsigned char>((value & 0x00FF0000) >> 16);
+	unsigned char value3 = static_cast<unsigned char>((value & 0x0000FF00) >> 8);
+	unsigned char value4 = static_cast<unsigned char>((value & 0x000000FF));
+
 	std::lock_guard<std::mutex> lock(transfer_mutex_);
 
+	#ifdef TARGET_EMSCRIPTEN
+	updateRegister(address, value1);
+	updateRegister(address + 1, value2);
+	updateRegister(address + 2, value3);
+	updateRegister(address + 3, value4);
+	#else
 	clearBuffers();
 
 	// TODO definitions for buffer inds
 	write_buffer_[3] = 4; // write 4 registers
 	write_buffer_[4] = address; // at address 'address'
-	write_buffer_[5] = static_cast<unsigned char>((value & 0xFF000000) >> 24);
+	write_buffer_[5] = value1;
 	write_buffer_[6] = address + 1;
-	write_buffer_[7] = static_cast<unsigned char>((value & 0x00FF0000) >> 16);
+	write_buffer_[7] = value2;
 	write_buffer_[8] = address + 2;
-	write_buffer_[9] = static_cast<unsigned char>((value & 0x0000FF00) >> 8);
+	write_buffer_[9] = value3;
 	write_buffer_[10] = address + 3;
-	write_buffer_[11] = static_cast<unsigned char>((value & 0x000000FF));
+	write_buffer_[11] = value4;
 
 	//TODO: bool success = transfer();
 	//return succes2;
 	transfer();
+	#endif
 }
 
 void Wallaby::clearBuffers()

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.1)
 
 project(libwallaby)
 
@@ -13,6 +13,8 @@ project(libwallaby)
 # zoobee-wallaby controller			OFF					OFF	
 
 option(no_wallaby "Not a wallaby controller" OFF)
+option(emscripten "Build for use with emscripten (for simulator)" OFF)
+option(with_vision_support "Controls camera support" ON)
 
 option(no_zoobee_wallaby "Not a zoobee wallaby controller" OFF)
 
@@ -20,6 +22,13 @@ if(no_wallaby)
   add_definitions(-DNOT_A_WALLABY)
 endif()
 
+if(emscripten)
+  add_definitions(-DTARGET_EMSCRIPTEN)
+endif()
+
+if(with_vision_support)
+  add_definitions(-DWITH_VISION_SUPPORT)
+endif()
 
 if(USE_ARUCO)
 	add_definitions(-DARUCO)
@@ -54,17 +63,9 @@ file(GLOB PIXELTOASTER_SOURCES ${PIXELTOASTER}/*.cpp)
 
 
 # C++11
-# http://www.guyrutenberg.com/2014/01/05/enabling-c11-c0x-in-cmake/
-include(CheckCXXCompilerFlag)
-CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
-CHECK_CXX_COMPILER_FLAG("-std=c++0x" COMPILER_SUPPORTS_CXX0X)
-if(COMPILER_SUPPORTS_CXX11)
-	add_definitions(--std=c++11)
-elseif(COMPILER_SUPPORTS_CXX0X)
-	add_definitions(--std=c++0x)
-else()
-	message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
-endif()
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 
 # REMOVE ME
@@ -100,20 +101,28 @@ elseif(WIN32)
   set(ZBAR_DIR "C:/Program Files (x86)/ZBar")
 endif()
 
-find_package(OpenCV REQUIRED )
-find_package(JPEG REQUIRED)
+if(with_vision_support)
+  find_package(OpenCV REQUIRED )
+  find_package(JPEG REQUIRED)
+endif()
 find_package (Threads)
-find_package( PythonInterp 2.7 REQUIRED )
-find_package( PythonLibs 2.7 REQUIRED )
+
+if(build_python)
+  find_package( PythonInterp 2.7 REQUIRED )
+  find_package( PythonLibs 2.7 REQUIRED )
+endif()
 
 include_directories(${CMAKE_INSTALL_PREFIX}/include)
-include_directories(${OPENCV_INCLUDE})
-include_directories(${JPEG_INCLUDE_DIR})
-include_directories(${ZBAR_DIR}/include)
+if(with_vision_support)
+  include_directories(${OPENCV_INCLUDE})
+  include_directories(${JPEG_INCLUDE_DIR})
+  include_directories(${ZBAR_DIR}/include)
+
+  link_directories(${OPENCV_LIB})
+  link_directories(${ZBAR_DIR}/lib)
+endif()
 
 link_directories(${CMAKE_INSTALL_PREFIX}/lib)
-link_directories(${OPENCV_LIB})
-link_directories(${ZBAR_DIR}/lib)
 
 option(build_python "Build python bindings" ON)
 option(USE_ARUCO "Use Aruco Markers" OFF)
@@ -167,8 +176,10 @@ endif()
 add_library(wallaby SHARED ${SOURCES} ${PIXELTOASTER_SOURCES} ${OBJC_SOURCES})
 add_library(kipr SHARED ${SOURCES} ${PIXELTOASTER_SOURCES} ${OBJC_SOURCES})
 
-target_link_libraries(wallaby ${OpenCV_LIBS} ${JPEG_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} zbar opencv_core opencv_highgui opencv_imgproc)
-target_link_libraries(kipr ${OpenCV_LIBS} ${JPEG_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} zbar opencv_core opencv_highgui opencv_imgproc)
+if(with_vision_support)
+  target_link_libraries(wallaby ${OpenCV_LIBS} ${JPEG_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} zbar opencv_core opencv_highgui opencv_imgproc)
+  target_link_libraries(kipr ${OpenCV_LIBS} ${JPEG_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} zbar opencv_core opencv_highgui opencv_imgproc)
+endif()
 
 
 if(USE_ARUCO)

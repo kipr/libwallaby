@@ -44,8 +44,11 @@ int per_tick_large_to_small(int val)
 // TODO: this is a hack but the hardware timers are making it hard to easily swap motors 2,3 today
 unsigned int fix_port(unsigned int port)
 {
+  #ifndef NOT_A_WALLABY
   if (port == 2) return 3;
   if (port == 3) return 2;
+  #endif
+  
   return port;
 }
 

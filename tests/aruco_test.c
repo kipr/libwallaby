@@ -30,6 +30,9 @@ int main(int argc, char const *argv[]) {
 // printf("Running the calibration\n");
 // bool calibrated = camera_calibrate();
 // printf(calibrated ? "true\n" : "false\n");
+#else
+  printf("This platform does not support ArUco");
 #endif
+
   return 0;
 }
