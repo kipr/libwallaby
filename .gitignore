@@ -32,3 +32,4 @@ build
 obj-arm-linux-gnueabihf
 deploy
 lib
+doc
