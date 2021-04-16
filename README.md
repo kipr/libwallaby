@@ -38,7 +38,7 @@ cd libwallaby
 sudo chmod 777 configure
 sudo ./configure
 cd build
-sudo make -j4
+make -j4
 sudo make install
 ```
 
