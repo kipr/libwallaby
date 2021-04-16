@@ -23,7 +23,8 @@ jobs:
     #I know that the actions/checkout@v2 function is SUPPOSED to do this... Doesn't work on the Wombat.
     - name: Get libwallaby from github
       run: 
-        sudo rm -r /home/pi/got2 || echo "No need to remove that file" && #I added the echo to keep rm from failing the build and to make sure mkdir runs
+        sudo rm -r /home/pi/got2 || 
+        echo "No need to remove that file" &&
         mkdir /home/pi/got2 &&
         cd /home/pi/got2 &&
         git clone https://github.com/kipr/libwallaby 
