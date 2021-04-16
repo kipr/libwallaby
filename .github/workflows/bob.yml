@@ -49,15 +49,15 @@ jobs:
         mv *.deb libwallaby.deb
     
     #Upload everything to github (note that the push is the last operation to prevent uploading bad things)
-    - name: Produce Github Repo
-      run:
-        cd /home/pi/got2 &&
-        git clone https://github.com/kipr/KIPR-Update &&
-        cp libwallaby.deb KIPR-Update/pkgs/libwallaby.deb &&
-        cd KIPR-Update &&
-        git init &&
-        git add . &&
-        git commit -m "[Bob the Builder] Automated Commit, Updating .deb for libwallaby" &&
-        git checkout -b bobthebuilder &&
-        git remote set-url origin "git+ssh://github.com/kipr/KIPR-Update" &&
-        git push origin bobthebuilder
+    #- name: Produce Github Repo
+     # run:
+        #cd /home/pi/got2 &&
+        #git clone https://github.com/kipr/KIPR-Update &&
+        #cp libwallaby.deb KIPR-Update/pkgs/libwallaby.deb &&
+        #cd KIPR-Update &&
+        #git init &&
+        #git add . &&
+        #git commit -m "[Bob the Builder] Automated Commit, Updating .deb for libwallaby" &&
+        #git checkout -b bobthebuilder &&
+        #git remote set-url origin "git+ssh://github.com/kipr/KIPR-Update" &&
+        #git push origin bobthebuilder
