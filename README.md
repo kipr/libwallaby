@@ -1,4 +1,4 @@
-[![Bob the Builder](https://github.com/kipr/libwallaby/actions/workflows/bob.yml/badge.svg)](https://github.com/justinmerrell/libwallaby/actions/workflows/bob.yml)
+[![Bob the Builder](https://github.com/kipr/libwallaby/actions/workflows/bob.yml/badge.svg)](https://github.com/kipr/libwallaby/actions/workflows/bob.yml)
 
 # libwallaby
 Library for interfacing with hardware on the 2016-2020 KIPR Wallaby and 2020-PRESENT KIPR Wombat controllers.
