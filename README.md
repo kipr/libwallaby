@@ -1,4 +1,4 @@
-[![Bob the Builder](https://github.com/justinmerrell/libwallaby/actions/workflows/cmake_build.yml/badge.svg)](https://github.com/justinmerrell/libwallaby/actions/workflows/bob.yml)
+[![Bob the Builder](https://github.com/kipr/libwallaby/actions/workflows/bob.yml/badge.svg)](https://github.com/justinmerrell/libwallaby/actions/workflows/bob.yml)
 
 # libwallaby
 Library for interfacing with the "wallaby" firmware on the 2016 controller board
