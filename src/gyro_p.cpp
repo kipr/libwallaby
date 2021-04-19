@@ -12,35 +12,28 @@
 #include "kipr/util.h"
 #include "kipr/motors.h"
 
-//Combines a high and low byte to make a 16 bit short integer.
-short combine(unsigned short low, unsigned short high){
-	return low + high*256;
-}
 
 //Biases default to zero so that the low pass only takes affect if calibration is run.
-double biasx = 0, biasy = 0, biasz = 0;
+int biasx = 0, biasy = 0, biasz = 0;
 
 namespace Private
 {
 //Pulls gyroscope data from the I2C registers. The MPU 9250 outputs high and low registers that need to be combined.
 short gyro_x(unsigned char * alt_read_buffer)
 {
-    return combine(static_cast<unsigned short>(Private::Wallaby::instance()->readRegister16b(REG_RW_GYRO_X_L, alt_read_buffer)),
-					static_cast<unsigned short>(Private::Wallaby::instance()->readRegister16b(REG_RW_GYRO_X_H, alt_read_buffer)) )-biasx;
+   return static_cast<signed short>(Private::Wallaby::instance()->readRegister16b(REG_RW_GYRO_X_H, alt_read_buffer))/16-biasx;
 }
 	
 //Pulls gyroscope data from the I2C registers. The MPU 9250 outputs high and low registers that need to be combined.
 short gyro_y(unsigned char * alt_read_buffer)
 {
-    return combine(static_cast<unsigned short>(Private::Wallaby::instance()->readRegister16b(REG_RW_GYRO_Y_L, alt_read_buffer)),
-					static_cast<unsigned short>(Private::Wallaby::instance()->readRegister16b(REG_RW_GYRO_Y_H, alt_read_buffer)) )-biasy;
+    return static_cast<signed short>(Private::Wallaby::instance()->readRegister16b(REG_RW_GYRO_Y_H, alt_read_buffer))/16-biasy;
 }
 	
 //Pulls gyroscope data from the I2C registers. The MPU 9250 outputs high and low registers that need to be combined.
 short gyro_z(unsigned char * alt_read_buffer)
 {
-    return combine(static_cast<unsigned short>(Private::Wallaby::instance()->readRegister16b(REG_RW_GYRO_Z_L, alt_read_buffer)),
-					static_cast<unsigned short>(Private::Wallaby::instance()->readRegister16b(REG_RW_GYRO_Z_H, alt_read_buffer)) )-biasz;
+    return static_cast<signed short>(Private::Wallaby::instance()->readRegister16b(REG_RW_GYRO_Z_H, alt_read_buffer))/16-biasz;
 }
 
 //Simple low-pass filter for gyroscope
@@ -60,7 +53,7 @@ bool gyro_calibrate()
         msleep(10);
         i++;
     }
-    biasz = avg/samples;
+    biasz += avg/samples;
 	
     //Get the bias for the Y axis by sampling the stationary output.
     i = 0;
@@ -70,7 +63,7 @@ bool gyro_calibrate()
         msleep(10);
         i++;
     }
-    biasy = avg/samples;
+    biasy += avg/samples;
 	
     //Get the bias for the X axis by sampling the stationary output.
     i = 0;
@@ -80,8 +73,8 @@ bool gyro_calibrate()
         msleep(10);
         i++;
     }
-    biasx = avg/samples;
-
+    biasx += avg/samples;
+    printf("Bias Z: %d | Bias Y: %d | Bias X: %d \n", biasz,biasy,biasx);
     return 0;
 }
 
