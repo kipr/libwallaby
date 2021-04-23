@@ -190,8 +190,10 @@ bool Wallaby::transfer(unsigned char * alt_read_buffer)
 
 // emscripten function to write register values to JS registers variable
 EM_JS(void, updateRegister, (unsigned char address, unsigned char value), {
-	Module.context.registers[address] = value;
-	Module.context.onRegistersChange(address, value);
+	if(Module.context.registers[address] !== value) {
+		Module.context.registers[address] = value;
+		Module.context.onRegistersChange(address, value);
+	}
 
 });
 
