@@ -189,12 +189,19 @@ bool Wallaby::transfer(unsigned char * alt_read_buffer)
 #ifdef TARGET_EMSCRIPTEN
 
 // emscripten function to write register values to JS registers variable
-EM_JS(void, updateRegister, (unsigned char address, unsigned char value), {
-	if(Module.context.registers[address] !== value) {
-		Module.context.registers[address] = value;
-		Module.context.onRegistersChange(address, value);
+EM_JS(void, updateRegisters, (unsigned char *addresses, unsigned char *values, int length), {
+	const registers = [];
+	for (let regIndex = 0; regIndex < length; regIndex++) {
+		// Array values must be accessed directly from emscripten's memory buffer
+		const address = HEAPU8[addresses + regIndex];
+		const value = HEAPU8[values + regIndex];
+		if(Module.context.registers[address] !== value) {
+			Module.context.registers[address] = value;
+			registers.push({ address: address, value: value });
+		}
 	}
 
+	Module.context.onRegistersChange(registers);
 });
 
 // emscripten function to read register values from JS registers variable
@@ -237,7 +244,9 @@ void Wallaby::writeRegister8b(unsigned char address, unsigned char value)
 	std::lock_guard<std::mutex> lock(transfer_mutex_);
 
 	#ifdef TARGET_EMSCRIPTEN
-	updateRegister(address, value);
+	unsigned char addresses[] = {address};
+	unsigned char values[] = {value};
+	updateRegisters(addresses, values, 1);
 	#else
 	clearBuffers();
 
@@ -289,8 +298,9 @@ void Wallaby::writeRegister16b(unsigned char address, unsigned short value)
 	std::lock_guard<std::mutex> lock(transfer_mutex_);
 
 	#ifdef TARGET_EMSCRIPTEN
-	updateRegister(address, value1);
-	updateRegister(address + 1, value2);
+	unsigned char addresses[] = {address, static_cast<unsigned char>(address + 1)};
+	unsigned char values[] = {value1, value2};
+	updateRegisters(addresses, values, 2);
 	#else
 	clearBuffers();
 
@@ -353,10 +363,9 @@ void Wallaby::writeRegister32b(unsigned char address, unsigned int value)
 	std::lock_guard<std::mutex> lock(transfer_mutex_);
 
 	#ifdef TARGET_EMSCRIPTEN
-	updateRegister(address, value1);
-	updateRegister(address + 1, value2);
-	updateRegister(address + 2, value3);
-	updateRegister(address + 3, value4);
+	unsigned char addresses[] = {address, static_cast<unsigned char>(address + 1), static_cast<unsigned char>(address + 2), static_cast<unsigned char>(address + 3)};
+	unsigned char values[] = {value1, value2, value3, value4};
+	updateRegisters(addresses, values, 4);
 	#else
 	clearBuffers();
 
