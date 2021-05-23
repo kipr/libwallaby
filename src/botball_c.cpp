@@ -1,4 +1,4 @@
-#include "kipr/wombat.h"
+#include "kipr/botball.h"
 
 #include "kipr/display.h"
 #include "kipr/thread.hpp"
@@ -128,8 +128,8 @@ void wait_for_light(int port)
 	     /*
 		This part keeps camera flashes from starting the robot. The 2 second wait is how long my cell phone flash takes. -Zach
 	     */
-            while(analog(0)>threshold){
-                 while(analog(0)>threshold){
+            while(analog(port)>threshold){
+                 while(analog(port)>threshold){
                     printf("Waiting for starting light...\n \n");
                     printf("Light ON Value: %d \n", initial);
                     printf("Light OFF Value: %d \n", final);
