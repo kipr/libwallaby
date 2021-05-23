@@ -67,6 +67,7 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ggdb")
 
 # REMOVE ME
 include_directories(${SRC}/pixeltoaster)
@@ -177,8 +178,9 @@ add_library(wallaby SHARED ${SOURCES} ${PIXELTOASTER_SOURCES} ${OBJC_SOURCES})
 add_library(kipr SHARED ${SOURCES} ${PIXELTOASTER_SOURCES} ${OBJC_SOURCES})
 
 if(with_vision_support)
-  target_link_libraries(wallaby ${OpenCV_LIBS} ${JPEG_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} zbar opencv_core opencv_highgui opencv_imgproc)
-  target_link_libraries(kipr ${OpenCV_LIBS} ${JPEG_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} zbar opencv_core opencv_highgui opencv_imgproc)
+link_directories(/opt/vc/lib)
+target_link_libraries(wallaby ${OpenCV_LIBS} ${JPEG_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} zbar opencv_core opencv_highgui opencv_imgproc avcodec avutil m /opt/vc/lib/libmmal.so /opt/vc/lib/libbcm_host.so swscale)
+target_link_libraries(kipr ${OpenCV_LIBS} ${JPEG_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} zbar opencv_core opencv_highgui opencv_imgproc avcodec avutil  m /opt/vc/lib/libmmal.so /opt/vc/lib/libbcm_host.so swscale)
 endif()
 
 

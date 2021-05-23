@@ -157,7 +157,7 @@ CvVideoWriter* cvCreateVideoWriter_GStreamer( const char* filename, int fourcc,
 namespace cv
 {
 
-//#`fdef CVCAPANY
+//#ifdef CVCAPANY
 /// from videoio.hpp
 
 /** @brief %VideoCapture API backends identifier.
@@ -168,7 +168,7 @@ namespace cv
  * @note Backends are available only if they have been built with your OpenCV binaries.
  * See @ref videoio_overview for more information.
  * */
-//#ifdef DELETETHIS	
+#if	0
     enum VideoCaptureAPIs {
  	    CAP_ANY          = 0,            //!< Auto detect == 0
 	    CAP_VFW          = 200,          //!< Video For Windows (obsolete, removed)
@@ -203,7 +203,7 @@ namespace cv
         CAP_INTEL_MFX    = 2300,         //!< Intel MediaSDK
         CAP_XINE         = 2400,         //!< XINE engine (Linux)
      };
-    
+     
     enum VideoCaptureProperties {
         CAP_PROP_POS_MSEC       =0, //!< Current position of the video file in milliseconds.
         CAP_PROP_POS_FRAMES     =1, //!< 0-based index of the frame to be decoded/captured next.
@@ -253,8 +253,9 @@ namespace cv
 #ifndef CV_DOXYGEN
         CV__CAP_PROP_LATEST
 #endif
+#endif
     };
-
+#if 0
     class IVideoCapture
     {
     public:
@@ -262,7 +263,7 @@ namespace cv
         virtual double getProperty(int) const { return 0; }
         virtual bool setProperty(int, double) { return false; }
         virtual bool grabFrame() = 0;
-        virtual bool retrieveFrame(int, OutputArray) = 0;
+        virtual bool retrieveFrame(int OutputArray) = 0;
         virtual bool isOpened() const = 0;
         virtual int getCaptureDomain() { return 0; } // Return the type of the capture object: CAP_DSHOW, etc...
     };
@@ -301,5 +302,5 @@ namespace cv
     Ptr<IVideoCapture> cvCreateCapture_MSMF(const String& filename);
     Ptr<IVideoWriter> cvCreateVideoWriter_MSMF(const String& filename, int fourcc, double fps, Size frameSize, int is_color);
 }
-
+#endif
 #endif /* __VIDEOIO_H_ */
