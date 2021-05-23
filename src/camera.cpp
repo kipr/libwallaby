@@ -35,6 +35,7 @@
 #endif
 
 using namespace Camera;
+using namespace std;
 
 #include <linux/usbdevice_fs.h>
 
@@ -292,12 +293,11 @@ Camera::Device::Device()
   m_model(/*WHITE_2016*/ BLACK_2017)
 {
   Config *config = Config::load(Camera::ConfigPath::defaultConfigPath());
-  ::printf("camera open\n");fflush(NULL);
 
   if(!config) return;
   setConfig(*config);
   delete config;
-::printf("camera open compelete\n");fflush(NULL);
+  ::printf("camera open compelete\n");fflush(NULL);
   // TODO: set initial resolution?
 }
 
@@ -378,9 +378,9 @@ bool Camera::Device::open(const int number, Resolution resolution,
   }
   else if (m_model == TELLO)
   {
-	m_cap = new UDPVideo("0.0.0.0",
+	m_cap = new udp_video("0.0.0.0",
 				   11111,
-                                   resolutionToWidth(m_resolution),
+                   resolutionToWidth(m_resolution),
 				   resolutionToHeight(m_resolution));
 	if(!m_cap->isOpened())
 	{
@@ -388,7 +388,6 @@ bool Camera::Device::open(const int number, Resolution resolution,
 		return false;
 	}
 	m_connected = true;
-/*debug*/printf("tello open complete\n");fflush(NULL);
   }
   return true;
 
@@ -857,8 +856,9 @@ int Camera::Device::readFrame() {
   {
 	  if (!m_connected)
 	  {
-		printf("not connected\n");
-		open(0, HIGH_RES/*LOW_RES*/, BLACK_2017); // TODO real numbers, we don't use these yet
+		printf("camera not connected\n");
+		//if(m_model != TELLO)
+		//	open(0, LOW_RES, BLACK_2017); // TODO real numbers, we don't use these yet
 		return -1;
 	  }
 
@@ -878,7 +878,7 @@ int Camera::Device::readFrame() {
 		printf("error reading image\n");
 		return -1;
 	  }
-	printf("camera::update m_image %x\n", m_image.data);
+	  //printf("camera::update m_image %x\n", m_image.data);
 
 	  return 1;
   }

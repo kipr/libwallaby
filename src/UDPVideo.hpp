@@ -1,6 +1,6 @@
 //
-//  UDPVideo.hpp
-//  
+//  UDPvideo.hpp
+//
 //
 //  Created by gene on 9/1/20.
 //
@@ -8,144 +8,83 @@
 #ifndef UDPVideo_hpp
 #define UDPVideo_hpp
 
-#include <stdio.h>
-#include <unistd.h>
-#include <sys/types.h> 
-#include <sys/socket.h> 
-#include <arpa/inet.h> 
-#include <netinet/in.h>
-#include <string>
-#include <vector>
-#include <thread>
-#include <mutex>
+#include <arpa/inet.h>
 #include <iostream>
+#include <mutex>
+#include <netinet/in.h>
 #include <queue>
+#include <stdio.h>
+#include <string>
+#include <sys/socket.h>
+#include <sys/types.h>
+#include <thread>
+#include <unistd.h>
+#include <vector>
 
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 
 extern "C" {
-#include <libavutil/avutil.h>
 #include <libavcodec/avcodec.h>
 #include <libavformat/avformat.h>
+#include <libavutil/avutil.h>
 #include <libavutil/imgutils.h>
-#include <libswscale/swscale.h>
 #include <libavutil/pixfmt.h>
+#include <libswscale/swscale.h>
 }
 
-    struct Image
-    {
-      unsigned char * data; //1280x720x3 MAX out
-      int width;
-      int height;
-    };
-  
- struct FrameData
- {
-   unsigned char * data;
-   unsigned int size;
- };
+class video_frame_processor {
+  std::queue<AVPacket> m_frame_data_vector;
+  std::mutex m_vid_mutex;
+  std::mutex m_vid_frame_mutex;
+  int m_ldestw, m_ldesth;
 
-   class VideoFrameProcessor 
-  {
-   static Image videoBuffer[2]; // Mod by Jeremy
-   static long videoTimestamp[2]; // Mod by Jeremy
-    bool enableCbcuiVision; // Mod by Jeremy
-    static std::queue<AVPacket> FrameDataVector; 
-    static std::queue<AVFrame&> FrameOutput;
-    static std::mutex VidMutex;
-    static std::mutex VidFrameMutex;
-    static bool waitingForReceiver;
-    static int ldestw, ldesth;
+  AVCodecParserContext *m_parser;
+  AVDictionary *m_av_dict_h264 = NULL;
+  AVCodecContext *m_pcodec_ctx_h264;
 
-	static AVCodecParserContext  *parser;
-	AVDictionary *AVDictH264 = NULL;
-        static AVCodecContext * pCodecCtxH264;
+  int m_sockfd;
+  struct sockaddr_in m_cliaddr;
+  struct sockaddr_in m_servaddr;
 
-	static int sockfd;
-   static struct sockaddr_in cliaddr;
-   struct sockaddr_in servaddr;
+public:
+  video_frame_processor(const char *drone_ip_address,
+                        const short unsigned int drone_port, const int destw,
+                        const int desth);
 
-    std::string myDroneAddress;
-    short unsigned int myDronePort;
+  ~video_frame_processor(void) throw();
+  bool get_pframe_from_list(cv::OutputArray image); // AVFrame& newFrame);
 
+private:
+  void add_frame_to_list(AVPacket packet);
 
-    public:
+  void add_pframe_to_list(AVFrame *newFrame);
 
-    VideoFrameProcessor(const char* DroneIpAddress, const short unsigned int DronePort, const int destw, const int desth);
-  
-    //VideoFrameProcessor(const int destw, const int desth);
-    ~VideoFrameProcessor(void) throw();
-    
-    static void addFrametoList(AVPacket packet);
-    void receiverDone(void);
+  void run_vfp();
+  void run_vdr();
+  std::thread *m_vfp_thread;
+  std::thread *m_vdr_thread;
 
-    static bool getpFramefromList (cv::OutputArray image); //AVFrame& newFrame);
-    static void addpFrametoList(AVFrame* newFrame);
+  bool m_vfp_running;
+  bool m_vdr_running;
+  bool m_udp_video_up;
+  AVFrame *m_next_frame;
+};
 
-     static void run_VFP();	
-     static void run_VDR();
+class udp_video : public cv::VideoCapture {
 
-   private:
-	std::thread* VFP_thread;
-    std::thread* VDR_thread;
+public:
+  udp_video(const char *drone_ip_address, const short unsigned int drone_port,
+            const int destw, const int desth);
+  ~udp_video();
+  bool isOpened() const;
+  // bool read(cv::Mat& Image);
+  bool read(cv::OutputArray image) override;
 
-	static bool VFPrunning;
-        static bool VDRrunning;
-	    static bool UDPVideoUP;
-  };
-
-#if 0  
-  class VideoDataReceiver
-  {
-    std::mutex myMutex;
-    std::string myDroneAddress;
-    short unsigned int myDronePort;
-    static VideoFrameProcessor* myVideoFrameProcessor;
-   // unsigned char myVideoData[921600]; //640x480x3 MAX out
-    unsigned int videoDataLength;
-
-   static int sockfd;
-   static struct sockaddr_in cliaddr;
-   struct sockaddr_in servaddr;
-   int ldestw, ldesth;
-
-   struct timespec sleep;
-   struct timespec sleep_left;
-
-  public:
-    VideoDataReceiver(const char* DroneIpAddress, const short unsigned int DronePort, const int destw, const int desth);
-    ~VideoDataReceiver() throw ();
-
-    bool getpFramefromList (cv::OutputArray); //AVFrame& newFrame);
-    
-    static void run_VDR();
-  private:
-    std::thread* VDR_thread;
-  protected:
-    static bool UDPVideoUP;
-    static bool VDRrunning;
-  };
-#endif
-
-  class UDPVideo: public cv::VideoCapture
-  {
-     VideoFrameProcessor* DataReceiver;
-
-     public:
-        UDPVideo(const char* DroneIpAddress, const short unsigned int DronePort, const int destw, const int desth);
-        ~UDPVideo();
-	bool isOpened() const;
-	//bool read(cv::Mat& Image);
-        bool read(cv::OutputArray image) override;
-
-     protected:
-	bool UDPOpened;
-	cv::Mat tmp_image;
-  };
-
-
-
+private:
+  bool m_udp_opened;
+  video_frame_processor *m_data_receiver;
+};
 
 #endif /* UDPVideo_hpp */

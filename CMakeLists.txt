@@ -46,16 +46,20 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 set(INCLUDE ${libwallaby_SOURCE_DIR}/include)
 set(SRC ${libwallaby_SOURCE_DIR}/src)
 set(PIXELTOASTER ${SRC}/pixeltoaster)
+set(WPACLI ${SRC}/wpa_ctrl)
 set(BINDINGS ${CMAKE_SOURCE_DIR}/bindings)
 
 set(LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/lib)
 
 include_directories(${INCLUDE})
-
+include_directories(${libwallaby_SOURCE_DIR}/src/wpa_ctrl/common)
 
 file(GLOB SOURCES ${SRC}/*.cpp)
 file(GLOB C_TESTS tests/*.c)
 file(GLOB PIXELTOASTER_SOURCES ${PIXELTOASTER}/*.cpp)
+
+file(GLOB WPACLI_COMMON ${WPACLI}/common/*.c)
+file(GLOB WPACLI_UTILS ${WPACLI}/utils/*.c)
 
 # Cross-compile
 # set(CMAKE_CXX_COMPILER arm-linux-gnueabihf-g++)
@@ -174,15 +178,23 @@ endif()
 
 ##Changed wallaby to KIPR under three instances below: 148, 151,165
 # Library: libwallaby
-add_library(wallaby SHARED ${SOURCES} ${PIXELTOASTER_SOURCES} ${OBJC_SOURCES})
-add_library(kipr SHARED ${SOURCES} ${PIXELTOASTER_SOURCES} ${OBJC_SOURCES})
+add_library(wallaby SHARED ${SOURCES} ${PIXELTOASTER_SOURCES} ${OBJC_SOURCES} ${WPACLI_UTILS} ${WPACLI_COMMON})
+add_library(kipr SHARED ${SOURCES} ${PIXELTOASTER_SOURCES} ${OBJC_SOURCES} ${WPACLI_UTILS} ${WPACLI_COMMON})
+
+#if(with_vision_support)
+#  target_link_libraries(wallaby ${OpenCV_LIBS} ${JPEG_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} zbar opencv_core opencv_highgui opencv_imgproc)
+#  target_link_libraries(kipr ${OpenCV_LIBS} ${JPEG_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} zbar opencv_core opencv_highgui opencv_imgproc)
+#endif()
 
 if(with_vision_support)
 link_directories(/opt/vc/lib)
   target_link_libraries(wallaby ${OpenCV_LIBS} ${JPEG_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} zbar opencv_core opencv_highgui opencv_imgproc avcodec avutil m /opt/vc/lib/libmmal.so /opt/vc/lib/libbcm_host.so swscale)
   target_link_libraries(kipr ${OpenCV_LIBS} ${JPEG_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} zbar opencv_core opencv_highgui opencv_imgproc avcodec avutil  m /opt/vc/lib/libmmal.so /opt/vc/lib/libbcm_host.so swscale)
 endif()
+link_directories(/opt/vc/lib)
 
+target_link_libraries(wallaby ${OpenCV_LIBS} ${JPEG_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} zbar opencv_core opencv_highgui opencv_imgproc avcodec avutil m /opt/vc/lib/libmmal.so /opt/vc/lib/libbcm_host.so swscale)
+target_link_libraries(kipr ${OpenCV_LIBS} ${JPEG_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} zbar opencv_core opencv_highgui opencv_imgproc avcodec avutil  m /opt/vc/lib/libmmal.so /opt/vc/lib/libbcm_host.so swscale)
 
 if(USE_ARUCO)
     target_link_libraries(wallaby opencv_aruco)
