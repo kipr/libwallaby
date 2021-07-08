@@ -108,8 +108,8 @@ endif()
 find_package (Threads)
 
 if(build_python)
-  find_package( PythonInterp 2.7 REQUIRED )
-  find_package( PythonLibs 2.7 REQUIRED )
+  find_package( PythonInterp 3.4 REQUIRED )
+  find_package( PythonLibs 3.4 REQUIRED )
 endif()
 
 include_directories(${CMAKE_INSTALL_PREFIX}/include)
@@ -144,7 +144,7 @@ file(GLOB SWIG_SOURCES ${BINDINGS}/*.i)
 
 if(build_python)
   find_package(SWIG REQUIRED)
-  find_package(PythonLibs 2.7 REQUIRED)
+  find_package(PythonLibs 3.4 REQUIRED)
   message("${PYTHON_LIBRARY}")
   set(PYTHON_BINDING_SOURCES ${CMAKE_BINARY_DIR}/kipr_wrap_py.cxx)
   set(PYTHON_BINDING_LIBRARIES ${PYTHON_LIBRARY})
@@ -154,10 +154,8 @@ if(build_python)
     OUTPUT ${CMAKE_BINARY_DIR}/kipr_wrap_py.cxx ${LIBRARY_OUTPUT_PATH}/kipr.py)
     install(FILES ${LIBRARY_OUTPUT_PATH}/kipr.py DESTINATION lib)
   
-endif()
 
 
-if(build_python)
   add_library(wallaby_python SHARED ${PYTHON_BINDING_SOURCES})
   set_target_properties(wallaby_python PROPERTIES PREFIX _ OUTPUT_NAME wallaby SUFFIX .so)
   target_link_libraries(wallaby_python wallaby ${PYTHON_BINDING_LIBRARIES} )
