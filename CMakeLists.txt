@@ -108,8 +108,8 @@ endif()
 find_package (Threads)
 
 if(build_python)
-  find_package( PythonInterp 3.4 REQUIRED )
-  find_package( PythonLibs 3.4 REQUIRED )
+  find_package( PythonInterp 3.8 REQUIRED )
+  find_package( PythonLibs 3.8 REQUIRED )
 endif()
 
 include_directories(${CMAKE_INSTALL_PREFIX}/include)
@@ -144,7 +144,7 @@ file(GLOB SWIG_SOURCES ${BINDINGS}/*.i)
 
 if(build_python)
   find_package(SWIG REQUIRED)
-  find_package(PythonLibs 3.4 REQUIRED)
+  find_package(PythonLibs 3.8 REQUIRED)
   message("${PYTHON_LIBRARY}")
   set(PYTHON_BINDING_SOURCES ${CMAKE_BINARY_DIR}/kipr_wrap_py.cxx)
   set(PYTHON_BINDING_LIBRARIES ${PYTHON_LIBRARY})
@@ -163,7 +163,7 @@ if(build_python)
 
   add_library(wombat_python SHARED ${PYTHON_BINDING_SOURCES})
   set_target_properties(wombat_python PROPERTIES PREFIX _ OUTPUT_NAME kipr SUFFIX .so)
-  target_link_libraries(wombat_python kipr ${PYTHON_BINDING_LIBRARIES} )
+  target_link_libraries(wombat_python kipr ${PYTHON_BINDING_LIBRARIES} gcov)
   install(TARGETS wombat_python DESTINATION lib)
 endif()
 

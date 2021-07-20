@@ -7,7 +7,7 @@
 
 #ifdef WITH_VISION_SUPPORT
 
-#include "precomp.hpp"
+// #include "precomp.hpp"
 #include "wallaby/camera.hpp"
 #include "channel_p.hpp"
 #include "wallaby/camera.h"
@@ -51,10 +51,10 @@ using namespace Camera;
 // with the select timeout issue.
 // (2) Only the black camera has the camera lag reduced.
 
-extern CvCapture* cvCreateCameraCapture_V4L_K( int index );
-extern CvCapture* cvCreateCameraCapture_V4L_K( const char * deviceName);
+// extern CvCapture* cvCreateCameraCapture_V4L_K( int index );
+// extern CvCapture* cvCreateCameraCapture_V4L_K( const char * deviceName);
 
-class VideoCapture_K: public  cv::VideoCapture
+/* class VideoCapture_K: public  cv::VideoCapture
 {
 public:
 	VideoCapture_K(const std::string& filename)
@@ -90,6 +90,7 @@ public:
 		this->~VideoCapture();
 	}
 };
+*/
 
 // select timeout values for the WHITE_2016 Camera
 // BLACk_2017 camera values are set in cap_v4l.cpp
@@ -346,7 +347,7 @@ bool Camera::Device::open(const int number, Resolution resolution,
   }
   else if (m_model == BLACK_2017)
   {
-	  m_cap = new VideoCapture_K(0);
+	  m_cap = new cv::VideoCapture(0);
 	  if(!m_cap->isOpened())
 	  {
 		fprintf(stderr, "Failed to open %s\n", device_name);
@@ -922,7 +923,7 @@ cv::Mat Camera::Device::decodeJpeg(void *p, int size) {
   jpeg_destroy_decompress(&cInfo);
 
   cv::Mat image(cv::Size(outWidth, outHeight), CV_8UC3, m_bmpBuffer);
-  cv::cvtColor(image, image, CV_BGR2RGB);
+  cv::cvtColor(image, image, cv::COLOR_BGR2RGB);
 
   return image;
 }
