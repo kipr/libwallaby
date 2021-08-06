@@ -11,6 +11,7 @@ on:
     branches:    
       #- master I'm putting this project on hold for now. The amount of time being used to get it to work is not worth the result.
       - master #Push events on my testing branch
+      - version27
 
 jobs:
   build:

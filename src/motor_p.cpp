@@ -182,6 +182,13 @@ int get_motor_goal_velocity(unsigned int port, unsigned char * alt_read_buffer)
 
 bool set_motor_goal_velocity(unsigned int port, int goal_velocity)
 {
+  if(goal_velocity > 1500){
+	goal_velocity = 1500;
+  }
+  if(goal_velocity < -1500){
+	goal_velocity = -1500;
+  }
+
   if (port >= NUM_MOTORS) return false;
 
   // TODO:check that byte order doesn't get messed up
