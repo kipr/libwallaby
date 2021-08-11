@@ -169,81 +169,16 @@ namespace cv
  * See @ref videoio_overview for more information.
  * */
 //#ifdef DELETETHIS	
-    enum VideoCaptureAPIs {
- 	    CAP_ANY          = 0,            //!< Auto detect == 0
-	    CAP_VFW          = 200,          //!< Video For Windows (obsolete, removed)
-        CAP_V4L          = 200,          //!< V4L/V4L2 capturing support
-        CAP_V4L2         = CAP_V4L,      //!< Same as CAP_V4L
-        CAP_FIREWIRE     = 300,          //!< IEEE 1394 drivers
-        CAP_FIREWARE     = CAP_FIREWIRE, //!< Same value as CAP_FIREWIRE
-        CAP_IEEE1394     = CAP_FIREWIRE, //!< Same value as CAP_FIREWIRE
-        CAP_DC1394       = CAP_FIREWIRE, //!< Same value as CAP_FIREWIRE
-        CAP_CMU1394      = CAP_FIREWIRE, //!< Same value as CAP_FIREWIRE
-        CAP_QT           = 500,          //!< QuickTime (obsolete, removed)
-        CAP_UNICAP       = 600,          //!< Unicap drivers (obsolete, removed)
-        CAP_DSHOW        = 700,          //!< DirectShow (via videoInputdf)
-        CAP_PVAPI        = 800,          //!< PvAPI, Prosilica GigE SDK
-        CAP_OPENNI       = 900,          //!< OpenNI (for Kinect)
-        CAP_OPENNI_ASUS  = 910,          //!< OpenNI (for Asus Xtion)
-        CAP_ANDROID      = 1000,         //!< Android - not used
-        CAP_XIAPI        = 1100,         //!< XIMEA Camera API
-        CAP_AVFOUNDATION = 1200,         //!< AVFoundation framework for iOS (OS X Lion will have the same API)
-        CAP_GIGANETIX    = 1300,         //!< Smartek Giganetix GigEVisionSDK
-        CAP_MSMF         = 1400,         //!< Microsoft Media Foundation (via videoInput)
-        CAP_WINRT        = 1410,         //!< Microsoft Windows Runtime using Media Foundation
-        CAP_INTELPERC    = 1500,         //!< Intel Perceptual Computing SDK
-        CAP_OPENNI2      = 1600,         //!< OpenNI2 (for Kinect)
-        CAP_OPENNI2_ASUS = 1610,         //!< OpenNI2 (for Asus Xtion and Occipital Structure sensors)
-        CAP_GPHOTO2      = 1700,         //!< gPhoto2 connection
-        CAP_GSTREAMER    = 1800,         //!< GStreamer
-        CAP_FFMPEG       = 1900,         //!< Open and record video file or stream using the FFMPEG library
-        CAP_IMAGES       = 2000,         //!< OpenCV Image Sequence (e.g. img_%02d.jpg)
-        CAP_ARAVIS       = 2100,         //!< Aravis SDK
+//
+
+    enum KIPRVideoCaptureAPIs {
         CAP_OPENCV_MJPEG = 2200,         //!< Built-in OpenCV MotionJPEG codecv
         CAP_INTEL_MFX    = 2300,         //!< Intel MediaSDK
         CAP_XINE         = 2400,         //!< XINE engine (Linux)
      };
     
-    enum VideoCaptureProperties {
-        CAP_PROP_POS_MSEC       =0, //!< Current position of the video file in milliseconds.
-        CAP_PROP_POS_FRAMES     =1, //!< 0-based index of the frame to be decoded/captured next.
-        CAP_PROP_POS_AVI_RATIO  =2, //!< Relative position of the video file: 0=start of the film, 1=end of the film.
-        CAP_PROP_FRAME_WIDTH    =3, //!< Width of the frames in the video stream.
-        CAP_PROP_FRAME_HEIGHT   =4, //!< Height of the frames in the video stream.
-        CAP_PROP_FPS            =5, //!< Frame rate.
-        CAP_PROP_FOURCC         =6, //!< 4-character code of codec. see VideoWriter::fourcc .
-        CAP_PROP_FRAME_COUNT    =7, //!< Number of frames in the video file.
-        CAP_PROP_FORMAT         =8, //!< Format of the %Mat objects returned by VideoCapture::retrieve().
-        CAP_PROP_MODE           =9, //!< Backend-specific value indicating the current capture mode.
-        CAP_PROP_BRIGHTNESS    =10, //!< Brightness of the image (only for those cameras that support).
-        CAP_PROP_CONTRAST      =11, //!< Contrast of the image (only for cameras).
-        CAP_PROP_SATURATION    =12, //!< Saturation of the image (only for cameras).
-        CAP_PROP_HUE           =13, //!< Hue of the image (only for cameras).
-        CAP_PROP_GAIN          =14, //!< Gain of the image (only for those cameras that support).
-        CAP_PROP_EXPOSURE      =15, //!< Exposure (only for those cameras that support).
-        CAP_PROP_CONVERT_RGB   =16, //!< Boolean flags indicating whether images should be converted to RGB.
-        CAP_PROP_WHITE_BALANCE_BLUE_U =17, //!< Currently unsupported.
-        CAP_PROP_RECTIFICATION =18, //!< Rectification flag for stereo cameras (note: only supported by DC1394 v 2.x backend currently).
-        CAP_PROP_MONOCHROME    =19,
-        CAP_PROP_SHARPNESS     =20,
-        CAP_PROP_AUTO_EXPOSURE =21, //!< DC1394: exposure control done by camera, user can adjust reference level using this feature.
-        CAP_PROP_GAMMA         =22,
-        CAP_PROP_TEMPERATURE   =23,
-        CAP_PROP_TRIGGER       =24,
-        CAP_PROP_TRIGGER_DELAY =25,
-        CAP_PROP_WHITE_BALANCE_RED_V =26,
-        CAP_PROP_ZOOM          =27,
-        CAP_PROP_FOCUS         =28,
-        CAP_PROP_GUID          =29,
-        CAP_PROP_ISO_SPEED     =30,
-        CAP_PROP_BACKLIGHT     =32,
-        CAP_PROP_PAN           =33,
-        CAP_PROP_TILT          =34,
-        CAP_PROP_ROLL          =35,
-        CAP_PROP_IRIS          =36,
-        CAP_PROP_SETTINGS      =37, //!< Pop up video/camera filter dialog (note: only supported by DSHOW backend currently. The property value is ignored)
-        CAP_PROP_BUFFERSIZE    =38,
-        CAP_PROP_AUTOFOCUS     =39,
+    enum KIPRVideoCaptureProperties {
+      
         CAP_PROP_SAR_NUM       =40, //!< Sample aspect ratio: num/den (num)
         CAP_PROP_SAR_DEN       =41, //!< Sample aspect ratio: num/den (den)
         CAP_PROP_BACKEND       =42, //!< Current backend (enum VideoCaptureAPIs). Read-only property
