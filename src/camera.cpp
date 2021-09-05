@@ -7,6 +7,8 @@
 
 #ifdef WITH_VISION_SUPPORT
 
+#define BOTUI_TELLO_TEST
+
 #include "precomp.hpp"
 #include "wallaby/camera.hpp"
 #include "channel_p.hpp"
@@ -290,7 +292,11 @@ Camera::Device::Device()
   m_cap(0),
   m_image(),
   m_resolution(HIGH_RES /*LOW_RES*/),
+#ifdef BOTUI_TELLO_TEST
+  m_model(TELLO)
+#else
   m_model(/*WHITE_2016*/ BLACK_2017)
+#endif
 {
   Config *config = Config::load(Camera::ConfigPath::defaultConfigPath());
 
