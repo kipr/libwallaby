@@ -34,7 +34,7 @@ extern "C" {
 #include <libswscale/swscale.h>
 }
 
-class video_frame_processor {
+class VideoFrameProcessor {
   std::queue<AVPacket> m_frame_data_vector;
   std::mutex m_vid_mutex;
   std::mutex m_vid_frame_mutex;
@@ -49,11 +49,11 @@ class video_frame_processor {
   struct sockaddr_in m_servaddr;
 
 public:
-  video_frame_processor(const char *drone_ip_address,
+  VideoFrameProcessor(const char *drone_ip_address,
                         const short unsigned int drone_port, const int destw,
                         const int desth);
 
-  ~video_frame_processor(void) throw();
+  ~VideoFrameProcessor(void) throw();
   bool get_pframe_from_list(cv::OutputArray image); // AVFrame& newFrame);
 
 private:
@@ -72,19 +72,19 @@ private:
   AVFrame *m_next_frame;
 };
 
-class udp_video : public cv::VideoCapture {
+class UdpVideo : public cv::VideoCapture {
 
 public:
-  udp_video(const char *drone_ip_address, const short unsigned int drone_port,
+  UdpVideo(const char *drone_ip_address, const short unsigned int drone_port,
             const int destw, const int desth);
-  ~udp_video();
+  ~UdpVideo();
   bool isOpened() const;
   // bool read(cv::Mat& Image);
   bool read(cv::OutputArray image) override;
 
 private:
   bool m_udp_opened;
-  video_frame_processor *m_data_receiver;
+  VideoFrameProcessor *m_data_receiver;
 };
 
 #endif /* UDPVideo_hpp */

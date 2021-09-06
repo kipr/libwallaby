@@ -38,7 +38,7 @@ int decode(AVCodecContext *avctx, AVFrame *frame, int *got_frame,
   return 0;
 }
 
-video_frame_processor::video_frame_processor(
+VideoFrameProcessor::VideoFrameProcessor(
     const char *drone_ip_address, const short unsigned int drone_port,
     const int destw, const int desth) {
   // todo: allow caller to set ip address
@@ -97,7 +97,7 @@ video_frame_processor::video_frame_processor(
   m_pcodec_ctx_h264 = avcodec_alloc_context3(p_codec_h264);
 
   if (m_pcodec_ctx_h264 == NULL) {
-    std::cout << "video_frame_processor::run - could not allocate codec context"
+    std::cout << "VideoFrameProcessor::run - could not allocate codec context"
       << std::endl << std::flush;
     return;
   }
@@ -126,11 +126,11 @@ video_frame_processor::video_frame_processor(
     std::this_thread::sleep_for(std::chrono::milliseconds(20));
   }
 
-  std::cout << "video_frame_processor initialized" << std::endl;
+  std::cout << "VideoFrameProcessor initialized" << std::endl;
 }
 
-video_frame_processor::~video_frame_processor() throw() {
-    std::cout << "video_frame_processor - terminating" << std::endl;
+VideoFrameProcessor::~VideoFrameProcessor() throw() {
+    std::cout << "VideoFrameProcessor - terminating" << std::endl;
 
   m_udp_video_up = false;
   try {
@@ -139,21 +139,21 @@ video_frame_processor::~video_frame_processor() throw() {
   }
 
   catch (int ex) {
-    std::cout << "~video_frame_processor - exception :" << ex
+    std::cout << "~VideoFrameProcessor - exception :" << ex
       << std::endl << std::flush;
   }
   close(m_sockfd);
 
   // Cleanup
   av_parser_close(m_parser);
-  std::cout << "video_frame_processor - terminated" << std::endl;
+  std::cout << "VideoFrameProcessor - terminated" << std::endl;
 }
 
-void video_frame_processor::run_vdr() {
+void VideoFrameProcessor::run_vdr() {
   unsigned int packet_count;
   unsigned int pos;
 
-  std::cout << "video_frame_processor started" << std::endl;
+  std::cout << "VideoFrameProcessor started" << std::endl;
   unsigned int payload_size = 65536;
   size_t receive_size;
   bool first_keyframe = false;
@@ -222,11 +222,11 @@ void video_frame_processor::run_vdr() {
     }
   }
 VDR_done:
-  std::cout << "video_frame_processor stopped" << std::endl;
+  std::cout << "VideoFrameProcessor stopped" << std::endl;
 }
 
 #define FRAME_SLEEP_TIME 10 // in milliseconds
-bool video_frame_processor::get_pframe_from_list(cv::OutputArray image) {
+bool VideoFrameProcessor::get_pframe_from_list(cv::OutputArray image) {
   unsigned long wait_time = 0;
   while (m_next_frame == NULL) {
     // wait until we get something in the vector
@@ -246,7 +246,7 @@ bool video_frame_processor::get_pframe_from_list(cv::OutputArray image) {
 
   image.create(m_next_frame->height, m_next_frame->width, CV_8UC3);
 #if DEBUG_UDP
-  std::cout << "video_frame_processor::get_pframe_from_list h: " << m_next_frame->height
+  std::cout << "VideoFrameProcessor::get_pframe_from_list h: " << m_next_frame->height
     << " w: " << m_next_frame->width
     << std::hex
     << " dataptr: " << (void *) m_next_frame->data[0]
@@ -283,7 +283,7 @@ bool video_frame_processor::get_pframe_from_list(cv::OutputArray image) {
   return true;
 }
 
-void video_frame_processor::add_pframe_to_list(AVFrame *newFrame) {
+void VideoFrameProcessor::add_pframe_to_list(AVFrame *newFrame) {
   m_vid_frame_mutex.lock();
 
   // make sure the requestor receives the most recent frame
@@ -293,7 +293,7 @@ void video_frame_processor::add_pframe_to_list(AVFrame *newFrame) {
   }
   m_next_frame = newFrame;
 #if 0
-	std::cout << "video_frame_processor::add_pframe_to_list h: " << newFrame->height
+	std::cout << "VideoFrameProcessor::add_pframe_to_list h: " << newFrame->height
     << " w: " << newFrame->width
     << std::hex
     << " dataptr: " << (void *) newFrame->data[0]
@@ -304,7 +304,7 @@ void video_frame_processor::add_pframe_to_list(AVFrame *newFrame) {
   m_vid_frame_mutex.unlock();
 }
 
-void video_frame_processor::add_frame_to_list(AVPacket frameData) {
+void VideoFrameProcessor::add_frame_to_list(AVPacket frameData) {
   m_vid_mutex.lock();
 
   // When a new Key Frame arrives, flush the frame queue.
@@ -325,14 +325,14 @@ void video_frame_processor::add_frame_to_list(AVPacket frameData) {
 #endif
 }
 
-void video_frame_processor::run_vfp() {
+void VideoFrameProcessor::run_vfp() {
   int FrameFinished;
   AVPacket packet;
   struct SwsContext *img_convert_ctx = NULL;
 
   // setup the datastructures for the codes (move this stuff somewhere else...
 
-  std::cout << "video_frame_processor::run - Starting" << std::endl;
+  std::cout << "VideoFrameProcessor::run - Starting" << std::endl;
 
   m_vfp_running = true;
 
@@ -362,7 +362,7 @@ void video_frame_processor::run_vfp() {
 
       AVFrame *pFrame = av_frame_alloc();
 #ifdef DEBUG_UDP
-      std::cout << "video_frame_processor::run_vfp new packet data: "
+      std::cout << "VideoFrameProcessor::run_vfp new packet data: "
         << std::hex
         << (void *) packet.data
         << std::dec
@@ -375,7 +375,7 @@ void video_frame_processor::run_vfp() {
 
       // int avresult = decode(pCodecCtxH264, pFrame, &FrameFinished, &packet);
 #ifdef DEBUG_UDP
-      std::cout << "video_frame_processor::run_vfp-->Decoding complete "
+      std::cout << "VideoFrameProcessor::run_vfp-->Decoding complete "
         << "FrameFinished: " << FrameFinished
         << " avresult: " << avresult
         << std::endl << std::flush;
@@ -387,7 +387,7 @@ void video_frame_processor::run_vfp() {
       } else // convert the image into something the KIPR SW can understand
       {
 #ifdef DEBUG_UDP
-        cout << "video_frame_processor::run_vfp data: " << std::hex
+        cout << "VideoFrameProcessor::run_vfp data: " << std::hex
           << (void *) pFrame->data[0]
           << std::dec
           << " pFrame->linesize[0]: " << pFrame->linesize[0]
@@ -414,24 +414,24 @@ VFP_done:
   std::cout << "run_vfp terminating" << std::endl;
 }
 
-udp_video::udp_video(const char *drone_ip_address,
+UdpVideo::UdpVideo(const char *drone_ip_address,
                      const short unsigned int drone_port, const int destw,
                      const int desth) {
   m_udp_opened = true;
   m_data_receiver =
-      new video_frame_processor(drone_ip_address, drone_port, destw, desth);
+      new VideoFrameProcessor(drone_ip_address, drone_port, destw, desth);
   std::cout << "UDP Video started" << std::endl;
 }
 
-udp_video::~udp_video() {
+UdpVideo::~UdpVideo() {
   m_udp_opened = false;
   delete m_data_receiver;
-  std::cout << "~udp_video done\n";
+  std::cout << "~UdpVideo done\n";
 }
 
-bool udp_video::isOpened() const { return m_udp_opened; }
+bool UdpVideo::isOpened() const { return m_udp_opened; }
 
-bool udp_video::read(cv::OutputArray image) {
+bool UdpVideo::read(cv::OutputArray image) {
   bool retval = false;
   if (isOpened())
     retval = m_data_receiver->get_pframe_from_list(image);
