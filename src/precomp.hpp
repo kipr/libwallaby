@@ -170,7 +170,7 @@ namespace cv
  * */
 //#ifdef DELETETHIS	
 //
-
+/*
     enum KIPRVideoCaptureAPIs {
         CAP_OPENCV_MJPEG = 2200,         //!< Built-in OpenCV MotionJPEG codecv
         CAP_INTEL_MFX    = 2300,         //!< Intel MediaSDK
@@ -189,6 +189,7 @@ namespace cv
         CV__CAP_PROP_LATEST
 #endif
     };
+    */
 
     class IVideoCapture
     {
