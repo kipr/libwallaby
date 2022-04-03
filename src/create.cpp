@@ -1073,6 +1073,32 @@ void Create::setAngle(const int angle)
 	m_state.angle = angle;
 }
 
+// songNum valid vals are {0, 1, 2, 3}
+// song should be an array of numbers
+// for example {88, 20, 91, 32} will play midi value 88 for 20/64ths of a second and
+// then play midi value 91 for 32/64ths of a second
+// In other words, the first value in a pair will be the midi value of the note
+// the second value in the pair will be the duration (in 64ths of a second) 
+bool Create::loadSong(const unsigned char* song, const size_t songNum = 0)
+{
+	unsigned char temp[sizeof(song)/sizeof(song[0]) + 3];
+	temp[0] = 140;  // 140 is the op code
+	temp[1] = songNum;
+	temp[2] = sizeof(song) / sizeof(song[0]);
+	for (int i = 0; i < sizeof(song) / sizeof(song[0]); i++)
+		temp[i+3] = song[i];
+	return write(temp);;
+}
+
+// play a song that has been loaded
+// songNum valid vals are {0, 1, 2, 3}
+bool Create::playSong(const size_t songNum = 0)
+{
+	unsigned char temp[] = {141, songNum};  // 141 is the op code, songNum is the song to play
+	return write(temp);
+}
+
+
 const CreateState *Create::state()
 {
 	return &m_state;
