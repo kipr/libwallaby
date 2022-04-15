@@ -384,6 +384,7 @@ bool Camera::Device::open(const int number, Resolution resolution,
   }
   else if (m_model == TELLO)
   {
+	m_resolution = TELLO_RES;
 	m_cap = new UdpVideo("0.0.0.0",
 				   11111,
                    resolutionToWidth(m_resolution),
