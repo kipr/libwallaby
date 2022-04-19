@@ -438,14 +438,14 @@ void create_low_side_drivers(int pwm2, int pwm1, int pwm0)
   THIS_IS_NYI
 }
 
-void create_load_song(int num)
+int create_load_song(const unsigned char* song, int num)
 {
-  THIS_IS_NYI
+  return Create::instance()->loadSong(song, num) ? 1 : 0;
 }
 
-void create_play_song(int num)
+int create_play_song(int num)
 {
-  THIS_IS_NYI
+  return Create::instance()->playSong(num) ? 1 : 0;
 }
 
 int create_read_block(char *data, int count)
