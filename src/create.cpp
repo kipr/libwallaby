@@ -1079,7 +1079,7 @@ void Create::setAngle(const int angle)
 // then play midi value 91 for 32/64ths of a second
 // In other words, the first value in a pair will be the midi value of the note
 // the second value in the pair will be the duration (in 64ths of a second) 
-bool Create::loadSong(const unsigned char* song, const size_t songNum)
+bool Create::loadSong(const unsigned char* song, const unsigned char songNum)
 {
 	unsigned char temp[sizeof(song)/sizeof(song[0]) + 3];
 	temp[0] = 140;  // 140 is the op code
@@ -1092,7 +1092,7 @@ bool Create::loadSong(const unsigned char* song, const size_t songNum)
 
 // play a song that has been loaded
 // songNum valid vals are {0, 1, 2, 3}
-bool Create::playSong(const size_t songNum = 0)
+bool Create::playSong(const unsigned char songNum)
 {
 	unsigned char temp[] = {141, songNum};  // 141 is the op code, songNum is the song to play
 	return write(temp, sizeof(temp)/sizeof(temp[0]));

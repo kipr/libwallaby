@@ -454,14 +454,14 @@ public:
 	 * \param songNum valid vals are {0, 1, 2, 3}
 	 * \return true on success, false on failure
 	 */
-	bool loadSong(const unsigned char* song, const size_t songNum = 0);
+	bool loadSong(const unsigned char* song, const unsigned char songNum = 0);
 
 	/*!
 	 * play a song that has been loaded
 	 * \param songNum valid values are {0, 1, 2, 3}
 	 * \return true on success, false on failure
 	 */
-	bool Create::playSong(const size_t songNum = 0);
+	bool playSong(const unsigned char songNum = 0);
 
 	/*!
 	 * The Create class is a singleton, which means that you cannot instantiate it directly.

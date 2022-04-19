@@ -440,7 +440,7 @@ VF EXPORT_SYM void create_low_side_drivers(int pwm2, int pwm1, int pwm0);
  * \return 1 on success, 0 on failure
  * \ingroup create
  */
-VF EXPORT_SYM int create_load_song(const unsigned char* song, int num);
+VF EXPORT_SYM int create_load_song(const unsigned char* song, unsigned char num);
 
 /*!
  * Plays a song that has been loaded. Use create_load_song first.
@@ -449,7 +449,7 @@ VF EXPORT_SYM int create_load_song(const unsigned char* song, int num);
  * \see create_load_song
  * \ingroup create
  */
-VF EXPORT_SYM int create_play_song(int num);
+VF EXPORT_SYM int create_play_song(unsigned char num);
 
 /*!
  * \ingroup create

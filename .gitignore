@@ -33,3 +33,6 @@ obj-arm-linux-gnueabihf
 deploy
 lib
 doc
+
+# VSCode folder
+.vscode

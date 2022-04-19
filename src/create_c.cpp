@@ -438,12 +438,12 @@ void create_low_side_drivers(int pwm2, int pwm1, int pwm0)
   THIS_IS_NYI
 }
 
-int create_load_song(const unsigned char* song, int num)
+int create_load_song(const unsigned char* song, unsigned char num)
 {
   return Create::instance()->loadSong(song, num) ? 1 : 0;
 }
 
-int create_play_song(int num)
+int create_play_song(unsigned char num)
 {
   return Create::instance()->playSong(num) ? 1 : 0;
 }
