@@ -201,16 +201,17 @@ endif()
 
 # Executables: test programs
 # TODO: use a list and foreach to make this more concise
-set(TESTS )
+if (BUILD_TESTS)
+  set(TESTS )
 
-foreach(C_TEST ${C_TESTS})
-  get_filename_component(C_TEST_NAME ${C_TEST} NAME_WE)
-  set(TEST_BIN_NAME ${C_TEST_NAME}_c)
-  add_executable(${TEST_BIN_NAME} ${C_TEST})
-  target_link_libraries(${TEST_BIN_NAME} kipr)
-  list(APPEND TESTS ${TEST_BIN_NAME})
-endforeach()
-
+  foreach(C_TEST ${C_TESTS})
+    get_filename_component(C_TEST_NAME ${C_TEST} NAME_WE)
+    set(TEST_BIN_NAME ${C_TEST_NAME}_c)
+    add_executable(${TEST_BIN_NAME} ${C_TEST})
+    target_link_libraries(${TEST_BIN_NAME} kipr)
+    list(APPEND TESTS ${TEST_BIN_NAME})
+  endforeach()
+endif()
 
 ########################################
 #   Doxygen documentation (optional)   #
@@ -237,15 +238,16 @@ endif()
 
 
 
-
-install(TARGETS ${TESTS} DESTINATION bin/wallaby)
-install(TARGETS ${TESTS} DESTINATION bin/kipr)
+if (BUILD_TESTS)
+  install(TARGETS ${TESTS} DESTINATION bin/wallaby)
+  install(TARGETS ${TESTS} DESTINATION bin/kipr)
+endif()
 install(TARGETS kipr DESTINATION lib)
 install(TARGETS wallaby DESTINATION lib)
 install(DIRECTORY ${INCLUDE}/wallaby DESTINATION include)
 install(DIRECTORY ${INCLUDE}/kipr DESTINATION include)
 
-set(CMAKE_INSTALL_PREFIX /usr)
+# set(CMAKE_INSTALL_PREFIX /home/eliot/Documents/GitHub/libwallaby/out)
 
 # Install the manpage (appropriate for .deb package)
 # manpage should have -r-wr--r-- or 644 permission (owner r-w, group r--, others r--)
