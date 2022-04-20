@@ -1081,6 +1081,10 @@ void Create::setAngle(const int angle)
 // the second value in the pair will be the duration (in 64ths of a second) 
 bool Create::loadSong(const unsigned char* song, const unsigned char songNum)
 {
+	if (!isConnected()){
+		std::cout << "Not connected. Please connect before trying to load a song." << std::endl;
+		return false;
+	}
 	unsigned char temp[sizeof(song)/sizeof(song[0]) + 3];
 	temp[0] = 140;  // 140 is the op code
 	temp[1] = songNum;
@@ -1094,6 +1098,10 @@ bool Create::loadSong(const unsigned char* song, const unsigned char songNum)
 // songNum valid vals are {0, 1, 2, 3}
 bool Create::playSong(const unsigned char songNum)
 {
+	if (!isConnected()){
+		std::cout << "Not connected. Please connect before trying to play a song." << std::endl;
+		return false;
+	}
 	unsigned char temp[] = {141, songNum};  // 141 is the op code, songNum is the song to play
 	return write(temp, sizeof(temp)/sizeof(temp[0]));
 }
