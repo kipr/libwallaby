@@ -202,6 +202,7 @@ endif()
 # Executables: test programs
 # TODO: use a list and foreach to make this more concise
 set(TESTS )
+
 foreach(C_TEST ${C_TESTS})
   get_filename_component(C_TEST_NAME ${C_TEST} NAME_WE)
   set(TEST_BIN_NAME ${C_TEST_NAME}_c)
@@ -209,6 +210,7 @@ foreach(C_TEST ${C_TESTS})
   target_link_libraries(${TEST_BIN_NAME} kipr)
   list(APPEND TESTS ${TEST_BIN_NAME})
 endforeach()
+
 
 ########################################
 #   Doxygen documentation (optional)   #
@@ -231,6 +233,7 @@ if(BUILD_DOCUMENTATION)
   add_custom_target(DocMetadata ALL
     COMMAND ${CMAKE_COMMAND} -E copy ${DOXYGEN_DIR}/metadata.ini ${PROJECT_SOURCE_DIR}/doc)
 endif()
+
 
 
 
