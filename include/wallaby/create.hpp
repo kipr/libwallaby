@@ -442,25 +442,29 @@ public:
 	const unsigned short& refreshRate() const;
 
 	/*!
-	 *
-	 * \param song should be an array of unsigned chars (positive integers 0-255)
-	 * The first value in a pair will be the midi value of the note
-	 * the second value in the pair will be the duration (in 64ths of a second)
-	 * for example, a song {88, 20, 91, 32, 70, 15} will play midi value 88 for 20/64ths 
-	 * of a second, midi value 91 for 32/64ths of a second, and midi value 70 for
-	 * 15/64ths of a second.
-	 * Note that a full list of notes playable on the create is found at
-	 * https://cdn-shop.adafruit.com/datasheets/create_2_Open_Interface_Spec.pdf on page 34  
-	 * \param songNum valid vals are {0, 1, 2, 3}
-	 * \return true on success, false on failure
-	 */
+     * Loads a song for playing on the create
+     * \param song It should be an array of unsigned chars (positive integers 0-255)
+     * The first value in a pair will be the midi value of the note
+     * the second value in the pair will be the duration (in 64ths of a second)
+     * for example, a song {88, 20, 91, 32, 70, 15} will play midi value 88 for 20/64ths 
+     * of a second, midi value 91 for 32/64ths of a second, and midi value 70 for
+     * 15/64ths of a second.
+     * A full list of notes playable on the create is found at
+     * https://cdn-shop.adafruit.com/datasheets/create_2_Open_Interface_Spec.pdf on page 34  
+     * \param num The song slot to load the song into; valid values are 0, 1, 2, and 3
+     * \return 1 on success, 0 on failure
+     * \note Example use: `unsigned char example_song[] = {88, 20, 91, 32, 70, 15}; create_load_song(example_song, 0);`
+     * \ingroup create
+     */
 	bool loadSong(const unsigned char* song, const unsigned char songNum = 0);
 
 	/*!
-	 * play a song that has been loaded
-	 * \param songNum valid values are {0, 1, 2, 3}
-	 * \return true on success, false on failure
-	 */
+     * Plays a song that has been loaded. Use create_load_song first.
+     * \param num The song slot to play from; valid values are 0, 1, 2, and 3
+     * \return 1 on success, 0 on failure
+     * \see create_load_song
+     * \ingroup create
+     */
 	bool playSong(const unsigned char songNum = 0);
 
 	/*!

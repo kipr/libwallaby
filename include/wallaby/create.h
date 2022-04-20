@@ -434,17 +434,18 @@ VF EXPORT_SYM void create_low_side_drivers(int pwm2, int pwm1, int pwm0);
  * for example, a song {88, 20, 91, 32, 70, 15} will play midi value 88 for 20/64ths 
  * of a second, midi value 91 for 32/64ths of a second, and midi value 70 for
  * 15/64ths of a second.
- * Note that a full list of notes playable on the create is found at
+ * A full list of notes playable on the create is found at
  * https://cdn-shop.adafruit.com/datasheets/create_2_Open_Interface_Spec.pdf on page 34  
- * \param num The song slot to load the song into; valid vals are {0, 1, 2, 3}
+ * \param num The song slot to load the song into; valid values are 0, 1, 2, and 3
  * \return 1 on success, 0 on failure
+ * \note Example use: `unsigned char example_song[] = {88, 20, 91, 32, 70, 15}; create_load_song(example_song, 0);`
  * \ingroup create
  */
 VF EXPORT_SYM int create_load_song(const unsigned char* song, unsigned char num);
 
 /*!
  * Plays a song that has been loaded. Use create_load_song first.
- * \param num The song slot to play from; valid values are {0, 1, 2, 3}
+ * \param num The song slot to play from; valid values are 0, 1, 2, and 3
  * \return 1 on success, 0 on failure
  * \see create_load_song
  * \ingroup create

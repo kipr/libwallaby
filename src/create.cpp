@@ -1073,9 +1073,10 @@ void Create::setAngle(const int angle)
 	m_state.angle = angle;
 }
 
-// songNum valid vals are {0, 1, 2, 3}
+// songNum valid vals are 0, 1, 2, and 3
 // song should be an array of numbers
-// for example {88, 20, 91, 32} will play midi value 88 for 20/64ths of a second and
+// for example, a call with unsigned char song[] = {88, 20, 91, 32}
+// will play midi value 88 for 20/64ths of a second and
 // then play midi value 91 for 32/64ths of a second
 // In other words, the first value in a pair will be the midi value of the note
 // the second value in the pair will be the duration (in 64ths of a second) 
@@ -1086,7 +1087,7 @@ bool Create::loadSong(const unsigned char* song, const unsigned char songNum)
 		return false;
 	}
 	unsigned char temp[sizeof(song)/sizeof(song[0]) + 3];
-	temp[0] = 140;  // 140 is the op code
+	temp[0] = OI_SONG;  // OI_SONG (140) is the op code
 	temp[1] = songNum;
 	temp[2] = sizeof(song) / sizeof(song[0]);
 	for (int i = 0; i < sizeof(song) / sizeof(song[0]); i++)
@@ -1095,14 +1096,15 @@ bool Create::loadSong(const unsigned char* song, const unsigned char songNum)
 }
 
 // play a song that has been loaded
-// songNum valid vals are {0, 1, 2, 3}
+// songNum valid values are 0, 1, 2, and 3
 bool Create::playSong(const unsigned char songNum)
 {
 	if (!isConnected()){
 		std::cout << "Not connected. Please connect before trying to play a song." << std::endl;
 		return false;
 	}
-	unsigned char temp[] = {141, songNum};  // 141 is the op code, songNum is the song to play
+	// OI_PLAY_SONG (141) is the op code, songNum is the song to play
+	unsigned char temp[] = {OI_PLAY_SONG, songNum};
 	return write(temp, sizeof(temp)/sizeof(temp[0]));
 }
 
