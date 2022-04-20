@@ -1,0 +1,7 @@
+#!/bin/bash
+
+cd ./build
+sudo make install
+cd ..
+sudo cp -r ./doc /home/pi/harrogate/shared/client
+sudo cp -r ./doc /home/pi/harrogate/public
