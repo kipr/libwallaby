@@ -450,13 +450,15 @@ public:
      * of a second, midi value 91 for 32/64ths of a second, and midi value 70 for
      * 15/64ths of a second.
      * A full list of notes playable on the create is found at
-     * https://cdn-shop.adafruit.com/datasheets/create_2_Open_Interface_Spec.pdf on page 34  
+     * https://cdn-shop.adafruit.com/datasheets/create_2_Open_Interface_Spec.pdf on page 34
+ 	 * \param length The length of the song. It is how many notes are in the song, not
+  	 * how many items are in your song array.
      * \param num The song slot to load the song into; valid values are 0, 1, 2, and 3
      * \return 1 on success, 0 on failure
-     * \note Example use: `unsigned char example_song[] = {88, 20, 91, 32, 70, 15}; create_load_song(example_song, 0);`
+     * \note Example use: `unsigned char example_song[] = {88, 20, 91, 32, 70, 15}; create_load_song(example_song, 3, 0);`
      * \ingroup create
      */
-	bool loadSong(const unsigned char* song, const unsigned char songNum = 0);
+	bool loadSong(const unsigned char* song, const unsigned char length, const unsigned char songNum);
 
 	/*!
      * Plays a song that has been loaded. Use create_load_song first.
@@ -465,7 +467,7 @@ public:
      * \see create_load_song
      * \ingroup create
      */
-	bool playSong(const unsigned char songNum = 0);
+	bool playSong(const unsigned char songNum);
 
 	/*!
 	 * The Create class is a singleton, which means that you cannot instantiate it directly.

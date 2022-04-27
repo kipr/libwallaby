@@ -631,12 +631,14 @@ VF EXPORT_SYM void create_low_side_drivers(int pwm2, int pwm1, int pwm0);
  * 15/64ths of a second.
  * A full list of notes playable on the create is found at
  * https://cdn-shop.adafruit.com/datasheets/create_2_Open_Interface_Spec.pdf on page 34  
+ * \param length The length of the song. It is how many notes are in the song, not
+ * how many items are in your song array.
  * \param num The song slot to load the song into; valid values are 0, 1, 2, and 3
  * \return 1 on success, 0 on failure
- * \note Example use: `unsigned char example_song[] = {88, 20, 91, 32, 70, 15}; create_load_song(example_song, 0);`
+ * \note Example use: `unsigned char example_song[] = {88, 20, 91, 32, 70, 15}; create_load_song(example_song, 3, 0);`
  * \ingroup create
  */
-VF EXPORT_SYM int create_load_song(const unsigned char* song, unsigned char num);
+VF EXPORT_SYM int create_load_song(const unsigned char* song, const unsigned char length, const unsigned char num);
 
 /*!
  * Plays a song that has been loaded. Use create_load_song first.
@@ -645,7 +647,7 @@ VF EXPORT_SYM int create_load_song(const unsigned char* song, unsigned char num)
  * \see create_load_song
  * \ingroup create
  */
-VF EXPORT_SYM int create_play_song(unsigned char num);
+VF EXPORT_SYM int create_play_song(const unsigned char num);
 
 /*!
  * \ingroup create
