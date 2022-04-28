@@ -517,11 +517,14 @@ VF EXPORT_SYM int get_create_bay_DI();
 VF EXPORT_SYM int get_create_bay_AI();
 
 /*!
+ * \return The song slot of the current song
  * \ingroup create
  */
 VF EXPORT_SYM int get_create_song_number();
 
 /*!
+ * \return 1 if it the create is playing a song,
+ * 0 if the create isn't playing a song
  * \ingroup create
  */
 VF EXPORT_SYM int get_create_song_playing();

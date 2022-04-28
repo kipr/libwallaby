@@ -229,6 +229,9 @@ namespace CreateSensors
   class LightBumpRightSignal;
   class LightBumpCenterLeftSignal;
   class LightBumpCenterRightSignal;
+
+  class SongPlaying;
+  class SongNumber;
 }
 
 /*!
@@ -438,6 +441,9 @@ public:
   Sensor<unsigned short> *lightBumpFrontRightSignal() const;
   Sensor<unsigned short> *lightBumpRightSignal() const;
 
+  Sensor<unsigned char> *songPlaying() const;
+  Sensor<unsigned char> *songNumber() const;
+
 	void setRefreshRate(const unsigned short& refreshRate);
 	const unsigned short& refreshRate() const;
 
@@ -635,6 +641,9 @@ private:
 	mutable CreateSensors::WheelDropLeft *m_wheelDropLeft;
 	mutable CreateSensors::WheelDropRight *m_wheelDropRight;
 	mutable CreateSensors::WheelDropCaster *m_wheelDropCaster;
+
+	mutable CreateSensors::SongPlaying *m_songPlaying;
+	mutable CreateSensors::SongNumber *m_songNumber;
 
 	size_t m_i;
 	CreateScript m_script;

@@ -318,14 +318,12 @@ int get_create_bay_AI()
 
 int get_create_song_number()
 {
-  THIS_IS_NYI
-	return 0;
+    return Create::instance()->songNumber()->value();
 }
 
 int get_create_song_playing()
 {
-  THIS_IS_NYI
-	return 0;
+  	return Create::instance()->songPlaying()->value();
 }
 
 int get_create_number_of_stream_packets()
