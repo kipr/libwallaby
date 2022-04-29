@@ -318,14 +318,12 @@ int get_create_bay_AI()
 
 int get_create_song_number()
 {
-  THIS_IS_NYI
-	return 0;
+    return Create::instance()->songNumber()->value();
 }
 
 int get_create_song_playing()
 {
-  THIS_IS_NYI
-	return 0;
+  	return Create::instance()->songPlaying()->value();
 }
 
 int get_create_number_of_stream_packets()
@@ -438,14 +436,14 @@ void create_low_side_drivers(int pwm2, int pwm1, int pwm0)
   THIS_IS_NYI
 }
 
-void create_load_song(int num)
+int create_load_song(const unsigned char* song, const unsigned char length, const unsigned char num)
 {
-  THIS_IS_NYI
+  return Create::instance()->loadSong(song, length, num) ? 1 : 0;
 }
 
-void create_play_song(int num)
+int create_play_song(const unsigned char num)
 {
-  THIS_IS_NYI
+  return Create::instance()->playSong(num) ? 1 : 0;
 }
 
 int create_read_block(char *data, int count)

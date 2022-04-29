@@ -322,11 +322,14 @@ VF EXPORT_SYM int get_create_bay_DI();
 VF EXPORT_SYM int get_create_bay_AI();
 
 /*!
+ * \return The song slot of the current song
  * \ingroup create
  */
 VF EXPORT_SYM int get_create_song_number();
 
 /*!
+ * \return 1 if it the create is playing a song,
+ * 0 if the create isn't playing a song
  * \ingroup create
  */
 VF EXPORT_SYM int get_create_song_playing();
@@ -427,14 +430,32 @@ VF EXPORT_SYM void create_pwm_low_side_drivers(int pwm2, int pwm1, int pwm0);
 VF EXPORT_SYM void create_low_side_drivers(int pwm2, int pwm1, int pwm0);
 
 /*!
+ * Loads a song for playing on the create
+ * \param song It should be an array of unsigned chars (positive integers 0-255)
+ * The first value in a pair will be the midi value of the note
+ * the second value in the pair will be the duration (in 64ths of a second)
+ * for example, a song {88, 20, 91, 32, 70, 15} will play midi value 88 for 20/64ths 
+ * of a second, midi value 91 for 32/64ths of a second, and midi value 70 for
+ * 15/64ths of a second.
+ * A full list of notes playable on the create is found at
+ * https://cdn-shop.adafruit.com/datasheets/create_2_Open_Interface_Spec.pdf on page 34
+ * \param length The length of the song. It is how many notes are in the song, not
+ * how many items are in your song array.
+ * \param num The song slot to load the song into; valid values are 0, 1, 2, and 3
+ * \return 1 on success, 0 on failure
+ * \note Example use: `unsigned char example_song[] = {88, 20, 91, 32, 70, 15}; create_load_song(example_song, 3, 0);`
  * \ingroup create
  */
-VF EXPORT_SYM void create_load_song(int num);
+VF EXPORT_SYM int create_load_song(const unsigned char* song, const unsigned char length, const unsigned char num);
 
 /*!
+ * Plays a song that has been loaded. Use create_load_song first.
+ * \param num The song slot to play from; valid values are 0, 1, 2, and 3
+ * \return 1 on success, 0 on failure
+ * \see create_load_song
  * \ingroup create
  */
-VF EXPORT_SYM void create_play_song(int num);
+VF EXPORT_SYM int create_play_song(const unsigned char num);
 
 /*!
  * \ingroup create
