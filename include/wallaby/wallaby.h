@@ -31,6 +31,7 @@
 #include "motors.h"
 #include "robot.h"
 #include "servo.h"
+#include "tello.h"
 #include "thread.h"
 #include "util.h"
 #include "wait_for.h"
