@@ -112,8 +112,6 @@ Wallaby::Wallaby()
 
 Wallaby::~Wallaby()
 {
-	std::cout << "~Wallaby()" << std::endl;
-
 	// happens automatically before destructor call: this->atExit();
 	atExit(false);
 
