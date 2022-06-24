@@ -337,11 +337,15 @@ extern "C"
   VF EXPORT_SYM int get_create_infrared();
 
   /*!
+   * Returns whether the create's advance button has a value.
+   * 1 means that it has a value, 0 means that it doesn't
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_advance_button();
 
   /*!
+   * Returns whether the create's play button has a value.
+   * 1 means that it has a value, 0 means that it doesn't
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_play_button();
