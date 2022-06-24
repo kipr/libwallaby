@@ -5,7 +5,6 @@
  *      Author: Joshua Southerland
  */
 
-
 #include "wallaby/create.h"
 #include "wallaby/create.hpp"
 #include "nyi.h"
@@ -14,7 +13,8 @@
 
 int create_connect()
 {
-	while(!create_connect_once());
+	while (!create_connect_once())
+		;
 	return 0;
 }
 
@@ -43,29 +43,24 @@ void create_full()
 	Create::instance()->setFullMode();
 }
 
-void create_start()
-{
-  THIS_IS_NYI
-}
-
 void create_spot()
 {
-  THIS_IS_NYI
+	THIS_IS_NYI
 }
 
 void create_cover()
 {
-  THIS_IS_NYI
+	THIS_IS_NYI
 }
 
 void create_demo(int d)
 {
-  THIS_IS_NYI
+	THIS_IS_NYI
 }
 
 void create_cover_dock()
 {
-  THIS_IS_NYI
+	THIS_IS_NYI
 }
 
 int get_create_mode()
@@ -125,70 +120,62 @@ int get_create_rcliff()
 
 int get_create_llightbump()
 {
-  return Create::instance()->lightBumpLeft()->value() ? 1 : 0;
+	return Create::instance()->lightBumpLeft()->value() ? 1 : 0;
 }
-
 
 int get_create_lflightbump()
 {
-  return Create::instance()->lightBumpFrontLeft()->value() ? 1 : 0;
+	return Create::instance()->lightBumpFrontLeft()->value() ? 1 : 0;
 }
-
 
 int get_create_lclightbump()
 {
-  return Create::instance()->lightBumpCenterLeft()->value() ? 1 : 0;
+	return Create::instance()->lightBumpCenterLeft()->value() ? 1 : 0;
 }
 
 int get_create_rlightbump()
 {
-  return Create::instance()->lightBumpRight()->value() ? 1 : 0;
+	return Create::instance()->lightBumpRight()->value() ? 1 : 0;
 }
-
 
 int get_create_rflightbump()
 {
-  return Create::instance()->lightBumpFrontRight()->value() ? 1 : 0;
+	return Create::instance()->lightBumpFrontRight()->value() ? 1 : 0;
 }
-
 
 int get_create_rclightbump()
 {
-  return Create::instance()->lightBumpCenterRight()->value() ? 1 : 0;
+	return Create::instance()->lightBumpCenterRight()->value() ? 1 : 0;
 }
 
 int get_create_llightbump_amt()
 {
-  return Create::instance()->lightBumpLeftSignal()->value();
+	return Create::instance()->lightBumpLeftSignal()->value();
 }
-
 
 int get_create_lflightbump_amt()
 {
-  return Create::instance()->lightBumpFrontLeftSignal()->value();
+	return Create::instance()->lightBumpFrontLeftSignal()->value();
 }
-
 
 int get_create_lclightbump_amt()
 {
-  return Create::instance()->lightBumpCenterLeftSignal()->value();
+	return Create::instance()->lightBumpCenterLeftSignal()->value();
 }
 
 int get_create_rlightbump_amt()
 {
-  return Create::instance()->lightBumpRightSignal()->value();
+	return Create::instance()->lightBumpRightSignal()->value();
 }
-
 
 int get_create_rflightbump_amt()
 {
-  return Create::instance()->lightBumpFrontRightSignal()->value();
+	return Create::instance()->lightBumpFrontRightSignal()->value();
 }
-
 
 int get_create_rclightbump_amt()
 {
-  return Create::instance()->lightBumpCenterRightSignal()->value();
+	return Create::instance()->lightBumpCenterRightSignal()->value();
 }
 
 int get_create_vwall()
@@ -198,8 +185,8 @@ int get_create_vwall()
 
 int get_create_overcurrents()
 {
-  THIS_IS_NYI
-  return 0;
+	THIS_IS_NYI
+	return 0;
 }
 
 int get_create_infrared()
@@ -254,14 +241,14 @@ int get_create_battery_charging_state()
 
 int get_create_battery_voltage()
 {
-  THIS_IS_NYI
-  return 0;
+	THIS_IS_NYI
+	return 0;
 }
 
 int get_create_battery_current()
 {
-  THIS_IS_NYI
-  return 0;
+	THIS_IS_NYI
+	return 0;
 }
 
 int get_create_battery_temp()
@@ -306,64 +293,64 @@ int get_create_rcliff_amt()
 
 int get_create_bay_DI()
 {
-  THIS_IS_NYI
+	THIS_IS_NYI
 	return 0;
 }
 
 int get_create_bay_AI()
 {
-  THIS_IS_NYI
+	THIS_IS_NYI
 	return 0;
 }
 
 int get_create_song_number()
 {
-    return Create::instance()->songNumber()->value();
+	return Create::instance()->songNumber()->value();
 }
 
 int get_create_song_playing()
 {
-  	return Create::instance()->songPlaying()->value();
+	return Create::instance()->songPlaying()->value();
 }
 
 int get_create_number_of_stream_packets()
 {
-  THIS_IS_NYI
+	THIS_IS_NYI
 	return 0;
 }
 
 int get_create_requested_velocity()
 {
-  THIS_IS_NYI
+	THIS_IS_NYI
 	return 0;
 }
 
 int get_create_requested_radius()
 {
-  THIS_IS_NYI
+	THIS_IS_NYI
 	return 0;
 }
 
 int get_create_requested_right_velocity()
 {
-  THIS_IS_NYI
+	THIS_IS_NYI
 	return 0;
 }
 
 int get_create_requested_left_velocity()
 {
-  THIS_IS_NYI
+	THIS_IS_NYI
 	return 0;
 }
 
 void set_create_baud_rate(const enum BaudRate baudRate)
 {
-  Create::instance()->setDefaultBaudRate(static_cast<Create::BaudRate>(baudRate));
+	Create::instance()->setDefaultBaudRate(static_cast<Create::BaudRate>(baudRate));
 }
 
 enum BaudRate get_create_baud_rate()
 {
-  return static_cast<BaudRate>(Create::instance()->defaultBaudRate());
+	return static_cast<BaudRate>(Create::instance()->defaultBaudRate());
 }
 
 void create_stop()
@@ -408,42 +395,42 @@ int _create_get_raw_encoders(long *lenc, long *renc)
 
 void create_advance_led(int on)
 {
-  THIS_IS_NYI
+	THIS_IS_NYI
 }
 
 void create_play_led(int on)
 {
-  THIS_IS_NYI
+	THIS_IS_NYI
 }
 
 void create_power_led(int color, int brightness)
 {
-  THIS_IS_NYI
+	THIS_IS_NYI
 }
 
 void create_digital_output(int bits)
 {
-  THIS_IS_NYI
+	THIS_IS_NYI
 }
 
 void create_pwm_low_side_drivers(int pwm2, int pwm1, int pwm0)
 {
-  THIS_IS_NYI
+	THIS_IS_NYI
 }
 
 void create_low_side_drivers(int pwm2, int pwm1, int pwm0)
 {
-  THIS_IS_NYI
+	THIS_IS_NYI
 }
 
-int create_load_song(const unsigned char* song, const unsigned char length, const unsigned char num)
+int create_load_song(const unsigned char *song, const unsigned char length, const unsigned char num)
 {
-  return Create::instance()->loadSong(song, length, num) ? 1 : 0;
+	return Create::instance()->loadSong(song, length, num) ? 1 : 0;
 }
 
 int create_play_song(const unsigned char num)
 {
-  return Create::instance()->playSong(num) ? 1 : 0;
+	return Create::instance()->playSong(num) ? 1 : 0;
 }
 
 int create_read_block(char *data, int count)
