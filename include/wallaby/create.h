@@ -74,25 +74,25 @@ extern "C"
 
   /*!
    * Starts spot cleaning mode on the roomba.
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM void create_spot();
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM void create_cover();
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM void create_demo(int d);
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM void create_cover_dock();
@@ -135,7 +135,8 @@ extern "C"
   VF EXPORT_SYM int get_create_lwdrop();
 
   /*!
-   * TODO
+   * Returns if the caster wheel has dropped.
+   * 1 is dropped, 0 is not dropped.
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_cwdrop();
@@ -152,7 +153,10 @@ extern "C"
   VF EXPORT_SYM int get_create_rwdrop();
 
   /*!
-   * TODO
+   * Returns whether or not the create's wall sensor has a value.
+   * 1 means that it has a value, 0 means that it doesn't.
+   * DOES NOT return the value of the wall sensor.
+   * \see get_create_wall_amt
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_wall();
@@ -312,31 +316,32 @@ extern "C"
   VF EXPORT_SYM int get_create_rflightbump_amt();
 
   /*!
-   * TODO
+   * Returns the whether the create senses a virtual wall.
+   * 1 means that it senses a virtual wall, 0 means that it
+   * doesn't.
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_vwall();
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_overcurrents();
 
   /*!
-   * TODO
+   * Returns the value returned by the create's infrared
+   * sensor.
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_infrared();
 
   /*!
-   * TODO
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_advance_button();
 
   /*!
-   * TODO
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_play_button();
@@ -394,13 +399,13 @@ extern "C"
   VF EXPORT_SYM int get_create_battery_charging_state();
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_battery_voltage();
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_battery_current();
@@ -425,7 +430,8 @@ extern "C"
   VF EXPORT_SYM int get_create_battery_capacity();
 
   /*!
-   * TODO
+   * Returns the wall signal sensed by the create.
+   * \see get_create_wall
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_wall_amt();
@@ -471,13 +477,13 @@ extern "C"
   VF EXPORT_SYM int get_create_rcliff_amt();
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_bay_DI();
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_bay_AI();
@@ -496,31 +502,31 @@ extern "C"
   VF EXPORT_SYM int get_create_song_playing();
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_number_of_stream_packets();
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_requested_velocity();
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_requested_radius();
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_requested_right_velocity();
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_requested_left_velocity();
@@ -586,43 +592,43 @@ extern "C"
   VF EXPORT_SYM void create_spin_block(int speed, int angle);
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM int _create_get_raw_encoders(long *lenc, long *renc);
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM void create_advance_led(int on);
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM void create_play_led(int on);
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM void create_power_led(int color, int brightness);
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM void create_digital_output(int bits);
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM void create_pwm_low_side_drivers(int pwm2, int pwm1, int pwm0);
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM void create_low_side_drivers(int pwm2, int pwm1, int pwm0);
