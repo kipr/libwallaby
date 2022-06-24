@@ -103,7 +103,7 @@ extern "C"
    * 1 is passive (sensor data, no control),
    * 2 is safe (sensor data, most control),
    * 3 is full (sensor data, full control).
-   * \see create_full create_safe create_passive
+   * \see create_full create_safe create_passive create_stop
    * \returns int
    * \ingroup create
    */
@@ -324,111 +324,160 @@ extern "C"
   VF EXPORT_SYM int get_create_overcurrents();
 
   /*!
+   * TODO
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_infrared();
 
   /*!
+   * TODO
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_advance_button();
 
   /*!
+   * TODO
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_play_button();
 
   /*!
+   * Returns the create's normalized angle. The value
+   * will be between 0 and 360.
+   * \note positive values indicate clockwise turns; negative values indicate counterclockwise turns
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_normalized_angle();
 
   /*!
+   * Sets what the create refers to its current angle as.
+   * This is just a wrapper for set_create_total_angle
+   * \see set_create_total_angle
    * \ingroup create
    */
   VF EXPORT_SYM void set_create_normalized_angle(int angle);
 
   /*!
+   * Returns the create's total angle. This is the total
+   * amount of degrees that the create has turned and
+   * is not necessarily between 0 and 360.
+   * \note positive values indicate clockwise turns; negative values indicate counterclockwise turns
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_total_angle();
 
   /*!
+   * Sets what the create refers to its current angle as.
    * \ingroup create
    */
   VF EXPORT_SYM void set_create_total_angle(int angle);
 
   /*!
+   * Returns the distance, in millimeters, that the roomba has traveled.
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_distance();
 
   /*!
+   * Sets what the create refers to its current distance as.
    * \ingroup create
    */
   VF EXPORT_SYM void set_create_distance(int dist);
 
   /*!
+   * Returns the create's current battery charging state.
+   * 0 means not charging, 1 means reconditioning charging,
+   * 2 means full charging, 3 means trickle charging, 4 means
+   * waiting, and 5 means charging fault condition.
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_battery_charging_state();
 
   /*!
+   * \note NYI
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_battery_voltage();
 
   /*!
+   * \note NYI
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_battery_current();
 
   /*!
+   * Returns the temperature of the roomba in degrees Celsius.
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_battery_temp();
 
   /*!
+   * Returns the create's current charge in milliamp-hours (mAh).
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_battery_charge();
 
   /*!
+   * Returns the estimated capacity of how many milliamp-hours (mAh)
+   * the create's battery can hold.
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_battery_capacity();
 
   /*!
+   * TODO
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_wall_amt();
 
   /*!
+   * Returns the value measured by the left-most
+   * cliff sensor.
+   * \note For line following purposes, this can be treated like
+   * a tophat sensor value. Lower values often indicate black, higher
+   * values often indicate white.
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_lcliff_amt();
 
   /*!
+   * Returns the value measured by the left-front
+   * cliff sensor.
+   * \note For line following purposes, this can be treated like
+   * a tophat sensor value. Lower values often indicate black, higher
+   * values often indicate white.
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_lfcliff_amt();
 
   /*!
+   * Returns the value measured by the right-front
+   * cliff sensor.
+   * \note For line following purposes, this can be treated like
+   * a tophat sensor value. Lower values often indicate black, higher
+   * values often indicate white.
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_rfcliff_amt();
 
   /*!
+   * Returns the value measured by the right-most
+   * cliff sensor.
+   * \note For line following purposes, this can be treated like
+   * a tophat sensor value. Lower values often indicate black, higher
+   * values often indicate white.
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_rcliff_amt();
 
   /*!
+   * \note NYI
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_bay_DI();
 
   /*!
+   * \note NYI
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_bay_AI();
@@ -447,96 +496,133 @@ extern "C"
   VF EXPORT_SYM int get_create_song_playing();
 
   /*!
+   * \note NYI
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_number_of_stream_packets();
 
   /*!
+   * \note NYI
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_requested_velocity();
 
   /*!
+   * \note NYI
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_requested_radius();
 
   /*!
+   * \note NYI
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_requested_right_velocity();
 
   /*!
+   * \note NYI
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_requested_left_velocity();
 
   /*!
+   * Sets the create connection mode to off. No sensor data
+   * will be available, and the create will not respond to
+   * movement commands.
    * \ingroup create
    */
   VF EXPORT_SYM void create_stop();
 
   /*!
+   * Drive at the requested speed in an arc with the provided
+   * radius.
+   * \param speed The speed (in mm/s) to drive at. Range is -500 to 500.
+   * \param radius The radius (in mm) of the arc to drive through. Range is
+   * -2000 to 2000.
    * \ingroup create
    */
   VF EXPORT_SYM void create_drive(int speed, int radius);
 
   /*!
+   * Drive straight at the requested speed.
+   * \param speed The speed (in mm/s) to drive at. Range is -500 to 500.
    * \ingroup create
    */
   VF EXPORT_SYM void create_drive_straight(int speed);
 
   /*!
+   * Spin clockwise at the requested speed. Spins in place.
+   * \param speed The speed (in mm/s) to drive at. Range is -500 to 500.
+   * \note negative speeds will result in spinning counter-clockwise
    * \ingroup create
    */
   VF EXPORT_SYM void create_spin_CW(int speed);
 
   /*!
+   * Spin counter-clockwise at the requested speed. Spins in place.
+   * \param speed The speed (in mm/s) to drive at. Range is -500 to 500.
+   * \note negative speeds will result in spinning clockwise
    * \ingroup create
    */
   VF EXPORT_SYM void create_spin_CCW(int speed);
 
   /*!
+   * Drive the create at the provided left wheel speed and right wheel speed.
+   * \param l_speed The speed (in mm/s) to drive the left wheel at. Range is -500 to 500
+   * \param r_speed The speed (in mm/s) to drive the right wheel at. Range is -500 to 500
    * \ingroup create
    */
   VF EXPORT_SYM void create_drive_direct(int l_speed, int r_speed);
 
   /*!
+   * Turns the create the requested number of degrees at the requested speed.
+   * \param speed The speed (in mm/s) to turn at. Range is -500 to 500
+   * \param angle The angle (in degrees) to turn.
+   * \note This is a blocking function, so you DO NOT need an msleep after it.
+   * It already sleeps for the time that it needs to execute the turn and
+   * doesn't need extra msleeps.
    * \ingroup create
    */
   VF EXPORT_SYM void create_spin_block(int speed, int angle);
 
   /*!
+   * \note NYI
    * \ingroup create
    */
   VF EXPORT_SYM int _create_get_raw_encoders(long *lenc, long *renc);
 
   /*!
+   * \note NYI
    * \ingroup create
    */
   VF EXPORT_SYM void create_advance_led(int on);
 
   /*!
+   * \note NYI
    * \ingroup create
    */
   VF EXPORT_SYM void create_play_led(int on);
 
   /*!
+   * \note NYI
    * \ingroup create
    */
   VF EXPORT_SYM void create_power_led(int color, int brightness);
 
   /*!
+   * \note NYI
    * \ingroup create
    */
   VF EXPORT_SYM void create_digital_output(int bits);
 
   /*!
+   * \note NYI
    * \ingroup create
    */
   VF EXPORT_SYM void create_pwm_low_side_drivers(int pwm2, int pwm1, int pwm0);
 
   /*!
+   * \note NYI
    * \ingroup create
    */
   VF EXPORT_SYM void create_low_side_drivers(int pwm2, int pwm1, int pwm0);
@@ -570,16 +656,26 @@ extern "C"
   VF EXPORT_SYM int create_play_song(const unsigned char num);
 
   /*!
+   * Reads sensor data from the create.
+   * \param data - This is where the read sensor data is stored
+   * \param count - How many bytes to read from the create.
+   * \returns 1 on success, 0 on failure.
    * \ingroup create
    */
   VF EXPORT_SYM int create_read_block(char *data, int count);
 
   /*!
+   * Write a byte to the create. This is used to send commands directly
+   * to the create without using the functions provided in this library.
+   * \note If you want to directly send bytes to the create, consider checking out
+   * the actual create oi specifications: https://cdn-shop.adafruit.com/datasheets/create_2_Open_Interface_Spec.pdf
    * \ingroup create
    */
   VF EXPORT_SYM void create_write_byte(char byte);
 
   /*!
+   * Flushes commands to the create.
+   * \note This library already automatically flushes commands to the create
    * \ingroup create
    */
   VF EXPORT_SYM void create_clear_serial_buffer();
@@ -591,11 +687,15 @@ extern "C"
   };
 
   /*!
+   * Returns the baud rate of the create.
+   * \note The baud rate is how many times a second the create updates its sensors and
+   * receives commands.
    * \ingroup create
    */
   VF EXPORT_SYM enum BaudRate get_create_baud_rate();
 
   /*!
+   * Sets the create's baud rate to the provided baud rate.
    * \ingroup create
    */
   VF EXPORT_SYM void set_create_baud_rate(const enum BaudRate baudRate);

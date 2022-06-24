@@ -390,6 +390,7 @@ void create_spin_block(int speed, int angle)
 
 int _create_get_raw_encoders(long *lenc, long *renc)
 {
+	THIS_IS_NYI
 	return 0;
 }
 
