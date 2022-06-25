@@ -273,7 +273,7 @@ make & enjoy!
 /* Defaults - If your board can do better, set it here.  Set for the most common type inputs. */
 #define DEFAULT_V4L_WIDTH  640
 #define DEFAULT_V4L_HEIGHT 480
-#define DEFAULT_V4L_FPS 15 
+#define DEFAULT_V4L_FPS  30
 
 #define MAX_CAMERAS 8
 

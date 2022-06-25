@@ -20,21 +20,16 @@ using namespace Private;
 
 int camera_open()
 {  
-  return camera_open_at_res(LOW_RES);
+  return camera_open_at_res(HIGH_RES);
 }
 
 int camera_open_black()
 {
-	return camera_open_device_model_at_res(0, BLACK_2017, LOW_RES);
+	return camera_open_device_model_at_res(0, BLACK_2017, HIGH_RES);
 }
 
 int camera_open_at_res(enum Resolution res)
 {
-  if(res != LOW_RES) {
-    WARN("only LOW_RES is currently supported");
-    return 0;
-  }
-  
   return camera_open_device(0, res);
 }
 
