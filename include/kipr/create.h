@@ -74,25 +74,25 @@ extern "C"
 
   /*!
    * Starts spot cleaning mode on the roomba.
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM void create_spot();
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM void create_cover();
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM void create_demo(int d);
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM void create_cover_dock();
@@ -135,7 +135,8 @@ extern "C"
   VF EXPORT_SYM int get_create_lwdrop();
 
   /*!
-   * TODO
+   * Returns if the caster wheel has dropped.
+   * 1 is dropped, 0 is not dropped.
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_cwdrop();
@@ -152,7 +153,10 @@ extern "C"
   VF EXPORT_SYM int get_create_rwdrop();
 
   /*!
-   * TODO
+   * Returns whether or not the create's wall sensor has a value.
+   * 1 means that it has a value, 0 means that it doesn't.
+   * DOES NOT return the value of the wall sensor.
+   * \see get_create_wall_amt
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_wall();
@@ -312,31 +316,36 @@ extern "C"
   VF EXPORT_SYM int get_create_rflightbump_amt();
 
   /*!
-   * TODO
+   * Returns the whether the create senses a virtual wall.
+   * 1 means that it senses a virtual wall, 0 means that it
+   * doesn't.
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_vwall();
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_overcurrents();
 
   /*!
-   * TODO
+   * Returns the value returned by the create's infrared
+   * sensor.
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_infrared();
 
   /*!
-   * TODO
+   * Returns whether the create's advance button has a value.
+   * 1 means that it has a value, 0 means that it doesn't
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_advance_button();
 
   /*!
-   * TODO
+   * Returns whether the create's play button has a value.
+   * 1 means that it has a value, 0 means that it doesn't
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_play_button();
@@ -394,13 +403,13 @@ extern "C"
   VF EXPORT_SYM int get_create_battery_charging_state();
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_battery_voltage();
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_battery_current();
@@ -425,7 +434,8 @@ extern "C"
   VF EXPORT_SYM int get_create_battery_capacity();
 
   /*!
-   * TODO
+   * Returns the wall signal sensed by the create.
+   * \see get_create_wall
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_wall_amt();
@@ -471,13 +481,13 @@ extern "C"
   VF EXPORT_SYM int get_create_rcliff_amt();
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_bay_DI();
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_bay_AI();
@@ -496,31 +506,31 @@ extern "C"
   VF EXPORT_SYM int get_create_song_playing();
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_number_of_stream_packets();
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_requested_velocity();
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_requested_radius();
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_requested_right_velocity();
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM int get_create_requested_left_velocity();
@@ -586,43 +596,43 @@ extern "C"
   VF EXPORT_SYM void create_spin_block(int speed, int angle);
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM int _create_get_raw_encoders(long *lenc, long *renc);
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM void create_advance_led(int on);
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM void create_play_led(int on);
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM void create_power_led(int color, int brightness);
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM void create_digital_output(int bits);
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM void create_pwm_low_side_drivers(int pwm2, int pwm1, int pwm0);
 
   /*!
-   * \note NYI
+   * \note Not yet implemented
    * \ingroup create
    */
   VF EXPORT_SYM void create_low_side_drivers(int pwm2, int pwm1, int pwm0);
@@ -639,21 +649,21 @@ extern "C"
    * https://cdn-shop.adafruit.com/datasheets/create_2_Open_Interface_Spec.pdf on page 34
    * \param length The length of the song. It is how many notes are in the song, not
    * how many items are in your song array.
-   * \param num The song slot to load the song into; valid values are 0, 1, 2, and 3
+   * \param songNum The song slot to load the song into; valid values are 0, 1, 2, and 3
    * \return 1 on success, 0 on failure
    * \note Example use: `unsigned char example_song[] = {88, 20, 91, 32, 70, 15}; create_load_song(example_song, 3, 0);`
    * \ingroup create
    */
-  VF EXPORT_SYM int create_load_song(const unsigned char *song, const unsigned char length, const unsigned char num);
+  VF EXPORT_SYM int create_load_song(const unsigned char *song, const unsigned char length, const unsigned char songNum);
 
   /*!
    * Plays a song that has been loaded. Use create_load_song first.
-   * \param num The song slot to play from; valid values are 0, 1, 2, and 3
+   * \param songNum The song slot to play from; valid values are 0, 1, 2, and 3
    * \return 1 on success, 0 on failure
    * \see create_load_song
    * \ingroup create
    */
-  VF EXPORT_SYM int create_play_song(const unsigned char num);
+  VF EXPORT_SYM int create_play_song(const unsigned char songNum);
 
   /*!
    * Reads sensor data from the create.
