@@ -13,13 +13,6 @@
 //#include <wallaby/util.h>
 #include <wallaby/tello.h>
 
-#define BUFSIZE 1024
-#define TELLO_LENGTH 13
-
-#define TELLO_CMD_PORT 8889
-#define TELLO_STATE_PORT 8890
-#define TELLO_VIDEO_PORT 11111
-
 static int tello_cmd_socket;
 static struct sockaddr_in tello_cmd_addr;
 
@@ -28,10 +21,10 @@ void swarm_server();
 int main(void)
 {
 	int result;
-	char buf[BUFSIZE];
+	char buf[TELLO_BUFSIZE];
 	int len;
 	int n;
-	char * tellos;
+	struct tello_ssid * tellos;
 	int send_result;
 
 	if( wpa_sup_connect() == -1)
@@ -40,14 +33,16 @@ int main(void)
 		return -1;
 	}
 	tellos = tellos_find();
+	n = 0;
 
-	if(tellos == NULL)
-		return;
-	else
-		printf ("Tellos: %s\n", tellos);
+	while(tellos[n].ssid[0] != '\0')
+	{
+		printf ("Tellos: %s\n", tellos[n].ssid);
+		n++;
+	}
 
 	// connect to the first tello on the list
-	tello_connect(tellos);
+	tello_connect(tellos[0].ssid);
 
 	do 
 	{	

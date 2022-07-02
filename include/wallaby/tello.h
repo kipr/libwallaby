@@ -6,7 +6,15 @@
 extern "C" {
 #endif
 
-char * tellos_find();
+#define TELLO_SSID_LENGTH 13
+#define TELLO_BUFSIZE 1024
+#define TELLO_CMD_PORT 8889
+#define TELLO_STATE_PORT 8890
+#define TELLO_VIDEO_PORT 11111
+
+struct tello_ssid { char ssid[TELLO_SSID_LENGTH]; };
+
+struct tello_ssid * tellos_find();
 
 int tello_connect(char const * tello);
 

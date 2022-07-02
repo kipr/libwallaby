@@ -13,23 +13,16 @@
 #include <wallaby/util.h>
 #include <wallaby/tello.h>
 
-#define BUFSIZE 1024
-#define TELLO_LENGTH 13
-
-#define TELLO_CMD_PORT 8889
-#define TELLO_STATE_PORT 8890
-#define TELLO_VIDEO_PORT 11111
-
 static int tello_cmd_socket;
 static struct sockaddr_in tello_cmd_addr;
 
 int main(void)
 {
 	int result;
-	char buf[BUFSIZE];
+	char buf[TELLO_BUFSIZE];
 	int len;
 	int n;
-	char * tellos;
+	struct tello_ssid * tellos;
 	int send_result;
 
 	if( wpa_sup_connect() == -1)
@@ -39,13 +32,17 @@ int main(void)
 	}
 	tellos = tellos_find();
 
-	if(tellos == NULL)
-		return;
-	else
-		printf ("Tellos: %s\n", tellos);
+	printf("List of Tellos:\n");
+	n = 0;
+
+	while(tellos[n].ssid[0] != '\0')
+	{
+		printf("Tellos: %s\n", tellos[n].ssid);
+		n++;
+	}
 
 	// connect to the first tello on the list
-	tello_connect(tellos);
+	tello_connect(tellos[0].ssid);
 
 	//wpa_cmd ("LIST_NETWORKS", buf);
 
@@ -62,35 +59,35 @@ int main(void)
 	camera_open_device_model_at_res(0, TELLO, HIGH_RES);
 
 	printf("load config\n");fflush(NULL);
-    int ret = camera_load_config("1");
-    if (ret == 1) printf("...success\n");
-fflush(NULL);
+
+	int ret = camera_load_config("1");
+	if (ret == 1) printf("...success\n");
 	printf("waiting for camera_update\n");fflush(NULL);
-    camera_update();
-    printf("Cam width x height:  %d x %d\n", get_camera_width(), get_camera_height());fflush(NULL);
+	camera_update();
+	printf("Cam width x height:  %d x %d\n",
+		get_camera_width(), get_camera_height());fflush(NULL);
 
-    printf("Num channels = %d\n", get_channel_count());
-fflush(NULL);
+	printf("Num channels = %d\n", get_channel_count());
 
-    int i;
-    double start = seconds();
-    const int num_imgs = 600;
-    for (i = 0; i < num_imgs; ++i)
-    {
-       camera_update();
-       int x = get_object_count(0) > 0 ? get_object_center_x(0,0) : -1;
-       int y = get_object_count(0) > 0 ? get_object_center_y(0,0) : -1;
-       printf("%f objs: %d  (%d,%d)\n", seconds(), get_object_count(0), x, y);
-       fflush(NULL);
-       // printf("%f\n", seconds());
-    }
-    double stop = seconds();
+	int i;
+	double start = seconds();
+	const int num_imgs = 600;
 
-    printf("%f fps\n", ((double)num_imgs/(stop-start)));
+	for (i = 0; i < num_imgs; ++i)
+	{
+		camera_update();
+		int x = get_object_count(0) > 0 ? get_object_center_x(0,0) : -1;
+		int y = get_object_count(0) > 0 ? get_object_center_y(0,0) : -1;
+		printf("%f objs: %d  (%d,%d)\n", seconds(), get_object_count(0), x, y);
+		fflush(NULL);
+	}
+	double stop = seconds();
 
-    printf("Camera close\n");
-    camera_close();
-    close (tello_cmd_socket);
-    return 0;
+	printf("%f fps\n", ((double)num_imgs/(stop-start)));
+
+	printf("Camera close\n");
+	camera_close();
+	close (tello_cmd_socket);
+	return 0;
 }
 

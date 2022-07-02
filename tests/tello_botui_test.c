@@ -11,23 +11,16 @@
 
 #include <wallaby/tello.h>
 
-#define BUFSIZE 1024
-#define TELLO_LENGTH 13
-
-#define TELLO_CMD_PORT 8889
-#define TELLO_STATE_PORT 8890
-#define TELLO_VIDEO_PORT 11111
-
 static int tello_cmd_socket;
 static struct sockaddr_in tello_cmd_addr;
 
 int main(void)
 {
 	int result;
-	char buf[BUFSIZE];
+	char buf[TELLO_BUFSIZE];
 	int len;
 	int n;
-	char * tellos;
+	struct tello_ssid * tellos;
 	int send_result;
 
 	if (wpa_sup_connect() == -1)
@@ -39,9 +32,20 @@ int main(void)
 		printf ("wpa_supplicant opened\n");
 
 	tellos = tellos_find();
-	printf ("Tellos: %s\n", tellos);
 
-	tello_connect(tellos);
+	n = 0;
+	printf("List of Tellos\n");
+
+	while(tellos[n].ssid[0] != '\0')
+	{
+		printf ("Tellos: %s\n", tellos[n].ssid);
+		n++;
+	}
+	fflush(NULL);
+
+	// for this example select only the first Tello in the list
+
+	tello_connect(tellos[0].ssid);
 
 	if ( (tello_cmd_socket = socket(AF_INET, SOCK_DGRAM, 0)) < 0 )
 	{

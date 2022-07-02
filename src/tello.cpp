@@ -14,15 +14,9 @@
 #include <wallaby/tello.h>
 
 #define CONFIG_CTRL_IFACE_DIR "/var/run/wpa_supplicant/wlan0"
-#define BUFSIZE 1024
-#define TELLO_LENGTH 13
 
 static struct wpa_ctrl * ctrl_conn;
 static struct wpa_ctrl * mon_conn;
-
-#define TELLO_CMD_PORT 8889
-#define TELLO_STATE_PORT 8890
-#define TELLO_VIDEO_PORT 11111
 
 static int tello_cmd_socket;
 static struct sockaddr_in tello_cmd_addr;
@@ -41,15 +35,16 @@ int wpa_cmd(char const * cmd, char * buf)
 	
 	printf("wpa_cmd: %s\n", cmd);
 	cmd_len = (size_t)strlen(cmd);
-	printf("cmd_len %d\n", cmd_len);
-	len = BUFSIZE;
+	//printf("cmd_len %d\n", cmd_len);
+	len = TELLO_BUFSIZE;
 	result = wpa_ctrl_request(ctrl_conn,
 			cmd,
 			cmd_len,
 			buf,
 			&len,
 			wpa_cli_msg_cb);
-	printf("len %d\n", len);
+
+	//printf("len %d\n", len);
 	buf[len] = '\0';
 	printf("%s\n", buf);
 
@@ -58,16 +53,25 @@ int wpa_cmd(char const * cmd, char * buf)
 	return result;
 }
 
-char * tellos_find(void)
+struct tello_ssid * tellos_find(void)
 {
 	char * tello = NULL;
 	char * tello_found;
-	char buf[BUFSIZE];
+	char buf[TELLO_BUFSIZE];
+
+	struct tello_ssid * tello_ssid;
+
+	char * ssid_found = NULL;
+	uint wpa_index;
+
+	char bss_cmd[12];
 
 	struct timespec sleep;
         struct timespec sleep_left;
 
-	printf("looking for Tellos\n");
+	printf("tello_find - looking for Tellos\n");
+
+	tello_ssid = (struct tello_ssid *) calloc(1, sizeof(struct tello_ssid));
 
 	// scan the network
 	// note: use the even network to speed it up
@@ -78,30 +82,50 @@ char * tellos_find(void)
         sleep.tv_sec = 2;
         sleep.tv_nsec = 0;
         nanosleep(&sleep, &sleep_left);
+	wpa_index = 0;
 
-        wpa_cmd ("SCAN_RESULTS", buf);
+	sprintf(bss_cmd, "BSS RANGE=ALL MASK=%x", WPA_BSS_MASK_SSID);
 
-        tello_found = strstr(buf, "TELLO-");
+	wpa_cmd(bss_cmd, buf);
+	// see if there is an ssid
+	ssid_found = strstr(buf, "ssid");
 
-        if (tello_found != NULL)
-        {
-		tello = (char *) malloc(TELLO_LENGTH);
-                strncpy(tello, tello_found, 12);
-                tello[12] = '\0';
-                printf("tello found - %s\n", tello);
-		return tello;
-        }
-        else
-                printf("tello not found\n");
+	if (ssid_found == NULL)
+	{
+		printf("tellos_find - no ssids found\n");
+		return tello_ssid;    // we are done
+	}
 
-	return tello;
+while(1)
+{
+	int tello_size;
+	tello_found = strstr(ssid_found, "TELLO-");
+
+	if(tello_found == NULL)
+		break;
+
+	tello_size = strnlen(tello_found, TELLO_SSID_LENGTH);
+	if( tello_size > TELLO_SSID_LENGTH - 1)
+		tello_size = TELLO_SSID_LENGTH - 1;
+
+        strncpy(tello_ssid[wpa_index].ssid, tello_found, tello_size);
+	tello_ssid[wpa_index].ssid[tello_size] = '\0';
+	printf("tello found - %s\n", tello_ssid[wpa_index].ssid);
+	wpa_index++;
+
+	tello_ssid = (struct tello_ssid *) realloc((void *) tello_ssid, sizeof(struct tello_ssid)*(wpa_index + 1));
+	memset(&tello_ssid[wpa_index], 0, sizeof(struct tello_ssid));
+
+	ssid_found = tello_found + tello_size;
+}
+	return tello_ssid;
 }
 
 #define SSID_CMD_SIZE 50
 
 int tello_connect(char const * tello)
 {
-	char buf[BUFSIZE];
+	char buf[TELLO_BUFSIZE];
 
 	char tello_ssid[SSID_CMD_SIZE];
 
@@ -127,7 +151,7 @@ int tello_connect(char const * tello)
 int tello_send(char const * command)
 {
 	size_t cmd_len;
-	char buf[BUFSIZE];
+	char buf[TELLO_BUFSIZE];
 	int n;
 	socklen_t len;
 	int max_fd = tello_cmd_socket + 1;
@@ -173,7 +197,7 @@ int tello_send(char const * command)
 	}
 
 
-        n = recvfrom ( tello_cmd_socket, (char *) buf, BUFSIZE,
+        n = recvfrom ( tello_cmd_socket, (char *) buf, TELLO_BUFSIZE,
                         MSG_WAITALL, (struct sockaddr *) &tello_cmd_addr,
                         &len);
         buf[n] = '\0';
