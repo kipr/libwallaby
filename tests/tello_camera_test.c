@@ -53,7 +53,6 @@ int main(void)
 	
 	} while(send_result != 0);
 
-
 	tello_send("streamon");
 
 	camera_open_device_model_at_res(0, TELLO, HIGH_RES);

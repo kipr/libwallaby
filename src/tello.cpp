@@ -132,7 +132,7 @@ int tello_connect(char const * tello)
 	sprintf(tello_ssid, "SET_NETWORK 0 ssid \"%s\"", tello);
 	wpa_cmd ("LIST_NETWORKS", buf);
 
-        wpa_cmd ("ADD_NETWORK", buf);
+	wpa_cmd ("ADD_NETWORK", buf);
 
         wpa_cmd (tello_ssid, buf);
 
@@ -149,6 +149,16 @@ int tello_connect(char const * tello)
 }
 
 int tello_send(char const * command)
+{
+	return tello_send_wait(command, 10);
+}
+
+int tello_send_no_wait(char const * command)
+{
+	return tello_send_wait(command, 0);
+}
+
+int tello_send_wait(char const * command, int wait)
 {
 	size_t cmd_len;
 	char buf[TELLO_BUFSIZE];
@@ -178,8 +188,8 @@ int tello_send(char const * command)
 
         /* Wait up to .2 seconds. */
 
-           tv.tv_sec = 10;
-           tv.tv_usec = 0;
+           tv.tv_sec = wait;
+           tv.tv_usec = 10000;
 
            retval = select(max_fd, &rfds, NULL, NULL, &tv);
 	printf("retval ; %d\n", retval); fflush(NULL);
@@ -192,10 +202,14 @@ int tello_send(char const * command)
 
 	if (retval == 0)
 	{
-		printf("send_to_tello - timeout\n"); fflush(NULL);
-		return (-2);
+		if (wait !=0)
+		{
+			printf("send_to_tello - timeout\n"); fflush(NULL);
+			return (-2);
+		}
+		else
+			return 0; // if not waiting - then okay 
 	}
-
 
         n = recvfrom ( tello_cmd_socket, (char *) buf, TELLO_BUFSIZE,
                         MSG_WAITALL, (struct sockaddr *) &tello_cmd_addr,
