@@ -79,9 +79,15 @@ int main(void)
 
 	// Launch the tello. This cammond will not return until the tello has completed the takeoff and
 	// is holding position at the defeulat altitude
- 	send_result = tello_send("takeoff");
-	printf("send_result %d\n", send_result); fflush(stdout);
-	// msleep(500);
+
+	do
+	{
+		send_result = tello_send("takeoff");
+		if(send_result != 0)
+			printf("Error received on takeoff command\n");
+		        printf("send_result %d\n", send_result); fflush(stdout);
+	} while(send_result != 0);
+	 msleep(500);
 
 	// Autonomous loop...
 	int i;

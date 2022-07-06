@@ -11,6 +11,7 @@ extern "C" {
 #define TELLO_CMD_PORT 8889
 #define TELLO_STATE_PORT 8890
 #define TELLO_VIDEO_PORT 11111
+#define TELLO_TIMEOUT 5
 
 struct tello_ssid { char ssid[TELLO_SSID_LENGTH]; };
 

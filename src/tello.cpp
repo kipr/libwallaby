@@ -150,7 +150,7 @@ int tello_connect(char const * tello)
 
 int tello_send(char const * command)
 {
-	return tello_send_wait(command, 10);
+	return tello_send_wait(command, TELLO_TIMEOUT);
 }
 
 int tello_send_no_wait(char const * command)
@@ -217,7 +217,13 @@ int tello_send_wait(char const * command, int wait)
         buf[n] = '\0';
 
         printf ("Tello: %s\n", buf); fflush(NULL);
-	return 0;
+
+	if(strncmp(buf, "ok", n) == 0)
+		return 0;
+	if(strncmp(buf, "error", n) == 0)
+		return 1;
+	else
+		return 2;
 }
 
 int wpa_sup_connect()
