@@ -7,7 +7,7 @@
 
 #ifdef WITH_VISION_SUPPORT
 
-//#define BOTUI_TELLO_TEST
+#define BOTUI_TELLO_TEST
 
 #include "precomp.hpp"
 #include "wallaby/camera.hpp"

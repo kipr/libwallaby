@@ -32,7 +32,7 @@
 #include <net/if.h>
 #endif /* CONFIG_CTRL_IFACE_UDP_IPV6 */
 
-#include "wpa_ctrl.h"
+#include <wallaby/wpa_ctrl.h>
 #include "common.h"
 
 

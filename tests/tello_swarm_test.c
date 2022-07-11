@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "wpa_ctrl.h"
+#include <wallaby/wpa_ctrl.h>
 #include <string.h>
 #include <sys/types.h>
 #include <sys/socket.h>
