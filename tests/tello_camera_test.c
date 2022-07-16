@@ -23,6 +23,8 @@ int main(void)
 	int len;
 	int n;
 	struct tello_ssid * tellos;
+
+	struct tello_info tello;
 	int send_result;
 
 	if( wpa_sup_connect() == -1)
@@ -42,18 +44,18 @@ int main(void)
 	}
 
 	// connect to the first tello on the list
-	tello_connect(tellos[0].ssid);
+	tello_connect(&tello, tellos[0].ssid);
 
 	//wpa_cmd ("LIST_NETWORKS", buf);
 
 	do 
 	{	
-		send_result = tello_send("command");
+		send_result = tello_send(&tello, "command");
 		printf("send_result %d\n", send_result);
 	
 	} while(send_result != 0);
 
-	tello_send("streamon");
+	tello_send(&tello, "streamon");
 
 	camera_open_device_model_at_res(0, TELLO, HIGH_RES);
 

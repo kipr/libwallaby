@@ -8,6 +8,8 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <netinet/in.h>
+#include <ifaddrs.h>
+#include <netdb.h>
 
 #include <wallaby/camera.h>
 #include <wallaby/util.h>
@@ -18,13 +20,77 @@
 static struct wpa_ctrl * ctrl_conn;
 static struct wpa_ctrl * mon_conn;
 
-static int tello_cmd_socket;
-static struct sockaddr_in tello_cmd_addr;
+//static int tello_cmd_socket;
+//static struct sockaddr_in tello_cmd_addr;
 
 static void wpa_cli_msg_cb(char *msg, size_t len)
 {
         printf ("call back \n");
         printf("%s\n", msg);
+}
+
+int check_for_address(const char * address24);
+
+int wait_for_address(const char * address24)
+{
+    int address24_size = strlen(address24);
+    int ret_val = -1;
+    int net_check_count = 0;
+
+    while((ret_val == -1)||(net_check_count < NET_WAIT_COUNT))
+    {
+	ret_val = check_for_address(address24);
+	if(ret_val == 0)
+		break;
+	net_check_count++;
+	msleep(1000);
+    }
+    if(ret_val != 0)
+    {
+        printf("**ERROR** - no address established, check drone (%d)\n", net_check_count); fflush(NULL);
+        ret_val = -1;
+    }
+    return ret_val;
+}
+
+int check_for_address(const char * address24)
+{
+    int address24_size = strlen(address24);
+    int ret_val = 0;
+    int net_check_count = 0;
+    struct ifaddrs *addresses;
+    if (getifaddrs(&addresses) == -1)
+    {
+        printf("wait_for_address - getifaddrs call failed\n");
+        return -1;
+    }
+
+    struct ifaddrs *address = addresses;
+
+    while(address)
+    {
+        int family = address->ifa_addr->sa_family;
+        if (family == AF_INET || family == AF_INET6)
+        {
+            char ap[100];
+            const int family_size = family == AF_INET ? sizeof(struct sockaddr_in) : sizeof(struct sockaddr_in6);
+            getnameinfo(address->ifa_addr,family_size, ap, sizeof(ap), 0, 0, NI_NUMERICHOST);
+            if(strncmp(address24, ap, address24_size) == 0)
+            {
+               printf("Network Address Established:\n");
+                printf("%s\t", address->ifa_name);
+                printf("%s\t", family == AF_INET ? "IPv4" : "IPv6");
+                printf("\t%s (%d)\n", ap, net_check_count); fflush(NULL);
+		ret_val = 0;
+		goto done;
+            }
+        }
+        address = address->ifa_next;
+    }
+    ret_val = -1;
+done:
+    freeifaddrs(addresses);
+    return ret_val;
 }
 
 int wpa_cmd(char const * cmd, char * buf)
@@ -84,7 +150,7 @@ struct tello_ssid * tellos_find(void)
         nanosleep(&sleep, &sleep_left);
 	wpa_index = 0;
 
-	sprintf(bss_cmd, "BSS RANGE=ALL MASK=%x", WPA_BSS_MASK_SSID);
+	sprintf(bss_cmd, "BSS RANGE=ALL MASK=%x", WPA_BSS_MASK_SSID|WPA_BSS_MASK_LEVEL);
 
 	wpa_cmd(bss_cmd, buf);
 	// see if there is an ssid
@@ -96,102 +162,147 @@ struct tello_ssid * tellos_find(void)
 		return tello_ssid;    // we are done
 	}
 
-while(1)
-{
-	int tello_size;
-	tello_found = strstr(ssid_found, "TELLO-");
+	while(1)
+	{
+		int tello_size;
+		tello_found = strstr(ssid_found, "TELLO-");
 
-	if(tello_found == NULL)
-		break;
+		if(tello_found == NULL)
+			break;
 
-	tello_size = strnlen(tello_found, TELLO_SSID_LENGTH);
-	if( tello_size > TELLO_SSID_LENGTH - 1)
-		tello_size = TELLO_SSID_LENGTH - 1;
+		tello_size = strnlen(tello_found, TELLO_SSID_LENGTH);
+		if( tello_size > TELLO_SSID_LENGTH - 1)
+			tello_size = TELLO_SSID_LENGTH - 1;
 
-        strncpy(tello_ssid[wpa_index].ssid, tello_found, tello_size);
-	tello_ssid[wpa_index].ssid[tello_size] = '\0';
-	printf("tello found - %s\n", tello_ssid[wpa_index].ssid);
-	wpa_index++;
+        	strncpy(tello_ssid[wpa_index].ssid, tello_found, tello_size);
+		tello_ssid[wpa_index].ssid[tello_size] = '\0';
+		printf("tello found - %s\n", tello_ssid[wpa_index].ssid);
+		wpa_index++;
 
-	tello_ssid = (struct tello_ssid *) realloc((void *) tello_ssid, sizeof(struct tello_ssid)*(wpa_index + 1));
-	memset(&tello_ssid[wpa_index], 0, sizeof(struct tello_ssid));
+		tello_ssid = (struct tello_ssid *) realloc((void *) tello_ssid, sizeof(struct tello_ssid)*(wpa_index + 1));
+		memset(&tello_ssid[wpa_index], 0, sizeof(struct tello_ssid));
 
-	ssid_found = tello_found + tello_size;
-}
+		ssid_found = tello_found + tello_size;
+	}
 	return tello_ssid;
 }
 
 #define SSID_CMD_SIZE 50
 
-int tello_connect(char const * tello)
+int tello_connect(struct tello_info * tello, char const * tello_ssid)
 {
+	int ret_val = 0;
+
 	char buf[TELLO_BUFSIZE];
 
-	char tello_ssid[SSID_CMD_SIZE];
+	char tello_ssid_cmd[SSID_CMD_SIZE];
 
-	sprintf(tello_ssid, "SET_NETWORK 0 ssid \"%s\"", tello);
+	printf("tello_connect - connecting to %s\n", tello_ssid);
+
+	memcpy((void *) tello->ssid, tello_ssid, TELLO_SSID_LENGTH);
+
+	sprintf(tello_ssid_cmd, "SET_NETWORK 0 ssid \"%s\"", tello_ssid);
 	wpa_cmd ("LIST_NETWORKS", buf);
 
-	wpa_cmd ("ADD_NETWORK", buf);
+	if(check_for_address(TELLO_SUBNET) != 0)
+	{
+		printf("tello_connect - network not there, connect to it\n");
+		wpa_cmd ("ADD_NETWORK", buf);
+		wpa_cmd (tello_ssid_cmd, buf);
+		wpa_cmd ("SET_NETWORK 0 key_mgmt NONE", buf);
+		wpa_cmd ("ENABLE_NETWORK 0", buf);
 
-        wpa_cmd (tello_ssid, buf);
+		printf("tello_connect - waiting for network address to be assigned\n");
+		ret_val = wait_for_address(TELLO_SUBNET);
+		if(ret_val !=0)
+		{
+			printf("***ERROR*** (tello_connect) Drone not connected\n");
+			return -1;
+		}
+		printf("tello_connect - address assigned, continuing\n");
+	}
 
-        wpa_cmd ("SET_NETWORK 0 key_mgmt NONE", buf);
+	if ( (tello->tello_cmd_socket = socket(AF_INET, SOCK_DGRAM, 0)) < 0 )
+	{
+		perror ("tello_connect - socket creation failed");
+		return -1;
+	}
 
-        wpa_cmd ("ENABLE_NETWORK 0", buf);
+	// setup the network address
 
-	if ( (tello_cmd_socket = socket(AF_INET, SOCK_DGRAM, 0)) < 0 )
-        {
-                perror ("socket creation failed");
-                return -1;
-        }
+	tello->tello_cmd_addr.sin_family = AF_INET;
+	tello->tello_cmd_addr.sin_port = htons (TELLO_CMD_PORT);
+	tello->tello_cmd_addr.sin_addr.s_addr = inet_addr("192.168.10.1");
 	return 0;
 }
 
-int tello_send(char const * command)
+int tello_send(struct tello_info * tello, char const * command)
 {
-	return tello_send_wait(command, TELLO_TIMEOUT);
+	if(strncmp(command, "rc", 2) == 0)
+		return tello_send_no_wait(tello, command);
+	else
+		return tello_send_wait(tello, command, TELLO_WAIT);
 }
 
-int tello_send_no_wait(char const * command)
+int tello_send_no_wait(struct tello_info * tello, char const * command)
 {
-	return tello_send_wait(command, 0);
+	return tello_send_wait_noretry(tello, command, 0);
 }
 
-int tello_send_wait(char const * command, int wait)
+int tello_send_wait(struct tello_info * tello, char const * command, int wait)
+{
+	int retrys = (wait / TELLO_TIMEOUT);
+	int retval = -1;
+
+	while( (retval == TELLO_RETURN_TIMEOUT) ||
+		(retval == TELLO_RETURN_GARBAGE))
+	{
+		retval = tello_send_wait_noretry(tello, command, wait);
+		retrys--;
+		if(retrys < 0)
+		{
+			printf("tello_send_wait - ERROR - command not sent\n"); fflush(NULL);
+			return retval;
+		}
+
+	}
+	return retval;
+}
+
+int tello_send_wait_noretry(struct tello_info * tello, char const * command, int wait)
 {
 	size_t cmd_len;
 	char buf[TELLO_BUFSIZE];
 	int n;
 	socklen_t len;
-	int max_fd = tello_cmd_socket + 1;
+	int max_fd = tello->tello_cmd_socket + 1;
 
         fd_set rfds;
         struct timeval tv;
         int retval;
 
-	tello_cmd_addr.sin_family = AF_INET;
-        tello_cmd_addr.sin_port = htons (TELLO_CMD_PORT);
-        tello_cmd_addr.sin_addr.s_addr = inet_addr("192.168.10.1");
+	//tello_cmd_addr.sin_family = AF_INET;
+        //tello_cmd_addr.sin_port = htons (TELLO_CMD_PORT);
+        //tello_cmd_addr.sin_addr.s_addr = inet_addr("192.168.10.1");
 	printf("Command: %s\n", command);
 
         cmd_len = (size_t)strlen(command);
 
-        sendto (tello_cmd_socket, command, cmd_len,
-                MSG_CONFIRM, (const struct sockaddr *) &tello_cmd_addr,
-                        sizeof (tello_cmd_addr));
+        sendto (tello->tello_cmd_socket, command, cmd_len,
+                MSG_CONFIRM, (const struct sockaddr *) &tello->tello_cmd_addr,
+                        sizeof (tello->tello_cmd_addr));
 	// make sure the response comes back within
 	// a given time
 
 	FD_ZERO(&rfds);
-        FD_SET(tello_cmd_socket, &rfds);
+        FD_SET(tello->tello_cmd_socket, &rfds);
 
-        /* Wait up to .2 seconds. */
+        /* setup Wait */
 
-           tv.tv_sec = wait;
-           tv.tv_usec = 10000;
+       tv.tv_sec = wait;
+       tv.tv_usec = 10000;
 
-           retval = select(max_fd, &rfds, NULL, NULL, &tv);
+        retval = select(max_fd, &rfds, NULL, NULL, &tv);
 	printf("retval ; %d\n", retval); fflush(NULL);
 	
 	if (retval == -1)
@@ -205,25 +316,42 @@ int tello_send_wait(char const * command, int wait)
 		if (wait !=0)
 		{
 			printf("send_to_tello - timeout\n"); fflush(NULL);
-			return (-2);
+			return TELLO_RETURN_TIMEOUT;
 		}
 		else
-			return 0; // if not waiting - then okay 
+			return TELLO_RETURN_OK; // if not waiting - then okay 
 	}
 
-        n = recvfrom ( tello_cmd_socket, (char *) buf, TELLO_BUFSIZE,
-                        MSG_WAITALL, (struct sockaddr *) &tello_cmd_addr,
+        n = recvfrom ( tello->tello_cmd_socket, (char *) buf, TELLO_BUFSIZE,
+                        MSG_WAITALL, (struct sockaddr *) &tello->tello_cmd_addr,
                         &len);
         buf[n] = '\0';
 
-        printf ("Tello: %s\n", buf); fflush(NULL);
+        printf ("Tello return: %s\n", buf); fflush(NULL);
 
 	if(strncmp(buf, "ok", n) == 0)
-		return 0;
-	if(strncmp(buf, "error", n) == 0)
-		return 1;
-	else
-		return 2;
+		return TELLO_RETURN_OK;
+	if(strncmp(buf, "error", 5) == 0)
+	{
+		if(strncmp(buf, "error Not joystick", n))
+		{
+			printf("TELLO ERROR - command before %s not complete\n",
+				command);
+			return TELLO_RETURN_CMD_NOT_COMPLETE;
+		}
+		if(strncmp(buf, "error No valid imu", n))
+		{
+			printf("TELLO ERROR - not enough light for position tracking\n");
+			return TELLO_RETURN_INSUFFICIANT_LIGHT;
+		}
+
+		printf("TELLO ERROR\n");
+		return TELLO_RETURN_ERROR;
+	}
+
+	printf("send to tello - tello return unknown\n");
+	return TELLO_RETURN_UNKNOWN;
+
 }
 
 int wpa_sup_connect()
