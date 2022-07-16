@@ -11,9 +11,6 @@
 
 #include <wallaby/tello.h>
 
-static int tello_cmd_socket;
-static struct sockaddr_in tello_cmd_addr;
-
 int main(void)
 {
 	int result;
@@ -21,6 +18,7 @@ int main(void)
 	int len;
 	int n;
 	struct tello_ssid * tellos;
+	struct tello_info tello;
 	int send_result;
 
 	if (wpa_sup_connect() == -1)
@@ -45,21 +43,15 @@ int main(void)
 
 	// for this example select only the first Tello in the list
 
-	tello_connect(tellos[0].ssid);
-
-	if ( (tello_cmd_socket = socket(AF_INET, SOCK_DGRAM, 0)) < 0 )
-	{
-		perror ("socket creation failed");
-		exit(EXIT_FAILURE);
-	}
+	tello_connect(&tello, tellos[0].ssid);
 
 	do 
 	{	
-		send_result = tello_send("command");
+		send_result = tello_send(&tello, "command");
 	} while(send_result != 0);
 
 	// tell tello to send video
-	tello_send("streamon");
+	tello_send(&tello, "streamon");
 	
 	while(1)
 	{
