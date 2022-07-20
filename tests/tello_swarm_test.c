@@ -10,7 +10,7 @@
 #include <netinet/in.h>
 
 //#include <wallaby/camera.h>
-//#include <wallaby/util.h>
+#include <wallaby/util.h>
 #include <wallaby/tello.h>
 
 #define BUFSIZE 1024
