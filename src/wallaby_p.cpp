@@ -1,4 +1,4 @@
- /*
+/*
  * wallaby_p.cpp
  *
  *  Created on: Nov 2, 2015
@@ -299,10 +299,7 @@ void Wallaby::writeRegister16b(unsigned char address, unsigned short value)
 	std::lock_guard<std::mutex> lock(transfer_mutex_);
 
 	#ifdef TARGET_EMSCRIPTEN
-<<<<<<< HEAD
 	emscripten_sleep(0);
-=======
->>>>>>> For JS, update multi-byte registers in batches
 	unsigned char addresses[] = {address, static_cast<unsigned char>(address + 1)};
 	unsigned char values[] = {value1, value2};
 	updateRegisters(addresses, values, 2);
@@ -368,10 +365,7 @@ void Wallaby::writeRegister32b(unsigned char address, unsigned int value)
 	std::lock_guard<std::mutex> lock(transfer_mutex_);
 
 	#ifdef TARGET_EMSCRIPTEN
-<<<<<<< HEAD
 	emscripten_sleep(0);
-=======
->>>>>>> For JS, update multi-byte registers in batches
 	unsigned char addresses[] = {address, static_cast<unsigned char>(address + 1), static_cast<unsigned char>(address + 2), static_cast<unsigned char>(address + 3)};
 	unsigned char values[] = {value1, value2, value3, value4};
 	updateRegisters(addresses, values, 4);
