@@ -42,7 +42,7 @@ int main(void)
 	tellos = tellos_find();
 
 	if(tellos == NULL)
-		return;
+		return -1;
 	else
 		printf ("Tellos: %s\n", tellos);
 
