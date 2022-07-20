@@ -25,6 +25,7 @@ static struct sockaddr_in tello_cmd_addr;
 
 int main(void)
 {
+#ifdef WITH_VISION_SUPPORT
 	int result;
 	char buf[BUFSIZE];
 	int len;
@@ -91,6 +92,10 @@ fflush(NULL);
     printf("Camera close\n");
     camera_close();
     close (tello_cmd_socket);
+#else
+    printf("This platform does not support camera");
+#endif
+
     return 0;
 }
 
