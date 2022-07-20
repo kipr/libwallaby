@@ -62,7 +62,7 @@ int main(void)
 		msleep(1000);
 		tello_send("battery?");
 	}
-	send_to_tello("ap 0352-wombat 29d7d200");
+	tello_send("ap 0352-wombat 29d7d200");
 
 //	printf("starting swarm server\n");
     // note: cannot start swarm server until the wombat access point
