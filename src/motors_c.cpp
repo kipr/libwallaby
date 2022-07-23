@@ -52,9 +52,9 @@ int move_to_position(int motor, int speed, int goal_pos)
 	const short velocity = std::abs(speed) * sign;
 
 	// TODO: combine into one call
-	Private::set_motor_mode(motor, Private::Motor::SpeedPosition);
 	Private::set_motor_goal_position(motor, goal_pos);
 	Private::set_motor_goal_velocity(motor, velocity);
+	Private::set_motor_mode(motor, Private::Motor::SpeedPosition);
 
 	return 0;
 }
