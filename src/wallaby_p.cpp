@@ -28,7 +28,7 @@
 
 #ifndef NOT_A_WALLABY
 	#include <linux/spi/spidev.h>
-	#ifndef NOT_A_ZOOBEE_WALLABY
+	#ifndef NOT_A_WOMBAT
 		#define SPI_FILE_SYSTEM "/dev/spidev0.0"
 	#else
 		#define SPI_FILE_SYSTEM "/dev/spidev2.0"

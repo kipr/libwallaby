@@ -7,16 +7,16 @@ project(libwallaby)
 
 
 # Use these options based on platform:
-# platform										no_wallaby	no_zoobee_wallaby
-# desktop (Ubuntu, etc.)					ON					ON or OFF (don't care)
+# platform						no_wallaby	no_wombat
+# desktop (Ubuntu, etc.)					ON		ON or OFF (don't care)
 # wallaby-wallaby controller			OFF					ON
-# zoobee-wallaby controller			OFF					OFF	
+# wombat controller			OFF					OFF	
 
 option(no_wallaby "Not a wallaby controller" OFF)
 option(emscripten "Build for use with emscripten (for simulator)" OFF)
 option(with_vision_support "Controls camera support" ON)
 
-option(no_zoobee_wallaby "Not a zoobee wallaby controller" OFF)
+option(no_wombat "Not a wombat controller" OFF)
 
 if(no_wallaby)
   add_definitions(-DNOT_A_WALLABY)
@@ -34,9 +34,10 @@ if(USE_ARUCO)
 	add_definitions(-DARUCO)
 endif()
 
-
-if(no_zoobee_wallaby)
-  add_definitions(-DNOT_A_ZOOBEE_WALLABY)
+#Changed no_zoobee_wallaby to no_wombat
+#Changed -DNOT_A_ZOOBEE_WALLABY to -DNOT_A_WOMBAT
+if(no_wombat)
+	add_definitions(-DNOT_A_WOMBAT)
 endif()
 
 
