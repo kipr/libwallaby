@@ -1,3 +1,5 @@
+#ifdef WITH_VISION_SUPPORT
+
 #include "UDPVideo.hpp"
 
 #define DEST_PIXEL_FMT AV_PIX_FMT_BGR24
@@ -437,3 +439,5 @@ bool UdpVideo::read(cv::OutputArray image) {
     retval = m_data_receiver->get_pframe_from_list(image);
   return retval;
 }
+
+#endif

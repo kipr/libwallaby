@@ -8,6 +8,7 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <netinet/in.h>
+#include <unistd.h>
 
 #include <wallaby/camera.h>
 #include <wallaby/util.h>
@@ -25,6 +26,7 @@ static struct sockaddr_in tello_cmd_addr;
 
 int main(void)
 {
+#ifdef WITH_VISION_SUPPORT
 	int result;
 	char buf[BUFSIZE];
 	int len;
@@ -40,7 +42,7 @@ int main(void)
 	tellos = tellos_find();
 
 	if(tellos == NULL)
-		return;
+		return -1;
 	else
 		printf ("Tellos: %s\n", tellos);
 
@@ -91,6 +93,10 @@ fflush(NULL);
     printf("Camera close\n");
     camera_close();
     close (tello_cmd_socket);
+#else
+    printf("This platform does not support camera");
+#endif
+
     return 0;
 }
 

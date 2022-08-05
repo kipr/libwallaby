@@ -10,7 +10,7 @@
 #include <netinet/in.h>
 
 //#include <wallaby/camera.h>
-//#include <wallaby/util.h>
+#include <wallaby/util.h>
 #include <wallaby/tello.h>
 
 #define BUFSIZE 1024
@@ -42,7 +42,7 @@ int main(void)
 	tellos = tellos_find();
 
 	if(tellos == NULL)
-		return;
+		return -1;
 	else
 		printf ("Tellos: %s\n", tellos);
 
@@ -62,7 +62,7 @@ int main(void)
 		msleep(1000);
 		tello_send("battery?");
 	}
-	send_to_tello("ap 0352-wombat 29d7d200");
+	tello_send("ap 0352-wombat 29d7d200");
 
 //	printf("starting swarm server\n");
     // note: cannot start swarm server until the wombat access point

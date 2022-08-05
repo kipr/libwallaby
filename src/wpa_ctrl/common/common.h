@@ -11,7 +11,7 @@
 
 #include "os.h"
 
-#if defined(__linux__) || defined(__GLIBC__)
+#if defined(__linux__) || defined(__unix__) || defined(__GLIBC__)
 #include <endian.h>
 #include <byteswap.h>
 #endif /* __linux__ */
