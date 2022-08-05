@@ -5,6 +5,8 @@
  *      Author: Nafis Zaman
  */
 
+#ifdef WITH_VISION_SUPPORT
+
 #ifndef _CAMERA_HPP_
 #define _CAMERA_HPP_
 
@@ -196,5 +198,7 @@ private:
  */
 Camera::Device *cDevice();
 }
+
+#endif
 
 #endif

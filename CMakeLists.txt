@@ -15,6 +15,7 @@ project(libwallaby)
 option(no_wallaby "Not a wallaby controller" OFF)
 option(emscripten "Build for use with emscripten (for simulator)" OFF)
 option(with_vision_support "Controls camera support" ON)
+option(with_tests "Build with tests" ON)
 
 option(no_zoobee_wallaby "Not a zoobee wallaby controller" OFF)
 
@@ -108,8 +109,8 @@ endif()
 find_package (Threads)
 
 if(build_python)
-  find_package( PythonInterp 2.7 REQUIRED )
-  find_package( PythonLibs 2.7 REQUIRED )
+  find_package( PythonInterp 3.10 REQUIRED )
+  find_package( PythonLibs 3.10 REQUIRED )
 endif()
 
 include_directories(${CMAKE_INSTALL_PREFIX}/include)
@@ -144,12 +145,19 @@ file(GLOB SWIG_SOURCES ${BINDINGS}/*.i)
 
 if(build_python)
   find_package(SWIG REQUIRED)
-  find_package(PythonLibs 2.7 REQUIRED)
+  find_package(PythonLibs 3.10 REQUIRED)
   message("${PYTHON_LIBRARY}")
   set(PYTHON_BINDING_SOURCES ${CMAKE_BINARY_DIR}/kipr_wrap_py.cxx)
   set(PYTHON_BINDING_LIBRARIES ${PYTHON_LIBRARY})
   include_directories(${PYTHON_INCLUDE_DIR})
-  add_custom_command(COMMAND ${SWIG_EXECUTABLE} -Wall -python -c++ -I${INCLUDE}/kipr -outdir ${LIBRARY_OUTPUT_PATH} -o ${CMAKE_BINARY_DIR}/kipr_wrap_py.cxx ${BINDINGS}/kipr.i
+  set(swig_defines )
+  if (with_vision_support)
+    list(APPEND swig_defines "-DWITH_VISION_SUPPORT")
+  endif()
+  if (USE_ARUCO)
+    list(APPEND swig_defines "-DARUCO")
+  endif()
+  add_custom_command(COMMAND ${SWIG_EXECUTABLE} -Wall -python -c++ -I${INCLUDE}/kipr ${swig_defines} -outdir ${LIBRARY_OUTPUT_PATH} -o ${CMAKE_BINARY_DIR}/kipr_wrap_py.cxx ${BINDINGS}/kipr.i
     DEPENDS ${SWIG_SOURCES}
     OUTPUT ${CMAKE_BINARY_DIR}/kipr_wrap_py.cxx ${LIBRARY_OUTPUT_PATH}/kipr.py)
     install(FILES ${LIBRARY_OUTPUT_PATH}/kipr.py DESTINATION lib)
@@ -199,17 +207,20 @@ if(UNIX AND NOT APPLE)
 endif()
 
 
-# Executables: test programs
-# TODO: use a list and foreach to make this more concise
-set(TESTS )
+if (with_tests)
+  # Executables: test programs
+  # TODO: use a list and foreach to make this more concise
+  set(TESTS )
 
-foreach(C_TEST ${C_TESTS})
-  get_filename_component(C_TEST_NAME ${C_TEST} NAME_WE)
-  set(TEST_BIN_NAME ${C_TEST_NAME}_c)
-  add_executable(${TEST_BIN_NAME} ${C_TEST})
-  target_link_libraries(${TEST_BIN_NAME} kipr)
-  list(APPEND TESTS ${TEST_BIN_NAME})
-endforeach()
+  foreach(C_TEST ${C_TESTS})
+    get_filename_component(C_TEST_NAME ${C_TEST} NAME_WE)
+    set(TEST_BIN_NAME ${C_TEST_NAME}_c)
+    add_executable(${TEST_BIN_NAME} ${C_TEST})
+    target_link_libraries(${TEST_BIN_NAME} kipr)
+    list(APPEND TESTS ${TEST_BIN_NAME})
+  endforeach()
+
+endif()
 
 
 ########################################

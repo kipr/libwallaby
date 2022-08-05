@@ -5,6 +5,8 @@
  *      Author: Nafis Zaman
  */
 
+#ifdef WITH_VISION_SUPPORT
+
 #ifndef _CAMERA_H_
 #define _CAMERA_H_
 
@@ -296,5 +298,7 @@ unsigned get_camera_element_size();
 }
 #endif
 
+
+#endif
 
 #endif
