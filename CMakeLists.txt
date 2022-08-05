@@ -173,8 +173,9 @@ if(build_python)
 
   add_library(wombat_python SHARED ${PYTHON_BINDING_SOURCES})
   set_target_properties(wombat_python PROPERTIES PREFIX _ OUTPUT_NAME kipr SUFFIX .so)
-  target_link_libraries(wombat_python kipr ${PYTHON_BINDING_LIBRARIES} )
-  install(TARGETS wombat_python DESTINATION lib)
+  target_link_libraries(wombat_python kipr ${PYTHON_BINDING_LIBRARIES})
+  install(TARGETS wombat_python DESTINATION kipr)
+  install(FILES ${BINDINGS}/python/__init__.py DESTINATION kipr)
 endif()
 
 
@@ -255,8 +256,6 @@ install(TARGETS kipr DESTINATION lib)
 install(TARGETS wallaby DESTINATION lib)
 install(DIRECTORY ${INCLUDE}/wallaby DESTINATION include)
 install(DIRECTORY ${INCLUDE}/kipr DESTINATION include)
-
-set(CMAKE_INSTALL_PREFIX /usr)
 
 # Install the manpage (appropriate for .deb package)
 # manpage should have -r-wr--r-- or 644 permission (owner r-w, group r--, others r--)
