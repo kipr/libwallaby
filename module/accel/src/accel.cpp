@@ -1,45 +1,40 @@
-/*
- * accel.cpp
- *
- *  Created on: Nov 5, 2015
- *      Author: Joshua Southerland
- */
-
-#include "wallaby/accel.hpp"
+#include "kipr/accel/accel.hpp"
 #include "accel_p.hpp"
 
+using namespace kipr;
+using namespace kipr::accel;
 
 signed short Acceleration::x()
 {
-	return Private::accel_x();
+  return accel_x();
 }
 
 signed short Acceleration::y()
 {
-	return Private::accel_y();
+  return accel_y();
 }
 
 signed short Acceleration::z()
 {
-	return Private::accel_z();
+  return accel_z();
 }
 
 bool Acceleration::calibrate()
 {
-	return Private::accel_calibrate();
+  return accel_calibrate();
 }
 
 short AccelX::value() const
 {
-	return Private::accel_x();
+  return accel_x();
 }
 
 short AccelY::value() const
 {
-	return Private::accel_y();
+  return accel_y();
 }
 
 short AccelZ::value() const
 {
-	return Private::accel_z();
+  return accel_z();
 }

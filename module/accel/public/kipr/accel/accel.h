@@ -1,18 +1,11 @@
-/*
- * accel.h
- *
- *  Created on: Nov 5, 2015
- *      Author: Joshua Southerland
- */
-
-#ifndef INCLUDE_WALLABY_ACCEL_H_
-#define INCLUDE_WALLABY_ACCEL_H_
-
 /*!
  * \file analog.h
  * \copyright KISS Institute for Practical Robotics
  * \defgroup accel Accelerometer
  */
+
+#ifndef _KIPR_ACCEL_ACCEL_H_
+#define _KIPR_ACCEL_ACCEL_H_
 
 #ifdef __cplusplus
 extern "C" {
@@ -65,4 +58,4 @@ int accel_calibrate();
 #endif
 
 
-#endif /* INCLUDE_WALLABY_ACCEL_H_ */
+#endif

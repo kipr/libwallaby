@@ -1,17 +1,15 @@
-#ifndef _COMPASS_H_
-#define _COMPASS_H_
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /*!
  * \file compass.h
- * \author Joshua southerland
  * \copyright KISS Institute for Practical Robotics
  * \defgroup compass Compass
  */
 
+#ifndef _KIPR_COMPASS_COMPASS_H_
+#define _KIPR_COMPASS_COMPASS_H_
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /*!
  * Begin calibrating the compass.
@@ -56,5 +54,4 @@ float get_compass_angle(void);
 }
 #endif
 
-
-#endif // #define _COMPASS_H_
+#endif

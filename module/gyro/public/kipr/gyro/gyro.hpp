@@ -1,13 +1,13 @@
-#ifndef _KIPR_ACCEL_ACCEL_HPP_
-#define _KIPR_ACCEL_ACCEL_HPP_
+#ifndef _KIPR_GYRO_GYRO_HPP_
+#define _KIPR_GYRO_GYRO_HPP_
 
 #include "kipr/sensor/sensor.hpp"
 
 namespace kipr
 {
-  namespace accel
+  namespace gyro
   {
-    class Acceleration
+    class Gyro
     {
     public:
       static short x();
@@ -18,19 +18,19 @@ namespace kipr
     private:
     };
 
-    class AccelX : public sensor::Sensor<short>
+    class GyroX : public sensor::Sensor<short>
     {
     public:
       virtual short value() const;
     };
 
-    class AccelY : public sensor::Sensor<short>
+    class GyroY : public sensor::Sensor<short>
     {
     public:
       virtual short value() const;
     };
 
-    class AccelZ : public sensor::Sensor<short>
+    class GyroZ : public sensor::Sensor<short>
     {
     public:
       virtual short value() const;

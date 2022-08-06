@@ -1,22 +1,24 @@
-#ifndef SRC_COMPASS_HPP_
-#define SRC_COMPASS_HPP_
+#ifndef _KIPR_COMPASS_COMPASS_HPP_
+#define _KIPR_COMPASS_COMPASS_HPP_
 
-
-class Compass
+namespace kipr
 {
-public:
+  namespace compass
+  {
+    class Compass
+    {
+    public:
+      Compass();
+      ~Compass();
 
-	Compass();
-	~Compass();
+      static void calibrate();
 
-	static void calibrate();
+      static void setParams(float meanX, float meanY, float meanZ,
+                            float W1, float W2, float div_E1, float div_E2);
 
-	static void setParams(float meanX, float meanY, float meanZ,
-				    float W1, float W2, float div_E1, float div_E2);
+      static float getAngle(void);
+    };
+  }
+}
 
-	static float getAngle(void);
-};
-
-
-
-#endif // #define SRC_COMPASS_HPP_
+#endif

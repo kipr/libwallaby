@@ -1,30 +1,25 @@
-/*
- * accel_c.cpp
- *
- *  Created on: Nov 5, 2015
- *      Author: Joshua Southerland
- */
-
 #include "wallaby/accel.h"
 #include "accel_p.hpp"
 
+using namespace kipr;
+using namespace kipr::accel;
 
 short accel_x()
 {
-	return Private::accel_x();
+  return accel::accel_x();
 }
 
 short accel_y()
 {
-	return Private::accel_y();
+  return accel::accel_y();
 }
 
 short accel_z()
 {
-	return Private::accel_z();
+  return accel::accel_z();
 }
 
 int accel_calibrate()
 {
-	return Private::accel_calibrate();
+  return accel::accel_calibrate();
 }

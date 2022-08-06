@@ -1,19 +1,11 @@
-/*
- * gyro.h
- *
- *  Created on: Nov 5, 2015
- *      Author: Joshua Southerland
- */
-
-#ifndef INCLUDE_WALLABY_GYRO_H_
-#define INCLUDE_WALLABY_GYRO_H_
-
 /*!
  * \file gyro.h
  * \copyright KISS Institute for Practical Robotics
  * \defgroup gyro Gyrometer
  */
 
+#ifndef _KIPR_GYRO_GYRO_H_
+#define _KIPR_GYRO_GYRO_H_
 
 #ifdef __cplusplus
 extern "C" {
@@ -58,5 +50,4 @@ int gyro_calibrate();
 #endif
 
 
-
-#endif /* INCLUDE_WALLABY_GYRO_H_ */
+#endif

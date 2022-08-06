@@ -1,26 +1,18 @@
-/*
- * accel_p.hpp
- *
- *  Created on: Dec 31, 2015
- *      Author: Joshua Southerland
- */
+#ifndef _KIPR_ACCEL_ACCEL_P_HPP_
+#define _KIPR_ACCEL_ACCEL_P_HPP_
 
-#ifndef SRC_ACCEL_P_HPP_
-#define SRC_ACCEL_P_HPP_
-
-namespace Private
+namespace kipr
 {
+  namespace accel
+  {
+    short accel_x(unsigned char *alt_read_buffer = nullptr);
 
-short accel_x(unsigned char * alt_read_buffer = nullptr);
+    short accel_y(unsigned char *alt_read_buffer = nullptr);
 
-short accel_y(unsigned char * alt_read_buffer = nullptr);
+    short accel_z(unsigned char *alt_read_buffer = nullptr);
 
-short accel_z(unsigned char * alt_read_buffer = nullptr);
-
-bool accel_calibrate();
-
-
-
+    bool accel_calibrate();
+  }
 }
 
-#endif /* SRC_ACCEL_P_HPP_ */
+#endif
