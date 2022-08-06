@@ -1,48 +1,47 @@
-/*
- * analog.hpp
- *
- *  Created on: Nov 3, 2015
- *      Author: Joshua Southerland
- */
+#ifndef _KIPR_ANALOG_ANALOG_HPP_
+#define _KIPR_ANALOG_ANALOG_HPP_
 
-#ifndef INCLUDE_WALLABY_ANALOG_HPP_
-#define INCLUDE_WALLABY_ANALOG_HPP_
+#include "kipr/sensor/sensor.hpp"
 
-#include "sensor.hpp"
-
-class Analog : public Sensor<unsigned short>
+namespace kipr
 {
-public:
-	Analog(unsigned char port);
-	virtual ~Analog();
+  namespace analog
+  {
+    class Analog : public sensor::Sensor<unsigned short>
+    {
+    public:
+      Analog(unsigned char port);
+      virtual ~Analog();
 
-	virtual unsigned short value() const;
+      virtual unsigned short value() const;
 
-	virtual void setPullup(bool pullup);
-	bool pullup() const;
+      virtual void setPullup(bool pullup);
+      bool pullup() const;
 
-	unsigned char port() const;
-private:
-	unsigned char m_port;
-};
+      unsigned char port() const;
 
-class Analog8 : public Analog
-{
-public:
-	Analog8(unsigned char port);
-	virtual ~Analog8();
+    private:
+      unsigned char m_port;
+    };
 
-	unsigned short value() const;
-};
+    class Analog8 : public Analog
+    {
+    public:
+      Analog8(unsigned char port);
+      virtual ~Analog8();
 
-class Analog10 : public Analog
-{
-public:
-	Analog10(unsigned char port);
-	virtual ~Analog10();
+      unsigned short value() const;
+    };
 
-	virtual unsigned short value() const;
-};
+    class Analog10 : public Analog
+    {
+    public:
+      Analog10(unsigned char port);
+      virtual ~Analog10();
 
+      virtual unsigned short value() const;
+    };
+  }
+}
 
-#endif /* INCLUDE_WALLABY_ANALOG_HPP_ */
+#endif

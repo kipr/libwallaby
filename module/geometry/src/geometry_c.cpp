@@ -1,11 +1,4 @@
-/*
- * geom_c.cpp
- *
- *  Created on: Jan 7, 2016
- *      Author: Braden McDorman
- */
-
-#include "wallaby/geom.h"
+#include "kipr/geometry/geometry.h"
 
 point2 create_point2(int x, int y)
 {

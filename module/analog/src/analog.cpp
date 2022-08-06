@@ -1,29 +1,22 @@
-/*
- * analog.cpp
- *
- *  Created on: Nov 3, 2015
- *      Author: Joshua Southerland
- */
-
-#include "wallaby/analog.hpp"
+#include "kipr/analog/analog.hpp"
 
 #include "analog_p.hpp"
 
+using namespace kipr;
+using namespace kipr::analog;
 
 Analog::Analog(unsigned char port)
-: m_port(port)
+  : m_port(port)
 {
-
 }
 
 Analog::~Analog()
 {
-
 }
 
 unsigned short Analog::value() const
 {
-	return Private::analog_value(m_port, nullptr);
+	return analog_value(m_port, nullptr);
 }
 
 unsigned char Analog::port() const

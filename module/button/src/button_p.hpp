@@ -1,38 +1,32 @@
-/*
- * button_p.hpp
- *
- *  Created on: Mar 25, 2016
- *      Author: kipr
- */
+#ifndef _KIPR_BUTTON_BUTTON_P_H_
+#define _KIPR_BUTTON_BUTTON_P_H_
 
-#ifndef BUTTON_P_HPP_
-#define BUTTON_P_HPP_
+#include "kipr/button/button_ids.hpp"
 
-
-#include "wallaby/button_ids.hpp"
-
-
-namespace Private
+namespace kipr
 {
-	struct SharedButton;
+  namespace button
+  {
+    struct SharedButton;
 
-	class Button
-	{
-	public:
-		void setPressed(const ::Button::Type::Id &id, bool pressed);
-		bool isPressed(const ::Button::Type::Id &id) const;
+    class Button
+    {
+    public:
+      void setPressed(const Id &id, bool pressed);
+      bool isPressed(const Id &id) const;
 
-		void setExtraShown(const bool& shown);
-		bool isExtraShown() const;
+      void setExtraShown(const bool& shown);
+      bool isExtraShown() const;
 
-		static Button *instance();
-	private:
-		unsigned char buttonOffset(const ::Button::Type::Id &id) const;
+      static Button *instance();
+    private:
+      unsigned char buttonOffset(const Id &id) const;
 
-		Button();
-		Button(const Button& rhs);
+      Button();
+      Button(const Button& rhs);
 
-	};
+    };
+  }
 }
 
-#endif /* BUTTON_P_HPP_ */
+#endif 

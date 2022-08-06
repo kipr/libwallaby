@@ -1,31 +1,23 @@
-/*
- * button_ids.hpp
- *
- *  Created on: Nov 12, 2015
- *      Author: Joshua Southerland
- */
+#ifndef _KIPR_BUTTON_BUTTON_IDS_H_
+#define _KIPR_BUTTON_BUTTON_IDS_H_
 
-#ifndef INCLUDE_WALLABY_BUTTON_IDS_HPP_
-#define INCLUDE_WALLABY_BUTTON_IDS_HPP_
-
-
-namespace Button
+namespace kipr
 {
-	namespace Type
-	{
-		enum Id {
-			A = 0,
-			B,
-			C,
-			X,
-			Y,
-			Z,
-			Left,
-                        Right,
-                        Physical
-		};
-	}
+  namespace button
+  {
+    enum class Id
+    {
+      A = 0,
+      B,
+      C,
+      X,
+      Y,
+      Z,
+      Left,
+      Right,
+      Physical
+    };
+  }
 }
 
-
-#endif /* INCLUDE_WALLABY_BUTTON_IDS_HPP_ */
+#endif

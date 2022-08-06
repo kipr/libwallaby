@@ -1,19 +1,11 @@
-/*
- * analog.h
- *
- *  Created on: Nov 3, 2015
- *      Author: Joshua Southerland
- */
-
-#ifndef INCLUDE_WALLABY_ANALOG_H_
-#define INCLUDE_WALLABY_ANALOG_H_
-
 /*!
  * \file analog.h
  * \copyright KISS Institute for Practical Robotics
  * \defgroup analog Analogs
  */
 
+#ifndef _KIPR_ANALOG_ANALOG_H_
+#define _KIPR_ANALOG_ANALOG_H_
 
 #ifdef __cplusplus
 extern "C" {
@@ -95,5 +87,4 @@ int get_analog_pullup(int port);
 }
 #endif
 
-
-#endif /* INCLUDE_WALLABY_ANALOG_H_ */
+#endif

@@ -1,20 +1,11 @@
-/*
- * digital.h
- *
- *  Created on: Nov 2, 2015
- *      Author: Joshua Southerland
- */
-
-#ifndef INCLUDE_WALLABY_DIGITAL_H_
-#define INCLUDE_WALLABY_DIGITAL_H_
-
-
 /*!
  * \file digital.h
  * \copyright KISS Institute for Practical Robotics
  * \defgroup digital Digitals
  */
 
+#ifndef _KIPR_DIGITAL_DIGITAL_H_
+#define _KIPR_DIGITAL_DIGITAL_H_
 
 #ifdef __cplusplus
 extern "C" {
@@ -80,4 +71,4 @@ void set_digital_pullup(int port, int pullup);
 }
 #endif
 
-#endif /* INCLUDE_WALLABY_DIGITAL_H_ */
+#endif

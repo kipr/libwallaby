@@ -1,23 +1,14 @@
 #include "kipr/botball.h"
-
-#include "kipr/display.h"
-#include "kipr/thread.hpp"
-#include "kipr/general.h"
-#include "kipr/create.hpp"
-#include "kipr/compat.hpp"
+#include "kipr/thread/thread.hpp"
+#include "kipr/button/button.h"
+#include "kipr/analog/analog.h"
+#include "kipr/console/console.h"
 
 #include <stdio.h>
 #include <string.h>
 #include <kipr/util.h>
-#include <kipr/graphics.h>
-#include <kipr/graphics_characters.h>
-#include <kipr/console.h>
-#include <kipr/digital.h>
-#include <kipr/analog.h>
-#include <kipr/button.h>
-#include <kipr/audio.h>
 
-#include "wallaby_p.hpp"
+#include "kipr/core/cleanup.hpp"
 
 #include <cstdlib>
 #include <iostream>
@@ -26,7 +17,9 @@
 #include <unistd.h>
 #endif
 
-class ShutDownIn : public Thread
+using namespace kipr;
+
+class ShutDownIn : public kipr::thread::Thread
 {
 public:
 	ShutDownIn(double s)
@@ -46,7 +39,7 @@ public:
 		std::cout << std::endl << "Shutdown after " << (end - start) << " seconds" << std::endl;
 		// Note: Might want to move this to botui in the future.
 		//Create::instance()->stop();
-		Private::Wallaby::atExit(true);
+		kipr::core::cleanup(true);
 		_exit(0);
 	}
 	
@@ -54,7 +47,7 @@ private:
 	double m_s;
 };
 
-VI void shut_down_in(double s)
+void shut_down_in(double s)
 {
 	static ShutDownIn *s_instance;
 	if(s_instance) {

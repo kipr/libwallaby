@@ -1,33 +1,28 @@
-/*
- * button.cpp
- *
- *  Created on: Nov 12, 2015
- *      Author: Joshua Southerland
- */
-
 #include "button_p.hpp"
-#include "wallaby/button.hpp"
-#include "wallaby_p.hpp"
-#include "wallaby/compat.hpp"
-
+#include "kipr/button/button.hpp"
+#include "kipr/core/platform.hpp"
+#include "kipr/compat/compat.hpp"
 
 #include <cstring>
 
-IdButton Button::A(Button::Type::A, "A");
-IdButton Button::B(Button::Type::B, "B");
-IdButton Button::C(Button::Type::C, "C");
+using namespace kipr;
+using namespace kipr::button;
 
-IdButton Button::X(Button::Type::X, "X");
-IdButton Button::Y(Button::Type::Y, "Y");
-IdButton Button::Z(Button::Type::Z, "Z");
+IdButton kipr::button::A(Id::A, "A");
+IdButton kipr::button::B(Id::B, "B");
+IdButton kipr::button::C(Id::C, "C");
 
-IdButton Button::Left(Button::Type::Left, "");
-IdButton Button::Right(Button::Type::Right, "");
+IdButton kipr::button::X(Id::X, "X");
+IdButton kipr::button::Y(Id::Y, "Y");
+IdButton kipr::button::Z(Id::Z, "Z");
 
-IdButton * const Button::all[8] = {
-		&Button::A, &Button::B, &Button::C,
-		&Button::X, &Button::Y, &Button::Z,
-                &Button::Left, &Button::Right
+IdButton kipr::button::Left(Id::Left, "");
+IdButton kipr::button::Right(Id::Right, "");
+
+IdButton * const kipr::button::all[8] = {
+    &A, &B, &C,
+    &X, &Y, &Z,
+    &Left, &Right
 };
 
 AbstractButton::~AbstractButton()
@@ -37,18 +32,18 @@ AbstractButton::~AbstractButton()
 
 void AbstractButton::waitUntilReleased() const
 {
-	while (isPressed()) compat::yield();
+  while (isPressed()) compat::yield();
 }
 
 void AbstractButton::waitUntilPressed() const
 {
-	while (isNotPressed()) compat::yield();
+  while (isNotPressed()) compat::yield();
 }
 
 void AbstractButton::waitUntilClicked() const
 {
-	waitUntilPressed();
-	waitUntilReleased();
+  waitUntilPressed();
+  waitUntilReleased();
 }
 
 AbstractTextButton::~AbstractTextButton()
@@ -56,66 +51,66 @@ AbstractTextButton::~AbstractTextButton()
 
 }
 
-IdButton::IdButton(const Button::Type::Id & id, const char * defaultText)
-:m_id(id)
+IdButton::IdButton(const Id &id, const char * defaultText)
+  : m_id(id)
 {
-	size_t len = strlen(defaultText);
-	m_defaultText = new char[len + 1];
-	memcpy(m_defaultText, defaultText, len);
-	m_defaultText[len] = 0;
+  size_t len = strlen(defaultText);
+  m_defaultText = new char[len + 1];
+  memcpy(m_defaultText, defaultText, len);
+  m_defaultText[len] = 0;
 }
 
 IdButton::~IdButton()
 {
-	if (m_defaultText) delete[] m_defaultText;
+  if (m_defaultText) delete[] m_defaultText;
 }
 
 void IdButton::setText(const char * text)
 {
-	// deprecated
+  // deprecated
 }
 
 const char * IdButton::text() const
 {
-	return m_defaultText; // deprecated
+  return m_defaultText; // deprecated
 }
 
 bool IdButton::isTextDirty() const
 {
-	return false; // deprecated
+  return false; // deprecated
 }
 
 void IdButton::setPressed(bool pressed)
 {
-	Private::Button::instance()->setPressed(m_id, pressed);
+  Button::instance()->setPressed(m_id, pressed);
 }
 
 bool IdButton::value() const
 {
-	return Private::Button::instance()->isPressed(m_id);
+  return Button::instance()->isPressed(m_id);
 }
 
 void IdButton::resetText()
 {
-	setText(m_defaultText);
+  setText(m_defaultText);
 }
 
 void ExtraButtons::show()
 {
-	setShown(true);
+  setShown(true);
 }
 
 void ExtraButtons::hide()
 {
-	setShown(false);
+  setShown(false);
 }
 
 void ExtraButtons::setShown(bool shown)
 {
-	Private::Button::instance()->setExtraShown(shown);
+  Button::instance()->setExtraShown(shown);
 }
 
 bool ExtraButtons::isShown()
 {
-	return Private::Button::instance()->isExtraShown();
+  return Button::instance()->isExtraShown();
 }

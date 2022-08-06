@@ -1,23 +1,16 @@
-/*
- * analog_p.cpp
- *
- *  Created on: Dec 31, 2015
- *      Author: Joshua Southerland
- */
-
 #include "analog_p.hpp"
 
-#include "wallaby_p.hpp"
-#include "wallaby_regs_p.hpp"
+#include "kipr/core/platform.hpp"
+#include "kipr/core/registers.hpp"
 
-namespace Private
-{
+using namespace kipr;
+using namespace kipr::analog;
 
-unsigned short analog_value(unsigned int port, unsigned char * alt_read_buffer)
+using kipr::core::Platform;
+
+unsigned short kipr::analog::analog_value(unsigned int port, unsigned char *alt_read_buffer)
 {
     // TODO port # checks, shared # of ports constant
     const unsigned char address = REG_RW_ADC_0_H + 2 * port;
-    return Private::Wallaby::instance()->readRegister16b(address, alt_read_buffer);
-}
-
+    return Platform::instance()->readRegister16b(address, alt_read_buffer);
 }

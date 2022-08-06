@@ -1,25 +1,15 @@
-/*
- * button.h
- *
- *  Created on: Nov 12, 2015
- *      Author: Joshua Southerland
- */
-
-#ifndef INCLUDE_WALLABY_BUTTON_H_
-#define INCLUDE_WALLABY_BUTTON_H_
-
-
 /*!
  * \file button.h
  * \copyright KISS Institute for Practical Robotics
  * \defgroup button Buttons
  */
 
+#ifndef _KIPR_BUTTON_BUTTON_H_
+#define _KIPR_BUTTON_BUTTON_H_
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
 
 /*!
  * Updates the A button's text.
@@ -283,5 +273,4 @@ void set_extra_buttons_visible(int visible);
 }
 #endif
 
-
-#endif /* INCLUDE_WALLABY_BUTTON_H_ */
+#endif

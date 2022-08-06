@@ -1,13 +1,8 @@
-/*
- * analog_c.cpp
- *
- *  Created on: Nov 3, 2015
- *      Author: Joshua Southerland
- */
-
-#include "wallaby/analog.h"
+#include "kipr/analog/analog.h"
 #include "analog_p.hpp"
 
+using namespace kipr;
+using namespace kipr::analog;
 
 int analog(int port)
 {
@@ -16,22 +11,22 @@ int analog(int port)
 
 int analog8(int port)
 {
-	return analog(port) >> 4;
+	return ::analog(port) >> 4;
 }
 
 int analog10(int port)
 {
-	return analog(port) >> 2;
+	return ::analog(port) >> 2;
 }
 
 int analog12(int port)
 {
-	return Private::analog_value(port, nullptr);
+	return analog_value(port, nullptr);
 }
 
 int analog_et(int port)
 {
-	return analog(port);
+	return ::analog(port);
 }
 
 void set_analog_pullup(int port, int pullup)

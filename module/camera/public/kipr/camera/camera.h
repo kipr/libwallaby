@@ -1,47 +1,40 @@
-/*
- * camera.h
- *
- *  Created on: Jan 29, 2016
- *      Author: Nafis Zaman
- */
-
-#ifndef _CAMERA_H_
-#define _CAMERA_H_
-
-#include "geom.h"
-
 /*!
  * \file camera.h
  * \copyright KISS Institute for Practical Robotics
  * \defgroup camera Camera
  */
 
+#ifndef _KIPR_CAMERA_CAMERA_H_
+#define _KIPR_CAMERA_CAMERA_H_
+
+#include "kipr/geometry/geometry.h"
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 typedef struct pixel
 {
-	int r;
-	int g;
-	int b;
+  int r;
+  int g;
+  int b;
 } pixel;
 
 enum Resolution
 {
-	LOW_RES,
-	MED_RES,
-	HIGH_RES,
-	TELLO_RES,
-	NATIVE_RES
+  LOW_RES,
+  MED_RES,
+  HIGH_RES,
+  TELLO_RES,
+  NATIVE_RES
 };
 
 enum Model
 {
-	WHITE_2016,
-	BLACK_2017,
-	TELLO
+  WHITE_2016,
+  BLACK_2017,
+  TELLO
 };
 
 /**
@@ -126,7 +119,6 @@ int camera_open_device_model_at_res(int number, enum Model model, enum Resolutio
  * \ingroup camera
  */
 int camera_load_config(const char *name);
-
 
 /**
  * Sets the camera's x resolution.
@@ -297,10 +289,8 @@ const unsigned char *get_camera_frame();
 
 unsigned get_camera_element_size();
 
-
 #ifdef __cplusplus
 }
 #endif
-
 
 #endif

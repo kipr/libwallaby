@@ -1,19 +1,12 @@
-/*
- * analog_p.hpp
- *
- *  Created on: Dec 31, 2015
- *      Author: Joshua Southerland
- */
+#ifndef _KIPR_ANALOG_ANALOG_P_H_
+#define _KIPR_ANALOG_ANALOG_P_H_
 
-#ifndef SRC_ANALOG_P_HPP_
-#define SRC_ANALOG_P_HPP_
-
-namespace Private
+namespace kipr
 {
-
-unsigned short analog_value(unsigned int port, unsigned char * alt_read_buffer);
-
+  namespace analog
+  {
+    unsigned short analog_value(unsigned int port, unsigned char * alt_read_buffer);
+  }
 }
 
-
-#endif /* SRC_ANALOG_P_HPP_ */
+#endif
