@@ -1,29 +1,25 @@
-/*
- * magneto_c.cpp
- *
- *  Created on: Nov 5, 2015
- *      Author: Joshua Southerland
- */
-
-#include "wallaby/magneto.h"
+#include "kipr/magneto/magneto.h"
 #include "magneto_p.hpp"
+
+using namespace kipr;
+using namespace kipr::magneto;
 
 short magneto_x()
 {
-	return Private::magneto_x(nullptr);
+	return magneto::magneto_x(nullptr);
 }
 
 short magneto_y()
 {
-	return Private::magneto_y(nullptr);
+	return magneto::magneto_y(nullptr);
 }
 
 short magneto_z()
 {
-	return Private::magneto_z(nullptr);
+	return magneto::magneto_z(nullptr);
 }
 
 int magneto_calibrate()
 {
-	return Private::magneto_calibrate();
+	return magneto::magneto_calibrate();
 }

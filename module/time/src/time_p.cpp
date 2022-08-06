@@ -1,10 +1,3 @@
-/*
- * time_p.cpp
- *
- *  Created on: Nov 6, 2015
- *      Author: Joshua Southerland
- */
-
 #include "time_p.hpp"
 #include "wallaby/compat.hpp"
 
@@ -22,7 +15,7 @@
 #include <algorithm>
 #include <stdio.h>
 
-void Private::Time::microsleep(unsigned long microsecs)
+void kipr::time::microsleep(unsigned long microsecs)
 {
 	while (microsecs)
 	{
@@ -36,7 +29,7 @@ void Private::Time::microsleep(unsigned long microsecs)
 	}
 }
 
-unsigned long Private::Time::systime()
+unsigned long kipr::time::systime()
 {
 #ifdef _MSC_VER
 	FILETIME ft;

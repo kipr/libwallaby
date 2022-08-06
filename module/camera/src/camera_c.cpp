@@ -1,22 +1,14 @@
-/*
- * camera_c.cpp
- *
- *  Created on: Jan 29, 2016
- *      Author: Nafis Zaman
- */
-
-#ifdef WITH_VISION_SUPPORT
-
-#include "wallaby/camera.h"
-#include "wallaby/camera.hpp"
-#include "warn.hpp"
-#include "nyi.h"
+#include "kipr/camera/camera.h"
+#include "kipr/camera/camera.hpp"
 #include "camera_c_p.hpp"
 
 #include <iostream>
 #include <cstdlib>
 
-using namespace Private;
+using namespace kipr;
+using namespace kipr::camera;
+
+using kipr::config::Config;
 
 int camera_open()
 {  
@@ -49,7 +41,7 @@ int camera_open_device_model_at_res(int number, enum Model model, enum Resolutio
 
 int camera_load_config(const char *name)
 {
-  Config *config = Config::load(Camera::ConfigPath::path(name));
+  Config *config = Config::load(ConfigPath::path(name));
   if(!config) return 0;
   DeviceSingleton::instance()->setConfig(*config);
   delete config;
@@ -93,12 +85,12 @@ pixel get_camera_pixel(point2 p)
 {
   const cv::Mat &mat = DeviceSingleton::instance()->rawImage();
   if(mat.empty()) {
-    WARN("camera image is empty");
+    std::cerr << "camera image is empty" << std::endl;
     return pixel();
   }
   
   if(p.x < 0 || p.y < 0 || p.x >= mat.cols || p.y >= mat.rows) {
-    WARN("point isn't within the image");
+    std::cerr << "point isn't within the image" << std::endl;
     return pixel();
   }
   
@@ -119,7 +111,7 @@ int get_channel_count(void)
 
 bool check_channel(int i)
 {
-  const Camera::ChannelPtrVector &channels = DeviceSingleton::instance()->channels();
+  const ChannelPtrVector &channels = DeviceSingleton::instance()->channels();
   if(i < 0 || i >= channels.size()) {
     std::cout << "Channel must be in the range 0 .. " << (channels.size() - 1) << std::endl;
     return false;
@@ -129,14 +121,14 @@ bool check_channel(int i)
 
 bool check_channel_and_object(int i, int j)
 {
-  const Camera::ChannelPtrVector &channels = DeviceSingleton::instance()->channels();
+  const ChannelPtrVector &channels = DeviceSingleton::instance()->channels();
   if(i < 0 || i >= channels.size()) {
     if(!channels.size()) std::cout << "Active configuration doesn't have any channels.";
     else std::cout << "Channel must be in the range 0 .. " << (channels.size() - 1);
     std::cout << std::endl;
     return false;
   }
-  const Camera::ObjectVector *objs = channels[i]->objects();
+  const ObjectVector *objs = channels[i]->objects();
   if(j < 0 || j >= objs->size()) {
     std::cout << "No such object " << j << std::endl;
     return false;
@@ -153,7 +145,7 @@ int get_object_count(int channel)
 double get_object_confidence(int channel, int object)
 {
   if(!check_channel_and_object(channel, object)) return 0.0;
-  const Camera::Object &o = (*DeviceSingleton::instance()->channels()[channel]->objects())[object];
+  const Object &o = (*DeviceSingleton::instance()->channels()[channel]->objects())[object];
   return o.confidence();
 }
 
@@ -161,7 +153,7 @@ double get_object_confidence(int channel, int object)
 const char *get_object_data(int channel, int object)
 {
   if(!check_channel_and_object(channel, object)) return 0;
-  const Camera::Object &o = (*DeviceSingleton::instance()->channels()[channel]->objects())[object];
+  const Object &o = (*DeviceSingleton::instance()->channels()[channel]->objects())[object];
   return o.data();
 }
 
@@ -176,21 +168,21 @@ int get_code_num(int channel, int object)
 int get_object_data_length(int channel, int object)
 {
   if(!check_channel_and_object(channel, object)) return 0;
-  const Camera::Object &o = (*DeviceSingleton::instance()->channels()[channel]->objects())[object];
+  const Object &o = (*DeviceSingleton::instance()->channels()[channel]->objects())[object];
   return o.dataLength();
 }
 
 int get_object_area(int channel, int object)
 {
   if(!check_channel_and_object(channel, object)) return -1;
-  const Camera::Object &o = (*DeviceSingleton::instance()->channels()[channel]->objects())[object];
+  const Object &o = (*DeviceSingleton::instance()->channels()[channel]->objects())[object];
   return o.boundingBox().area();
 }
 
 rectangle get_object_bbox(int channel, int object)
 {
   if(!check_channel_and_object(channel, object)) return create_rectangle(-1, -1, 0, 0);
-  const Camera::Object &o = (*DeviceSingleton::instance()->channels()[channel]->objects())[object];
+  const Object &o = (*DeviceSingleton::instance()->channels()[channel]->objects())[object];
   return o.boundingBox().toCRectangle();
 }
 
@@ -229,7 +221,7 @@ int get_object_bbox_height(int channel, int object)
 point2 get_object_centroid(int channel, int object)
 {
   if(!check_channel_and_object(channel, object)) return create_point2(-1, -1);
-  const Camera::Object &o = (*DeviceSingleton::instance()->channels()[channel]->objects())[object];
+  const Object &o = (*DeviceSingleton::instance()->channels()[channel]->objects())[object];
   return o.centroid().toCPoint2();
 }
 
@@ -256,7 +248,7 @@ int get_object_centroid_y(int channel, int object)
 point2 get_object_center(int channel, int object)
 {
   if(!check_channel_and_object(channel, object)) return create_point2(-1, -1);
-  const Camera::Object &o = (*DeviceSingleton::instance()->channels()[channel]->objects())[object];
+  const Object &o = (*DeviceSingleton::instance()->channels()[channel]->objects())[object];
   return o.boundingBox().center().toCPoint2();
 }
 
@@ -287,7 +279,7 @@ void camera_close()
 
 void set_camera_config_base_path(const char *const path)
 {
-  Camera::ConfigPath::setBasePath(path);
+  ConfigPath::setBasePath(path);
 }
 
 const unsigned char *get_camera_frame_row(unsigned row)
@@ -304,5 +296,3 @@ unsigned get_camera_element_size()
 {
   return DeviceSingleton::instance()->rawImage().elemSize();
 }
-
-#endif

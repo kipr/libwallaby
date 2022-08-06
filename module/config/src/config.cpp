@@ -1,4 +1,4 @@
-#include "wallaby/config.hpp"
+#include "kipr/config/config.hpp"
 
 #include <sstream>
 #include <fstream>
@@ -6,6 +6,9 @@
 
 #define SEP "/"
 #define EQUAL ":"
+
+using namespace kipr;
+using namespace kipr::config;
 
 Config::Config()
 {

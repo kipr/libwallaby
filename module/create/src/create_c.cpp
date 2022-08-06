@@ -1,16 +1,10 @@
-/*
- * create_c.cpp
- *
- *  Created on: Nov 13, 2015
- *      Author: Joshua Southerland
- */
-
-
-#include "wallaby/create.h"
-#include "wallaby/create.hpp"
-#include "nyi.h"
+#include "kipr/create/create.h"
+#include "kipr/create/create.hpp"
 
 #include <climits>
+
+using namespace kipr;
+using namespace kipr::create;
 
 int create_connect()
 {
@@ -41,31 +35,6 @@ void create_safe()
 void create_full()
 {
 	Create::instance()->setFullMode();
-}
-
-void create_start()
-{
-  THIS_IS_NYI
-}
-
-void create_spot()
-{
-  THIS_IS_NYI
-}
-
-void create_cover()
-{
-  THIS_IS_NYI
-}
-
-void create_demo(int d)
-{
-  THIS_IS_NYI
-}
-
-void create_cover_dock()
-{
-  THIS_IS_NYI
 }
 
 int get_create_mode()
@@ -196,12 +165,6 @@ int get_create_vwall()
 	return Create::instance()->virtualWall()->value();
 }
 
-int get_create_overcurrents()
-{
-  THIS_IS_NYI
-  return 0;
-}
-
 int get_create_infrared()
 {
 	return Create::instance()->ir()->value();
@@ -252,18 +215,6 @@ int get_create_battery_charging_state()
 	return Create::instance()->chargingState()->value();
 }
 
-int get_create_battery_voltage()
-{
-  THIS_IS_NYI
-  return 0;
-}
-
-int get_create_battery_current()
-{
-  THIS_IS_NYI
-  return 0;
-}
-
 int get_create_battery_temp()
 {
 	return Create::instance()->batteryTemperature()->value();
@@ -304,18 +255,6 @@ int get_create_rcliff_amt()
 	return Create::instance()->cliffRightSignal()->value();
 }
 
-int get_create_bay_DI()
-{
-  THIS_IS_NYI
-	return 0;
-}
-
-int get_create_bay_AI()
-{
-  THIS_IS_NYI
-	return 0;
-}
-
 int get_create_song_number()
 {
     return Create::instance()->songNumber()->value();
@@ -324,36 +263,6 @@ int get_create_song_number()
 int get_create_song_playing()
 {
   	return Create::instance()->songPlaying()->value();
-}
-
-int get_create_number_of_stream_packets()
-{
-  THIS_IS_NYI
-	return 0;
-}
-
-int get_create_requested_velocity()
-{
-  THIS_IS_NYI
-	return 0;
-}
-
-int get_create_requested_radius()
-{
-  THIS_IS_NYI
-	return 0;
-}
-
-int get_create_requested_right_velocity()
-{
-  THIS_IS_NYI
-	return 0;
-}
-
-int get_create_requested_left_velocity()
-{
-  THIS_IS_NYI
-	return 0;
 }
 
 void set_create_baud_rate(const enum BaudRate baudRate)
@@ -404,36 +313,6 @@ void create_spin_block(int speed, int angle)
 int _create_get_raw_encoders(long *lenc, long *renc)
 {
 	return 0;
-}
-
-void create_advance_led(int on)
-{
-  THIS_IS_NYI
-}
-
-void create_play_led(int on)
-{
-  THIS_IS_NYI
-}
-
-void create_power_led(int color, int brightness)
-{
-  THIS_IS_NYI
-}
-
-void create_digital_output(int bits)
-{
-  THIS_IS_NYI
-}
-
-void create_pwm_low_side_drivers(int pwm2, int pwm1, int pwm0)
-{
-  THIS_IS_NYI
-}
-
-void create_low_side_drivers(int pwm2, int pwm1, int pwm0)
-{
-  THIS_IS_NYI
 }
 
 int create_load_song(const unsigned char* song, const unsigned char length, const unsigned char num)

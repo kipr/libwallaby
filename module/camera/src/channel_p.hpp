@@ -1,41 +1,32 @@
-/*
- * channel_p.hpp
- *
- *  Created on: Jan 29, 2016
- *      Author: Nafis Zaman
- */
+#ifndef _KIPR_CAMERA_CHANNEL_P_HPP_
+#define _KIPR_CAMERA_CHANNEL_P_HPP_
 
-#ifdef WITH_VISION_SUPPORT
-
-#ifndef _CHANNEL_P_HPP_
-#define _CHANNEL_P_HPP_
-
-#include "wallaby/camera.hpp"
+#include "kipr/camera/camera.hpp"
 #include <opencv2/core/core.hpp>
 
 #include <zbar.h>
 
-namespace Private
+namespace kipr
 {
-  namespace Camera
+  namespace camera
   {
-    class HsvChannelImpl : public ::Camera::ChannelImpl
+    class HsvChannelImpl : public ChannelImpl
     {
     public:
       HsvChannelImpl();
       virtual void update(const cv::Mat &image);
-      virtual ::Camera::ObjectVector findObjects(const Config &config);
+      virtual ObjectVector findObjects(const config::Config &config);
       
     private:
       cv::Mat m_image;
     };
     
-    class BarcodeChannelImpl : public ::Camera::ChannelImpl
+    class BarcodeChannelImpl : public ChannelImpl
     {
     public:
       BarcodeChannelImpl();
       virtual void update(const cv::Mat &image);
-      virtual ::Camera::ObjectVector findObjects(const Config &config);
+      virtual ObjectVector findObjects(const config::Config &config);
 
     private:
       cv::Mat m_gray;
@@ -43,12 +34,12 @@ namespace Private
       zbar::ImageScanner m_scanner;
     };
 
-    class ArucoChannelImpl : public ::Camera::ChannelImpl
+    class ArucoChannelImpl : public ChannelImpl
     {
     public:
       ArucoChannelImpl();
       virtual void update(const cv::Mat &image);
-      virtual ::Camera::ObjectVector findObjects(const Config &config);
+      virtual ObjectVector findObjects(const config::Config &config);
 
     private:
       cv::Mat m_image;

@@ -1,17 +1,9 @@
-/*
- * create.cpp
- *
- *  Created on: Nov 13, 2015
- *      Author: Joshua Southerland
- */
+#include "kipr/create/create.hpp"
 
-#include "wallaby/create.hpp"
-
-#include "wallaby/battery.hpp"
-#include "wallaby/compat.hpp"
-#include "wallaby/create_codes.h"
-#include "wallaby/util.hpp"
-#include "wallaby_p.hpp"
+#include "kipr/battery/battery.hpp"
+#include "kipr/compat/compat.hpp"
+#include "kipr/create/create_codes.h"
+#include "kipr/core/platform.hpp"
 
 #ifndef WIN32
 #include <fcntl.h>
@@ -24,6 +16,9 @@
 #include <cstdio>
 #include <cstring>
 #include <iostream>
+
+using namespace kipr;
+using namespace kipr::create;
 
 #define LOW_BYTE(x) ((x)&0xFF)
 #define HIGH_BYTE(x) (((x)&0xFF00) >> 8)
@@ -54,8 +49,10 @@ using namespace CreatePackets;
 // CREATE SENSORS //
 ////////////////////
 
-namespace CreateSensors {
-class PlayButton : public AbstractButton {
+using namespace kipr::create::sensors;
+
+class PlayButton : public button::AbstractButton
+{
    public:
     PlayButton(Create *create) : m_create(create) {}
 
@@ -69,7 +66,7 @@ class PlayButton : public AbstractButton {
     Create *m_create;
 };
 
-class AdvanceButton : public AbstractButton {
+class AdvanceButton : public button::AbstractButton {
    public:
     AdvanceButton(Create *create) : m_create(create) {}
 
@@ -83,7 +80,7 @@ class AdvanceButton : public AbstractButton {
     Create *m_create;
 };
 
-class Wall : public Sensor<bool> {
+class Wall : public sensor::Sensor<bool> {
    public:
     Wall(Create *create) : m_create(create) {}
 
@@ -96,7 +93,7 @@ class Wall : public Sensor<bool> {
     Create *m_create;
 };
 
-class CliffLeft : public Sensor<bool> {
+class CliffLeft : public sensor::Sensor<bool> {
    public:
     CliffLeft(Create *create) : m_create(create) {}
 
@@ -109,7 +106,7 @@ class CliffLeft : public Sensor<bool> {
     Create *m_create;
 };
 
-class CliffFrontLeft : public Sensor<bool> {
+class CliffFrontLeft : public sensor::Sensor<bool> {
    public:
     CliffFrontLeft(Create *create) : m_create(create) {}
 
@@ -122,7 +119,7 @@ class CliffFrontLeft : public Sensor<bool> {
     Create *m_create;
 };
 
-class CliffFrontRight : public Sensor<bool> {
+class CliffFrontRight : public sensor::Sensor<bool> {
    public:
     CliffFrontRight(Create *create) : m_create(create) {}
 
@@ -135,7 +132,7 @@ class CliffFrontRight : public Sensor<bool> {
     Create *m_create;
 };
 
-class CliffRight : public Sensor<bool> {
+class CliffRight : public sensor::Sensor<bool> {
    public:
     CliffRight(Create *create) : m_create(create) {}
 

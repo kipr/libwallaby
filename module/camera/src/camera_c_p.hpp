@@ -1,29 +1,21 @@
-/*
- * camera_c_p.hpp
- *
- *  Created on: Jan 29, 2016
- *      Author: Nafis Zaman
- */
+#ifndef _KIPR_CAMERA_CAMERA_C_P_HPP_
+#define _KIPR_CAMERA_CAMERA_C_P_HPP_
 
-#ifdef WITH_VISION_SUPPORT
+#include "kipr/camera/camera.hpp"
 
-#ifndef _CAMERA_C_P_HPP_
-#define _CAMERA_C_P_HPP_
-
-#include "wallaby/camera.hpp"
-
-namespace Private
+namespace kipr
 {
-  class DeviceSingleton
+  namespace camera
   {
-  public:    
-    static ::Camera::Device *instance();
-    
-  private:
-    static ::Camera::Device *s_device;
-  };
+    class DeviceSingleton
+    {
+    public:    
+      static Device *instance();
+      
+    private:
+      static Device *s_device;
+    };
+  }
 }
-
-#endif
 
 #endif

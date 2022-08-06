@@ -1,19 +1,6 @@
-/*
- * camera.cpp
- *
- *  Created on: Jan 29, 2016
- *      Author: Nafis Zaman
- */
-
-#ifdef WITH_VISION_SUPPORT
-
-//#define BOTUI_TELLO_TEST
-
-#include "precomp.hpp"
-#include "wallaby/camera.hpp"
+#include "kipr/camera/camera.hpp"
 #include "channel_p.hpp"
-#include "wallaby/camera.h"
-#include "warn.hpp"
+#include "kipr/camera/camera.h"
 #include "UDPVideo.hpp"
 
 #include <csetjmp>
@@ -36,8 +23,12 @@
 #include <unistd.h>
 #endif
 
-using namespace Camera;
-using namespace std;
+using namespace kipr;
+using namespace kipr::camera;
+
+using kipr::geometry::Rect;
+using kipr::geometry::Point2;
+using kipr::config::Config;
 
 #include <linux/usbdevice_fs.h>
 
@@ -105,9 +96,7 @@ public:
 #define SELECTTIMEOUTSEC       1
 #define SELECTTIMEOUTUSEC      0
 
-// Object //
-
-Camera::Object::Object(const Point2<unsigned> &centroid,
+Object::Object(const Point2<unsigned> &centroid,
   const Rect<unsigned> &boundingBox,
   const double confidence, const char *data,
   const size_t &dataLength)
@@ -123,7 +112,7 @@ Camera::Object::Object(const Point2<unsigned> &centroid,
   memcpy(m_data, data, m_dataLength);
 }
 
-Camera::Object::Object(const Object &rhs)
+Object::Object(const Object &rhs)
     : m_centroid(rhs.m_centroid), m_boundingBox(rhs.m_boundingBox),
       m_confidence(rhs.m_confidence), m_data(0),
       m_dataLength(rhs.m_dataLength) {
@@ -135,19 +124,19 @@ Camera::Object::Object(const Object &rhs)
   m_data[m_dataLength] = 0;
 }
 
-Camera::Object::~Object() { delete[] m_data; }
+Object::~Object() { delete[] m_data; }
 
-const Point2<unsigned> &Camera::Object::centroid() const { return m_centroid; }
+const geometry::Point2<unsigned> &Object::centroid() const { return m_centroid; }
 
-const Rect<unsigned> &Camera::Object::boundingBox() const {
+const geometry::Rect<unsigned> &Object::boundingBox() const {
   return m_boundingBox;
 }
 
-const double Camera::Object::confidence() const { return m_confidence; }
+const double Object::confidence() const { return m_confidence; }
 
-const char *Camera::Object::data() const { return m_data; }
+const char *Object::data() const { return m_data; }
 
-const size_t Camera::Object::dataLength() const { return m_dataLength; }
+const size_t Object::dataLength() const { return m_dataLength; }
 
 ChannelImpl::ChannelImpl() : m_dirty(true) {}
 
@@ -172,9 +161,9 @@ ObjectVector ChannelImpl::objects(const Config &config) {
 }
 
 std::map<std::string, ChannelImpl *> ChannelImplManager::m_channelImpls = {
-  {"hsv", new Private::Camera::HsvChannelImpl()}, 
-  {"qr", new Private::Camera::BarcodeChannelImpl()},
-  {"aruco", new Private::Camera::ArucoChannelImpl()}
+  {"hsv", new HsvChannelImpl()}, 
+  {"qr", new BarcodeChannelImpl()},
+  {"aruco", new ArucoChannelImpl()}
 };
 
 void ChannelImplManager::setImage(const cv::Mat &image) {
@@ -190,7 +179,7 @@ ChannelImpl *ChannelImplManager::channelImpl(const std::string &name) {
 
 // Channel //
 
-Camera::Channel::Channel(Device *device, const Config &config)
+Channel::Channel(Device *device, const Config &config)
     : m_device(device), m_config(config), m_impl(0), m_valid(false) {
   m_objects.clear();
   const std::string type = config.stringValue("type");

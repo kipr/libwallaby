@@ -1,13 +1,3 @@
-/*
- * create.h
- *
- *  Created on: Nov 13, 2015
- *      Author: Joshua Southerland
- */
-
-#ifndef INCLUDE_WALLABY_CREATE_H_
-#define INCLUDE_WALLABY_CREATE_H_
-
 /*!
  * \file create.h
  * \author Braden McDorman
@@ -15,8 +5,10 @@
  * \defgroup create iRobot (R) Create (TM)
  */
 
-#include "export.h"
-#include "vtable.h"
+#ifndef _KIPR_CREATE_CREATE_H_
+#define _KIPR_CREATE_CREATE_H_
+
+#include "kipr/export/export.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -29,7 +21,7 @@ extern "C" {
  * \see create_disconnect
  * \ingroup create
  */
-VF EXPORT_SYM int create_connect();
+EXPORT_SYM int create_connect();
 
 /*!
  * Attempts to establish a connection to the create.
@@ -37,7 +29,7 @@ VF EXPORT_SYM int create_connect();
  * \see create_disconnect
  * \ingroup create
  */
-VF EXPORT_SYM int create_connect_once();
+EXPORT_SYM int create_connect_once();
 
 /*!
  * \description Disconnects the controller from the iRobot Create.
@@ -45,16 +37,7 @@ VF EXPORT_SYM int create_connect_once();
  * \see create_connect
  * \ingroup create
  */
-VF EXPORT_SYM void create_disconnect();
-
-/*!
- * \ingroup create
- * \see ceate_connect
- * \description Initiates a connection to the iRobot Create. 
- * \description Not recommended as create_connect() handles this and more.
- * \description Read iRobot Create manual before using this command.
- */ 
-VF EXPORT_SYM void create_start();
+EXPORT_SYM void create_disconnect();
 
 /*!
  * \ingroup create
@@ -68,7 +51,7 @@ VF EXPORT_SYM void create_start();
  * \description In Passive mode, Roomba will go into power saving mode to conserve battery power after five minutes of inactivity
  * \note Appears to crash controller, do not use or use serial communication.
  */
-VF EXPORT_SYM void create_passive();
+EXPORT_SYM void create_passive();
 
 /*!
  * \ingroup create
@@ -80,7 +63,7 @@ VF EXPORT_SYM void create_passive();
  * \description safety-related conditions include: Cliff detection, wheel drop, and charging.
  * \description If your Create is refusing to move, try setting it to full mode.
  */
-VF EXPORT_SYM void create_safe();
+EXPORT_SYM void create_safe();
 
 /*!
  * \ingroup create
@@ -93,36 +76,7 @@ VF EXPORT_SYM void create_safe();
  * \description Use this if you are having issues with the Create not moving after lifting it, falling, etc.
  * 
  */
-VF EXPORT_SYM void create_full();
-
-/*!
- * \ingroup create
- * \see create_demo
- * \see create_cover
- * \see create_cover_dock
- 
- * \description Same as hitting the "Spot" button on the Roomba/Create.
- * \description Cleans a 3ft/1m circle around where SPOT was initiated.
- */
-VF EXPORT_SYM void create_spot();
-
-/*!
- * \ingroup create
- * \note Not Yet Implemented
- */
-VF EXPORT_SYM void create_cover();
-
-/*!
- * \ingroup create
- * \note Not Yet Implemented
- */
-VF EXPORT_SYM void create_demo(int d);
-
-/*!
- * \ingroup create
- * \note Not Yet Implemented
- */
-VF EXPORT_SYM void create_cover_dock();
+EXPORT_SYM void create_full();
 
 /*!
  * \ingroup create
@@ -132,28 +86,28 @@ VF EXPORT_SYM void create_cover_dock();
  * \description Gets the current mode of the Create OI
  * \description Off: 0, Passive: 1, Safe: 2, Full: 3
  */
-VF EXPORT_SYM int get_create_mode();
+EXPORT_SYM int get_create_mode();
 
 /*!
  * \ingroup create
  * \see get_create_rbump
  * \description Returns the status of the left bumper as a digital value (0 or 1).
  */
-VF EXPORT_SYM int get_create_lbump();
+EXPORT_SYM int get_create_lbump();
 
 /*!
  * \ingroup create
  * \see get_create_lbump
  * \description Returns the status of the right bumper as a digital value (0 or 1).
  */
-VF EXPORT_SYM int get_create_rbump();
+EXPORT_SYM int get_create_rbump();
 
 /*!
  * \ingroup create
  * \see get_create_rwdrop
  * \description Detects if the left wheel is dropped/lowered (the create is lifted)
  */
-VF EXPORT_SYM int get_create_lwdrop();
+EXPORT_SYM int get_create_lwdrop();
 
 /*!
  * \ingroup create
@@ -161,14 +115,14 @@ VF EXPORT_SYM int get_create_lwdrop();
  * \see get_create_lwdrop
  * \note Not Implemented
  */
-VF EXPORT_SYM int get_create_cwdrop();
+EXPORT_SYM int get_create_cwdrop();
 
 /*!
  * \ingroup create
  * \see get_create_lwdrop
  * \description Detects if the right wheel is dropped/lowered (the create is lifted)
  */
-VF EXPORT_SYM int get_create_rwdrop();
+EXPORT_SYM int get_create_rwdrop();
 
 /*!
  * \ingroup create
@@ -176,7 +130,7 @@ VF EXPORT_SYM int get_create_rwdrop();
  * \description Reports if the Create sees a physical wall.
  * \note The Create only detects walls on the right because Roombas only need it on the right side.
  */
-VF EXPORT_SYM int get_create_wall();
+EXPORT_SYM int get_create_wall();
 
 /*!
  * \ingroup create
@@ -185,7 +139,7 @@ VF EXPORT_SYM int get_create_wall();
  * \see get_create_rcliff
  * \description reports if the left cliff/edge sensor is tripped. 
  */
-VF EXPORT_SYM int get_create_lcliff();
+EXPORT_SYM int get_create_lcliff();
 
 /*!
  * \ingroup create
@@ -194,7 +148,7 @@ VF EXPORT_SYM int get_create_lcliff();
  * \see get_create_rcliff
  * \description reports if the front-left cliff/edge sensor is tripped. 
  */
-VF EXPORT_SYM int get_create_lfcliff();
+EXPORT_SYM int get_create_lfcliff();
 
 /*!
  * \ingroup create
@@ -203,7 +157,7 @@ VF EXPORT_SYM int get_create_lfcliff();
  * \see get_create_lfcliff
  * \description reports if the front-right cliff/edge sensor is tripped. 
  */
-VF EXPORT_SYM int get_create_rfcliff();
+EXPORT_SYM int get_create_rfcliff();
 
 /*!
  * \ingroup create
@@ -212,7 +166,7 @@ VF EXPORT_SYM int get_create_rfcliff();
  * \see get_create_rfcliff
  * \description reports if the right cliff/edge sensor is tripped. 
  */
-VF EXPORT_SYM int get_create_rcliff();
+EXPORT_SYM int get_create_rcliff();
 
 /*!
  * \ingroup create
@@ -224,7 +178,7 @@ VF EXPORT_SYM int get_create_rcliff();
  * \description returns the left light bumper sensor as described in the iRobot Create manual.
  * \descritpion returns a binary/digital value rather than the raw sensor data (on or off/1 or 0).
  */
-VF EXPORT_SYM int get_create_llightbump();
+EXPORT_SYM int get_create_llightbump();
 
 /*!
  * \ingroup create
@@ -236,7 +190,7 @@ VF EXPORT_SYM int get_create_llightbump();
  * \description returns the left-front light bumper sensor as described in the iRobot Create manual.
  * \descritpion returns a binary/digital value rather than the raw sensor data (on or off/1 or 0).
  */
-VF EXPORT_SYM int get_create_lflightbump();
+EXPORT_SYM int get_create_lflightbump();
 
 /*!
  * \ingroup create
@@ -248,7 +202,7 @@ VF EXPORT_SYM int get_create_lflightbump();
  * \description returns the left-center light bumper sensor as described in the iRobot Create manual.
  * \descritpion returns a binary/digital value rather than the raw sensor data (on or off/1 or 0).
  */
-VF EXPORT_SYM int get_create_lclightbump();
+EXPORT_SYM int get_create_lclightbump();
 
 /*!
  * \ingroup create
@@ -260,7 +214,7 @@ VF EXPORT_SYM int get_create_lclightbump();
  * \description returns the right-center light bumper sensor as described in the iRobot Create manual.
  * \descritpion returns a binary/digital value rather than the raw sensor data (on or off/1 or 0).
  */
-VF EXPORT_SYM int get_create_rclightbump();
+EXPORT_SYM int get_create_rclightbump();
 
 /*!
  * \ingroup create
@@ -272,7 +226,7 @@ VF EXPORT_SYM int get_create_rclightbump();
  * \description returns the right-front light bumper sensor as described in the iRobot Create manual.
  * \descritpion returns a binary/digital value rather than the raw sensor data (on or off/1 or 0).
  */
-VF EXPORT_SYM int get_create_rflightbump();
+EXPORT_SYM int get_create_rflightbump();
 
 /*!
  * \ingroup create
@@ -284,7 +238,7 @@ VF EXPORT_SYM int get_create_rflightbump();
  * \description returns the right light bumper sensor as described in the iRobot Create manual.
  * \descritpion returns a binary/digital value rather than the raw sensor data (on or off/1 or 0).
  */
-VF EXPORT_SYM int get_create_rlightbump();
+EXPORT_SYM int get_create_rlightbump();
 
 /*!
  * \ingroup create
@@ -296,7 +250,7 @@ VF EXPORT_SYM int get_create_rlightbump();
  * \description returns the left light bumper sensor as described in the iRobot Create manual.
  * \description returns the amount the sensor is pressed, rather than a binary value.
  */
-VF EXPORT_SYM int get_create_llightbump_amt();
+EXPORT_SYM int get_create_llightbump_amt();
 
 /*!
  * \ingroup create
@@ -308,7 +262,7 @@ VF EXPORT_SYM int get_create_llightbump_amt();
  * \description returns the right light bumper sensor as described in the iRobot Create manual.
  * \description returns the amount the sensor is pressed, rather than a binary value.
  */
-VF EXPORT_SYM int get_create_rlightbump_amt();
+EXPORT_SYM int get_create_rlightbump_amt();
 
 /*!
  * \ingroup create
@@ -320,7 +274,7 @@ VF EXPORT_SYM int get_create_rlightbump_amt();
  * \description returns the left-front light bumper sensor as described in the iRobot Create manual.
  * \description returns the amount the sensor is pressed, rather than a binary value.
  */
-VF EXPORT_SYM int get_create_lflightbump_amt();
+EXPORT_SYM int get_create_lflightbump_amt();
 
 /*!
  * \ingroup create
@@ -332,7 +286,7 @@ VF EXPORT_SYM int get_create_lflightbump_amt();
  * \description returns the left-center light bumper sensor as described in the iRobot Create manual.
  * \description returns the amount the sensor is pressed, rather than a binary value.
  */
-VF EXPORT_SYM int get_create_lclightbump_amt();
+EXPORT_SYM int get_create_lclightbump_amt();
 
 /*!
  * \ingroup create
@@ -344,7 +298,7 @@ VF EXPORT_SYM int get_create_lclightbump_amt();
  * \description returns the right-center light bumper sensor as described in the iRobot Create manual.
  * \description returns the amount the sensor is pressed, rather than a binary value.
  */
-VF EXPORT_SYM int get_create_rclightbump_amt();
+EXPORT_SYM int get_create_rclightbump_amt();
 
 /*!
  * \ingroup create
@@ -356,7 +310,7 @@ VF EXPORT_SYM int get_create_rclightbump_amt();
  * \description returns the right-front light bumper sensor as described in the iRobot Create manual.
  * \description returns the amount the sensor is pressed, rather than a binary value.
  */
-VF EXPORT_SYM int get_create_rflightbump_amt();
+EXPORT_SYM int get_create_rflightbump_amt();
 
 /*!
  * \ingroup create
@@ -364,13 +318,7 @@ VF EXPORT_SYM int get_create_rflightbump_amt();
  * \description Reports if there is a virutal wall. 
  * \note The botball kit does not contain a "virtual wall" unit as of Fall 2019.
  */
-VF EXPORT_SYM int get_create_vwall();
-
-/*!
- * \ingroup create
- * \note Not Yet Implemented
- */
-VF EXPORT_SYM int get_create_overcurrents();
+EXPORT_SYM int get_create_vwall();
 
 /*!
  * \ingroup create
@@ -379,21 +327,21 @@ VF EXPORT_SYM int get_create_overcurrents();
  * \description You can also potentially control the Create with IR signals for forward, backward, etc.
  * \description See iRobot Create Manual for more information ("Characters sent by iRobot devices")
  */
-VF EXPORT_SYM int get_create_infrared();
+EXPORT_SYM int get_create_infrared();
 
 /*!
  * \ingroup create
  * \description Returns if the "advance" button is pressed.
  * \note "Advance" is not a button on the newer Creates.
  */
-VF EXPORT_SYM int get_create_advance_button();
+EXPORT_SYM int get_create_advance_button();
 
 /*!
  * \ingroup create
  * \description Returns if the "play" button is pressed.
  * \note "Play" is not a button on the newer Creates.
  */
-VF EXPORT_SYM int get_create_play_button();
+EXPORT_SYM int get_create_play_button();
 
 /*!
  * \ingroup create
@@ -401,7 +349,7 @@ VF EXPORT_SYM int get_create_play_button();
  * \description returns the normalized angle that the create is at in degrees (angle mod 360).
  * \description "Normalized" means that the angle is converted to be between 0 and 360 degrees first.
  */
-VF EXPORT_SYM int get_create_normalized_angle();
+EXPORT_SYM int get_create_normalized_angle();
 
 /*!
  * \ingroup create
@@ -409,7 +357,7 @@ VF EXPORT_SYM int get_create_normalized_angle();
  * \description Set the current angle that the create is at.
  * \description Sets what the create should use as a reference for its angle
  */
-VF EXPORT_SYM void set_create_normalized_angle(int angle);
+EXPORT_SYM void set_create_normalized_angle(int angle);
 
 /*!
  * \ingroup create
@@ -417,7 +365,7 @@ VF EXPORT_SYM void set_create_normalized_angle(int angle);
  * \description returns the angle the Create is currently turned to (does not "normalize").
  * \description This value is any value as it is not normalized to a range of [0,360)
  */
-VF EXPORT_SYM int get_create_total_angle();
+EXPORT_SYM int get_create_total_angle();
 
 /*!
  * \ingroup create
@@ -425,7 +373,7 @@ VF EXPORT_SYM int get_create_total_angle();
  * \description Set the current angle that the create is at for the total angle functions.
  * \description Sets what the create should use as a reference for its angle
  */
-VF EXPORT_SYM void set_create_total_angle(int angle);
+EXPORT_SYM void set_create_total_angle(int angle);
 
 /*!
  * \ingroup create
@@ -433,14 +381,14 @@ VF EXPORT_SYM void set_create_total_angle(int angle);
  * \description Gets the distance traveled based on encoder values in the wheels.
  * \description Units should be in millimeters (mm)
  */
-VF EXPORT_SYM int get_create_distance();
+EXPORT_SYM int get_create_distance();
 
 /*!
  * \ingroup create
  * \description Sets the current distance the create thinks it has traveled.
  * \description Use this to set it's reference for where it is.
  */
-VF EXPORT_SYM void set_create_distance(int dist);
+EXPORT_SYM void set_create_distance(int dist);
 
 /*!
  * \ingroup create
@@ -449,180 +397,103 @@ VF EXPORT_SYM void set_create_distance(int dist);
  * \description returns the current charging state of the battery.
  * \description Not Charging: 0, Reconditioning Charging: 1, Full Charging: 2, Trickle Charging: 3, Waiting: 4, Charging Connection Fault: 5
  */
-VF EXPORT_SYM int get_create_battery_charging_state();
-
-/*!
- * \ingroup create
- * \description returns battery voltage in millivolts (mV)
- */
-VF EXPORT_SYM int get_create_battery_voltage();
-
-/*!
- * \ingroup create
- * \description returns current in milliAmps (mA)
- */
-VF EXPORT_SYM int get_create_battery_current();
+EXPORT_SYM int get_create_battery_charging_state();
 
 /*!
  * \ingroup create
  * \description returns the temperature of the battery in degrees Celcius
  */
-VF EXPORT_SYM int get_create_battery_temp();
+EXPORT_SYM int get_create_battery_temp();
 
 /*!
  * \ingroup create
  * \description returns the current charge on the battery in milliAmp-Hours (mAH)
  */
-VF EXPORT_SYM int get_create_battery_charge();
+EXPORT_SYM int get_create_battery_charge();
 
 /*!
  * \ingroup create
  * \description Returns the capacity of the battery in milliAmp-Hours (mAH)
  */
-VF EXPORT_SYM int get_create_battery_capacity();
+EXPORT_SYM int get_create_battery_capacity();
 
 /*!
  * \ingroup create
  */
-VF EXPORT_SYM int get_create_wall_amt();
+EXPORT_SYM int get_create_wall_amt();
 
 /*!
  * \ingroup create
  */
-VF EXPORT_SYM int get_create_lcliff_amt();
+EXPORT_SYM int get_create_lcliff_amt();
 
 /*!
  * \ingroup create
  */
-VF EXPORT_SYM int get_create_lfcliff_amt();
+EXPORT_SYM int get_create_lfcliff_amt();
 
 /*!
  * \ingroup create
  */
-VF EXPORT_SYM int get_create_rfcliff_amt();
+EXPORT_SYM int get_create_rfcliff_amt();
 
 /*!
  * \ingroup create
  */
-VF EXPORT_SYM int get_create_rcliff_amt();
-
-/*!
- * \ingroup create
- */
-VF EXPORT_SYM int get_create_bay_DI();
-
-/*!
- * \ingroup create
- */
-VF EXPORT_SYM int get_create_bay_AI();
+EXPORT_SYM int get_create_rcliff_amt();
 
 /*!
  * \return The song slot of the current song
  * \ingroup create
  */
-VF EXPORT_SYM int get_create_song_number();
+EXPORT_SYM int get_create_song_number();
 
 /*!
  * \return 1 if it the create is playing a song,
  * 0 if the create isn't playing a song
  * \ingroup create
  */
-VF EXPORT_SYM int get_create_song_playing();
+EXPORT_SYM int get_create_song_playing();
 
 /*!
  * \ingroup create
  */
-VF EXPORT_SYM int get_create_number_of_stream_packets();
+EXPORT_SYM void create_stop();
 
 /*!
  * \ingroup create
  */
-VF EXPORT_SYM int get_create_requested_velocity();
+EXPORT_SYM void create_drive(int speed, int radius);
 
 /*!
  * \ingroup create
  */
-VF EXPORT_SYM int get_create_requested_radius();
+EXPORT_SYM void create_drive_straight(int speed);
 
 /*!
  * \ingroup create
  */
-VF EXPORT_SYM int get_create_requested_right_velocity();
+EXPORT_SYM void create_spin_CW(int speed);
 
 /*!
  * \ingroup create
  */
-VF EXPORT_SYM int get_create_requested_left_velocity();
+EXPORT_SYM void create_spin_CCW(int speed);
 
 /*!
  * \ingroup create
  */
-VF EXPORT_SYM void create_stop();
+EXPORT_SYM void create_drive_direct(int l_speed, int r_speed);
 
 /*!
  * \ingroup create
  */
-VF EXPORT_SYM void create_drive(int speed, int radius);
+EXPORT_SYM void create_spin_block(int speed, int angle);
 
 /*!
  * \ingroup create
  */
-VF EXPORT_SYM void create_drive_straight(int speed);
-
-/*!
- * \ingroup create
- */
-VF EXPORT_SYM void create_spin_CW(int speed);
-
-/*!
- * \ingroup create
- */
-VF EXPORT_SYM void create_spin_CCW(int speed);
-
-/*!
- * \ingroup create
- */
-VF EXPORT_SYM void create_drive_direct(int l_speed, int r_speed);
-
-/*!
- * \ingroup create
- */
-VF EXPORT_SYM void create_spin_block(int speed, int angle);
-
-/*!
- * \ingroup create
- */
-VF EXPORT_SYM int _create_get_raw_encoders(long *lenc, long *renc);
-
-/*!
- * \ingroup create
- */
-VF EXPORT_SYM void create_advance_led(int on);
-
-/*!
- * \ingroup create
- */
-VF EXPORT_SYM void create_play_led(int on) ;
-
-/*!
- * \ingroup create
- */
-VF EXPORT_SYM void create_power_led(int color, int brightness);
-
-/*!
- * \ingroup create
- */
-VF EXPORT_SYM void create_digital_output(int bits);
-
-/*!
- * \ingroup create
- */
-VF EXPORT_SYM void create_pwm_low_side_drivers(int pwm2, int pwm1, int pwm0);
-
-/*!
- * \ingroup create
- */
-VF EXPORT_SYM void create_low_side_drivers(int pwm2, int pwm1, int pwm0);
+EXPORT_SYM int _create_get_raw_encoders(long *lenc, long *renc);
 
 /*!
  * Loads a song for playing on the create
@@ -641,7 +512,7 @@ VF EXPORT_SYM void create_low_side_drivers(int pwm2, int pwm1, int pwm0);
  * \note Example use: `unsigned char example_song[] = {88, 20, 91, 32, 70, 15}; create_load_song(example_song, 3, 0);`
  * \ingroup create
  */
-VF EXPORT_SYM int create_load_song(const unsigned char* song, const unsigned char length, const unsigned char num);
+EXPORT_SYM int create_load_song(const unsigned char* song, const unsigned char length, const unsigned char num);
 
 /*!
  * Plays a song that has been loaded. Use create_load_song first.
@@ -650,22 +521,22 @@ VF EXPORT_SYM int create_load_song(const unsigned char* song, const unsigned cha
  * \see create_load_song
  * \ingroup create
  */
-VF EXPORT_SYM int create_play_song(const unsigned char num);
+EXPORT_SYM int create_play_song(const unsigned char num);
 
 /*!
  * \ingroup create
  */
-VF EXPORT_SYM int create_read_block(char *data, int count);
+EXPORT_SYM int create_read_block(char *data, int count);
 
 /*!
  * \ingroup create
  */
-VF EXPORT_SYM void create_write_byte(char byte);
+EXPORT_SYM void create_write_byte(char byte);
 
 /*!
  * \ingroup create
  */
-VF EXPORT_SYM void create_clear_serial_buffer();
+EXPORT_SYM void create_clear_serial_buffer();
 
 enum BaudRate
 {
@@ -676,14 +547,12 @@ enum BaudRate
 /*!
  * \ingroup create
  */
-VF EXPORT_SYM enum BaudRate get_create_baud_rate();
+EXPORT_SYM enum BaudRate get_create_baud_rate();
 
 /*!
  * \ingroup create
  */
-VF EXPORT_SYM void set_create_baud_rate(const enum BaudRate baudRate);
-
-VFL
+EXPORT_SYM void set_create_baud_rate(const enum BaudRate baudRate);
 
 #ifdef __cplusplus
 }

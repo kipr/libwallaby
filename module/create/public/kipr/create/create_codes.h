@@ -1,13 +1,5 @@
-/*
- * create_codes.h
- *
- *  Created on: Nov 13, 2015
- *      Author: Joshua Southerland
- */
-
-#ifndef INCLUDE_WALLABY_CREATE_CODES_H_
-#define INCLUDE_WALLABY_CREATE_CODES_H_
-
+#ifndef _KIPR_CREATE_CREATE_CODES_H_
+#define _KIPR_CREATE_CREATE_CODES_H_
 
 // See http://www.irobot.com/filelibrary/pdfs/hrd/create/create%20open%20interface_v2.pdf
 // for more information
@@ -59,6 +51,4 @@
 #define OI_CURRENT 23
 #define OI_CARGO_BAY_DIGITAL_INPUTS 32
 
-
-
-#endif /* INCLUDE_WALLABY_CREATE_CODES_H_ */
+#endif
