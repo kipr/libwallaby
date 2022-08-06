@@ -49,4 +49,3 @@ namespace kipr
 
 #endif
 
-#endif

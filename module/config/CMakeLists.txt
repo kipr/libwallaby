@@ -1,1 +1,1 @@
-add_module(config)
+add_module(config export)

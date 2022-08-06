@@ -7,6 +7,10 @@ extern "C" {
 
 void msleep(long msecs);
 
+unsigned long systime();
+
+double seconds();
+
 #ifdef __cplusplus
 }
 #endif

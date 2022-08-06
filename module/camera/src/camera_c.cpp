@@ -1,6 +1,8 @@
 #include "kipr/camera/camera.h"
 #include "kipr/camera/camera.hpp"
+#include "kipr/log/log.hpp"
 #include "camera_c_p.hpp"
+#include "logger.hpp"
 
 #include <iostream>
 #include <cstdlib>
@@ -51,7 +53,7 @@ int camera_load_config(const char *name)
 void set_camera_width(int width)
 {
   if(width <= 0) {
-    std::cout << "Camera width must be greater than 0." << std::endl;
+    logger.error() << "Camera width must be greater than 0.";
     return;
   }
   DeviceSingleton::instance()->setWidth(width);
@@ -60,7 +62,7 @@ void set_camera_width(int width)
 void set_camera_height(int height)
 {
   if(height <= 0) {
-    std::cout << "Camera height must be greater than 0." << std::endl;
+    logger.error() << "Camera height must be greater than 0.";
     return;
   }
   DeviceSingleton::instance()->setHeight(height);
@@ -85,12 +87,12 @@ pixel get_camera_pixel(point2 p)
 {
   const cv::Mat &mat = DeviceSingleton::instance()->rawImage();
   if(mat.empty()) {
-    std::cerr << "camera image is empty" << std::endl;
+    logger.error() << "camera image is empty";
     return pixel();
   }
   
   if(p.x < 0 || p.y < 0 || p.x >= mat.cols || p.y >= mat.rows) {
-    std::cerr << "point isn't within the image" << std::endl;
+    logger.error() << "point isn't within the image";
     return pixel();
   }
   
@@ -113,7 +115,7 @@ bool check_channel(int i)
 {
   const ChannelPtrVector &channels = DeviceSingleton::instance()->channels();
   if(i < 0 || i >= channels.size()) {
-    std::cout << "Channel must be in the range 0 .. " << (channels.size() - 1) << std::endl;
+    logger.error() << "Channel must be in the range 0 .. " << (channels.size() - 1);
     return false;
   }
   return true;
@@ -123,14 +125,13 @@ bool check_channel_and_object(int i, int j)
 {
   const ChannelPtrVector &channels = DeviceSingleton::instance()->channels();
   if(i < 0 || i >= channels.size()) {
-    if(!channels.size()) std::cout << "Active configuration doesn't have any channels.";
-    else std::cout << "Channel must be in the range 0 .. " << (channels.size() - 1);
-    std::cout << std::endl;
+    if(!channels.size()) logger.error() << "Active configuration doesn't have any channels.";
+    else logger.error() << "Channel must be in the range 0 .. " << (channels.size() - 1);
     return false;
   }
   const ObjectVector *objs = channels[i]->objects();
   if(j < 0 || j >= objs->size()) {
-    std::cout << "No such object " << j << std::endl;
+    logger.error() << "No such object " << j;
     return false;
   }
   return true;

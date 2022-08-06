@@ -184,18 +184,18 @@ Channel::Channel(Device *device, const Config &config)
   m_objects.clear();
   const std::string type = config.stringValue("type");
   if (type.empty()) {
-    WARN("No type specified in config.");
+    std::cerr << "No type specified in config." << std::endl;
     return;
   }
 
   m_impl = ChannelImplManager::channelImpl(type);
   if (!m_impl) {
-    WARN("Type %s not found", type.c_str());
+    std::cerr << "Type " << type << " not found" << std::endl;
     return;
   }
 }
 
-Camera::Channel::~Channel() {}
+Channel::~Channel() {}
 
 void Camera::Channel::invalidate() { m_valid = false; }
 
@@ -968,4 +968,3 @@ int Camera::Device::xioctl(int fh, int request, void *arg) {
 #endif
 }
 
-#endif
