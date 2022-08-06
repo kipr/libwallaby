@@ -1,10 +1,3 @@
-/*
- * camera.hpp
- *
- *  Created on: Jan 29, 2016
- *      Author: Nafis Zaman
- */
-
 #ifndef _KIPR_CAMERA_CAMERA_HPP_
 #define _KIPR_CAMERA_CAMERA_HPP_
 
@@ -17,8 +10,8 @@
 #include <vector>
 
 #include "kipr/camera/camera.h"
+#include "kipr/camera/image.hpp"
 
-#include <opencv2/core/core.hpp>
 
 // These keys are used in the config files loaded by
 // Camera::Device
@@ -41,86 +34,8 @@ namespace kipr
   namespace camera
   {
     class Device;
-
-    class Object
-    {
-    public:
-      Object(const geometry::Point2<unsigned> &centroid, const geometry::Rect<unsigned> &boundingBox,
-            const double confidence, const char *data = 0,
-            const size_t &dataLength = 0);
-      Object(const Object &rhs);
-      ~Object();
-
-      const geometry::Point2<unsigned> &centroid() const;
-      const geometry::Rect<unsigned> &boundingBox() const;
-
-      const double confidence() const;
-      const char *data() const;
-      const size_t dataLength() const;
-
-    private:
-      geometry::Point2<unsigned> m_centroid;
-      geometry::Rect<unsigned> m_boundingBox;
-      double m_confidence;
-      char *m_data;
-      size_t m_dataLength;
-    };
-
-    typedef std::vector<Object> ObjectVector;
-
-    class ChannelImpl
-    {
-    public:
-      ChannelImpl();
-      virtual ~ChannelImpl();
-
-      void setImage(const cv::Mat &image);
-      ObjectVector objects(const config::Config &config);
-
-    protected:
-      virtual void update(const cv::Mat &image) = 0;
-      virtual ObjectVector findObjects(const config::Config &config) = 0;
-
-    private:
-      bool m_dirty;
-      cv::Mat m_image;
-    };
-
-    class ChannelImplManager
-    {
-    public:
-      static void setImage(const cv::Mat &image);
-      static ChannelImpl *channelImpl(const std::string &name);
-
-    private:
-      // TODO: private constructor?
-      static std::map<std::string, ChannelImpl *> m_channelImpls;
-    };
-
-    class Channel
-    {
-    public:
-      Channel(Device *device, const config::Config &config);
-      ~Channel();
-
-      void invalidate();
-      const ObjectVector *objects() const;
-      Device *device() const;
-
-      /**
-      * Do not call this method unless you know what you are doing!
-      */
-      void setConfig(const config::Config &config);
-
-    private:
-      Device *m_device;
-      config::Config m_config;
-      mutable ObjectVector m_objects;
-      ChannelImpl *m_impl;
-      mutable bool m_valid;
-    };
-
-    typedef std::vector<Channel *> ChannelPtrVector;
+    class Channel;
+    class DeviceImpl;
 
     class ConfigPath
     {
@@ -155,9 +70,9 @@ namespace kipr
       static unsigned int resolutionToHeight(Resolution res);
       static unsigned int resolutionToWidth(Resolution res);
 
-      const ChannelPtrVector &channels() const;
+      const std::vector<Channel *> &channels() const;
 
-      const cv::Mat &rawImage() const;
+      Image rawImage() const;
 
       void setConfig(const config::Config &config);
       const config::Config &config() const;
@@ -170,7 +85,6 @@ namespace kipr
       void updateConfig();
       bool initCapDevice(const unsigned width, const unsigned height);
       int readFrame();
-      cv::Mat decodeJpeg(void *p, int size);
       int xioctl(int fh, int request, void *arg);
 
       struct buffer
@@ -183,9 +97,8 @@ namespace kipr
 
       // cv::VideoCapture *m_capture;
       config::Config m_config;
-      ChannelPtrVector m_channels;
-      cv::Mat m_image;
-      unsigned char *m_bmpBuffer;
+      std::vector<Channel *> m_channels;
+      std::unique_ptr<DeviceImpl> m_impl;
 
       mutable unsigned char *m_bgr;
       mutable unsigned m_bgrSize;

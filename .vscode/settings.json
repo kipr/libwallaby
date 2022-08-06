@@ -5,8 +5,10 @@
     "${workspaceRoot}/module/aruco/public",
     "${workspaceRoot}/module/audio/public",
     "${workspaceRoot}/module/battery/public",
+    "${workspaceRoot}/module/botball/public",
     "${workspaceRoot}/module/button/public",
     "${workspaceRoot}/module/camera/public",
+    "${workspaceRoot}/module/camera/protected",
     "${workspaceRoot}/module/color/public",
     "${workspaceRoot}/module/compat/protected",
     "${workspaceRoot}/module/compass/public",
@@ -34,5 +36,12 @@
     "${workspaceRoot}/build/module/camera/dependencies/dep_opencv/include/opencv4",
     "${workspaceRoot}/build/module/camera/dependencies/dep_zbar/include",
     "${workspaceRoot}/module/tello/dependencies/wpa_ctrl/common",
-  ]
+    // Config
+    "${workspaceRoot}/build/include",
+  ],
+  "files.associations": {
+    "*.page": "json",
+    "wallaby.h": "c",
+    "camera.h": "c"
+  }
 }

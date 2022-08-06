@@ -1,4 +1,4 @@
-#include "kipr/botball.h"
+#include "kipr/botball/botball.h"
 #include "kipr/thread/thread.hpp"
 #include "kipr/button/button.h"
 #include "kipr/analog/analog.h"
@@ -6,7 +6,7 @@
 
 #include <stdio.h>
 #include <string.h>
-#include <kipr/util.h>
+#include <kipr/time/time.h>
 
 #include "kipr/core/cleanup.hpp"
 

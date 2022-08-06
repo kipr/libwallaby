@@ -1,7 +1,7 @@
 #ifndef _KIPR_KIPR_H_
 #define _KIPR_KIPR_H_
 
-#include "config.h"
+#include "kipr/config.h"
 
 #ifdef KIPR_MODULE_ACCEL
 #include "kipr/accel/accel.h"

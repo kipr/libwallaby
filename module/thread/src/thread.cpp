@@ -3,7 +3,6 @@
 using namespace kipr;
 using namespace kipr::thread;
 
-
 Mutex::Mutex()
 {
 #ifdef WIN32

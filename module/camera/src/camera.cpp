@@ -1,6 +1,7 @@
 #include "kipr/camera/camera.hpp"
 #include "channel_p.hpp"
 #include "kipr/camera/camera.h"
+#include "kipr/camera/channel.hpp"
 #include "UDPVideo.hpp"
 
 #include <csetjmp>
@@ -87,6 +88,11 @@ public:
   }
 };
 
+namespace
+{
+  unsigned char *bmpBuffer;
+}
+
 // select timeout values for the WHITE_2016 Camera
 // BLACk_2017 camera values are set in cap_v4l.cpp
 //
@@ -97,151 +103,7 @@ public:
 #define SELECTTIMEOUTSEC 1
 #define SELECTTIMEOUTUSEC 0
 
-Object::Object(const Point2<unsigned> &centroid,
-               const Rect<unsigned> &boundingBox,
-               const double confidence, const char *data,
-               const size_t &dataLength)
-    : m_centroid(centroid),
-      m_boundingBox(boundingBox),
-      m_confidence(confidence),
-      m_data(0),
-      m_dataLength(dataLength)
-{
-  if (!data)
-    return;
 
-  m_data = new char[m_dataLength];
-  memcpy(m_data, data, m_dataLength);
-}
-
-Object::Object(const Object &rhs)
-    : m_centroid(rhs.m_centroid), m_boundingBox(rhs.m_boundingBox),
-      m_confidence(rhs.m_confidence), m_data(0),
-      m_dataLength(rhs.m_dataLength)
-{
-  if (!rhs.m_data)
-    return;
-
-  m_data = new char[m_dataLength + 1];
-  memcpy(m_data, rhs.m_data, m_dataLength);
-  m_data[m_dataLength] = 0;
-}
-
-Object::~Object() { delete[] m_data; }
-
-const geometry::Point2<unsigned> &Object::centroid() const { return m_centroid; }
-
-const geometry::Rect<unsigned> &Object::boundingBox() const
-{
-  return m_boundingBox;
-}
-
-const double Object::confidence() const { return m_confidence; }
-
-const char *Object::data() const { return m_data; }
-
-const size_t Object::dataLength() const { return m_dataLength; }
-
-ChannelImpl::ChannelImpl() : m_dirty(true) {}
-
-ChannelImpl::~ChannelImpl() {}
-
-void ChannelImpl::setImage(const cv::Mat &image)
-{
-  if (image.empty())
-  {
-    m_image = cv::Mat();
-    m_dirty = true;
-    return;
-  }
-  m_image = image;
-  m_dirty = true;
-}
-
-ObjectVector ChannelImpl::objects(const Config &config)
-{
-  if (m_dirty)
-  {
-    update(m_image);
-    m_dirty = false;
-  }
-  return findObjects(config);
-}
-
-std::map<std::string, ChannelImpl *> ChannelImplManager::m_channelImpls = {
-  {"hsv", new HsvChannelImpl()},
-  {"qr", new BarcodeChannelImpl()},
-  {"aruco", new ArucoChannelImpl()}
-};
-
-void ChannelImplManager::setImage(const cv::Mat &image)
-{
-  std::map<std::string, ChannelImpl *>::iterator it = m_channelImpls.begin();
-  for (; it != m_channelImpls.end(); ++it)
-    it->second->setImage(image);
-}
-
-ChannelImpl *ChannelImplManager::channelImpl(const std::string &name)
-{
-  std::map<std::string, ChannelImpl *>::iterator it = m_channelImpls.find(name);
-  return (it == m_channelImpls.end()) ? 0 : it->second;
-}
-
-// Channel //
-
-Channel::Channel(Device *device, const Config &config)
-    : m_device(device), m_config(config), m_impl(0), m_valid(false)
-{
-  m_objects.clear();
-  const std::string type = config.stringValue("type");
-  if (type.empty())
-  {
-    std::cerr << "No type specified in config." << std::endl;
-    return;
-  }
-
-  m_impl = ChannelImplManager::channelImpl(type);
-  if (!m_impl)
-  {
-    std::cerr << "Type " << type << " not found" << std::endl;
-    return;
-  }
-}
-
-Channel::~Channel() {}
-
-void Channel::invalidate() { m_valid = false; }
-
-struct AreaComparator
-{
-public:
-  bool operator()(const Object &left, const Object &right)
-  {
-    return left.boundingBox().area() > right.boundingBox().area();
-  }
-} LargestAreaFirst;
-
-const ObjectVector *Channel::objects() const
-{
-  if (!m_impl)
-    return 0;
-  if (!m_valid)
-  {
-    m_objects.clear();
-    m_objects = m_impl->objects(m_config);
-    std::sort(m_objects.begin(), m_objects.end(), LargestAreaFirst);
-    m_valid = true;
-  }
-  return &m_objects;
-}
-
-Device *Channel::device() const { return m_device; }
-
-void Channel::setConfig(const Config &config)
-{
-  m_config = config;
-  invalidate();
-}
 
 // ConfigPath //
 
@@ -292,16 +154,21 @@ void ConfigPath::setDefaultConfigPath(const std::string &name)
 
 // Device //
 
+class kipr::camera::DeviceImpl
+{
+public:
+  cv::Mat image;
+};
+
 const char *Device::device_name = "/dev/video0";
 
 Device::Device()
-    : m_bmpBuffer(0),
-      m_connected(false),
+    : m_connected(false),
       m_bgr(0),
       m_bgrSize(0),
       m_fd(-1),
       m_cap(0),
-      m_image(),
+      m_impl(std::make_unique<DeviceImpl>()),
       m_resolution(HIGH_RES /*LOW_RES*/),
 #ifdef BOTUI_TELLO_TEST
       m_model(TELLO)
@@ -322,13 +189,13 @@ Device::Device()
 
 Device::~Device()
 {
-  ChannelPtrVector::const_iterator it = m_channels.begin();
+  auto it = m_channels.begin();
   for (; it != m_channels.end(); ++it)
     delete *it;
   delete m_bgr;
   delete m_cap;
-  free(m_bmpBuffer);
-  m_bmpBuffer = 0;
+  free(bmpBuffer);
+  bmpBuffer = 0;
   m_connected = false;
 }
 
@@ -467,7 +334,7 @@ bool Device::close()
     type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
     if (xioctl(m_fd, VIDIOC_STREAMOFF, &type) == -1)
     {
-      // TODO: ignore this failure?
+      // TODO:  ignore this failure?
     }
 
     // Unmap buffers
@@ -521,9 +388,9 @@ bool Device::update()
         printf("select error errno: %d\n", r);
         if (errno == EINTR)
           continue;
-        m_image = cv::Mat();
-        free(m_bmpBuffer);
-        m_bmpBuffer = 0;
+        m_impl->image = cv::Mat();
+        free(bmpBuffer);
+        bmpBuffer = 0;
         return false;
       }
       if (r == 0)
@@ -534,9 +401,9 @@ bool Device::update()
         printf("select timeout - resetting camera driver\n");
         close();
         open(0, m_resolution, m_model);
-        m_image = cv::Mat();
-        free(m_bmpBuffer);
-        m_bmpBuffer = 0;
+        m_impl->image = cv::Mat();
+        free(bmpBuffer);
+        bmpBuffer = 0;
         SelectTimeoutSec = SELECTTIMEOUTINITSEC; // longer timeout for recovery
         SelectTimeoutuSec = SELECTTIMEOUTINITUSEC;
         return false;
@@ -546,7 +413,7 @@ bool Device::update()
       if (readRes == -1)
       {
         // Something went wrong
-        m_image = cv::Mat();
+        m_impl->image = cv::Mat();
         const int readRes = this->readFrame();
         if (readRes == -1)
           return false; // TODO more image clearing
@@ -555,10 +422,10 @@ bool Device::update()
           return true;
 
         // Dirty all channel impls
-        ChannelImplManager::setImage(m_image);
+        ChannelImplManager::setImage(m_impl->image);
 
-        free(m_bmpBuffer);
-        m_bmpBuffer = 0;
+        free(bmpBuffer);
+        bmpBuffer = 0;
         return false;
       }
       else if (readRes == 1)
@@ -575,7 +442,7 @@ bool Device::update()
     if (readRes < 0)
     {
       printf("camera::update - readRes %d\n", readRes);
-      m_image = cv::Mat(); // return a null image
+      m_impl->image = cv::Mat(); // return a null image
       return false;
     }
   }
@@ -585,7 +452,7 @@ bool Device::update()
     return true;
 
   // Dirty all channel impls
-  ChannelImplManager::setImage(m_image);
+  ChannelImplManager::setImage(m_impl->image);
 
   // Invalidate all channels
   ChannelPtrVector::const_iterator it = m_channels.begin();
@@ -598,14 +465,14 @@ bool Device::update()
   return true;
 }
 
-const ChannelPtrVector &Device::channels() const
+const std::vector<Channel *> &Device::channels() const
 {
   return m_channels;
 }
 
-const cv::Mat &Device::rawImage() const
+Image Device::rawImage() const
 {
-  return m_image;
+  // return m_image;
 }
 
 void Device::setConfig(const Config &config)
@@ -621,7 +488,7 @@ const Config &Device::config() const
 
 const unsigned char *Device::bgr() const
 {
-  const unsigned correctSize = m_image.rows * m_image.cols * m_image.elemSize();
+  const unsigned correctSize = m_impl->image.rows * m_impl->image.cols * m_impl->image.elemSize();
   if (m_bgrSize != correctSize)
   {
     delete m_bgr;
@@ -629,11 +496,11 @@ const unsigned char *Device::bgr() const
     m_bgr = new unsigned char[m_bgrSize];
   }
 
-  for (unsigned row = 0; row < m_image.rows; ++row)
+  for (unsigned row = 0; row < m_impl->image.rows; ++row)
   {
-    unsigned offset1 = row * m_image.cols * m_image.elemSize();
-    memcpy(m_bgr + offset1, m_image.ptr(row),
-           m_image.cols * m_image.elemSize());
+    unsigned offset1 = row * m_impl->image.cols * m_impl->image.elemSize();
+    memcpy(m_bgr + offset1, m_impl->image.ptr(row),
+           m_impl->image.cols * m_impl->image.elemSize());
   }
 
   return m_bgr;
@@ -641,7 +508,7 @@ const unsigned char *Device::bgr() const
 
 void Device::updateConfig()
 {
-  ChannelPtrVector::const_iterator it = m_channels.begin();
+  auto it = m_channels.begin();
   for (; it != m_channels.end(); ++it)
     delete *it;
   m_channels.clear();
@@ -822,7 +689,7 @@ int Device::readFrame()
     // cv::Mat jpgBuf(cv::Size(160, 120), CV_8UC3, buffers[buf.index].start);
     // m_image = cv::imdecode(jpgBuf, CV_LOAD_IMAGE_COLOR);
     // LIBJPEG WAY
-    m_image = this->decodeJpeg(buffers[buf.index].start, buf.bytesused);
+    m_impl->image = decodeJpeg(buffers[buf.index].start, buf.bytesused);
 
     if (xioctl(m_fd, VIDIOC_QBUF, &buf) == -1)
     {
@@ -853,7 +720,7 @@ int Device::readFrame()
       printf("cap isn't opened\n");
     }
 
-    if (!(m_cap->read(m_image)))
+    if (!(m_cap->read(m_impl->image)))
     {
       printf("error reading image\n");
       return -1;
@@ -885,7 +752,9 @@ void jpegErrorJmp(j_common_ptr cInfo)
 METHODDEF(void)
 emit_message_suppressed(j_common_ptr cinfo, int msg_level) {}
 
-cv::Mat Device::decodeJpeg(void *p, int size)
+
+
+cv::Mat decodeJpeg(void *p, int size)
 {
   if (size <= 0)
     return cv::Mat();
@@ -924,20 +793,20 @@ cv::Mat Device::decodeJpeg(void *p, int size)
 
   unsigned long bmp_size = outWidth * outHeight * outComp;
   int row_stride = width * outComp;
-  free(m_bmpBuffer);
-  m_bmpBuffer = (unsigned char *)malloc(bmp_size);
+  free(bmpBuffer);
+  bmpBuffer = (unsigned char *)malloc(bmp_size);
 
   while (cInfo.output_scanline < cInfo.output_height)
   {
     unsigned char *buffer_array[1];
-    buffer_array[0] = m_bmpBuffer + (cInfo.output_scanline) * row_stride;
+    buffer_array[0] = bmpBuffer + (cInfo.output_scanline) * row_stride;
     jpeg_read_scanlines(&cInfo, buffer_array, 1);
   }
 
   jpeg_finish_decompress(&cInfo);
   jpeg_destroy_decompress(&cInfo);
 
-  cv::Mat image(cv::Size(outWidth, outHeight), CV_8UC3, m_bmpBuffer);
+  cv::Mat image(cv::Size(outWidth, outHeight), CV_8UC3, bmpBuffer);
   cv::cvtColor(image, image, cv::COLOR_BGR2RGB);
 
   return image;
@@ -945,10 +814,6 @@ cv::Mat Device::decodeJpeg(void *p, int size)
 
 int Device::xioctl(int fh, int request, void *arg)
 {
-#ifdef NOT_A_WALLABY
-  WARN("camera only supported on wallaby");
-  return -1;
-#else
   int r;
   do
   {
@@ -956,5 +821,4 @@ int Device::xioctl(int fh, int request, void *arg)
   } while (-1 == r && EINTR == errno);
 
   return r;
-#endif
 }

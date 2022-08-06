@@ -2,6 +2,10 @@ cmake_minimum_required(VERSION 3.1)
 
 project(libkipr)
 
+set(KIPR_VERSION_MAJOR 1)
+set(KIPR_VERSION_MINOR 0)
+set(KIPR_VERSION_PATCH 0)
+
 add_subdirectory(module)
 
 # Get all modules. These are registered in `add_module`.

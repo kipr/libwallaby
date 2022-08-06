@@ -12,11 +12,14 @@
 #include <string>
 #include <unistd.h>
 
+#include <memory>
+
 namespace kipr
 {
   namespace camera
   {
-    class Aruco;
+    class ArucoImpl;
+
     const static int defaultDictionaryID = 1; // TODO default dictionary
 
     class Aruco

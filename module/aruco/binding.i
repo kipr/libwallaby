@@ -1,0 +1,1 @@
+%include "kipr/aruco/aruco.h"

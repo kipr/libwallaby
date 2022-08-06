@@ -576,59 +576,57 @@ namespace kipr
 
       // These are all marked mutable because they
       // are initialized lazily in a const accessor.
-      // I have yet to decide if this is the "correct"
-      // way to go about it.
-      mutable CreateSensors::PlayButton *m_playButton;
-      mutable CreateSensors::AdvanceButton *m_advanceButton;
+      mutable sensors::PlayButton *m_playButton;
+      mutable sensors::AdvanceButton *m_advanceButton;
 
-      mutable CreateSensors::Wall *m_wall;
-      mutable CreateSensors::CliffLeft *m_cliffLeft;
-      mutable CreateSensors::CliffFrontLeft *m_cliffFrontLeft;
-      mutable CreateSensors::CliffFrontRight *m_cliffFrontRight;
-      mutable CreateSensors::CliffRight *m_cliffRight;
-      mutable CreateSensors::VirtualWall *m_virtualWall;
+      mutable sensors::Wall *m_wall;
+      mutable sensors::CliffLeft *m_cliffLeft;
+      mutable sensors::CliffFrontLeft *m_cliffFrontLeft;
+      mutable sensors::CliffFrontRight *m_cliffFrontRight;
+      mutable sensors::CliffRight *m_cliffRight;
+      mutable sensors::VirtualWall *m_virtualWall;
 
-      mutable CreateSensors::WallSignal *m_wallSignal;
-      mutable CreateSensors::CliffLeftSignal *m_cliffLeftSignal;
-      mutable CreateSensors::CliffFrontLeftSignal *m_cliffFrontLeftSignal;
-      mutable CreateSensors::CliffFrontRightSignal *m_cliffFrontRightSignal;
-      mutable CreateSensors::CliffRightSignal *m_cliffRightSignal;
-      mutable CreateSensors::CargoBayAnalogSignal *m_cargoBayAnalogSignal;
-      mutable CreateSensors::CargoBayDigitalInputs *m_cargoBayDigitalInputs;
+      mutable sensors::WallSignal *m_wallSignal;
+      mutable sensors::CliffLeftSignal *m_cliffLeftSignal;
+      mutable sensors::CliffFrontLeftSignal *m_cliffFrontLeftSignal;
+      mutable sensors::CliffFrontRightSignal *m_cliffFrontRightSignal;
+      mutable sensors::CliffRightSignal *m_cliffRightSignal;
+      mutable sensors::CargoBayAnalogSignal *m_cargoBayAnalogSignal;
+      mutable sensors::CargoBayDigitalInputs *m_cargoBayDigitalInputs;
 
-      mutable CreateSensors::LightBumpLeft *m_lightBumpLeft;
-      mutable CreateSensors::LightBumpFrontLeft *m_lightBumpFrontLeft;
-      mutable CreateSensors::LightBumpCenterLeft *m_lightBumpCenterLeft;
-      mutable CreateSensors::LightBumpCenterRight *m_lightBumpCenterRight;
-      mutable CreateSensors::LightBumpFrontRight *m_lightBumpFrontRight;
-      mutable CreateSensors::LightBumpRight *m_lightBumpRight;
+      mutable sensors::LightBumpLeft *m_lightBumpLeft;
+      mutable sensors::LightBumpFrontLeft *m_lightBumpFrontLeft;
+      mutable sensors::LightBumpCenterLeft *m_lightBumpCenterLeft;
+      mutable sensors::LightBumpCenterRight *m_lightBumpCenterRight;
+      mutable sensors::LightBumpFrontRight *m_lightBumpFrontRight;
+      mutable sensors::LightBumpRight *m_lightBumpRight;
 
-      mutable CreateSensors::LightBumpLeftSignal *m_lightBumpLeftSignal;
-      mutable CreateSensors::LightBumpFrontLeftSignal *m_lightBumpFrontLeftSignal;
-      mutable CreateSensors::LightBumpCenterLeftSignal *m_lightBumpCenterLeftSignal;
-      mutable CreateSensors::LightBumpCenterRightSignal *m_lightBumpCenterRightSignal;
-      mutable CreateSensors::LightBumpFrontRightSignal *m_lightBumpFrontRightSignal;
-      mutable CreateSensors::LightBumpRightSignal *m_lightBumpRightSignal;
+      mutable sensors::LightBumpLeftSignal *m_lightBumpLeftSignal;
+      mutable sensors::LightBumpFrontLeftSignal *m_lightBumpFrontLeftSignal;
+      mutable sensors::LightBumpCenterLeftSignal *m_lightBumpCenterLeftSignal;
+      mutable sensors::LightBumpCenterRightSignal *m_lightBumpCenterRightSignal;
+      mutable sensors::LightBumpFrontRightSignal *m_lightBumpFrontRightSignal;
+      mutable sensors::LightBumpRightSignal *m_lightBumpRightSignal;
 
-      mutable CreateSensors::IR *m_ir;
+      mutable sensors::IR *m_ir;
 
-      mutable CreateSensors::ChargingState *m_chargingState;
-      mutable CreateSensors::BatteryTemperature *m_batteryTemperature;
-      mutable CreateSensors::BatteryCharge *m_batteryCharge;
-      mutable CreateSensors::BatteryCapacity *m_batteryCapacity;
+      mutable sensors::ChargingState *m_chargingState;
+      mutable sensors::BatteryTemperature *m_batteryTemperature;
+      mutable sensors::BatteryCharge *m_batteryCharge;
+      mutable sensors::BatteryCapacity *m_batteryCapacity;
 
-      mutable CreateSensors::Angle *m_angle;
-      mutable CreateSensors::Distance *m_distance;
+      mutable sensors::Angle *m_angle;
+      mutable sensors::Distance *m_distance;
 
-      mutable CreateSensors::BumpLeft *m_bumpLeft;
-      mutable CreateSensors::BumpRight *m_bumpRight;
+      mutable sensors::BumpLeft *m_bumpLeft;
+      mutable sensors::BumpRight *m_bumpRight;
 
-      mutable CreateSensors::WheelDropLeft *m_wheelDropLeft;
-      mutable CreateSensors::WheelDropRight *m_wheelDropRight;
-      mutable CreateSensors::WheelDropCaster *m_wheelDropCaster;
+      mutable sensors::WheelDropLeft *m_wheelDropLeft;
+      mutable sensors::WheelDropRight *m_wheelDropRight;
+      mutable sensors::WheelDropCaster *m_wheelDropCaster;
 
-      mutable CreateSensors::SongPlaying *m_songPlaying;
-      mutable CreateSensors::SongNumber *m_songNumber;
+      mutable sensors::SongPlaying *m_songPlaying;
+      mutable sensors::SongNumber *m_songNumber;
 
       size_t m_i;
       CreateScript m_script;

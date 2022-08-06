@@ -3,27 +3,28 @@
 
 namespace kipr
 {
-	namespace servo
-	{
-		class Servo
-		{
-		public:
-			typedef unsigned int ticks_t;
+  namespace servo
+  {
+    class Servo
+    {
+    public:
+      typedef unsigned int ticks_t;
 
-			Servo(int port);
+      Servo(int port);
 
-			void setPosition(ticks_t position);
+      void setPosition(ticks_t position);
 
-			ticks_t position() const;
+      ticks_t position() const;
 
-			void disable();
-			void enable();
-			void setEnabled(bool enabled);
-			bool isEnabled() const;
-		private:
-			int m_port;
-		};
-	}
+      void disable();
+      void enable();
+      void setEnabled(bool enabled);
+      bool isEnabled() const;
+
+    private:
+      int m_port;
+    };
+  }
 }
 
 #endif
