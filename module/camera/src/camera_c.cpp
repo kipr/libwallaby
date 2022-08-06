@@ -50,24 +50,6 @@ int camera_load_config(const char *name)
   return 1;
 }
 
-void set_camera_width(int width)
-{
-  if(width <= 0) {
-    logger.error() << "Camera width must be greater than 0.";
-    return;
-  }
-  DeviceSingleton::instance()->setWidth(width);
-}
-
-void set_camera_height(int height)
-{
-  if(height <= 0) {
-    logger.error() << "Camera height must be greater than 0.";
-    return;
-  }
-  DeviceSingleton::instance()->setHeight(height);
-}
-
 int get_camera_width(void)
 {
   return DeviceSingleton::instance()->width();

@@ -1,5 +1,14 @@
 include(ExternalProject)
 
+set(OPENCV_CONTRIB_DIR ${CMAKE_CURRENT_BINARY_DIR}/dep_opencv_contrib-prefix/src/dep_opencv_contrib)
+
+ExternalProject_Add(dep_opencv_contrib
+  URL https://github.com/opencv/opencv_contrib/archive/refs/tags/4.6.0.tar.gz
+  CONFIGURE_COMMAND ""
+  BUILD_COMMAND ""
+  INSTALL_COMMAND ""
+)
+
 set(OPENCV_DIR ${CMAKE_CURRENT_BINARY_DIR}/dep_opencv)
 set(OPENCV_LIB_DIR ${OPENCV_DIR}/lib)
 set(OPENCV_INCLUDE_DIR ${OPENCV_DIR}/include)
@@ -25,9 +34,79 @@ ExternalProject_Add(dep_opencv
     -DWITH_JASPER=OFF
     -DWITH_OPENJPEG=OFF
     -DWITH_WEBP=OFF
+    -DWITH_PNG=OFF
     -DWITH_TIFF=OFF
     -DCMAKE_INSTALL_PREFIX=${OPENCV_DIR}
+    -DOPENCV_EXTRA_MODULES_PATH=${OPENCV_CONTRIB_DIR}/modules
+    -DBUILD_opencv_dnn=OFF
+    -DBUILD_opencv_flann=ON
+    -DBUILD_opencv_features2d=ON
+    -DBUILD_opencv_gapi=OFF
+    -DBUILD_opencv_ml=OFF
+    -DBUILD_opencv_objdetect=OFF
+    -DBUILD_opencv_stitching=OFF
+    -DBUILD_opencv_alphamat=OFF
+    -DBUILD_opencv_aruco=ON
+    -DBUILD_opencv_barcode=OFF
+    -DBUILD_opencv_bgsegm=OFF
+    -DBUILD_opencv_bioinspired=OFF
+    -DBUILD_opencv_ccalib=OFF
+    -DBUILD_opencv_cnn_3dobj=OFF
+    -DBUILD_opencv_cubaarithm=OFF
+    -DBUILD_opencv_cudacodec=OFF
+    -DBUILD_opencv_cudafeatures2d=OFF
+    -DBUILD_opencv_cudafilters=OFF
+    -DBUILD_opencv_cudaimgproc=OFF
+    -DBUILD_opencv_cudalegacy=OFF
+    -DBUILD_opencv_cudaobjdetect=OFF
+    -DBUILD_opencv_cudaoptflow=OFF
+    -DBUILD_opencv_cudastereo=OFF
+    -DBUILD_opencv_cudawarping=OFF
+    -DBUILD_opencv_cudev=OFF
+    -DBUILD_opencv_cvv=OFF
+    -DBUILD_opencv_datasets=OFF
+    -DBUILD_opencv_dnn_objdetect=OFF
+    -DBUILD_opencv_dnn_superres=OFF
+    -DBUILD_opencv_dnn_easily_fooled=OFF
+    -DBUILD_opencv_dpm=OFF
+    -DBUILD_opencv_face=OFF
+    -DBUILD_opencv_freetype=OFF
+    -DBUILD_opencv_fuzzy=OFF
+    -DBUILD_opencv_hdf=OFF
+    -DBUILD_opencv_hfs=OFF
+    -DBUILD_opencv_img_hash=OFF
+    -DBUILD_opencv_intensity_transform=OFF
+    -DBUILD_opencv_julia=OFF
+    -DBUILD_opencv_line_descriptor=OFF
+    -DBUILD_opencv_matlab=OFF
+    -DBUILD_opencv_mcc=OFF
+    -DBUILD_opencv_optflow=OFF
+    -DBUILD_opencv_ovis=OFF
+    -DBUILD_opencv_phase_unwrapping=OFF
+    -DBUILD_opencv_plot=OFF
+    -DBUILD_opencv_quality=OFF
+    -DBUILD_opencv_rapid=OFF
+    -DBUILD_opencv_reg=OFF
+    -DBUILD_opencv_rgbd=OFF
+    -DBUILD_opencv_saliency=OFF
+    -DBUILD_opencv_sfm=OFF
+    -DBUILD_opencv_shape=OFF
+    -DBUILD_opencv_stereo=OFF
+    -DBUILD_opencv_structured_light=OFF
+    -DBUILD_opencv_superres=OFF
+    -DBUILD_opencv_surface_matching=OFF
+    -DBUILD_opencv_text=OFF
+    -DBUILD_opencv_tracking=OFF
+    -DBUILD_opencv_videostab=OFF
+    -DBUILD_opencv_viz=OFF
+    -DBUILD_opencv_wechat_qrcode=OFF
+    -DBUILD_opencv_xfeatures2d=OFF
+    -DBUILD_opencv_ximgproc=OFF
+    -DBUILD_opencv_xobjdetect=OFF
+    -DBUILD_opencv_xphoto=OFF
 )
+
+add_dependencies(dep_opencv dep_opencv_contrib)
 
 # opencv
 add_library(opencv INTERFACE)

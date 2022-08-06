@@ -4,8 +4,8 @@
  * \defgroup aruco Aruco Markers
  */
 
-#ifndef _KIPR_ARUCO_ARUCO_H_
-#define _KIPR_ARUCO_ARUCO_H_
+#ifndef _KIPR_CAMERA_ARUCO_H_
+#define _KIPR_CAMERA_ARUCO_H_
 
 #ifdef __cplusplus
 extern "C" {

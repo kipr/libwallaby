@@ -1,15 +1,8 @@
-/*
- * analog_test.c
- *
- *  Created on: Nov 4, 2015
- *      Author: Joshua Southerland
- */
-
-
 #include <stdio.h>
 #include <unistd.h>
 
-#include "wallaby/wallaby.h"
+#include "kipr/analog/analog.h"
+#include "kipr/time/time.h"
 
 #define NUM_ADC_CHANS 6
 

@@ -1,5 +1,5 @@
-#ifndef _KIPR_ARUCO_ARUCO_HPP_
-#define _KIPR_ARUCO_ARUCO_HPP_
+#ifndef _KIPR_CAMERA_ARUCO_HPP_
+#define _KIPR_CAMERA_ARUCO_HPP_
 
 #include <algorithm>
 #include <fstream>
@@ -14,10 +14,9 @@
 
 namespace kipr
 {
-  namespace aruco
+  namespace camera
   {
     class Aruco;
-    static Aruco *instance;
     const static int defaultDictionaryID = 1; // TODO default dictionary
 
     class Aruco

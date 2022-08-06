@@ -1,20 +1,26 @@
 #include "channel_p.hpp"
-#include "warn.hpp"
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 
-#include "wallaby/aruco.hpp"
+#include "kipr/camera/aruco.hpp"
 #include <iostream>
 #include <vector>
 #include <zbar.h>
 
-using namespace Private::Camera;
+using namespace kipr;
+using namespace kipr::camera;
+
+using kipr::geometry::Point2;
+using kipr::geometry::Rect;
+using kipr::config::Config;
 
 HsvChannelImpl::HsvChannelImpl() {}
 
-void HsvChannelImpl::update(const cv::Mat &image) {
-  if (image.empty()) {
+void HsvChannelImpl::update(const cv::Mat &image)
+{
+  if (image.empty())
+  {
     m_image = cv::Mat();
     return;
   }
@@ -22,9 +28,10 @@ void HsvChannelImpl::update(const cv::Mat &image) {
   cv::cvtColor(image, m_image, cv::COLOR_BGR2HSV);
 }
 
-Camera::ObjectVector HsvChannelImpl::findObjects(const Config &config) {
+ObjectVector HsvChannelImpl::findObjects(const Config &config)
+{
   if (m_image.empty())
-    return ::Camera::ObjectVector();
+    return ObjectVector();
 
   cv::Vec3b top(config.intValue("th"), config.intValue("ts"),
                 config.intValue("tv"));
@@ -35,13 +42,16 @@ Camera::ObjectVector HsvChannelImpl::findObjects(const Config &config) {
   // << std::endl;
 
   cv::Mat fixed = m_image;
-  if (bottom[0] > top[0]) {
+  if (bottom[0] > top[0])
+  {
     // Modulo 180
     // TODO: Optimize for ARM?
     const uchar adjH = 180 - bottom[0];
-    for (int i = 0; i < fixed.rows; ++i) {
+    for (int i = 0; i < fixed.rows; ++i)
+    {
       uchar *row = fixed.ptr<uchar>(i);
-      for (int j = 0; j < fixed.cols; ++j) {
+      for (int j = 0; j < fixed.cols; ++j)
+      {
         row[j * fixed.elemSize()] += adjH;
         row[j * fixed.elemSize()] %= 180;
       }
@@ -59,18 +69,20 @@ Camera::ObjectVector HsvChannelImpl::findObjects(const Config &config) {
   cv::findContours(only, c, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_TC89_L1);
 
   std::vector<cv::Moments> m(c.size());
-  for (std::vector<cv::Moments>::size_type i = 0; i < c.size(); ++i) {
+  for (std::vector<cv::Moments>::size_type i = 0; i < c.size(); ++i)
+  {
     m[i] = cv::moments(c[i], false);
   }
 
-  ::Camera::ObjectVector ret;
-  for (::Camera::ObjectVector::size_type i = 0; i < c.size(); ++i) {
+  ObjectVector ret;
+  for (ObjectVector::size_type i = 0; i < c.size(); ++i)
+  {
     const cv::Rect rect = cv::boundingRect(c[i]);
     if (rect.width < 3 && rect.height < 3)
       continue;
 
     const double confidence = m[i].m00 / rect.area();
-    ret.push_back(::Camera::Object(
+    ret.push_back(Object(
         Point2<unsigned>(m[i].m10 / m[i].m00, m[i].m01 / m[i].m00),
         Rect<unsigned>(rect.x, rect.y, rect.width, rect.height), confidence));
   }
@@ -78,14 +90,17 @@ Camera::ObjectVector HsvChannelImpl::findObjects(const Config &config) {
   return ret;
 }
 
-BarcodeChannelImpl::BarcodeChannelImpl() {
+BarcodeChannelImpl::BarcodeChannelImpl()
+{
   m_image.set_format("Y800");
   m_scanner.set_config(zbar::ZBAR_NONE, zbar::ZBAR_CFG_ENABLE, 0);
   m_scanner.set_config(zbar::ZBAR_QRCODE, zbar::ZBAR_CFG_ENABLE, 1);
 }
 
-void BarcodeChannelImpl::update(const cv::Mat &image) {
-  if (image.empty()) {
+void BarcodeChannelImpl::update(const cv::Mat &image)
+{
+  if (image.empty())
+  {
     m_gray = cv::Mat();
     return;
   }
@@ -98,15 +113,17 @@ void BarcodeChannelImpl::update(const cv::Mat &image) {
   m_image.set_size(m_gray.cols, m_gray.rows);
 }
 
-::Camera::ObjectVector BarcodeChannelImpl::findObjects(const Config &config) {
+ObjectVector BarcodeChannelImpl::findObjects(const Config &config)
+{
   if (m_gray.empty())
-    return ::Camera::ObjectVector();
+    return ObjectVector();
 
   m_scanner.scan(m_image);
   zbar::SymbolSet symbols = m_scanner.get_results();
-  ::Camera::ObjectVector ret;
+  ObjectVector ret;
   zbar::SymbolIterator it = symbols.symbol_begin();
-  for (; it != symbols.symbol_end(); ++it) {
+  for (; it != symbols.symbol_end(); ++it)
+  {
     zbar::Symbol symbol = *it;
 
     // Determine bounding box and centroid
@@ -116,7 +133,8 @@ void BarcodeChannelImpl::update(const cv::Mat &image) {
     int top = 0;
 
     zbar::Symbol::PointIterator pit = symbol.point_begin();
-    for (int i = 0; i < symbol.get_location_size(); ++i) {
+    for (int i = 0; i < symbol.get_location_size(); ++i)
+    {
       const int &x = symbol.get_location_x(i);
       if (x > right)
         right = x;
@@ -130,7 +148,7 @@ void BarcodeChannelImpl::update(const cv::Mat &image) {
         bottom = y;
     }
 
-    ret.push_back(::Camera::Object(
+    ret.push_back(Object(
         Point2<unsigned>((left + right) / 2, (top + bottom) / 2),
         Rect<unsigned>(left, bottom, right - left, top - bottom), 1.0,
         zbar_symbol_get_data(symbol), zbar_symbol_get_data_length(symbol)));
@@ -141,8 +159,10 @@ void BarcodeChannelImpl::update(const cv::Mat &image) {
 
 ArucoChannelImpl::ArucoChannelImpl() {}
 
-void ArucoChannelImpl::update(const cv::Mat &image) {
-  if (image.empty()) {
+void ArucoChannelImpl::update(const cv::Mat &image)
+{
+  if (image.empty())
+  {
     m_image = cv::Mat();
     return;
   }
@@ -152,20 +172,21 @@ void ArucoChannelImpl::update(const cv::Mat &image) {
   m_image = image;
 }
 
-Camera::ObjectVector ArucoChannelImpl::findObjects(const Config &config) {
+ObjectVector ArucoChannelImpl::findObjects(const Config &config)
+{
   if (m_image.empty())
-    return ::Camera::ObjectVector();
+    return ObjectVector();
 
   // TODO: use m_image, don't get a new image
   // std::cout << "We see " <<
   // aruco::Aruco::getInstance()->arucoMarkersInView(&m_image).size() << "
   // markers" << std::endl;
-  ::Camera::ObjectVector ret;
-#ifdef ARUCO
+  ObjectVector ret;
   std::vector<std::vector<cv::Point2f>> corners =
-      aruco::Aruco::getInstance()->arucoMarkerCorners(&m_image);
+      Aruco::getInstance()->arucoMarkerCorners(&m_image);
 
-  for (auto it = corners.begin(); it != corners.end(); ++it) {
+  for (auto it = corners.begin(); it != corners.end(); ++it)
+  {
     std::vector<cv::Point2f> marker_corners = *it;
 
     // cv::Point2f ul = (*it)[0];
@@ -180,7 +201,8 @@ Camera::ObjectVector ArucoChannelImpl::findObjects(const Config &config) {
     int top = 0;
 
     for (auto it2 = marker_corners.begin(); it2 != marker_corners.end();
-         ++it2) {
+         ++it2)
+    {
       if (it2->x < left)
         left = it2->x;
       if (it2->x > right)
@@ -191,11 +213,10 @@ Camera::ObjectVector ArucoChannelImpl::findObjects(const Config &config) {
         bottom = it2->y;
     }
 
-    ret.push_back(::Camera::Object(
+    ret.push_back(Object(
         Point2<unsigned>((left + right) / 2, (top + bottom) / 2),
         Rect<unsigned>(left, bottom, right - left, top - bottom), 1.0));
   }
-#endif
 
   return ret;
 }

@@ -149,9 +149,6 @@ namespace kipr
       bool close();
       bool update();
 
-      void setWidth(const unsigned width);
-      void setHeight(const unsigned height);
-
       unsigned width() const;
       unsigned height() const;
 
@@ -200,6 +197,9 @@ namespace kipr
 
       Resolution m_resolution;
       Model m_model;
+
+      unsigned int SelectTimeoutSec;
+      unsigned int SelectTimeoutuSec;
     };
 
     /**

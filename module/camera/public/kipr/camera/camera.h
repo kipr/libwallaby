@@ -121,22 +121,6 @@ int camera_open_device_model_at_res(int number, enum Model model, enum Resolutio
 int camera_load_config(const char *name);
 
 /**
- * Sets the camera's x resolution.
- * \warning Setting the camera width is not currently supported.
- * \param width The width in pixels
- * \ingroup camera
- */
-void set_camera_width(int width);
-
-/**
- * Sets the camera's y resolution.
- * \warning Setting the camera height is not currently supported.
- * \param width The height in pixels
- * \ingroup camera
- */
-void set_camera_height(int height);
-
-/**
  * Gets the camera's x resolution.
  * \attention This value might be different than the previously set x resolution. Never assume the x resolution.
  * \return The camera's x resolution, in pixels.

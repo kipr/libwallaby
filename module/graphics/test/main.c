@@ -1,10 +1,10 @@
 // Copyright (c) KIPR, 2019
 //   cnw - 8/15/2019
-#include <kipr/graphics.h>
-#include <kipr/util.h>
+#include <kipr/graphics/graphics.h>
+#include <kipr/time/time.h>
 #include <stdio.h>
 
-#include "kipr/colors.h"
+#include "kipr/color/colors.h"
 // usuable screen is 400 x 798
 #define ROW 304
 #define COL 400

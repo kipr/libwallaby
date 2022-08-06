@@ -11,6 +11,7 @@ function(add_module NAME)
     target_include_directories(${NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/public)
     target_include_directories(${NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/protected)
     target_link_libraries(${NAME} PUBLIC ${ARGN})
+    message(STATUS "Linking ${NAME} against ${ARGN}")
   else()
     add_library(${NAME} INTERFACE)
     target_include_directories(${NAME} INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/public)
@@ -18,10 +19,16 @@ function(add_module NAME)
     target_link_libraries(${NAME} INTERFACE ${ARGN})
   endif()
 
-  
-
   get_property(KIPR_MODULES GLOBAL PROPERTY kipr_modules)
   set_property(GLOBAL PROPERTY kipr_modules ${KIPR_MODULES} ${NAME})
+endfunction()
+
+function(add_test NAME)
+  file(GLOB_RECURSE SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.c*)
+
+  add_executable(${NAME} ${SOURCES})
+
+  target_link_libraries(${NAME} PUBLIC ${ARGN})
 endfunction()
 
 add_subdirectory(analog)
@@ -36,6 +43,7 @@ add_subdirectory(digital)
 add_subdirectory(export)
 add_subdirectory(geometry)
 add_subdirectory(gyro)
+add_subdirectory(log)
 add_subdirectory(network)
 add_subdirectory(motor)
 add_subdirectory(sensor)
