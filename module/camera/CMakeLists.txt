@@ -1,8 +1,15 @@
 option(with_camera "Enable camera API" ON)
 
 if(with_camera)
-  add_module(camera export geometry color config log)
   add_subdirectory(dependencies)
-  target_link_libraries(camera PUBLIC opencv_core)
-  target_link_libraries(camera PRIVATE zbar)
+  add_module(camera export geometry color config log)
+  target_link_libraries(camera PUBLIC
+    opencv_videoio_wrapper
+    opencv_imgcodecs_wrapper
+    opencv_imgproc_wrapper
+    opencv_core_wrapper
+    jpeg_wrapper
+    z
+    zbar_wrapper
+  )
 endif()

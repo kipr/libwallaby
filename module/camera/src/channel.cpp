@@ -35,7 +35,6 @@ ObjectVector ChannelImpl::objects(const config::Config &config)
 std::map<std::string, ChannelImpl *> ChannelImplManager::m_channelImpls = {
   {"hsv", new HsvChannelImpl()},
   {"qr", new BarcodeChannelImpl()},
-  {"aruco", new ArucoChannelImpl()}
 };
 
 void ChannelImplManager::setImage(const cv::Mat &image)

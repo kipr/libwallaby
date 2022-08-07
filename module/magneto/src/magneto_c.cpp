@@ -18,8 +18,3 @@ short magneto_z()
 {
 	return magneto::magneto_z(nullptr);
 }
-
-int magneto_calibrate()
-{
-	return magneto::magneto_calibrate();
-}

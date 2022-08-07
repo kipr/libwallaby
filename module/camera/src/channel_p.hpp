@@ -2,6 +2,7 @@
 #define _KIPR_CAMERA_CHANNEL_P_HPP_
 
 #include "kipr/camera/camera.hpp"
+#include "kipr/camera/channel.hpp"
 #include "kipr/camera/object.hpp"
 #include <opencv2/core/core.hpp>
 
@@ -33,17 +34,6 @@ namespace kipr
       cv::Mat m_gray;
       zbar::Image m_image;
       zbar::ImageScanner m_scanner;
-    };
-
-    class ArucoChannelImpl : public ChannelImpl
-    {
-    public:
-      ArucoChannelImpl();
-      virtual void update(const cv::Mat &image);
-      virtual ObjectVector findObjects(const config::Config &config);
-
-    private:
-      cv::Mat m_image;
     };
   }
 }

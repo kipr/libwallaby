@@ -3,6 +3,16 @@
 using namespace kipr;
 using namespace kipr::camera;
 
+Image::Image()
+  : type_(Type::Grey8)
+  , data_(nullptr)
+  , owned_(false)
+  , width_(0)
+  , height_(0)
+  , stride_(0)
+{
+}
+
 Image::Image(
   const Type type,
   const unsigned width,
@@ -48,6 +58,8 @@ Image::~Image()
   if (owned_) delete[] data_;
 }
 
+bool Image::isEmpty() const { return data_ == nullptr; }
+Image::Type Image::getType() const { return type_; }
 const unsigned char *const Image::getData() const { return data_; }
 unsigned Image::getWidth() const { return width_; }
 unsigned Image::getHeight() const { return height_; }

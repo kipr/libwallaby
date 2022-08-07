@@ -7,7 +7,7 @@ function(add_module NAME)
   list(LENGTH SOURCES SOURCES_LEN)
 
   if (SOURCES_LEN GREATER 0)
-    add_library(${NAME} OBJECT ${SOURCES})
+    add_library(${NAME} STATIC ${SOURCES})
     target_compile_options(${NAME} PRIVATE -fPIC)
 
     target_include_directories(${NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/public)
@@ -19,6 +19,8 @@ function(add_module NAME)
     target_include_directories(${NAME} INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/protected)
     target_link_libraries(${NAME} INTERFACE ${ARGN})
   endif()
+
+  
 
   get_property(KIPR_MODULES GLOBAL PROPERTY kipr_modules)
   set_property(GLOBAL PROPERTY kipr_modules ${KIPR_MODULES} ${NAME})

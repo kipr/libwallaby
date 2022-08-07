@@ -15,6 +15,8 @@ namespace kipr
         Bgr888,
       };
 
+      Image();
+
       Image(
         const Type type,
         const unsigned width,
@@ -29,7 +31,11 @@ namespace kipr
 
       ~Image();
 
+      bool isEmpty() const;
+
+      Type getType() const;
       const unsigned char *const getData() const;
+
       unsigned getWidth() const;
       unsigned getHeight() const;
       unsigned getStride() const;

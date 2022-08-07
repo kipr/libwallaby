@@ -8,3 +8,5 @@ endif()
 
 add_library(pixeltoaster STATIC ${PIXELTOASTER_SOURCES} ${OBJC_SOURCES})
 target_include_directories(pixeltoaster PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
+target_compile_options(pixeltoaster PRIVATE -fPIC -w)

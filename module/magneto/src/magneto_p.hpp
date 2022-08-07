@@ -8,8 +8,6 @@ namespace kipr
     short magneto_x(unsigned char *alt_read_buffer = nullptr);
     short magneto_y(unsigned char *alt_read_buffer = nullptr);
     short magneto_z(unsigned char *alt_read_buffer = nullptr);
-    bool magneto_calibrate();
-    bool magneto_calibrated(unsigned char *alt_read_buffer = nullptr);
   }
 }
 

@@ -120,6 +120,9 @@ namespace kipr
       T m_z;
     };
 
+    typedef Point2<float> Point2f;
+    typedef Point2<double> Point2d;
+
     template <typename T>
     class EXPORT_SYM Rect
     {
@@ -193,6 +196,9 @@ namespace kipr
       T m_width;
       T m_height;
     };
+
+    typedef Rect<float> Rectf;
+    typedef Rect<double> Rectd;
   }
 }
 

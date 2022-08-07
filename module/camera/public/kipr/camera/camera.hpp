@@ -8,6 +8,7 @@
 #include <map>
 #include <string>
 #include <vector>
+#include <memory>
 
 #include "kipr/camera/camera.h"
 #include "kipr/camera/image.hpp"

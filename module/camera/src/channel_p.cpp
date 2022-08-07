@@ -3,7 +3,6 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 
-#include "kipr/camera/aruco.hpp"
 #include <iostream>
 #include <vector>
 #include <zbar.h>
@@ -157,66 +156,3 @@ ObjectVector BarcodeChannelImpl::findObjects(const Config &config)
   return ret;
 }
 
-ArucoChannelImpl::ArucoChannelImpl() {}
-
-void ArucoChannelImpl::update(const cv::Mat &image)
-{
-  if (image.empty())
-  {
-    m_image = cv::Mat();
-    return;
-  }
-
-  // TODO: actual aruco image format needs
-
-  m_image = image;
-}
-
-ObjectVector ArucoChannelImpl::findObjects(const Config &config)
-{
-  if (m_image.empty())
-    return ObjectVector();
-
-  // TODO: use m_image, don't get a new image
-  // std::cout << "We see " <<
-  // aruco::Aruco::getInstance()->arucoMarkersInView(&m_image).size() << "
-  // markers" << std::endl;
-  ObjectVector ret;
-  std::vector<std::vector<cv::Point2f>> corners =
-      Aruco::getInstance()->arucoMarkerCorners(&m_image);
-
-  for (auto it = corners.begin(); it != corners.end(); ++it)
-  {
-    std::vector<cv::Point2f> marker_corners = *it;
-
-    // cv::Point2f ul = (*it)[0];
-    // cv::Point2f ur = (*it)[1];
-    // cv::Point2f lr = (*it)[2];
-    // cv::Point2f ll = (*it)[3];
-
-    // Determine bounding box and centroid
-    int left = m_image.size().height;
-    int right = 0;
-    int bottom = m_image.size().width;
-    int top = 0;
-
-    for (auto it2 = marker_corners.begin(); it2 != marker_corners.end();
-         ++it2)
-    {
-      if (it2->x < left)
-        left = it2->x;
-      if (it2->x > right)
-        right = it2->x;
-      if (it2->y > top)
-        top = it2->y;
-      if (it2->y < bottom)
-        bottom = it2->y;
-    }
-
-    ret.push_back(Object(
-        Point2<unsigned>((left + right) / 2, (top + bottom) / 2),
-        Rect<unsigned>(left, bottom, right - left, top - bottom), 1.0));
-  }
-
-  return ret;
-}

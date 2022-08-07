@@ -472,7 +472,15 @@ const std::vector<Channel *> &Device::channels() const
 
 Image Device::rawImage() const
 {
-  // return m_image;
+  if (m_impl->image.empty()) return Image();
+  return Image(
+    Image::Type::Bgr888,
+    m_impl->image.cols,
+    m_impl->image.rows,
+    m_impl->image.step,
+    m_impl->image.data,
+    false
+  );
 }
 
 void Device::setConfig(const Config &config)
@@ -528,6 +536,84 @@ void Device::updateConfig()
     m_config.endGroup();
   }
   m_config.endGroup();
+}
+
+struct jpegErrorManager
+{
+  struct jpeg_error_mgr jpegErrMgr;
+  jmp_buf jmpBuffer;
+};
+
+char jpegLastErrorMsg[JMSG_LENGTH_MAX];
+
+void jpegErrorJmp(j_common_ptr cInfo)
+{
+  jpegErrorManager *const errMgr = (jpegErrorManager *)cInfo->err;
+  (*(cInfo->err->format_message))(cInfo, jpegLastErrorMsg);
+  longjmp(errMgr->jmpBuffer, 1);
+}
+
+METHODDEF(void)
+emit_message_suppressed(j_common_ptr cinfo, int msg_level) {}
+
+
+
+cv::Mat decodeJpeg(void *p, int size)
+{
+  if (size <= 0)
+    return cv::Mat();
+
+  // Init JPEG decompression objects
+  struct jpeg_decompress_struct cInfo;
+  struct jpegErrorManager errMgr;
+  cInfo.err = jpeg_std_error(&errMgr.jpegErrMgr);
+  // TODO: uncomment this line again
+  // errMgr.jpegErrMgr.emit_message = emit_message_suppressed;
+  errMgr.jpegErrMgr.error_exit = jpegErrorJmp;
+
+  // setjmp return context
+  if (setjmp(errMgr.jmpBuffer))
+  {
+    std::cerr << jpegLastErrorMsg << std::endl;
+    jpeg_destroy_decompress(&cInfo);
+    return cv::Mat();
+  }
+
+  jpeg_create_decompress(&cInfo);
+
+  // Compressed data source
+  jpeg_mem_src(&cInfo, (unsigned char *)p, size); // parameters?
+
+  // Read JPEG header
+  jpeg_read_header(&cInfo, TRUE);
+  const int width = cInfo.image_width;
+  const int height = cInfo.image_height;
+  const int numComp = cInfo.num_components;
+
+  jpeg_start_decompress(&cInfo);
+  const int outWidth = cInfo.output_width;
+  const int outHeight = cInfo.output_height;
+  const int outComp = cInfo.output_components;
+
+  unsigned long bmp_size = outWidth * outHeight * outComp;
+  int row_stride = width * outComp;
+  free(bmpBuffer);
+  bmpBuffer = (unsigned char *)malloc(bmp_size);
+
+  while (cInfo.output_scanline < cInfo.output_height)
+  {
+    unsigned char *buffer_array[1];
+    buffer_array[0] = bmpBuffer + (cInfo.output_scanline) * row_stride;
+    jpeg_read_scanlines(&cInfo, buffer_array, 1);
+  }
+
+  jpeg_finish_decompress(&cInfo);
+  jpeg_destroy_decompress(&cInfo);
+
+  cv::Mat image(cv::Size(outWidth, outHeight), CV_8UC3, bmpBuffer);
+  cv::cvtColor(image, image, cv::COLOR_BGR2RGB);
+
+  return image;
 }
 
 bool Device::initCapDevice(const unsigned width,
@@ -734,83 +820,7 @@ int Device::readFrame()
   return 1;
 }
 
-struct jpegErrorManager
-{
-  struct jpeg_error_mgr jpegErrMgr;
-  jmp_buf jmpBuffer;
-};
 
-char jpegLastErrorMsg[JMSG_LENGTH_MAX];
-
-void jpegErrorJmp(j_common_ptr cInfo)
-{
-  jpegErrorManager *const errMgr = (jpegErrorManager *)cInfo->err;
-  (*(cInfo->err->format_message))(cInfo, jpegLastErrorMsg);
-  longjmp(errMgr->jmpBuffer, 1);
-}
-
-METHODDEF(void)
-emit_message_suppressed(j_common_ptr cinfo, int msg_level) {}
-
-
-
-cv::Mat decodeJpeg(void *p, int size)
-{
-  if (size <= 0)
-    return cv::Mat();
-
-  // Init JPEG decompression objects
-  struct jpeg_decompress_struct cInfo;
-  struct jpegErrorManager errMgr;
-  cInfo.err = jpeg_std_error(&errMgr.jpegErrMgr);
-  // TODO: uncomment this line again
-  // errMgr.jpegErrMgr.emit_message = emit_message_suppressed;
-  errMgr.jpegErrMgr.error_exit = jpegErrorJmp;
-
-  // setjmp return context
-  if (setjmp(errMgr.jmpBuffer))
-  {
-    std::cerr << jpegLastErrorMsg << std::endl;
-    jpeg_destroy_decompress(&cInfo);
-    return cv::Mat();
-  }
-
-  jpeg_create_decompress(&cInfo);
-
-  // Compressed data source
-  jpeg_mem_src(&cInfo, (unsigned char *)p, size); // parameters?
-
-  // Read JPEG header
-  jpeg_read_header(&cInfo, true);
-  const int width = cInfo.image_width;
-  const int height = cInfo.image_height;
-  const int numComp = cInfo.num_components;
-
-  jpeg_start_decompress(&cInfo);
-  const int outWidth = cInfo.output_width;
-  const int outHeight = cInfo.output_height;
-  const int outComp = cInfo.output_components;
-
-  unsigned long bmp_size = outWidth * outHeight * outComp;
-  int row_stride = width * outComp;
-  free(bmpBuffer);
-  bmpBuffer = (unsigned char *)malloc(bmp_size);
-
-  while (cInfo.output_scanline < cInfo.output_height)
-  {
-    unsigned char *buffer_array[1];
-    buffer_array[0] = bmpBuffer + (cInfo.output_scanline) * row_stride;
-    jpeg_read_scanlines(&cInfo, buffer_array, 1);
-  }
-
-  jpeg_finish_decompress(&cInfo);
-  jpeg_destroy_decompress(&cInfo);
-
-  cv::Mat image(cv::Size(outWidth, outHeight), CV_8UC3, bmpBuffer);
-  cv::cvtColor(image, image, cv::COLOR_BGR2RGB);
-
-  return image;
-}
 
 int Device::xioctl(int fh, int request, void *arg)
 {

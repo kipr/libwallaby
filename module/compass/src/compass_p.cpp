@@ -1,6 +1,6 @@
 #include "compass_p.hpp"
-#include <wallaby/magneto.h>
-#include <wallaby/util.h>
+#include <kipr/magneto/magneto.h>
+#include <kipr/time/time.h>
 
 #include <cstdio>
 #include <cmath>

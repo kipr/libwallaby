@@ -1,13 +1,7 @@
-/*
- * servo_test.c
- *
- *  Created on: Nov 5, 2015
- *      Author: Joshua Southerland
- */
-
 #include <stdio.h>
 
-#include "wallaby/wallaby.h"
+#include "kipr/servo/servo.h"
+#include "kipr/time/time.h"
 
 #define NUM_SERVOS 4
 #define NUM_SERVO_CMDS 6

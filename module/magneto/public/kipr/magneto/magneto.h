@@ -32,14 +32,6 @@ signed short magneto_y();
  */
 signed short magneto_z();
 
-/*!
- * Initiates a calibration of the magnetometer
- * \note Not Yet Implemented
- * \return 1: success 0: failure
- * \ingroup magneto
- */
-int magneto_calibrate();
-
 #ifdef __cplusplus
 }
 #endif

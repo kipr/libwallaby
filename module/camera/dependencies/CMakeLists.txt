@@ -1,5 +1,23 @@
 include(ExternalProject)
 
+set(JPEG_DIR ${CMAKE_CURRENT_BINARY_DIR}/dep_jpeg)
+set(JPEG_LIB_DIR ${JPEG_DIR}/lib)
+set(JPEG_INCLUDE_DIR ${JPEG_DIR}/include)
+
+ExternalProject_Add(dep_jpeg
+  URL https://www.ijg.org/files/jpegsrc.v9e.tar.gz
+  CONFIGURE_COMMAND ${JPEG_DIR}-prefix/src/dep_jpeg/configure
+    --prefix=${JPEG_DIR}
+    --enable-shared=no
+  INSTALL_COMMAND make install
+)
+
+# jpeg
+add_library(jpeg_wrapper INTERFACE)
+add_dependencies(jpeg_wrapper dep_jpeg)
+target_link_directories(jpeg_wrapper INTERFACE ${JPEG_LIB_DIR})
+target_include_directories(jpeg_wrapper INTERFACE ${JPEG_INCLUDE_DIR})
+
 set(OPENCV_CONTRIB_DIR ${CMAKE_CURRENT_BINARY_DIR}/dep_opencv_contrib-prefix/src/dep_opencv_contrib)
 
 ExternalProject_Add(dep_opencv_contrib
@@ -16,7 +34,9 @@ set(OPENCV_INCLUDE_DIR ${OPENCV_DIR}/include)
 ExternalProject_Add(dep_opencv
   URL https://github.com/opencv/opencv/archive/refs/tags/4.6.0.tar.gz
   CMAKE_ARGS
+    -DBUILD_SHARED_LIBS=OFF
     -DWITH_FFMPEG=OFF
+    -DWITH_1394=OFF
     -DWITH_GSTREAMER=OFF
     -DMSMF=OFF
     -DWITH_DSHOW=OFF
@@ -38,6 +58,7 @@ ExternalProject_Add(dep_opencv
     -DWITH_TIFF=OFF
     -DCMAKE_INSTALL_PREFIX=${OPENCV_DIR}
     -DOPENCV_EXTRA_MODULES_PATH=${OPENCV_CONTRIB_DIR}/modules
+    -DOPENCV_GENERATE_PKGCONFIG=YES
     -DBUILD_opencv_dnn=OFF
     -DBUILD_opencv_flann=ON
     -DBUILD_opencv_features2d=ON
@@ -111,12 +132,25 @@ add_dependencies(dep_opencv dep_opencv_contrib)
 # opencv
 add_library(opencv INTERFACE)
 add_dependencies(opencv dep_opencv)
-target_link_directories(opencv INTERFACE ${OPENCV_LIB_DIR})
+target_link_directories(opencv INTERFACE ${OPENCV_LIB_DIR} ${OPENCV_LIB_DIR}/opencv4/3rdparty)
 target_include_directories(opencv INTERFACE ${OPENCV_INCLUDE_DIR}/opencv4)
+target_link_libraries(opencv INTERFACE dl ippiw ippicv ittnotify)
 
 # opencv_core
-add_library(opencv_core INTERFACE)
-target_link_libraries(opencv_core INTERFACE opencv opencv_core)
+add_library(opencv_core_wrapper INTERFACE)
+target_link_libraries(opencv_core_wrapper INTERFACE opencv opencv_core)
+
+# opencv_imgproc
+add_library(opencv_imgproc_wrapper INTERFACE)
+target_link_libraries(opencv_imgproc_wrapper INTERFACE opencv opencv_imgproc)
+
+# opencv_videoio
+add_library(opencv_videoio_wrapper INTERFACE)
+target_link_libraries(opencv_videoio_wrapper INTERFACE opencv opencv_videoio)
+
+# opencv_imgcodecs
+add_library(opencv_imgcodecs_wrapper INTERFACE)
+target_link_libraries(opencv_imgcodecs_wrapper INTERFACE opencv opencv_imgcodecs)
 
 
 set(ZBAR_DIR ${CMAKE_CURRENT_BINARY_DIR}/dep_zbar)
@@ -136,11 +170,15 @@ ExternalProject_Add(dep_zbar
     --without-jpeg
     --without-xv
     --without-xshm
+    --enable-shared=no
+    --with-pic
   INSTALL_COMMAND make install
 )
 
 # zbar
-add_library(zbar INTERFACE)
-add_dependencies(zbar dep_zbar)
-target_link_directories(zbar INTERFACE ${ZBAR_LIB_DIR})
-target_include_directories(zbar INTERFACE ${ZBAR_INCLUDE_DIR})
+add_library(zbar_wrapper INTERFACE)
+add_dependencies(zbar_wrapper dep_zbar)
+target_link_directories(zbar_wrapper INTERFACE ${ZBAR_LIB_DIR})
+target_include_directories(zbar_wrapper INTERFACE ${ZBAR_INCLUDE_DIR})
+target_link_libraries(zbar_wrapper INTERFACE zbar)
+

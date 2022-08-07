@@ -13,7 +13,6 @@ namespace kipr
 			static short x();
 			static short y();
 			static short z();
-			static bool calibrate();
 		};
 
 		class MagnetoX : public sensor::Sensor<short>

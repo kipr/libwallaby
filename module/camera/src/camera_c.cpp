@@ -1,8 +1,11 @@
 #include "kipr/camera/camera.h"
 #include "kipr/camera/camera.hpp"
+#include "kipr/camera/channel.hpp"
 #include "kipr/log/log.hpp"
 #include "camera_c_p.hpp"
 #include "logger.hpp"
+
+#include <opencv2/core/core.hpp>
 
 #include <iostream>
 #include <cstdlib>
@@ -67,25 +70,43 @@ int camera_update(void)
 
 pixel get_camera_pixel(point2 p)
 {
-  const cv::Mat &mat = DeviceSingleton::instance()->rawImage();
-  if(mat.empty()) {
+  const Image image = DeviceSingleton::instance()->rawImage();
+  if(image.isEmpty()) {
     logger.error() << "camera image is empty";
     return pixel();
   }
   
-  if(p.x < 0 || p.y < 0 || p.x >= mat.cols || p.y >= mat.rows) {
+  if(p.x < 0 || p.y < 0 || p.x >= image.getWidth() || p.y >= image.getHeight()) {
     logger.error() << "point isn't within the image";
     return pixel();
   }
-  
-  const cv::Vec3b v = mat.at<cv::Vec3b>(p.y, p.x);
-  
-  pixel ret;
-  ret.r = v[2];
-  ret.g = v[1];
-  ret.b = v[0];
-  
-  return ret;
+
+  switch (image.getType())
+  {
+    case Image::Type::Bgr888:
+    {
+      const unsigned char *const data = image.getData() + p.y * image.getStride() + p.x * 3;
+      pixel ret;
+      ret.r = data[2];
+      ret.g = data[1];
+      ret.b = data[0];
+      return ret;
+    }
+    case Image::Type::Rgb888:
+    {
+      const unsigned char *const data = image.getData() + p.y * image.getStride() + p.x * 3;
+      pixel ret;
+      ret.r = data[0];
+      ret.g = data[1];
+      ret.b = data[2];
+      return ret;
+    }
+    case Image::Type::Grey8:
+    {
+      logger.error() << "grey8 not supported";
+      return pixel();
+    }
+  }
 }
 
 int get_channel_count(void)
@@ -95,7 +116,7 @@ int get_channel_count(void)
 
 bool check_channel(int i)
 {
-  const ChannelPtrVector &channels = DeviceSingleton::instance()->channels();
+  const auto &channels = DeviceSingleton::instance()->channels();
   if(i < 0 || i >= channels.size()) {
     logger.error() << "Channel must be in the range 0 .. " << (channels.size() - 1);
     return false;
@@ -105,13 +126,13 @@ bool check_channel(int i)
 
 bool check_channel_and_object(int i, int j)
 {
-  const ChannelPtrVector &channels = DeviceSingleton::instance()->channels();
+  const auto &channels = DeviceSingleton::instance()->channels();
   if(i < 0 || i >= channels.size()) {
     if(!channels.size()) logger.error() << "Active configuration doesn't have any channels.";
     else logger.error() << "Channel must be in the range 0 .. " << (channels.size() - 1);
     return false;
   }
-  const ObjectVector *objs = channels[i]->objects();
+  const auto *objs = channels[i]->objects();
   if(j < 0 || j >= objs->size()) {
     logger.error() << "No such object " << j;
     return false;
@@ -267,7 +288,8 @@ void set_camera_config_base_path(const char *const path)
 
 const unsigned char *get_camera_frame_row(unsigned row)
 {
-  return DeviceSingleton::instance()->rawImage().ptr(row);
+  const Image image = DeviceSingleton::instance()->rawImage();
+  return image.getData() + row * image.getStride();
 }
 
 const unsigned char *get_camera_frame()
@@ -277,5 +299,14 @@ const unsigned char *get_camera_frame()
 
 unsigned get_camera_element_size()
 {
-  return DeviceSingleton::instance()->rawImage().elemSize();
+  
+  const Image image = DeviceSingleton::instance()->rawImage();
+  switch (image.getType())
+  {
+    case Image::Type::Rgb888: return 3;
+    case Image::Type::Bgr888: return 3;
+    case Image::Type::Grey8: return 1;
+  }
+  logger.error() << "Unsupported image type";
+  return 0;
 }

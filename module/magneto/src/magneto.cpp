@@ -19,11 +19,6 @@ signed short Magneto::z()
 	return magneto_z(nullptr);
 }
 
-bool Magneto::calibrate()
-{
-	return magneto_calibrate();
-}
-
 short MagnetoX::value() const
 {
 	return magneto_x(nullptr);

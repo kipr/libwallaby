@@ -1,24 +1,14 @@
-/*
- * compass_test.c
- *
- *  Created on: Jan 30, 2017
- *      Author: Joshua Southerland
- */
-
-
 #include <stdio.h>
 
-#include "wallaby/wallaby.h"
-
+#include "kipr/compass/compass.h"
+#include "kipr/time/time.h"
 
 int main(int argc, char ** argv)
 {
-
 	// Test:  void calibrate_compass()
 	// spin and calibrate the compass
 	// this also displays the compass calibration values
 	calibrate_compass();
-
 
 	// Test:  float get_compass_angle()
 	int i;

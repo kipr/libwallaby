@@ -1,0 +1,1 @@
+add_test(servo_test core servo time)
