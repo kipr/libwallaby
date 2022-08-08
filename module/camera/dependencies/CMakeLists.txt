@@ -7,6 +7,7 @@ set(JPEG_INCLUDE_DIR ${JPEG_DIR}/include)
 ExternalProject_Add(dep_jpeg
   URL https://www.ijg.org/files/jpegsrc.v9e.tar.gz
   CONFIGURE_COMMAND ${JPEG_DIR}-prefix/src/dep_jpeg/configure
+    CFLAGS=-fPIC
     --prefix=${JPEG_DIR}
     --enable-shared=no
   INSTALL_COMMAND make install
@@ -17,6 +18,7 @@ add_library(jpeg_wrapper INTERFACE)
 add_dependencies(jpeg_wrapper dep_jpeg)
 target_link_directories(jpeg_wrapper INTERFACE ${JPEG_LIB_DIR})
 target_include_directories(jpeg_wrapper INTERFACE ${JPEG_INCLUDE_DIR})
+target_link_libraries(jpeg_wrapper INTERFACE jpeg)
 
 set(OPENCV_CONTRIB_DIR ${CMAKE_CURRENT_BINARY_DIR}/dep_opencv_contrib-prefix/src/dep_opencv_contrib)
 
@@ -44,6 +46,8 @@ ExternalProject_Add(dep_opencv
     -DWITH_GTK=OFF
     -DWITH_WIN32UI=OFF
     -DWITH_JAVA=OFF
+    -DWITH_ITT=OFF
+    -DWITH_IPP=OFF
     -DBUILD_opencv_python2=OFF
     -DBUILD_opencv_python3=OFF
     -DBUILD_TESTS=OFF
@@ -55,6 +59,7 @@ ExternalProject_Add(dep_opencv
     -DWITH_OPENJPEG=OFF
     -DWITH_WEBP=OFF
     -DWITH_PNG=OFF
+    -DWITH_JPEG=OFF
     -DWITH_TIFF=OFF
     -DCMAKE_INSTALL_PREFIX=${OPENCV_DIR}
     -DOPENCV_EXTRA_MODULES_PATH=${OPENCV_CONTRIB_DIR}/modules
@@ -134,7 +139,7 @@ add_library(opencv INTERFACE)
 add_dependencies(opencv dep_opencv)
 target_link_directories(opencv INTERFACE ${OPENCV_LIB_DIR} ${OPENCV_LIB_DIR}/opencv4/3rdparty)
 target_include_directories(opencv INTERFACE ${OPENCV_INCLUDE_DIR}/opencv4)
-target_link_libraries(opencv INTERFACE dl ippiw ippicv ittnotify)
+target_link_libraries(opencv INTERFACE dl)
 
 # opencv_core
 add_library(opencv_core_wrapper INTERFACE)
@@ -143,6 +148,30 @@ target_link_libraries(opencv_core_wrapper INTERFACE opencv opencv_core)
 # opencv_imgproc
 add_library(opencv_imgproc_wrapper INTERFACE)
 target_link_libraries(opencv_imgproc_wrapper INTERFACE opencv opencv_imgproc)
+
+# opencv_flann
+add_library(opencv_flann_wrapper INTERFACE)
+target_link_libraries(opencv_flann_wrapper INTERFACE opencv opencv_flann)
+
+# opencv_video
+add_library(opencv_video_wrapper INTERFACE)
+target_link_libraries(opencv_video_wrapper INTERFACE opencv opencv_video)
+
+# opencv_photo
+add_library(opencv_photo_wrapper INTERFACE)
+target_link_libraries(opencv_photo_wrapper INTERFACE opencv opencv_photo)
+
+# opencv_highgui
+add_library(opencv_highgui_wrapper INTERFACE)
+target_link_libraries(opencv_highgui_wrapper INTERFACE opencv opencv_highgui)
+
+# opencv_features2d
+add_library(opencv_features2d_wrapper INTERFACE)
+target_link_libraries(opencv_features2d_wrapper INTERFACE opencv opencv_features2d)
+
+# opencv_calib3d
+add_library(opencv_calib3d_wrapper INTERFACE)
+target_link_libraries(opencv_calib3d_wrapper INTERFACE opencv opencv_calib3d)
 
 # opencv_videoio
 add_library(opencv_videoio_wrapper INTERFACE)
@@ -182,3 +211,60 @@ target_link_directories(zbar_wrapper INTERFACE ${ZBAR_LIB_DIR})
 target_include_directories(zbar_wrapper INTERFACE ${ZBAR_INCLUDE_DIR})
 target_link_libraries(zbar_wrapper INTERFACE zbar)
 
+set(LIBAV_DIR ${CMAKE_CURRENT_BINARY_DIR}/dep_libav)
+set(LIBAV_LIB_DIR ${LIBAV_DIR}/lib)
+set(LIBAV_INCLUDE_DIR ${LIBAV_DIR}/include)
+
+ExternalProject_Add(dep_libav
+  URL https://libav.org/releases/libav-12.3.tar.gz
+  CONFIGURE_COMMAND ${LIBAV_DIR}-prefix/src/dep_libav/configure
+    --enable-pic  
+    --prefix=${LIBAV_DIR}
+    --extra-cflags=-w
+    --disable-encoders
+    --disable-decoders
+    --disable-muxers
+    --disable-demuxers
+    --disable-parsers
+    --disable-protocols
+    --disable-indevs
+    --disable-outdevs
+    --disable-filters
+  INSTALL_COMMAND make install
+)
+
+# libav
+
+# opencv
+add_library(av_wrapper INTERFACE)
+add_dependencies(av_wrapper dep_libav)
+target_link_directories(av_wrapper INTERFACE ${LIBAV_LIB_DIR})
+target_include_directories(av_wrapper INTERFACE ${LIBAV_INCLUDE_DIR})
+
+# libavcodec
+add_library(avcodec_wrapper INTERFACE)
+target_link_libraries(avcodec_wrapper INTERFACE av_wrapper avcodec)
+
+# libavfilter
+add_library(avfilter_wrapper INTERFACE)
+target_link_libraries(avfilter_wrapper INTERFACE av_wrapper avfilter)
+
+# libavdevice
+add_library(avdevice_wrapper INTERFACE)
+target_link_libraries(avdevice_wrapper INTERFACE av_wrapper avdevice)
+
+# libavformat
+add_library(avformat_wrapper INTERFACE)
+target_link_libraries(avformat_wrapper INTERFACE av_wrapper avformat)
+
+# libavresample
+add_library(avresample_wrapper INTERFACE)
+target_link_libraries(avresample_wrapper INTERFACE av_wrapper avresample)
+
+# libavutil
+add_library(avutil_wrapper INTERFACE)
+target_link_libraries(avutil_wrapper INTERFACE av_wrapper avutil)
+
+# libavutil
+add_library(swscale_wrapper INTERFACE)
+target_link_libraries(swscale_wrapper INTERFACE av_wrapper swscale)

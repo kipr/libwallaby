@@ -8,7 +8,7 @@ using namespace kipr::battery;
 
 using kipr::core::Platform;
 
-unsigned short battery_raw_reading(unsigned char *alt_read_buffer)
+unsigned short kipr::battery::battery_raw_reading(unsigned char *alt_read_buffer)
 {
   return Platform::instance()->readRegister16b(REG_RW_BATT_H, alt_read_buffer);
 }
@@ -37,7 +37,7 @@ float voltage_to_capacity(const float *vs, const float *ps, unsigned int num_pts
   return ps[num_pts - 1];
 }
 
-float battery_power_level(Type batt_type, unsigned short raw_batt)
+float kipr::battery::battery_power_level(Type batt_type, unsigned short raw_batt)
 {
   // calculate voltage based on linear curve-fitting
   double voltage = 0.009175 * static_cast<double>(raw_batt);

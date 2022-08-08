@@ -1,1 +1,1 @@
-add_test(analog_test core analog time)
+add_test(analog_test analog time)

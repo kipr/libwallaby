@@ -11,7 +11,6 @@ int main(int argc, char ** argv)
 	printf("Connecting...\n");
 	create_connect();
 
-	create_start();
 
 	printf("Spinning CW...n");
 	create_spin_CW(40);

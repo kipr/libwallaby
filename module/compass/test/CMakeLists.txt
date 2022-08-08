@@ -1,1 +1,1 @@
-add_test(compass_test core compass magneto time)
+add_test(compass_test compass time)

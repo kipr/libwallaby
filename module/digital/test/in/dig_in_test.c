@@ -1,15 +1,7 @@
-/*
- * dig_in_test.c
- *
- *  Created on: Nov 19, 2015
- *      Author: Joshua Southerland
- */
-
-
-
 #include <stdio.h>
 
-#include "wallaby/wallaby.h"
+#include "kipr/digital/digital.h"
+#include "kipr/time/time.h"
 
 #define NUM_DIG_INS 16
 

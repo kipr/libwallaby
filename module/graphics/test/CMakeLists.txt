@@ -1,0 +1,1 @@
+add_test(graphics_test graphics time export color)

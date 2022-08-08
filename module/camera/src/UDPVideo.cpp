@@ -1,5 +1,3 @@
-#ifdef WITH_VISION_SUPPORT
-
 #include "UDPVideo.hpp"
 
 #define DEST_PIXEL_FMT AV_PIX_FMT_BGR24
@@ -14,15 +12,17 @@
 using namespace std;
 
 int decode(AVCodecContext *avctx, AVFrame *frame, int *got_frame,
-           AVPacket *pkt) {
+           AVPacket *pkt)
+{
   int ret;
 
   *got_frame = 0;
 
-  if (pkt) {
+  if (pkt)
+  {
     ret = avcodec_send_packet(avctx, pkt);
     std::cout << "decode - avcodec_send_packet - ret: " << ret << std::endl;
-      
+
     // In particular, we don't expect AVERROR(EAGAIN), because we read all
     // decoded frames with avcodec_receive_frame() until done.
     if (ret < 0)
@@ -42,7 +42,8 @@ int decode(AVCodecContext *avctx, AVFrame *frame, int *got_frame,
 
 VideoFrameProcessor::VideoFrameProcessor(
     const char *drone_ip_address, const short unsigned int drone_port,
-    const int destw, const int desth) {
+    const int destw, const int desth)
+{
   // todo: allow caller to set ip address
   m_udp_video_up = true;
   m_vdr_running = false;
@@ -53,8 +54,10 @@ VideoFrameProcessor::VideoFrameProcessor(
 
   // Create a socket file descriptor
 
-  if ((m_sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
-    std::cout << "socket creation failed" << std::endl << std::flush;
+  if ((m_sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0)
+  {
+    std::cout << "socket creation failed" << std::endl
+              << std::flush;
     return;
   }
 
@@ -76,9 +79,11 @@ VideoFrameProcessor::VideoFrameProcessor(
 
   // Bind the socket with the server address
   if (bind(m_sockfd, (const struct sockaddr *)&m_servaddr, sizeof(m_servaddr)) <
-      0) {
-      std::cout << "bind failed: " << strerror(errno) << std::endl << std::flush;
-      return;
+      0)
+  {
+    std::cout << "bind failed: " << strerror(errno) << std::endl
+              << std::flush;
+    return;
   }
 
   m_vfp_running = false;
@@ -91,20 +96,25 @@ VideoFrameProcessor::VideoFrameProcessor(
 
   // Hardware codec
   // AVCodec * p_codec_h264 = avcodec_find_decoder_by_name("h264_mmal");
-  if (p_codec_h264 == NULL) {
-      std::cout << "codec not found" << std::endl << std::flush;
+  if (p_codec_h264 == NULL)
+  {
+    std::cout << "codec not found" << std::endl
+              << std::flush;
     return;
   }
 
   m_pcodec_ctx_h264 = avcodec_alloc_context3(p_codec_h264);
 
-  if (m_pcodec_ctx_h264 == NULL) {
+  if (m_pcodec_ctx_h264 == NULL)
+  {
     std::cout << "VideoFrameProcessor::run - could not allocate codec context"
-      << std::endl << std::flush;
+              << std::endl
+              << std::flush;
     return;
   }
 
-  if (p_codec_h264->capabilities & AV_CODEC_CAP_TRUNCATED) {
+  if (p_codec_h264->capabilities & AV_CODEC_CAP_TRUNCATED)
+  {
     m_pcodec_ctx_h264->flags |= AV_CODEC_FLAG_TRUNCATED;
   }
 
@@ -115,34 +125,42 @@ VideoFrameProcessor::VideoFrameProcessor(
   m_parser = av_parser_init(AV_CODEC_ID_H264);
 
   // start the frame processing thread
-  m_vfp_thread = new std::thread([this]() { run_vfp(); });
+  m_vfp_thread = new std::thread([this]()
+                                 { run_vfp(); });
 
-  while (!m_vfp_running) {
+  while (!m_vfp_running)
+  {
     std::this_thread::sleep_for(std::chrono::milliseconds(20));
   }
 
   // start up the UDP packet receiver thread
-  m_vdr_thread = new std::thread([this]() { run_vdr(); });
+  m_vdr_thread = new std::thread([this]()
+                                 { run_vdr(); });
 
-  while (!m_vdr_running) {
+  while (!m_vdr_running)
+  {
     std::this_thread::sleep_for(std::chrono::milliseconds(20));
   }
 
   std::cout << "VideoFrameProcessor initialized" << std::endl;
 }
 
-VideoFrameProcessor::~VideoFrameProcessor() throw() {
-    std::cout << "VideoFrameProcessor - terminating" << std::endl;
+VideoFrameProcessor::~VideoFrameProcessor() throw()
+{
+  std::cout << "VideoFrameProcessor - terminating" << std::endl;
 
   m_udp_video_up = false;
-  try {
+  try
+  {
     m_vdr_thread->join();
     m_vfp_thread->join();
   }
 
-  catch (int ex) {
+  catch (int ex)
+  {
     std::cout << "~VideoFrameProcessor - exception :" << ex
-      << std::endl << std::flush;
+              << std::endl
+              << std::flush;
   }
   close(m_sockfd);
 
@@ -151,7 +169,8 @@ VideoFrameProcessor::~VideoFrameProcessor() throw() {
   std::cout << "VideoFrameProcessor - terminated" << std::endl;
 }
 
-void VideoFrameProcessor::run_vdr() {
+void VideoFrameProcessor::run_vdr()
+{
   unsigned int packet_count;
   unsigned int pos;
 
@@ -172,12 +191,14 @@ void VideoFrameProcessor::run_vdr() {
   // receive UDP packets, reassemble frame packets and send them on
   m_vdr_running = true;
 
-  while (m_udp_video_up) {
+  while (m_udp_video_up)
+  {
     unsigned char packetdata[65536];
     socklen_t soc_len = sizeof(m_cliaddr); // len is value/resuslt
     receive_size = recvfrom(m_sockfd, (char *)packetdata, payload_size, 0,
                             (struct sockaddr *)&m_cliaddr, &soc_len);
-    if ((int)receive_size < 0) {
+    if ((int)receive_size < 0)
+    {
       std::cout << "run_vdr: " << strerror(errno) << std::endl;
       continue;
     }
@@ -186,7 +207,8 @@ void VideoFrameProcessor::run_vdr() {
     in_data = packetdata;
 
     // rebuild frames from the UDP packets that are arriving
-    while (in_len) {
+    while (in_len)
+    {
       len = av_parser_parse2(m_parser, m_pcodec_ctx_h264, &(packet.data),
                              &(packet.size), in_data, in_len, 0, 0,
                              AV_NOPTS_VALUE);
@@ -194,7 +216,8 @@ void VideoFrameProcessor::run_vdr() {
       in_len -= len;
 
       // have a packet, prepare it for processing
-      if (packet.size != 0) {
+      if (packet.size != 0)
+      {
         // annotate key frames
         if (m_parser->key_frame == 1 ||
             (m_parser->key_frame == -1 &&
@@ -202,7 +225,7 @@ void VideoFrameProcessor::run_vdr() {
           packet.flags |= AV_PKT_FLAG_KEY;
 
         if ((m_parser->key_frame == -1) &&
-            (m_parser->pict_type == AV_PICTURE_TYPE_NONE) &&
+            (m_parser->pict_type == 0) &&
             (packet.flags & AV_PKT_FLAG_KEY))
           packet.flags |= AV_PKT_FLAG_KEY;
 
@@ -210,7 +233,8 @@ void VideoFrameProcessor::run_vdr() {
           first_keyframe = true;
 
         // can only process after we receive a keyframe
-        if (first_keyframe) {
+        if (first_keyframe)
+        {
           unsigned char *new_data;
 
           new_data = (unsigned char *)av_malloc(packet.size);
@@ -228,17 +252,21 @@ VDR_done:
 }
 
 #define FRAME_SLEEP_TIME 10 // in milliseconds
-bool VideoFrameProcessor::get_pframe_from_list(cv::OutputArray image) {
+bool VideoFrameProcessor::get_pframe_from_list(cv::OutputArray image)
+{
   unsigned long wait_time = 0;
-  while (m_next_frame == NULL) {
+  while (m_next_frame == NULL)
+  {
     // wait until we get something in the vector
     std::this_thread::sleep_for(std::chrono::milliseconds(FRAME_SLEEP_TIME));
     if (!m_udp_video_up)
       return false;
 
     wait_time += FRAME_SLEEP_TIME;
-    if (wait_time > FRAME_TIMEOUT) {
-        std::cout << "Frame timeout" << std::endl << std::flush;
+    if (wait_time > FRAME_TIMEOUT)
+    {
+      std::cout << "Frame timeout" << std::endl
+                << std::flush;
       return false;
     }
   }
@@ -249,14 +277,15 @@ bool VideoFrameProcessor::get_pframe_from_list(cv::OutputArray image) {
   image.create(m_next_frame->height, m_next_frame->width, CV_8UC3);
 #if DEBUG_UDP
   std::cout << "VideoFrameProcessor::get_pframe_from_list h: " << m_next_frame->height
-    << " w: " << m_next_frame->width
-    << std::hex
-    << " dataptr: " << (void *) m_next_frame->data[0]
-    << std::dec
-    << " linesize[0] " << m_next_frame->linesize[0]
-    << " linesize[1] " << m_next_frame->linesize[1]
-    << " linesize[2] " << m_next_frame->linesize[2]
-    << std::endl << std::flush;
+            << " w: " << m_next_frame->width
+            << std::hex
+            << " dataptr: " << (void *)m_next_frame->data[0]
+            << std::dec
+            << " linesize[0] " << m_next_frame->linesize[0]
+            << " linesize[1] " << m_next_frame->linesize[1]
+            << " linesize[2] " << m_next_frame->linesize[2]
+            << std::endl
+            << std::flush;
 #endif
   cv::Mat image2 = image.getMat();
 
@@ -285,12 +314,14 @@ bool VideoFrameProcessor::get_pframe_from_list(cv::OutputArray image) {
   return true;
 }
 
-void VideoFrameProcessor::add_pframe_to_list(AVFrame *newFrame) {
+void VideoFrameProcessor::add_pframe_to_list(AVFrame *newFrame)
+{
   m_vid_frame_mutex.lock();
 
   // make sure the requestor receives the most recent frame
   // so we have only a one frame queue
-  if (m_next_frame != NULL) {
+  if (m_next_frame != NULL)
+  {
     av_free(m_next_frame);
   }
   m_next_frame = newFrame;
@@ -306,12 +337,14 @@ void VideoFrameProcessor::add_pframe_to_list(AVFrame *newFrame) {
   m_vid_frame_mutex.unlock();
 }
 
-void VideoFrameProcessor::add_frame_to_list(AVPacket frameData) {
+void VideoFrameProcessor::add_frame_to_list(AVPacket frameData)
+{
   m_vid_mutex.lock();
 
   // When a new Key Frame arrives, flush the frame queue.
   // This way the most recent frame is sent to the codac
-  if ((frameData.flags & AV_PKT_FLAG_KEY) == AV_PKT_FLAG_KEY) {
+  if ((frameData.flags & AV_PKT_FLAG_KEY) == AV_PKT_FLAG_KEY)
+  {
     std::queue<AVPacket> empty;
     std::swap(m_frame_data_vector, empty);
   }
@@ -327,7 +360,8 @@ void VideoFrameProcessor::add_frame_to_list(AVPacket frameData) {
 #endif
 }
 
-void VideoFrameProcessor::run_vfp() {
+void VideoFrameProcessor::run_vfp()
+{
   int FrameFinished;
   AVPacket packet;
   struct SwsContext *img_convert_ctx = NULL;
@@ -338,14 +372,17 @@ void VideoFrameProcessor::run_vfp() {
 
   m_vfp_running = true;
 
-  while (1) {
+  while (1)
+  {
     m_vid_mutex.lock();
 
-    while ((m_frame_data_vector.empty()) /* ||waitingForReceiver*/) {
+    while ((m_frame_data_vector.empty()) /* ||waitingForReceiver*/)
+    {
       // wait until we get something in the vector
       m_vid_mutex.unlock(); // release the lock before we sleep
       std::this_thread::sleep_for(std::chrono::milliseconds(10));
-      if (m_udp_video_up == false) {
+      if (m_udp_video_up == false)
+      {
         cout << "run_vfp - time to get out" << std::endl;
         goto VFP_done;
       }
@@ -365,11 +402,12 @@ void VideoFrameProcessor::run_vfp() {
       AVFrame *pFrame = av_frame_alloc();
 #ifdef DEBUG_UDP
       std::cout << "VideoFrameProcessor::run_vfp new packet data: "
-        << std::hex
-        << (void *) packet.data
-        << std::dec
-        << " size: " << packet.size
-        << std::endl << std::flush;
+                << std::hex
+                << (void *)packet.data
+                << std::dec
+                << " size: " << packet.size
+                << std::endl
+                << std::flush;
 #endif
       int avresult = avcodec_decode_video2(m_pcodec_ctx_h264, pFrame,
                                            &FrameFinished, &packet);
@@ -378,31 +416,36 @@ void VideoFrameProcessor::run_vfp() {
       // int avresult = decode(pCodecCtxH264, pFrame, &FrameFinished, &packet);
 #ifdef DEBUG_UDP
       std::cout << "VideoFrameProcessor::run_vfp-->Decoding complete "
-        << "FrameFinished: " << FrameFinished
-        << " avresult: " << avresult
-        << std::endl << std::flush;
+                << "FrameFinished: " << FrameFinished
+                << " avresult: " << avresult
+                << std::endl
+                << std::flush;
 #endif
       if (FrameFinished == 0) //  no output this time arounf
       {
         std::cout << "-->frame not decoded\n";
         continue;
-      } else // convert the image into something the KIPR SW can understand
+      }
+      else // convert the image into something the KIPR SW can understand
       {
 #ifdef DEBUG_UDP
         cout << "VideoFrameProcessor::run_vfp data: " << std::hex
-          << (void *) pFrame->data[0]
-          << std::dec
-          << " pFrame->linesize[0]: " << pFrame->linesize[0]
-          << " linesize[1]: " << pFrame->linesize[1]
-          << " width: " << pFrame->width
-          << " height: " << pFrame->height
-          << " key_frame: " << pFrame->key_frame
-          << std::endl << std::flush;
+             << (void *)pFrame->data[0]
+             << std::dec
+             << " pFrame->linesize[0]: " << pFrame->linesize[0]
+             << " linesize[1]: " << pFrame->linesize[1]
+             << " width: " << pFrame->width
+             << " height: " << pFrame->height
+             << " key_frame: " << pFrame->key_frame
+             << std::endl
+             << std::flush;
 #endif
-        if (pFrame->data[0] == NULL) {
+        if (pFrame->data[0] == NULL)
+        {
           std::cout << "VideoFrameProcessor_VFP::run ***Warning*** pointer to frame "
-                  "is NULL"
-               << std::endl << std::flush;
+                       "is NULL"
+                    << std::endl
+                    << std::flush;
           continue;
         }
 
@@ -417,15 +460,17 @@ VFP_done:
 }
 
 UdpVideo::UdpVideo(const char *drone_ip_address,
-                     const short unsigned int drone_port, const int destw,
-                     const int desth) {
+                   const short unsigned int drone_port, const int destw,
+                   const int desth)
+{
   m_udp_opened = true;
   m_data_receiver =
       new VideoFrameProcessor(drone_ip_address, drone_port, destw, desth);
   std::cout << "UDP Video started" << std::endl;
 }
 
-UdpVideo::~UdpVideo() {
+UdpVideo::~UdpVideo()
+{
   m_udp_opened = false;
   delete m_data_receiver;
   std::cout << "~UdpVideo done\n";
@@ -433,11 +478,10 @@ UdpVideo::~UdpVideo() {
 
 bool UdpVideo::isOpened() const { return m_udp_opened; }
 
-bool UdpVideo::read(cv::OutputArray image) {
+bool UdpVideo::read(cv::OutputArray image)
+{
   bool retval = false;
   if (isOpened())
     retval = m_data_receiver->get_pframe_from_list(image);
   return retval;
 }
-
-#endif

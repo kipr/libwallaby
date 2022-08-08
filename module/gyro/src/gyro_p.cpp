@@ -17,25 +17,25 @@ using namespace kipr::gyro;
 using kipr::core::Platform;
 
 // Pulls gyroscope data from the I2C registers. The MPU 9250 outputs high and low registers that need to be combined.
-short gyro_x(unsigned char *alt_read_buffer)
+short kipr::gyro::gyro_x(unsigned char *alt_read_buffer)
 {
   return static_cast<signed short>(Platform::instance()->readRegister16b(REG_RW_GYRO_X_H, alt_read_buffer)) / 16 - biasx;
 }
 
 // Pulls gyroscope data from the I2C registers. The MPU 9250 outputs high and low registers that need to be combined.
-short gyro_y(unsigned char *alt_read_buffer)
+short kipr::gyro::gyro_y(unsigned char *alt_read_buffer)
 {
   return static_cast<signed short>(Platform::instance()->readRegister16b(REG_RW_GYRO_Y_H, alt_read_buffer)) / 16 - biasy;
 }
 
 // Pulls gyroscope data from the I2C registers. The MPU 9250 outputs high and low registers that need to be combined.
-short gyro_z(unsigned char *alt_read_buffer)
+short kipr::gyro::gyro_z(unsigned char *alt_read_buffer)
 {
   return static_cast<signed short>(Platform::instance()->readRegister16b(REG_RW_GYRO_Z_H, alt_read_buffer)) / 16 - biasz;
 }
 
 // Simple low-pass filter for gyroscope
-bool gyro_calibrate()
+bool kipr::gyro::gyro_calibrate()
 {
   int samples = 50;
 
@@ -78,7 +78,7 @@ bool gyro_calibrate()
 }
 
 // This function is currently unused and meaningless...
-bool gyro_calibrated(unsigned char *alt_read_buffer)
+bool kipr::gyro::gyro_calibrated(unsigned char *alt_read_buffer)
 {
   // TODO
   return true;

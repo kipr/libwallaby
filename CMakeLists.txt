@@ -30,6 +30,7 @@ configure_file(include/kipr/config.h.in ${CMAKE_CURRENT_BINARY_DIR}/include/kipr
 # Build the library.
 file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/empty.cpp "")
 add_library(kipr SHARED ${CMAKE_CURRENT_BINARY_DIR})
-target_link_libraries(kipr PUBLIC "-Wl,--whole-archive" ${STATIC_KIPR_MODULES} "-Wl,--no-whole-archive")
+target_link_libraries(kipr PRIVATE "-Wl,-Bsymbolic" "-Wl,--whole-archive"  ${STATIC_KIPR_MODULES} "-Wl,--no-whole-archive")
+target_link_libraries(kipr INTERFACE ${STATIC_KIPR_MODULES})
 
 install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/include DESTINATION include)

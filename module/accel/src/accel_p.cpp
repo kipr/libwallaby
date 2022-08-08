@@ -15,23 +15,23 @@ namespace
   double Biasz = 0;
 }
 
-short accel_x(unsigned char *alt_read_buffer)
+short kipr::accel::accel_x(unsigned char *alt_read_buffer)
 {
   return static_cast<signed short>(Platform::instance()->readRegister16b(REG_RW_ACCEL_X_H, alt_read_buffer)) / 16 - Biasx;
 }
 
-short accel_y(unsigned char *alt_read_buffer)
+short kipr::accel::accel_y(unsigned char *alt_read_buffer)
 {
   return static_cast<signed short>(Platform::instance()->readRegister16b(REG_RW_ACCEL_Y_H, alt_read_buffer)) / 16 - Biasy;
 }
 
-short accel_z(unsigned char *alt_read_buffer)
+short kipr::accel::accel_z(unsigned char *alt_read_buffer)
 {
   return static_cast<signed short>(Platform::instance()->readRegister16b(REG_RW_ACCEL_Z_H, alt_read_buffer)) / 16 - Biasz;
 }
 
 // Simple low-pass filter for accelerometer
-bool accel_calibrate()
+bool kipr::accel::accel_calibrate()
 {
 
   // Find the average noise

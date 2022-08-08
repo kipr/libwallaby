@@ -27,9 +27,6 @@
 
 %include "vtable.h"
 
-%include "button_prelude.i"
-//%include "camera_prelude.i"
-
 %include "sensor.hpp"
 %template(IntSensor) Sensor<int>;
 %template(ShortSensor) Sensor<short>;

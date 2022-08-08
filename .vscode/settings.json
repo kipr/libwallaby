@@ -43,5 +43,6 @@
     "*.page": "json",
     "wallaby.h": "c",
     "camera.h": "c"
-  }
+  },
+  "search.useIgnoreFiles": false
 }

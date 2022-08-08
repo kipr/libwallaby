@@ -25,7 +25,8 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 
-extern "C" {
+extern "C"
+{
 #include <libavcodec/avcodec.h>
 #include <libavformat/avformat.h>
 #include <libavutil/avutil.h>
@@ -34,7 +35,8 @@ extern "C" {
 #include <libswscale/swscale.h>
 }
 
-class VideoFrameProcessor {
+class VideoFrameProcessor
+{
   std::queue<AVPacket> m_frame_data_vector;
   std::mutex m_vid_mutex;
   std::mutex m_vid_frame_mutex;
@@ -50,8 +52,8 @@ class VideoFrameProcessor {
 
 public:
   VideoFrameProcessor(const char *drone_ip_address,
-                        const short unsigned int drone_port, const int destw,
-                        const int desth);
+                      const short unsigned int drone_port, const int destw,
+                      const int desth);
 
   ~VideoFrameProcessor(void) throw();
   bool get_pframe_from_list(cv::OutputArray image); // AVFrame& newFrame);
@@ -72,11 +74,12 @@ private:
   AVFrame *m_next_frame;
 };
 
-class UdpVideo : public cv::VideoCapture {
+class UdpVideo : public cv::VideoCapture
+{
 
 public:
   UdpVideo(const char *drone_ip_address, const short unsigned int drone_port,
-            const int destw, const int desth);
+           const int destw, const int desth);
   ~UdpVideo();
   bool isOpened() const;
   // bool read(cv::Mat& Image);

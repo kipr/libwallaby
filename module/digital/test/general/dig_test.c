@@ -1,14 +1,7 @@
-/*
- * dig_test.c
- *
- *  Created on: Nov 23, 2015
- *      Author: Joshua Southerland
- */
-
-
 #include <stdio.h>
 
-#include "wallaby/wallaby.h"
+#include "kipr/digital/digital.h"
+#include "kipr/time/time.h"
 
 
 int main(int argc, char ** argv)

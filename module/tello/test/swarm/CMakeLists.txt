@@ -1,0 +1,1 @@
+add_test(tello_swarm_test core tello time)

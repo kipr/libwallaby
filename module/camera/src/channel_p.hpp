@@ -6,8 +6,6 @@
 #include "kipr/camera/object.hpp"
 #include <opencv2/core/core.hpp>
 
-#include <zbar.h>
-
 namespace kipr
 {
   namespace camera
@@ -21,19 +19,6 @@ namespace kipr
       
     private:
       cv::Mat m_image;
-    };
-    
-    class BarcodeChannelImpl : public ChannelImpl
-    {
-    public:
-      BarcodeChannelImpl();
-      virtual void update(const cv::Mat &image);
-      virtual ObjectVector findObjects(const config::Config &config);
-
-    private:
-      cv::Mat m_gray;
-      zbar::Image m_image;
-      zbar::ImageScanner m_scanner;
     };
   }
 }
