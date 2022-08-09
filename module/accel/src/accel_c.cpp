@@ -1,4 +1,4 @@
-#include "wallaby/accel.h"
+#include "kipr/accel/accel.h"
 #include "accel_p.hpp"
 
 using namespace kipr;

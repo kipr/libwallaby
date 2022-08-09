@@ -1,6 +1,6 @@
 #ifndef _WIN32
 
-#include "wallaby/socket.hpp"
+#include "kipr/network/socket.hpp"
 
 #ifndef WIN32
 #include <arpa/inet.h>

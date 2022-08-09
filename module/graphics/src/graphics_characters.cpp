@@ -12,8 +12,8 @@
 #include <math.h>
 
 
-#include "wallaby/graphics_characters.h"
-#include "wallaby/graphics.h"
+#include "kipr/graphics/graphics_characters.h"
+#include "kipr/graphics/graphics.h"
 
 /* These are functions for adding alphameric characters (caps only) to graphics windows.
    The functions were extracted from a graphing package written by D.Miller Oct 2008.

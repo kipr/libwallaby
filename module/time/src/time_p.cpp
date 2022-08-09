@@ -1,5 +1,5 @@
 #include "time_p.hpp"
-#include "wallaby/compat.hpp"
+#include "kipr/compat/compat.hpp"
 
 #include <unistd.h>
 #include <sys/time.h>

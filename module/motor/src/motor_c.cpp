@@ -1,5 +1,5 @@
 #include "kipr/motor/motor.h"
-#include "wallaby/util.h"
+#include "kipr/time/time.h"
 #include "motor_p.hpp"
 
 #include <iostream>

@@ -6,7 +6,7 @@
  */
 
 
-#include "wallaby/audio.h"
+#include "kipr/audio/audio.h"
 
 #include <cstdio>
 

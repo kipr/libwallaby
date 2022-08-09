@@ -5,8 +5,8 @@
  *      Author: Joshua Southerland
  */
 
-#include "wallaby/util.h"
-#include "wallaby/motors.hpp"
+#include "kipr/time/time.h"
+#include "kipr/motor/motor.hpp"
 #include "motor_p.hpp"
 
 #include <cstdlib>

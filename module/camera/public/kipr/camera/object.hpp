@@ -4,6 +4,7 @@
 #include "kipr/geometry/geometry.hpp"
 
 #include <cstdint>
+#include <cstddef>
 #include <vector>
 
 namespace kipr
