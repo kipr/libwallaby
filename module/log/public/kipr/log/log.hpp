@@ -34,6 +34,7 @@ namespace kipr
     class LogStream
     {
     public:
+      LogStream(LogStream &&rhs);
       LogStream(Log &log, const Level level);
       ~LogStream();
 
@@ -45,7 +46,7 @@ namespace kipr
       template<typename T>
       inline LogStream &operator <<(const T &t)
       {
-        stream_ << t;
+        (*stream_) << t;
         return *this;
       }
 
@@ -56,7 +57,7 @@ namespace kipr
       Level level_;
       bool flushed_;
 
-      std::ostringstream stream_;
+      std::unique_ptr<std::ostringstream> stream_;
     };
 
     class Log
