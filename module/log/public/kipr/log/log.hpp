@@ -34,7 +34,6 @@ namespace kipr
     class LogStream
     {
     public:
-      LogStream(LogStream &&rhs);
       LogStream(Log &log, const Level level);
       ~LogStream();
 
