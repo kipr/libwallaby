@@ -172,4 +172,16 @@ namespace kipr
   }
 }
 
+namespace std
+{
+  template<>
+  struct hash<kipr::log::Level>
+  {
+    size_t operator()(const kipr::log::Level &level) const
+    {
+      return std::hash<unsigned>()(static_cast<unsigned>(level));
+    }
+  };
+}
+
 #endif

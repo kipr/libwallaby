@@ -168,7 +168,7 @@ Device::Device()
       m_bgrSize(0),
       m_fd(-1),
       m_cap(0),
-      m_impl(std::make_unique<DeviceImpl>()),
+      m_impl(new DeviceImpl),
       m_resolution(HIGH_RES /*LOW_RES*/),
 #ifdef BOTUI_TELLO_TEST
       m_model(TELLO)
