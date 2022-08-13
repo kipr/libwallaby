@@ -11,10 +11,6 @@
 #include "kipr/analog/analog.h"
 #endif
 
-#ifdef KIPR_MODULE_ARUCO
-#include "kipr/aruco/aruco.h"
-#endif
-
 #ifdef KIPR_MODULE_AUDIO
 #include "kipr/audio/audio.h"
 #endif
