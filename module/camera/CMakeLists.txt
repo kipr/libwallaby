@@ -14,7 +14,7 @@ if(with_camera)
     opencv_flann_wrapper
     opencv_core_wrapper
     jpeg_wrapper
-    z
+    z_wrapper
     avcodec_wrapper
     avformat_wrapper
     avutil_wrapper

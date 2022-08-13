@@ -29,6 +29,15 @@ function(add_module NAME)
   if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/test)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/test)
   endif()
+
+  if (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/public)
+    install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/public/ DESTINATION include)
+  endif()
+
+  if (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/binding.i)
+    get_property(KIPR_BINDINGS GLOBAL PROPERTY kipr_bindings)
+    set_property(GLOBAL PROPERTY kipr_bindings ${KIPR_BINDINGS} ${NAME})
+  endif()
 endfunction()
 
 function(add_test NAME)

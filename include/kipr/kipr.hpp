@@ -11,10 +11,6 @@
 #include "kipr/analog/analog.hpp"
 #endif
 
-#ifdef KIPR_MODULE_ARUCO
-#include "kipr/aruco/aruco.hpp"
-#endif
-
 #ifdef KIPR_MODULE_AUDIO
 #include "kipr/audio/audio.h"
 #endif
@@ -80,6 +76,10 @@
 
 #ifdef KIPR_MODULE_TIME
 #include "kipr/time/time.h"
+#endif
+
+#ifdef KIPR_MODULE_WAIT_FOR
+#include "kipr/wait_for/wait_for.h"
 #endif
 
 #include <stdio.h>

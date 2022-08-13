@@ -1,5 +1,6 @@
 {
   "C_Cpp.default.includePath": [
+    "${workspaceRoot}/include",
     "${workspaceRoot}/module/accel/public",
     "${workspaceRoot}/module/analog/public",
     "${workspaceRoot}/module/aruco/public",
@@ -42,7 +43,10 @@
   "files.associations": {
     "*.page": "json",
     "wallaby.h": "c",
-    "camera.h": "c"
+    "camera.h": "c",
+    "button.h": "c",
+    "export.h": "c"
   },
-  "search.useIgnoreFiles": false
+  "search.useIgnoreFiles": false,
+  "cmake.configureOnOpen": false
 }
