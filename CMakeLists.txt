@@ -20,12 +20,21 @@ add_subdirectory(binding)
 # Get all modules. These are registered in `add_module`.
 get_property(KIPR_MODULES GLOBAL PROPERTY kipr_modules)
 set(STATIC_KIPR_MODULES)
+set(KIPR_MODULE_OBJECTS)
 foreach(MODULE ${KIPR_MODULES})
   string(TOUPPER ${MODULE} MODULE_UPPER)
   set(KIPR_MODULE_${MODULE_UPPER} ON)
-  get_target_property(TYPE ${MODULE} TYPE)
 
   list(APPEND STATIC_KIPR_MODULES ${MODULE})
+
+  if(TARGET ${MODULE}_objects)
+    get_target_property(TYPE ${MODULE}_objects TYPE)
+    message(STATUS "Found module ${MODULE} of type ${TYPE}")
+    if(TYPE STREQUAL OBJECT_LIBRARY)
+      message(STATUS "${MODULE}_objects: $<TARGET_OBJECTS:${MODULE}_objects>")
+      # list(APPEND KIPR_MODULE_OBJECTS $<TARGET_OBJECTS:${MODULE}_objects>)
+    endif()
+  endif()
 endforeach()
 
 execute_process(
@@ -42,12 +51,15 @@ execute_process(
   OUTPUT_STRIP_TRAILING_WHITESPACE
 )
 
+string(TIMESTAMP KIPR_BUILD_DATETIME UTC)
+
 configure_file(include/kipr/config.h.in ${CMAKE_CURRENT_BINARY_DIR}/include/kipr/config.h)
 
 # Build the library.
+message(STATUS "KIPR module objects are: ${KIPR_MODULE_OBJECTS}")
 file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/empty.cpp "")
-add_library(kipr SHARED ${CMAKE_CURRENT_BINARY_DIR}/empty.cpp)
-target_link_libraries(kipr PRIVATE ${STATIC_KIPR_MODULES})
+add_library(kipr SHARED ${CMAKE_CURRENT_BINARY_DIR}/empty.cpp ${KIPR_MODULE_OBJECTS})
+target_link_libraries(kipr PRIVATE "-Wl,-Bsymbolic" ${STATIC_KIPR_MODULES})
 
 if (TARGET kipr_python)
   target_link_libraries(kipr PRIVATE kipr_python)
