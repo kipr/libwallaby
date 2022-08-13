@@ -26,22 +26,6 @@ function(gather_module_objects OUT)
   set(${OUT} ${GATHERED_OBJECTS} PARENT_SCOPE)
 endfunction()
 
-
-
-add_subdirectory(module)
-add_subdirectory(binding)
-
-
-
-# Get all modules. These are registered in `add_module`.
-get_property(KIPR_MODULES GLOBAL PROPERTY kipr_modules)
-set(STATIC_KIPR_MODULES)
-foreach(MODULE ${KIPR_MODULES})
-  string(TOUPPER ${MODULE} MODULE_UPPER)
-  set(KIPR_MODULE_${MODULE_UPPER} ON)
-  list(APPEND STATIC_KIPR_MODULES ${MODULE})
-endforeach()
-
 execute_process(
   COMMAND git rev-parse --abbrev-ref HEAD
   WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
@@ -59,6 +43,24 @@ execute_process(
 string(TIMESTAMP KIPR_BUILD_DATETIME UTC)
 
 configure_file(include/kipr/config.h.in ${CMAKE_CURRENT_BINARY_DIR}/include/kipr/config.h)
+
+
+
+add_subdirectory(module)
+add_subdirectory(binding)
+
+
+
+# Get all modules. These are registered in `add_module`.
+get_property(KIPR_MODULES GLOBAL PROPERTY kipr_modules)
+set(STATIC_KIPR_MODULES)
+foreach(MODULE ${KIPR_MODULES})
+  string(TOUPPER ${MODULE} MODULE_UPPER)
+  set(KIPR_MODULE_${MODULE_UPPER} ON)
+  list(APPEND STATIC_KIPR_MODULES ${MODULE})
+endforeach()
+
+
 
 
 
