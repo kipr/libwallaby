@@ -23,7 +23,7 @@ jobs:
       run: mkdir build
       working-directory: libwallaby
     - name: Run cmake
-      run: cmake -Dwith_camera=OFF -Dwith_python_binding=OFF ..
+      run: cmake -Dwith_tello=OFF -Dwith_camera=OFF -Dwith_python_binding=OFF ..
       working-directory: libwallaby/build
     - name: Run make
       run: make -j2
