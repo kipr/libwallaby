@@ -40,6 +40,10 @@
 %include "module/console/binding.i"
 #endif
 
+#ifdef KIPR_MODULE_CORE
+%include "module/core/binding.i"
+#endif
+
 #ifdef KIPR_MODULE_CREATE
 %include "module/create/binding.i"
 #endif
