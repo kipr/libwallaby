@@ -3,7 +3,9 @@ Library for interfacing with KIPR Robot Controllers.
 
 Documentation can be viewed at https://www.kipr.org/doc/index.html or by clicking the "Help" button in the KIPR Software Suite IDE.
 
-# Compilation Flags
+# CMake Options
+
+Each of the following options may be specified when executing CMake by prefixing the option with `-D` (e.g., `-Dwith_accel=OFF`).
 
 ## Modules
   - `with_accel` (default: `ON`) - Build accelerometer support.
