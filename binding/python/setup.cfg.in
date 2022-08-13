@@ -1,0 +1,12 @@
+[metadata]
+name = kipr
+version = @KIPR_VERSION_MAJOR@.@KIPR_VERSION_MINOR@.@KIPR_VERSION_PATCH@
+license = GPLv3
+
+[options]
+package_dir=
+    =src
+packages=find:
+
+[options.packages.find]
+where=src
