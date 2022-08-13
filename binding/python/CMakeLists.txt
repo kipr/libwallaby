@@ -21,7 +21,7 @@ if(with_python_binding)
       -outdir ${PACKAGE_DIR}/src/kipr
       ${KIPR_SWIG_OPTIONS}
       ${KIPR_SWIG_WRAPPER}
-    SOURCES ${KIPR_SWIG_WRAPPER}
+    SOURCES ${KIPR_SWIG_WRAPPER} ${CMAKE_BINARY_DIR}/include/kipr/config.h
     BYPRODUCTS ${KIPR_PYTHON_WRAPPER} ${PACKAGE_DIR}/src/kipr/kipr.py
   )
   
