@@ -2,7 +2,7 @@ option(with_python_binding "Build python bindings" ON)
 
 if(with_python_binding)
   find_package(SWIG REQUIRED)
-  find_package(Python3 COMPONENTS Development REQUIRED)
+  find_package(PythonLibs 3 REQUIRED)
 
   set(KIPR_PYTHON_WRAPPER ${CMAKE_CURRENT_BINARY_DIR}/kipr_python.cpp)
 
@@ -21,11 +21,11 @@ if(with_python_binding)
   )
 
   add_library(kipr_python STATIC ${KIPR_PYTHON_WRAPPER})
-  target_link_libraries(kipr_python PRIVATE Python3::Python)
+  target_link_libraries(kipr_python PRIVATE ${PYTHON_LIBRARIES})
+  target_include_directories(kipr_python PRIVATE ${PYTHON_INCLUDE_DIRS})
 
-  message(STATUS ${Python3_VERSION})
   install(
     FILES ${CMAKE_CURRENT_BINARY_DIR}/kipr.py
-    DESTINATION lib/python${Python3_VERSION}/site-packages/
+    DESTINATION lib/python${PYTHONLIBS_VERSION_STRING}/site-packages/
   )
 endif()

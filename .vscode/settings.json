@@ -45,7 +45,8 @@
     "wallaby.h": "c",
     "camera.h": "c",
     "button.h": "c",
-    "export.h": "c"
+    "export.h": "c",
+    "servo.h": "c"
   },
   "search.useIgnoreFiles": false,
   "cmake.configureOnOpen": false
