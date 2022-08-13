@@ -18,7 +18,7 @@ Each of the following options may be specified when executing CMake by prefixing
   - `with_console` (default: `ON`) - Build console support.
   - `with_create` (default: `ON`) - Build iRobot Create 2 support.
   - `with_digital` (default: `ON`) - Build digital sensor support.
-  - `with_graphics` (default: `ON`) - Build graphics support.
+  - `with_graphics` (default: `ON`) - Build graphics support (requires X11 development files, such as `x11proto-dev` on Debian/Ubuntu).
   - `with_gyro` (default: `ON`) - Build gyroscope support.
   - `with_magneto` (default: `ON`) - Build magnetometer support.
   - `with_motor` (default: `ON`) - Build motor support.
