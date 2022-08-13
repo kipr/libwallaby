@@ -25,10 +25,7 @@ foreach(MODULE ${KIPR_MODULES})
   set(KIPR_MODULE_${MODULE_UPPER} ON)
   get_target_property(TYPE ${MODULE} TYPE)
 
-  # Some modules are interfaces. We need to prune them.
-  if(TYPE STREQUAL STATIC_LIBRARY)
-    list(APPEND STATIC_KIPR_MODULES ${MODULE})
-  endif()
+  list(APPEND STATIC_KIPR_MODULES ${MODULE})
 endforeach()
 
 execute_process(
@@ -49,9 +46,8 @@ configure_file(include/kipr/config.h.in ${CMAKE_CURRENT_BINARY_DIR}/include/kipr
 
 # Build the library.
 file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/empty.cpp "")
-add_library(kipr SHARED ${CMAKE_CURRENT_BINARY_DIR})
-target_link_libraries(kipr PRIVATE "-Wl,-Bsymbolic" "-Wl,--whole-archive"  ${STATIC_KIPR_MODULES} "-Wl,--no-whole-archive")
-target_link_libraries(kipr INTERFACE ${STATIC_KIPR_MODULES})
+add_library(kipr SHARED ${CMAKE_CURRENT_BINARY_DIR}/empty.cpp)
+target_link_libraries(kipr PRIVATE ${STATIC_KIPR_MODULES})
 
 if (TARGET kipr_python)
   target_link_libraries(kipr PRIVATE kipr_python)

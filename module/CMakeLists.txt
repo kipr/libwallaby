@@ -6,22 +6,26 @@ function(add_module NAME)
   # If there are no sources, this is an include-only module
   list(LENGTH SOURCES SOURCES_LEN)
 
+  add_library(${NAME} INTERFACE)
   if (SOURCES_LEN GREATER 0)
-    add_library(${NAME} STATIC ${SOURCES})
-    target_compile_options(${NAME} PRIVATE -fPIC)
-
-    target_include_directories(${NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/public)
-    target_include_directories(${NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/protected)
-    target_link_libraries(${NAME} PUBLIC ${ARGN})
-  else()
-    add_library(${NAME} INTERFACE)
-    target_include_directories(${NAME} INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/public)
-    target_include_directories(${NAME} INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/protected)
-    target_link_libraries(${NAME} INTERFACE ${ARGN})
+    add_library(${NAME}_objects OBJECT ${SOURCES})
+    target_compile_options(${NAME}_objects PRIVATE -fPIC)
+    target_include_directories(${NAME}_objects PRIVATE
+      ${CMAKE_CURRENT_SOURCE_DIR}/public
+      ${CMAKE_CURRENT_SOURCE_DIR}/protected
+    )
+    target_link_libraries(${NAME}_objects PRIVATE ${ARGN})
+    target_link_libraries(${NAME} INTERFACE
+      ${NAME}_objects
+      $<TARGET_OBJECTS:${NAME}_objects>
+      m
+    )
   endif()
 
+  target_include_directories(${NAME} INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/public)
+  target_include_directories(${NAME} INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/protected)
+  target_link_libraries(${NAME} INTERFACE ${ARGN})
   
-
   get_property(KIPR_MODULES GLOBAL PROPERTY kipr_modules)
   set_property(GLOBAL PROPERTY kipr_modules ${KIPR_MODULES} ${NAME})
 
@@ -40,13 +44,18 @@ function(add_module NAME)
   endif()
 endfunction()
 
+function(module_link_libraries NAME)
+  target_link_libraries(${NAME}_objects PRIVATE ${ARGN})
+  target_link_libraries(${NAME} INTERFACE ${ARGN})
+endfunction()
+
 function(add_test NAME)
   if(with_tests)
-  file(GLOB_RECURSE SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.c*)
+    file(GLOB_RECURSE SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.c*)
+    set_source_files_properties(${SOURCES} PROPERTIES LANGUAGE CXX)
+    add_executable(${NAME} ${SOURCES})
 
-  add_executable(${NAME} ${SOURCES})
-
-  target_link_libraries(${NAME} PUBLIC ${ARGN})
+    target_link_libraries(${NAME} PUBLIC ${ARGN} )
   endif()
 endfunction()
 

@@ -9,7 +9,6 @@
 #include <arpa/inet.h>
 #include <netinet/in.h>
 
-//#include <wallaby/camera.h>
 #include <kipr/time/time.h>
 #include <kipr/tello/tello.h>
 
@@ -27,56 +26,58 @@ void swarm_server();
 
 int main(void)
 {
-	int result;
-	char buf[BUFSIZE];
-	int len;
-	int n;
-	char * tellos;
-	int send_result;
+  int result;
+  char buf[BUFSIZE];
+  int len;
+  int n;
+  char *tellos;
+  int send_result;
 
-	if( wpa_sup_connect() == -1)
-	{
-		printf("WPA Supplicant not active\n");
-		return -1;
-	}
-	tellos = tellos_find();
+  if (wpa_sup_connect() == -1)
+  {
+    printf("WPA Supplicant not active\n");
+    return -1;
+  }
+  tellos = tellos_find();
 
-	if(tellos == NULL)
-		return -1;
-	else
-		printf ("Tellos: %s\n", tellos);
+  if (tellos == NULL)
+  {
+    return -1;
+  }
+  else
+  {
+    printf("Tellos: %s\n", tellos);
+  }
 
-	// connect to the first tello on the list
-	tello_connect(tellos);
+  // connect to the first tello on the list
+  tello_connect(tellos);
 
-	do 
-	{	
-		send_result = tello_send("command");
-		printf("send_result %d\n", send_result);
-	
-	} while(send_result != 0);
+  do
+  {
+    send_result = tello_send("command");
+    printf("send_result %d\n", send_result);
+  } while (send_result != 0);
 
-	while(1)
-	{
-		//keep the tello connected
-		msleep(1000);
-		tello_send("battery?");
-	}
-	tello_send("ap 0352-wombat 29d7d200");
+  while (1)
+  {
+    // keep the tello connected
+    msleep(1000);
+    tello_send("battery?");
+  }
+  tello_send("ap 0352-wombat 29d7d200");
 
-//	printf("starting swarm server\n");
-    // note: cannot start swarm server until the wombat access point
-    // is brought up.  This cannot be done until after all the
-    // swarm tellos have been configured as bringing up the AP
-    // will prevent any further connections on the client interface
-//	swarm_server();
+  // note: cannot start swarm server until the wombat access point
+  // is brought up.  This cannot be done until after all the
+  // swarm tellos have been configured as bringing up the AP
+  // will prevent any further connections on the client interface
+  // swarm_server();
 
-	while(1)
-	{
-		msleep(100);
-	}
+  while (1)
+  {
+    msleep(100);
+  }
 
-	return 0;
+  return 0;
 }
 
 #define MAXLINE 1024
@@ -85,47 +86,57 @@ int main(void)
 
 void swarm_server()
 {
-    int sockfd;
-    char buffer[MAXLINE];
-    char *hello = "Hello from server";
-    struct sockaddr_in servaddr, cliaddr;
-      
-    // Creating socket file descriptor
-    if ( (sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) {
-        perror("socket creation failed");
-        exit(EXIT_FAILURE);
-    }
-      
-    memset(&servaddr, 0, sizeof(servaddr));
-    memset(&cliaddr, 0, sizeof(cliaddr));
-      
-    // Filling server information
-    servaddr.sin_family    = AF_INET; // IPv4
-    servaddr.sin_addr.s_addr = INADDR_ANY;
-    servaddr.sin_port = htons(TELLO_CMD_PORT);
-      
-    // Bind the socket with the server address
-    if ( bind(sockfd, (const struct sockaddr *)&servaddr, 
-            sizeof(servaddr)) < 0 )
-    {
-        perror("bind failed");
-        exit(EXIT_FAILURE);
-    }
-      
-    int len, n;
-  
-    len = sizeof(cliaddr);  //len is value/resuslt
- printf("Waiting for tello to connect\n"); 
-    n = recvfrom(sockfd, (char *)buffer, MAXLINE, 
-                MSG_WAITALL, ( struct sockaddr *) &cliaddr,
-                &len);
-    buffer[n] = '\0';
-    printf("Client : %s\n", buffer);
-    sendto(sockfd, (const char *)hello, strlen(hello), 
-        MSG_CONFIRM, (const struct sockaddr *) &cliaddr,
-            len);
-    printf("Hello message sent.\n"); 
-      
-    return;
-}
+  int sockfd;
+  char buffer[MAXLINE];
+  const char *const hello = "Hello from server";
+  struct sockaddr_in servaddr, cliaddr;
 
+  // Creating socket file descriptor
+  if ((sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0)
+  {
+    perror("socket creation failed");
+    exit(EXIT_FAILURE);
+  }
+
+  memset(&servaddr, 0, sizeof(servaddr));
+  memset(&cliaddr, 0, sizeof(cliaddr));
+
+  // Filling server information
+  servaddr.sin_family = AF_INET; // IPv4
+  servaddr.sin_addr.s_addr = INADDR_ANY;
+  servaddr.sin_port = htons(TELLO_CMD_PORT);
+
+  // Bind the socket with the server address
+  if (bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr)) < 0)
+  {
+    perror("bind failed");
+    exit(EXIT_FAILURE);
+  }
+
+  socklen_t len;
+  int n;
+
+  len = sizeof(cliaddr); // len is value/resuslt
+  printf("Waiting for tello to connect\n");
+  n = recvfrom(
+    sockfd,
+    buffer,
+    MAXLINE,
+    MSG_WAITALL,
+    (struct sockaddr *)&cliaddr,
+    &len
+  );
+  buffer[n] = '\0';
+  printf("Client : %s\n", buffer);
+  sendto(
+    sockfd,
+    hello,
+    strlen(hello),
+    MSG_CONFIRM,
+    (const struct sockaddr *)&cliaddr,
+    len
+  );
+  printf("Hello message sent.\n");
+
+  return;
+}

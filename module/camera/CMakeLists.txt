@@ -3,7 +3,7 @@ option(with_camera "Enable camera API" ON)
 if(with_camera)
   add_subdirectory(dependencies)
   add_module(camera export geometry color config log time)
-  target_link_libraries(camera PUBLIC
+  module_link_libraries(camera
     opencv_highgui_wrapper
     opencv_photo_wrapper
     opencv_videoio_wrapper
