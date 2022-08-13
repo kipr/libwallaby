@@ -36,5 +36,5 @@ jobs:
       with:
         name: libwallaby-package
         path: |
-          build/kipr-*.zip
-          build/kipr-*.deb
+          libwallaby/build/kipr-*.zip
+          libwallaby/build/kipr-*.deb
