@@ -15,7 +15,9 @@ jobs:
       with:
         path: libwallaby
     - name: Install doxygen
-      run: sudo apt-get install doxygen -y
+      run: |
+        sudo apt-get update
+        sudo apt-get install doxygen -y
     - name: Create build folder
       run: mkdir build
       working-directory: libwallaby
