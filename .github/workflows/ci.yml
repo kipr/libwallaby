@@ -1,0 +1,25 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - refactor-ci
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout libwallaby
+      uses: actions/checkout@v2
+      with:
+        path: libwallaby
+    - name: Create build folder
+      run: mkdir build
+      working-directory: libwallaby
+    - name: Run cmake
+      run: cmake ..
+      working-directory: libwallaby/build
+    - name: Run make
+      run: make -j4
+      working-directory: libwallaby/build
