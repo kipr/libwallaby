@@ -14,6 +14,7 @@ if (CMAKE_CROSSCOMPILING)
     URL https://www.zlib.net/zlib-1.2.12.tar.gz
     CMAKE_ARGS
       -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}
+      ${ZLIB_COMMON_OPTIONS}
     INSTALL_COMMAND make install
   )
 else()
