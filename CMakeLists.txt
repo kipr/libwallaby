@@ -11,31 +11,23 @@ set(KIPR_VERSION_PATCH 0)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+function(gather_module_objects OUT)
+  get_property(KIPR_MODULES GLOBAL PROPERTY kipr_modules)
+  message(STATUS "Gathering module objects... ${ARGN}")
+  set(GATHERED_OBJECTS)
+  foreach(MODULE ${ARGN})
+    if(TARGET ${MODULE}_objects)
+      list(APPEND GATHERED_OBJECTS $<TARGET_OBJECTS:${MODULE}_objects>)
+    else()
+      message(STATUS "No objects for ${MODULE}")
+    endif()
+  endforeach()
 
+  set(${OUT} ${GATHERED_OBJECTS} PARENT_SCOPE)
+endfunction()
 
 add_subdirectory(module)
-
 add_subdirectory(binding)
-
-# Get all modules. These are registered in `add_module`.
-get_property(KIPR_MODULES GLOBAL PROPERTY kipr_modules)
-set(STATIC_KIPR_MODULES)
-set(KIPR_MODULE_OBJECTS)
-foreach(MODULE ${KIPR_MODULES})
-  string(TOUPPER ${MODULE} MODULE_UPPER)
-  set(KIPR_MODULE_${MODULE_UPPER} ON)
-
-  list(APPEND STATIC_KIPR_MODULES ${MODULE})
-
-  if(TARGET ${MODULE}_objects)
-    get_target_property(TYPE ${MODULE}_objects TYPE)
-    message(STATUS "Found module ${MODULE} of type ${TYPE}")
-    if(TYPE STREQUAL OBJECT_LIBRARY)
-      message(STATUS "${MODULE}_objects: $<TARGET_OBJECTS:${MODULE}_objects>")
-      # list(APPEND KIPR_MODULE_OBJECTS $<TARGET_OBJECTS:${MODULE}_objects>)
-    endif()
-  endif()
-endforeach()
 
 execute_process(
   COMMAND git rev-parse --abbrev-ref HEAD
@@ -53,13 +45,29 @@ execute_process(
 
 string(TIMESTAMP KIPR_BUILD_DATETIME UTC)
 
+# Get all modules. These are registered in `add_module`.
+get_property(KIPR_MODULES GLOBAL PROPERTY kipr_modules)
+set(STATIC_KIPR_MODULES)
+foreach(MODULE ${KIPR_MODULES})
+  string(TOUPPER ${MODULE} MODULE_UPPER)
+  set(KIPR_MODULE_${MODULE_UPPER} ON)
+  list(APPEND STATIC_KIPR_MODULES ${MODULE})
+endforeach()
+
 configure_file(include/kipr/config.h.in ${CMAKE_CURRENT_BINARY_DIR}/include/kipr/config.h)
 
 # Build the library.
-message(STATUS "KIPR module objects are: ${KIPR_MODULE_OBJECTS}")
+gather_module_objects(KIPR_MODULE_OBJECTS ${STATIC_KIPR_MODULES})
+message(STATUS "KIPR module objects are: ${STATIC_KIPR_MODULES} ${KIPR_MODULE_OBJECTS}")
 file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/empty.cpp "")
 add_library(kipr SHARED ${CMAKE_CURRENT_BINARY_DIR}/empty.cpp ${KIPR_MODULE_OBJECTS})
-target_link_libraries(kipr PRIVATE "-Wl,-Bsymbolic" ${STATIC_KIPR_MODULES})
+
+if(EMSCRIPTEN)
+  target_link_libraries(kipr PRIVATE ${STATIC_KIPR_MODULES})
+else()
+  target_link_libraries(kipr PRIVATE "-Wl,-Bsymbolic" ${STATIC_KIPR_MODULES})
+endif()
+target_link_libraries(kipr INTERFACE ${STATIC_KIPR_MODULES})
 
 if (TARGET kipr_python)
   target_link_libraries(kipr PRIVATE kipr_python)

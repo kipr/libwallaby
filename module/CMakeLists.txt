@@ -15,11 +15,7 @@ function(add_module NAME)
       ${CMAKE_CURRENT_SOURCE_DIR}/protected
     )
     target_link_libraries(${NAME}_objects PRIVATE ${ARGN})
-    target_link_libraries(${NAME} INTERFACE
-      ${NAME}_objects
-      $<TARGET_OBJECTS:${NAME}_objects>
-      m
-    )
+    target_link_libraries(${NAME} INTERFACE m)
   endif()
 
   target_include_directories(${NAME} INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/public)
@@ -55,7 +51,7 @@ function(add_test NAME)
     set_source_files_properties(${SOURCES} PROPERTIES LANGUAGE CXX)
     add_executable(${NAME} ${SOURCES})
 
-    target_link_libraries(${NAME} PUBLIC ${ARGN} )
+    target_link_libraries(${NAME} PUBLIC kipr)
   endif()
 endfunction()
 
