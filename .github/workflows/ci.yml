@@ -28,3 +28,13 @@ jobs:
     - name: Run make
       run: make -j2
       working-directory: libwallaby/build
+    - name: Run cpack
+      run: cpack
+      working-directory: libwallaby/build
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: libwallaby-package
+        path: |
+          build/kipr-*.zip
+          build/kipr-*.deb
