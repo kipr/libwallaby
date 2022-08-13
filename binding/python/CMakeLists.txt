@@ -18,10 +18,11 @@ if(with_python_binding)
       -I${CMAKE_BINARY_DIR}/include
       -I${CMAKE_SOURCE_DIR}/include
       -I${CMAKE_SOURCE_DIR}
+      -outdir ${PACKAGE_DIR}/src/kipr
       ${KIPR_SWIG_OPTIONS}
       ${KIPR_SWIG_WRAPPER}
     SOURCES ${KIPR_SWIG_WRAPPER}
-    BYPRODUCTS ${KIPR_PYTHON_WRAPPER} ${CMAKE_CURRENT_BINARY_DIR}/kipr.py
+    BYPRODUCTS ${KIPR_PYTHON_WRAPPER} ${PACKAGE_DIR}/src/kipr/kipr.py
   )
   
   add_library(kipr_python STATIC ${KIPR_PYTHON_WRAPPER})
@@ -33,7 +34,6 @@ if(with_python_binding)
 
 
   file(COPY pyproject.toml DESTINATION ${PACKAGE_DIR})
-  file(COPY ${CMAKE_CURRENT_BINARY_DIR}/kipr.py DESTINATION ${PACKAGE_DIR}/src/kipr)
   configure_file(setup.cfg.in ${PACKAGE_DIR}/setup.cfg)
   file(WRITE ${PACKAGE_DIR}/src/kipr/__init__.py "")
 endif()
