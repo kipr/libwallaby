@@ -25,5 +25,5 @@ jobs:
       run: cmake ..
       working-directory: libwallaby/build
     - name: Run make
-      run: make -j4
+      run: make -j2
       working-directory: libwallaby/build
