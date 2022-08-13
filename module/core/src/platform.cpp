@@ -23,7 +23,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-#ifndef NOT_A_Platform
+#ifndef EMSCRIPTEN
 	#include <linux/spi/spidev.h>
 	#ifndef NOT_A_ZOOBEE_Platform
 		#define SPI_FILE_SYSTEM "/dev/spidev0.0"
@@ -38,7 +38,7 @@
 #include <iostream>
 #include <iomanip> // std::hex
 
-#ifdef TARGET_EMSCRIPTEN
+#ifdef EMSCRIPTEN
 	#include <emscripten.h>
 #endif
 
@@ -101,7 +101,7 @@ Platform * Platform::instance()
 bool Platform::transfer(unsigned char * alt_read_buffer)
 {
 	// Doesn't make sense for non-Platforms
-#ifdef NOT_A_Platform
+#ifdef EMSCRIPTEN
 	std::cerr << "Warning: this is not a Platform; transfer failed" << std::endl;
 	return false;
 #else
@@ -156,7 +156,7 @@ bool Platform::transfer(unsigned char * alt_read_buffer)
 #endif
 }
 
-#ifdef TARGET_EMSCRIPTEN
+#ifdef EMSCRIPTEN
 
 // emscripten function to write register values to JS registers variable
 EM_JS(void, updateRegisters, (unsigned char *addresses, unsigned char *values, int length), {
@@ -191,7 +191,7 @@ unsigned char Platform::readRegister8b(unsigned char address, const unsigned cha
 
 	if (alt_read_buffer == nullptr)
 	{
-		#ifdef TARGET_EMSCRIPTEN
+		#ifdef EMSCRIPTEN
 		emscripten_sleep(0);
 		read_buffer_[address] = readRegister(address);
 		#else
@@ -213,7 +213,7 @@ void Platform::writeRegister8b(unsigned char address, unsigned char value)
 
 	std::lock_guard<std::mutex> lock(transfer_mutex_);
 
-	#ifdef TARGET_EMSCRIPTEN
+	#ifdef EMSCRIPTEN
 	emscripten_sleep(0);
 	unsigned char addresses[] = {address};
 	unsigned char values[] = {value};
@@ -242,7 +242,7 @@ unsigned short Platform::readRegister16b(unsigned char address, const unsigned c
 
 	if (alt_read_buffer == nullptr)
 	{
-		#ifdef TARGET_EMSCRIPTEN
+		#ifdef EMSCRIPTEN
 		emscripten_sleep(0);
 		read_buffer_[address] = readRegister(address);
 		read_buffer_[address+1] = readRegister(address+1);
@@ -268,7 +268,7 @@ void Platform::writeRegister16b(unsigned char address, unsigned short value)
 
 	std::lock_guard<std::mutex> lock(transfer_mutex_);
 
-	#ifdef TARGET_EMSCRIPTEN
+	#ifdef EMSCRIPTEN
 	emscripten_sleep(0);
 	unsigned char addresses[] = {address, static_cast<unsigned char>(address + 1)};
 	unsigned char values[] = {value1, value2};
@@ -299,7 +299,7 @@ unsigned int Platform::readRegister32b(unsigned char address, const unsigned cha
 
 	if (alt_read_buffer == nullptr)
 	{
-		#ifdef TARGET_EMSCRIPTEN
+		#ifdef EMSCRIPTEN
 		emscripten_sleep(0);
 		read_buffer_[address] = readRegister(address);
 		read_buffer_[address+1] = readRegister(address+1);
@@ -334,7 +334,7 @@ void Platform::writeRegister32b(unsigned char address, unsigned int value)
 
 	std::lock_guard<std::mutex> lock(transfer_mutex_);
 
-	#ifdef TARGET_EMSCRIPTEN
+	#ifdef EMSCRIPTEN
 	emscripten_sleep(0);
 	unsigned char addresses[] = {address, static_cast<unsigned char>(address + 1), static_cast<unsigned char>(address + 2), static_cast<unsigned char>(address + 3)};
 	unsigned char values[] = {value1, value2, value3, value4};

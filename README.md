@@ -1,26 +1,23 @@
-# libwallaby
+# libkipr
 Library for interfacing with KIPR Robot Controllers.
 
 Documentation can be viewed at https://www.kipr.org/doc/index.html or by clicking the "Help" button in the KIPR Software Suite IDE.
 
-### Build Instructions:
-```` bash
-# Optional dependencies: 
-sudo apt-get install python-dev doxygen swig
+# Cross-compiling to aarch64-linux-gnu (e.g., Wombat)
 
-# Create a build directory (inside libwallaby/) and change directory to it
-mkdir build
-cd build
+```bash
+apt install gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
+cd libkipr
+cmake -Bbuild -DCMAKE_TOOLCHAIN_FILE=$(pwd)/toolchain/aarch64-linux-gnu.cmake .
+```
 
-# Initialize CMake
-cmake ..
+# Cross-compiling to JavaScript/WASM (e.g., Simulator)
 
-# Build
-make
-
-# Install
-sudo make install
-````
+```
+source emsdk/emsdk_env.sh
+cd libkipr
+emcmake cmake -Bbuild -Dwith_graphics=OFF -Dwith_camera=OFF -Dwith_python_binding=OFF -Dwith_tello=OFF .
+```
 
 # Contributing
 
