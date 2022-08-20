@@ -73,9 +73,10 @@ if(EMSCRIPTEN)
     target_link_options(kipr PRIVATE
       -sSIDE_MODULE
       -sLINKABLE
-      -sERROR_ON_UNDEFINED_SYMBOLS=0
+      -sNO_ERROR_ON_UNDEFINED_SYMBOLS
       -sSTANDALONE_WASM
       -sWASM_BIGINT
+      -sLIBRARY_DEBUG
       --no-entry
     )
   else()

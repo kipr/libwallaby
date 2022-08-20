@@ -3,7 +3,7 @@
 
 namespace
 {
-  __attribute__((constructor))
+  __attribute__((constructor(2)))
   void register_servo_cleanup()
   {
     kipr::core::cleanup_add(disable_servos);

@@ -3,12 +3,17 @@
 
 #include <mutex>
 #include <vector>
+#include <iostream>
 
 namespace kipr
 {
   namespace core
   {
     class Device;
+
+    // See comment for KIPR_CORE_PLATFORM_DEVICE_REGISTER for information
+    // on why this exists.
+    extern std::unique_ptr<Device> DEVICE;
 
     class Platform
     {
@@ -26,31 +31,23 @@ namespace kipr
       unsigned int readRegister32b(unsigned char address);
       void writeRegister32b(unsigned char address, unsigned int value);
 
-      template<typename T>
-      static void registerDevice()
-      {
-        if (!T::isPresent()) return;
-        std::shared_ptr<typename T::DeviceType> device(new typename T::DeviceType());
-        Platform::instance()->devices_.push_back(device);
-      }
-
     private:
-      Platform(const std::shared_ptr<Device> &device);
-      std::shared_ptr<Device> device_;
+      Platform();
 
       static std::mutex instance_mut_;
       static Platform *instance_;
-
-      static std::vector<std::shared_ptr<Device>> devices_;
     };
   }
 }
 
+// Typically we would create __attribute__((constructor))s
+// and register each available Device with the Platform. There's
+// a bug in emscripten's WASM dynamic linking, though, where
+// __attribute__((constructor))s run before global data initialization,
+// causing all sorts of bizarre bugs. Instead we'll set a global to
+// the appropriate Device, since we know we'll only have one compiled
+// into the executable for now. Sigh.
 #define KIPR_CORE_PLATFORM_DEVICE_REGISTER(descriptor) \
-  __attribute__((constructor)) \
-  static void descriptor##_register() \
-  { \
-    kipr::core::Platform::registerDevice<descriptor>(); \
-  }
+  std::unique_ptr<kipr::core::Device> kipr::core::DEVICE(new descriptor::DeviceType());
 
 #endif

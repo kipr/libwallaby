@@ -9,8 +9,10 @@
 #include <csignal>
 #include <thread>
 
+
 using namespace kipr;
 using namespace kipr::core;
+
 
 namespace
 {
@@ -25,10 +27,8 @@ namespace
 
 Platform *Platform::instance_ = nullptr;
 std::mutex Platform::instance_mut_;
-std::vector<std::shared_ptr<Device>> Platform::devices_;
 
-Platform::Platform(const std::shared_ptr<Device> &device)
-  : device_(device)
+Platform::Platform()
 {
   // register sig int handler
   struct sigaction sigIntHandler;
@@ -50,18 +50,7 @@ Platform *Platform::instance()
   
   if (!instance_)
   {
-    if (devices_.size() == 0)
-    {
-      logger.fatal() << "No devices registered.";
-      return nullptr;
-    }
-
-    if (devices_.size() > 1)
-    {
-      logger.warning() << "More than one device found. Using " << devices_[0]->getName() << ".";
-    }
-
-    instance_ = new Platform(devices_[0]);
+    instance_ = new Platform();
   }
 
   return instance_;
@@ -75,7 +64,7 @@ unsigned char Platform::readRegister8b(unsigned char address)
     return 0;
   }
 
-  return device_->r8(address);
+  return DEVICE->r8(address);
 }
 
 void Platform::writeRegister8b(unsigned char address, unsigned char value)
@@ -86,7 +75,7 @@ void Platform::writeRegister8b(unsigned char address, unsigned char value)
     return;
   }
 
-  device_->w8(address, value);
+  DEVICE->w8(address, value);
 }
 
 unsigned short Platform::readRegister16b(unsigned char address)
@@ -97,7 +86,7 @@ unsigned short Platform::readRegister16b(unsigned char address)
     return 0;
   }
 
-  return device_->r16(address);
+  return DEVICE->r16(address);
 }
 
 void Platform::writeRegister16b(unsigned char address, unsigned short value)
@@ -108,7 +97,7 @@ void Platform::writeRegister16b(unsigned char address, unsigned short value)
     return;
   }
 
-  return device_->w16(address, value);
+  return DEVICE->w16(address, value);
 }
 
 unsigned int Platform::readRegister32b(unsigned char address)
@@ -119,7 +108,7 @@ unsigned int Platform::readRegister32b(unsigned char address)
     return 0;
   }
 
-  return device_->r16(address);
+  return DEVICE->r16(address);
 }
 
 void Platform::writeRegister32b(unsigned char address, unsigned int value)
@@ -130,5 +119,5 @@ void Platform::writeRegister32b(unsigned char address, unsigned int value)
     return;
   }
 
-  return device_->w32(address, value);
+  return DEVICE->w32(address, value);
 }
