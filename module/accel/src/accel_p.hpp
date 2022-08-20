@@ -5,11 +5,11 @@ namespace kipr
 {
   namespace accel
   {
-    short accel_x(unsigned char *alt_read_buffer = nullptr);
+    short accel_x();
 
-    short accel_y(unsigned char *alt_read_buffer = nullptr);
+    short accel_y();
 
-    short accel_z(unsigned char *alt_read_buffer = nullptr);
+    short accel_z();
 
     bool accel_calibrate();
   }

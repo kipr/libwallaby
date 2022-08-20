@@ -11,6 +11,10 @@ set(KIPR_VERSION_PATCH 0)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+if (EMSCRIPTEN)
+  option(wasm "Build for WASM dynamic linking" OFF)
+endif()
+
 function(gather_module_objects OUT)
   get_property(KIPR_MODULES GLOBAL PROPERTY kipr_modules)
   message(STATUS "Gathering module objects... ${ARGN}")
@@ -60,11 +64,27 @@ configure_file(include/kipr/config.h.in ${CMAKE_CURRENT_BINARY_DIR}/include/kipr
 gather_module_objects(KIPR_MODULE_OBJECTS ${STATIC_KIPR_MODULES})
 message(STATUS "KIPR module objects are: ${STATIC_KIPR_MODULES} ${KIPR_MODULE_OBJECTS}")
 file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/empty.cpp "")
-add_library(kipr SHARED ${CMAKE_CURRENT_BINARY_DIR}/empty.cpp ${KIPR_MODULE_OBJECTS})
+
 
 if(EMSCRIPTEN)
+  if (wasm)
+    add_executable(kipr ${CMAKE_CURRENT_BINARY_DIR}/empty.cpp ${KIPR_MODULE_OBJECTS})
+    set_target_properties(kipr PROPERTIES SUFFIX .wasm)
+    target_link_options(kipr PRIVATE
+      -sSIDE_MODULE
+      -sLINKABLE
+      -sERROR_ON_UNDEFINED_SYMBOLS=0
+      -sSTANDALONE_WASM
+      -sWASM_BIGINT
+      --no-entry
+    )
+  else()
+    add_library(kipr SHARED ${CMAKE_CURRENT_BINARY_DIR}/empty.cpp ${KIPR_MODULE_OBJECTS})
+  endif()
+  
   target_link_libraries(kipr PRIVATE ${STATIC_KIPR_MODULES})
 else()
+  add_library(kipr SHARED ${CMAKE_CURRENT_BINARY_DIR}/empty.cpp ${KIPR_MODULE_OBJECTS})
   target_link_libraries(kipr PRIVATE "-Wl,-Bsymbolic" ${STATIC_KIPR_MODULES})
 endif()
 target_link_libraries(kipr INTERFACE ${STATIC_KIPR_MODULES})

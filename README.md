@@ -52,6 +52,10 @@ cd libkipr
 emcmake cmake -Bbuild -Dwith_graphics=OFF -Dwith_camera=OFF -Dwith_python_binding=OFF -Dwith_tello=OFF .
 ```
 
+# License
+
+libkipr is licensed under the terms of the [GPLv3 License](LICENSE).
+
 # Contributing
 
 Want to Contribute? Start Here!:

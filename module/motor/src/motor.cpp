@@ -35,7 +35,7 @@ void Motor::moveAtVelocity(short velocity)
 void Motor::moveToPosition(short speed, int goalPos)
 {
   // FIXME: handle velocity scaling?
-  const int sign = motor::get_motor_bemf(m_port, nullptr) > goalPos ? -1 : 1;
+  const int sign = motor::get_motor_bemf(m_port) > goalPos ? -1 : 1;
   const short velocity = std::abs(speed) * sign;
 
   motor::set_motor_mode(m_port, static_cast<unsigned char>(ControlMode::SpeedPosition));
@@ -45,7 +45,7 @@ void Motor::moveToPosition(short speed, int goalPos)
 
 void Motor::moveRelativePosition(short speed, int deltaPos)
 {
-  moveToPosition(speed, motor::get_motor_bemf(m_port, nullptr) + deltaPos);
+  moveToPosition(speed, motor::get_motor_bemf(m_port) + deltaPos);
 }
 
 void Motor::setPidGains(short p, short i, short d, short pd, short id, short dd)
@@ -66,7 +66,7 @@ void Motor::freeze()
 
 bool Motor::isMotorDone() const
 {
-  return !(motor::get_motor_pid_active(m_port, nullptr));
+  return !(motor::get_motor_pid_active(m_port));
 }
 
 void Motor::blockMotorDone() const
@@ -134,7 +134,7 @@ BackEMF::BackEMF(int port)
 
 int BackEMF::value() const
 {
-  return motor::get_motor_bemf(m_port, nullptr);
+  return motor::get_motor_bemf(m_port);
 }
 
 int BackEMF::port() const

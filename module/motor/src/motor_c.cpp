@@ -11,7 +11,7 @@ using namespace kipr::motor;
 
 int get_motor_position_counter(int motor)
 {
-  return get_motor_bemf(motor, nullptr);
+  return get_motor_bemf(motor);
 }
 
 int gmpc(int motor)
@@ -44,7 +44,7 @@ int mav(int motor, int velocity)
 int move_to_position(int motor, int speed, int goal_pos)
 {
   // FIXME: handle velocity scaling?
-  const int sign = motor::get_motor_bemf(motor, nullptr) > goal_pos ? -1 : 1;
+  const int sign = motor::get_motor_bemf(motor) > goal_pos ? -1 : 1;
   const short velocity = std::abs(speed) * sign;
 
   // TODO: combine into one call
@@ -63,7 +63,7 @@ int mtp(int motor, int speed, int goal_pos)
 int move_relative_position(int motor, int speed, int delta_pos)
 {
   if (motor < 0 || motor > 3) return -1;
-  move_to_position(motor, speed, get_motor_bemf(motor, nullptr) + delta_pos);
+  move_to_position(motor, speed, get_motor_bemf(motor) + delta_pos);
   return 0;
 }
 
@@ -93,7 +93,7 @@ int get_motor_done(int motor)
 {
   if (motor < 0 || motor > 3) return -1;
   msleep(2); // to make sure PID was run.. TODO: remove?
-  return (get_motor_pid_active(motor, nullptr) ? 0 : 1);
+  return (get_motor_pid_active(motor) ? 0 : 1);
 }
 
 void block_motor_done(int motor)

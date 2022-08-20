@@ -5,7 +5,7 @@ namespace kipr
 {
   namespace analog
   {
-    unsigned short analog_value(unsigned int port, unsigned char * alt_read_buffer);
+    unsigned short analog_value(unsigned int port);
   }
 }
 

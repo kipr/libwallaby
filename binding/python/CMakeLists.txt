@@ -27,10 +27,13 @@ if(with_python_binding)
   
   add_library(kipr_python STATIC ${KIPR_PYTHON_WRAPPER})
   add_dependencies(kipr_python swig_kipr_python)
-  target_link_libraries(kipr_python PRIVATE ${PYTHON_LIBRARIES})
+  if (NOT EMSCRIPTEN)
+    target_link_libraries(kipr_python PRIVATE ${PYTHON_LIBRARIES})
+  endif()
   target_include_directories(kipr_python PRIVATE ${PYTHON_INCLUDE_DIRS})
   get_property(KIPR_MODULES GLOBAL PROPERTY kipr_modules)
   target_link_libraries(kipr_python PRIVATE ${KIPR_MODULES})
+  set_target_properties(kipr_python PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
 
   file(COPY pyproject.toml DESTINATION ${PACKAGE_DIR})

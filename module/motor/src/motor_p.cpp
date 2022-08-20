@@ -57,13 +57,13 @@ unsigned int fix_port(unsigned int port)
   return port;
 }
 
-unsigned char kipr::motor::get_motor_mode(unsigned int port, unsigned char * alt_read_buffer)
+unsigned char kipr::motor::get_motor_mode(unsigned int port)
 {
   if (port < 0 || port > 3) return static_cast<unsigned char>(ControlMode::Inactive); // TODO: better fail code
 
   const unsigned short offset = 2*fix_port(port);
 
-  unsigned char modes = Platform::instance()->readRegister8b(REG_RW_MOT_MODES, alt_read_buffer);
+  unsigned char modes = Platform::instance()->readRegister8b(REG_RW_MOT_MODES);
   unsigned char mode = (modes & (0x3 << offset)) >> offset;
 
   return mode;
@@ -98,17 +98,17 @@ bool kipr::motor::clear_motor_bemf(unsigned int port)
   return true;
 }
 
-int kipr::motor::get_motor_bemf(unsigned int port, unsigned char * alt_read_buffer)
+int kipr::motor::get_motor_bemf(unsigned int port)
 {
   if (port >= NUM_MOTORS) return 0;
-  int val = Platform::instance()->readRegister32b(REG_RW_MOT_0_B3 + 4 * fix_port(port), alt_read_buffer);
+  int val = Platform::instance()->readRegister32b(REG_RW_MOT_0_B3 + 4 * fix_port(port));
   return per_tick_large_to_small(val); // TODO: cleaner place for scaling
 }
 
-int kipr::motor::get_motor_bemf_vel(unsigned int port, unsigned char * alt_read_buffer)
+int kipr::motor::get_motor_bemf_vel(unsigned int port)
 {
   if (port >= NUM_MOTORS) return 0;
-  int val = Platform::instance()->readRegister32b(REG_RW_MOT_0_SP_H + 4 * fix_port(port), alt_read_buffer);
+  int val = Platform::instance()->readRegister32b(REG_RW_MOT_0_SP_H + 4 * fix_port(port));
   return val;
 }
 
@@ -130,12 +130,12 @@ bool kipr::motor::set_motor_direction(unsigned int port, unsigned char dir)
   return true;
 }
 
-unsigned char kipr::motor::get_motor_direction(unsigned int port, unsigned char * alt_read_buffer)
+unsigned char kipr::motor::get_motor_direction(unsigned int port)
 {
   if (port >= NUM_MOTORS) return static_cast<unsigned char>(Direction::PassiveStop);
   // TODO: error signal outside of range
 
-  unsigned char dirs = Platform::instance()->readRegister8b(REG_RW_MOT_DIRS, alt_read_buffer);
+  unsigned char dirs = Platform::instance()->readRegister8b(REG_RW_MOT_DIRS);
 
   unsigned short offset = 2 * fix_port(port);
 
@@ -150,11 +150,11 @@ bool kipr::motor::stop_motor(int port)
   return true;
 }
 
-unsigned int kipr::motor::get_motor_pwm(unsigned int port, unsigned char * alt_read_buffer)
+unsigned int kipr::motor::get_motor_pwm(unsigned int port)
 {
   if (port >= NUM_MOTORS) return 0;
   // TODO: error signal outside of range
-  return Platform::instance()->readRegister16b(REG_RW_MOT_0_PWM_H + 2 * fix_port(port), alt_read_buffer);
+  return Platform::instance()->readRegister16b(REG_RW_MOT_0_PWM_H + 2 * fix_port(port));
 }
 
 bool kipr::motor::set_motor_pwm(unsigned int port, unsigned char speed)
@@ -173,7 +173,7 @@ bool kipr::motor::set_motor_pwm(unsigned int port, unsigned char speed)
 }
 
 
-int get_motor_goal_velocity(unsigned int port, unsigned char * alt_read_buffer)
+int get_motor_goal_velocity(unsigned int port)
 {
   if (port >= NUM_MOTORS) return 0; // TODO
 
@@ -206,7 +206,7 @@ bool kipr::motor::set_motor_goal_velocity(unsigned int port, int goal_velocity)
   return true;
 }
 
-int kipr::motor::get_motor_goal_position(unsigned int port, unsigned char * alt_read_buffer)
+int kipr::motor::get_motor_goal_position(unsigned int port)
 {
   if (port >= NUM_MOTORS) return 0; // TODO
 
@@ -265,12 +265,12 @@ bool kipr::motor::get_motor_pid_gains(int port, short & p, short & i, short & d,
   return true;
 }
 
-bool kipr::motor::get_motor_stop(unsigned int port, unsigned char * alt_read_buffer)
+bool kipr::motor::get_motor_stop(unsigned int port)
 {
   if (port >= NUM_MOTORS) return false;
   // TODO: this needs testing
-  bool stopped = get_motor_mode(port, alt_read_buffer) == static_cast<unsigned char>(ControlMode::Inactive)
-      && get_motor_direction(port, alt_read_buffer) == static_cast<unsigned char>(Direction::PassiveStop);
+  bool stopped = get_motor_mode(port) == static_cast<unsigned char>(ControlMode::Inactive)
+      && get_motor_direction(port) == static_cast<unsigned char>(Direction::PassiveStop);
   return stopped;
 }
 
@@ -283,17 +283,16 @@ bool kipr::motor::set_motor_stop(unsigned int port, bool stop)
 }
 
 
-bool kipr::motor::get_motor_done(unsigned int port, unsigned char * alt_read_buffer)
+bool kipr::motor::get_motor_done(unsigned int port)
 {
   if (port >= NUM_MOTORS) return false;
-  unsigned char motors_done = Platform::instance()->readRegister8b(REG_RW_MOT_DONE, alt_read_buffer);
-  //std::cout << "motors done = " << (unsigned int)motors_done << " vs " << (1 < fix_port(port))  << "fixed port is " << std::endl;
+  unsigned char motors_done = Platform::instance()->readRegister8b(REG_RW_MOT_DONE);
 
   return (motors_done & (1 << fix_port(port)));
 }
 
-bool kipr::motor::get_motor_pid_active(unsigned int port, unsigned char * alt_read_buffer)
+bool kipr::motor::get_motor_pid_active(unsigned int port)
 {
   if (port >= NUM_MOTORS) return false;
-  return !(get_motor_done(port, alt_read_buffer));
+  return !(get_motor_done(port));
 }

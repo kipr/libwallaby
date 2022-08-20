@@ -15,19 +15,19 @@ namespace
   double Biasz = 0;
 }
 
-short kipr::accel::accel_x(unsigned char *alt_read_buffer)
+short kipr::accel::accel_x()
 {
-  return static_cast<signed short>(Platform::instance()->readRegister16b(REG_RW_ACCEL_X_H, alt_read_buffer)) / 16 - Biasx;
+  return static_cast<signed short>(Platform::instance()->readRegister16b(REG_RW_ACCEL_X_H)) / 16 - Biasx;
 }
 
-short kipr::accel::accel_y(unsigned char *alt_read_buffer)
+short kipr::accel::accel_y()
 {
-  return static_cast<signed short>(Platform::instance()->readRegister16b(REG_RW_ACCEL_Y_H, alt_read_buffer)) / 16 - Biasy;
+  return static_cast<signed short>(Platform::instance()->readRegister16b(REG_RW_ACCEL_Y_H)) / 16 - Biasy;
 }
 
-short kipr::accel::accel_z(unsigned char *alt_read_buffer)
+short kipr::accel::accel_z()
 {
-  return static_cast<signed short>(Platform::instance()->readRegister16b(REG_RW_ACCEL_Z_H, alt_read_buffer)) / 16 - Biasz;
+  return static_cast<signed short>(Platform::instance()->readRegister16b(REG_RW_ACCEL_Z_H)) / 16 - Biasz;
 }
 
 // Simple low-pass filter for accelerometer

@@ -16,7 +16,7 @@ void Servo::setPosition(Servo::ticks_t position)
 
 Servo::ticks_t Servo::position() const
 {
-  return get_servo_position(m_port, nullptr);
+  return get_servo_position(m_port);
 }
 
 void Servo::disable()
@@ -36,5 +36,5 @@ void Servo::setEnabled(bool enabled)
 
 bool Servo::isEnabled() const
 {
-  return get_servo_enabled(m_port, nullptr);
+  return get_servo_enabled(m_port);
 }

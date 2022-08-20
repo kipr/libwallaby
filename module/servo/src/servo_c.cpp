@@ -30,12 +30,12 @@ void set_servo_enabled(int port, int enabled)
 
 int get_servo_enabled(int port)
 {
-  return (kipr::servo::get_servo_enabled(port, nullptr) ? 1 : 0);
+  return (kipr::servo::get_servo_enabled(port) ? 1 : 0);
 }
 
 int get_servo_position(int port)
 {
-  return kipr::servo::get_servo_position(port, nullptr);
+  return kipr::servo::get_servo_position(port);
 }
 
 void set_servo_position(int port, int position)

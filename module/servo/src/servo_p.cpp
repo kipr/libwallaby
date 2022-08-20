@@ -36,11 +36,11 @@ void kipr::servo::set_servo_enabled(int port, bool enabled)
 }
 
 
-bool kipr::servo::get_servo_enabled(int port, unsigned char * alt_read_buffer)
+bool kipr::servo::get_servo_enabled(int port)
 {
   if (port > 3) return false;
 
-  unsigned short allStop = Platform::instance()->readRegister8b(REG_RW_MOT_SRV_ALLSTOP, alt_read_buffer);
+  unsigned short allStop = Platform::instance()->readRegister8b(REG_RW_MOT_SRV_ALLSTOP);
 
   const unsigned short bit = 1 << (port + 4);
   const bool currentlyDisabled = allStop & bit;
@@ -65,12 +65,12 @@ bool kipr::servo::set_servo_position(int port, unsigned short position)
 }
 
 
-unsigned short kipr::servo::get_servo_position(int port, unsigned char * alt_read_buffer)
+unsigned short kipr::servo::get_servo_position(int port)
 {
   if (port > 3) return 0xFFFF;
 
   unsigned char address = REG_RW_SERVO_0_H + 2 * port;
-  const unsigned short position = Platform::instance()->readRegister16b(address, alt_read_buffer);
+  const unsigned short position = Platform::instance()->readRegister16b(address);
 
   double degrees = ((double)position - 1500.0) / 10.0; // [-90, 90]
   double dval = (degrees + 90.0)  * 2047.0 / 180.0; // [0, 2047]

@@ -12,7 +12,7 @@ namespace kipr
       NiMH
     };
 
-    unsigned short battery_raw_reading(unsigned char * alt_read_buffer = nullptr);
+    unsigned short battery_raw_reading();
 
     // TODO: move to battery source/header
     // TODO: doesn't allow for use of an alt_read_buffer

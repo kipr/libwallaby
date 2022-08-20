@@ -8,17 +8,17 @@ using namespace kipr::magneto;
 
 using kipr::core::Platform;
 
-short kipr::magneto::magneto_x(unsigned char * alt_read_buffer)
+short kipr::magneto::magneto_x()
 {
-    return static_cast<signed short>(Platform::instance()->readRegister16b(REG_RW_MAG_X_H, alt_read_buffer))/16;
+    return static_cast<signed short>(Platform::instance()->readRegister16b(REG_RW_MAG_X_H))/16;
 }
 
-short kipr::magneto::magneto_y(unsigned char * alt_read_buffer)
+short kipr::magneto::magneto_y()
 {
-    return static_cast<signed short>(Platform::instance()->readRegister16b(REG_RW_MAG_Y_H, alt_read_buffer))/16;
+    return static_cast<signed short>(Platform::instance()->readRegister16b(REG_RW_MAG_Y_H))/16;
 }
 
-short kipr::magneto::magneto_z(unsigned char * alt_read_buffer)
+short kipr::magneto::magneto_z()
 {
-    return static_cast<signed short>(Platform::instance()->readRegister16b(REG_RW_MAG_Z_H, alt_read_buffer))/16;
+    return static_cast<signed short>(Platform::instance()->readRegister16b(REG_RW_MAG_Z_H))/16;
 }
