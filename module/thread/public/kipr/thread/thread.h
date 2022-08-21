@@ -55,7 +55,7 @@ EXPORT_SYM void mutex_destroy(mutex m);
 /**
  * \ingroup thread
  */
-EXPORT_SYM ::thread thread_create(thread_function func);
+EXPORT_SYM thread thread_create(thread_function func);
 
 /**
  * \ingroup thread
