@@ -60,17 +60,17 @@ EXPORT_SYM thread thread_create(thread_function func);
 /**
  * \ingroup thread
  */
-EXPORT_SYM void thread_start(::thread id);
+EXPORT_SYM void thread_start(thread id);
 
 /**
  * \ingroup thread
  */
-EXPORT_SYM void thread_wait(::thread id);
+EXPORT_SYM void thread_wait(thread id);
 
 /**
  * \ingroup thread
  */
-EXPORT_SYM void thread_destroy(::thread id);
+EXPORT_SYM void thread_destroy(thread id);
 
 #ifdef __cplusplus
 }
