@@ -24,17 +24,17 @@
 
 // The number of segments in a character display
 /* Segment arrangement
-	 --0- -1--     ---18----     --20 21--     ---- ----
-	|\   |   /|	  |\  18   /|	|\20   21/|	  ||   |   /|
-	7 8  9 10 2	  | \  |  / |	|24  |  26|	  ||\ 29  / |
-	|   \|/   |	  |   17/   |	24   |/  26	  || 29|/   |
-	 -15- -11-	   ---17----	 ---- ----	   |--- ----
-	|   /|\   |	  |   /|\   |	25  /|\  27	  |2  /|\   |
-	6 14 1 12 3	  |  / |  \ |	|25  |  27|	  |8 / |  \ |
-	|/   3   \|	  |/  16   \|	|/22   23\|	  ||   |   \|
- 	 --5- -4--	   ---16----	 --22 23--	   ---- ----
+   --0- -1--     ---18----     --20 21--     ---- ----
+  |\   |   /|	  |\  18   /|	|\20   21/|	  ||   |   /|
+  7 8  9 10 2	  | \  |  / |	|24  |  26|	  ||\ 29  / |
+  |   \|/   |	  |   17/   |	24   |/  26	  || 29|/   |
+   -15- -11-	   ---17----	 ---- ----	   |--- ----
+  |   /|\   |	  |   /|\   |	25  /|\  27	  |2  /|\   |
+  6 14 1 12 3	  |  / |  \ |	|25  |  27|	  |8 / |  \ |
+  |/   3   \|	  |/  16   \|	|/22   23\|	  ||   |   \|
+   --5- -4--	   ---16----	 --22 23--	   ---- ----
                        /
-                	  / (19)
+                    / (19)
 */
 
 #define NUMSEG 30
@@ -44,15 +44,15 @@
 #define SEGSP 7
 // The width in pixels of the window
 extern int __bold;
-#define BOLD __bold=1;
-#define NOBOLD __bold=0;
+#define BOLD __bold = 1;
+#define NOBOLD __bold = 0;
 
 #ifndef GXWINDOW
-  #define GXWINDOW 700
+#define GXWINDOW 700
 #endif
 // The height of the window
 #ifndef GYWINDOW
-  #define GYWINDOW 500
+#define GYWINDOW 500
 #endif
 
 // **************** Function Prototypes ******************
@@ -62,7 +62,8 @@ extern int __bold;
 // arrows (l,r,u,d) are specified by numbers 11 ,12, 13, 14
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
   /**
@@ -80,7 +81,6 @@ extern "C" {
   void graphics_segmentDisplay(int s[], int x, int y, int r, int g, int b, float size);
   void g_segmentDisplay(int s[], int x, int y, int r, int g, int b, float size);
 
-
   /**
    * Prints out a character in 16 segment characters
    *
@@ -96,11 +96,10 @@ extern "C" {
   void graphics_printCharacter(int n, int x, int y, int r, int g, int b, float size);
   void g_printCharacter(int n, int x, int y, int r, int g, int b, float size);
 
-
   /**
    * Prints out a text string in 16 segment characters
    *
-   * \param n The string to display
+   * \param s The string to display
    * \param x The X coordinate of the first character's top-left corner
    * \param y The Y coordinate of the first character's top-left corner
    * \param r The red component of the drawing, from 0 to 255
@@ -111,7 +110,6 @@ extern "C" {
    */
   void graphics_printString(char s[], int x, int y, int r, int g, int b, float size);
   void g_printString(char s[], int x, int y, int r, int g, int b, float size);
-
 
   /**
    * Prints out an integer in 16 segment characters
@@ -129,7 +127,6 @@ extern "C" {
   int graphics_printInt(int n, int minNumDigits, int x, int y, int r, int g, int b, float size);
   int g_printInt(int n, int minNumDigits, int x, int y, int r, int g, int b, float size);
 
-
   /**
    * Prints out a float in 16 segment characters
    *
@@ -146,10 +143,8 @@ extern "C" {
   void graphics_printFloat(float n, int numDigits, int x, int y, int r, int g, int b, float size);
   void g_printFloat(float n, int numDigits, int x, int y, int r, int g, int b, float size);
 
-
 #ifdef __cplusplus
 }
 #endif
-
 
 #endif /* GRAPHICS_CHARACTERS_H_ */

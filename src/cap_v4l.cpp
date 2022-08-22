@@ -1056,7 +1056,7 @@ bool CvCaptureCAM_V4L_K::tryIoctl(unsigned long ioctlCode, void *parameter) //co
                 	DqbufTimeoutuSec  = STIMEOUT_RESET_USEC;
                 //	v4l2_reset();
 		//}
-                printf("camera driver reset - time: %d\n", systime() - StartTime);
+                printf("camera driver reset - time: %lu\n", systime() - StartTime);
             }
             
             return false;
