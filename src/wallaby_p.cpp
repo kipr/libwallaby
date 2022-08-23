@@ -188,25 +188,29 @@ bool Wallaby::transfer(unsigned char * alt_read_buffer)
 
 #ifdef TARGET_EMSCRIPTEN
 
-// emscripten function to write register values to JS registers variable
-EM_JS(void, updateRegisters, (unsigned char *addresses, unsigned char *values, int length), {
-	const registers = [];
-	for (let regIndex = 0; regIndex < length; regIndex++) {
-		// Array values must be accessed directly from emscripten's memory buffer
-		const address = HEAPU8[addresses + regIndex];
-		const value = HEAPU8[values + regIndex];
-		if(Module.context.registers[address] !== value) {
-			Module.context.registers[address] = value;
-			registers.push({ address: address, value: value });
-		}
-	}
-
-	Module.context.onRegistersChange(registers);
+// emscripten functions to write register values to JS
+EM_JS(void, jsSetRegister8b, (unsigned char address, unsigned char value), {
+	Module.context.setRegister8b(address, value);
 });
 
-// emscripten function to read register values from JS registers variable
-EM_JS(unsigned char, readRegister, (unsigned char address), {
-	return Module.context.registers[address];
+EM_JS(void, jsSetRegister16b, (unsigned char address, unsigned short value), {
+	Module.context.setRegister16b(address, value);
+});
+
+EM_JS(void, jsSetRegister32b, (unsigned char address, unsigned int value), {
+	Module.context.setRegister32b(address, value);
+});
+
+EM_JS(unsigned char, jsReadRegister8b, (unsigned char address), {
+	return Module.context.readRegister8b(address);
+});
+
+EM_JS(unsigned short, jsReadRegister16b, (unsigned char address), {
+	return Module.context.readRegister16b(address);
+});
+
+EM_JS(unsigned int, jsReadRegister32b, (unsigned char address), {
+	return Module.context.readRegister32b(address);
 });
 
 #endif
@@ -223,7 +227,7 @@ unsigned char Wallaby::readRegister8b(unsigned char address, const unsigned char
 	{
 		#ifdef TARGET_EMSCRIPTEN
 		emscripten_sleep(0);
-		read_buffer_[address] = readRegister(address);
+		return jsReadRegister8b(address);
 		#else
 		clearBuffers();
 
@@ -245,9 +249,7 @@ void Wallaby::writeRegister8b(unsigned char address, unsigned char value)
 
 	#ifdef TARGET_EMSCRIPTEN
 	emscripten_sleep(0);
-	unsigned char addresses[] = {address};
-	unsigned char values[] = {value};
-	updateRegisters(addresses, values, 1);
+	jsSetRegister8b(address, value);
 	#else
 	clearBuffers();
 
@@ -274,8 +276,7 @@ unsigned short Wallaby::readRegister16b(unsigned char address, const unsigned ch
 	{
 		#ifdef TARGET_EMSCRIPTEN
 		emscripten_sleep(0);
-		read_buffer_[address] = readRegister(address);
-		read_buffer_[address+1] = readRegister(address+1);
+		return jsReadRegister16b(address);
 		#else
 		clearBuffers();
 
@@ -300,9 +301,7 @@ void Wallaby::writeRegister16b(unsigned char address, unsigned short value)
 
 	#ifdef TARGET_EMSCRIPTEN
 	emscripten_sleep(0);
-	unsigned char addresses[] = {address, static_cast<unsigned char>(address + 1)};
-	unsigned char values[] = {value1, value2};
-	updateRegisters(addresses, values, 2);
+	jsSetRegister16b(address, value);
 	#else
 	clearBuffers();
 
@@ -331,10 +330,7 @@ unsigned int Wallaby::readRegister32b(unsigned char address, const unsigned char
 	{
 		#ifdef TARGET_EMSCRIPTEN
 		emscripten_sleep(0);
-		read_buffer_[address] = readRegister(address);
-		read_buffer_[address+1] = readRegister(address+1);
-		read_buffer_[address+2] = readRegister(address+2);
-		read_buffer_[address+3] = readRegister(address+3);
+		return jsReadRegister32b(address);
 		#else
 		clearBuffers();
 
@@ -366,9 +362,7 @@ void Wallaby::writeRegister32b(unsigned char address, unsigned int value)
 
 	#ifdef TARGET_EMSCRIPTEN
 	emscripten_sleep(0);
-	unsigned char addresses[] = {address, static_cast<unsigned char>(address + 1), static_cast<unsigned char>(address + 2), static_cast<unsigned char>(address + 3)};
-	unsigned char values[] = {value1, value2, value3, value4};
-	updateRegisters(addresses, values, 4);
+	jsSetRegister32b(address, value);
 	#else
 	clearBuffers();
 
