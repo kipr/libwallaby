@@ -3,6 +3,8 @@
 #include <vector>
 #include <cstdlib>
 #include <mutex>
+#include <iostream>
+
 
 using namespace kipr;
 using namespace kipr::core;
@@ -24,6 +26,8 @@ void kipr::core::cleanup_add(const CleanupFunction &func)
 void kipr::core::cleanup(bool should_abort)
 {
   std::lock_guard<std::mutex> lock(cleanup_mutex);
+
+  std::cout << "Cleaning up " << cleanup_functions.size() << std::endl;
 
   for (const auto &func : cleanup_functions) func();
 
