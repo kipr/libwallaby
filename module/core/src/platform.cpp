@@ -108,7 +108,7 @@ unsigned int Platform::readRegister32b(unsigned char address)
     return 0;
   }
 
-  return DEVICE->r16(address);
+  return DEVICE->r32(address);
 }
 
 void Platform::writeRegister32b(unsigned char address, unsigned int value)
