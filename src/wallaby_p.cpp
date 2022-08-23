@@ -226,7 +226,6 @@ unsigned char Wallaby::readRegister8b(unsigned char address, const unsigned char
 	if (alt_read_buffer == nullptr)
 	{
 		#ifdef TARGET_EMSCRIPTEN
-		emscripten_sleep(0);
 		return jsReadRegister8b(address);
 		#else
 		clearBuffers();
@@ -248,7 +247,6 @@ void Wallaby::writeRegister8b(unsigned char address, unsigned char value)
 	std::lock_guard<std::mutex> lock(transfer_mutex_);
 
 	#ifdef TARGET_EMSCRIPTEN
-	emscripten_sleep(0);
 	jsSetRegister8b(address, value);
 	#else
 	clearBuffers();
@@ -275,7 +273,6 @@ unsigned short Wallaby::readRegister16b(unsigned char address, const unsigned ch
 	if (alt_read_buffer == nullptr)
 	{
 		#ifdef TARGET_EMSCRIPTEN
-		emscripten_sleep(0);
 		return jsReadRegister16b(address);
 		#else
 		clearBuffers();
@@ -300,7 +297,6 @@ void Wallaby::writeRegister16b(unsigned char address, unsigned short value)
 	std::lock_guard<std::mutex> lock(transfer_mutex_);
 
 	#ifdef TARGET_EMSCRIPTEN
-	emscripten_sleep(0);
 	jsSetRegister16b(address, value);
 	#else
 	clearBuffers();
@@ -329,7 +325,6 @@ unsigned int Wallaby::readRegister32b(unsigned char address, const unsigned char
 	if (alt_read_buffer == nullptr)
 	{
 		#ifdef TARGET_EMSCRIPTEN
-		emscripten_sleep(0);
 		return jsReadRegister32b(address);
 		#else
 		clearBuffers();
@@ -361,7 +356,6 @@ void Wallaby::writeRegister32b(unsigned char address, unsigned int value)
 	std::lock_guard<std::mutex> lock(transfer_mutex_);
 
 	#ifdef TARGET_EMSCRIPTEN
-	emscripten_sleep(0);
 	jsSetRegister32b(address, value);
 	#else
 	clearBuffers();
