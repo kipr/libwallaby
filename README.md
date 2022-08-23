@@ -46,11 +46,23 @@ cmake -Bbuild -DCMAKE_TOOLCHAIN_FILE=$(pwd)/toolchain/aarch64-linux-gnu.cmake .
 
 # Cross-compiling to JavaScript/WASM (e.g., Simulator)
 
+## Without Python Support
+
 ```
 source emsdk/emsdk_env.sh
 cd libkipr
-emcmake cmake -Bbuild -Dwith_graphics=OFF -Dwith_camera=OFF -Dwith_python_binding=OFF -Dwith_tello=OFF .
+emcmake cmake -Bbuild -Dwith_graphics=OFF -Dwith_camera=OFF -Dwith_tello=OFF -Dwith_python_binding=OFF .
 ```
+
+## With Python Support
+```
+source emsdk/emsdk_env.sh
+cd libkipr
+emcmake cmake -Bbuild -Dwith_graphics=OFF -Dwith_camera=OFF -Dwith_tello=OFF -DPYTHON_LIBRARY=$PYTHON_LIBRARY -DPYTHON_INCLUDE_DIR=$PYTHON_INCLUDE_DIR .
+```
+where:
+  - `$PYTHON_LIBRARY` is the `libpythonVERSION.a` file that has been compiled to emscripten-browser.
+  - `$PYTHON_INCLUDE_DIR` is that python's include directory. 
 
 # License
 
