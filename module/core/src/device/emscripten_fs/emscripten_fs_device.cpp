@@ -70,8 +70,8 @@ public:
     }
 
     return (
-      values[0] << 8 |
-      values[1] << 0
+      (values[0] << 8) |
+      (values[1] << 0)
     );
   }
 
@@ -87,10 +87,10 @@ public:
     }
 
     return (
-      values[0] << 24 |
-      values[1] << 16 |
-      values[2] << 8 |
-      values[3] << 0
+      (values[0] << 24) |
+      (values[1] << 16) |
+      (values[2] << 8) |
+      (values[3] << 0)
     );
   }
 
