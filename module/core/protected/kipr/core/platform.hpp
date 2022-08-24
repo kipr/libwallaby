@@ -4,6 +4,7 @@
 #include <mutex>
 #include <vector>
 #include <iostream>
+#include <memory>
 
 namespace kipr
 {

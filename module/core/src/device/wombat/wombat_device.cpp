@@ -1,5 +1,6 @@
 #include "../../device.hpp"
 #include "kipr/core/platform.hpp"
+#include "kipr/core/registers.hpp"
 
 #include "kipr/log/log.hpp"
 
@@ -63,7 +64,7 @@ public:
 
     return (
       read_buffer[address] << 8 |
-      read_buffer[address + 1] << 0 |
+      read_buffer[address + 1] << 0
     );
   }
 
@@ -106,7 +107,7 @@ public:
       address,
       (value & 0xFF00) >> 8,
       address + 1,
-      (value 0x00FF) >> 0,
+      (value & 0x00FF) >> 0,
       'S'
     };
 
@@ -123,11 +124,11 @@ public:
       address,
       (value & 0xFF000000) >> 24,
       address + 1,
-      (value 0x00FF0000) >> 16,
+      (value & 0x00FF0000) >> 16,
       address + 2,
-      (value 0x0000FF00) >> 8,
+      (value & 0x0000FF00) >> 8,
       address + 3,
-      (value 0x000000FF) >> 0,
+      (value & 0x000000FF) >> 0,
       'S'
     };
 
@@ -146,7 +147,7 @@ private:
     struct spi_ioc_transfer xfer;
     memset(&xfer, 0, sizeof xfer);
 
-    xfer.tx_buf = (unsigned long)write_buffer_;
+    xfer.tx_buf = (unsigned long)write_buffer;
     xfer.rx_buf = (unsigned long)read_buffer;
     xfer.len = size;
     xfer.speed_hz = 16000000;
