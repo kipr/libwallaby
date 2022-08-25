@@ -170,31 +170,67 @@ public:
       work_buffer.push_back(command.address);
       work_buffer.push_back(command.size);
 
-      switch (command.size) {
-        case 1:
+      switch (command.type)
+      {
+        case Command::Type::Read:
         {
-          work_buffer.push_back(*command.value);
-          work_buffer.push_back(command.mask & 0xFF);
+          switch (command.size) {
+            case 1:
+            {
+              work_buffer.push_back(command.mask & 0xFF);
+              break;
+            }
+            case 2:
+            {
+              work_buffer.push_back((command.mask & 0xFF00) >> 8);
+              work_buffer.push_back((command.mask & 0x00FF) >> 0);
+              break;
+            }
+            case 4:
+            {
+              work_buffer.push_back((command.mask & 0xFF000000) >> 24);
+              work_buffer.push_back((command.mask & 0x00FF0000) >> 16);
+              work_buffer.push_back((command.mask & 0x0000FF00) >> 8);
+              work_buffer.push_back((command.mask & 0x000000FF) >> 0);
+              break;
+            }
+          }
           break;
         }
-        case 2:
+        case Command::Type::Write:
         {
-          work_buffer.push_back((*command.value & 0xFF00) >> 8);
-          work_buffer.push_back((*command.value & 0x00FF) >> 0);
-          work_buffer.push_back((command.mask & 0xFF00) >> 8);
-          work_buffer.push_back((command.mask & 0x00FF) >> 0);
+          switch (command.size) {
+            case 1:
+            {
+              work_buffer.push_back(*command.value);
+              work_buffer.push_back(command.mask & 0xFF);
+              break;
+            }
+            case 2:
+            {
+              work_buffer.push_back((*command.value & 0xFF00) >> 8);
+              work_buffer.push_back((*command.value & 0x00FF) >> 0);
+              work_buffer.push_back((command.mask & 0xFF00) >> 8);
+              work_buffer.push_back((command.mask & 0x00FF) >> 0);
+              break;
+            }
+            case 4:
+            {
+              work_buffer.push_back((*command.value & 0xFF000000) >> 24);
+              work_buffer.push_back((*command.value & 0x00FF0000) >> 16);
+              work_buffer.push_back((*command.value & 0x0000FF00) >> 8);
+              work_buffer.push_back((*command.value & 0x000000FF) >> 0);
+              work_buffer.push_back((command.mask & 0xFF000000) >> 24);
+              work_buffer.push_back((command.mask & 0x00FF0000) >> 16);
+              work_buffer.push_back((command.mask & 0x0000FF00) >> 8);
+              work_buffer.push_back((command.mask & 0x000000FF) >> 0);
+              break;
+            }
+          }
           break;
         }
-        case 4:
+        case Command::Type::Fence:
         {
-          work_buffer.push_back((*command.value & 0xFF000000) >> 24);
-          work_buffer.push_back((*command.value & 0x00FF0000) >> 16);
-          work_buffer.push_back((*command.value & 0x0000FF00) >> 8);
-          work_buffer.push_back((*command.value & 0x000000FF) >> 0);
-          work_buffer.push_back((command.mask & 0xFF000000) >> 24);
-          work_buffer.push_back((command.mask & 0x00FF0000) >> 16);
-          work_buffer.push_back((command.mask & 0x0000FF00) >> 8);
-          work_buffer.push_back((command.mask & 0x000000FF) >> 0);
           break;
         }
       }
