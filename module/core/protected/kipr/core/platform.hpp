@@ -34,7 +34,6 @@ namespace kipr
       unsigned int readRegister32b(unsigned char address);
       void writeRegister32b(unsigned char address, unsigned int value);
       
-      void submit(const Command *const buffer, const std::size_t size);
 
       template<typename... Args>
       void submit(Args &&...args)
@@ -42,11 +41,14 @@ namespace kipr
         std::vector<Command> commands;
         commands.reserve(submitSize(args...));
         buildSubmit(commands, args...);
-        submit(command.cbegin(), command.cend());
+        submit_(commands.data(), commands.size());
       }
 
     private:
       Platform();
+
+      void submit_(const Command *const buffer, const std::size_t size);
+
 
       template<typename... Args>
       void buildSubmit(std::vector<Command> &commands, Command &&first, Args &&...args)
@@ -62,6 +64,11 @@ namespace kipr
         buildSubmit(commands, args...);
       }
 
+      void buildSubmit(std::vector<Command> &commands, Command &&first)
+      {
+        commands.emplace_back(first);
+      }
+
       template<typename T>
       void buildSubmit(std::vector<Command> &commands, T &&first)
       {
@@ -74,16 +81,18 @@ namespace kipr
         return 1 + submitSize(args...);
       }
 
+      size_t submitSize(const Command &first)
+      {
+        return 1;
+      }
+
       template<typename T, typename... Args>
       size_t submitSize(const T &first, const Args &...args)
       {
         return submitSize(first.size());
       }
 
-      size_t submitSize(const Command &first)
-      {
-        return 1;
-      }
+      
 
       template<typename T>
       size_t submitSize(const T &first)

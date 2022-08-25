@@ -161,6 +161,10 @@ public:
           work_buffer.push_back(REQUEST_WRITE_MASK);
           break;
         }
+        case Command::Type::Fence:
+        {
+          continue;
+        }
       }
 
       work_buffer.push_back(command.address);
@@ -227,19 +231,21 @@ public:
         case 2:
         {
           *command.value = (
-            (work_buffer[in_iter++] << 8) |
-            (work_buffer[in_iter++] << 0)
+            (work_buffer[in_iter + 0] << 8) |
+            (work_buffer[in_iter + 1] << 0)
           );
+          in_iter += 2;
           break;
         }
         case 4:
         {
           *command.value = (
-            (work_buffer[in_iter++] << 24) |
-            (work_buffer[in_iter++] << 16) |
-            (work_buffer[in_iter++] << 8) |
-            (work_buffer[in_iter++] << 0)
+            (work_buffer[in_iter + 0] << 24) |
+            (work_buffer[in_iter + 1] << 16) |
+            (work_buffer[in_iter + 2] << 8) |
+            (work_buffer[in_iter + 3] << 0)
           );
+          in_iter += 4;
           break;
         }
       }

@@ -103,6 +103,10 @@ void Device::submit(const Command *const buffer, const std::size_t size)
         }
         break;
       }
+      case Command::Type::Fence:
+      {
+        break;
+      }
     }
   }
 }

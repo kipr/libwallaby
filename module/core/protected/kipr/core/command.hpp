@@ -138,14 +138,14 @@ namespace kipr
       {
         if (vec.empty()) vec.emplace_back();
         
-        Chunk<std::uint8_t> &last = vec.back();
-        if (last.offset == last.data.size())
+        Chunk<T> *last = &*vec.back();
+        if (last->offset == last->data.size())
         {
           vec.emplace_back();
-          last = vec.back();
+          last = &*vec.back();
         }
 
-        T &ret = last.data[last.offset++];
+        T &ret = last->data[last->offset++];
         ret = value;
         return &ret;
       }
