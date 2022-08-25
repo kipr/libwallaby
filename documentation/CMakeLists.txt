@@ -2,7 +2,8 @@ option(with_documentation "Enable documentation" ON)
 
 if (with_documentation)
   find_package(Doxygen REQUIRED)
-  
+
+  set(DOXYGEN_ALIASES description="@details" detailed="@details" blocks="@par @b This function is blocking." blocksuntil="@par @b This function blocks until ")
   set(DOXYGEN_GENERATE_HTML YES)
   set(DOXYGEN_GENERATE_MAN YES)
   set(DOXYGEN_PROJECT_NUMBER ${KIPR_VERSION_MAJOR}.${KIPR_VERSION_MINOR}.${KIPR_VERSION_PATCH})
