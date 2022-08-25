@@ -203,6 +203,8 @@ public:
       return;
     }
 
+    if (in_buffer_size == 0) return;
+
     res = ::read(fd_, work_buffer.data(), in_buffer_size);
     if (res != in_buffer_size)
     {
