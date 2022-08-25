@@ -41,6 +41,7 @@ namespace kipr
       {
         std::vector<Command> commands;
         commands.reserve(submitSize(args...));
+        buildSubmit(commands, args...);
         submit(command.cbegin(), command.cend());
       }
 
