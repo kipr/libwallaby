@@ -6,6 +6,8 @@
 #include <iostream>
 #include <memory>
 
+#include "command.hpp"
+
 namespace kipr
 {
   namespace core
@@ -31,9 +33,62 @@ namespace kipr
 
       unsigned int readRegister32b(unsigned char address);
       void writeRegister32b(unsigned char address, unsigned int value);
+      
+      void submit(const Command *const buffer, const std::size_t size);
+
+      template<typename... Args>
+      void submit(Args &&...args)
+      {
+        std::vector<Command> commands;
+        commands.reserve(submitSize(args...));
+        submit(command.cbegin(), command.cend());
+      }
 
     private:
       Platform();
+
+      template<typename... Args>
+      void buildSubmit(std::vector<Command> &commands, Command &&first, Args &&...args)
+      {
+        commands.emplace_back(first);
+        buildSubmit(commands, args...);
+      }
+
+      template<typename T, typename... Args>
+      void buildSubmit(std::vector<Command> &commands, T &&first, Args &&...args)
+      {
+        commands.insert(commands.end(), first.cbegin(), first.cend());
+        buildSubmit(commands, args...);
+      }
+
+      template<typename T>
+      void buildSubmit(std::vector<Command> &commands, T &&first)
+      {
+        commands.insert(commands.end(), first.cbegin(), first.cend());
+      }
+
+      template<typename... Args>
+      size_t submitSize(const Command &first, const Args &...args)
+      {
+        return 1 + submitSize(args...);
+      }
+
+      template<typename T, typename... Args>
+      size_t submitSize(const T &first, const Args &...args)
+      {
+        return submitSize(first.size());
+      }
+
+      size_t submitSize(const Command &first)
+      {
+        return 1;
+      }
+
+      template<typename T>
+      size_t submitSize(const T &first)
+      {
+        return first.size();
+      }
 
       static std::mutex instance_mut_;
       static Platform *instance_;

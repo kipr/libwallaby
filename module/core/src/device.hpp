@@ -8,6 +8,8 @@ namespace kipr
 {
   namespace core
   {
+    struct Command;
+
     class Device
     {
     public:
@@ -22,6 +24,8 @@ namespace kipr
       virtual void w8(const std::uint8_t address, const std::uint8_t value) = 0;
       virtual void w16(const std::uint8_t address, const std::uint16_t value) = 0;
       virtual void w32(const std::uint8_t address, const std::uint32_t value) = 0;
+
+      virtual void submit(const Command *const buffer, const std::size_t size);
     };
   }
 }

@@ -1,6 +1,8 @@
 #include "kipr/motor/motor.h"
 #include "kipr/time/time.h"
 #include "motor_p.hpp"
+#include "kipr/motor/command.hpp"
+#include "kipr/core/platform.hpp"
 
 #include <iostream>
 #include <cstdlib>
@@ -8,6 +10,9 @@
 
 using namespace kipr;
 using namespace kipr::motor;
+
+using kipr::core::Platform;
+using kipr::core::Memory;
 
 int get_motor_position_counter(int motor)
 {
@@ -163,7 +168,8 @@ void off(int motor)
 
 void alloff()
 {
-  for (unsigned int i = 0; i < 4; ++i) off(i);
+  Memory memory;
+  Platform::instance()->submit(command::all_off(memory));
 }
 
 void ao()
