@@ -20,7 +20,7 @@ if (CMAKE_CROSSCOMPILING)
 else()
   ExternalProject_Add(dep_zlib
     URL https://www.zlib.net/zlib-1.2.12.tar.gz
-    CONFIGURE_COMMAND ${ZLIB_DIR}-prefix/src/dep_zlib/configure
+    CMAKE_ARGS
       ${ZLIB_COMMON_OPTIONS}
     INSTALL_COMMAND make install
   )

@@ -121,3 +121,8 @@ void Platform::writeRegister32b(unsigned char address, unsigned int value)
 
   return DEVICE->w32(address, value);
 }
+
+void Platform::submit_(const Command *const buffer, const std::size_t size)
+{
+  DEVICE->submit(buffer, size);
+}

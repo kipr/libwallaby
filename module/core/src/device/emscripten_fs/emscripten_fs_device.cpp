@@ -1,6 +1,7 @@
 #include "../../device.hpp"
 #include "kipr/core/platform.hpp"
 #include "kipr/log/log.hpp"
+#include "kipr/core/command.hpp"
 
 #include <cstdint>
 #include <fcntl.h>
@@ -8,6 +9,9 @@
 #include <cstring>
 #include <cstdio>
 #include <unistd.h>
+
+using kipr::core::Device;
+using kipr::core::Command;
 
 namespace
 {
@@ -17,9 +21,11 @@ namespace
 
   const std::uint8_t REQUEST_READ = 0;
   const std::uint8_t REQUEST_WRITE = 1;
+  const std::uint8_t REQUEST_READ_MASK = 2;
+  const std::uint8_t REQUEST_WRITE_MASK = 3;
 }
 
-class EmscriptenFsDevice : public kipr::core::Device
+class EmscriptenFsDevice : public Device
 {
 public:
   EmscriptenFsDevice()
@@ -119,6 +125,167 @@ public:
     };
 
     write(address, values, 4);
+  }
+
+  virtual void submit(const Command *const buffer, const std::size_t size) override
+  {
+    std::size_t work_buffer_size = 0;
+    for (std::size_t i = 0; i < size; ++i)
+    {
+      // Header
+      work_buffer_size += 3;
+      // Data
+      work_buffer_size += buffer[i].size;
+      // Mask
+      work_buffer_size += buffer[i].size;
+    }
+
+    std::vector<std::uint8_t> work_buffer;
+    work_buffer.reserve(work_buffer_size);
+    std::size_t in_buffer_size = 0;
+
+
+    for (std::size_t i = 0; i < size; ++i)
+    {
+      const Command &command = buffer[i];
+      switch (command.type)
+      {
+        case Command::Type::Read:
+        {
+          work_buffer.push_back(REQUEST_READ_MASK);
+          in_buffer_size += command.size;
+          break;
+        }
+        case Command::Type::Write:
+        {
+          work_buffer.push_back(REQUEST_WRITE_MASK);
+          break;
+        }
+        case Command::Type::Fence:
+        {
+          continue;
+        }
+      }
+
+      work_buffer.push_back(command.address);
+      work_buffer.push_back(command.size);
+
+      switch (command.type)
+      {
+        case Command::Type::Read:
+        {
+          switch (command.size) {
+            case 1:
+            {
+              work_buffer.push_back(command.mask & 0xFF);
+              break;
+            }
+            case 2:
+            {
+              work_buffer.push_back((command.mask & 0xFF00) >> 8);
+              work_buffer.push_back((command.mask & 0x00FF) >> 0);
+              break;
+            }
+            case 4:
+            {
+              work_buffer.push_back((command.mask & 0xFF000000) >> 24);
+              work_buffer.push_back((command.mask & 0x00FF0000) >> 16);
+              work_buffer.push_back((command.mask & 0x0000FF00) >> 8);
+              work_buffer.push_back((command.mask & 0x000000FF) >> 0);
+              break;
+            }
+          }
+          break;
+        }
+        case Command::Type::Write:
+        {
+          switch (command.size) {
+            case 1:
+            {
+              work_buffer.push_back(*command.value);
+              work_buffer.push_back(command.mask & 0xFF);
+              break;
+            }
+            case 2:
+            {
+              work_buffer.push_back((*command.value & 0xFF00) >> 8);
+              work_buffer.push_back((*command.value & 0x00FF) >> 0);
+              work_buffer.push_back((command.mask & 0xFF00) >> 8);
+              work_buffer.push_back((command.mask & 0x00FF) >> 0);
+              break;
+            }
+            case 4:
+            {
+              work_buffer.push_back((*command.value & 0xFF000000) >> 24);
+              work_buffer.push_back((*command.value & 0x00FF0000) >> 16);
+              work_buffer.push_back((*command.value & 0x0000FF00) >> 8);
+              work_buffer.push_back((*command.value & 0x000000FF) >> 0);
+              work_buffer.push_back((command.mask & 0xFF000000) >> 24);
+              work_buffer.push_back((command.mask & 0x00FF0000) >> 16);
+              work_buffer.push_back((command.mask & 0x0000FF00) >> 8);
+              work_buffer.push_back((command.mask & 0x000000FF) >> 0);
+              break;
+            }
+          }
+          break;
+        }
+        case Command::Type::Fence:
+        {
+          break;
+        }
+      }
+    }
+
+    ssize_t res = ::write(fd_, write_buffer_, work_buffer_size);
+    if (res != work_buffer_size)
+    {
+      logger.error() << "(write) write failed with result: " << res;
+      return;
+    }
+
+    if (in_buffer_size == 0) return;
+
+    res = ::read(fd_, work_buffer.data(), in_buffer_size);
+    if (res != in_buffer_size)
+    {
+      logger.error() << "(read) read failed with result: " << res;
+      return;
+    }
+
+    std::size_t in_iter = 0;
+    for (std::size_t i = 0; i < size; ++i)
+    {
+      const Command &command = buffer[i];
+      if (command.type != Command::Type::Read) continue;
+
+      switch (command.size) {
+        case 1:
+        {
+          *command.value = work_buffer[in_iter++];
+          break;
+        }
+        case 2:
+        {
+          *command.value = (
+            (work_buffer[in_iter + 0] << 8) |
+            (work_buffer[in_iter + 1] << 0)
+          );
+          in_iter += 2;
+          break;
+        }
+        case 4:
+        {
+          *command.value = (
+            (work_buffer[in_iter + 0] << 24) |
+            (work_buffer[in_iter + 1] << 16) |
+            (work_buffer[in_iter + 2] << 8) |
+            (work_buffer[in_iter + 3] << 0)
+          );
+          in_iter += 4;
+          break;
+        }
+      }
+    }
   }
 
 private:
