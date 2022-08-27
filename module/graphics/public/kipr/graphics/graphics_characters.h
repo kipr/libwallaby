@@ -1,5 +1,5 @@
 /*!
-* \file graphics.h
+* \file graphics_characters.h
 * \brief functions for adding alphameric characters to graphics windows.
 
    These are functions for adding alphameric characters (caps only) to graphics windows.
@@ -14,8 +14,8 @@
 #ifndef _KIPR_GRAPHICS_GRAPHICS_CHARACTERS_H_
 #define _KIPR_GRAPHICS_GRAPHICS_CHARACTERS_H_
 
-// The number of segments in a character display
-/* Segment arrangement
+/*
+Segment arrangement
 	 --0- -1--     ---18----     --20 21--     ---- ----
 	|\   |   /|	  |\  18   /|	|\20   21/|	  ||   |   /|
 	7 8  9 10 2	  | \  |  / |	|24  |  26|	  ||\ 29  / |
@@ -25,24 +25,28 @@
 	6 14 1 12 3	  |  / |  \ |	|25  |  27|	  |8 / |  \ |
 	|/   3   \|	  |/  16   \|	|/22   23\|	  ||   |   \|
  	 --5- -4--	   ---16----	 --22 23--	   ---- ----
-                       /
+                     /
                 	  / (19)
 */
-
+//! The number of segments in a character display
 #define NUMSEG 30
-// SEGL specifies the length of a vertical segment in pixels
+//! SEGL specifies the length of a vertical segment in pixels
 #define SEGL 5
-// SEGSP is the spacing of characters
+//! SEGSP is the spacing of characters
 #define SEGSP 7
-// The width in pixels of the window
+
+//! the variable used to store whether or not characters should be bold
 extern int __bold;
+//! BOLD means have bold text
 #define BOLD __bold=1;
+//! NOBOLD means do not have bold text
 #define NOBOLD __bold=0;
 
+//! The width in pixels of the window
 #ifndef GXWINDOW
   #define GXWINDOW 700
 #endif
-// The height of the window
+//! The height of the window
 #ifndef GYWINDOW
   #define GYWINDOW 500
 #endif
@@ -69,8 +73,7 @@ extern "C" {
  * \param size The segment's size
  * \ingroup graphics
  */
-void graphics_segmentDisplay(int s[], int x, int y, int r, int g, int b, float size);
-void g_segmentDisplay(int s[], int x, int y, int r, int g, int b, float size);
+void graphics_segment_display(int s[], int x, int y, int r, int g, int b, float size);
 
 
 /**
@@ -85,8 +88,7 @@ void g_segmentDisplay(int s[], int x, int y, int r, int g, int b, float size);
  * \param size The character's size
  * \ingroup graphics
  */
-void graphics_printCharacter(int n, int x, int y, int r, int g, int b, float size);
-void g_printCharacter(int n, int x, int y, int r, int g, int b, float size);
+void graphics_print_character(int n, int x, int y, int r, int g, int b, float size);
 
 
 /**
@@ -101,8 +103,7 @@ void g_printCharacter(int n, int x, int y, int r, int g, int b, float size);
  * \param size The strings's size
  * \ingroup graphics
  */
-void graphics_printString(char s[], int x, int y, int r, int g, int b, float size);
-void g_printString(char s[], int x, int y, int r, int g, int b, float size);
+void graphics_print_string(char s[], int x, int y, int r, int g, int b, float size);
 
 
 /**
@@ -118,8 +119,7 @@ void g_printString(char s[], int x, int y, int r, int g, int b, float size);
  * \param size The strings's size
  * \ingroup graphics
  */
-int graphics_printInt(int n, int minNumDigits, int x, int y, int r, int g, int b, float size);
-int g_printInt(int n, int minNumDigits, int x, int y, int r, int g, int b, float size);
+int graphics_print_int(int n, int minNumDigits, int x, int y, int r, int g, int b, float size);
 
 
 /**
@@ -135,8 +135,7 @@ int g_printInt(int n, int minNumDigits, int x, int y, int r, int g, int b, float
  * \param size The strings's size
  * \ingroup graphics
  */
-void graphics_printFloat(float n, int numDigits, int x, int y, int r, int g, int b, float size);
-void g_printFloat(float n, int numDigits, int x, int y, int r, int g, int b, float size);
+void graphics_print_float(float n, int numDigits, int x, int y, int r, int g, int b, float size);
 
 
 #ifdef __cplusplus

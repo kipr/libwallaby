@@ -1,5 +1,5 @@
 /*!
- * \file motors.h
+ * \file motor.h
  * \copyright KISS Institute for Practical Robotics
  * \defgroup motor Motors
  */
