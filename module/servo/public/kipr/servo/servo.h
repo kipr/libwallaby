@@ -55,7 +55,7 @@ int get_servo_enabled(int port);
 
 /*!
  * \brief Get the most recent commanded servo position
- * \param servo The port of the servo
+ * \param port The port of the servo
  * \return The servo's position as an 11 bit integer (which is an integer between 0 and 2047)
  * \note This method will return the last _sent_ position, not the currently _set_ position.
  * \ingroup servo
@@ -64,7 +64,7 @@ int get_servo_position(int port);
 
 /*!
  * \brief Set a new servo goal position
- * \param servo The port of the servo
+ * \param port The port of the servo
  * \param position The new servo position, between 0 and 2047
  *
  * \note Even though the servos have a _theoretical_ range between 0 and 2047,

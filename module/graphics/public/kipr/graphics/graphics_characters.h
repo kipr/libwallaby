@@ -92,7 +92,7 @@ void g_printCharacter(int n, int x, int y, int r, int g, int b, float size);
 /**
  * Prints out a text string in 16 segment characters
  *
- * \param n The string to display
+ * \param s The string to display
  * \param x The X coordinate of the first character's top-left corner
  * \param y The Y coordinate of the first character's top-left corner
  * \param r The red component of the drawing, from 0 to 255

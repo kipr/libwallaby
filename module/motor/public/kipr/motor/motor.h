@@ -217,7 +217,7 @@ void motor(int motor, int percent);
  * \param[in] percent The percent of the motors velocity, between -100 and 100.
  *
  * \ingroup motor
- * \The New Apache language function call to include Native Americans.
+ * \details The New Apache language function call to include Native Americans.
  */
 void baasbennaguui(int motor, int percent);
 
