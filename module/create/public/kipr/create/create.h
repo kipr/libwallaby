@@ -176,7 +176,7 @@ EXPORT_SYM int get_create_rcliff();
  * \see get_create_rflightbump
  * \see get_create_rlightbump
  * \description returns the left light bumper sensor as described in the iRobot Create manual.
- * \descritpion returns a binary/digital value rather than the raw sensor data (on or off/1 or 0).
+ * \description returns a binary/digital value rather than the raw sensor data (on or off/1 or 0).
  */
 EXPORT_SYM int get_create_llightbump();
 
@@ -188,7 +188,7 @@ EXPORT_SYM int get_create_llightbump();
  * \see get_create_rflightbump
  * \see get_create_rlightbump
  * \description returns the left-front light bumper sensor as described in the iRobot Create manual.
- * \descritpion returns a binary/digital value rather than the raw sensor data (on or off/1 or 0).
+ * \description returns a binary/digital value rather than the raw sensor data (on or off/1 or 0).
  */
 EXPORT_SYM int get_create_lflightbump();
 
@@ -200,7 +200,7 @@ EXPORT_SYM int get_create_lflightbump();
  * \see get_create_rflightbump
  * \see get_create_rlightbump
  * \description returns the left-center light bumper sensor as described in the iRobot Create manual.
- * \descritpion returns a binary/digital value rather than the raw sensor data (on or off/1 or 0).
+ * \description returns a binary/digital value rather than the raw sensor data (on or off/1 or 0).
  */
 EXPORT_SYM int get_create_lclightbump();
 
@@ -212,7 +212,7 @@ EXPORT_SYM int get_create_lclightbump();
  * \see get_create_rflightbump
  * \see get_create_rlightbump
  * \description returns the right-center light bumper sensor as described in the iRobot Create manual.
- * \descritpion returns a binary/digital value rather than the raw sensor data (on or off/1 or 0).
+ * \description returns a binary/digital value rather than the raw sensor data (on or off/1 or 0).
  */
 EXPORT_SYM int get_create_rclightbump();
 
@@ -224,7 +224,7 @@ EXPORT_SYM int get_create_rclightbump();
  * \see get_create_llightbump
  * \see get_create_rlightbump
  * \description returns the right-front light bumper sensor as described in the iRobot Create manual.
- * \descritpion returns a binary/digital value rather than the raw sensor data (on or off/1 or 0).
+ * \description returns a binary/digital value rather than the raw sensor data (on or off/1 or 0).
  */
 EXPORT_SYM int get_create_rflightbump();
 
@@ -236,7 +236,7 @@ EXPORT_SYM int get_create_rflightbump();
  * \see get_create_rflightbump
  * \see get_create_llightbump
  * \description returns the right light bumper sensor as described in the iRobot Create manual.
- * \descritpion returns a binary/digital value rather than the raw sensor data (on or off/1 or 0).
+ * \description returns a binary/digital value rather than the raw sensor data (on or off/1 or 0).
  */
 EXPORT_SYM int get_create_rlightbump();
 
@@ -383,7 +383,7 @@ EXPORT_SYM void set_create_total_angle(int angle);
  */
 EXPORT_SYM int get_create_distance();
 
-/*!
+/*! 
  * \ingroup create
  * \description Sets the current distance the create thinks it has traveled.
  * \description Use this to set it's reference for where it is.
@@ -418,26 +418,51 @@ EXPORT_SYM int get_create_battery_charge();
 EXPORT_SYM int get_create_battery_capacity();
 
 /*!
+ * Returns the wall signal sensed by the create.
+ * \see get_create_wall
  * \ingroup create
  */
 EXPORT_SYM int get_create_wall_amt();
 
 /*!
+ * Returns the value measured by the left-most
+ * cliff sensor.
+ * \note For line following purposes, this can be treated like
+ * a tophat sensor value. Lower values often indicate black, higher
+ * values often indicate white.
+ * \see get_create_lcliff
  * \ingroup create
  */
 EXPORT_SYM int get_create_lcliff_amt();
 
 /*!
+ * Returns the value measured by the left-front
+ * cliff sensor.
+ * \note For line following purposes, this can be treated like
+ * a tophat sensor value. Lower values often indicate black, higher
+ * values often indicate white.
+ * \see get_create_lfcliff
  * \ingroup create
  */
 EXPORT_SYM int get_create_lfcliff_amt();
 
 /*!
+ * Returns the value measured by the right-front
+ * cliff sensor.
+ * \note For line following purposes, this can be treated like
+ * a tophat sensor value. Lower values often indicate black, higher
+ * values often indicate white.
+ * \see get_create_rfcliff
  * \ingroup create
  */
 EXPORT_SYM int get_create_rfcliff_amt();
 
 /*!
+ * Returns the value measured by the right-most
+ * cliff sensor.
+ * \note For line following purposes, this can be treated like
+ * a tophat sensor value. Lower values often indicate black, higher
+ * values often indicate white.
  * \ingroup create
  */
 EXPORT_SYM int get_create_rcliff_amt();
@@ -456,41 +481,71 @@ EXPORT_SYM int get_create_song_number();
 EXPORT_SYM int get_create_song_playing();
 
 /*!
+ * Sets the create connection mode to off. No sensor data
+ * will be available, and the create will not respond to
+ * movement commands.
  * \ingroup create
  */
 EXPORT_SYM void create_stop();
 
 /*!
+ * Drive at the requested speed in an arc with the provided
+ * radius.
+ * \param speed The speed (in mm/s) to drive at. Range is -500 to 500.
+ * \param radius The radius (in mm) of the arc to drive through. Range is
+ * -2000 to 2000.
  * \ingroup create
  */
 EXPORT_SYM void create_drive(int speed, int radius);
 
 /*!
+ * Drive straight at the requested speed.
+ * \param speed The speed (in mm/s) to drive at. Range is -500 to 500.
  * \ingroup create
  */
 EXPORT_SYM void create_drive_straight(int speed);
 
 /*!
+ * Spin clockwise at the requested speed. Spins in place.
+ * \param speed The speed (in mm/s) to drive at. Range is -500 to 500.
+ * \note negative speeds will result in spinning counter-clockwise
  * \ingroup create
  */
 EXPORT_SYM void create_spin_CW(int speed);
 
 /*!
+ * Spin counter-clockwise at the requested speed. Spins in place.
+ * \param speed The speed (in mm/s) to drive at. Range is -500 to 500.
+ * \note negative speeds will result in spinning clockwise
  * \ingroup create
  */
 EXPORT_SYM void create_spin_CCW(int speed);
 
 /*!
+ * Drive the create at the provided left wheel speed and right wheel speed.
+ * \param l_speed The speed (in mm/s) to drive the left wheel at. Range is -500 to 500
+ * \param r_speed The speed (in mm/s) to drive the right wheel at. Range is -500 to 500
  * \ingroup create
  */
 EXPORT_SYM void create_drive_direct(int l_speed, int r_speed);
 
 /*!
+ * Turns the create the requested number of degrees at the requested speed.
+ * \param speed The speed (in mm/s) to turn at. Range is -500 to 500
+ * \param angle The angle (in degrees) to turn.
+ * \note This is a blocking function, so you DO NOT need an msleep after it.
+ * It already sleeps for the time that it needs to execute the turn and
+ * doesn't need extra msleeps.
  * \ingroup create
  */
 EXPORT_SYM void create_spin_block(int speed, int angle);
 
 /*!
+ * Gets the displacement of the left wheel and right wheel and
+ * puts that data into the `long`s provided
+ * \param[out] lenc - where the left wheel's displacement is stored
+ * \param[out] renc - where the right wheel's displacement is stored 
+ * \note Not yet implemented
  * \ingroup create
  */
 EXPORT_SYM int _create_get_raw_encoders(long *lenc, long *renc);
@@ -524,32 +579,54 @@ EXPORT_SYM int create_load_song(const unsigned char* song, const unsigned char l
 EXPORT_SYM int create_play_song(const unsigned char num);
 
 /*!
+ * Reads sensor data from the create.
+ * \param data - This is where the read sensor data is stored
+ * \param count - How many bytes to read from the create.
+ * \returns 1 on success, 0 on failure.
  * \ingroup create
  */
 EXPORT_SYM int create_read_block(char *data, int count);
 
 /*!
+ * Write a byte to the create. This is used to send commands directly
+ * to the create without using the functions provided in this library.
+ * \note If you want to directly send bytes to the create, consider checking out
+ * the actual create oi specifications: https://cdn-shop.adafruit.com/datasheets/create_2_Open_Interface_Spec.pdf
  * \ingroup create
  */
 EXPORT_SYM void create_write_byte(char byte);
 
 /*!
+ * Flushes commands to the create.
+ * \note This library already automatically flushes commands to the create
  * \ingroup create
  */
 EXPORT_SYM void create_clear_serial_buffer();
 
+/**
+ * \brief The baudrate to use with the create
+ * \details The baudrate can be thought of as the refresh
+ * rate, or how many times per second the wombat/wallaby
+ * checks the create's sensors and sends commands (if any)
+ * to the create
+ */
 enum BaudRate
 {
-  Baud57600 = 0,
-  Baud115200 = 1
+  Baud57600 = 0,  //!< Baudrate of 57600 times per second
+  Baud115200 = 1  //!< Baudrate of 115200 times per second
 };
 
+
 /*!
+ * Returns the baud rate of the create.
+ * \note The baud rate is how many times a second the create updates its sensors and
+ * receives commands.
  * \ingroup create
  */
 EXPORT_SYM enum BaudRate get_create_baud_rate();
 
 /*!
+ * Sets the create's baud rate to the provided baud rate.
  * \ingroup create
  */
 EXPORT_SYM void set_create_baud_rate(const enum BaudRate baudRate);

@@ -2,6 +2,12 @@ option(with_documentation "Enable documentation" ON)
 
 if (with_documentation)
   find_package(Doxygen REQUIRED)
+
+  # aliases
+  set(DOXYGEN_ALIASES description="@details" detailed="@details" [[blocks="@par @b This function is blocking."]] [[blocksuntil="@par @b This function blocks until "]])
+  set(DOXYGEN_VERBATIM_VARS DOXYGEN_ALIASES)
+
+  set(DOXYGEN_WARN_LOGFILE warnings.txt)
   
   set(DOXYGEN_GENERATE_HTML YES)
   set(DOXYGEN_GENERATE_MAN YES)

@@ -58,15 +58,15 @@
 // there are added segments to provide for . : , ; and other non alphameric characters
 // arrows (l,r,u,d) are specified by numbers 11 ,12, 13, 14
 
-void g_segmentDisplay(int s[], int x, int y, int r, int g, int b, float size);
-// uses g_segmentDisplay to draw a 16 segment character (alphameric - caps only)
-void g_printCharacter(int n, int x, int y, int r, int g, int b, float size);
+void graphics_segment_display(int s[], int x, int y, int r, int g, int b, float size);
+// uses graphics_segment_display to draw a 16 segment character (alphameric - caps only)
+void graphics_print_character(int n, int x, int y, int r, int g, int b, float size);
 //  prints out a text string in 16 segment characters
-void g_printString(char s[], int x, int y, int r, int g, int b, float size);
+void graphics_print_string(char s[], int x, int y, int r, int g, int b, float size);
 // prints out an integer in 16 segment characters. minNumDigits is normally 0, but can be larger if leading 0's are desired
-int g_printInt(int n, int minNumDigits, int x, int y, int r, int g, int b, float size);
+int graphics_print_int(int n, int minNumDigits, int x, int y, int r, int g, int b, float size);
 // prints out a float. numDigits is the number of digits to right of decimal to be printed
-void g_printFloat(float n, int numDigits, int x, int y, int r, int g, int b, float size);
+void graphics_print_float(float n, int numDigits, int x, int y, int r, int g, int b, float size);
 */
 
 // bold faces print; usage: BOLD g_print<fn>;
@@ -77,20 +77,20 @@ int __bold=0;
 #endif
 
 
-void g_printString(char s[],int x, int y, int r, int g, int b, float size)
+void graphics_print_string(char s[],int x, int y, int r, int g, int b, float size)
 {
 	int i,l;
 	l=strlen(s);
 	for(i=0;i<l;i++) {
-		g_printCharacter(s[i],x+i*size*SEGSP,y,r,g,b,size);
+		graphics_print_character(s[i],x+i*size*SEGSP,y,r,g,b,size);
 	}
 }
 
-int g_printInt(int n, int minNumDigits, int x, int y, int r, int g, int b, float size)
+int graphics_print_int(int n, int minNumDigits, int x, int y, int r, int g, int b, float size)
 {
 	int i,d, count=0, numDigits;
 	if(n<0){
-		g_printCharacter('-',x,y,r,g,b,size);
+		graphics_print_character('-',x,y,r,g,b,size);
 		n = -n;
 		x = x + SEGSP*size;
 		count++;
@@ -106,31 +106,31 @@ int g_printInt(int n, int minNumDigits, int x, int y, int r, int g, int b, float
 			d=n%10;
 			n=n/10;
 		}
-		g_printCharacter(d,i*SEGSP*size + x, y, r,g,b,size);
+		graphics_print_character(d,i*SEGSP*size + x, y, r,g,b,size);
 		count++;
 	}
 	return(count);
 }
 
-void g_printFloat(float n, int numDigits, int x, int y, int r, int g, int b, float size)
+void graphics_print_float(float n, int numDigits, int x, int y, int r, int g, int b, float size)
 {
 	int whole, frac, offset;
 	whole = (int) n;
 	frac = (int)(fabs(n - whole) * pow(10.000001,numDigits)); // corrective factor for float->int conversions
 	//	printf(" n %f, w %d f %d n-w %f\n",n,whole,frac,n-whole);
 	if(whole == 0 && n <0.0){
-		g_printCharacter('-',x,y,r,g,b,size);
-		g_printInt(whole,1,x+SEGL,y,r,g,b,size);
+		graphics_print_character('-',x,y,r,g,b,size);
+		graphics_print_int(whole,1,x+SEGL,y,r,g,b,size);
 		offset=2;
 	}
 	else{
-		offset = g_printInt(whole,1,x,y,r,g,b,size);
+		offset = graphics_print_int(whole,1,x,y,r,g,b,size);
 	}
-	g_printCharacter('.',x + offset*SEGSP*size,y, r,g,b,size);
-	g_printInt(frac,numDigits,x + (offset+1)*SEGSP*size, y,r,g,b,size);
+	graphics_print_character('.',x + offset*SEGSP*size,y, r,g,b,size);
+	graphics_print_int(frac,numDigits,x + (offset+1)*SEGSP*size, y,r,g,b,size);
 }
 
-void g_printCharacter(int n, int x, int y, int r, int g, int b, float size)
+void graphics_print_character(int n, int x, int y, int r, int g, int b, float size)
 {
 	int d[NUMSEG]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 	switch(n){
@@ -405,7 +405,7 @@ void g_printCharacter(int n, int x, int y, int r, int g, int b, float size)
 			break;
 		}
 	}
-	g_segmentDisplay(d,x,y,r,g,b,size);
+	graphics_segment_display(d,x,y,r,g,b,size);
 }
 /* Segment arrangement
 	 --0- -1--     ---18----     --20 21--     ---- ----
@@ -420,7 +420,7 @@ void g_printCharacter(int n, int x, int y, int r, int g, int b, float size)
                        /
                 	  / (19)
 */
-void g_segmentDisplay(int s[], int x, int y, int r, int g, int b, float size)
+void graphics_segment_display(int s[], int x, int y, int r, int g, int b, float size)
 {
 	int segmap[NUMSEG][2][2]={
 		{{0,0},{2,0}},  // 0
