@@ -3,6 +3,28 @@
  * \copyright KISS Institute for Practical Robotics
  * \defgroup analog Analogs
  */
+/**
+ * \page Analog
+ * The functions defined here allow for reading the values
+ * in analog sensors. For example, if there was a distance sensor
+ * in analog port 0, then you could use the following code block
+ * to move until close to an object or wall
+ * ```
+ * #include <kipr/wombat.h>
+ * #include <stdio.h>
+ *
+ * int main(){
+ *      // arbitrary number that represents how close to get to the wall/object
+ *      // larger numbers mean closer to the wall/object
+ *      int stopping_distance = 1200;
+ *
+ *      while (analog(0) < stopping_distance){
+ *          // move
+ *      }
+ * }
+ * ```
+ * \ingroup analog
+ */
 
 #ifndef _KIPR_ANALOG_ANALOG_H_
 #define _KIPR_ANALOG_ANALOG_H_
@@ -46,7 +68,7 @@ int analog10(int port);
  * \param[in] port A value between 0 and 5 specifying the sensor to read from.
  * \return The latest 12-bit value of the port (a value in the range 0 to 4095).
  * \see analog
- * \ingroup sensor
+ * \ingroup analog
  */
 int analog12(int port);
 
