@@ -6,7 +6,9 @@
 /**
  * \page Analog
  * The functions defined here allow for reading the values
- * in analog sensors. For example, if there was a distance sensor
+ * in analog sensors.
+ * \section example_analog_distance Example
+ * For example, if there was a distance sensor
  * in analog port 0, then you could use the following code block
  * to move until close to an object or wall
  * ```

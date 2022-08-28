@@ -3,6 +3,61 @@
  * \copyright KISS Institute for Practical Robotics
  * \defgroup camera Camera
  */
+/**
+ * \page Camera
+ * The functions here deal with the camera.
+ * Specifically, the functions here deal with
+ * object detection through the use of color.
+ * \section setup Setup
+ * To use the object detections, you'll first have
+ * to have a `.conf` file. On a wombat, you can go to 
+ * `settings`, then `channels`, then add a configuration.
+ * Next, edit that configuration and add a new channel
+ * (for the color object detection, it should be HSV Blob Tracking).
+ * Finally, configure that channel, selecting the color that
+ * you want the camera to detect when detecting objects on that
+ * channel.
+ * \section example_object_detection Example object detection
+ * Assuming you have a configuration file "botball.conf" and
+ * you have a Channel 0 on that file configured to detect red
+ * pom poms, then the following code would print 'red' when
+ * a red pom is seen.
+ * ```
+ * #include <kipr/wombat.h>
+ * #include <stdio.h>
+ * 
+ * int main(){
+ *      camera_load_config("botball.conf");
+ *      camera_open();
+ *      
+ *      // wait a little and update the camera
+ *      int i = 0;
+ *      for (i = 0; i < 10; i++){
+ *          camera_update();
+ *          msleep(10);
+ *      }
+ * 
+ *      int red_object_seen = 0;
+ *      while (!red_object_seen){
+ *          // get the bounding box of the largest object in
+ *          // channel 0 (the red channel)
+ *          rectangle object_bounding_box = get_object_bbox(0, 0);
+ *          if (object_bounding_box.width * object_bounding_box.height != 0){
+ *              printf("red object seen!");
+ *              red_object_seen = 1;
+ *          }
+ * 
+ *          // update the camera
+ *          camera_update();
+ *          msleep(10);
+ *      }
+ * 
+ *      camera_close();  // cleanup the camera
+ *      return 0;
+ * }
+ * ```
+ * \ingroup camera
+ */
 
 #ifndef _KIPR_CAMERA_CAMERA_H_
 #define _KIPR_CAMERA_CAMERA_H_
@@ -14,11 +69,15 @@ extern "C"
 {
 #endif
 
+/**
+ * @brief A struct that represents a pixel in an image
+ * 
+ */
 typedef struct pixel
 {
-  int r;
-  int g;
-  int b;
+  int r;  //!< the red value of the pixel
+  int g;  //!< the green value of the pixel
+  int b;  //!< the blue value of the pixel
 } pixel;
 
 enum Resolution

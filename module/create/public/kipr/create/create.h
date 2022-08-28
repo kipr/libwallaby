@@ -4,6 +4,51 @@
  * \copyright KISS Institute for Practical Robotics
  * \defgroup create iRobot (R) Create (TM)
  */
+/**
+ * \page create
+ * The functions here allow for communication with the Create (roomba).
+ * They only work when there is a Create cable plugged into the
+ * wombat and into the Create.
+ * \section setup Setup
+ * Make sure to plug the usb side of the Create cable into the
+ * wombat and the other side into the Create.
+ * \section example_create_movement Movement Example
+ * Once you've done that, you can now use the roomba. The
+ * following example moves the roomba forward, swerves left, 
+ * swerves right, and finally drives backwards.
+ * ```
+ * #include <kipr/wombat.h>
+ * #include <stdio.h>
+ * 
+ * int main(){
+ *      // connect to the create in order to control it
+ *      create_connect_once();
+ * 
+ *      // move forward for 1 second
+ *      create_drive_direct(200, 200);
+ *      msleep(1000);
+ * 
+ *      // swerve left
+ *      create_drive_direct(100, 200);
+ *      msleep(300);
+ *      // swerve right
+ *      create_drive_direct(200, 100);
+ *      msleep(300);
+ *  
+ *      // go backwards for 1 second
+ *      create_drive_direct(-100, -100);
+ *      msleep(1000);
+ * 
+ *      // stop moving
+ *      create_drive_direct(0, 0);
+ * 
+ *      // disconnect before ending the program
+ *      create_disconnect();
+ *      return 0;
+ * }
+ * ```
+ * \ingroup create
+ */
 
 #ifndef _KIPR_CREATE_CREATE_H_
 #define _KIPR_CREATE_CREATE_H_

@@ -3,6 +3,11 @@
  * \copyright KISS Institute for Practical Robotics
  * \defgroup compass Compass
  */
+/**
+ * \page Compass
+ * The functions defined here make a compass.
+ * \ingroup compass
+ */
 
 #ifndef _KIPR_COMPASS_COMPASS_H_
 #define _KIPR_COMPASS_COMPASS_H_
