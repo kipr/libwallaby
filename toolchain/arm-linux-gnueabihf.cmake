@@ -1,14 +1,14 @@
 # set(CMAKE_SYSROOT ${AARCH64_LINUX_GNU_SYSROOT})
-set(ARCH aarch64)
+set(ARCH armv7l)
 
 set(CMAKE_SYSTEM_NAME Linux)
-set(CMAKE_SYSTEM_PROCESSOR aarch64)
+set(CMAKE_SYSTEM_PROCESSOR armv7l)
 
-set(triple aarch64-linux-gnu)
+set(triple arm-linux-gnueabihf)
 
 set_property(GLOBAL PROPERTY host aarch64-linux)
 set_property(GLOBAL PROPERTY triple ${triple})
-set_property(GLOBAL PROPERTY arch aarch64)
+set_property(GLOBAL PROPERTY arch armv7l)
 set_property(GLOBAL PROPERTY target_os linux)
 set_property(GLOBAL PROPERTY cross_prefix ${triple}-)
 
