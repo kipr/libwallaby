@@ -1,4 +1,0 @@
-var dir_58ed4c147cedd5630b13c4b8818af095 =
-[
-    [ "digital", "dir_f6d9694d5644229736a2796e0149000b.html", "dir_f6d9694d5644229736a2796e0149000b" ]
-];
