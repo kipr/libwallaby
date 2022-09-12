@@ -1,0 +1,119 @@
+.TH "/home/zachary/libwallaby/module/graphics/public/kipr/graphics/graphics_characters.h" 3 "Mon Sep 12 2022" "Version 1.0.0" "libkipr" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/zachary/libwallaby/module/graphics/public/kipr/graphics/graphics_characters.h \- functions for adding alphameric characters to graphics windows\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBNUMSEG\fP   30"
+.br
+.RI "The number of segments in a character display\&. "
+.ti -1c
+.RI "#define \fBSEGL\fP   5"
+.br
+.RI "SEGL specifies the length of a vertical segment in pixels\&. "
+.ti -1c
+.RI "#define \fBSEGSP\fP   7"
+.br
+.RI "SEGSP is the spacing of characters\&. "
+.ti -1c
+.RI "#define \fBBOLD\fP   \fB__bold\fP=1;"
+.br
+.RI "BOLD means have bold text\&. "
+.ti -1c
+.RI "#define \fBNOBOLD\fP   \fB__bold\fP=0;"
+.br
+.RI "NOBOLD means do not have bold text\&. "
+.ti -1c
+.RI "#define \fBGXWINDOW\fP   700"
+.br
+.RI "The width in pixels of the window\&. "
+.ti -1c
+.RI "#define \fBGYWINDOW\fP   500"
+.br
+.RI "The height of the window\&. "
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBgraphics_segment_display\fP (int s[], int x, int y, int r, int g, int b, float size)"
+.br
+.ti -1c
+.RI "void \fBgraphics_print_character\fP (int n, int x, int y, int r, int g, int b, float size)"
+.br
+.ti -1c
+.RI "void \fBgraphics_print_string\fP (char s[], int x, int y, int r, int g, int b, float size)"
+.br
+.ti -1c
+.RI "int \fBgraphics_print_int\fP (int n, int minNumDigits, int x, int y, int r, int g, int b, float size)"
+.br
+.ti -1c
+.RI "void \fBgraphics_print_float\fP (float n, int numDigits, int x, int y, int r, int g, int b, float size)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "int \fB__bold\fP"
+.br
+.RI "the variable used to store whether or not characters should be bold "
+.in -1c
+.SH "Detailed Description"
+.PP 
+functions for adding alphameric characters to graphics windows\&. 
+
+These are functions for adding alphameric characters (caps only) to graphics windows\&. The functions were extracted from a graphing package written by D\&.Miller Oct 2008\&. Character generation capabilities were extended from 7-segment to 16-segment and enhanced to include basic punctuation characters, plus size and bold-face options by C\&.Winton Oct 2008\&. 
+.PP
+\fBCopyright\fP
+.RS 4
+KISS Insitute for Practical Robotics 
+.RE
+.PP
+
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define BOLD   \fB__bold\fP=1;"
+
+.PP
+BOLD means have bold text\&. 
+.SS "#define GXWINDOW   700"
+
+.PP
+The width in pixels of the window\&. 
+.SS "#define GYWINDOW   500"
+
+.PP
+The height of the window\&. 
+.SS "#define NOBOLD   \fB__bold\fP=0;"
+
+.PP
+NOBOLD means do not have bold text\&. 
+.SS "#define NUMSEG   30"
+
+.PP
+The number of segments in a character display\&. 
+.SS "#define SEGL   5"
+
+.PP
+SEGL specifies the length of a vertical segment in pixels\&. 
+.SS "#define SEGSP   7"
+
+.PP
+SEGSP is the spacing of characters\&. 
+.SH "Variable Documentation"
+.PP 
+.SS "int __bold\fC [extern]\fP"
+
+.PP
+the variable used to store whether or not characters should be bold 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libkipr from the source code\&.

@@ -1,0 +1,483 @@
+.TH "camera" 3 "Mon Sep 12 2022" "Version 1.0.0" "libkipr" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+camera \- Camera
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBcamera_open\fP ()"
+.br
+.ti -1c
+.RI "int \fBcamera_open_black\fP ()"
+.br
+.ti -1c
+.RI "int \fBcamera_open_at_res\fP (enum \fBResolution\fP res)"
+.br
+.ti -1c
+.RI "int \fBcamera_open_device\fP (int number, enum \fBResolution\fP res)"
+.br
+.ti -1c
+.RI "int \fBcamera_open_device_model_at_res\fP (int number, enum \fBModel\fP model, enum \fBResolution\fP res)"
+.br
+.ti -1c
+.RI "int \fBcamera_load_config\fP (const char *name)"
+.br
+.ti -1c
+.RI "int \fBget_camera_width\fP (void)"
+.br
+.ti -1c
+.RI "int \fBget_camera_height\fP (void)"
+.br
+.ti -1c
+.RI "int \fBcamera_update\fP (void)"
+.br
+.ti -1c
+.RI "\fBpixel\fP \fBget_camera_pixel\fP (\fBpoint2\fP p)"
+.br
+.ti -1c
+.RI "int \fBget_channel_count\fP (void)"
+.br
+.ti -1c
+.RI "int \fBget_object_count\fP (int channel)"
+.br
+.ti -1c
+.RI "const char * \fBget_object_data\fP (int channel, int object)"
+.br
+.ti -1c
+.RI "int \fBget_object_data_length\fP (int channel, int object)"
+.br
+.ti -1c
+.RI "double \fBget_object_confidence\fP (int channel, int object)"
+.br
+.ti -1c
+.RI "int \fBget_object_area\fP (int channel, int object)"
+.br
+.ti -1c
+.RI "\fBrectangle\fP \fBget_object_bbox\fP (int channel, int object)"
+.br
+.ti -1c
+.RI "\fBpoint2\fP \fBget_object_centroid\fP (int channel, int object)"
+.br
+.ti -1c
+.RI "\fBpoint2\fP \fBget_object_center\fP (int channel, int object)"
+.br
+.ti -1c
+.RI "void \fBcamera_close\fP ()"
+.br
+.ti -1c
+.RI "void \fBset_camera_config_base_path\fP (const char *const path)"
+.br
+.ti -1c
+.RI "const unsigned char * \fBget_camera_frame_row\fP (unsigned row)"
+.br
+.ti -1c
+.RI "const unsigned char * \fBget_camera_frame\fP ()"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SH "Function Documentation"
+.PP 
+.SS "void camera_close ()"
+Cleanup the current camera instance\&. 
+.PP
+\fBSee also\fP
+.RS 4
+\fBcamera_open\fP 
+.PP
+\fBcamera_open_at_res\fP 
+.PP
+\fBcamera_open_device\fP 
+.RE
+.PP
+
+.SS "int camera_load_config (const char * name)"
+Loads the config file specified by name\&. The system will look for the config in the base path\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIname\fP The configuration to load\&. Configuration file names are case sensitive\&. 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+Do NOT include the config file extension '\&.conf' in the name parameter\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+1 on success, 0 on failure\&. 
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBset_camera_config_base_path\fP 
+.RE
+.PP
+
+.SS "int camera_open ()"
+Opens the default system camera for use at LOW_RES (160x120)\&. 
+.PP
+\fBReturns\fP
+.RS 4
+1 on success, 0 on failure 
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBcamera_open_at_res\fP 
+.PP
+\fBcamera_open_device\fP 
+.PP
+\fBcamera_close\fP 
+.RE
+.PP
+
+.SS "int camera_open_at_res (enum \fBResolution\fP res)"
+Opens the default system camera for use at a given resolution\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIres\fP The resolution the camera should operate at\&. This can be:
+.IP "\(bu" 2
+LOW_RES (160x120)
+.IP "\(bu" 2
+MED_RES (320x240)
+.IP "\(bu" 2
+HIGH_RES (640x480)
+.IP "\(bu" 2
+TELLO_RES (1280x720) 
+.PP
+.RE
+.PP
+\fBWarning\fP
+.RS 4
+Only LOW_RES is currently supported\&. The function will fail for other resolutions\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+1 on success, 0 on failure 
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBcamera_open\fP 
+.PP
+\fBcamera_open_device\fP 
+.PP
+\fBcamera_close\fP 
+.RE
+.PP
+
+.SS "int camera_open_black ()"
+Opens the default system camera for use at LOW_RES (160x120)\&. This will improve frame rates for the black Logitech camera 
+.PP
+\fBReturns\fP
+.RS 4
+1 on success, 0 on failure 
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBcamera_open_at_res\fP 
+.PP
+\fBcamera_open_device\fP 
+.PP
+\fBcamera_close\fP 
+.RE
+.PP
+
+.SS "int camera_open_device (int number, enum \fBResolution\fP res)"
+Opens a camera for use\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fInumber\fP The camera's id\&. 0 is the first camera, 1 is the second camera, etc\&. 
+.br
+\fIres\fP The resolution the camera should operate at\&. This can be:
+.IP "\(bu" 2
+LOW_RES (160x120)
+.IP "\(bu" 2
+MED_RES (320x240)
+.IP "\(bu" 2
+HIGH_RES (640x480)
+.IP "\(bu" 2
+TELLO_RES (1280x720) 
+.PP
+.RE
+.PP
+\fBWarning\fP
+.RS 4
+Only LOW_RES is currently supported\&. The function will fail for other resolutions\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+1 on success, 0 on failure 
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBcamera_open\fP 
+.PP
+\fBcamera_close\fP 
+.RE
+.PP
+
+.SS "int camera_open_device_model_at_res (int number, enum \fBModel\fP model, enum \fBResolution\fP res)"
+Opens a camera for use\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fInumber\fP The camera's id\&. 0 is the first camera, 1 is the second camera, etc\&. 
+.br
+\fIres\fP The resolution the camera should operate at\&. This can be:
+.IP "\(bu" 2
+LOW_RES (160x120)
+.IP "\(bu" 2
+MED_RES (320x240)
+.IP "\(bu" 2
+HIGH_RES (640x480)
+.IP "\(bu" 2
+TELLO_RES (1280x720) 
+.PP
+.br
+\fImodel\fP The camera model
+.IP "\(bu" 2
+WHITE_2016 The white 2016 Botball camera
+.IP "\(bu" 2
+BLACK_2017 The black 2017 Botball camera
+.IP "\(bu" 2
+TELLO Tello drone camera 
+.PP
+.RE
+.PP
+\fBWarning\fP
+.RS 4
+MED_RES is supported only for the BLACK_2017 camera and HIGH_RES is not supported 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+1 on success, 0 on failure 
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBcamera_open\fP 
+.PP
+\fBcamera_close\fP 
+.RE
+.PP
+
+.SS "int camera_update (void)"
+Pulls a new image from the camera for processing\&. 
+.PP
+\fBReturns\fP
+.RS 4
+1 on success, 0 on failure\&. 
+.RE
+.PP
+
+.SS "const unsigned char* get_camera_frame ()"
+Retrieves the current camera frame as a BGR (BGR888) array\&. The returned pointer is invalid after \fBcamera_update()\fP is called again\&.
+.PP
+\fBReturns\fP
+.RS 4
+the current BGR888 camera frame\&. 
+.RE
+.PP
+
+.SS "const unsigned char* get_camera_frame_row (unsigned row)"
+Retrieves the current camera frame row as a BGR (BGR888) array\&. The returned pointer is invalid after \fBcamera_update()\fP is called again\&.
+.PP
+\fBReturns\fP
+.RS 4
+the current BGR888 camera frame row\&. 
+.RE
+.PP
+
+.SS "int get_camera_height (void)"
+Gets the camera's y resolution\&. 
+.PP
+\fBAttention\fP
+.RS 4
+This value might be different than the previously set y resolution\&. Never assume the y resolution\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The camera's y resolution, in pixels\&. 
+.RE
+.PP
+
+.SS "\fBpixel\fP get_camera_pixel (\fBpoint2\fP p)"
+Gets the color of a pixel\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIp\fP The point at which the pixel lies\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The rgb value of the pixel located at point p\&. 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+A (r, g, b) value of (-1, -1, -1) will be returned for points that are out of range\&. 
+.RE
+.PP
+
+.SS "int get_camera_width (void)"
+Gets the camera's x resolution\&. 
+.PP
+\fBAttention\fP
+.RS 4
+This value might be different than the previously set x resolution\&. Never assume the x resolution\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The camera's x resolution, in pixels\&. 
+.RE
+.PP
+
+.SS "int get_channel_count (void)"
+
+.PP
+\fBReturns\fP
+.RS 4
+Number of channels in the current configuration\&. 
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBget_object_count\fP 
+.RE
+.PP
+
+.SS "int get_object_area (int channel, int object)"
+
+.PP
+\fBReturns\fP
+.RS 4
+The object's bounding box area\&. -1 is returned if the channel or object doesn't exist\&. 
+.RE
+.PP
+
+.SS "\fBrectangle\fP get_object_bbox (int channel, int object)"
+
+.PP
+\fBReturns\fP
+.RS 4
+The bounding box of the given object on the given channel\&. 
+.RE
+.PP
+
+.SS "\fBpoint2\fP get_object_center (int channel, int object)"
+
+.PP
+\fBReturns\fP
+.RS 4
+The (x, y) center of the given object on the given channel\&. 
+.RE
+.PP
+
+.SS "\fBpoint2\fP get_object_centroid (int channel, int object)"
+
+.PP
+\fBReturns\fP
+.RS 4
+The (x, y) centroid of the given object on the given channel\&. 
+.RE
+.PP
+
+.SS "double get_object_confidence (int channel, int object)"
+
+.PP
+\fBReturns\fP
+.RS 4
+The confidence, between 0\&.0 and 1\&.0, that given object on the given channel is significant\&. If the channel or object doesn't exist, 0\&.0 is returned\&. 
+.RE
+.PP
+
+.SS "int get_object_count (int channel)"
+
+.PP
+\fBParameters\fP
+.RS 4
+\fIchannel\fP The channel to scan for objects\&. 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+Objects are sorted by area, largest first\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Number of objects in the given channel, -1 if channel doesn't exist\&. 
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBget_channel_count\fP 
+.RE
+.PP
+
+.SS "const char* get_object_data (int channel, int object)"
+
+.PP
+\fBReturns\fP
+.RS 4
+The string data associated with a given object on a given channel\&. If there is no data associated, 0 is returned\&. 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+This data is not guaranteed to be null terminated\&. 
+.PP
+This string pointer will be invalid after a call to \fBcamera_update()\fP 
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBget_object_data_length\fP 
+.RE
+.PP
+
+.SS "int get_object_data_length (int channel, int object)"
+
+.PP
+\fBReturns\fP
+.RS 4
+The length of the string data associated with a given object on a given channel\&. If there is no data associated, 0 is returned\&. If the channel or object is invalid, 0 is returned\&. 
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBget_object_data\fP 
+.RE
+.PP
+
+.SS "void set_camera_config_base_path (const char *const path)"
+Sets the path in which to look for camera configurations\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIpath\fP the absolute directory path in which to look for camera configurations\&. 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libkipr from the source code\&.

@@ -1,0 +1,251 @@
+.TH "/home/zachary/libwallaby/module/create/public/kipr/create/create.h" 3 "Mon Sep 12 2022" "Version 1.0.0" "libkipr" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/zachary/libwallaby/module/create/public/kipr/create/create.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'kipr/export/export\&.h'\fP
+.br
+
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBBaudRate\fP { \fBBaud57600\fP = 0, \fBBaud115200\fP = 1 }"
+.br
+.RI "The baudrate to use with the create\&. "
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBcreate_connect\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBcreate_connect_once\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBcreate_disconnect\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBcreate_passive\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBcreate_safe\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBcreate_full\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_mode\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_lbump\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_rbump\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_lwdrop\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_cwdrop\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_rwdrop\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_wall\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_lcliff\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_lfcliff\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_rfcliff\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_rcliff\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_llightbump\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_lflightbump\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_lclightbump\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_rclightbump\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_rflightbump\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_rlightbump\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_llightbump_amt\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_rlightbump_amt\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_lflightbump_amt\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_lclightbump_amt\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_rclightbump_amt\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_rflightbump_amt\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_vwall\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_infrared\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_advance_button\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_play_button\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_normalized_angle\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBset_create_normalized_angle\fP (int angle)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_total_angle\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBset_create_total_angle\fP (int angle)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_distance\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBset_create_distance\fP (int dist)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_battery_charging_state\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_battery_temp\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_battery_charge\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_battery_capacity\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_wall_amt\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_lcliff_amt\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_lfcliff_amt\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_rfcliff_amt\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_rcliff_amt\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_song_number\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_create_song_playing\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBcreate_stop\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBcreate_drive\fP (int speed, int radius)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBcreate_drive_straight\fP (int speed)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBcreate_spin_CW\fP (int speed)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBcreate_spin_CCW\fP (int speed)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBcreate_drive_direct\fP (int l_speed, int r_speed)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBcreate_spin_block\fP (int speed, int angle)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fB_create_get_raw_encoders\fP (long *lenc, long *renc)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBcreate_load_song\fP (const unsigned char *song, const unsigned char length, const unsigned char num)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBcreate_play_song\fP (const unsigned char num)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBcreate_read_block\fP (char *data, int count)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBcreate_write_byte\fP (char byte)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBcreate_clear_serial_buffer\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP enum \fBBaudRate\fP \fBget_create_baud_rate\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBset_create_baud_rate\fP (const enum \fBBaudRate\fP baudRate)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBAuthor\fP
+.RS 4
+Braden McDorman 
+.RE
+.PP
+\fBCopyright\fP
+.RS 4
+KISS Institute for Practical Robotics 
+.RE
+.PP
+
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBBaudRate\fP"
+
+.PP
+The baudrate to use with the create\&. The baudrate can be thought of as the refresh rate, or how many times per second the wombat/wallaby checks the create's sensors and sends commands (if any) to the create 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIBaud57600 \fP\fP
+Baudrate of 57600 times per second\&. 
+.TP
+\fB\fIBaud115200 \fP\fP
+Baudrate of 115200 times per second\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libkipr from the source code\&.

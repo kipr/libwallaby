@@ -1,0 +1,135 @@
+.TH "/home/zachary/libwallaby/module/graphics/public/kipr/graphics/graphics.h" 3 "Mon Sep 12 2022" "Version 1.0.0" "libkipr" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/zachary/libwallaby/module/graphics/public/kipr/graphics/graphics.h \- Methods for displaying graphics to the screen\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'kipr/export/export\&.h'\fP
+.br
+\fC#include 'graphics_key_code\&.h'\fP
+.br
+
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef enum \fBEncoding\fP \fBEncoding\fP"
+.br
+.RI "An enumerate with encoding types RGB and BGR\&. "
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBEncoding\fP { \fBRGB\fP, \fBBGR\fP }"
+.br
+.RI "An enumerate with encoding types RGB and BGR\&. "
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBgraphics_open\fP (int width, int height)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBgraphics_close\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBgraphics_update\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBgraphics_clear\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBgraphics_blit\fP (const unsigned char *data, int x, int y, int width, int height)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBgraphics_blit_region\fP (const unsigned char *data, int sx, int sy, int ex, int ey, int width, int height, int dx, int dy)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBgraphics_blit_enc\fP (const unsigned char *data, \fBEncoding\fP enc, int x, int y, int width, int height)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBgraphics_blit_region_enc\fP (const unsigned char *data, \fBEncoding\fP enc, int sx, int sy, int ex, int ey, int width, int height, int dx, int dy)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBgraphics_fill\fP (int r, int g, int b)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBgraphics_pixel\fP (int x, int y, int r, int g, int b)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBgraphics_line\fP (int x1, int y1, int x2, int y2, int r, int g, int b)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBgraphics_circle\fP (int cx, int cy, int radius, int r, int g, int b)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBgraphics_circle_fill\fP (int cx, int cy, int radius, int r, int g, int b)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBgraphics_rectangle\fP (int x1, int y1, int x2, int y2, int r, int g, int b)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBgraphics_rectangle_fill\fP (int x1, int y1, int x2, int y2, int r, int g, int b)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBgraphics_triangle\fP (int x1, int y1, int x2, int y2, int x3, int y3, int r, int g, int b)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBgraphics_triangle_fill\fP (int x1, int y1, int x2, int y2, int x3, int y3, int r, int g, int b)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_key_state\fP (enum \fBKeyCode\fP key)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBget_mouse_position\fP (int *x, int *y)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_mouse_middle_button\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_mouse_left_button\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_mouse_right_button\fP ()"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Methods for displaying graphics to the screen\&. 
+
+
+.PP
+\fBCopyright\fP
+.RS 4
+KISS Insitute for Practical Robotics 
+.RE
+.PP
+
+.SH "Function Documentation"
+.PP 
+.SS "\fBEXPORT_SYM\fP void graphics_blit (const unsigned char * data, int x, int y, int width, int height)"
+This function is equivalent to calling \fBgraphics_blit_enc()\fP with an encoding of RGB 
+.PP
+\fBSee also\fP
+.RS 4
+\fBgraphics_blit_enc\fP 
+.RE
+.PP
+
+.SS "\fBEXPORT_SYM\fP void graphics_blit_region (const unsigned char * data, int sx, int sy, int ex, int ey, int width, int height, int dx, int dy)"
+This function is equivalent to calling \fBgraphics_blit_region_enc()\fP with an encoding of RGB 
+.PP
+\fBSee also\fP
+.RS 4
+\fBgraphics_blit_region_enc\fP 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libkipr from the source code\&.

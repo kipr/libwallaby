@@ -1,0 +1,62 @@
+.TH "kipr::camera::Object" 3 "Mon Sep 12 2022" "Version 1.0.0" "libkipr" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+kipr::camera::Object
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <object\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBObject\fP (const \fBgeometry::Point2\fP< unsigned > &\fBcentroid\fP, const \fBgeometry::Rect\fP< unsigned > &\fBboundingBox\fP, const double \fBconfidence\fP, const char *\fBdata\fP=0, const size_t &\fBdataLength\fP=0)"
+.br
+.ti -1c
+.RI "\fBObject\fP (const \fBObject\fP &rhs)"
+.br
+.ti -1c
+.RI "\fB~Object\fP ()"
+.br
+.ti -1c
+.RI "const \fBgeometry::Point2\fP< unsigned > & \fBcentroid\fP () const"
+.br
+.ti -1c
+.RI "const \fBgeometry::Rect\fP< unsigned > & \fBboundingBox\fP () const"
+.br
+.ti -1c
+.RI "const double \fBconfidence\fP () const"
+.br
+.ti -1c
+.RI "const char * \fBdata\fP () const"
+.br
+.ti -1c
+.RI "const size_t \fBdataLength\fP () const"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "kipr::camera::Object::Object (const \fBgeometry::Point2\fP< unsigned > & centroid, const \fBgeometry::Rect\fP< unsigned > & boundingBox, const double confidence, const char * data = \fC0\fP, const size_t & dataLength = \fC0\fP)"
+
+.SS "kipr::camera::Object::Object (const \fBObject\fP & rhs)"
+
+.SS "kipr::camera::Object::~Object ()"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "const \fBgeometry::Rect\fP<unsigned>& kipr::camera::Object::boundingBox () const"
+
+.SS "const \fBgeometry::Point2\fP<unsigned>& kipr::camera::Object::centroid () const"
+
+.SS "const double kipr::camera::Object::confidence () const"
+
+.SS "const char* kipr::camera::Object::data () const"
+
+.SS "const size_t kipr::camera::Object::dataLength () const"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libkipr from the source code\&.

@@ -1,0 +1,69 @@
+.TH "compass" 3 "Mon Sep 12 2022" "Version 1.0.0" "libkipr" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+compass \- Compass
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBcalibrate_compass\fP ()"
+.br
+.ti -1c
+.RI "void \fBset_compass_params\fP (float meanX, float meanY, float meanZ, float W1, float W2, float div_E1, float div_E2)"
+.br
+.ti -1c
+.RI "float \fBget_compass_angle\fP (void)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SH "Function Documentation"
+.PP 
+.SS "void calibrate_compass ()"
+Begin calibrating the compass\&.
+.PP
+Will display the calibration parameter results which can be used in the future with set_compass_params
+.PP
+Provided by Dr\&. Andrew H\&. Fagg and Twister Robotics 
+.SS "float get_compass_angle (void)"
+Get the current compass heading\&.
+.PP
+Provided by Dr\&. Andrew H\&. Fagg and Twister Robotics 
+.PP
+\fBReturns\fP
+.RS 4
+the compass angle in radians 
+.RE
+.PP
+
+.SS "void set_compass_params (float meanX, float meanY, float meanZ, float W1, float W2, float div_E1, float div_E2)"
+Set the compass parameters based on a previous calibration\&.
+.PP
+Provided by Dr\&. Andrew H\&. Fagg and Twister Robotics
+.PP
+\fBParameters\fP
+.RS 4
+\fImeanX\fP a value provided by calibrate_compass 
+.br
+\fImeanY\fP a value provided by calibrate_compass 
+.br
+\fImeanZ\fP a value provided by calibrate_compass 
+.br
+\fIW1\fP a value provided by calibrate_compass 
+.br
+\fIW2\fP a value provided by calibrate_compass 
+.br
+\fIdiv_E1\fP a value provided by calibrate_compass 
+.br
+\fIdiv_E2\fP a value provided by calibrate_compass 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libkipr from the source code\&.

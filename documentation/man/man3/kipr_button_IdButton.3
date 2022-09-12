@@ -1,0 +1,76 @@
+.TH "kipr::button::IdButton" 3 "Mon Sep 12 2022" "Version 1.0.0" "libkipr" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+kipr::button::IdButton
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <button\&.hpp>\fP
+.PP
+Inherits \fBkipr::button::AbstractTextButton\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBIdButton\fP (const \fBId\fP &id, const char *defaultText)"
+.br
+.ti -1c
+.RI "\fB~IdButton\fP ()"
+.br
+.ti -1c
+.RI "virtual void \fBsetText\fP (const char *\fBtext\fP)"
+.br
+.ti -1c
+.RI "virtual const char * \fBtext\fP () const"
+.br
+.ti -1c
+.RI "virtual bool \fBisTextDirty\fP () const"
+.br
+.ti -1c
+.RI "virtual void \fBsetPressed\fP (bool pressed)"
+.br
+.ti -1c
+.RI "virtual bool \fBvalue\fP () const"
+.br
+.ti -1c
+.RI "virtual void \fBresetText\fP ()"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "kipr::button::IdButton::IdButton (const \fBId\fP & id, const char * defaultText)"
+
+.SS "kipr::button::IdButton::~IdButton ()"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual bool kipr::button::IdButton::isTextDirty () const\fC [virtual]\fP"
+
+.PP
+Implements \fBkipr::button::AbstractTextButton\fP\&.
+.SS "virtual void kipr::button::IdButton::resetText ()\fC [virtual]\fP"
+
+.PP
+Implements \fBkipr::button::AbstractTextButton\fP\&.
+.SS "virtual void kipr::button::IdButton::setPressed (bool pressed)\fC [virtual]\fP"
+
+.PP
+Implements \fBkipr::button::AbstractButton\fP\&.
+.SS "virtual void kipr::button::IdButton::setText (const char * text)\fC [virtual]\fP"
+
+.PP
+Implements \fBkipr::button::AbstractTextButton\fP\&.
+.SS "virtual const char* kipr::button::IdButton::text () const\fC [virtual]\fP"
+
+.PP
+Implements \fBkipr::button::AbstractTextButton\fP\&.
+.SS "virtual bool kipr::button::IdButton::value () const\fC [virtual]\fP"
+
+.PP
+Implements \fBkipr::sensor::Sensor< bool >\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libkipr from the source code\&.

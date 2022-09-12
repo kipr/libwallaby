@@ -1,0 +1,72 @@
+.TH "kipr::create::CreateScript" 3 "Mon Sep 12 2022" "Version 1.0.0" "libkipr" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+kipr::create::CreateScript
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <create\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBCreateScript\fP ()"
+.br
+.ti -1c
+.RI "\fBCreateScript\fP (const \fBCreateScript\fP &rhs)"
+.br
+.ti -1c
+.RI "void \fBappend\fP (const unsigned char &\fBbyte\fP)"
+.br
+.ti -1c
+.RI "void \fBappend\fP (const unsigned char *\fBdata\fP, const size_t &\fBsize\fP)"
+.br
+.ti -1c
+.RI "void \fBappend\fP (const \fBCreateScript\fP &script)"
+.br
+.ti -1c
+.RI "void \fBremove\fP (const size_t &i, const size_t &len=1)"
+.br
+.ti -1c
+.RI "const unsigned char * \fBdata\fP () const"
+.br
+.ti -1c
+.RI "size_t \fBsize\fP () const"
+.br
+.ti -1c
+.RI "unsigned char \fBbyte\fP (const size_t &i)"
+.br
+.ti -1c
+.RI "\fBCreateScript\fP & \fBoperator=\fP (const \fBCreateScript\fP &rhs)"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "kipr::create::CreateScript::CreateScript ()"
+
+.SS "kipr::create::CreateScript::CreateScript (const \fBCreateScript\fP & rhs)"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void kipr::create::CreateScript::append (const \fBCreateScript\fP & script)"
+
+.SS "void kipr::create::CreateScript::append (const unsigned char & byte)"
+
+.SS "void kipr::create::CreateScript::append (const unsigned char * data, const size_t & size)"
+
+.SS "unsigned char kipr::create::CreateScript::byte (const size_t & i)"
+
+.SS "const unsigned char* kipr::create::CreateScript::data () const"
+
+.SS "\fBCreateScript\fP& kipr::create::CreateScript::operator= (const \fBCreateScript\fP & rhs)"
+
+.SS "void kipr::create::CreateScript::remove (const size_t & i, const size_t & len = \fC1\fP)"
+
+.SS "size_t kipr::create::CreateScript::size () const"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libkipr from the source code\&.

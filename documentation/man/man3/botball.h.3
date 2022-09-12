@@ -1,0 +1,44 @@
+.TH "/home/zachary/libwallaby/module/botball/public/kipr/botball/botball.h" 3 "Mon Sep 12 2022" "Version 1.0.0" "libkipr" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/zachary/libwallaby/module/botball/public/kipr/botball/botball.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'kipr/export/export\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBshut_down_in\fP (double s)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBwait_for_light\fP (int light_port_)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "\fBEXPORT_SYM\fP void shut_down_in (double s)"
+Register an event to stop the user program after s seconds 
+.PP
+\fBParameters\fP
+.RS 4
+\fIs\fP The number of seconds to wait before the end of program 
+.RE
+.PP
+
+.SS "\fBEXPORT_SYM\fP void wait_for_light (int light_port_)"
+Initiate a calibration and wait for light sequence which is a normal early step in Botball programs 
+.PP
+\fBParameters\fP
+.RS 4
+\fIlight_port_\fP The analog port and light sensor to use\&. 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libkipr from the source code\&.

@@ -1,0 +1,102 @@
+.TH "kipr::camera::Image" 3 "Mon Sep 12 2022" "Version 1.0.0" "libkipr" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+kipr::camera::Image
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <image\&.hpp>\fP
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "enum class \fBType\fP { \fBGrey8\fP, \fBRgb888\fP, \fBBgr888\fP }"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBImage\fP ()"
+.br
+.ti -1c
+.RI "\fBImage\fP (const \fBType\fP type, const unsigned width, const unsigned height, const unsigned stride, unsigned char *const data, const bool owned=true)"
+.br
+.ti -1c
+.RI "\fBImage\fP (const \fBImage\fP &)"
+.br
+.ti -1c
+.RI "\fBImage\fP (\fBImage\fP &&)"
+.br
+.ti -1c
+.RI "\fB~Image\fP ()"
+.br
+.ti -1c
+.RI "bool \fBisEmpty\fP () const"
+.br
+.ti -1c
+.RI "\fBType\fP \fBgetType\fP () const"
+.br
+.ti -1c
+.RI "const unsigned char *const \fBgetData\fP () const"
+.br
+.ti -1c
+.RI "unsigned \fBgetWidth\fP () const"
+.br
+.ti -1c
+.RI "unsigned \fBgetHeight\fP () const"
+.br
+.ti -1c
+.RI "unsigned \fBgetStride\fP () const"
+.br
+.ti -1c
+.RI "bool \fBisOwned\fP () const"
+.br
+.in -1c
+.SH "Member Enumeration Documentation"
+.PP 
+.SS "enum \fBkipr::camera::Image::Type\fP\fC [strong]\fP"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIGrey8 \fP\fP
+.TP
+\fB\fIRgb888 \fP\fP
+.TP
+\fB\fIBgr888 \fP\fP
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "kipr::camera::Image::Image ()"
+
+.SS "kipr::camera::Image::Image (const \fBType\fP type, const unsigned width, const unsigned height, const unsigned stride, unsigned char *const data, const bool owned = \fCtrue\fP)"
+
+.SS "kipr::camera::Image::Image (const \fBImage\fP &)"
+
+.SS "kipr::camera::Image::Image (\fBImage\fP &&)"
+
+.SS "kipr::camera::Image::~Image ()"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "const unsigned char* const kipr::camera::Image::getData () const"
+
+.SS "unsigned kipr::camera::Image::getHeight () const"
+
+.SS "unsigned kipr::camera::Image::getStride () const"
+
+.SS "\fBType\fP kipr::camera::Image::getType () const"
+
+.SS "unsigned kipr::camera::Image::getWidth () const"
+
+.SS "bool kipr::camera::Image::isEmpty () const"
+
+.SS "bool kipr::camera::Image::isOwned () const"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libkipr from the source code\&.

@@ -1,0 +1,119 @@
+.TH "/home/zachary/libwallaby/module/wait_for/public/kipr/wait_for/wait_for.h" 3 "Mon Sep 12 2022" "Version 1.0.0" "libkipr" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/zachary/libwallaby/module/wait_for/public/kipr/wait_for/wait_for.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'kipr/export/export\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBwait_for_milliseconds\fP (long msecs)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBwait_for_touch\fP (int port)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBwait_for_a_button\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBwait_for_b_button\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBwait_for_c_button\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBwait_for_x_button\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBwait_for_y_button\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBwait_for_z_button\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBwait_for_side_button\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBwait_for_any_button\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBwait_for_a_button_clicked\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBwait_for_b_button_clicked\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBwait_for_c_button_clicked\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBwait_for_x_button_clicked\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBwait_for_y_button_clicked\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBwait_for_z_button_clicked\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBwait_for_side_button_clicked\fP ()"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "\fBEXPORT_SYM\fP void wait_for_a_button ()"
+Waits (blocks) until the a button has been pressed\&. 
+.SS "\fBEXPORT_SYM\fP void wait_for_a_button_clicked ()"
+Waits (blocks) until the a button has been pressed and then subsequently released\&. 
+.SS "\fBEXPORT_SYM\fP void wait_for_any_button ()"
+Waits (blocks) until any system button has been pressed\&. 
+.SS "\fBEXPORT_SYM\fP void wait_for_b_button ()"
+Waits (blocks) until the b button has been pressed\&. 
+.SS "\fBEXPORT_SYM\fP void wait_for_b_button_clicked ()"
+Waits (blocks) until the b button has been pressed and then subsequently released\&. 
+.SS "\fBEXPORT_SYM\fP void wait_for_c_button ()"
+Waits (blocks) until the c button has been pressed\&. 
+.SS "\fBEXPORT_SYM\fP void wait_for_c_button_clicked ()"
+Waits (blocks) until the c button has been pressed and then subsequently released\&. 
+.SS "\fBEXPORT_SYM\fP void wait_for_milliseconds (long msecs)"
+Waits (blocks) for the given number of milliseconds\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fImsecs\fP the number of milliseconds to sleep 
+.RE
+.PP
+
+.SS "\fBEXPORT_SYM\fP void wait_for_side_button ()"
+Waits (blocks) until the side button has been pressed\&. 
+.SS "\fBEXPORT_SYM\fP void wait_for_side_button_clicked ()"
+Waits (blocks) until the side button has been pressed and then subsequently released\&. 
+.SS "\fBEXPORT_SYM\fP void wait_for_touch (int port)"
+Waits (blocks) until the digital sensor on the given port has been activated\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIport\fP The port to wait for activation on 
+.RE
+.PP
+
+.SS "\fBEXPORT_SYM\fP void wait_for_x_button ()"
+Waits (blocks) until the x button has been pressed\&. 
+.SS "\fBEXPORT_SYM\fP void wait_for_x_button_clicked ()"
+Waits (blocks) until the x button has been pressed and then subsequently released\&. 
+.SS "\fBEXPORT_SYM\fP void wait_for_y_button ()"
+Waits (blocks) until the y button has been pressed\&. 
+.SS "\fBEXPORT_SYM\fP void wait_for_y_button_clicked ()"
+Waits (blocks) until the y button has been pressed and then subsequently released\&. 
+.SS "\fBEXPORT_SYM\fP void wait_for_z_button ()"
+Waits (blocks) until the z button has been pressed\&. 
+.SS "\fBEXPORT_SYM\fP void wait_for_z_button_clicked ()"
+Waits (blocks) until the z button has been pressed and then subsequently released\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libkipr from the source code\&.

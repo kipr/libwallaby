@@ -1,0 +1,69 @@
+.TH "gyro" 3 "Mon Sep 12 2022" "Version 1.0.0" "libkipr" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+gyro \- Gyrometer
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "signed short \fBgyro_x\fP ()"
+.br
+.ti -1c
+.RI "signed short \fBgyro_y\fP ()"
+.br
+.ti -1c
+.RI "signed short \fBgyro_z\fP ()"
+.br
+.ti -1c
+.RI "int \fBgyro_calibrate\fP ()"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SH "Function Documentation"
+.PP 
+.SS "int gyro_calibrate ()"
+Calibrates gyroscope
+.PP
+Sets a low-pass filter\&. Put at beginning of your program or before you use gyroscope commands if you want calibrated output\&. 
+.SS "signed short gyro_x ()"
+Gets the sensed x rotation 
+.PP
+\fBReturns\fP
+.RS 4
+The latest signed x rotation value
+.RE
+.PP
+Wallaby: +/- 250 degree/sec range, 1024 per 250 degrees
+.PP
+Wombat: +/- 250 degree/sec range, 512 per 250 degrees 
+.SS "signed short gyro_y ()"
+Gets the sensed y rotation 
+.PP
+\fBReturns\fP
+.RS 4
+The latest signed y rotation value
+.RE
+.PP
+Wallaby: +/- 250 degree/sec range, 1024 per 250 degrees
+.PP
+Wombat: +/- 250 degree/sec range, 512 per 250 degrees 
+.SS "signed short gyro_z ()"
+Gets the sensed z rotation 
+.PP
+\fBReturns\fP
+.RS 4
+The latest signed z rotation value
+.RE
+.PP
+Wallaby: +/- 250 degree/sec range, 1024 per 250 degrees
+.PP
+Wombat: +/- 250 degree/sec range, 512 per 250 degrees 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libkipr from the source code\&.

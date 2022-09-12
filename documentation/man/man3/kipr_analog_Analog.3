@@ -1,0 +1,60 @@
+.TH "kipr::analog::Analog" 3 "Mon Sep 12 2022" "Version 1.0.0" "libkipr" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+kipr::analog::Analog
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <analog\&.hpp>\fP
+.PP
+Inherits \fBkipr::sensor::Sensor< unsigned short >\fP\&.
+.PP
+Inherited by \fBkipr::analog::Analog10\fP, and \fBkipr::analog::Analog8\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAnalog\fP (unsigned char \fBport\fP)"
+.br
+.ti -1c
+.RI "virtual \fB~Analog\fP ()"
+.br
+.ti -1c
+.RI "virtual unsigned short \fBvalue\fP () const"
+.br
+.ti -1c
+.RI "virtual void \fBsetPullup\fP (bool \fBpullup\fP)"
+.br
+.ti -1c
+.RI "bool \fBpullup\fP () const"
+.br
+.ti -1c
+.RI "unsigned char \fBport\fP () const"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "kipr::analog::Analog::Analog (unsigned char port)"
+
+.SS "virtual kipr::analog::Analog::~Analog ()\fC [virtual]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "unsigned char kipr::analog::Analog::port () const"
+
+.SS "bool kipr::analog::Analog::pullup () const"
+
+.SS "virtual void kipr::analog::Analog::setPullup (bool pullup)\fC [virtual]\fP"
+
+.SS "virtual unsigned short kipr::analog::Analog::value () const\fC [virtual]\fP"
+
+.PP
+Implements \fBkipr::sensor::Sensor< unsigned short >\fP\&.
+.PP
+Reimplemented in \fBkipr::analog::Analog10\fP, and \fBkipr::analog::Analog8\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libkipr from the source code\&.

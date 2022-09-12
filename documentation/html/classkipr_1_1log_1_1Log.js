@@ -1,0 +1,28 @@
+var classkipr_1_1log_1_1Log =
+[
+    [ "ConstPtr", "classkipr_1_1log_1_1Log.html#a898c5e0a782262b7b84a0365736f7533", null ],
+    [ "Ptr", "classkipr_1_1log_1_1Log.html#a26063a0c80e68110ae767810db625937", null ],
+    [ "Log", "classkipr_1_1log_1_1Log.html#a5bccc028fb9faf5bde618e712c8b775d", null ],
+    [ "Log", "classkipr_1_1log_1_1Log.html#ae00bae0f9bf3bc5042b661403489951e", null ],
+    [ "debug", "classkipr_1_1log_1_1Log.html#a9823bd95ddee2e7e335f2996f2e1e8bc", null ],
+    [ "debug", "classkipr_1_1log_1_1Log.html#a42b87fe6435ad44df7feb504e02f9495", null ],
+    [ "debug", "classkipr_1_1log_1_1Log.html#a6242639402d6f4838cf45a0fcad21036", null ],
+    [ "error", "classkipr_1_1log_1_1Log.html#a3afb6a573fa31c479faffd39826e49aa", null ],
+    [ "error", "classkipr_1_1log_1_1Log.html#a86937dd91fc86be7c3ed488d90197fb4", null ],
+    [ "error", "classkipr_1_1log_1_1Log.html#a641ec24b2a797c77930b50bb00655112", null ],
+    [ "fatal", "classkipr_1_1log_1_1Log.html#a02272838b5187ef57702b7a4dac07824", null ],
+    [ "fatal", "classkipr_1_1log_1_1Log.html#a3d7abab9d33d976d07eb2675cd027516", null ],
+    [ "fatal", "classkipr_1_1log_1_1Log.html#ace1798e31bb7d7b03b70014b35084673", null ],
+    [ "info", "classkipr_1_1log_1_1Log.html#aed77f0a9a9d7fd37e9a408f42ca9d11d", null ],
+    [ "info", "classkipr_1_1log_1_1Log.html#a02afcc2b4844fb8e6024c55a8db1dfa9", null ],
+    [ "info", "classkipr_1_1log_1_1Log.html#ae7bfc47518eb0a9e33a829cb6e6da494", null ],
+    [ "log", "classkipr_1_1log_1_1Log.html#a0fc0b322df5c1e143cfa532ac03946f1", null ],
+    [ "log", "classkipr_1_1log_1_1Log.html#acf0c213b70670e3d758f51af065c547a", null ],
+    [ "log", "classkipr_1_1log_1_1Log.html#a4649952e9cc2f7e15536d59a17c4353f", null ],
+    [ "verbose", "classkipr_1_1log_1_1Log.html#a87939f5a76cc54672e8801bec70bc9d3", null ],
+    [ "verbose", "classkipr_1_1log_1_1Log.html#adfd70a10b975d57780ecea8b71bf43d5", null ],
+    [ "verbose", "classkipr_1_1log_1_1Log.html#a49b41515cf058cce811b773f1e42fc83", null ],
+    [ "warning", "classkipr_1_1log_1_1Log.html#a7bf2edd69b9c1d491d03424528a82ced", null ],
+    [ "warning", "classkipr_1_1log_1_1Log.html#aa56b543f05a37928cd30f63bb07eacab", null ],
+    [ "warning", "classkipr_1_1log_1_1Log.html#af8f6e3bdff267e84db30e5c2d8010475", null ]
+];

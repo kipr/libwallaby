@@ -1,0 +1,41 @@
+.TH "mutex" 3 "Mon Sep 12 2022" "Version 1.0.0" "libkipr" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+mutex \- A mutex, or lock\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <thread\&.h>\fP
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "void * \fBdata\fP"
+.br
+.RI "a C++ Mutex object cast to a \fCvoid*\fP\&. Not intended to be accessed\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+A mutex, or lock\&. 
+
+mutexes are used to prevent memory errors when two programs or threads need to access the same variable\&. 
+.PP
+\fBSee also\fP
+.RS 4
+\fBmutex_create\fP 
+.RE
+.PP
+
+.SH "Member Data Documentation"
+.PP 
+.SS "void* mutex::data"
+
+.PP
+a C++ Mutex object cast to a \fCvoid*\fP\&. Not intended to be accessed\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libkipr from the source code\&.

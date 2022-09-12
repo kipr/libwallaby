@@ -1,0 +1,67 @@
+.TH "/home/zachary/libwallaby/module/analog/public/kipr/analog/analog.h" 3 "Mon Sep 12 2022" "Version 1.0.0" "libkipr" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/zachary/libwallaby/module/analog/public/kipr/analog/analog.h
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBanalog\fP (int port)"
+.br
+.ti -1c
+.RI "int \fBanalog8\fP (int port)"
+.br
+.ti -1c
+.RI "int \fBanalog10\fP (int port)"
+.br
+.ti -1c
+.RI "int \fBanalog12\fP (int port)"
+.br
+.ti -1c
+.RI "int \fBanalog_et\fP (int port)"
+.br
+.ti -1c
+.RI "void \fBset_analog_pullup\fP (int port, int pullup)"
+.br
+.ti -1c
+.RI "int \fBget_analog_pullup\fP (int port)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBCopyright\fP
+.RS 4
+KISS Institute for Practical Robotics 
+.RE
+.PP
+
+.SH "Function Documentation"
+.PP 
+.SS "int analog12 (int port)"
+Gets the 12-bit analog value of a port\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIport\fP A value between 0 and 5 specifying the sensor to read from\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The latest 12-bit value of the port (a value in the range 0 to 4095)\&. 
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBanalog\fP 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libkipr from the source code\&.

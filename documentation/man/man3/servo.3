@@ -1,0 +1,150 @@
+.TH "servo" 3 "Mon Sep 12 2022" "Version 1.0.0" "libkipr" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+servo \- Servos
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBenable_servo\fP (int port)"
+.br
+.RI "Enable a specific servo\&. "
+.ti -1c
+.RI "void \fBdisable_servo\fP (int port)"
+.br
+.RI "Disable a specific servo\&. "
+.ti -1c
+.RI "void \fBenable_servos\fP ()"
+.br
+.RI "Enable all four servo channels\&. "
+.ti -1c
+.RI "void \fBdisable_servos\fP ()"
+.br
+.RI "Disable all four servo channels\&. "
+.ti -1c
+.RI "void \fBset_servo_enabled\fP (int port, int enabled)"
+.br
+.RI "Enable or disable a specific servo\&. "
+.ti -1c
+.RI "int \fBget_servo_enabled\fP (int port)"
+.br
+.RI "Check if a servo is enabled\&. "
+.ti -1c
+.RI "int \fBget_servo_position\fP (int port)"
+.br
+.RI "Get the most recent commanded servo position\&. "
+.ti -1c
+.RI "void \fBset_servo_position\fP (int port, int position)"
+.br
+.RI "Set a new servo goal position\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SH "Function Documentation"
+.PP 
+.SS "void disable_servo (int port)"
+
+.PP
+Disable a specific servo\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIport\fP The port, between 0 and 3, to disable 
+.RE
+.PP
+
+.SS "void disable_servos ()"
+
+.PP
+Disable all four servo channels\&. 
+.SS "void enable_servo (int port)"
+
+.PP
+Enable a specific servo\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIport\fP The port, between 0 and 3, to enable 
+.RE
+.PP
+
+.SS "void enable_servos ()"
+
+.PP
+Enable all four servo channels\&. 
+.SS "int get_servo_enabled (int port)"
+
+.PP
+Check if a servo is enabled\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIport\fP The port, between 0 and 3 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The servo enable setting 0: disabled 1: enabled 
+.RE
+.PP
+
+.SS "int get_servo_position (int port)"
+
+.PP
+Get the most recent commanded servo position\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIport\fP The port of the servo 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The servo's position as an 11 bit integer (which is an integer between 0 and 2047) 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+This method will return the last \fIsent\fP position, not the currently \fIset\fP position\&. 
+.RE
+.PP
+
+.SS "void set_servo_enabled (int port, int enabled)"
+
+.PP
+Enable or disable a specific servo\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIport\fP The port, between 0 and 3, to enable 
+.br
+\fIenabled\fP The new enable setting 0: disabled 1: enabled 
+.RE
+.PP
+
+.SS "void set_servo_position (int port, int position)"
+
+.PP
+Set a new servo goal position\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIport\fP The port of the servo 
+.br
+\fIposition\fP The new servo position, between 0 and 2047
+.RE
+.PP
+\fBNote\fP
+.RS 4
+Even though the servos have a \fItheoretical\fP range between 0 and 2047, the \fIactual\fP range is often less\&. Setting the servo to a position that it cannot physically reach will cause the servo to audibly strain and will consume battery very quickly\&. 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libkipr from the source code\&.

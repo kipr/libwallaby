@@ -1,0 +1,72 @@
+.TH "Address" 3 "Mon Sep 12 2022" "Version 1.0.0" "libkipr" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Address
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <socket\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAddress\fP (const char *const host, const unsigned short \fBport\fP)"
+.br
+.ti -1c
+.RI "\fBAddress\fP (const sockaddr_in &\fBaddr\fP)"
+.br
+.ti -1c
+.RI "\fBAddress\fP ()"
+.br
+.ti -1c
+.RI "bool \fBisValid\fP () const"
+.br
+.ti -1c
+.RI "bool \fBsetHost\fP (const char *const host)"
+.br
+.ti -1c
+.RI "void \fBsetPort\fP (const unsigned short \fBport\fP)"
+.br
+.ti -1c
+.RI "unsigned short \fBport\fP () const"
+.br
+.ti -1c
+.RI "const sockaddr * \fBaddr\fP () const"
+.br
+.ti -1c
+.RI "socklen_t \fBaddrLength\fP () const"
+.br
+.ti -1c
+.RI "const char * \fBip\fP () const"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Address::Address (const char *const host, const unsigned short port)"
+
+.SS "Address::Address (const sockaddr_in & addr)"
+
+.SS "Address::Address ()"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "const sockaddr* Address::addr () const"
+
+.SS "socklen_t Address::addrLength () const"
+
+.SS "const char* Address::ip () const"
+
+.SS "bool Address::isValid () const"
+
+.SS "unsigned short Address::port () const"
+
+.SS "bool Address::setHost (const char *const host)"
+
+.SS "void Address::setPort (const unsigned short port)"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libkipr from the source code\&.

@@ -1,0 +1,529 @@
+.TH "motor" 3 "Mon Sep 12 2022" "Version 1.0.0" "libkipr" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+motor \- Motors
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBget_motor_position_counter\fP (int \fBmotor\fP)"
+.br
+.RI "Gets the current motor position\&. "
+.ti -1c
+.RI "int \fBgmpc\fP (int \fBmotor\fP)"
+.br
+.RI "Gets the current motor position\&. "
+.ti -1c
+.RI "void \fBclear_motor_position_counter\fP (int \fBmotor\fP)"
+.br
+.RI "Clears the motor position counter\&. "
+.ti -1c
+.RI "void \fBcmpc\fP (int \fBmotor\fP)"
+.br
+.RI "Clears the motor position counter\&. "
+.ti -1c
+.RI "int \fBmove_at_velocity\fP (int \fBmotor\fP, int velocity)"
+.br
+.RI "Set a goal velocity in ticks per second\&. "
+.ti -1c
+.RI "int \fBmav\fP (int \fBmotor\fP, int velocity)"
+.br
+.RI "Set a goal velocity in ticks per second\&. "
+.ti -1c
+.RI "int \fBmove_to_position\fP (int \fBmotor\fP, int speed, int goal_pos)"
+.br
+.RI "Set a goal position (in ticks) for the motor to move to\&. "
+.ti -1c
+.RI "int \fBmtp\fP (int \fBmotor\fP, int speed, int goal_pos)"
+.br
+.RI "Set a goal position (in ticks) for the motor to move to\&. "
+.ti -1c
+.RI "int \fBmove_relative_position\fP (int \fBmotor\fP, int speed, int delta_pos)"
+.br
+.RI "Set a goal position (in ticks) for the motor to move to, relative to the current position\&. "
+.ti -1c
+.RI "int \fBmrp\fP (int \fBmotor\fP, int speed, int delta_pos)"
+.br
+.RI "Set a goal position (in ticks) for the motor to move to, relative to the current position\&. "
+.ti -1c
+.RI "void \fBset_pid_gains\fP (int \fBmotor\fP, short p, short i, short d, short pd, short id, short dd)"
+.br
+.RI "Set the motor PID gains, represented as fractions\&. "
+.ti -1c
+.RI "void \fBget_pid_gains\fP (int \fBmotor\fP, short *p, short *i, short *d, short *pd, short *id, short *dd)"
+.br
+.RI "Set the motor PID gains, represented as fractions\&. "
+.ti -1c
+.RI "int \fBfreeze\fP (int \fBmotor\fP)"
+.br
+.RI "Active braking to stop a motor\&. "
+.ti -1c
+.RI "int \fBget_motor_done\fP (int \fBmotor\fP)"
+.br
+.RI "Check if the motor has reached it's goal\&. "
+.ti -1c
+.RI "void \fBblock_motor_done\fP (int \fBmotor\fP)"
+.br
+.RI "Wait until the motor is at it's goal\&. "
+.ti -1c
+.RI "void \fBbmd\fP (int \fBmotor\fP)"
+.br
+.RI "Wait until the motor is at it's goal\&. "
+.ti -1c
+.RI "int \fBsetpwm\fP (int \fBmotor\fP, int pwm)"
+.br
+.RI "Set the motor pwm (percent power) command\&. "
+.ti -1c
+.RI "int \fBgetpwm\fP (int \fBmotor\fP)"
+.br
+.RI "Get the current motor pwm command\&. "
+.ti -1c
+.RI "void \fBfd\fP (int \fBmotor\fP)"
+.br
+.RI "Moves the given motor forward at full power\&. "
+.ti -1c
+.RI "void \fBbk\fP (int \fBmotor\fP)"
+.br
+.RI "Moves the given motor backward at full power\&. "
+.ti -1c
+.RI "void \fBmotor\fP (int motor, int percent)"
+.br
+.RI "Moves a motor at a percent velocity\&. "
+.ti -1c
+.RI "void \fBbaasbennaguui\fP (int \fBmotor\fP, int percent)"
+.br
+.RI "Moves a motor at a percent velocity\&. "
+.ti -1c
+.RI "void \fBmotor_power\fP (int \fBmotor\fP, int percent)"
+.br
+.RI "Moves a motor at a percent power\&. "
+.ti -1c
+.RI "void \fBoff\fP (int \fBmotor\fP)"
+.br
+.RI "Turns the specified motor off\&. "
+.ti -1c
+.RI "void \fBalloff\fP ()"
+.br
+.RI "Turns all motors off\&. "
+.ti -1c
+.RI "void \fBao\fP ()"
+.br
+.RI "Turns all motors off\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SH "Function Documentation"
+.PP 
+.SS "void alloff ()"
+
+.PP
+Turns all motors off\&. 
+.PP
+\fBSee also\fP
+.RS 4
+\fBao\fP 
+.RE
+.PP
+
+.SS "void ao ()"
+
+.PP
+Turns all motors off\&. 
+.PP
+\fBSee also\fP
+.RS 4
+\fBalloff\fP 
+.RE
+.PP
+
+.SS "void baasbennaguui (int motor, int percent)"
+
+.PP
+Moves a motor at a percent velocity\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fImotor\fP The motor port\&. 
+.br
+\fIpercent\fP The percent of the motors velocity, between -100 and 100\&.
+.RE
+.PP
+The New Apache language function call to include Native Americans\&. 
+.SS "void bk (int motor)"
+
+.PP
+Moves the given motor backward at full power\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fImotor\fP the motor's port\&. 
+.RE
+.PP
+
+.SS "void block_motor_done (int motor)"
+
+.PP
+Wait until the motor is at it's goal\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fImotor\fP The motor port\&. 
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBbmd\fP 
+.RE
+.PP
+
+.SS "void bmd (int motor)"
+
+.PP
+Wait until the motor is at it's goal\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fImotor\fP The motor port\&. 
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBblock_motor_done\fP 
+.RE
+.PP
+
+.SS "void clear_motor_position_counter (int motor)"
+
+.PP
+Clears the motor position counter\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fImotor\fP The motor port\&.
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBcmpc\fP 
+.RE
+.PP
+
+.SS "void cmpc (int motor)"
+
+.PP
+Clears the motor position counter\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fImotor\fP The motor port\&.
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBclear_motor_position_counter\fP 
+.RE
+.PP
+
+.SS "void fd (int motor)"
+
+.PP
+Moves the given motor forward at full power\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fImotor\fP the motor's port\&. 
+.RE
+.PP
+
+.SS "int freeze (int motor)"
+
+.PP
+Active braking to stop a motor\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fImotor\fP The motor port\&. 
+.RE
+.PP
+
+.SS "int get_motor_done (int motor)"
+
+.PP
+Check if the motor has reached it's goal\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fImotor\fP The motor port\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+1: at goal 0: not at goal 
+.RE
+.PP
+
+.SS "int get_motor_position_counter (int motor)"
+
+.PP
+Gets the current motor position\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fImotor\fP The motor port\&.
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBgmpc\fP 
+.RE
+.PP
+
+.SS "void get_pid_gains (int motor, short * p, short * i, short * d, short * pd, short * id, short * dd)"
+
+.PP
+Set the motor PID gains, represented as fractions\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fImotor\fP The motor port\&. 
+.br
+\fIp\fP The P (proportional) gain numerator 
+.br
+\fIi\fP The I (integral) gain numerator 
+.br
+\fId\fP The D (derivative) gain numerator 
+.br
+\fIpd\fP The P (proportional) gain denominator 
+.br
+\fIid\fP The I (integral) gain denominator 
+.br
+\fIdd\fP The D (derivative) gain denominator 
+.RE
+.PP
+
+.SS "int getpwm (int motor)"
+
+.PP
+Get the current motor pwm command\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fImotor\fP The motor port\&. 
+.RE
+.PP
+
+.SS "int gmpc (int motor)"
+
+.PP
+Gets the current motor position\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fImotor\fP The motor port\&.
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBget_motor_position_counter\fP 
+.RE
+.PP
+
+.SS "int mav (int motor, int velocity)"
+
+.PP
+Set a goal velocity in ticks per second\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fImotor\fP The motor port\&. 
+.br
+\fIvelocity\fP The goal velocity in -1500 to 1500 ticks / second
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBmove_at_velocity\fP 
+.RE
+.PP
+
+.SS "void motor (int motor, int percent)"
+
+.PP
+Moves a motor at a percent velocity\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fImotor\fP The motor port\&. 
+.br
+\fIpercent\fP The percent of the motors velocity, between -100 and 100\&. 
+.RE
+.PP
+
+.SS "void motor_power (int motor, int percent)"
+
+.PP
+Moves a motor at a percent power\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fImotor\fP the motor port\&. 
+.br
+\fIpercent\fP The power of the motor, between -100 and 100\&. 
+.RE
+.PP
+
+.SS "int move_at_velocity (int motor, int velocity)"
+
+.PP
+Set a goal velocity in ticks per second\&. The range is -1500 to 1500, though motor position accuracy may be decreased outside of -1000 to 1000 
+.PP
+\fBParameters\fP
+.RS 4
+\fImotor\fP The motor port\&. 
+.br
+\fIvelocity\fP The goal velocity in -1500 to 1500 ticks / second
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBmav\fP 
+.RE
+.PP
+
+.SS "int move_relative_position (int motor, int speed, int delta_pos)"
+
+.PP
+Set a goal position (in ticks) for the motor to move to, relative to the current position\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fImotor\fP The motor port\&. 
+.br
+\fIspeed\fP The speed to move at, between -1500 and 1500 ticks / second 
+.br
+\fIdelta_pos\fP The position to move to (in ticks) given the current position
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBmrp\fP 
+.RE
+.PP
+
+.SS "int move_to_position (int motor, int speed, int goal_pos)"
+
+.PP
+Set a goal position (in ticks) for the motor to move to\&. There are approximately 1500 ticks per motor revolution\&.
+.PP
+This function is more accurate if speeds between -1000 and 1000 are used\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fImotor\fP The motor port\&. 
+.br
+\fIspeed\fP The speed to move at, between -1500 and 1500 ticks / second 
+.br
+\fIgoal_pos\fP The position to move to (in ticks)
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBmtp\fP 
+.RE
+.PP
+
+.SS "int mrp (int motor, int speed, int delta_pos)"
+
+.PP
+Set a goal position (in ticks) for the motor to move to, relative to the current position\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fImotor\fP The motor port\&. 
+.br
+\fIspeed\fP The speed to move at, between -1500 and 1500 ticks / second 
+.br
+\fIdelta_pos\fP The position to move to (in ticks) given the current position
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBmove_relative_position\fP 
+.RE
+.PP
+
+.SS "int mtp (int motor, int speed, int goal_pos)"
+
+.PP
+Set a goal position (in ticks) for the motor to move to\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fImotor\fP The motor port\&. 
+.br
+\fIspeed\fP The speed to move at, between -1500 and 1500 ticks / second 
+.br
+\fIgoal_pos\fP The position to move to (in ticks)
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBmove_to_position\fP 
+.RE
+.PP
+
+.SS "void off (int motor)"
+
+.PP
+Turns the specified motor off\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fImotor\fP the motor's port\&. 
+.RE
+.PP
+
+.SS "void set_pid_gains (int motor, short p, short i, short d, short pd, short id, short dd)"
+
+.PP
+Set the motor PID gains, represented as fractions\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fImotor\fP The motor port\&. 
+.br
+\fIp\fP The P (proportional) gain numerator 
+.br
+\fIi\fP The I (integral) gain numerator 
+.br
+\fId\fP The D (derivative) gain numerator 
+.br
+\fIpd\fP The P (proportional) gain denominator 
+.br
+\fIid\fP The I (integral) gain denominator 
+.br
+\fIdd\fP The D (derivative) gain denominator 
+.RE
+.PP
+
+.SS "int setpwm (int motor, int pwm)"
+
+.PP
+Set the motor pwm (percent power) command\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fImotor\fP The motor port\&. 
+.br
+\fIpwm\fP A new motor pwm command between 0 and 100 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libkipr from the source code\&.

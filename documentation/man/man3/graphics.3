@@ -1,0 +1,533 @@
+.TH "graphics" 3 "Mon Sep 12 2022" "Version 1.0.0" "libkipr" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+graphics \- Graphics
+.SH SYNOPSIS
+.br
+.PP
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef enum \fBEncoding\fP \fBEncoding\fP"
+.br
+.RI "An enumerate with encoding types RGB and BGR\&. "
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBEncoding\fP { \fBRGB\fP, \fBBGR\fP }"
+.br
+.RI "An enumerate with encoding types RGB and BGR\&. "
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBgraphics_open\fP (int width, int height)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBgraphics_close\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBgraphics_update\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBgraphics_clear\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBgraphics_blit_enc\fP (const unsigned char *data, \fBEncoding\fP enc, int x, int y, int width, int height)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBgraphics_blit_region_enc\fP (const unsigned char *data, \fBEncoding\fP enc, int sx, int sy, int ex, int ey, int width, int height, int dx, int dy)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBgraphics_fill\fP (int r, int g, int b)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBgraphics_pixel\fP (int x, int y, int r, int g, int b)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBgraphics_line\fP (int x1, int y1, int x2, int y2, int r, int g, int b)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBgraphics_circle\fP (int cx, int cy, int radius, int r, int g, int b)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBgraphics_circle_fill\fP (int cx, int cy, int radius, int r, int g, int b)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBgraphics_rectangle\fP (int x1, int y1, int x2, int y2, int r, int g, int b)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBgraphics_rectangle_fill\fP (int x1, int y1, int x2, int y2, int r, int g, int b)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBgraphics_triangle\fP (int x1, int y1, int x2, int y2, int x3, int y3, int r, int g, int b)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBgraphics_triangle_fill\fP (int x1, int y1, int x2, int y2, int x3, int y3, int r, int g, int b)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_key_state\fP (enum \fBKeyCode\fP key)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP void \fBget_mouse_position\fP (int *x, int *y)"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_mouse_middle_button\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_mouse_left_button\fP ()"
+.br
+.ti -1c
+.RI "\fBEXPORT_SYM\fP int \fBget_mouse_right_button\fP ()"
+.br
+.ti -1c
+.RI "void \fBgraphics_segment_display\fP (int s[], int x, int y, int r, int g, int b, float size)"
+.br
+.ti -1c
+.RI "void \fBgraphics_print_character\fP (int n, int x, int y, int r, int g, int b, float size)"
+.br
+.ti -1c
+.RI "void \fBgraphics_print_string\fP (char s[], int x, int y, int r, int g, int b, float size)"
+.br
+.ti -1c
+.RI "int \fBgraphics_print_int\fP (int n, int minNumDigits, int x, int y, int r, int g, int b, float size)"
+.br
+.ti -1c
+.RI "void \fBgraphics_print_float\fP (float n, int numDigits, int x, int y, int r, int g, int b, float size)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef enum \fBEncoding\fP \fBEncoding\fP"
+
+.PP
+An enumerate with encoding types RGB and BGR\&. 
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBEncoding\fP"
+
+.PP
+An enumerate with encoding types RGB and BGR\&. 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIRGB \fP\fP
+the enum used to represent RGB encoding 
+.TP
+\fB\fIBGR \fP\fP
+the enum used to represent BGR encoding 
+.SH "Function Documentation"
+.PP 
+.SS "\fBEXPORT_SYM\fP int get_key_state (enum \fBKeyCode\fP key)"
+Gets the current state of a keyboard key\&.
+.PP
+\fBNote\fP
+.RS 4
+A KISS Graphics Window must be open for input functions to work\&. 
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIkey\fP An ASCII key code or a Key value from the KeyCode enum\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+1 for pressed, 0 for not pressed 
+.RE
+.PP
+
+.SS "\fBEXPORT_SYM\fP int get_mouse_left_button ()"
+Returns the state of the mouse's left button\&. 
+.PP
+\fBReturns\fP
+.RS 4
+1 for pressed, 0 for not pressed 
+.RE
+.PP
+
+.SS "\fBEXPORT_SYM\fP int get_mouse_middle_button ()"
+Returns the state of the mouse's middle button\&. 
+.PP
+\fBReturns\fP
+.RS 4
+1 for pressed, 0 for not pressed 
+.RE
+.PP
+
+.SS "\fBEXPORT_SYM\fP void get_mouse_position (int * x, int * y)"
+Returns the mouse's current position relative to the top left corner of the graphics window\&. 
+.SS "\fBEXPORT_SYM\fP int get_mouse_right_button ()"
+Returns the state of the mouse's right button\&. 
+.PP
+\fBReturns\fP
+.RS 4
+1 for pressed, 0 for not pressed 
+.RE
+.PP
+
+.SS "\fBEXPORT_SYM\fP void graphics_blit_enc (const unsigned char * data, \fBEncoding\fP enc, int x, int y, int width, int height)"
+Blits a pixel array onto the graphics context
+.PP
+\fBParameters\fP
+.RS 4
+\fIdata\fP the 1D array of pixel data to blit 
+.br
+\fIenc\fP RGB for a Red-Green-Blue encoding or BGR for a Blue-Green-Red encoding 
+.br
+\fIx\fP The destination x coordinate of the blit (target) 
+.br
+\fIy\fP The destination y coordinate of the blit (target) 
+.br
+\fIwidth\fP The width of the area to blit 
+.br
+\fIheight\fP The height of the area to blit 
+.RE
+.PP
+
+.SS "\fBEXPORT_SYM\fP void graphics_blit_region_enc (const unsigned char * data, \fBEncoding\fP enc, int sx, int sy, int ex, int ey, int width, int height, int dx, int dy)"
+Blits a pixel array region onto the graphics context
+.PP
+\fBParameters\fP
+.RS 4
+\fIdata\fP the 1D array of pixel data to blit 
+.br
+\fIenc\fP RGB for a Red-Green-Blue encoding or BGR for a Blue-Green-Red encoding 
+.br
+\fIsx\fP The start x coordinate of the blit (source) 
+.br
+\fIsy\fP The start y coordinate of the blit (source) 
+.br
+\fIex\fP The end x coordinate of the blit (source) 
+.br
+\fIey\fP The end y coordinate of the blit (source) 
+.br
+\fIwidth\fP The width of the area to blit 
+.br
+\fIheight\fP The height of the area to blit 
+.br
+\fIdx\fP The destination x coordinate of the blit (target) 
+.br
+\fIdy\fP The destination y coordinate of the blit (target) 
+.RE
+.PP
+
+.SS "\fBEXPORT_SYM\fP void graphics_circle (int cx, int cy, int radius, int r, int g, int b)"
+Draw an unfilled circle to the graphics window at the given coordinates and with the given radius\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIcx\fP the X coordinate of the center of the circle 
+.br
+\fIcy\fP the Y cordinate of the center of the circle 
+.br
+\fIradius\fP the radius of the circle to be drawn 
+.br
+\fIr\fP the red component of the drawing, from 0 to 255 
+.br
+\fIg\fP the green component of the drawing, from 0 to 255 
+.br
+\fIb\fP the blue component of the drawing, from 0 to 255 
+.RE
+.PP
+
+.SS "\fBEXPORT_SYM\fP void graphics_circle_fill (int cx, int cy, int radius, int r, int g, int b)"
+Draw a filled circle to the graphics window at the given coordinates and with the given radius\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIcx\fP the X coordinate of the center of the circle 
+.br
+\fIcy\fP the Y cordinate of the center of the circle 
+.br
+\fIradius\fP the radius of the circle to be drawn 
+.br
+\fIr\fP the red component of the drawing, from 0 to 255 
+.br
+\fIg\fP the green component of the drawing, from 0 to 255 
+.br
+\fIb\fP the blue component of the drawing, from 0 to 255 
+.RE
+.PP
+
+.SS "\fBEXPORT_SYM\fP void graphics_clear ()"
+Fills the entire window with the color black 
+.SS "\fBEXPORT_SYM\fP void graphics_close ()"
+Closes the previously opened KISS Graphics Window 
+.SS "\fBEXPORT_SYM\fP void graphics_fill (int r, int g, int b)"
+Fill the graphics context with a color\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIr\fP the red component of the drawing, from 0 to 255 
+.br
+\fIg\fP the green component of the drawing, from 0 to 255 
+.br
+\fIb\fP the blue component of the drawing, from 0 to 255 
+.RE
+.PP
+
+.SS "\fBEXPORT_SYM\fP void graphics_line (int x1, int y1, int x2, int y2, int r, int g, int b)"
+Draw a line from the point (x1, y1) to (x2, y2) 
+.PP
+\fBParameters\fP
+.RS 4
+\fIx1\fP the X coordinate of the first point 
+.br
+\fIy1\fP the Y coordinate of the first point 
+.br
+\fIx2\fP the X coordinate of the second point 
+.br
+\fIy2\fP the Y coordinate of the second point 
+.br
+\fIr\fP the red component of the drawing, from 0 to 255 
+.br
+\fIg\fP the green component of the drawing, from 0 to 255 
+.br
+\fIb\fP the blue component of the drawing, from 0 to 255 
+.RE
+.PP
+
+.SS "\fBEXPORT_SYM\fP int graphics_open (int width, int height)"
+Opens a KISS Graphics Window for drawing and input functions\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIwidth\fP The width of the graphics window 
+.br
+\fIheight\fP The height of the graphics window 
+.RE
+.PP
+
+.SS "\fBEXPORT_SYM\fP void graphics_pixel (int x, int y, int r, int g, int b)"
+Draw a pixel at (x, y) 
+.PP
+\fBParameters\fP
+.RS 4
+\fIx\fP the X coordinate of the pixel 
+.br
+\fIy\fP the Y coordinate of the pixel 
+.br
+\fIr\fP the red component of the drawing, from 0 to 255 
+.br
+\fIg\fP the green component of the drawing, from 0 to 255 
+.br
+\fIb\fP the blue component of the drawing, from 0 to 255 
+.RE
+.PP
+
+.SS "void graphics_print_character (int n, int x, int y, int r, int g, int b, float size)"
+Prints out a character in 16 segment characters
+.PP
+\fBParameters\fP
+.RS 4
+\fIn\fP The character to display 
+.br
+\fIx\fP The X coordinate of the character's top-left corner 
+.br
+\fIy\fP The Y coordinate of the character's top-left corner 
+.br
+\fIr\fP The red component of the drawing, from 0 to 255 
+.br
+\fIg\fP The green component of the drawing, from 0 to 255 
+.br
+\fIb\fP The blue component of the drawing, from 0 to 255 
+.br
+\fIsize\fP The character's size 
+.RE
+.PP
+
+.SS "void graphics_print_float (float n, int numDigits, int x, int y, int r, int g, int b, float size)"
+Prints out a float in 16 segment characters
+.PP
+\fBParameters\fP
+.RS 4
+\fIn\fP The float to display 
+.br
+\fInumDigits\fP numDigits is the number of digits to right of decimal to be printed 
+.br
+\fIx\fP The X coordinate of the first character's top-left corner 
+.br
+\fIy\fP The Y coordinate of the first character's top-left corner 
+.br
+\fIr\fP The red component of the drawing, from 0 to 255 
+.br
+\fIg\fP The green component of the drawing, from 0 to 255 
+.br
+\fIb\fP The blue component of the drawing, from 0 to 255 
+.br
+\fIsize\fP The strings's size 
+.RE
+.PP
+
+.SS "int graphics_print_int (int n, int minNumDigits, int x, int y, int r, int g, int b, float size)"
+Prints out an integer in 16 segment characters
+.PP
+\fBParameters\fP
+.RS 4
+\fIn\fP The integer to display 
+.br
+\fIminNumDigits\fP minNumDigits is normally 0, but can be larger if leading 0's are desired 
+.br
+\fIx\fP The X coordinate of the first character's top-left corner 
+.br
+\fIy\fP The Y coordinate of the first character's top-left corner 
+.br
+\fIr\fP The red component of the drawing, from 0 to 255 
+.br
+\fIg\fP The green component of the drawing, from 0 to 255 
+.br
+\fIb\fP The blue component of the drawing, from 0 to 255 
+.br
+\fIsize\fP The strings's size 
+.RE
+.PP
+
+.SS "void graphics_print_string (char s[], int x, int y, int r, int g, int b, float size)"
+Prints out a text string in 16 segment characters
+.PP
+\fBParameters\fP
+.RS 4
+\fIs\fP The string to display 
+.br
+\fIx\fP The X coordinate of the first character's top-left corner 
+.br
+\fIy\fP The Y coordinate of the first character's top-left corner 
+.br
+\fIr\fP The red component of the drawing, from 0 to 255 
+.br
+\fIg\fP The green component of the drawing, from 0 to 255 
+.br
+\fIb\fP The blue component of the drawing, from 0 to 255 
+.br
+\fIsize\fP The strings's size 
+.RE
+.PP
+
+.SS "\fBEXPORT_SYM\fP void graphics_rectangle (int x1, int y1, int x2, int y2, int r, int g, int b)"
+Draw an unfilled rectangle to the graphics window at the given coordinates\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIx1\fP the X coordinate of the rectangle's top-left corner 
+.br
+\fIy1\fP the Y coordinate of the rectangle's top-left corner 
+.br
+\fIx2\fP the X coordinate of the rectangle's bottom-right corner 
+.br
+\fIy2\fP the Y coordinate of the rectangle's bottom-right corner 
+.br
+\fIr\fP the red component of the drawing, from 0 to 255 
+.br
+\fIg\fP the green component of the drawing, from 0 to 255 
+.br
+\fIb\fP the blue component of the drawing, from 0 to 255 
+.RE
+.PP
+
+.SS "\fBEXPORT_SYM\fP void graphics_rectangle_fill (int x1, int y1, int x2, int y2, int r, int g, int b)"
+Draw a filled rectangle to the graphics window at the given coordinates\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIx1\fP the X coordinate of the rectangle's top-left corner 
+.br
+\fIy1\fP the Y coordinate of the rectangle's top-left corner 
+.br
+\fIx2\fP the X coordinate of the rectangle's bottom-right corner 
+.br
+\fIy2\fP the Y coordinate of the rectangle's bottom-right corner 
+.br
+\fIr\fP the red component of the drawing, from 0 to 255 
+.br
+\fIg\fP the green component of the drawing, from 0 to 255 
+.br
+\fIb\fP the blue component of the drawing, from 0 to 255 
+.RE
+.PP
+
+.SS "void graphics_segment_display (int s[], int x, int y, int r, int g, int b, float size)"
+Draw a 16 segment character (alphameric - caps only)
+.PP
+\fBParameters\fP
+.RS 4
+\fIs\fP The segments to display 
+.br
+\fIx\fP The X coordinate of the first segment's top-left corner 
+.br
+\fIy\fP The Y coordinate of the first segment's top-left corner 
+.br
+\fIr\fP The red component of the drawing, from 0 to 255 
+.br
+\fIg\fP The green component of the drawing, from 0 to 255 
+.br
+\fIb\fP The blue component of the drawing, from 0 to 255 
+.br
+\fIsize\fP The segment's size 
+.RE
+.PP
+
+.SS "\fBEXPORT_SYM\fP void graphics_triangle (int x1, int y1, int x2, int y2, int x3, int y3, int r, int g, int b)"
+Draw an unfilled triangle to the graphics window at the given coordinates\&. The order of the corners does not matter when drawing a triangle\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIx1\fP the X coordinate of the triangle's first corner 
+.br
+\fIy1\fP the Y coordinate of the triangle's first corner 
+.br
+\fIx2\fP the X coordinate of the triangle's second corner 
+.br
+\fIy2\fP the Y coordinate of the triangle's second corner 
+.br
+\fIx3\fP the X coordinate of the triangle's third corner 
+.br
+\fIy3\fP the Y coordinate of the triangle's third corner 
+.br
+\fIr\fP the red component of the drawing, from 0 to 255 
+.br
+\fIg\fP the green component of the drawing, from 0 to 255 
+.br
+\fIb\fP the blue component of the drawing, from 0 to 255 
+.RE
+.PP
+
+.SS "\fBEXPORT_SYM\fP void graphics_triangle_fill (int x1, int y1, int x2, int y2, int x3, int y3, int r, int g, int b)"
+Draw a filled triangle to the graphics window at the given coordinates\&. The order of the corners does not matter when drawing a triangle\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIx1\fP the X coordinate of the triangle's first corner 
+.br
+\fIy1\fP the Y coordinate of the triangle's first corner 
+.br
+\fIx2\fP the X coordinate of the triangle's second corner 
+.br
+\fIy2\fP the Y coordinate of the triangle's second corner 
+.br
+\fIx3\fP the X coordinate of the triangle's third corner 
+.br
+\fIy3\fP the Y coordinate of the triangle's third corner 
+.br
+\fIr\fP the red component of the drawing, from 0 to 255 
+.br
+\fIg\fP the green component of the drawing, from 0 to 255 
+.br
+\fIb\fP the blue component of the drawing, from 0 to 255 
+.RE
+.PP
+
+.SS "\fBEXPORT_SYM\fP void graphics_update ()"
+Update must be called after drawing to the window for changes to be visible\&. This function also must be called regularly for input to work\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libkipr from the source code\&.

@@ -1,0 +1,51 @@
+.TH "kipr::sensor::logic::Not" 3 "Mon Sep 12 2022" "Version 1.0.0" "libkipr" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+kipr::sensor::logic::Not
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <logic\&.hpp>\fP
+.PP
+Inherits \fBkipr::sensor::Sensor< bool >\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBNot\fP (const \fBSensor\fP< bool > *\fBinput\fP, bool \fBowns\fP=false)"
+.br
+.ti -1c
+.RI "\fB~Not\fP ()"
+.br
+.ti -1c
+.RI "virtual bool \fBvalue\fP () const"
+.br
+.ti -1c
+.RI "const \fBSensor\fP< bool > * \fBinput\fP () const"
+.br
+.ti -1c
+.RI "bool \fBowns\fP () const"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "kipr::sensor::logic::Not::Not (const \fBSensor\fP< bool > * input, bool owns = \fCfalse\fP)"
+
+.SS "kipr::sensor::logic::Not::~Not ()"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "const \fBSensor\fP<bool>* kipr::sensor::logic::Not::input () const"
+
+.SS "bool kipr::sensor::logic::Not::owns () const"
+
+.SS "virtual bool kipr::sensor::logic::Not::value () const\fC [virtual]\fP"
+
+.PP
+Implements \fBkipr::sensor::Sensor< bool >\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libkipr from the source code\&.

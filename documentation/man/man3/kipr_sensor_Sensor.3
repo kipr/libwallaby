@@ -1,0 +1,34 @@
+.TH "kipr::sensor::Sensor< T >" 3 "Mon Sep 12 2022" "Version 1.0.0" "libkipr" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+kipr::sensor::Sensor< T >
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <sensor\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fB~Sensor\fP ()"
+.br
+.ti -1c
+.RI "virtual T \fBvalue\fP () const =0"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename T > virtual \fBkipr::sensor::Sensor\fP< T >::~\fBSensor\fP ()\fC [inline]\fP, \fC [virtual]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T > virtual T \fBkipr::sensor::Sensor\fP< T >::value () const\fC [pure virtual]\fP"
+
+.PP
+Implemented in \fBkipr::sensor::logic::Not\fP, \fBkipr::sensor::logic::Xor\fP, \fBkipr::sensor::logic::Or\fP, \fBkipr::sensor::logic::And\fP, \fBkipr::magneto::MagnetoZ\fP, \fBkipr::magneto::MagnetoY\fP, \fBkipr::magneto::MagnetoX\fP, \fBkipr::gyro::GyroZ\fP, \fBkipr::gyro::GyroY\fP, \fBkipr::gyro::GyroX\fP, \fBkipr::digital::Digital\fP, \fBkipr::button::IdButton\fP, \fBkipr::analog::Analog10\fP, \fBkipr::analog::Analog8\fP, \fBkipr::analog::Analog\fP, \fBkipr::accel::AccelZ\fP, \fBkipr::accel::AccelY\fP, and \fBkipr::accel::AccelX\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libkipr from the source code\&.

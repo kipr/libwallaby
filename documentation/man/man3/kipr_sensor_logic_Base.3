@@ -1,0 +1,51 @@
+.TH "kipr::sensor::logic::Base" 3 "Mon Sep 12 2022" "Version 1.0.0" "libkipr" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+kipr::sensor::logic::Base
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <logic\&.hpp>\fP
+.PP
+Inherits \fBkipr::sensor::Sensor< bool >\fP\&.
+.PP
+Inherited by \fBkipr::sensor::logic::And\fP, \fBkipr::sensor::logic::Or\fP, and \fBkipr::sensor::logic::Xor\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBBase\fP (const \fBSensor\fP< bool > *\fBa\fP, const \fBSensor\fP< bool > *\fBb\fP, bool \fBowns\fP=false)"
+.br
+.ti -1c
+.RI "\fB~Base\fP ()"
+.br
+.ti -1c
+.RI "const \fBSensor\fP< bool > * \fBa\fP () const"
+.br
+.ti -1c
+.RI "const \fBSensor\fP< bool > * \fBb\fP () const"
+.br
+.ti -1c
+.RI "bool \fBowns\fP () const"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "kipr::sensor::logic::Base::Base (const \fBSensor\fP< bool > * a, const \fBSensor\fP< bool > * b, bool owns = \fCfalse\fP)"
+
+.SS "kipr::sensor::logic::Base::~Base ()"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "const \fBSensor\fP<bool>* kipr::sensor::logic::Base::a () const"
+
+.SS "const \fBSensor\fP<bool>* kipr::sensor::logic::Base::b () const"
+
+.SS "bool kipr::sensor::logic::Base::owns () const"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libkipr from the source code\&.

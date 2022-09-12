@@ -1,0 +1,47 @@
+.TH "kipr::log::LogStream" 3 "Mon Sep 12 2022" "Version 1.0.0" "libkipr" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+kipr::log::LogStream
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <log\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBLogStream\fP (\fBLogStream\fP &&rhs)"
+.br
+.ti -1c
+.RI "\fBLogStream\fP (\fBLog\fP &log, const \fBLevel\fP level)"
+.br
+.ti -1c
+.RI "\fB~LogStream\fP ()"
+.br
+.ti -1c
+.RI "void \fBoperator<<\fP (const \fBFlush\fP &_)"
+.br
+.ti -1c
+.RI "template<typename T > \fBLogStream\fP & \fBoperator<<\fP (const T &t)"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "kipr::log::LogStream::LogStream (\fBLogStream\fP && rhs)"
+
+.SS "kipr::log::LogStream::LogStream (\fBLog\fP & log, const \fBLevel\fP level)"
+
+.SS "kipr::log::LogStream::~LogStream ()"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void kipr::log::LogStream::operator<< (const \fBFlush\fP & _)\fC [inline]\fP"
+
+.SS "template<typename T > \fBLogStream\fP& kipr::log::LogStream::operator<< (const T & t)\fC [inline]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libkipr from the source code\&.

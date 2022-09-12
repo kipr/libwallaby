@@ -1,0 +1,95 @@
+.TH "battery" 3 "Mon Sep 12 2022" "Version 1.0.0" "libkipr" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+battery \- Battery
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBbattery_charging\fP ()"
+.br
+.ti -1c
+.RI "float \fBpower_level\fP ()"
+.br
+.ti -1c
+.RI "float \fBpower_level_nimh\fP ()"
+.br
+.ti -1c
+.RI "float \fBpower_level_lipo\fP ()"
+.br
+.ti -1c
+.RI "float \fBpower_level_life\fP ()"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SH "Function Documentation"
+.PP 
+.SS "int battery_charging ()"
+Whether or not the battery is charging 
+.PP
+\fBReturns\fP
+.RS 4
+0: not charging 1: charging 
+.RE
+.PP
+\fBDeprecated\fP
+.RS 4
+not applicable for the Wallaby controller
+.RE
+.PP
+
+.SS "float power_level ()"
+The device's power level 
+.PP
+\fBReturns\fP
+.RS 4
+The device's current battery capacity 0: 0% 1: 100% 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+defaults to LiFePO4 chemistry 
+.RE
+.PP
+
+.SS "float power_level_life ()"
+The device's power level (LiFePO4 chemistry) 
+.PP
+\fBReturns\fP
+.RS 4
+The device's current battery capacity 0: 0% 1: 100% 
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBpower_level()\fP 
+.RE
+.PP
+
+.SS "float power_level_lipo ()"
+The device's power level (LiPo chemistry) 
+.PP
+\fBReturns\fP
+.RS 4
+The device's current battery capacity 0: 0% 1: 100% 
+.RE
+.PP
+
+.SS "float power_level_nimh ()"
+The device's power level (NiMH chemistry) 
+.PP
+\fBReturns\fP
+.RS 4
+The device's current battery capacity 0: 0% 1: 100% 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libkipr from the source code\&.
