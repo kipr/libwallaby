@@ -41,7 +41,7 @@ int wpa_cmd(char const *cmd, char *buf)
 
   printf("wpa_cmd: %s\n", cmd);
   cmd_len = (size_t)strlen(cmd);
-  printf("cmd_len %d\n", cmd_len);
+  printf("cmd_len %zu\n", cmd_len);
   len = BUFSIZE;
   result = wpa_ctrl_request(ctrl_conn,
                             cmd,
@@ -49,7 +49,7 @@ int wpa_cmd(char const *cmd, char *buf)
                             buf,
                             &len,
                             wpa_cli_msg_cb);
-  printf("len %d\n", len);
+  printf("len %zu\n", len);
   buf[len] = '\0';
   printf("%s\n", buf);
 
