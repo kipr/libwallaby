@@ -134,7 +134,7 @@ inline Pixel fromTrueColor(Encoding enc, const int _0, const int _1, const int _
 {
 	switch(enc) {
 		case RGB: return Pixel(_0 / 255.0, _1 / 255.0, _2 / 255.0);
-		case BGR: return Pixel(_2 / 255.0, _1 / 255.0, _0 / 255.0);
+		default: return Pixel(_2 / 255.0, _1 / 255.0, _0 / 255.0);
 	}
 }
 
