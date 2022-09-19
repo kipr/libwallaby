@@ -754,7 +754,7 @@ int Device::readFrame()
     buf.memory = V4L2_MEMORY_MMAP;
     if (xioctl(m_fd, VIDIOC_DQBUF, &buf) == -1)
     {
-      printf("DQBUF Error: $d\n", errno);
+      printf("DQBUF Error: %d\n", errno);
       switch (errno)
       {
       case EAGAIN:
