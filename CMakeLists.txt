@@ -89,6 +89,7 @@ else()
   target_link_libraries(kipr PRIVATE "-Wl,-Bsymbolic" ${STATIC_KIPR_MODULES})
 endif()
 target_link_libraries(kipr INTERFACE ${STATIC_KIPR_MODULES})
+target_link_options(kipr PRIVATE -static-libgcc -static-libstdc++)  # since wombat is still on jessie, needs the latest g++, gcc
 
 if (TARGET kipr_python)
   target_link_libraries(kipr PRIVATE kipr_python)

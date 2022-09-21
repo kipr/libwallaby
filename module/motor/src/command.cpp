@@ -1,4 +1,5 @@
 #include "kipr/motor/command.hpp"
+#include <stdexcept>
 
 using namespace kipr;
 using namespace kipr::motor;
