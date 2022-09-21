@@ -58,9 +58,9 @@ Platform *Platform::instance()
 
 unsigned char Platform::readRegister8b(unsigned char address)
 {
-  if (address >= REG_READABLE_COUNT)
+  if (address >= REG_ALL_COUNT)
   {
-    logger.error() << "Address " << address << " is invalid";
+    logger.error() << "Address " << static_cast<std::uint32_t>(address) << " is invalid";
     return 0;
   }
 
@@ -71,7 +71,7 @@ void Platform::writeRegister8b(unsigned char address, unsigned char value)
 {
   if (address >= REG_ALL_COUNT)
   {
-    logger.error() << "8-bit address " << address << " is invalid";
+    logger.error() << "8-bit address " << static_cast<std::uint32_t>(address) << " is invalid";
     return;
   }
 
@@ -80,9 +80,9 @@ void Platform::writeRegister8b(unsigned char address, unsigned char value)
 
 unsigned short Platform::readRegister16b(unsigned char address)
 {
-  if (address >= REG_READABLE_COUNT - 1)
+  if (address >= REG_ALL_COUNT - 1)
   {
-    logger.error() << "16-bit address " << address << " is invalid";
+    logger.error() << "16-bit address " << static_cast<std::uint32_t>(address) << " is invalid";
     return 0;
   }
 
@@ -91,9 +91,9 @@ unsigned short Platform::readRegister16b(unsigned char address)
 
 void Platform::writeRegister16b(unsigned char address, unsigned short value)
 {
-  if (address >= REG_READABLE_COUNT - 1)
+  if (address >= REG_ALL_COUNT - 1)
   {
-    logger.error() << "16-bit address " << address << " is invalid";
+    logger.error() << "16-bit address " << static_cast<std::uint32_t>(address) << " is invalid";
     return;
   }
 
@@ -102,9 +102,9 @@ void Platform::writeRegister16b(unsigned char address, unsigned short value)
 
 unsigned int Platform::readRegister32b(unsigned char address)
 {
-  if (address >= REG_READABLE_COUNT - 3)
+  if (address >= REG_ALL_COUNT - 3)
   {
-    logger.error() << "32-bit address " << address << " is invalid";
+    logger.error() << "32-bit address " << static_cast<std::uint32_t>(address) << " is invalid";
     return 0;
   }
 
@@ -113,9 +113,9 @@ unsigned int Platform::readRegister32b(unsigned char address)
 
 void Platform::writeRegister32b(unsigned char address, unsigned int value)
 {
-  if (address >= REG_READABLE_COUNT - 3)
+  if (address >= REG_ALL_COUNT - 3)
   {
-    logger.error() << "32-bit address " << address << " is invalid";
+    logger.error() << "32-bit address " << static_cast<std::uint32_t>(address) << " is invalid";
     return;
   }
 
