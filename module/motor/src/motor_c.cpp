@@ -168,8 +168,7 @@ void off(int motor)
 
 void alloff()
 {
-  Memory memory;
-  Platform::instance()->submit(command::all_off(memory));
+  for (unsigned int i = 0; i < 4; ++i) off(i);
 }
 
 void ao()
