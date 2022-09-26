@@ -77,7 +77,7 @@ int __bold=0;
 #endif
 
 
-void graphics_print_string(char s[],int x, int y, int r, int g, int b, float size)
+void graphics_print_string(const char s[],int x, int y, int r, int g, int b, float size)
 {
 	int i,l;
 	l=strlen(s);
