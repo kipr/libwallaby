@@ -53,6 +53,12 @@ Image::Image(Image &&rhs)
   rhs.owned_ = false;
 }
 
+Image &Image::operator=(Image other)
+{
+  swap(*this, other);
+  return *this;
+}
+
 Image::~Image()
 {
   if (owned_) delete[] data_;
