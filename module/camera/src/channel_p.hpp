@@ -2,7 +2,7 @@
 #define _KIPR_CAMERA_CHANNEL_P_HPP_
 
 #include "kipr/camera/camera.hpp"
-#include "kipr/camera/channel.hpp"
+#include "kipr/camera/channel_impl.hpp"
 #include "kipr/camera/object.hpp"
 #include <opencv2/core/core.hpp>
 
