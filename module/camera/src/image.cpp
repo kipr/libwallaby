@@ -21,7 +21,7 @@ Image::Image(
   unsigned char *const data,
   const bool owned
 ) : type_(type)
-  , data_(nullptr)
+  , data_(data)
   , owned_(owned)
   , width_(width)
   , height_(height)

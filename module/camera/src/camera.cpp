@@ -2,6 +2,7 @@
 #include "channel_p.hpp"
 #include "kipr/camera/camera.h"
 #include "kipr/camera/channel.hpp"
+#include "kipr/camera/channel_impl.hpp"
 #include "UDPVideo.hpp"
 
 #include <csetjmp>
