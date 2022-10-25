@@ -162,7 +162,7 @@ private:
       return false;
     }
 
-    if (read_buffer[0] != 'J')
+    if (read_buffer && read_buffer[0] != 'J')
     {
       logger.error() << "DMA de-synchronized";
       return false;
