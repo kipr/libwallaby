@@ -103,7 +103,7 @@ void graphics_print_character(int n, int x, int y, int r, int g, int b, float si
  * \param size The strings's size
  * \ingroup graphics
  */
-void graphics_print_string(char s[], int x, int y, int r, int g, int b, float size);
+void graphics_print_string(const char s[], int x, int y, int r, int g, int b, float size);
 
 
 /**

@@ -105,9 +105,9 @@ public:
       1,
       2,
       address,
-      (value & 0xFF00) >> 8,
+      (std::uint8_t)((value & 0xFF00) >> 8),
       address + 1,
-      (value & 0x00FF) >> 0,
+      (std::uint8_t)((value & 0x00FF) >> 0),
       'S'
     };
 
@@ -122,13 +122,13 @@ public:
       1,
       4,
       address,
-      (value & 0xFF000000) >> 24,
+      (std::uint8_t)((value & 0xFF000000) >> 24),
       address + 1,
-      (value & 0x00FF0000) >> 16,
+      (std::uint8_t)((value & 0x00FF0000) >> 16),
       address + 2,
-      (value & 0x0000FF00) >> 8,
+      (std::uint8_t)((value & 0x0000FF00) >> 8),
       address + 3,
-      (value & 0x000000FF) >> 0,
+      (std::uint8_t)((value & 0x000000FF) >> 0),
       'S'
     };
 
