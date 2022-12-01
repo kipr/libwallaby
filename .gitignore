@@ -1,2 +1,4 @@
 build
 .vscode/
+documentation/html
+documentation/man
