@@ -86,8 +86,9 @@ public:
     virtual void w8(const std::uint8_t address, const std::uint8_t value) override
     {
         clear_buffers();
-        write_buf[3] = address,
-        write_buf[4] = value,
+        write_buf[3] = 1,
+        write_buf[4] = address,
+        write_buf[5] = value;
 
         transfer();
     }
@@ -130,6 +131,7 @@ private:
     bool transfer()
     {
         std::lock_guard<std::mutex> lock(mut_);
+        std::cout << "address is " << static_cast<unsigned int>(write_buf[4]) << std::endl;
 
         ++count;
         write_buf[0] = 'J';
@@ -137,15 +139,15 @@ private:
         write_buf[2] = count;
         write_buf[REG_ALL_COUNT - 1] = 'S';
 
-        struct spi_ioc_transfer xfer;
-        memset(&xfer, 0, sizeof xfer);
+        struct spi_ioc_transfer xfer[1];
+        memset(xfer, 0, sizeof xfer);
 
-        xfer.tx_buf = (unsigned long)write_buf;
-        xfer.rx_buf = (unsigned long)read_buf;
-        xfer.len = REG_ALL_COUNT;
-        xfer.speed_hz = 16000000;
+        xfer[0].tx_buf = (unsigned long)write_buf;
+        xfer[0].rx_buf = (unsigned long)read_buf;
+        xfer[0].len = REG_ALL_COUNT;
+        xfer[0].speed_hz = 16000000;
 
-        const int status = ioctl(spi_fd_, SPI_IOC_MESSAGE(1), &xfer);
+        const int status = ioctl(spi_fd_, SPI_IOC_MESSAGE(1), xfer);
 
         usleep(50); // FIXME: this  makes sure we don't outrun the co-processor until interrupts are in place for DMA
 
@@ -155,7 +157,7 @@ private:
             return false;
         }
 
-        if (read_buf[0] != 'J')
+        if (read_buf[0] != static_cast<unsigned char>('J'))
         {
             logger.error() << "DMA de-synchronized";
             return false;
