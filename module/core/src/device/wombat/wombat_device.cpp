@@ -28,7 +28,8 @@ class WombatDevice : public kipr::core::Device
 {
 public:
   WombatDevice()
-    : spi_fd_(-1)
+      : spi_fd_(-1),
+        count(0)
   {
     spi_fd_ = open(SPI_FILE_SYSTEM, O_RDWR);
     if (spi_fd_ <= 0)
@@ -51,7 +52,7 @@ public:
   {
     std::uint8_t read_buffer[REG_ALL_COUNT];
 
-    transfer(nullptr, read_buffer, sizeof (read_buffer));
+    transfer(nullptr, read_buffer, sizeof(read_buffer));
 
     return read_buffer[address];
   }
@@ -60,87 +61,84 @@ public:
   {
     std::uint8_t read_buffer[REG_ALL_COUNT];
 
-    transfer(nullptr, read_buffer, sizeof (read_buffer));
+    transfer(nullptr, read_buffer, sizeof(read_buffer));
 
     return (
-      read_buffer[address] << 8 |
-      read_buffer[address + 1] << 0
-    );
+        read_buffer[address] << 8 |
+        read_buffer[address + 1] << 0);
   }
 
   virtual std::uint32_t r32(const std::uint8_t address) override
   {
     std::uint8_t read_buffer[REG_ALL_COUNT];
 
-    transfer(nullptr, read_buffer, sizeof (read_buffer));
+    transfer(nullptr, read_buffer, sizeof(read_buffer));
 
     return (
-      read_buffer[address] << 24 |
-      read_buffer[address + 1] << 16 |
-      read_buffer[address + 2] << 8 |
-      read_buffer[address + 3] << 0
-    );
+        read_buffer[address] << 24 |
+        read_buffer[address + 1] << 16 |
+        read_buffer[address + 2] << 8 |
+        read_buffer[address + 3] << 0);
   }
 
   virtual void w8(const std::uint8_t address, const std::uint8_t value) override
   {
     const std::uint8_t write_buffer[7] = {
-      'J',
-      WALLABY_SPI_VERSION,
-      1,
-      1,
-      address,
-      value,
-      'S'
-    };
+        'J',
+        WALLABY_SPI_VERSION,
+        count,
+        1,
+        address,
+        value,
+        'S'};
+    ++count;
 
-    transfer(write_buffer, nullptr, sizeof (write_buffer));
+    transfer(write_buffer, nullptr, sizeof(write_buffer));
   }
 
   virtual void w16(const std::uint8_t address, const std::uint16_t value) override
   {
     const std::uint8_t write_buffer[9] = {
-      'J',
-      WALLABY_SPI_VERSION,
-      1,
-      2,
-      address,
-      (value & 0xFF00) >> 8,
-      address + 1,
-      (value & 0x00FF) >> 0,
-      'S'
-    };
+        'J',
+        WALLABY_SPI_VERSION,
+        count,
+        2,
+        address,
+        (value & 0xFF00) >> 8,
+        address + 1,
+        (value & 0x00FF) >> 0,
+        'S'};
+    ++count;
 
-    transfer(write_buffer, nullptr, sizeof (write_buffer));
+    transfer(write_buffer, nullptr, sizeof(write_buffer));
   }
 
   virtual void w32(const std::uint8_t address, const std::uint32_t value) override
   {
     const std::uint8_t write_buffer[13] = {
-      'J',
-      WALLABY_SPI_VERSION,
-      1,
-      4,
-      address,
-      (value & 0xFF000000) >> 24,
-      address + 1,
-      (value & 0x00FF0000) >> 16,
-      address + 2,
-      (value & 0x0000FF00) >> 8,
-      address + 3,
-      (value & 0x000000FF) >> 0,
-      'S'
-    };
+        'J',
+        WALLABY_SPI_VERSION,
+        count,
+        4,
+        address,
+        (value & 0xFF000000) >> 24,
+        address + 1,
+        (value & 0x00FF0000) >> 16,
+        address + 2,
+        (value & 0x0000FF00) >> 8,
+        address + 3,
+        (value & 0x000000FF) >> 0,
+        'S'};
+    ++count;
 
-    transfer(write_buffer, nullptr, sizeof (write_buffer));
+    transfer(write_buffer, nullptr, sizeof(write_buffer));
   }
 
 private:
   bool transfer(
-    const std::uint8_t *const write_buffer,
-    std::uint8_t *const read_buffer,
-    const std::size_t size
-  )
+      const std::uint8_t *const write_buffer,
+      std::uint8_t *const read_buffer,
+      const std::size_t size)
   {
     std::lock_guard<std::mutex> lock(mut_);
 
@@ -173,6 +171,7 @@ private:
 
   int spi_fd_;
   std::mutex mut_;
+  std::uint8_t count;
 };
 
 struct WombatDeviceDescriptor

@@ -6,7 +6,7 @@ set(CMAKE_SYSTEM_PROCESSOR armv7l)
 
 set(triple arm-linux-gnueabihf)
 
-set_property(GLOBAL PROPERTY host aarch64-linux)
+set_property(GLOBAL PROPERTY host arm-linux)
 set_property(GLOBAL PROPERTY triple ${triple})
 set_property(GLOBAL PROPERTY arch armv7l)
 set_property(GLOBAL PROPERTY target_os linux)
