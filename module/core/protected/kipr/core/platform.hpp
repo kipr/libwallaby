@@ -16,13 +16,13 @@ namespace kipr
 
     // See comment for KIPR_CORE_PLATFORM_DEVICE_REGISTER for information
     // on why this exists.
-    extern std::unique_ptr<Device> DEVICE;
+    extern kipr::core::Device *DEVICE;
 
     class Platform
     {
     public:
       ~Platform();
-      
+
       static Platform *instance();
 
       unsigned char readRegister8b(unsigned char address);
@@ -33,9 +33,8 @@ namespace kipr
 
       unsigned int readRegister32b(unsigned char address);
       void writeRegister32b(unsigned char address, unsigned int value);
-      
 
-      template<typename... Args>
+      template <typename... Args>
       void submit(Args &&...args)
       {
         std::vector<Command> commands;
@@ -49,15 +48,14 @@ namespace kipr
 
       void submit_(const Command *const buffer, const std::size_t size);
 
-
-      template<typename... Args>
+      template <typename... Args>
       void buildSubmit(std::vector<Command> &commands, Command &&first, Args &&...args)
       {
         commands.emplace_back(first);
         buildSubmit(commands, args...);
       }
 
-      template<typename T, typename... Args>
+      template <typename T, typename... Args>
       void buildSubmit(std::vector<Command> &commands, T &&first, Args &&...args)
       {
         commands.insert(commands.end(), first.cbegin(), first.cend());
@@ -69,13 +67,13 @@ namespace kipr
         commands.emplace_back(first);
       }
 
-      template<typename T>
+      template <typename T>
       void buildSubmit(std::vector<Command> &commands, T &&first)
       {
         commands.insert(commands.end(), first.cbegin(), first.cend());
       }
 
-      template<typename... Args>
+      template <typename... Args>
       size_t submitSize(const Command &first, const Args &...args)
       {
         return 1 + submitSize(args...);
@@ -86,15 +84,13 @@ namespace kipr
         return 1;
       }
 
-      template<typename T, typename... Args>
+      template <typename T, typename... Args>
       size_t submitSize(const T &first, const Args &...args)
       {
         return submitSize(first.size());
       }
 
-      
-
-      template<typename T>
+      template <typename T>
       size_t submitSize(const T &first)
       {
         return first.size();
@@ -102,6 +98,7 @@ namespace kipr
 
       static std::mutex instance_mut_;
       static std::unique_ptr<Platform> instance_;
+      static kipr::core::Device *device_; // to stop DEVICE's deconstructor from being called until Platform's deconstructor is called
     };
   }
 }
@@ -114,6 +111,6 @@ namespace kipr
 // the appropriate Device, since we know we'll only have one compiled
 // into the executable for now. Sigh.
 #define KIPR_CORE_PLATFORM_DEVICE_REGISTER(descriptor) \
-  std::unique_ptr<kipr::core::Device> kipr::core::DEVICE(new descriptor::DeviceType());
+  kipr::core::Device *kipr::core::DEVICE(new descriptor::DeviceType());
 
 #endif
