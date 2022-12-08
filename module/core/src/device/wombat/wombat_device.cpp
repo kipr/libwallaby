@@ -132,7 +132,6 @@ private:
   bool transfer()
   {
     std::lock_guard<std::mutex> lock(mut_);
-    std::cout << "address is " << static_cast<unsigned int>(write_buf[4]) << std::endl;
 
     ++count;
     write_buf[0] = 'J';
