@@ -101,7 +101,7 @@ namespace kipr
       }
 
       static std::mutex instance_mut_;
-      static Platform *instance_;
+      static std::unique_ptr<Platform> instance_;
     };
   }
 }

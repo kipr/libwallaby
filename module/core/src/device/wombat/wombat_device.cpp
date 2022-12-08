@@ -43,6 +43,7 @@ public:
 
   virtual ~WombatDevice()
   {
+    std::cout << "~Wombat()" << std::endl;
     close(spi_fd_);
     delete[] read_buf;
     delete[] write_buf;

@@ -25,7 +25,7 @@ namespace
   }
 }
 
-Platform *Platform::instance_ = nullptr;
+std::unique_ptr<Platform> Platform::instance_ = nullptr;
 std::mutex Platform::instance_mut_;
 
 Platform::Platform()
@@ -50,10 +50,10 @@ Platform *Platform::instance()
   
   if (!instance_)
   {
-    instance_ = new Platform();
+    instance_ = std::unique_ptr<Platform>(new Platform());
   }
 
-  return instance_;
+  return instance_.get();
 }
 
 unsigned char Platform::readRegister8b(unsigned char address)
