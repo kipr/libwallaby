@@ -9,6 +9,8 @@ if (with_documentation)
 
   set(DOXYGEN_WARN_LOGFILE warnings.txt)
   
+  set(DOXYGEN_IMAGE_PATH ${CMAKE_SOURCE_DIR}/documentation/pages)
+  set(DOXYGEN_PROJECT_LOGO ${CMAKE_SOURCE_DIR}/documentation/pages/logo.png)
   set(DOXYGEN_GENERATE_HTML YES)
   set(DOXYGEN_GENERATE_MAN YES)
   set(DOXYGEN_PROJECT_NUMBER ${KIPR_VERSION_MAJOR}.${KIPR_VERSION_MINOR}.${KIPR_VERSION_PATCH})
@@ -19,6 +21,7 @@ if (with_documentation)
   foreach(MODULE ${KIPR_MODULES})
       list(APPEND DOCUMENTATION_DIRECTORIES ${CMAKE_SOURCE_DIR}/module/${MODULE}/public)
   endforeach()
+  list(APPEND DOCUMENTATION_DIRECTORIES ${CMAKE_SOURCE_DIR}/documentation/pages)
 
  #Project Settings
   set(DOXYGEN_PROJECT_LOGO ${CMAKE_SOURCE_DIR}/documentation/kipr.png)

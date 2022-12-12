@@ -25,8 +25,9 @@ namespace
   }
 }
 
-Platform *Platform::instance_ = nullptr;
+std::unique_ptr<Platform> Platform::instance_ = nullptr;
 std::mutex Platform::instance_mut_;
+kipr::core::Device* Platform::device_ = nullptr;
 
 Platform::Platform()
 {
@@ -42,6 +43,7 @@ Platform::Platform()
 Platform::~Platform()
 {
   cleanup(false);
+  delete device_;
 }
 
 Platform *Platform::instance()
@@ -50,10 +52,11 @@ Platform *Platform::instance()
   
   if (!instance_)
   {
-    instance_ = new Platform();
+    instance_ = std::unique_ptr<Platform>(new Platform());
+    device_ = kipr::core::DEVICE;
   }
 
-  return instance_;
+  return instance_.get();
 }
 
 unsigned char Platform::readRegister8b(unsigned char address)

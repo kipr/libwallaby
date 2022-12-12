@@ -28,18 +28,25 @@ class WombatDevice : public kipr::core::Device
 {
 public:
   WombatDevice()
-    : spi_fd_(-1)
+      : spi_fd_(-1),
+        count(0),
+        read_buf(new std::uint8_t[REG_READABLE_COUNT]),
+        write_buf(new std::uint8_t[REG_READABLE_COUNT])
   {
     spi_fd_ = open(SPI_FILE_SYSTEM, O_RDWR);
     if (spi_fd_ <= 0)
     {
       logger.fatal() << "Not found: " << SPI_FILE_SYSTEM;
     }
+    clear_buffers();
   }
 
   virtual ~WombatDevice()
   {
+    std::cout << "~Wombat()" << std::endl;
     close(spi_fd_);
+    delete[] read_buf;
+    delete[] write_buf;
   }
 
   virtual const std::string &getName() const override
@@ -49,110 +56,98 @@ public:
 
   virtual std::uint8_t r8(const std::uint8_t address) override
   {
-    std::uint8_t read_buffer[REG_ALL_COUNT];
+    clear_buffers();
+    transfer();
 
-    transfer(nullptr, read_buffer, sizeof (read_buffer));
-
-    return read_buffer[address];
+    return read_buf[address];
   }
 
   virtual std::uint16_t r16(const std::uint8_t address) override
   {
-    std::uint8_t read_buffer[REG_ALL_COUNT];
-
-    transfer(nullptr, read_buffer, sizeof (read_buffer));
+    clear_buffers();
+    transfer();
 
     return (
-      read_buffer[address] << 8 |
-      read_buffer[address + 1] << 0
-    );
+        read_buf[address] << 8 |
+        read_buf[address + 1] << 0);
   }
 
   virtual std::uint32_t r32(const std::uint8_t address) override
   {
-    std::uint8_t read_buffer[REG_ALL_COUNT];
-
-    transfer(nullptr, read_buffer, sizeof (read_buffer));
+    clear_buffers();
+    transfer();
 
     return (
-      read_buffer[address] << 24 |
-      read_buffer[address + 1] << 16 |
-      read_buffer[address + 2] << 8 |
-      read_buffer[address + 3] << 0
-    );
+        read_buf[address] << 24 |
+        read_buf[address + 1] << 16 |
+        read_buf[address + 2] << 8 |
+        read_buf[address + 3] << 0);
   }
 
   virtual void w8(const std::uint8_t address, const std::uint8_t value) override
   {
-    const std::uint8_t write_buffer[7] = {
-      'J',
-      WALLABY_SPI_VERSION,
-      1,
-      1,
-      address,
-      value,
-      'S'
-    };
+    clear_buffers();
+    write_buf[3] = 1,
+    write_buf[4] = address,
+    write_buf[5] = value;
 
-    transfer(write_buffer, nullptr, sizeof (write_buffer));
+    transfer();
   }
 
   virtual void w16(const std::uint8_t address, const std::uint16_t value) override
   {
-    const std::uint8_t write_buffer[9] = {
-      'J',
-      WALLABY_SPI_VERSION,
-      1,
-      2,
-      address,
-      (value & 0xFF00) >> 8,
-      address + 1,
-      (value & 0x00FF) >> 0,
-      'S'
-    };
+    clear_buffers();
+    write_buf[3] = 2,
+    write_buf[4] = address,
+    write_buf[5] = (value & 0xFF00) >> 8,
+    write_buf[6] = address + 1,
+    write_buf[7] = (value & 0x00FF) >> 0,
 
-    transfer(write_buffer, nullptr, sizeof (write_buffer));
+    transfer();
   }
 
   virtual void w32(const std::uint8_t address, const std::uint32_t value) override
   {
-    const std::uint8_t write_buffer[13] = {
-      'J',
-      WALLABY_SPI_VERSION,
-      1,
-      4,
-      address,
-      (value & 0xFF000000) >> 24,
-      address + 1,
-      (value & 0x00FF0000) >> 16,
-      address + 2,
-      (value & 0x0000FF00) >> 8,
-      address + 3,
-      (value & 0x000000FF) >> 0,
-      'S'
-    };
+    clear_buffers();
+    write_buf[3] = 4;
+    write_buf[4] = address,
+    write_buf[5] = (value & 0xFF000000) >> 24,
+    write_buf[6] = address + 1,
+    write_buf[7] = (value & 0x00FF0000) >> 16,
+    write_buf[8] = address + 2,
+    write_buf[9] = (value & 0x0000FF00) >> 8,
+    write_buf[10] = address + 3,
+    write_buf[11] = (value & 0x000000FF) >> 0,
 
-    transfer(write_buffer, nullptr, sizeof (write_buffer));
+    transfer();
   }
 
 private:
-  bool transfer(
-    const std::uint8_t *const write_buffer,
-    std::uint8_t *const read_buffer,
-    const std::size_t size
-  )
+  void clear_buffers()
+  {
+    memset(write_buf, 0, REG_READABLE_COUNT);
+    memset(read_buf, 0, REG_READABLE_COUNT);
+  }
+
+  bool transfer()
   {
     std::lock_guard<std::mutex> lock(mut_);
 
-    struct spi_ioc_transfer xfer;
-    memset(&xfer, 0, sizeof xfer);
+    ++count;
+    write_buf[0] = 'J';
+    write_buf[1] = WALLABY_SPI_VERSION;
+    write_buf[2] = count;
+    write_buf[REG_READABLE_COUNT - 1] = 'S';
 
-    xfer.tx_buf = (unsigned long)write_buffer;
-    xfer.rx_buf = (unsigned long)read_buffer;
-    xfer.len = size;
-    xfer.speed_hz = 16000000;
+    struct spi_ioc_transfer xfer[1];
+    memset(xfer, 0, sizeof xfer);
 
-    const int status = ioctl(spi_fd_, SPI_IOC_MESSAGE(1), &xfer);
+    xfer[0].tx_buf = (unsigned long)write_buf;
+    xfer[0].rx_buf = (unsigned long)read_buf;
+    xfer[0].len = REG_READABLE_COUNT;
+    xfer[0].speed_hz = 16000000;
+
+    const int status = ioctl(spi_fd_, SPI_IOC_MESSAGE(1), xfer);
 
     usleep(50); // FIXME: this  makes sure we don't outrun the co-processor until interrupts are in place for DMA
 
@@ -162,7 +157,7 @@ private:
       return false;
     }
 
-    if (read_buffer && read_buffer[0] != 'J')
+    if (read_buf[0] != static_cast<unsigned char>('J'))
     {
       logger.error() << "DMA de-synchronized";
       return false;
@@ -173,6 +168,9 @@ private:
 
   int spi_fd_;
   std::mutex mut_;
+  std::uint8_t count;
+  std::uint8_t *write_buf;
+  std::uint8_t *read_buf;
 };
 
 struct WombatDeviceDescriptor

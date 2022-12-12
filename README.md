@@ -41,7 +41,7 @@ Each of the following options may be specified when executing CMake by prefixing
 ```bash
 apt install gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
 cd libkipr
-cmake -Bbuild -DCMAKE_TOOLCHAIN_FILE=$(pwd)/toolchain/aarch64-linux-gnu.cmake .
+cmake -Bbuild -DCMAKE_TOOLCHAIN_FILE=$(pwd)/toolchain/arm-linux-gnueabihf.cmake .
 ```
 
 # Cross-compiling to JavaScript/WASM (e.g., Simulator)

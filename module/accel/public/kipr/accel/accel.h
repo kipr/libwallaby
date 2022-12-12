@@ -3,6 +3,12 @@
  * \copyright KISS Institute for Practical Robotics
  * \defgroup accel Accelerometer
  */
+/**
+ * \page Accelerometer
+ * The functions here allow for reading the accelerometer.
+ * The accelerometer measures acceleration in the x, y, and z directions.
+ * \ingroup accel
+ */
 
 #ifndef _KIPR_ACCEL_ACCEL_H_
 #define _KIPR_ACCEL_ACCEL_H_
