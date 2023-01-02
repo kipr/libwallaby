@@ -3,6 +3,15 @@
  * \copyright KISS Institute for Practical Robotics
  * \defgroup button Buttons
  */
+/**
+ * \page button
+ * The functions here allow for interfacing with the 
+ * digital buttons on the wombat's screen. When you run a program
+ * using the controller's interface,
+ * there are buttons that can be pressed. These are the buttons that
+ * these functions relate to.
+ * \ingroup button
+ */
 
 #ifndef _KIPR_BUTTON_BUTTON_H_
 #define _KIPR_BUTTON_BUTTON_H_

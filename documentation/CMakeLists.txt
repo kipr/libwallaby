@@ -9,6 +9,8 @@ if (with_documentation)
 
   set(DOXYGEN_WARN_LOGFILE warnings.txt)
   
+  set(DOXYGEN_IMAGE_PATH ${CMAKE_SOURCE_DIR}/documentation/pages)
+  set(DOXYGEN_PROJECT_LOGO ${CMAKE_SOURCE_DIR}/documentation/pages/logo.png)
   set(DOXYGEN_GENERATE_HTML YES)
   set(DOXYGEN_GENERATE_MAN YES)
   set(DOXYGEN_GENERATE_XML YES)
@@ -20,6 +22,27 @@ if (with_documentation)
   foreach(MODULE ${KIPR_MODULES})
       list(APPEND DOCUMENTATION_DIRECTORIES ${CMAKE_SOURCE_DIR}/module/${MODULE}/public)
   endforeach()
+  list(APPEND DOCUMENTATION_DIRECTORIES ${CMAKE_SOURCE_DIR}/documentation/pages)
+
+ #Project Settings
+  set(DOXYGEN_PROJECT_LOGO ${CMAKE_SOURCE_DIR}/documentation/kipr.png)
+  set(DOXYGEN_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/documentation)
+  #Build Settings
+  set(DOXYGEN_EXTRACT_ALL YES)
+  set(DOXYGEN_GENERATE_TODOLIST NO)
+  #Input Settings
+  set(DOXYGEN_RECURSIVE YES)
+  #Source Browser Settings
+  set(DOXYGEN_REFERENCED_BY_RELATION YES)
+  set(DOXYGEN_REFERENCES_RELATION YES)
+  #HTML
+    #Note: Finding a red color that wasn't ugly was a challenge, so it's purple for now
+    #(because purple is an awesome color)
+  set(DOXYGEN_HTML_COLORSTYLE_HUE 243)
+  set(DOXYGEN_HTML_COLORSTYLE_SAT 96)
+  set(DOXYGEN_HTML_COLORSTYLE_GAMMA 95)
+  set(DOXYGEN_DISABLE_INDEX YES)
+  set(DOXYGEN_GENERATE_TREEVIEW YES)
 
   doxygen_add_docs(
     documentation
