@@ -26,7 +26,7 @@ if (with_documentation)
 
  #Project Settings
   set(DOXYGEN_PROJECT_LOGO ${CMAKE_SOURCE_DIR}/documentation/kipr.png)
-  set(DOXYGEN_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/documentation)
+  set(DOXYGEN_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/documentation)
   #Build Settings
   set(DOXYGEN_EXTRACT_ALL YES)
   set(DOXYGEN_GENERATE_TODOLIST NO)
