@@ -23,6 +23,7 @@ int main(void)
 	int len;
 	int n;
 	struct tello_ssid * tellos;
+	struct tello_info tello;
 	
 	char cmd_buffer[128];
 	int send_result;
@@ -45,19 +46,19 @@ int main(void)
 	}
 
 	// connect to the first tello on the list
-	tello_connect(tellos[0].ssid);
+	tello_connect(&tello, tellos[0].ssid);
 
 	// Place the tello in sdk mode. We caanot porgress ustil this is done
 	// so block until complete.
 	do 
 	{	
-		send_result = tello_send("command");
+		send_result = tello_send(&tello, "command");
 		printf("send_result %d\n", send_result);
 	
 	} while(send_result != 0);
 
 	// Turn  on video streaming from the tello
-	tello_send("streamon");
+	tello_send(&tello, "streamon");
 
 	camera_open_device_model_at_res(0, TELLO, TELLO_RES);
 
@@ -82,7 +83,7 @@ int main(void)
 
 	do
 	{
-		send_result = tello_send("takeoff");
+		send_result = tello_send(&tello, "takeoff");
 		if(send_result != 0)
 			printf("Error received on takeoff command\n");
 		        printf("send_result %d\n", send_result); fflush(stdout);
@@ -162,7 +163,7 @@ int main(void)
 			printf("movement x=%d, y=%d, z=%d\n", a_movement, b_movement, c_movement); fflush(stdout);
 
 			sprintf(cmd_buffer, "rc %d %d %d %d", a_movement, b_movement, c_movement, 0 );
-			send_result = tello_send_no_wait(cmd_buffer);
+			send_result = tello_send_no_wait(&tello, cmd_buffer);
 			printf("send_result %d\n", send_result); fflush(stdout);
 			msleep(500);
 		}
@@ -171,7 +172,7 @@ int main(void)
 		{
 			// We do not see or lost track of the blob, so stop moving
 			sprintf(cmd_buffer, "rc %d %d %d %d", 0, 0, 0, 0 );
-			send_result = tello_send_no_wait(cmd_buffer);
+			send_result = tello_send_no_wait(&tello, cmd_buffer);
 			printf("send_result %d\n", send_result); fflush(stdout);
 			msleep(500);
 		}                    
