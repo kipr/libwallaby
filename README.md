@@ -36,6 +36,9 @@ Each of the following options may be specified when executing CMake by prefixing
   - `with_documentation` (default: `ON`) - Build documentation support (requires `doxygen` installed on system).
   - `with_tests` (default: `ON`) - Build tests.
 
+## Dummy Build
+  - `DUMMY` (default: `OFF`) - Build a dummy build for use on computer
+
 # Cross-compiling to aarch64-linux-gnu (e.g., Wombat)
 
 ```bash
