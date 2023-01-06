@@ -13,6 +13,7 @@ if (with_documentation)
   set(DOXYGEN_PROJECT_LOGO ${CMAKE_SOURCE_DIR}/documentation/pages/logo.png)
   set(DOXYGEN_GENERATE_HTML YES)
   set(DOXYGEN_GENERATE_MAN YES)
+  set(DOXYGEN_GENERATE_XML YES)
   set(DOXYGEN_PROJECT_NUMBER ${KIPR_VERSION_MAJOR}.${KIPR_VERSION_MINOR}.${KIPR_VERSION_PATCH})
 
   set(DOCUMENTATION_DIRECTORIES)
@@ -25,7 +26,7 @@ if (with_documentation)
 
  #Project Settings
   set(DOXYGEN_PROJECT_LOGO ${CMAKE_SOURCE_DIR}/documentation/kipr.png)
-  set(DOXYGEN_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/documentation)
+  set(DOXYGEN_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/documentation)
   #Build Settings
   set(DOXYGEN_EXTRACT_ALL YES)
   set(DOXYGEN_GENERATE_TODOLIST NO)
