@@ -86,10 +86,15 @@ if(EMSCRIPTEN)
   target_link_libraries(kipr PRIVATE ${STATIC_KIPR_MODULES})
 else()
   add_library(kipr SHARED ${CMAKE_CURRENT_BINARY_DIR}/empty.cpp ${KIPR_MODULE_OBJECTS})
-  target_link_libraries(kipr PRIVATE "-Wl,-Bsymbolic" ${STATIC_KIPR_MODULES})
+  if (UNIX AND NOT APPLE)
+    target_link_libraries(kipr PRIVATE "-Wl,-Bsymbolic" ${STATIC_KIPR_MODULES})
+  endif()
 endif()
 target_link_libraries(kipr INTERFACE ${STATIC_KIPR_MODULES})
-target_link_options(kipr PRIVATE -static-libgcc -static-libstdc++)  # since wombat is still on jessie, needs the latest g++, gcc
+
+if (UNIX AND NOT APPLE)
+  target_link_options(kipr PRIVATE -static-libgcc -static-libstdc++)  # since wombat is still on jessie, needs the latest g++, gcc
+endif()
 
 if (TARGET kipr_python)
   target_link_libraries(kipr PRIVATE kipr_python)
