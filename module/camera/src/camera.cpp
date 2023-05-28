@@ -230,7 +230,6 @@ bool Device::open(const int number, Resolution resolution, Model model)
 
     m_cap->set(cv::CAP_PROP_FRAME_WIDTH, resolutionToWidth(m_resolution));
     m_cap->set(cv::CAP_PROP_FRAME_HEIGHT, resolutionToHeight(m_resolution));
-    m_cap->set(cv::CAP_PROP_FOURCC, V4L2_PIX_FMT_MJPEG);
 
     if (m_resolution == LOW_RES)
     {
