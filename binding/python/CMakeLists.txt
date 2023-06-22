@@ -51,7 +51,7 @@ if(with_python_binding)
   configure_file(setup.cfg.in ${PACKAGE_DIR}/setup.cfg)
   file(WRITE ${PACKAGE_DIR}/src/kipr/__init__.py "")
 
-  # install .so file and .py file to /usr/lib
+  # install necessary .so file and .py file to /usr/lib
   install(TARGETS kipr_python DESTINATION lib)
   install(FILES ${PACKAGE_DIR}/src/kipr/kipr.py DESTINATION lib)
 endif()

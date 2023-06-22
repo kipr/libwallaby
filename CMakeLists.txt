@@ -99,10 +99,6 @@ if (UNIX AND NOT APPLE)
   target_link_options(kipr PRIVATE -static-libgcc -static-libstdc++)  # since wombat is still on jessie, needs the latest g++, gcc
 endif()
 
-if (TARGET kipr_python)
-  target_link_libraries(kipr PRIVATE kipr_python)
-endif()
-
 install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/include/ DESTINATION include)
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/ DESTINATION include PATTERN "*.in" EXCLUDE)
 install(TARGETS kipr DESTINATION lib)
