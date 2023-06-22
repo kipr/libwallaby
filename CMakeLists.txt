@@ -30,8 +30,8 @@ function(gather_module_objects OUT)
   set(${OUT} ${GATHERED_OBJECTS} PARENT_SCOPE)
 endfunction()
 
+# add all modules
 add_subdirectory(module)
-add_subdirectory(binding)
 
 execute_process(
   COMMAND git rev-parse --abbrev-ref HEAD
@@ -65,6 +65,9 @@ gather_module_objects(KIPR_MODULE_OBJECTS ${STATIC_KIPR_MODULES})
 message(STATUS "KIPR module objects are: ${STATIC_KIPR_MODULES} ${KIPR_MODULE_OBJECTS}")
 file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/empty.cpp "")
 
+# add bindings, which require the compiled objects
+set_property(GLOBAL PROPERTY kipr_module_objects ${KIPR_MODULE_OBJECTS})
+add_subdirectory(binding)
 
 if(EMSCRIPTEN)
   if (wasm)
@@ -113,5 +116,4 @@ set(CPACK_DEBIAN_PACKAGE_MAINTAINER "KISS Institute for Practical Robotics")
 set(CPACK_PACKAGE_VERSION_MAJOR ${KIPR_VERSION_MAJOR})
 set(CPACK_PACKAGE_VERSION_MINOR ${KIPR_VERSION_MINOR})
 set(CPACK_PACKAGE_VERSION_PATCH ${KIPR_VERSION_PATCH})
-set(CPACK_DEBIAN_PACKAGE_ARCHITECTURE arm64)
 include(CPack)
