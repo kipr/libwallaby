@@ -30,8 +30,8 @@ function(gather_module_objects OUT)
   set(${OUT} ${GATHERED_OBJECTS} PARENT_SCOPE)
 endfunction()
 
+# add all modules
 add_subdirectory(module)
-add_subdirectory(binding)
 
 execute_process(
   COMMAND git rev-parse --abbrev-ref HEAD
@@ -65,6 +65,9 @@ gather_module_objects(KIPR_MODULE_OBJECTS ${STATIC_KIPR_MODULES})
 message(STATUS "KIPR module objects are: ${STATIC_KIPR_MODULES} ${KIPR_MODULE_OBJECTS}")
 file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/empty.cpp "")
 
+# add bindings, which require the compiled objects
+set_property(GLOBAL PROPERTY kipr_module_objects ${KIPR_MODULE_OBJECTS})
+add_subdirectory(binding)
 
 if(EMSCRIPTEN)
   if (wasm)
@@ -94,10 +97,6 @@ target_link_libraries(kipr INTERFACE ${STATIC_KIPR_MODULES})
 
 if (UNIX AND NOT APPLE)
   target_link_options(kipr PRIVATE -static-libgcc -static-libstdc++)  # since wombat is still on jessie, needs the latest g++, gcc
-endif()
-
-if (TARGET kipr_python)
-  target_link_libraries(kipr PRIVATE kipr_python)
 endif()
 
 install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/include/ DESTINATION include)
