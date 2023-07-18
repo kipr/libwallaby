@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <wallaby/wpa_ctrl.h>
+#include "wpa_ctrl.h"
 #include <string.h>
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -10,9 +10,9 @@
 #include <netinet/in.h>
 #include <unistd.h>
 
-#include <wallaby/camera.h>
-#include <wallaby/util.h>
-#include <wallaby/tello.h>
+#include <kipr/time/time.h>
+#include <kipr/camera/camera.h>
+#include <kipr/tello/tello.h>
 
 static int tello_cmd_socket;
 static struct sockaddr_in tello_cmd_addr;

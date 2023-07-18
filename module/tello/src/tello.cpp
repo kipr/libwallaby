@@ -11,9 +11,9 @@
 #include <ifaddrs.h>
 #include <netdb.h>
 
-#include <wallaby/camera.h>
-#include <wallaby/util.h>
-#include <wallaby/tello.h>
+#include <kipr/camera/camera.h>
+#include <kipr/time/time.h>
+#include <kipr/tello/tello.h>
 
 #define CONFIG_CTRL_IFACE_DIR "/var/run/wpa_supplicant/wlan0"
 
