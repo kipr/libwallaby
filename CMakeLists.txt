@@ -11,6 +11,11 @@ set(KIPR_VERSION_PATCH 0)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+SET(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -fPIC -g -O3")
+SET(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -fPIC -O3 -g")
+
+
 if (EMSCRIPTEN)
   option(wasm "Build for WASM dynamic linking" OFF)
 endif()
@@ -94,6 +99,7 @@ else()
   endif()
 endif()
 target_link_libraries(kipr INTERFACE ${STATIC_KIPR_MODULES})
+
 
 if (UNIX AND NOT APPLE)
   target_link_options(kipr PRIVATE -static-libgcc -static-libstdc++)  # since wombat is still on jessie, needs the latest g++, gcc
