@@ -17,5 +17,5 @@ if(with_create3)
   # FIXME: create3 uses CMAKE_PROJECT_NAME to name its targets. This means
   # instead of create3_client, it's libkipr_client. We should remove the usage
   # of CMAKE_PROJECT_NAME in create3.
-  target_link_libraries(create3 INTERFACE libkipr_client)
+  target_link_libraries(create3 INTERFACE create3_client)
 endif()
