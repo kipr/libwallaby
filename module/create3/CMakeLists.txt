@@ -3,8 +3,6 @@ option(with_create3 "Enable Create 3 API" ON)
 if(with_create3)
   add_module(create3)
 
-  include(create3_ext)
-  include(create3_client)
   # include(FetchContent)
 
   # set(server OFF CACHE BOOL "" FORCE)
