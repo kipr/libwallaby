@@ -21,4 +21,5 @@ if(with_create3)
   # instead of create3_client, it's libkipr_client. We should remove the usage
   # of CMAKE_PROJECT_NAME in create3.
   target_link_libraries(create3 INTERFACE create3_client)
+  add_custom_linker_options(-Wl,--no-as-needed -lcreate3_client -Wl,--as-needed)
 endif()

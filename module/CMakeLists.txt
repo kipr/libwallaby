@@ -55,6 +55,12 @@ function(add_test NAME)
   endif()
 endfunction()
 
+function(add_custom_linker_options)
+  get_property(LINKER_OPTIONS GLOBAL PROPERTY kipr_linker_options)
+  list(APPEND LINKER_OPTIONS ${ARGN})
+  set_property(GLOBAL PROPERTY kipr_linker_options ${LINKER_OPTIONS})
+endfunction()
+
 add_subdirectory(accel)
 add_subdirectory(analog)
 add_subdirectory(audio)

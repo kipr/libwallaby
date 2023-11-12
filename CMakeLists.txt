@@ -99,7 +99,8 @@ else()
   endif()
 endif()
 target_link_libraries(kipr INTERFACE ${STATIC_KIPR_MODULES})
-
+get_property(LINKER_OPTIONS GLOBAL PROPERTY kipr_linker_options)
+target_link_options(kipr PRIVATE ${LINKER_OPTIONS})
 
 if (UNIX AND NOT APPLE)
   target_link_options(kipr PRIVATE -static-libgcc -static-libstdc++)  # since wombat is still on jessie, needs the latest g++, gcc
