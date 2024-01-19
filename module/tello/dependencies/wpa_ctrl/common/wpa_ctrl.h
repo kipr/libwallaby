@@ -13,7 +13,7 @@
 extern "C" {
 #endif
 
-#define BIT(n) (UINT32_C(1) << (n))
+#define BIT(n) (1 << (n))
 /* wpa_supplicant control interface - fixed message prefixes */
 
 /** Interactive request for identity/password/pin */
