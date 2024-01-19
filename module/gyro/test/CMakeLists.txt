@@ -1,0 +1,1 @@
+add_test(gyro_test core gyro time)

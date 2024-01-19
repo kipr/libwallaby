@@ -1,0 +1,1 @@
+add_test(digital_pu_test digital time)

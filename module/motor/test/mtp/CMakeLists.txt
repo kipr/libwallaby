@@ -1,0 +1,1 @@
+add_test(motor_mtp_test core motor time)

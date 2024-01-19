@@ -1,0 +1,1 @@
+add_test(digital_general_test digital time)

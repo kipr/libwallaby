@@ -1,0 +1,1 @@
+add_test(motor_mav_loop_test core motor time)

@@ -1,0 +1,1 @@
+add_test(compass_test compass time)

@@ -1,0 +1,1 @@
+add_test(tello_camera_test core tello time camera)

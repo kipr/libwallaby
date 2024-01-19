@@ -1,0 +1,1 @@
+add_test(motor_pid_gains_test core motor time)
