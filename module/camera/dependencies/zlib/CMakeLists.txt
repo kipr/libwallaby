@@ -11,7 +11,7 @@ set(ZLIB_COMMON_OPTIONS
 if (CMAKE_CROSSCOMPILING)
   get_property(ARCH GLOBAL PROPERTY arch)
   ExternalProject_Add(dep_zlib
-    URL https://www.zlib.net/zlib-1.3.tar.gz
+    URL https://www.zlib.net/current/zlib.tar.gz
     CMAKE_ARGS
       -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}
       ${ZLIB_COMMON_OPTIONS}
@@ -19,7 +19,7 @@ if (CMAKE_CROSSCOMPILING)
   )
 else()
   ExternalProject_Add(dep_zlib
-    URL https://www.zlib.net/zlib-1.3.tar.gz
+    URL https://www.zlib.net/current/zlib.tar.gz
     CMAKE_ARGS
       ${ZLIB_COMMON_OPTIONS}
     INSTALL_COMMAND make install
