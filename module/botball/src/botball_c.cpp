@@ -38,8 +38,10 @@ public:
 		const double start = seconds();
 		msleep(m_s * 1000.0);
 		const double end = seconds();
-        create3_execute_next_command_immediately();
-        create3_velocity_set_components(0, 0);
+        // create3_execute_next_command_immediately();
+        // create3_velocity_set_components(0, 0);
+
+            create3_rotate_degrees(180, 45);
         create3_wait();
 
 		std::cout << std::endl << "Shutdown after " << (end - start) << " seconds" << std::endl;
