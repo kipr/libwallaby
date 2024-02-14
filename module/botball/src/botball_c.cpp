@@ -3,8 +3,9 @@
 #include "kipr/button/button.h"
 #include "kipr/analog/analog.h"
 #include "kipr/console/console.h"
+#include "kipr/create3/client/client.h"
 #include "kipr/create3/client/Client.hpp"
-
+#include <optional>
 #include <stdio.h>
 #include <string.h>
 #include <kipr/time/time.h>
@@ -37,7 +38,7 @@ public:
 		const double start = seconds();
 		msleep(m_s * 1000.0);
 		const double end = seconds();
-         create3_execute_next_command_immediately();
+        create3_execute_next_command_immediately();
         create3_velocity_set_components(0, 0);
         create3_wait();
 
