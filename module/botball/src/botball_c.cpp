@@ -142,8 +142,11 @@ void wait_for_light(int port)
 
                 unsigned long startTime = systime()
                 while ((systime() - startTime) < 2000) {
-                    if (analog(port) > threshold)
-                        break
+                    if (analog(port) > threshold) {
+                        break;
+                    }
+
+                    msleep(10);
                 }
 
                 console_clear();
