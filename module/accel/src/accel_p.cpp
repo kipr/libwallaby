@@ -33,37 +33,25 @@ short kipr::accel::accel_z()
 // Simple low-pass filter for accelerometer
 bool kipr::accel::accel_calibrate()
 {
+  int samples = 50;
 
   // Find the average noise
   int i = 0;
-  double avg = 0;
-  while (i < 50)
+  double sumX, sumY, sumZ = 0;
+  while (i < samples)
   {
-    avg += accel_z();
+    sumX += accel_z();
+    sumY += accel_y();
+    sumZ += accel_x();
+
     msleep(10);
     i++;
   }
-  Biasz = avg / 50.0 + 512; // Z axis should be detecting gravity
 
-  i = 0;
-  avg = 0;
-  while (i < 50)
-  {
-    avg += accel_y();
-    msleep(10);
-    i++;
-  }
-  Biasy = avg / 50.0;
+  Biasx = sumX / samples;
+  Biasy = sumY / samples;
+  Biasz = sumZ / samples + 512; // Z axis should be detecting gravity
 
-  i = 0;
-  avg = 0;
-  while (i < 50)
-  {
-    avg += accel_x();
-    msleep(10);
-    i++;
-  }
-  Biasx = avg / 50.0;
-
+  printf("[Accel Calibration]: Bias Z: %f | Bias Y: %f | Bias X: %f \n", Biasz, Biasy, Biasx);
   return 0;
 }
