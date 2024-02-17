@@ -55,7 +55,7 @@ bool kipr::gyro::gyro_calibrate()
   biasy = sumY / samples;
   biasz = sumZ / samples;
 
-  printf("Bias Z: %d | Bias Y: %d | Bias X: %d \n", biasz, biasy, biasx);
+  printf("[Gyro Calibrate]: Bias Z: %d | Bias Y: %d | Bias X: %d \n", biasz, biasy, biasx);
   return 0;
 }
 
