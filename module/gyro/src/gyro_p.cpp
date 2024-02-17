@@ -39,40 +39,22 @@ bool kipr::gyro::gyro_calibrate()
 {
   int samples = 50;
 
-  // Find the average noise
-
-  // Get the bias for the Z axis by sampling the stationary output.
+  // Find the average noise of the gyro. Get the bias for gyro axis by sampling the stationary output.
   int i = 0;
-  double avg = 0;
+  double sumX, sumY, sumZ = 0;
   while (i < samples)
   {
-    avg += gyro_z();
+    sumX += gyro_x();
+    sumY += gyro_y();
+    sumZ += gyro_z();
     msleep(10);
     i++;
   }
-  biasz += avg / samples;
 
-  // Get the bias for the Y axis by sampling the stationary output.
-  i = 0;
-  avg = 0;
-  while (i < samples)
-  {
-    avg += gyro_y();
-    msleep(10);
-    i++;
-  }
-  biasy += avg / samples;
+  biasx = sumX / samples;
+  biasy = sumY / samples;
+  biasz = sumZ / samples;
 
-  // Get the bias for the X axis by sampling the stationary output.
-  i = 0;
-  avg = 0;
-  while (i < samples)
-  {
-    avg += gyro_x();
-    msleep(10);
-    i++;
-  }
-  biasx += avg / samples;
   printf("Bias Z: %d | Bias Y: %d | Bias X: %d \n", biasz, biasy, biasx);
   return 0;
 }
