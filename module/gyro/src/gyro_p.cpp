@@ -41,7 +41,7 @@ bool kipr::gyro::gyro_calibrate()
 
   // Find the average noise of the gyro. Get the bias for gyro axis by sampling the stationary output.
   int i = 0;
-  double sumX, sumY, sumZ = 0;
+  double sumX = 0, sumY = 0, sumZ = 0;
   while (i < samples)
   {
     sumX += gyro_x();

@@ -37,7 +37,7 @@ bool kipr::accel::accel_calibrate()
 
   // Find the average noise
   int i = 0;
-  double sumX, sumY, sumZ = 0;
+  double sumX = 0, sumY = 0, sumZ = 0;
   while (i < samples)
   {
     sumX += accel_z();
