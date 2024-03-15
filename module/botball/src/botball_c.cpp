@@ -140,7 +140,7 @@ void wait_for_light(int port)
                 printf("Threshold Value: %d \n \n", threshold);
                 printf("Current Value: %d  <----  \n", analog(port));
 
-                unsigned long startTime = systime()
+                unsigned long startTime = systime();
                 while ((systime() - startTime) < 2000) {
                     if (analog(port) > threshold) {
                         break;
