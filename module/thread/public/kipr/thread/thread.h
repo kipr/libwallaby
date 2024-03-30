@@ -47,7 +47,7 @@ typedef struct
  * be threaded
  * \ingroup thread
  */
-typedef void (*thread_function)();
+typedef std::function<void()> thread_function;
 
 /**
  * Create a mutex.
