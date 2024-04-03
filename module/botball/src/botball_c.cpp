@@ -3,6 +3,7 @@
 #include "kipr/button/button.h"
 #include "kipr/analog/analog.h"
 #include "kipr/console/console.h"
+#include "kipr/create3/client/client.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -39,6 +40,7 @@ public:
 		std::cout << std::endl << "Shutdown after " << (end - start) << " seconds" << std::endl;
 		// Note: Might want to move this to botui in the future.
 		//Create::instance()->stop();
+        create3_eStop();
 		kipr::core::cleanup(true);
 		_exit(0);
 	}

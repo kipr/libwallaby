@@ -30,6 +30,5 @@ void kipr::core::cleanup(bool should_abort)
   std::cout << "Cleaning up " << cleanup_functions.size() << std::endl;
 
   for (const auto &func : cleanup_functions) func();
-
   if (should_abort) abort();
 }
