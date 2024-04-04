@@ -40,6 +40,7 @@ public:
 		std::cout << std::endl << "Shutdown after " << (end - start) << " seconds" << std::endl;
 		// Note: Might want to move this to botui in the future.
 		//Create::instance()->stop();
+        create3_execute_next_command_immediately();
         create3_eStop();
 		kipr::core::cleanup(true);
 		_exit(0);
