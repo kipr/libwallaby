@@ -9,7 +9,8 @@
 #ifndef _KIPR_THREAD_THREAD_H_
 #define _KIPR_THREAD_THREAD_H_
 
-#include "kipr/export/export.h"  
+#include "kipr/export/export.h"
+#include <functional>
 
 #ifdef __cplusplus
 extern "C" {
@@ -47,7 +48,7 @@ typedef struct
  * be threaded
  * \ingroup thread
  */
-typedef void (*thread_function)();
+typedef std::function<void()> thread_function;
 
 /**
  * Create a mutex.
