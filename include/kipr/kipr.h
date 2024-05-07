@@ -74,6 +74,10 @@
 #include "kipr/servo/servo.h"
 #endif
 
+#ifdef KIPR_MODULE_TELLO
+#include "kipr/tello/Tello.h"
+#endif
+
 #ifdef KIPR_MODULE_THREAD
 #include "kipr/thread/thread.h"
 #endif
@@ -81,6 +85,7 @@
 #ifdef KIPR_MODULE_TIME
 #include "kipr/time/time.h"
 #endif
+
 
 #include <stdio.h>
 #include <math.h>

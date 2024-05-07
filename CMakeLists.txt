@@ -8,12 +8,48 @@ set(KIPR_VERSION_MAJOR 1)
 set(KIPR_VERSION_MINOR 0)
 set(KIPR_VERSION_PATCH 0)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 SET(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -fPIC -g -O3")
 SET(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -fPIC -O3 -g")
+
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/deploy)
+set(CMAKE_THREAD_LIBS_INIT "-lpthread")
+set(CMAKE_HAVE_THREADS_LIBRARY 1)
+set(CMAKE_USE_WIN32_THREADS_INIT 0)
+set(CMAKE_USE_PTHREADS_INIT 1)
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+set(INCLUDE ${CMAKE_SOURCE_DIR}/include/kipr)
+set(WOMBAT ${DEVICES}/kipr)
+set(RC ${CMAKE_SOURCE_DIR}/rc)
+set(SRC ${CMAKE_SOURCE_DIR}/src)
+set(UI ${CMAKE_SOURCE_DIR}/ui)
+set(TS ${CMAKE_SOURCE_DIR}/ts)
+set(CMAKE_PREFIX_PATH ~/Qt/6.2.4/gcc_64/lib/cmake)
+
+include_directories(
+	${CMAKE_SOURCE_DIR}
+	${CMAKE_SOURCE_DIR}/src
+	${DBUS}/include
+	${CMAKE_BINARY_DIR}
+  ${DEVICE_DIR}/include
+	${INCLUDE}
+)
+
+
+include_directories(~/Qt/6.2.4/gcc_64/include)
+include_directories(/usr/local/include)
+find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets Network Quick QuickWidgets QuickControls2)
+
+find_package(OpenSSL REQUIRED)
+
+file(GLOB INCLUDES ${INCLUDE}/*.h ${DEVICE_DIR}/include/*.h)
+file(GLOB SOURCES ${SRC}/*.cpp ${DEVICE_DIR}/src/*.cpp)
+file(GLOB UIS ${UI}/*)
+file(GLOB TS_FILES ${TS}/*.ts)
+file(GLOB DBUS_INTERFACES ${DBUS}/*.xml)
 
 
 if (EMSCRIPTEN)
@@ -34,6 +70,9 @@ function(gather_module_objects OUT)
 
   set(${OUT} ${GATHERED_OBJECTS} PARENT_SCOPE)
 endfunction()
+
+
+
 
 # add all modules
 add_subdirectory(module)
@@ -76,7 +115,7 @@ add_subdirectory(binding)
 
 if(EMSCRIPTEN)
   if (wasm)
-    add_executable(kipr ${CMAKE_CURRENT_BINARY_DIR}/empty.cpp ${KIPR_MODULE_OBJECTS})
+    add_executable(kipr ${CMAKE_CURRENT_BINARY_DIR}/empty.cpp ${KIPR_MODULE_OBJECTS} ${SRCS_CXX} ${QM_FILES} ${DBUS_INTERFACE_SOURCES})
     set_target_properties(kipr PROPERTIES SUFFIX .wasm)
     target_link_options(kipr PRIVATE
       -sSIDE_MODULE
@@ -88,7 +127,7 @@ if(EMSCRIPTEN)
       --no-entry
     )
   else()
-    add_library(kipr SHARED ${CMAKE_CURRENT_BINARY_DIR}/empty.cpp ${KIPR_MODULE_OBJECTS})
+    add_library(kipr SHARED ${CMAKE_CURRENT_BINARY_DIR}/empty.cpp ${KIPR_MODULE_OBJECTS} ${SRCS_CXX} ${QM_FILES} ${DBUS_INTERFACE_SOURCES})
   endif()
   
   target_link_libraries(kipr PRIVATE ${STATIC_KIPR_MODULES})
@@ -98,6 +137,7 @@ else()
     target_link_libraries(kipr PRIVATE "-Wl,-Bsymbolic" ${STATIC_KIPR_MODULES})
   endif()
 endif()
+add_subdirectory(dbus)
 target_link_libraries(kipr INTERFACE ${STATIC_KIPR_MODULES})
 get_property(LINKER_OPTIONS GLOBAL PROPERTY kipr_linker_options)
 target_link_options(kipr PRIVATE ${LINKER_OPTIONS})
@@ -106,11 +146,53 @@ if (UNIX AND NOT APPLE)
   target_link_options(kipr PRIVATE -static-libgcc -static-libstdc++)  # since wombat is still on jessie, needs the latest g++, gcc
 endif()
 
+
 install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/include/ DESTINATION include)
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/ DESTINATION include PATTERN "*.in" EXCLUDE)
 install(TARGETS kipr DESTINATION lib)
 
 add_subdirectory(documentation)
+include_directories(~/Qt/6.2.4/gcc_64/include)
+
+find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets Network Quick QuickWidgets QuickControls2)
+
+find_package(OpenSSL REQUIRED)
+
+
+set(UI ${UIS})
+
+set(QRC_FILES
+	${RC}/icons.qrc
+	${RC}/construction.qrc
+	${RC}/qml.qrc
+	${RC}/fonts.qrc
+	${RC}/target.qrc
+)
+
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(MOC_SRCS ${INCLUDES})
+set(SRCS_CXX ${SOURCES})
+qt6_wrap_cpp(SRCS_CXX ${MOC_SRCS} OPTIONS -DQT_VERSION=0x060000 -UQT_DBUS_LIB)
+qt6_wrap_ui(SRCS_CXX ${UI})
+qt6_add_resources(SRCS_CXX ${QRC_FILES})
+find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets Network Quick QuickWidgets QuickControls2)
+include_directories(${Qt6Core_INCLUDE_DIRS})
+target_link_libraries(kipr PUBLIC
+	Qt6::Core
+	Qt6::Gui
+	Qt6::Quick
+	Qt6::QuickWidgets
+	Qt6::Widgets
+	Qt6::QuickControls2
+	network_manager_dbus
+	pcompiler
+	z
+	${OPENSSL_LIBRARIES}
+	create3_client
+)
+
+target_link_libraries(kipr PUBLIC ${QT_LIBRARIES})
 
 
 set(CPACK_PACKAGE_NAME kipr)

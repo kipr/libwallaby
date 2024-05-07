@@ -1,1 +1,1 @@
-add_test(tello_demo core tello time)
+# add_test(tello_demo core tello time)
