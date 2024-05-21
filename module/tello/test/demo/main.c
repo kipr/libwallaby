@@ -31,7 +31,7 @@ int main(void)
 
 	if( wpa_sup_connect() == -1)
 	{
-		printf("WPA Supplicant not active\n");
+		printf("WPA Supplicant not active, wpa_sup_connect(): %d\n", wpa_sup_connect());
 		return -1;
 	}
 
@@ -45,7 +45,7 @@ int main(void)
 		printf(" Tellos: %s\n", tellos[n].ssid);
 		n++;
 	}
-
+	fflush(NULL);
 	// connect to the first tello on the list
 	tello_connect(&tello, tellos[0].ssid);
 

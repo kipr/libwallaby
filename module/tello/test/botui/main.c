@@ -23,11 +23,11 @@ int main(void)
 
 	if (wpa_sup_connect() == -1)
 	{
-		printf ("failed to open wpa_supplicant\n");
+		printf ("failed to open wpa_supplicant - main.c\n");
 		return -1;
 	}
 	else
-		printf ("wpa_supplicant opened\n");
+		printf ("wpa_supplicant opened - main.c\n");
 
 	tellos = tellos_find();
 
