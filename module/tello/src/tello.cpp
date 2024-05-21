@@ -15,7 +15,7 @@
 #include <kipr/time/time.h>
 #include <kipr/tello/tello.h>
 
-#define CONFIG_CTRL_IFACE_DIR "/var/run/wpa_supplicant/wlo1"
+#define CONFIG_CTRL_IFACE_DIR "/var/run/wpa_supplicant/wlan0"
 static struct wpa_ctrl *ctrl_conn;
 static struct wpa_ctrl *mon_conn;
 
