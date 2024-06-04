@@ -49,21 +49,6 @@ int main(void)
 	// connect to the first tello on the list
 	tello_connect(&tello, tellos[0].ssid);
 
-	// Place the tello in sdk mode. We caanot porgress ustil this is done
-	// so block until complete.
-	do 
-	{	
-		send_result = tello_send(&tello, "command");
-		printf("send_result %d\n", send_result);
-	
-	} while(send_result != 0);
-
-
-	// Image processing has started so now launch the tello and start blob tracking
-
-	// Launch the tello. This cammond will not return until the tello has completed the takeoff and
-	// is holding position at the defeulat altitude
-
 	do
 	{
 		send_result = tello_send(&tello, "takeoff");
@@ -85,10 +70,7 @@ int main(void)
 
     
 	tello_disconnect(&tello);
-	// close (tello_cmd_socket);
-	// wpa_sup_disconnect();
-
-	//printf("wpa_sup_disconnect: %d",)
+	
     return 0;
 }
 
