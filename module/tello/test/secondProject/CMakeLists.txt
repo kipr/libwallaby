@@ -1,0 +1,2 @@
+add_test(tello_secondProject_test core tello)
+target_link_libraries(tello_secondProject_test PRIVATE wpa_ctrl)
