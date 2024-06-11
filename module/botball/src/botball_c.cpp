@@ -38,8 +38,7 @@ public:
 		const double start = seconds();
 		msleep(m_s * 1000.0);
 		const double end = seconds();
-		std::cout << std::endl
-							<< "Shutdown after " << (end - start) << " seconds" << std::endl;
+		std::cout << std::endl << "Shutdown after " << (end - start) << " seconds" << std::endl;
 		// Note: Might want to move this to botui in the future.
 		// Create::instance()->stop();
 		kipr::core::cleanup(true);
