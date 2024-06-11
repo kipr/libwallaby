@@ -1,5 +1,5 @@
 option(with_botball "Enable botball API" ON)
 
 if(with_botball)
-  add_module(analog botball button console core graphics thread time)
+  add_module(botball core thread analog button console graphics time)
 endif()
