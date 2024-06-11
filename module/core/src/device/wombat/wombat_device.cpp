@@ -15,6 +15,7 @@
 #include <errno.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include "mutex"
 
 #define SPI_FILE_SYSTEM ("/dev/spidev0.0")
 
@@ -56,6 +57,7 @@ public:
 
   virtual std::uint8_t r8(const std::uint8_t address) override
   {
+    std::lock_guard<std::mutex> lock(mut_);
     clear_buffers();
     transfer();
 
@@ -64,6 +66,7 @@ public:
 
   virtual std::uint16_t r16(const std::uint8_t address) override
   {
+    std::lock_guard<std::mutex> lock(mut_);
     clear_buffers();
     transfer();
 
@@ -74,6 +77,7 @@ public:
 
   virtual std::uint32_t r32(const std::uint8_t address) override
   {
+    std::lock_guard<std::mutex> lock(mut_);
     clear_buffers();
     transfer();
 
@@ -86,6 +90,7 @@ public:
 
   virtual void w8(const std::uint8_t address, const std::uint8_t value) override
   {
+    std::lock_guard<std::mutex> lock(mut_);
     clear_buffers();
     write_buf[3] = 1,
     write_buf[4] = address,
@@ -96,6 +101,7 @@ public:
 
   virtual void w16(const std::uint8_t address, const std::uint16_t value) override
   {
+    std::lock_guard<std::mutex> lock(mut_);
     clear_buffers();
     write_buf[3] = 2,
     write_buf[4] = address,
@@ -108,6 +114,7 @@ public:
 
   virtual void w32(const std::uint8_t address, const std::uint32_t value) override
   {
+    std::lock_guard<std::mutex> lock(mut_);
     clear_buffers();
     write_buf[3] = 4;
     write_buf[4] = address,
@@ -131,8 +138,6 @@ private:
 
   bool transfer()
   {
-    std::lock_guard<std::mutex> lock(mut_);
-
     ++count;
     write_buf[0] = 'J';
     write_buf[1] = WALLABY_SPI_VERSION;
