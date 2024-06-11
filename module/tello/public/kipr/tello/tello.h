@@ -2,7 +2,8 @@
 #define _KIPR_TELLO_TELLO_H_
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 #include <sys/types.h>
@@ -16,79 +17,106 @@ extern "C" {
 #define TELLO_STATE_PORT 8890
 #define TELLO_VIDEO_PORT 11111
 #define TELLO_TIMEOUT 2000
-#define TELLO_SUBNET "192.168.10.3"
+#define TELLO_SUBNET "192.168.10"
 
 #define NET_WAIT_COUNT 30
-#define NET_WAIT_TIME  1000
+#define NET_WAIT_TIME 1000
 #define TELLO_WAIT 15000
 
-/* holds information about each tello that is received
-   from the wpa SCAN.
-*/
+   /* holds information about each tello that is received
+      from the wpa SCAN.
+   */
 
-struct tello_ssid { char ssid[TELLO_SSID_LENGTH]; };
+   struct tello_ssid
+   {
+      char ssid[TELLO_SSID_LENGTH];
+   };
 
-/* Data structures that are unique to each tello.
-*/
+   /* Data structures that are unique to each tello.
+    */
 
-struct tello_info { 
-		char ssid[TELLO_SSID_LENGTH];
-		struct sockaddr_in tello_cmd_addr;
-		int tello_cmd_socket;
-		};
+   struct tello_info
+   {
+      char ssid[TELLO_SSID_LENGTH];
+      struct sockaddr_in tello_cmd_addr;
+      int tello_cmd_socket;
+      int tello_state_socket;
+   };
 
-/* uses wpa SCAN to find tellos within its range
-   returns a packed data structure tello_ssid
-*/
+   /* uses wpa SCAN to find tellos within its range
+      returns a packed data structure tello_ssid
+   */
 
-struct tello_ssid * tellos_find();
+   struct tello_ssid *tellos_find();
 
-/* uses a tello ssid to connect to an individual tello.
-   does other administrative setup as well
-*/
+   /* uses a tello ssid to connect to an individual tello.
+      does other administrative setup as well
+   */
 
-int  tello_connect(struct tello_info *, char const * tello_ssid);
+   int tello_connect(struct tello_info *, char const *tello_ssid);
 
-/* sends a command to the tello represented by tello_info
-   This command will wait for the tello to respond within 
-   5 seconds
-*/
+   /* uses current connected tello to disconnect.
+    */
 
-int tello_send(struct tello_info * tello, char const * command);
+   int tello_disconnect(struct tello_info *tello);
 
-/* sends a command to the tello represented by tello_info
-   will wait for the tello to respond within 'seconds'
-*/
+   /* sends a command to the tello represented by tello_info
+      This command will wait for the tello to respond within
+      5 seconds
+   */
 
-int tello_send_wait(struct tello_info *, char const * command, int seconds);
+   int tello_send(struct tello_info *tello, char const *command);
 
-/* sends a command the tello represented by tello_info and does 
-   not wait.  Supports the undocumented (in v2 but documented in v3)
-   RC no wait command.
-*/
-int tello_send_no_wait(struct tello_info *, char const * command);
+   /* sends a command to the tello represented by tello_info
+      will wait for the tello to respond within 'seconds'
+   */
 
-/* base tello_send function */
-int tello_send_wait_noretry(struct tello_info * tello, char const * command, int wait);
+   int tello_send_wait(struct tello_info *, char const *command, int seconds);
 
-/* return mesages from the Tello */
+   /* sends a command the tello represented by tello_info and does
+      not wait.  Supports the undocumented (in v2 but documented in v3)
+      RC no wait command.
+   */
+   int tello_send_no_wait(struct tello_info *, char const *command);
 
-#define TELLO_RETURN_OK                 0
-#define TELLO_RETURN_GARBAGE           -1       /* usually happens when command is sent */
-#define TELLO_RETURN_ERROR             -2       /* error with no description */ 
-#define TELLO_RETURN_TIMEOUT           -3
-#define TELLO_RETURN_CMD_NOT_COMPLETE  -4       /* previous command not complete */
-#define TELLO_RETURN_INSUFFICIANT_LIGHT -5       /* need more light for position tracking */
-#define TELLO_RETURN_UNKNOWN           -99      /* unkown tello error */
+   /* base tello_send function */
+   int tello_send_wait_noretry(struct tello_info *tello, char const *command, int wait);
 
+   char *get_state_values(struct tello_info *tello);
 
-/* connects the user program to wpa_suppplicant */
-int wpa_sup_connect();
+   int bindStateSocket(struct tello_info *tello);
 
-int wpa_cmd(char const  * cmd, char * buf);
+   void close_sockets(struct tello_info *tello);
+
+   void setGlobalTelloInfo(struct tello_info *tello);
+
+   struct tello_info *getGlobalTelloInfo();
+
+   void cleanup(int signum);
+
+   int set_socket_nonblocking(int sockfd);
+
+   int get_battery_value(const char *state);
+
+   /* return mesages from the Tello */
+
+#define TELLO_RETURN_OK 0
+#define TELLO_RETURN_GARBAGE -1 /* usually happens when command is sent */
+#define TELLO_RETURN_ERROR -2   /* error with no description */
+#define TELLO_RETURN_TIMEOUT -3
+#define TELLO_RETURN_CMD_NOT_COMPLETE -4   /* previous command not complete */
+#define TELLO_RETURN_INSUFFICIANT_LIGHT -5 /* need more light for position tracking */
+#define TELLO_RETURN_UNKNOWN -99           /* unkown tello error */
+
+   /* connects the user program to wpa_suppplicant */
+   int wpa_sup_connect();
+
+   /* disconnects the user program to wpa_suppplicant */
+   int wpa_sup_disconnect();
+
+   int wpa_cmd(char const *cmd, char *buf);
 
 #ifdef __cplusplus
 }
 #endif
 #endif
-
