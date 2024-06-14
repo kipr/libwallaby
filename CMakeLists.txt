@@ -5,7 +5,7 @@ project(libkipr)
 option(package_debian "Build a Debian package" OFF)
 
 set(KIPR_VERSION_MAJOR 1)
-set(KIPR_VERSION_MINOR 0)
+set(KIPR_VERSION_MINOR 1)
 set(KIPR_VERSION_PATCH 0)
 
 set(CMAKE_CXX_STANDARD 11)
