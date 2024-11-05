@@ -23,7 +23,6 @@
 #cmakedefine KIPR_MODULE_CONSOLE
 #cmakedefine KIPR_MODULE_CORE
 #cmakedefine KIPR_MODULE_CREATE
-#cmakedefine KIPR_MODULE_CREATE3
 #cmakedefine KIPR_MODULE_DIGITAL
 #cmakedefine KIPR_MODULE_GEOMETRY
 #cmakedefine KIPR_MODULE_GRAPHICS
