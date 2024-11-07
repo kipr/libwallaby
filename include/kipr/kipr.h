@@ -44,10 +44,6 @@
 #include "kipr/create/create.h"
 #endif
 
-#ifdef KIPR_MODULE_CREATE3
-#include "kipr/create3/client/client.h"
-#endif
-
 #ifdef KIPR_MODULE_DIGITAL
 #include "kipr/digital/digital.h"
 #endif
