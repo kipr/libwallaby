@@ -2,6 +2,7 @@
  * \file accel.h
  * \copyright KISS Institute for Practical Robotics
  * \defgroup accel Accelerometer
+ * \authors Tobias Madlberger <tobias.madlberger@gmail.com>
  */
 /**
  * \page Accelerometer

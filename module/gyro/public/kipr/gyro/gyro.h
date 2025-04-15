@@ -2,6 +2,7 @@
  * \file gyro.h
  * \copyright KISS Institute for Practical Robotics
  * \defgroup gyro Gyrometer
+ * \authors Tobias Madlberger <tobias.madlberger@gmail.com>
  */
 
 #ifndef _KIPR_GYRO_GYRO_H_

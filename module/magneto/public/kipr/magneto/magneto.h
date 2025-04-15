@@ -2,6 +2,7 @@
  * \file magneto.h
  * \copyright KISS Institute for Practical Robotics
  * \defgroup magneto Magnetometer
+ * \authors Tobias Madlberger <tobias.madlberger@gmail.com>
  */
 
 #ifndef _KIPR_MAGNETO_MAGNETO_H_

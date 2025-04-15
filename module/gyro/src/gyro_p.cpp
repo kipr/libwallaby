@@ -1,3 +1,8 @@
+/*
+*  Modified by: Tobias Madlberger*, 2025
+*  * Corresponding author's email: tobias.madlberger@gmail.com
+*/
+
 #include "gyro_p.hpp"
 #include "kipr/core/platform.hpp"
 #include "kipr/core/registers.hpp"
