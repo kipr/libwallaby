@@ -7,6 +7,7 @@
 #include "device.hpp"
 
 #include <csignal>
+#include <cstring>
 #include <thread>
 
 
@@ -124,6 +125,25 @@ void Platform::writeRegister32b(unsigned char address, unsigned int value)
 
   return DEVICE->w32(address, value);
 }
+
+float Platform::readRegisterFloat(const unsigned char address)
+{
+  if (address >= REG_ALL_COUNT - 3) // Ensure we don't read out of bounds
+  {
+    logger.error() << "Float address " << static_cast<std::uint32_t>(address) << " is invalid";
+    return 0.0f;
+  }
+
+  // Read 4 bytes from the register as a 32-bit integer
+  const uint32_t rawData = DEVICE->r32(address);
+
+  // Convert raw integer data back to float
+  float result;
+  memcpy(&result, &rawData, sizeof(float));  // Safe conversion
+
+  return result;
+}
+
 
 void Platform::submit_(const Command *const buffer, const std::size_t size)
 {
