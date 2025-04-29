@@ -84,6 +84,7 @@ void shut_down_in(double s)
 void colorbar(int i, int range);
 void wait_for_light(int light_port)
 {
+	setvbuf(stdout, NULL, _IONBF, 0);
 	int OK = 0, onval, offval, reading, i = 0, range;
 	while (!OK)
 	{
@@ -164,6 +165,7 @@ void wait_for_light(int light_port)
 			display_clear();
 		}
 	}
+	setvbuf(stdout, NULL, _IOFBF, BUFSIZ);
 }
 void colorbar(int i, int range)
 {
