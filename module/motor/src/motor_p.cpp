@@ -108,7 +108,7 @@ int kipr::motor::get_motor_bemf(unsigned int port)
 int kipr::motor::get_motor_bemf_vel(unsigned int port)
 {
   if (port >= NUM_MOTORS) return 0;
-  int val = Platform::instance()->readRegister32b(REG_RW_MOT_0_SP_H + 4 * fix_port(port));
+  int val = Platform::instance()->readRegister32b(REG_RW_MOT_0_SP_H + 2 * fix_port(port));
   return val;
 }
 
