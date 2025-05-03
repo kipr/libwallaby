@@ -41,6 +41,7 @@ public:
 		std::cout << std::endl << "Shutdown after " << (end - start) << " seconds" << std::endl;
 		// Note: Might want to move this to botui in the future.
 		// Create::instance()->stop();
+		// ToDo: Shutdown all threads
 		kipr::core::cleanup(true);
 		_exit(0);
 	}

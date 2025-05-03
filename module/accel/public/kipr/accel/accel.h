@@ -1,7 +1,8 @@
 /*!
- * \file analog.h
+ * \file accel.h
  * \copyright KISS Institute for Practical Robotics
  * \defgroup accel Accelerometer
+ * \authors Tobias Madlberger <tobias.madlberger@gmail.com>
  */
 /**
  * \page Accelerometer
@@ -18,10 +19,10 @@ extern "C" {
 #endif
 
 /*!
- * \brief Gets the sensed x acceleration
- * \description Wallaby: +/- 2G range,  1024 per G
- * \description Wombat: +/- 2G range,  1024 per G
- * \description This should be approximately 0 when at rest and flat on a table
+ * \brief Gets the sensed x acceleration in the NED frame (Side with ports is defined as North)
+ * \description Wombat: +/- 2G range
+ * \description This should be approximately 0 when at rest and flat on a table.
+ * The measured unit is in m/s²
  * \return The latest signed x acceleration value
  * \ingroup accel
  */
@@ -29,10 +30,10 @@ signed short accel_x();
 
 
 /*!
- * \brief Gets the sensed y acceleration
- * \description Wallaby: +/- 2G range,  1024 per G
- * \description Wombat: +/- 2G range,  1024 per G
+ * \brief Gets the sensed y acceleration in the NED frame (Side with ports is defined as North)
+ * \description Wombat: +/- 2G range
  * \description This should be approximately 0 when at rest and flat on a table
+ * The measured unit is in m/s²
  * \return The latest signed y acceleration value
  * \ingroup accel
  */
@@ -40,11 +41,10 @@ signed short accel_y();
 
 
 /*!
- * \brief Gets the sensed z acceleration
- * \description Wallaby: +/- 2G range,  1024 per G
- * \description Wallaby: This should be approximately -1024 when at rest and flat on a table
- * \description Wombat: +/- 2G range,  1024 per G
- * \description Wombat: This should be approximately -512 when at rest and flat on a table
+ * \brief Gets the sensed z acceleration in the NED frame (Side with ports is defined as North)
+ * \description Wombat: +/- 2G range
+ * \description Wombat: This should be approximately -9.8 when at rest and flat on a table
+ * The measured unit is in m/s²
  * \return The latest signed z acceleration value
  * \ingroup accel
  */
@@ -55,6 +55,8 @@ signed short accel_z();
  * \brief Calibrates a lowpass filter for the accelerometer
  * \description Sets a low-pass filter. Put at beginning of your program or before you use accelerometer commands if you want calibrated output.
  * \description This function will block for around 500ms taking samples of the accelerometer at standstill.
+ * \description This function will determine the accelerometer bias as well as the gravity direction.
+ * \description When the wombat is flat at rest, the reading should be calibrated to be approximately 0, 0, -9.8.
  * \return 1: success 0: failure
  * \ingroup accel
  */
@@ -66,3 +68,4 @@ int accel_calibrate();
 
 
 #endif
+
