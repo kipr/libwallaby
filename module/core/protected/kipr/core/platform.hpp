@@ -34,6 +34,8 @@ namespace kipr
       unsigned int readRegister32b(unsigned char address);
       void writeRegister32b(unsigned char address, unsigned int value);
 
+      float readRegisterFloat(unsigned char address);
+      
       template <typename... Args>
       void submit(Args &&...args)
       {

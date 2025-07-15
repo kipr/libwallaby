@@ -2,8 +2,8 @@ option(with_python_binding "Build python bindings" ON)
 
 if(with_python_binding)
   find_package(SWIG REQUIRED)
-  find_package(PythonLibs 3 REQUIRED)
-
+  find_package(Python3 REQUIRED COMPONENTS Interpreter Development)
+  
   set(KIPR_PYTHON_WRAPPER ${CMAKE_CURRENT_BINARY_DIR}/kipr_python.cpp)
 
   set(PACKAGE_DIR ${CMAKE_CURRENT_BINARY_DIR}/package)
