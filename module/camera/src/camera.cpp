@@ -1,8 +1,10 @@
 #include "kipr/camera/camera.hpp"
+#include "UDPVideo.hpp"
+#include "USBNETVideo.hpp"
 #include "channel_p.hpp"
 #include "kipr/camera/camera.h"
 #include "kipr/camera/channel.hpp"
-#include "UDPVideo.hpp"
+#include "kipr/camera/channel_impl.hpp"
 
 #include <csetjmp>
 #include <fstream>
@@ -25,6 +27,8 @@
 #include <sys/types.h>
 #include <unistd.h>
 #endif
+
+#define BOTUI_AI_CAMERA_TEST 1
 
 using namespace kipr;
 using namespace kipr::camera;
@@ -49,28 +53,22 @@ using kipr::geometry::Rect;
 // with the select timeout issue.
 // (2) Only the black camera has the camera lag reduced.
 
-extern CvCapture *cvCreateCameraCapture_V4L_K(int index);
-extern CvCapture *cvCreateCameraCapture_V4L_K(const char *deviceName);
+extern cv::Ptr<cv::IVideoCapture> cvCreateCameraCapture_V4L_K(int index);
+extern cv::Ptr<cv::IVideoCapture> cvCreateCameraCapture_V4L_K(const char *deviceName);
 
 class VideoCapture_K : public cv::VideoCapture
 {
 public:
-  VideoCapture_K(const std::string &filename)
-  {
-    open(filename);
-  }
+  VideoCapture_K(const std::string &filename) { open(filename); }
 
-  VideoCapture_K(int device)
-  {
-    open(device);
-  }
+  VideoCapture_K(int device) { open(device); }
 
   bool open(int device)
   {
     if (isOpened())
       release();
 
-    cap = cvCreateCameraCapture_V4L_K(device);
+    icap = cvCreateCameraCapture_V4L_K(device);
     return isOpened();
   }
 
@@ -79,13 +77,11 @@ public:
     if (isOpened())
       release();
 
-    cap = cvCreateCameraCapture_V4L_K(filename.c_str());
+    icap = cvCreateCameraCapture_V4L_K(filename.c_str());
     return isOpened();
   }
 
-  ~VideoCapture_K()
-  {
-  }
+  ~VideoCapture_K() {}
 };
 
 namespace
@@ -102,8 +98,6 @@ namespace
 
 #define SELECTTIMEOUTSEC 1
 #define SELECTTIMEOUTUSEC 0
-
-
 
 // ConfigPath //
 
@@ -163,15 +157,12 @@ public:
 const char *Device::device_name = "/dev/video0";
 
 Device::Device()
-    : m_connected(false),
-      m_bgr(0),
-      m_bgrSize(0),
-      m_fd(-1),
-      m_cap(0),
-      m_impl(new DeviceImpl),
-      m_resolution(HIGH_RES /*LOW_RES*/),
+    : m_connected(false), m_bgr(0), m_bgrSize(0), m_fd(-1), m_cap(0),
+      m_impl(new DeviceImpl), m_resolution(HIGH_RES /*LOW_RES*/),
 #ifdef BOTUI_TELLO_TEST
       m_model(TELLO)
+#elseif BOTUI_AI_CAMERA_TEST
+      m_model(AI_CAMERA)
 #else
       m_model(/*WHITE_2016*/ BLACK_2017)
 #endif
@@ -201,8 +192,7 @@ Device::~Device()
 
 Model Device::getModel() { return this->m_model; }
 
-bool Device::open(const int number, Resolution resolution,
-                          Model model)
+bool Device::open(const int number, Resolution resolution, Model model)
 {
   // Device already open?
   if (this->isOpen())
@@ -211,13 +201,21 @@ bool Device::open(const int number, Resolution resolution,
   m_model = model;
   m_resolution = resolution;
 
+  /*Check FOR AI CAMERA*/
+  if(ai_camera_check())
+  {
+    m_model = AI_CAMERA;
+    printf("AI_CAMERA SET\n");
+  }
+
   if (m_model == WHITE_2016)
   {
     struct stat st;
 
     if (stat(device_name, &st) == -1)
     {
-      logger.error() << "Cannot identify '" << device_name << "': " << errno << ", " << strerror(errno);
+      logger.error() << "Cannot identify '" << device_name << "': " << errno
+                     << ", " << strerror(errno);
       return false;
     }
 
@@ -230,7 +228,8 @@ bool Device::open(const int number, Resolution resolution,
     SelectTimeoutSec = SELECTTIMEOUTINITSEC;
     SelectTimeoutuSec = SELECTTIMEOUTINITUSEC;
 
-    return this->initCapDevice(resolutionToWidth(m_resolution), resolutionToHeight(m_resolution));
+    return this->initCapDevice(resolutionToWidth(m_resolution),
+                               resolutionToHeight(m_resolution));
   }
   else if (m_model == BLACK_2017)
   {
@@ -243,7 +242,6 @@ bool Device::open(const int number, Resolution resolution,
 
     m_cap->set(cv::CAP_PROP_FRAME_WIDTH, resolutionToWidth(m_resolution));
     m_cap->set(cv::CAP_PROP_FRAME_HEIGHT, resolutionToHeight(m_resolution));
-    m_cap->set(cv::CAP_PROP_FOURCC, V4L2_PIX_FMT_MJPEG);
 
     if (m_resolution == LOW_RES)
     {
@@ -260,9 +258,7 @@ bool Device::open(const int number, Resolution resolution,
   else if (m_model == TELLO)
   {
     m_resolution = TELLO_RES;
-    m_cap = new UdpVideo("0.0.0.0",
-                         11111,
-                         resolutionToWidth(m_resolution),
+    m_cap = new UdpVideo("0.0.0.0", 11111, resolutionToWidth(m_resolution),
                          resolutionToHeight(m_resolution));
     if (!m_cap->isOpened())
     {
@@ -271,13 +267,22 @@ bool Device::open(const int number, Resolution resolution,
     }
     m_connected = true;
   }
+  else if (m_model == AI_CAMERA)
+  {
+    m_resolution = AI_CAMERA_RES;
+    m_cap = new UsbnetVideo("192.168.1.2", 5555, resolutionToWidth(m_resolution),
+			resolutionToHeight(m_resolution));
+    if (!m_cap->isOpened())
+    {
+	fprintf(stderr, "Failed to open AI Camera USB/UDP");
+	return false;
+    }
+    m_connected = true;
+  }
   return true;
 }
 
-bool Device::isOpen() const
-{
-  return m_connected || (m_fd != -1);
-}
+bool Device::isOpen() const { return m_connected || (m_fd != -1); }
 
 unsigned int Device::resolutionToHeight(Resolution res)
 {
@@ -288,6 +293,7 @@ unsigned int Device::resolutionToHeight(Resolution res)
   case MED_RES:
     return 240;
   case HIGH_RES:
+  case AI_CAMERA_RES:
     return 480;
   case TELLO_RES:
     return 720;
@@ -305,6 +311,7 @@ unsigned int Device::resolutionToWidth(Resolution res)
   case MED_RES:
     return 320;
   case HIGH_RES:
+  case AI_CAMERA_RES:
     return 640;
   case TELLO_RES:
     return 1280;
@@ -313,15 +320,9 @@ unsigned int Device::resolutionToWidth(Resolution res)
   return 0;
 }
 
-unsigned Device::width() const
-{
-  return resolutionToWidth(m_resolution);
-}
+unsigned Device::width() const { return resolutionToWidth(m_resolution); }
 
-unsigned Device::height() const
-{
-  return resolutionToHeight(m_resolution);
-}
+unsigned Device::height() const { return resolutionToHeight(m_resolution); }
 
 bool Device::close()
 {
@@ -352,8 +353,7 @@ bool Device::close()
 
     m_fd = -1;
   }
-  else if ((m_model == BLACK_2017) ||
-           (m_model == TELLO))
+  else if ((m_model == BLACK_2017) || (m_model == TELLO) || (m_model == AI_CAMERA))
   {
     /*debug*/ printf("closing camera\n");
     delete m_cap; // test to fix
@@ -375,12 +375,14 @@ bool Device::update()
 
       // Timeout
       struct timeval tv;
-      tv.tv_sec = SelectTimeoutSec;   // 2 sec delay to allow camera startup - Q; should we get rid of this code
-                                      // and use the BLACK_2017 to support WHITE_2016 as well?
-      tv.tv_usec = SelectTimeoutuSec; // 300 ms delay - mainly because the white camera
-                                      // is running at 15 FPS which is 66ms/frame
-                                      // 300 ms gives us a cushion to handle the
-                                      // corner cases
+      tv.tv_sec =
+          SelectTimeoutSec;           // 2 sec delay to allow camera startup - Q; should
+                                      // we get rid of this code and use the BLACK_2017 to
+                                      // support WHITE_2016 as well?
+      tv.tv_usec = SelectTimeoutuSec; // 300 ms delay - mainly because the white
+                                      // camera is running at 15 FPS which is
+                                      // 66ms/frame 300 ms gives us a cushion to
+                                      // handle the corner cases
 
       const int r = select(m_fd + 1, &fds, NULL, NULL, &tv);
       if (r == -1)
@@ -435,8 +437,7 @@ bool Device::update()
       }
     }
   }
-  else if ((m_model == BLACK_2017) ||
-           (m_model == TELLO))
+  else if ((m_model == BLACK_2017) || (m_model == TELLO) || (m_model == AI_CAMERA))
   {
     const int readRes = this->readFrame();
     if (readRes < 0)
@@ -465,22 +466,14 @@ bool Device::update()
   return true;
 }
 
-const std::vector<Channel *> &Device::channels() const
-{
-  return m_channels;
-}
+const std::vector<Channel *> &Device::channels() const { return m_channels; }
 
 Image Device::rawImage() const
 {
-  if (m_impl->image.empty()) return Image();
-  return Image(
-    Image::Type::Bgr888,
-    m_impl->image.cols,
-    m_impl->image.rows,
-    m_impl->image.step,
-    m_impl->image.data,
-    false
-  );
+  if (m_impl->image.empty())
+    return Image();
+  return Image(Image::Type::Bgr888, m_impl->image.cols, m_impl->image.rows,
+               m_impl->image.step, m_impl->image.data, false);
 }
 
 void Device::setConfig(const Config &config)
@@ -489,14 +482,12 @@ void Device::setConfig(const Config &config)
   updateConfig();
 }
 
-const Config &Device::config() const
-{
-  return m_config;
-}
+const Config &Device::config() const { return m_config; }
 
 const unsigned char *Device::bgr() const
 {
-  const unsigned correctSize = m_impl->image.rows * m_impl->image.cols * m_impl->image.elemSize();
+  const unsigned correctSize =
+      m_impl->image.rows * m_impl->image.cols * m_impl->image.elemSize();
   if (m_bgrSize != correctSize)
   {
     delete m_bgr;
@@ -556,8 +547,6 @@ void jpegErrorJmp(j_common_ptr cInfo)
 METHODDEF(void)
 emit_message_suppressed(j_common_ptr cinfo, int msg_level) {}
 
-
-
 cv::Mat decodeJpeg(void *p, int size)
 {
   if (size <= 0)
@@ -616,8 +605,7 @@ cv::Mat decodeJpeg(void *p, int size)
   return image;
 }
 
-bool Device::initCapDevice(const unsigned width,
-                                   const unsigned height)
+bool Device::initCapDevice(const unsigned width, const unsigned height)
 {
   if (!this->isOpen())
     return false;
@@ -784,14 +772,14 @@ int Device::readFrame()
     }
     return 1;
   }
-  else if ((m_model == BLACK_2017) ||
-           (m_model == TELLO))
+  else if ((m_model == BLACK_2017) || (m_model == TELLO) || (m_model == AI_CAMERA))
   {
     if (!m_connected)
     {
       printf("camera not connected\n");
       // if(m_model != TELLO)
-      //	open(0, LOW_RES, BLACK_2017); // TODO real numbers, we don't use these yet
+      //	open(0, LOW_RES, BLACK_2017); // TODO real numbers, we don't use
+      // these yet
       return -1;
     }
 
@@ -805,10 +793,11 @@ int Device::readFrame()
     {
       printf("cap isn't opened\n");
     }
-
+	m_impl->image = cv::Mat(3, width()*height()*3, CV_8UC3);
     if (!(m_cap->read(m_impl->image)))
     {
       printf("error reading image\n");
+	m_impl->image = cv::Mat();
       return -1;
     }
     // printf("camera::update m_image %x\n", m_image.data);
@@ -819,8 +808,6 @@ int Device::readFrame()
   // Success!
   return 1;
 }
-
-
 
 int Device::xioctl(int fh, int request, void *arg)
 {

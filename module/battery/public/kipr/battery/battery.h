@@ -15,9 +15,15 @@ extern "C" {
 
 /*!
  * \file battery.h
- * \author Joshua southerland
+ * \author Joshua Southerland
  * \copyright KISS Institute for Practical Robotics
  * \defgroup battery Battery
+ */
+/**
+ * \page battery
+ * The functions defined here allow for checking the wombat or 
+ * wallaby's battery status.
+ * \ingroup battery
  */
 
 

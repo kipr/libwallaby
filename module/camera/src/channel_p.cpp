@@ -3,6 +3,9 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 
+#include "USBNETVideo.hpp"
+#include "KIPRnet.hpp"
+
 #include <iostream>
 #include <vector>
 
@@ -88,3 +91,51 @@ ObjectVector HsvChannelImpl::findObjects(const Config &config)
   return ret;
 }
 
+TensorChannelImpl::TensorChannelImpl() {}
+
+void TensorChannelImpl::update(const cv::Mat &image)
+{
+}
+
+extern char * UsbnetVideo::m_object_list;
+
+
+ObjectVector TensorChannelImpl::findObjects(const Config &config)
+{
+	if (UsbnetVideo::m_object_list == nullptr)
+	{
+		/*debug*/ std::cout << "TensorChannel - no objects found" << std::endl;
+		return ObjectVector();
+	}
+
+//	return ObjectVector();
+
+	char * local_object_list = UsbnetVideo::m_object_list;
+
+	UsbnetVideo::m_object_list = nullptr;
+	
+	int object_count = ((int *) local_object_list)[0];
+	if(object_count == 0)
+	{
+		/*debug*/ std::cout << "TensorChannel - object_count is zero" << std::endl;
+		return ObjectVector();
+	}
+
+	ObjectVector ret;
+
+	for (ObjectVector::size_type i = 0; i < object_count; i++)
+	{
+		object_detection * t_object = (object_detection *) (local_object_list + sizeof(int) + (i * sizeof(object_detection)));
+
+	/*debug*/std::cout << "findObjects " << t_object->box.x << " " << t_object->box.y << " " << t_object->box.width << " " << t_object->box.height << " " << t_object->confidence << std::endl; fflush(NULL);
+		ret.push_back(Object(
+			Point2<unsigned>((t_object->box.x + t_object->box.x + t_object->box.width)/2,
+						(t_object->box.y + t_object->box.y + t_object->box.height)/2),
+			Rect<unsigned>(t_object->box.x, t_object->box.y, t_object->box.width, t_object->box.height),
+			t_object->confidence,
+			t_object->name,
+			t_object->name_len));
+	}
+
+	return ret;
+}

@@ -5,9 +5,9 @@ namespace kipr
 {
   namespace magneto
   {
-    short magneto_x(unsigned char *alt_read_buffer = nullptr);
-    short magneto_y(unsigned char *alt_read_buffer = nullptr);
-    short magneto_z(unsigned char *alt_read_buffer = nullptr);
+    short magneto_x();
+    short magneto_y();
+    short magneto_z();
   }
 }
 

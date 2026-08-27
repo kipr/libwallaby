@@ -3,6 +3,15 @@
  * \copyright KISS Institute for Practical Robotics
  * \defgroup button Buttons
  */
+/**
+ * \page button
+ * The functions here allow for interfacing with the 
+ * digital buttons on the wombat's screen. When you run a program
+ * using the controller's interface,
+ * there are buttons that can be pressed. These are the buttons that
+ * these functions relate to.
+ * \ingroup button
+ */
 
 #ifndef _KIPR_BUTTON_BUTTON_H_
 #define _KIPR_BUTTON_BUTTON_H_
@@ -136,7 +145,7 @@ int black_button();
  * Gets the ousg button's state (pressed or not pressed.)
  * \return 1 for pressed, 0 for not pressed
  * \see a_button_clicked
- * \the only physical button on the Wombat
+ * \details The ousg button is the only physical button on the Wombat
  */
 int push_button();
 

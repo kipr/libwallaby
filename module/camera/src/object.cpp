@@ -38,7 +38,7 @@ Object::Object(const Object &rhs)
   m_data[m_dataLength] = 0;
 }
 
-Object::~Object() { delete[] m_data; }
+Object::~Object() { /*delete[] m_data; m_data = nullptr;*/ }
 
 const geometry::Point2<unsigned> &Object::centroid() const { return m_centroid; }
 

@@ -5,15 +5,15 @@ namespace kipr
 {
   namespace gyro
   {
-    short gyro_x(unsigned char * alt_read_buffer = nullptr);
+    short gyro_x();
 
-    short gyro_y(unsigned char * alt_read_buffer = nullptr);
+    short gyro_y();
 
-    short gyro_z(unsigned char * alt_read_buffer = nullptr);
+    short gyro_z();
 
     bool gyro_calibrate();
 
-    bool gyro_calibrated(unsigned char * alt_read_buffer = nullptr);
+    bool gyro_calibrated();
   }
 }
 

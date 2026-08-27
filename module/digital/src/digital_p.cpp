@@ -15,9 +15,9 @@ using namespace kipr::digital;
 
 using kipr::core::Platform;
 
-bool kipr::digital::digital_value(unsigned int port, unsigned char * alt_read_buffer)
+bool kipr::digital::digital_value(unsigned int port)
 {
-  unsigned short dig_ins_val = Platform::instance()->readRegister16b(REG_RW_DIG_IN_H, alt_read_buffer);
+  unsigned short dig_ins_val = Platform::instance()->readRegister16b(REG_RW_DIG_IN_H);
 
   // TODO: what if this isn't a digital in
   bool ret = dig_ins_val & (1 << port);
@@ -43,10 +43,10 @@ bool kipr::digital::set_digital_value(unsigned char port, bool value)
 }
 
 
-bool kipr::digital::digital_output(unsigned char port, unsigned char * alt_read_buffer)
+bool kipr::digital::digital_output(unsigned char port)
 {
   // TODO: bounds check, if not a good port return Digital::Unknown
-  unsigned short outputs = Platform::instance()->readRegister16b(REG_RW_DIG_OE_H, alt_read_buffer);
+  unsigned short outputs = Platform::instance()->readRegister16b(REG_RW_DIG_OE_H);
   bool output  = outputs & (1 << port);
   return output;
 }

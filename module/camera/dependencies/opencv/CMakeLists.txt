@@ -8,7 +8,7 @@ ExternalProject_Add(dep_opencv
   URL https://github.com/opencv/opencv/archive/refs/tags/4.6.0.tar.gz
   CMAKE_ARGS
     -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}
-    -DBUILD_SHARED_LIBS=OFF
+    -DBUILD_SHARED_LIBS=ON
     -DWITH_FFMPEG=OFF
     -DWITH_1394=OFF
     -DWITH_GSTREAMER=OFF
@@ -26,13 +26,14 @@ ExternalProject_Add(dep_opencv
     -DBUILD_PERF_TESTS=OFF
     -DBUILD_EXAMPLES=OFF
     -DBUILD_opencv_apps=OFF
+    -DBUILD_JPEG=ON
     -DWITH_OPENEXR=OFF
     -DWITH_JASPER=OFF
-    -DWITH_OPENJPEG=OFF
+    -DWITH_OPENJPEG=ON
     -DWITH_WEBP=OFF
-    -DWITH_PNG=OFF
-    -DWITH_JPEG=OFF
-    -DWITH_TIFF=OFF
+    -DWITH_PNG=ON
+    -DWITH_JPEG=ON
+    -DWITH_TIFF=ON
     -DCMAKE_INSTALL_PREFIX=${OPENCV_DIR}
     -DOPENCV_GENERATE_PKGCONFIG=YES
     -DBUILD_opencv_dnn=OFF
@@ -151,3 +152,6 @@ target_link_libraries(opencv_videoio_wrapper INTERFACE opencv opencv_videoio)
 # opencv_imgcodecs
 add_library(opencv_imgcodecs_wrapper INTERFACE)
 target_link_libraries(opencv_imgcodecs_wrapper INTERFACE opencv opencv_imgcodecs)
+
+# Install compiled opencv libs as required by AI Camera update
+install(DIRECTORY ${OPENCV_LIB_DIR}/ TYPE LIB)

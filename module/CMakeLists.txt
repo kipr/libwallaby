@@ -46,13 +46,19 @@ function(module_link_libraries NAME)
 endfunction()
 
 function(add_test NAME)
-  if(with_tests)
+  if(with_tests AND NOT EMSCRIPTEN)
     file(GLOB_RECURSE SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.c*)
     set_source_files_properties(${SOURCES} PROPERTIES LANGUAGE CXX)
     add_executable(${NAME} ${SOURCES})
 
     target_link_libraries(${NAME} PUBLIC kipr)
   endif()
+endfunction()
+
+function(add_custom_linker_options)
+  get_property(LINKER_OPTIONS GLOBAL PROPERTY kipr_linker_options)
+  list(APPEND LINKER_OPTIONS ${ARGN})
+  set_property(GLOBAL PROPERTY kipr_linker_options ${LINKER_OPTIONS})
 endfunction()
 
 add_subdirectory(accel)

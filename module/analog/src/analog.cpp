@@ -16,7 +16,7 @@ Analog::~Analog()
 
 unsigned short Analog::value() const
 {
-	return analog_value(m_port, nullptr);
+	return analog_value(m_port);
 }
 
 unsigned char Analog::port() const

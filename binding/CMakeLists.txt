@@ -7,5 +7,5 @@ foreach(MODULE ${KIPR_MODULES})
     list(APPEND KIPR_SWIG_OPTIONS -I${CMAKE_SOURCE_DIR}/module/${MODULE}/public)
 endforeach()
 
-
 add_subdirectory(python)
+add_subdirectory(xml)

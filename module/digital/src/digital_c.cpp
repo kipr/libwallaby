@@ -6,7 +6,7 @@ using namespace kipr::digital;
 
 int digital(int port)
 {
-  return digital_value(port, nullptr);
+  return digital_value(port);
 }
 
 void set_digital_value(int port, int value)
@@ -16,7 +16,7 @@ void set_digital_value(int port, int value)
 
 int get_digital_value(int port)
 {
-  return (digital_value(port, nullptr) ? 1 : 0);
+  return (digital_value(port) ? 1 : 0);
 }
 
 void set_digital_output(int port, int out)
@@ -26,7 +26,7 @@ void set_digital_output(int port, int out)
 
 int get_digital_output(int port)
 {
-  return (digital_output(port, nullptr) ? 1 : 0);
+  return (digital_output(port) ? 1 : 0);
 }
 
 int get_digital_pullup(int port)

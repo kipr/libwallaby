@@ -1,6 +1,7 @@
 #include "kipr/camera/camera.h"
 #include "kipr/camera/camera.hpp"
 #include "kipr/camera/channel.hpp"
+#include "kipr/camera/channel_impl.hpp"
 #include "kipr/log/log.hpp"
 #include "camera_c_p.hpp"
 #include "logger.hpp"

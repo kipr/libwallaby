@@ -21,7 +21,7 @@ int analog10(int port)
 
 int analog12(int port)
 {
-	return analog_value(port, nullptr);
+	return analog_value(port);
 }
 
 int analog_et(int port)

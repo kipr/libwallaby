@@ -5,6 +5,13 @@
  * \copyright KISS Insitute for Practical Robotics
  * \defgroup console Console
  */
+/**
+ * \page console
+ * The functions defined here are functions
+ * relating to the console, or output window, of the
+ * UI.
+ * \ingroup console
+ */
 
 #ifndef _KIPR_CONSOLE_CONSOLE_H_
 #define _KIPR_CONSOLE_CONSOLE_H_

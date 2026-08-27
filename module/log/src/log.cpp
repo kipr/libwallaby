@@ -9,15 +9,6 @@ using namespace kipr::log;
 
 namespace
 {
-  const static std::unordered_map<Level, std::string> LEVEL_MAPPINGS {
-    { Level::Fatal, "!" },
-    { Level::Error, "E" },
-    { Level::Warning, "W" },
-    { Level::Info, "I" },
-    { Level::Debug, "D" },
-    { Level::Verbose, "V" }
-  };
-
   std::mutex log_mutex;
 }
 
@@ -65,11 +56,12 @@ Log::Log(Log &&rhs)
 void Log::log(const Level level, const std::string &message, const Location &location)
 {
   std::lock_guard<std::mutex> lock(log_mutex);
+
   std::cout
     << "["
     << module_
     << "] ["
-    << LEVEL_MAPPINGS.at(level)
+    << static_cast<char>(level)
     << "] ["
     << location.file
     << ":"
@@ -88,7 +80,7 @@ void Log::log(const Level level, const std::string &message)
     << "["
     << module_
     << "] ["
-    << LEVEL_MAPPINGS.at(level)
+    << static_cast<char>(level)
     << "]: "
     << message
     << std::endl;

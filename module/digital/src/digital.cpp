@@ -16,7 +16,7 @@ void Digital::setValue(bool value)
 
 bool Digital::value() const
 {
-  return digital_value(m_port, nullptr);
+  return digital_value(m_port);
 }
 
 void Digital::setOutput(bool output)
@@ -26,7 +26,7 @@ void Digital::setOutput(bool output)
 
 bool Digital::isOutput() const
 {
-  return digital_output(m_port, nullptr);
+  return digital_output(m_port);
 }
 
 void Digital::setPullup(bool pullup)

@@ -2,9 +2,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <wallaby/wallaby.h>
+#include <kipr/wombat.h>
 #include <string.h>
 #include <time.h>
+
+#define WITH_VISION_SUPPORT
 
 int main()
 {
@@ -12,7 +14,8 @@ int main()
     int ret;
 
     printf("Camera open\n");
-    camera_open_device_model_at_res(0, WHITE_2016, LOW_RES);
+    //camera_open_device_model_at_res(0, WHITE_2016, LOW_RES);
+    camera_open_device_model_at_res(0, AI_CAMERA, AI_CAMERA_RES);
 
     printf("load config\n");
     ret = camera_load_config("1");
@@ -40,7 +43,10 @@ int main()
     printf("%f fps\n", ((double)num_imgs/(stop-start)));
 
     printf("Camera close\n");
+fflush(NULL);
     camera_close();
+    printf("Camera close done\n");
+fflush(NULL);
 #else
     printf("This platform does not support camera");
 #endif

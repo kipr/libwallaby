@@ -14,14 +14,14 @@ namespace kipr
 
     class Log;
 
-    enum class Level
+    enum class Level : char
     {
-      Fatal,
-      Error,
-      Warning,
-      Info,
-      Debug,
-      Verbose
+      Fatal = '!',
+      Error = 'E',
+      Warning = 'W',
+      Info = 'I',
+      Debug = 'D',
+      Verbose = 'V'
     };
 
     struct Location

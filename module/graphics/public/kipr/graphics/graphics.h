@@ -45,10 +45,14 @@ EXPORT_SYM void graphics_update();
  */
 EXPORT_SYM void graphics_clear();
 
+/**
+ * @brief An enumerate with encoding types RGB and BGR
+ * \ingroup graphics
+ */
 typedef enum Encoding
 {
-  RGB,
-  BGR
+  RGB,  //!< the enum used to represent RGB encoding
+  BGR   //!< the enum used to represent BGR encoding
 } Encoding;
 
 /**
@@ -104,6 +108,8 @@ EXPORT_SYM void graphics_fill(int r, int g, int b);
 
 /**
  * Draw a pixel at (x, y)
+ * \param x the X coordinate of the pixel
+ * \param y the Y coordinate of the pixel
  * \param r the red component of the drawing, from 0 to 255
  * \param g the green component of the drawing, from 0 to 255
  * \param b the blue component of the drawing, from 0 to 255
@@ -113,6 +119,10 @@ EXPORT_SYM void graphics_pixel(int x, int y, int r, int g, int b);
 
 /**
  * Draw a line from the point (x1, y1) to (x2, y2)
+ * \param x1 the X coordinate of the first point
+ * \param y1 the Y coordinate of the first point
+ * \param x2 the X coordinate of the second point
+ * \param y2 the Y coordinate of the second point
  * \param r the red component of the drawing, from 0 to 255
  * \param g the green component of the drawing, from 0 to 255
  * \param b the blue component of the drawing, from 0 to 255
@@ -122,6 +132,9 @@ EXPORT_SYM void graphics_line(int x1, int y1, int x2, int y2, int r, int g, int 
 
 /**
  * Draw an unfilled circle to the graphics window at the given coordinates and with the given radius.
+ * \param cx the X coordinate of the center of the circle
+ * \param cy the Y cordinate of the center of the circle
+ * \param radius the radius of the circle to be drawn
  * \param r the red component of the drawing, from 0 to 255
  * \param g the green component of the drawing, from 0 to 255
  * \param b the blue component of the drawing, from 0 to 255
@@ -131,6 +144,9 @@ EXPORT_SYM void graphics_circle(int cx, int cy, int radius, int r, int g, int b)
 
 /**
  * Draw a filled circle to the graphics window at the given coordinates and with the given radius.
+ * \param cx the X coordinate of the center of the circle
+ * \param cy the Y cordinate of the center of the circle
+ * \param radius the radius of the circle to be drawn
  * \param r the red component of the drawing, from 0 to 255
  * \param g the green component of the drawing, from 0 to 255
  * \param b the blue component of the drawing, from 0 to 255
@@ -166,6 +182,13 @@ EXPORT_SYM void graphics_rectangle_fill(int x1, int y1, int x2, int y2, int r, i
 
 /**
  * Draw an unfilled triangle to the graphics window at the given coordinates.
+ * The order of the corners does not matter when drawing a triangle.
+ * \param x1 the X coordinate of the triangle's first corner
+ * \param y1 the Y coordinate of the triangle's first corner
+ * \param x2 the X coordinate of the triangle's second corner
+ * \param y2 the Y coordinate of the triangle's second corner
+ * \param x3 the X coordinate of the triangle's third corner
+ * \param y3 the Y coordinate of the triangle's third corner
  * \param r the red component of the drawing, from 0 to 255
  * \param g the green component of the drawing, from 0 to 255
  * \param b the blue component of the drawing, from 0 to 255
@@ -175,6 +198,13 @@ EXPORT_SYM void graphics_triangle(int x1, int y1, int x2, int y2, int x3, int y3
 
 /**
  * Draw a filled triangle to the graphics window at the given coordinates.
+ * The order of the corners does not matter when drawing a triangle.
+ * \param x1 the X coordinate of the triangle's first corner
+ * \param y1 the Y coordinate of the triangle's first corner
+ * \param x2 the X coordinate of the triangle's second corner
+ * \param y2 the Y coordinate of the triangle's second corner
+ * \param x3 the X coordinate of the triangle's third corner
+ * \param y3 the Y coordinate of the triangle's third corner
  * \param r the red component of the drawing, from 0 to 255
  * \param g the green component of the drawing, from 0 to 255
  * \param b the blue component of the drawing, from 0 to 255

@@ -3,6 +3,12 @@
  * \copyright KISS Institute for Practical Robotics
  * \defgroup accel Accelerometer
  */
+/**
+ * \page Accelerometer
+ * The functions here allow for reading the accelerometer.
+ * The accelerometer measures acceleration in the x, y, and z directions.
+ * \ingroup accel
+ */
 
 #ifndef _KIPR_ACCEL_ACCEL_H_
 #define _KIPR_ACCEL_ACCEL_H_
@@ -46,8 +52,9 @@ signed short accel_z();
 
 
 /*!
- * Initiates a calibration of the accelerometer
- * \note Not Yet Implemented
+ * \brief Calibrates a lowpass filter for the accelerometer
+ * \description Sets a low-pass filter. Put at beginning of your program or before you use accelerometer commands if you want calibrated output.
+ * \description This function will block for around 500ms taking samples of the accelerometer at standstill.
  * \return 1: success 0: failure
  * \ingroup accel
  */

@@ -8,9 +8,9 @@ using namespace kipr::battery;
 
 using kipr::core::Platform;
 
-unsigned short kipr::battery::battery_raw_reading(unsigned char *alt_read_buffer)
+unsigned short kipr::battery::battery_raw_reading()
 {
-  return Platform::instance()->readRegister16b(REG_RW_BATT_H, alt_read_buffer);
+  return Platform::instance()->readRegister16b(REG_RW_BATT_H);
 }
 
 // linear interpolation

@@ -7,5 +7,4 @@ using namespace kipr::console;
 void Console::clear()
 {
   printf("\f");
-  fflush(stdout);
 }

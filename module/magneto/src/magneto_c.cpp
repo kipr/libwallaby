@@ -6,15 +6,15 @@ using namespace kipr::magneto;
 
 short magneto_x()
 {
-	return magneto::magneto_x(nullptr);
+	return magneto::magneto_x();
 }
 
 short magneto_y()
 {
-	return magneto::magneto_y(nullptr);
+	return magneto::magneto_y();
 }
 
 short magneto_z()
 {
-	return magneto::magneto_z(nullptr);
+	return magneto::magneto_z();
 }

@@ -1,5 +1,5 @@
 /*!
-* \file graphics-key-code.h
+* \file graphics_key_code.h
 * \brief Key codes used in the graphics window
 * \copyright KISS Insitute for Practical Robotics
 * \defgroup graphics Graphics
@@ -12,6 +12,7 @@
 extern "C" {
 #endif
 
+//! All Key Codes
 enum KeyCode
 {
   KeyEnter = '\n',      ///< enter key

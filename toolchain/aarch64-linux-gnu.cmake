@@ -12,6 +12,16 @@ set_property(GLOBAL PROPERTY arch aarch64)
 set_property(GLOBAL PROPERTY target_os linux)
 set_property(GLOBAL PROPERTY cross_prefix ${triple}-)
 
+# Tell cmake about our sysroot
+set(CMAKE_SYSROOT /opt/sysroot)
+set(CMAKE_FIND_ROOT_PATH /opt/sysroot)
+
+# Tell cmake to ignore programs in the sysroot
+set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
+# Tell cmake to ignore the host root and only look in the sysroot for libraries and includes
+set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+
 set(CMAKE_C_COMPILER_TARGET ${triple})
 
 set(CMAKE_C_COMPILER ${triple}-gcc)

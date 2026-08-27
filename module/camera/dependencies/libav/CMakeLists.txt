@@ -25,7 +25,7 @@ if (CMAKE_CROSSCOMPILING)
   get_property(TARGET_OS GLOBAL PROPERTY target_os)
   get_property(CROSS_PREFIX GLOBAL PROPERTY cross_prefix)
   ExternalProject_Add(dep_libav
-    URL https://libav.org/releases/libav-12.3.tar.gz
+    URL https://github.com/libav/libav/archive/refs/tags/v12.3.tar.gz
     CONFIGURE_COMMAND ${LIBAV_DIR}-prefix/src/dep_libav/configure
       ${LIBAV_COMMON_OPTIONS}
       --enable-cross-compile
@@ -37,7 +37,7 @@ if (CMAKE_CROSSCOMPILING)
   )
 else()
   ExternalProject_Add(dep_libav
-    URL https://libav.org/releases/libav-12.3.tar.gz
+    URL https://github.com/libav/libav/archive/refs/tags/v12.3.tar.gz
     CONFIGURE_COMMAND ${LIBAV_DIR}-prefix/src/dep_libav/configure
       ${LIBAV_COMMON_OPTIONS}
     INSTALL_COMMAND make install
