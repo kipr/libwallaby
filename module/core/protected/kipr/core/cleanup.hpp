@@ -2,7 +2,6 @@
 #define _KIPR_CORE_CLEANUP_HPP_
 
 #include <functional>
-#include <mutex>
 
 namespace kipr
 {
@@ -10,7 +9,6 @@ namespace kipr
   {
     typedef std::function<void ()> CleanupFunction;
 
-    extern std::mutex cleanup_mutex;
     void cleanup_add(const CleanupFunction &func);
     void cleanup(bool should_abort = false);
   }
