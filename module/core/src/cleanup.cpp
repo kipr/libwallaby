@@ -12,15 +12,15 @@ namespace
 {
   std::vector<CleanupFunction> &cleanup_functions()
   {
-    static std::vector<CleanupFunction> functions;
-    return functions;
+    static std::vector<CleanupFunction> *functions = new std::vector<CleanupFunction>();
+    return *functions;
   }
+}
 
-  std::mutex &cleanup_mutex()
-  {
-    static std::mutex mutex;
-    return mutex;
-  }
+std::mutex &kipr::core::cleanup_mutex()
+{
+  static std::mutex *mutex = new std::mutex();
+  return *mutex;
 }
 
 void kipr::core::cleanup_add(const CleanupFunction &func)
@@ -42,7 +42,7 @@ void kipr::core::cleanup(bool should_abort)
       (*it)();
     }
   }
+  funcs.clear();  
 
   if (should_abort) abort();
 }
-
