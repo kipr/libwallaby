@@ -74,7 +74,7 @@ bool kipr::motor::set_motor_mode(unsigned int port, unsigned char mode)
 {
   if (port >= NUM_MOTORS) return false;
 
-  if (mode != 0) std::lock_guard<std::mutex> lock(cleanup_mutex);
+  if (mode != 0) std::lock_guard<std::mutex> lock(cleanup_mutex());
 
   unsigned char modes = Platform::instance()->readRegister8b(REG_RW_MOT_MODES);
 
@@ -161,7 +161,7 @@ bool kipr::motor::set_motor_pwm(unsigned int port, unsigned char speed)
 {
 
   if (port >= NUM_MOTORS) return false;
-  std::lock_guard<std::mutex> lock(cleanup_mutex);
+  std::lock_guard<std::mutex> lock(cleanup_mutex());
   // TODO: error signal outside of range
   set_motor_mode(port, static_cast<unsigned char>(ControlMode::Inactive));
   const unsigned short speedMax = 400;
@@ -198,7 +198,7 @@ bool kipr::motor::set_motor_goal_velocity(unsigned int port, int goal_velocity)
   // TODO: may need to put some logic in for not writing goals if they equal the current goal
   //  ... maybe add on the co-proc?
   unsigned int goal_addy = REG_RW_MOT_0_SP_H + 2 * fix_port(port); // TODO: 32 bit?
-  std::lock_guard<std::mutex> lock(cleanup_mutex);
+  std::lock_guard<std::mutex> lock(cleanup_mutex());
   Platform::instance()->writeRegister16b(goal_addy, static_cast<signed short>(goal_velocity));
 
   goal_vel_array[port] = goal_velocity;
