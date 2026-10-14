@@ -3,6 +3,7 @@
 #include "opencv2/imgcodecs.hpp"
 #include "KIPRnet.hpp"
 
+#include <unistd.h>
 #include <poll.h>
 
 #include <sys/types.h>
@@ -10,6 +11,8 @@
 #include <netdb.h>
 #include <netinet/in.h>
 #include <netinet/tcp.h>
+#include <fcntl.h>
+
 
 #include <opencv2/core/utils/logger.hpp>
 
@@ -157,7 +160,7 @@ start_block:
 				goto start_block;
 			}
 		} while (recvMsgSize == PACK_SIZE);
-
+header_found:
 		int total_pack = ((int *) buffer)[0];
 
 		image_size = total_pack;
@@ -187,26 +190,25 @@ start_block:
 		{
 			std::cout << "run_vdr-frame element: " << strerror(errno) << std::endl;
 			free(longbuf);
+			longbuf = nullptr;
 			goto start_block;
 		}
 		if (recvMsgSize != PACK_SIZE) {
 			cerr << "Received unexpected size pack:" << recvMsgSize << endl << std::flush;
 			free(longbuf);
-			goto start_block;   // somethings wrong - find next frame 
+			longbuf = nullptr;
+			goto header_found;   // must be start of a new block
                 }
 		memcpy( & longbuf[i * PACK_SIZE], buffer, recvMsgSize);
 	}
-
-	cout << "run-vdt Received packet from " << sourceAddress << ":" << sourcePort << endl;
 
 // dig out the codec signature string
 
 	size_t maxlen = 3;
 	Mat frame = imdecode(std::vector<uchar>(longbuf, longbuf+image_size), IMREAD_COLOR|IMREAD_ANYDEPTH|IMREAD_IGNORE_ORIENTATION);
 
-/*DEBUG*/ hexDump((char *)"longbuf", longbuf, 16);
-
 #ifdef VDTDEBUG
+/*DEBUG*/ hexDump((char *)"longbuf", longbuf, 16);
 /*DEBUG*/ cout << "run-vdt - frame.size().width: " << frame.size().width << endl;
 /*DEBUG*/ cout << "run-vdt - frame.depth(): " << frame.depth() << " frame.channels(): " << frame.channels() << endl;
 #endif
@@ -222,7 +224,7 @@ start_block:
 
 	clock_t next_cycle = clock();
 	double duration = (next_cycle - last_cycle) / (double) CLOCKS_PER_SEC;
-	cout << next_cycle - last_cycle;
+	cout << "cycle time: " << next_cycle - last_cycle;
 	last_cycle = next_cycle;
 	add_pframe_to_list(frame, object_list);
 	}
@@ -279,8 +281,10 @@ void UsbFrameProcessor::add_pframe_to_list(Mat &newFrame, char * object_list)
 	if(m_next_object_list != nullptr)
 	free(m_next_object_list);
 	m_next_object_list = object_list;
+#ifdef DEBUGGETPFRAMW
 	std::cout << "UsbFrameProcessor::add_pframe_to_list h: " << newFrame.rows
 		<< " w: " << newFrame.cols << endl;
+#endif
 	m_new_frame = true;
 	m_vid_frame_mutex.unlock();
 }
@@ -322,23 +326,91 @@ bool UsbnetVideo::read(cv::OutputArray image)
 #define MAXRECVBUFF 256
 #define AICAM_POLL_TIMEOUT 10000 /* in milliseconds */
 
+// Source - https://stackoverflow.com/a/61960339
+// Posted by Jay Sullivan, modified by community. See post 'Timeline' for change history
+// Retrieved 2026-10-13, License - CC BY-SA 4.0
+
+int connect_with_timeout(int sockfd, struct sockaddr_in *addr, socklen_t addrlen, unsigned int timeout_ms) {
+    int rc = 0;
+    // Set O_NONBLOCK
+/*DEBUG*/ cout << "connect_with_timeout timeout_ms: " << timeout_ms << endl;
+    int sockfd_flags_before;
+    if((sockfd_flags_before=fcntl(sockfd,F_GETFL,0)<0)) return -1;
+    if(fcntl(sockfd,F_SETFL,sockfd_flags_before | O_NONBLOCK)<0) return -1;
+    // Start connecting (asynchronously)
+    do {
+        if (connect(sockfd, (struct sockaddr*) addr, addrlen)<0) {
+            // Did connect return an error? If so, we'll fail.
+            if ((errno != EWOULDBLOCK) && (errno != EINPROGRESS)) {
+                rc = -1;
+            }
+            // Otherwise, we'll wait for it to complete.
+            else {
+                // Set a deadline timestamp 'timeout' ms from now (needed b/c poll can be interrupted)
+                struct timespec now;
+                if(clock_gettime(CLOCK_MONOTONIC, &now)<0) { rc=-1; break; }
+                struct timespec deadline = { .tv_sec = now.tv_sec,
+                                             .tv_nsec = now.tv_nsec + timeout_ms*100000l};
+                // Wait for the connection to complete.
+                do {
+                    // Calculate how long until the deadline
+                    if(clock_gettime(CLOCK_MONOTONIC, &now)<0) { rc=-1; break; }
+                    int ms_until_deadline = (int)(  (deadline.tv_sec  - now.tv_sec)*1000l
+                                                  + (deadline.tv_nsec - now.tv_nsec)/100000l);
+cout << "ms_until_deadline: " << ms_until_deadline << endl;
+                    if(ms_until_deadline<0) { rc=0; break; }
+                    // Wait for connect to complete (or for the timeout deadline)
+                    struct pollfd pfds[] = { { .fd = sockfd, .events = POLLOUT } };
+                    rc = poll(pfds, 1, ms_until_deadline);
+cout << "poll return - rc: " << rc << endl;
+                    // If poll 'succeeded', make sure it *really* succeeded
+                    if(rc>0) {
+                        int error = 0; socklen_t len = sizeof(error);
+                        int retval = getsockopt(sockfd, SOL_SOCKET, SO_ERROR, &error, &len);
+                        if(retval==0) errno = error;
+                        if(error!=0) rc=-1;
+                    }
+                }
+                // If poll was interrupted, try again.
+                while(rc==-1 && errno==EINTR);
+                // Did poll timeout? If so, fail.
+                if(rc==0) {
+                    errno = ETIMEDOUT;
+                    rc=-1;
+                }
+            }
+        }
+    } while(0);
+    // Restore original O_NONBLOCK state
+    if(fcntl(sockfd,F_SETFL,sockfd_flags_before)<0) return -1;
+    // Success
+    return rc;
+}
+
+
 char * ai_camera_command(char * command, int bufferlength)
 {
 	int flag = 1;
-	int sockfd;
+	int sockfd = -1;
 	int connectreturn;
 	struct sockaddr_in servaddr;
 	int commandLen = strlen(command);   // Determine input length
 	int bytes_sent;
+	fd_set fdset;
+	struct timeval tv;
 
 	// Establish connection with the AI Camera server
-
+/*debug*/ cout << "entering ai_camera_command" << endl << flush;
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
 	if(sockfd == -1)
 	{
 		cout << "socket creation failed" << endl;
 		return NULL;
 	}
+
+	// used for connect timeout
+
+//	fcntl(sockfd, F_SETFL, O_NONBLOCK);
 
 	// assign IP, PORT
 
@@ -349,10 +421,11 @@ char * ai_camera_command(char * command, int bufferlength)
 	servaddr.sin_port = htons(AI_CAMERA_COMMAND_PORT);
 
 	// connect  to the AI Camera command port
-
-	connectreturn = connect(sockfd, (struct sockaddr*)&servaddr, sizeof(servaddr));
-
-	if(connectreturn != 0)
+/*debug*/ cout << "connecting to server" << endl << flush;
+	connectreturn = connect_with_timeout(sockfd, &servaddr, sizeof(servaddr), 4000);
+       //connectreturn = connect(sockfd, (struct sockaddr*)&servaddr, sizeof(servaddr));
+/*DEBUG*/ cout << "connectreturn: " << connectreturn << endl;
+	if(connectreturn < 0)
 	{
 		cout << "connection with AI server failed with error " << connectreturn << endl;
 		perror("ai_camera_command connect");
@@ -364,16 +437,28 @@ char * ai_camera_command(char * command, int bufferlength)
 
 	setsockopt(sockfd, IPPROTO_TCP, TCP_NODELAY, (char *) &flag, sizeof(int));
 
+/*DEBUG*/ cout << "sending ai_camera_command - " << command << " sockfd: " << sockfd << " status: " << connectreturn << std::endl << std::flush;
+
 	bytes_sent = send(sockfd, command, commandLen, 0);
 
-	cout << "ai_camera_command - command sent: " << command << endl;
+	cout << "ai_camera_command - command sent: " << command << endl << std::flush;
 
 	int bytesReceived = 0;              // Bytes read on each recv()
 	int totalBytesReceived = 0;         // Total bytes read
 	cout << "ai_camera_command-Received: ";               // Setup to print the echoed string
         char * returnBuffer = (char *) malloc(MAXRECVBUFF);    // Buffer for echo string + \0
 
-	bytesReceived = recv(sockfd, returnBuffer, MAXRECVBUFF-1, 0);
+	int waitcount = 0;
+	do
+	{
+		bytesReceived = recv(sockfd, returnBuffer, MAXRECVBUFF-1, MSG_DONTWAIT );
+		if(bytesReceived < 0)
+		{
+			usleep(2500);
+			waitcount++;
+		}
+
+	} while ( (bytesReceived < 0) && (waitcount < 5) );
 
 	if (bytesReceived < 0) {
 		perror("ai_camera_command - recv");
