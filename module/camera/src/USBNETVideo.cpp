@@ -202,31 +202,10 @@ header_found:
 		memcpy( & longbuf[i * PACK_SIZE], buffer, recvMsgSize);
 	}
 
-// dig out the codec signature string
+	//add_pframe_to_list(frame, object_list);
 
-	size_t maxlen = 3;
-	Mat frame = imdecode(std::vector<uchar>(longbuf, longbuf+image_size), IMREAD_COLOR|IMREAD_ANYDEPTH|IMREAD_IGNORE_ORIENTATION);
+	add_pframe_to_list(longbuf, image_size, object_list);
 
-#ifdef VDTDEBUG
-/*DEBUG*/ hexDump((char *)"longbuf", longbuf, 16);
-/*DEBUG*/ cout << "run-vdt - frame.size().width: " << frame.size().width << endl;
-/*DEBUG*/ cout << "run-vdt - frame.depth(): " << frame.depth() << " frame.channels(): " << frame.channels() << endl;
-#endif
-
-        if(frame.data == NULL)
-        {
-                cerr << "decode error - frame data is null" << endl;
-                free(longbuf);
-                continue;
-        }
-
-	free(longbuf);
-
-	clock_t next_cycle = clock();
-	double duration = (next_cycle - last_cycle) / (double) CLOCKS_PER_SEC;
-	cout << "cycle time: " << next_cycle - last_cycle;
-	last_cycle = next_cycle;
-	add_pframe_to_list(frame, object_list);
 	}
 	
 	close(m_sockfd);
@@ -237,6 +216,9 @@ header_found:
 bool UsbFrameProcessor::get_pframe_from_list(cv::OutputArray image, char* & object_list)
 {
 	unsigned long wait_time = 0;
+	char * longbuf;
+	size_t image_size;
+tryagain:
 	while (!m_new_frame)
 	{
 		// wait until we get something in the vector
@@ -255,29 +237,41 @@ bool UsbFrameProcessor::get_pframe_from_list(cv::OutputArray image, char* & obje
 
 	m_vid_frame_mutex.lock();
 
-#ifdef DEBUGGETPFRAME
-/*DEBUG*/ cout << "get_pframe_from_list  m_next_frame.channels: " << m_next_frame.channels() << endl; 
-/*DEBUG*/ cout << "get_pframe_from_list  image.channels: " << image.channels() << endl;
-/*DEBUG*/ cout << "get_pframe_from_list  m_next_frame.depth: " << m_next_frame.depth() << endl;
-/*DEBUG*/ cout << "get_pframe_from_list image.depth: " << image.depth() << endl;
-#endif
-
-	image.create(m_next_frame.rows, m_next_frame.cols, CV_8UC3);
-	m_next_frame.copyTo(image.getMatRef());
+	image_size = m_next_image_size;
 	object_list = m_next_object_list;
+	longbuf = m_next_longbuf;
+	m_next_longbuf = nullptr;
 	m_next_object_list = nullptr;
 	m_new_frame = false;
 	m_vid_frame_mutex.unlock();
+
+
+size_t maxlen = 3;
+        Mat frame = imdecode(std::vector<uchar>(longbuf, longbuf+image_size), IMREAD_COLOR|IMREAD_ANYDEPTH|IMREAD_IGNORE_ORIENTATION);
+
+        if(frame.data == NULL)
+        {
+                cerr << "decode error - frame data is null" << endl;
+                free(longbuf);
+		longbuf = nullptr;
+		goto tryagain;
+        }
+        image.create(frame.rows, frame.cols, CV_8UC3);
+        frame.copyTo(image.getMatRef());
+
+        free(longbuf);
+
 	return true;
 }
 
-void UsbFrameProcessor::add_pframe_to_list(Mat &newFrame, char * object_list)
+void UsbFrameProcessor::add_pframe_to_list(char * longbuf, size_t image_size, char * object_list)
 {
 	m_vid_frame_mutex.lock();
 
 	// make sure the requestor receives the most recent frame
 	// so we have only a one frame queue
-	m_next_frame = newFrame;
+	m_next_longbuf = longbuf;
+	m_next_image_size = image_size;
 	if(m_next_object_list != nullptr)
 	free(m_next_object_list);
 	m_next_object_list = object_list;
@@ -333,7 +327,6 @@ bool UsbnetVideo::read(cv::OutputArray image)
 int connect_with_timeout(int sockfd, struct sockaddr_in *addr, socklen_t addrlen, unsigned int timeout_ms) {
     int rc = 0;
     // Set O_NONBLOCK
-/*DEBUG*/ cout << "connect_with_timeout timeout_ms: " << timeout_ms << endl;
     int sockfd_flags_before;
     if((sockfd_flags_before=fcntl(sockfd,F_GETFL,0)<0)) return -1;
     if(fcntl(sockfd,F_SETFL,sockfd_flags_before | O_NONBLOCK)<0) return -1;
@@ -357,12 +350,10 @@ int connect_with_timeout(int sockfd, struct sockaddr_in *addr, socklen_t addrlen
                     if(clock_gettime(CLOCK_MONOTONIC, &now)<0) { rc=-1; break; }
                     int ms_until_deadline = (int)(  (deadline.tv_sec  - now.tv_sec)*1000l
                                                   + (deadline.tv_nsec - now.tv_nsec)/100000l);
-cout << "ms_until_deadline: " << ms_until_deadline << endl;
                     if(ms_until_deadline<0) { rc=0; break; }
                     // Wait for connect to complete (or for the timeout deadline)
                     struct pollfd pfds[] = { { .fd = sockfd, .events = POLLOUT } };
                     rc = poll(pfds, 1, ms_until_deadline);
-cout << "poll return - rc: " << rc << endl;
                     // If poll 'succeeded', make sure it *really* succeeded
                     if(rc>0) {
                         int error = 0; socklen_t len = sizeof(error);
