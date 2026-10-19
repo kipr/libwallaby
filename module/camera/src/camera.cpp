@@ -28,7 +28,7 @@
 #include <unistd.h>
 #endif
 
-#define BOTUI_AI_CAMERA_TEST 1
+//#define BOTUI_AI_CAMERA_TEST 1
 
 using namespace kipr;
 using namespace kipr::camera;
@@ -188,6 +188,7 @@ Device::~Device()
   free(bmpBuffer);
   bmpBuffer = 0;
   m_connected = false;
+  ::printf("camera closed\n");
 }
 
 Model Device::getModel() { return this->m_model; }
@@ -236,7 +237,9 @@ bool Device::open(const int number, Resolution resolution, Model model)
     m_cap = new VideoCapture_K(0);
     if (!m_cap->isOpened())
     {
-      logger.fatal() << "Failed to open " << device_name;
+      logger.fatal() << "Failed to open (BLACK_2017)" << device_name;
+      delete m_cap;
+      m_cap = nullptr;
       return false;
     }
 
@@ -263,6 +266,8 @@ bool Device::open(const int number, Resolution resolution, Model model)
     if (!m_cap->isOpened())
     {
       fprintf(stderr, "Failed to open Tello camera (UDP)");
+      delete m_cap;
+      m_cap = nullptr;
       return false;
     }
     m_connected = true;
@@ -275,6 +280,8 @@ bool Device::open(const int number, Resolution resolution, Model model)
     if (!m_cap->isOpened())
     {
 	fprintf(stderr, "Failed to open AI Camera USB/UDP");
+	delete m_cap;
+	m_cap = nullptr;
 	return false;
     }
     m_connected = true;

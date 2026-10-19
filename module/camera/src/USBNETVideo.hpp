@@ -57,9 +57,12 @@ public:
 
   ~UsbFrameProcessor(void) throw();
   bool get_pframe_from_list(cv::OutputArray image, char* & object_list); // AVFrame& newFrame);
-  cv::Mat m_next_frame;
+  //cv::Mat m_next_frame;
+  char * m_next_longbuf;
+  size_t m_next_image_size;
 
-  void add_pframe_to_list(cv::Mat &newFrame, char * object_list);
+  //void add_pframe_to_list(cv::Mat &newFrame, char * object_list);
+  void add_pframe_to_list(char * longbuf, size_t object_size, char * object_list);
 
   char * m_next_object_list;
 
