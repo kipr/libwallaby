@@ -1,0 +1,42 @@
+name: History check
+
+# In October 2026 the repository history was rewritten to remove a large
+# Git LFS sysroot (container/sysroot.tar.gz). This job rejects any pull
+# request or branch that still carries the old history, so it can't be
+# merged back in by accident.
+#
+# The hashes below are the first commits that changed in the rewrite
+# (from git filter-repo's first-changed-commits). Every pre-rewrite commit
+# since 2018 descends from one of them, so finding any of them means old
+# history is present, whether or not it ever contained the sysroot.
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  no-sysroot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          lfs: false
+
+      - name: Reject pre-rewrite history
+        run: |
+          old_roots='
+          0b1f905b8a2a0d7cf5f5ede8d9ad3ba8c572f475
+          ba18dec4803fbb83c52492710f889d3c9a9fe081
+          c2c641669256702f7b326c7d20837b683030d3d9
+          c9dea89dc650681c65feeaa9a77c013f601bf7de
+          d83a6ccd055662735d9ff4538ccbc14115102d9c
+          e21da1bdfcd842be42880dbbb8a99a0c9f92f17e
+          '
+          found=$(git rev-list HEAD | grep -xF -f <(echo "$old_roots" | tr -d ' ' | grep .) || true)
+          sysroot=$(git log --full-history --format=%H HEAD -- container/sysroot.tar.gz)
+          if [ -n "$found" ] || [ -n "$sysroot" ]; then
+            echo "::error::This branch contains pre-rewrite libwallaby history. Rebase your work onto the current master; see the history rewrite announcement."
+            exit 1
+          fi
+          echo "History is clean."
