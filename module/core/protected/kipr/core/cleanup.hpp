@@ -9,8 +9,8 @@ namespace kipr
   namespace core
   {
     typedef std::function<void ()> CleanupFunction;
+    std::mutex& cleanup_mutex();
 
-    extern std::mutex cleanup_mutex;
     void cleanup_add(const CleanupFunction &func);
     void cleanup(bool should_abort = false);
   }

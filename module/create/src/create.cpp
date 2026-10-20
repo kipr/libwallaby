@@ -855,7 +855,7 @@ void Create::setFullMode()
 {
   if (!isConnected())
     return;
-  std::lock_guard<std::mutex> lock(core::cleanup_mutex);
+  std::lock_guard<std::mutex> lock(core::cleanup_mutex());
   beginAtomicOperation();
   write(OI_FULL);
   endAtomicOperation();
@@ -1041,7 +1041,7 @@ void Create::drive(const short &velocity, const short &radius)
 {
   if (!isConnected())
     return;
-  std::lock_guard<std::mutex> lock(core::cleanup_mutex);
+  std::lock_guard<std::mutex> lock(core::cleanup_mutex());
   beginAtomicOperation();
 
   write(OI_DRIVE);
@@ -1062,7 +1062,7 @@ void Create::driveDirect(const short &left, const short &right)
 {
   if (!isConnected())
     return;
-  std::lock_guard<std::mutex> lock(core::cleanup_mutex);
+  std::lock_guard<std::mutex> lock(core::cleanup_mutex());
   beginAtomicOperation();
 
   write(OI_DRIVE_DIRECT);
