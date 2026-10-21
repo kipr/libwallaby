@@ -1,0 +1,29 @@
+{
+  "name": "libwallaby Dev",
+  "build": {
+    "dockerfile": "./Dockerfile",
+    "context": "../"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.cpptools-extension-pack",
+        "github.vscode-pull-request-github",
+        "openai.chatgpt"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "fish",
+        "terminal.integrated.profiles.linux": {
+          "fish": {
+            "path": "/usr/bin/fish"
+          }
+        }
+      }
+    }
+  },
+  "initializeCommand": "mkdir -p \"$HOME/.config/codex\"",
+  "mounts": [
+    "source=${localEnv:HOME}/.config/codex,target=/home/code/.codex,type=bind,consistency=cached"
+  ],
+  "remoteUser": "code"
+}
