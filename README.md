@@ -49,7 +49,7 @@ The camera module downloads and builds OpenCV, libav, libjpeg and zlib, so the b
 To build on your own computer without a Wombat, use the dummy device backend:
 
 ```sh
-cmake -Bbuild -DDUMMY=ON -Dpackage_debian=OFF -Dwith_camera=OFF -Dwith_tello=OFF .
+cmake -Bbuild -DDUMMY=ON -Dpackage_debian=OFF -Dwith_camera=OFF .
 cmake --build build -j "$(nproc)"
 ```
 
@@ -67,7 +67,7 @@ libwallaby can be statically linked into a C program that has been compiled with
 
 ```sh
 source emsdk/emsdk_env.sh
-emcmake cmake -Bbuild -Dwith_graphics=OFF -Dwith_botball=OFF -Dwith_camera=OFF -Dwith_tello=OFF -Dwith_python_binding=OFF -Dwith_tests=OFF .
+emcmake cmake -Bbuild -Dwith_graphics=OFF -Dwith_botball=OFF -Dwith_camera=OFF -Dwith_python_binding=OFF -Dwith_tests=OFF .
 cmake --build build -j "$(nproc)"
 ```
 
@@ -77,7 +77,7 @@ libwallaby can be dynamically linked into a `cpython` that has been compiled wit
 
 ```sh
 source emsdk/emsdk_env.sh
-emcmake cmake -Bbuild -Dwith_graphics=OFF -Dwith_botball=OFF -Dwith_camera=OFF -Dwith_tello=OFF -Dwith_tests=OFF -Dwasm=ON -DPYTHON_LIBRARY=$PYTHON_LIBRARY -DPYTHON_INCLUDE_DIR=$PYTHON_INCLUDE_DIR .
+emcmake cmake -Bbuild -Dwith_graphics=OFF -Dwith_botball=OFF -Dwith_camera=OFF -Dwith_tests=OFF -Dwasm=ON -DPYTHON_LIBRARY=$PYTHON_LIBRARY -DPYTHON_INCLUDE_DIR=$PYTHON_INCLUDE_DIR .
 cmake --build build -j "$(nproc)"
 ```
 
@@ -104,7 +104,6 @@ Pass any of these to CMake with `-D`, for example `-Dwith_camera=OFF`.
 | `with_camera` | Camera API | `ON` | Internet access at build time |
 | `with_compass` | Compass API | `ON` | |
 | `with_console` | Console API | `ON` | |
-| `with_create` | iRobot Create 2 API | `ON` | |
 | `with_digital` | Digital sensor API | `ON` | |
 | `with_graphics` | Graphics API | `ON` | `libx11-dev` |
 | `with_gyro` | Gyroscope API | `ON` | |
@@ -112,7 +111,6 @@ Pass any of these to CMake with `-D`, for example `-Dwith_camera=OFF`.
 | `with_motor` | Motor API | `ON` | |
 | `with_network` | Network API | `ON` | |
 | `with_servo` | Servo API | `ON` | |
-| `with_tello` | Tello drone API (requires `with_camera`) | `ON` | |
 | `with_thread` | Thread/mutex API | `ON` | |
 | `with_time` | Time API | `ON` | |
 | `with_wait_for` | `wait_for` API | `ON` | |
