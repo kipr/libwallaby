@@ -22,15 +22,17 @@ docker run --rm --mount type=bind,source=.,destination=/src/ libwallaby-builder 
 ```
 
 Or build directly on Debian 13 (trixie).
-Install the cross-compiler and the `arm64` versions of the libraries the default build links against (the `Dockerfile` installs the same packages):
+Install the cross-compiler and the `arm64` versions of the libraries the default build links against:
 
 ```sh
 sudo dpkg --add-architecture arm64
 sudo apt update
 sudo apt install build-essential cmake git swig doxygen \
   gcc-aarch64-linux-gnu g++-aarch64-linux-gnu \
-  libx11-dev:arm64 python3.13-dev:arm64
+  libx11-dev:arm64 libpython3.13-dev:arm64
 ```
+
+Use `libpython3.13-dev:arm64` rather than `python3.13-dev:arm64`: the latter pulls in the `arm64` Python interpreter, and apt removes your system `python3` to make room for it.
 
 Then configure and build:
 
@@ -88,7 +90,7 @@ where:
 ### CMake options
 
 Pass any of these to CMake with `-D`, for example `-Dwith_camera=OFF`.
-**Deps** lists the Debian 13 packages each option needs. When cross-compiling, install the `:arm64` versions of libraries (for example `python3.13-dev:arm64`).
+**Deps** lists the Debian 13 packages each option needs. When cross-compiling, install the `:arm64` versions of libraries (for example `libpython3.13-dev:arm64`).
 
 | Option | Description | Default | Deps |
 |--------|-------------|---------|------|
