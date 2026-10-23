@@ -23,22 +23,5 @@ namespace kipr
   }
 }
 
-namespace kipr
-{
-  namespace camera
-  {
-    class TensorChannelImpl : public ChannelImpl
-    {
-    public:
-      TensorChannelImpl();
-      virtual void update(const cv::Mat &image);
-      virtual ObjectVector findObjects(const config::Config &config);
-
-    private:
-      cv::Mat m_image;
-    };
-  }
-}
-
 #endif
 

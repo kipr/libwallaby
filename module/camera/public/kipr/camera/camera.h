@@ -86,7 +86,6 @@ enum Resolution
   MED_RES,
   HIGH_RES,
   TELLO_RES,
-  AI_CAMERA_RES,
   NATIVE_RES
 };
 
@@ -94,8 +93,7 @@ enum Model
 {
   WHITE_2016,
   BLACK_2017,
-  TELLO,
-  AI_CAMERA
+  TELLO
 };
 
 /**
@@ -126,7 +124,6 @@ int camera_open_black();
  *   - MED_RES (320x240)
  *   - HIGH_RES (640x480)
  *   - TELLO_RES (1280x720)
- *   - AI_CAMERS_RES (1280x720)
  * \warning Only LOW_RES is currently supported. The function will fail for other resolutions.
  * \return 1 on success, 0 on failure
  * \see camera_open

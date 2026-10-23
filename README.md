@@ -120,37 +120,9 @@ Pass any of these to CMake with `-D`, for example `-Dwith_camera=OFF`.
 | `DUMMY` | Use the dummy device backend, for building on a computer | `OFF` | |
 | `wasm` | Build `kipr.wasm` for dynamic linking (Emscripten builds only) | `OFF` | |
 
-## AI Camera
+## Installation
 
-libwallaby supports the KIPR AI camera, a Pi Zero that connects to the Wombat over USB networking.
-When a camera is opened, libwallaby checks for the AI camera at `192.168.1.2` and uses it if it responds; otherwise it uses a regular USB camera.
-
-Wombat images and `.deb` packages with the latest AI camera changes are published on the [Releases page](https://github.com/kipr/libwallaby/releases) (currently the `v1.2.5` pre-release).
-To test newer changes, build a package as described in [Building](#wombat-aarch64).
-
-### Installation
-
-First, plug the Pi Zero into the Wombat, then SSH into the Wombat and create the necessary connection.
-
-```sh
-sudo nmcli connection add type ethernet con-name ai-camera-link ifname usb0 ipv4.addresses 192.168.1.1/24 ipv4.method manual ipv6.method auto ipv6.addresses "fe80::c3ed:d6c2:1e76:cebe/64" ipv6.routes "fe80::/64 :: 101"
-```
-
-The connection should come up pretty quickly (<30 sec).
-
-You can verify the connection by `ssh`ing from the Wombat to the Pi Zero:
-
-```sh
-ssh kipr@192.168.1.2
-```
-
-We will be rebooting the Wombat later, so you may wish to power off the Pi Zero now to avoid potential disk corruption.
-
-```sh
-sudo poweroff
-```
-
-Now, install the new version of libwallaby.
+To install a libwallaby `.deb` on a Wombat:
 
 1. Copy the libwallaby `.deb` file to the Wombat:
 
@@ -170,20 +142,9 @@ Now, install the new version of libwallaby.
    sudo reboot
    ```
 
-### Using the AI camera
+A Wombat that has an AI camera pre-release (`v1.2.3` or `v1.2.5`) installed will see this package as a downgrade, so confirm the downgrade when `apt` asks.
 
-Objects found by the AI camera are reported through a camera channel, which you configure in BotUI under Settings → Channels.
-Create the channel with the "QR Code Scanner" type. A future release will use a more appropriate name.
-
-Read the results with the usual camera object functions:
-
-- `get_object_centroid()` - centroid
-- `get_object_bbox()` - bounding box
-- `get_object_confidence()` - confidence
-- `get_object_data()` - string from the model that names the object type
-- `get_object_data_length()` - length of that string
-
-### Debugging with systemd
+## Debugging with systemd
 
 `botui` on the Wombat runs as a systemd unit.
 You can view a unit's logs by running:
@@ -221,3 +182,5 @@ libwallaby is licensed under the terms of the [GPLv3 License](LICENSE).
 ## Contributing
 
 Want to contribute? Start here: https://github.com/kipr/KIPR-Development-Toolkit
+
+AI camera support is developed on the [`ai-camera`](https://github.com/kipr/libwallaby/tree/ai-camera) branch.
