@@ -1,2 +1,0 @@
-add_test(tello_botui_test core tello)
-target_link_libraries(tello_botui_test PRIVATE wpa_ctrl)

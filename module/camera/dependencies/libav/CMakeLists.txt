@@ -7,7 +7,9 @@ set(LIBAV_INCLUDE_DIR ${LIBAV_DIR}/include)
 set(LIBAV_COMMON_OPTIONS
   --enable-pic
   --prefix=${LIBAV_DIR}
-  --extra-cflags=-w
+  # TODO Update Libav dependency. Libav 12.3 does not compile under GCC 14,
+  # which treats incompatible pointer types as errors.
+  "--extra-cflags=-w -Wno-error=incompatible-pointer-types"
   --disable-encoders
   --disable-decoders
   --disable-muxers

@@ -22,7 +22,6 @@
 #cmakedefine KIPR_MODULE_CONFIG
 #cmakedefine KIPR_MODULE_CONSOLE
 #cmakedefine KIPR_MODULE_CORE
-#cmakedefine KIPR_MODULE_CREATE
 #cmakedefine KIPR_MODULE_DIGITAL
 #cmakedefine KIPR_MODULE_GEOMETRY
 #cmakedefine KIPR_MODULE_GRAPHICS
@@ -32,7 +31,6 @@
 #cmakedefine KIPR_MODULE_NETWORK
 #cmakedefine KIPR_MODULE_SENSOR
 #cmakedefine KIPR_MODULE_SERVO
-#cmakedefine KIPR_MODULE_TELLO
 #cmakedefine KIPR_MODULE_THREAD
 #cmakedefine KIPR_MODULE_TIME
 #cmakedefine KIPR_MODULE_WAIT_FOR

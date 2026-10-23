@@ -2,7 +2,15 @@ option(with_python_binding "Build python bindings" ON)
 
 if(with_python_binding)
   find_package(SWIG REQUIRED)
-  find_package(PythonLibs 3 REQUIRED)
+
+  # Accept the FindPythonLibs-style hints that the Simulator's WASM build passes.
+  if(PYTHON_INCLUDE_DIR AND NOT Python3_INCLUDE_DIR)
+    set(Python3_INCLUDE_DIR ${PYTHON_INCLUDE_DIR})
+  endif()
+  if(PYTHON_LIBRARY AND NOT Python3_LIBRARY)
+    set(Python3_LIBRARY ${PYTHON_LIBRARY})
+  endif()
+  find_package(Python3 REQUIRED COMPONENTS Development)
 
   set(KIPR_PYTHON_WRAPPER ${CMAKE_CURRENT_BINARY_DIR}/kipr_python.cpp)
 
@@ -39,12 +47,12 @@ if(with_python_binding)
   add_library(kipr_python SHARED ${KIPR_PYTHON_WRAPPER})
   add_dependencies(kipr_python ${KIPR_MODULES})
   if (NOT EMSCRIPTEN)
-    target_link_libraries(kipr_python PRIVATE ${PYTHON_LIBRARIES})
+    target_link_libraries(kipr_python PRIVATE Python3::Python)
   endif()
+  target_link_libraries(kipr_python PRIVATE Python3::Module)
   # Guarantee kipr_python finds dependencies
-  target_include_directories(kipr_python PRIVATE ${PYTHON_INCLUDE_DIRS}
-                                             ${CMAKE_BINARY_DIR}/include
-                                             ${CMAKE_SOURCE_DIR}/include)
+  target_include_directories(kipr_python PRIVATE ${CMAKE_BINARY_DIR}/include
+                                                 ${CMAKE_SOURCE_DIR}/include)
 
   # link library to kipr objects
   target_link_libraries(kipr_python PRIVATE ${KIPR_MODULES})

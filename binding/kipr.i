@@ -44,10 +44,6 @@
 %include "module/core/binding.i"
 #endif
 
-#ifdef KIPR_MODULE_CREATE
-%include "module/create/binding.i"
-#endif
-
 #ifdef KIPR_MODULE_DIGITAL
 %include "module/digital/binding.i"
 #endif
@@ -74,10 +70,6 @@
 
 #ifdef KIPR_MODULE_SERVO
 %include "module/servo/binding.i"
-#endif
-
-#ifdef KIPR_MODULE_TELLO
-%include "module/tello/binding.i"
 #endif
 
 #ifdef KIPR_MODULE_TIME

@@ -40,10 +40,6 @@
 #include "kipr/console/display.h"
 #endif
 
-#ifdef KIPR_MODULE_CREATE
-#include "kipr/create/create.h"
-#endif
-
 #ifdef KIPR_MODULE_DIGITAL
 #include "kipr/digital/digital.h"
 #endif
