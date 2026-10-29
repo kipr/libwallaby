@@ -897,7 +897,7 @@ static void test_motion_sensors(void)
   char debug[160];
   run_wait_test("accel_calibrate", WORKER_ACCEL_CALIBRATE,
                 "Keep the controller still for about half a second.",
-                "calibration returns 0 (success) while the controller is still");
+                "calibration returns 1 (success) while the controller is still");
 
   {
     signed short x = accel_x();

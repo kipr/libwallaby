@@ -39,10 +39,11 @@ signed short gyro_y();
 signed short gyro_z();
 
 /*!
- * \description Calibrates gyroscope
- * \description Sets a low-pass filter. Put at beginning of your program or before you use gyroscope commands if you want calibrated output.
- * \description This function will block for around 500ms taking samples of the gyroscope at standstill.
+ * \brief Calibrates the gyroscope by measuring and removing its zero-rate offset
+ * \description Blocks for about 500 ms while it averages readings of the still controller, then subtracts that offset from every later gyro_x(), gyro_y() and gyro_z() reading, so a still controller reads about 0. It does not filter or smooth the readings.
+ * \description Call it at the start of your program, or before you use the gyroscope, if you want corrected readings. Until then readings are uncorrected. The offset lasts until the program exits or gyro_calibrate() is called again.
  * \description Fails, keeping any previous calibration, if the controller moves while sampling.
+ * \note Returns 0 on success, unlike accel_calibrate(), which returns 1 on success.
  * \return 0: success -1: failure
  * \ingroup gyro
  */

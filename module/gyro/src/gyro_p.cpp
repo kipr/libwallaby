@@ -16,7 +16,11 @@ namespace
 {
   // Biases default to zero so readings are uncorrected until calibration runs.
   // Atomic because user programs may read the gyro on one thread while another
-  // thread runs gyro_calibrate().
+  // thread runs gyro_calibrate(). Each bias is read whole, but the three are
+  // stored one at a time.
+  // TODO: a reader racing a recalibration can mix old and new biases across axes.
+  // If that matters, publish all three as one snapshot (mutex, seqlock or a
+  // single atomic struct). Same in accel_p.cpp.
   std::atomic<double> biasx{0};
   std::atomic<double> biasy{0};
   std::atomic<double> biasz{0};

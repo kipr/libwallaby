@@ -21,5 +21,6 @@ short accel_z()
 
 int accel_calibrate()
 {
-  return (accel::accel_calibrate() ? 0 : -1);
+  // 1: success, 0: failure, as accel.h documents (gyro_calibrate() differs)
+  return accel::accel_calibrate() ? 1 : 0;
 }

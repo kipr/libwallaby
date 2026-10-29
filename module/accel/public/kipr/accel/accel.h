@@ -1,5 +1,5 @@
 /*!
- * \file analog.h
+ * \file accel.h
  * \copyright KISS Institute for Practical Robotics
  * \defgroup accel Accelerometer
  */
@@ -52,12 +52,13 @@ signed short accel_z();
 
 
 /*!
- * \brief Calibrates a lowpass filter for the accelerometer
- * \description Sets a low-pass filter. Put at beginning of your program or before you use accelerometer commands if you want calibrated output.
- * \description This function will block for around 500ms taking samples of the accelerometer at standstill.
- * \description The controller must be still while calibrating, resting flat, upside down or on any side. Gravity is taken to be along the axis that reads largest, and any tilt away from that axis is treated as offset, so later readings are relative to the calibration position.
+ * \brief Calibrates the accelerometer by measuring and removing its at-rest offset
+ * \description Blocks for about 500 ms while it averages readings of the still controller, then subtracts that offset from every later accel_x(), accel_y() and accel_z() reading. It does not filter or smooth the readings.
+ * \description The controller must be still while calibrating, resting flat, upside down or on any side. Gravity is taken to be along the axis that reads largest: that axis keeps +/-1 g (about 1024) and the other two read about 0. Any tilt away from that axis is treated as offset, so later readings are relative to the calibration position.
+ * \description Call it at the start of your program, or before you use the accelerometer, if you want corrected readings. Until then readings are uncorrected. The offset lasts until the program exits or accel_calibrate() is called again.
  * \description Fails, keeping any previous calibration, if the controller moves while sampling or the total reading is too far from 1 g to be gravity.
- * \return 0: success -1: failure
+ * \note Returns 1 on success, unlike gyro_calibrate(), which returns 0 on success.
+ * \return 1: success 0: failure
  * \ingroup accel
  */
 int accel_calibrate();

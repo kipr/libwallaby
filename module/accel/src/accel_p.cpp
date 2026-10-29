@@ -15,7 +15,12 @@ using kipr::core::Platform;
 namespace
 {
   // Atomic because user programs may read the accelerometer on one thread while
-  // another thread runs accel_calibrate().
+  // another thread runs accel_calibrate(). Each bias is read whole, but the three
+  // are stored one at a time.
+  // TODO: a reader racing a recalibration can mix old and new biases across axes
+  // (one sample up to ~1 g off after a pose change). If that matters, publish all
+  // three as one snapshot (mutex, seqlock or a single atomic struct). Same in
+  // gyro_p.cpp.
   std::atomic<double> Biasx{0};
   std::atomic<double> Biasy{0};
   std::atomic<double> Biasz{0};
