@@ -55,8 +55,8 @@ signed short accel_z();
  * \brief Calibrates a lowpass filter for the accelerometer
  * \description Sets a low-pass filter. Put at beginning of your program or before you use accelerometer commands if you want calibrated output.
  * \description This function will block for around 500ms taking samples of the accelerometer at standstill.
- * \description The controller must be flat on a table (gravity on -Z) and still while calibrating; other orientations give wrong readings afterward.
- * \description Fails, keeping any previous calibration, if the controller moves while sampling.
+ * \description The controller must be still while calibrating, resting flat, upside down or on any side. Gravity is taken to be along the axis that reads largest, and any tilt away from that axis is treated as offset, so later readings are relative to the calibration position.
+ * \description Fails, keeping any previous calibration, if the controller moves while sampling or the total reading is too far from 1 g to be gravity.
  * \return 0: success -1: failure
  * \ingroup accel
  */
