@@ -42,6 +42,8 @@ signed short gyro_z();
  * \description Calibrates gyroscope
  * \description Sets a low-pass filter. Put at beginning of your program or before you use gyroscope commands if you want calibrated output.
  * \description This function will block for around 500ms taking samples of the gyroscope at standstill.
+ * \description Fails, keeping any previous calibration, if the controller moves while sampling.
+ * \return 0: success -1: failure
  * \ingroup gyro
  */
 int gyro_calibrate();

@@ -44,7 +44,7 @@ signed short accel_y();
  * \description Wallaby: +/- 2G range,  1024 per G
  * \description Wallaby: This should be approximately -1024 when at rest and flat on a table
  * \description Wombat: +/- 2G range,  1024 per G
- * \description Wombat: This should be approximately -512 when at rest and flat on a table
+ * \description Wombat: This should be approximately -1024 when at rest and flat on a table
  * \return The latest signed z acceleration value
  * \ingroup accel
  */
@@ -55,7 +55,9 @@ signed short accel_z();
  * \brief Calibrates a lowpass filter for the accelerometer
  * \description Sets a low-pass filter. Put at beginning of your program or before you use accelerometer commands if you want calibrated output.
  * \description This function will block for around 500ms taking samples of the accelerometer at standstill.
- * \return 1: success 0: failure
+ * \description The controller must be flat on a table (gravity on -Z) and still while calibrating; other orientations give wrong readings afterward.
+ * \description Fails, keeping any previous calibration, if the controller moves while sampling.
+ * \return 0: success -1: failure
  * \ingroup accel
  */
 int accel_calibrate();

@@ -21,5 +21,5 @@ short accel_z()
 
 int accel_calibrate()
 {
-  return accel::accel_calibrate();
+  return (accel::accel_calibrate() ? 0 : -1);
 }
