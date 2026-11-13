@@ -897,7 +897,7 @@ static void test_motion_sensors(void)
   char debug[160];
   run_wait_test("accel_calibrate", WORKER_ACCEL_CALIBRATE,
                 "Keep the controller still for about half a second.",
-                "calibration returns success while the controller is still");
+                "calibration returns 1 (success) while the controller is still");
 
   {
     signed short x = accel_x();
@@ -906,12 +906,12 @@ static void test_motion_sensors(void)
     snprintf(debug, sizeof(debug), "accel_x/y/z = %d / %d / %d", x, y, z);
   }
   review("accel_x / accel_y / accel_z",
-         "the axes react to orientation; flat and still is near (0,0,-512)",
+         "the axes react to orientation; flat and still is near (0,0,-1024)",
          debug);
 
   run_wait_test("gyro_calibrate", WORKER_GYRO_CALIBRATE,
                 "Keep the controller still for about half a second.",
-                "calibration completes successfully with the controller still");
+                "calibration returns 0 (success) with the controller still");
 
   {
     signed short x = gyro_x();
