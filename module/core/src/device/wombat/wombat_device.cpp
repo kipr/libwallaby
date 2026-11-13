@@ -8,6 +8,7 @@
 #include <sys/ioctl.h>
 #include <unistd.h>
 #include <mutex>
+#include <chrono>
 
 #include <cstdlib>
 #include <cstring>
@@ -31,6 +32,9 @@ public:
   WombatDevice()
       : spi_fd_(-1),
         count(0),
+        rejected_seen_(false),
+        rejected_last_(0),
+        rejected_pending_(0),
         read_buf(new std::uint8_t[REG_READABLE_COUNT]),
         write_buf(new std::uint8_t[REG_READABLE_COUNT])
   {
@@ -45,6 +49,9 @@ public:
   virtual ~WombatDevice()
   {
     std::cout << "~Wombat()" << std::endl;
+    if (rejected_pending_)
+      logger.warning() << "co-processor rejected " << rejected_pending_
+                       << " corrupt SPI packet(s); some writes may have been lost";
     close(spi_fd_);
     delete[] read_buf;
     delete[] write_buf;
@@ -168,12 +175,49 @@ private:
       return false;
     }
 
+    check_rejected();
     return true;
+  }
+
+  // The firmware counts packets it had to repair or drop writes from (corrupt
+  // count byte, out-of-range address) in the high nibble of REG_RW_MOT_DONE,
+  // mod 16. Older firmware leaves it 0. Warn when it moves, at most once every
+  // few seconds, so a bad link shows up without flooding the output.
+  void check_rejected()
+  {
+    const std::uint8_t now = read_buf[REG_RW_MOT_DONE] >> 4;
+    if (!rejected_seen_)
+    {
+      rejected_seen_ = true;
+      rejected_last_ = now;
+      return;
+    }
+
+    const std::uint8_t step = (now - rejected_last_) & 0x0F;
+    // A step of -1 is the firmware's main loop briefly writing back the
+    // previous count; it is republished on the next packet.
+    if (step != 0 && step != 0x0F)
+    {
+      rejected_last_ = now;
+      rejected_pending_ += step;
+    }
+    if (rejected_pending_ == 0) return;
+
+    const auto t = std::chrono::steady_clock::now();
+    if (rejected_warned_ != std::chrono::steady_clock::time_point() && t - rejected_warned_ < std::chrono::seconds(5)) return;
+    logger.warning() << "co-processor rejected " << rejected_pending_
+                     << " corrupt SPI packet(s); some writes may have been lost";
+    rejected_pending_ = 0;
+    rejected_warned_ = t;
   }
 
   int spi_fd_;
   std::mutex mut_;
   std::uint8_t count;
+  bool rejected_seen_;
+  std::uint8_t rejected_last_;
+  unsigned rejected_pending_;
+  std::chrono::steady_clock::time_point rejected_warned_;
   std::uint8_t *write_buf;
   std::uint8_t *read_buf;
 };
