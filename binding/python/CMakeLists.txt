@@ -44,7 +44,7 @@ if(with_python_binding)
   get_property(KIPR_MODULE_OBJECTS GLOBAL PROPERTY kipr_module_objects)
 
   # add python binding library
-  add_library(kipr_python SHARED ${KIPR_PYTHON_WRAPPER})
+  add_library(kipr_python SHARED ${KIPR_PYTHON_WRAPPER} ${KIPR_MODULE_OBJECTS})
   add_dependencies(kipr_python ${KIPR_MODULES})
   if (NOT EMSCRIPTEN)
     target_link_libraries(kipr_python PRIVATE Python3::Python)
@@ -56,7 +56,7 @@ if(with_python_binding)
 
   # link library to kipr objects
   target_link_libraries(kipr_python PRIVATE ${KIPR_MODULES})
-  target_link_options(kipr_python PRIVATE "-Wl,-Bsymbolic" ${KIPR_MODULE_OBJECTS})
+  target_link_options(kipr_python PRIVATE "-Wl,-Bsymbolic")
 
   # according to swig specifications, the output library must be
   # named _kipr.so
